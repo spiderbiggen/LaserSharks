@@ -1,66 +1,77 @@
 package lasersharks;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class LaserSharkTest {
 
-  protected void setUp() throws Exception {
-  }
+  private LaserShark laserShark;
+  private Position position;
+  private float size;
 
-  @Test
-  protected void tearDown() throws Exception {
-  }
-
-  @Test
-  public void testLaserShark() {
-    fail("Not yet implemented"); // TODO
+  @Before
+  public void setUp() {
+    position = new Position(0, 0);
+    size = 1.0f;
+    laserShark = new LaserShark(position, Direction.East, size);
   }
 
   @Test
   public void testGetDirection() {
-    fail("Not yet implemented"); // TODO
+    assertEquals(Direction.East, laserShark.getDirection());
   }
 
   @Test
   public void testSetDirection() {
-    fail("Not yet implemented"); // TODO
-  }
-
-  @Test
-  public void testSetPosition() {
-    fail("Not yet implemented"); // TODO
-  }
-
-  @Test
-  public void testSetSize() {
-    fail("Not yet implemented"); // TODO
+    laserShark.setDirection(Direction.West);
+    assertEquals(Direction.West, laserShark.getDirection());
   }
 
   @Test
   public void testGetPosition() {
-    fail("Not yet implemented"); // TODO
+    assertEquals(position, laserShark.getPosition());
   }
 
   @Test
-  public void testSetNextMove() {
-    fail("Not yet implemented"); // TODO
+  public void testSetPosition() {
+    Position position1 = new Position(10, 10);
+    laserShark.setPosition(position1);
+    assertEquals(position1, laserShark.getPosition());
   }
 
   @Test
   public void testGetSize() {
-    fail("Not yet implemented"); // TODO
+    assertTrue(size == laserShark.getSize());
   }
 
   @Test
-  public void testCollision() {
-    fail("Not yet implemented"); // TODO
+  public void testSetSize() {
+    float size2 = 5.0f;
+    laserShark.setSize(size2);
+    assertTrue(size2 == laserShark.getSize());
   }
+
+  /*
+   * @Test public void testSetNextMove() { fail("Not yet implemented"); // TODO }
+   * 
+   * 
+   * @Test public void testCollision() { fail("Not yet implemented"); // TODO }
+   */
 
   @Test
   public void testMove() {
-    fail("Not yet implemented"); // TODO
+    assertEquals(position, laserShark.getPosition());
+    
+    laserShark.move();
+    position.updatePosition(Direction.East);
+    assertEquals(position, laserShark.getPosition());
+    
+    laserShark.move();
+    position.updatePosition(Direction.East);
+    assertEquals(position, laserShark.getPosition());
   }
 
 }

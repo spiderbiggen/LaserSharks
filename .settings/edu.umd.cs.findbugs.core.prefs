@@ -1,5 +1,5 @@
 #FindBugs User Preferences
-#Wed Sep 02 15:09:37 CEST 2015
+#Wed Sep 02 20:47:31 CEST 2015
 detector_threshold=2
 effort=default
 filter_settings=Default|BAD_PRACTICE,CORRECTNESS,EXPERIMENTAL,I18N,MALICIOUS_CODE,MT_CORRECTNESS,PERFORMANCE,SECURITY,STYLE|false|15

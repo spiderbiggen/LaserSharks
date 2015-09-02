@@ -48,7 +48,7 @@ public class LaserShark implements Fish {
   }
 
   public void setNextMove(Direction newDirection) {
-    this.direction = newDirection;
+    setDirection(newDirection);
   }
 
   @Override
@@ -57,7 +57,6 @@ public class LaserShark implements Fish {
   }
 
   public boolean collision(Fish fish) {
-    // TODO Auto-generated method stub
     return false;
   }
 

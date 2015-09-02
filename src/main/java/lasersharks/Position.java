@@ -10,8 +10,10 @@ public class Position {
   /**
    * Initialize a position object.
    * 
-   * @param posX initial x position
-   * @param posY initial y position
+   * @param posX
+   *          initial x position
+   * @param posY
+   *          initial y position
    */
   public Position(int posX, int posY) {
     this.posX = posX;
@@ -54,7 +56,8 @@ public class Position {
 
   /**
    * 
-   * @param posY the amount to change posX with
+   * @param posY
+   *          the amount to change posX with
    */
   public void setPosY(int posY) {
     this.posY = posY;
@@ -62,7 +65,8 @@ public class Position {
 
   /**
    * 
-   * @param deltaY the amount to change posY with
+   * @param deltaY
+   *          the amount to change posY with
    */
   public void adjustPosY(int deltaY) {
     this.posY += deltaY;
@@ -70,8 +74,10 @@ public class Position {
 
   /**
    * 
-   * @param deltaX the amount to change posX with
-   * @param deltaY the amount to change posY with
+   * @param deltaX
+   *          the amount to change posX with
+   * @param deltaY
+   *          the amount to change posY with
    */
   public void adjustPos(int deltaX, int deltaY) {
     this.adjustPosX(deltaX);
@@ -81,11 +87,12 @@ public class Position {
   /**
    * Updates the position.
    * 
-   * @param dir the direction to move in
+   * @param dir
+   *          the direction to move in
    * @return false if fish moves off the screen
    */
-  public boolean updatePosition(Direction dir) { 
-    //TODO Maybe Rename to update checkstyle thinks it's too long
+  public boolean updatePosition(Direction dir) {
+    // TODO Maybe Rename to update checkstyle thinks it's too long
     switch (dir) {
       case North:
         adjustPos(1, 0);
@@ -117,5 +124,32 @@ public class Position {
 
     // TODO check if fish is outside of the view and then return false
     return true;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (!(obj instanceof Position)) {
+      return false;
+    }
+
+    Position position = (Position) obj;
+    if (this.getPosX() != position.getPosX() || this.getPosY() != position.getPosY()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 17;
+    int prime = 31;
+    hash = prime * hash + getPosX(); 
+    hash = prime * hash + getPosY();
+    return hash;
   }
 }
