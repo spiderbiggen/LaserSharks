@@ -7,6 +7,10 @@ public class Position {
   private int posX;
   private int posY;
 
+  //these are now static values inside Position. These represent the height and width of the screen.
+  static int HeightPanel = 600;
+  static int WidthPanel = 800;
+  
   /**
    * 
    * @param posX
@@ -78,7 +82,7 @@ public class Position {
   /**
    * Updates the position.
    * 
-   * @param dir
+   * @param dir the direction the position should shift to.
    * @return false if fish moves off the screen
    */
   public boolean updatePosition(Direction dir) {
@@ -88,8 +92,8 @@ public class Position {
   /**
    * Updates the position with a speed parameter
    * 
-   * @param dir
-   * @return false if fish moves off the screen
+   * @param dir the direction the position should shift to.
+   * @return false if fish moves off the screen.
    */
   public boolean updatePosition(Direction dir, int sp) {
     int negSp = sp*-1;
@@ -121,9 +125,29 @@ public class Position {
       default:
         break;
     }
-
-    // TODO check if fish is outside of the view and then return false
-    return true;
+    return isOnScreen();
+  }
+  
+  /**
+   * Returns the distance between the two positions using pythagoras
+   * @param other The other position that should be compared to this position
+   * @return the distance between this position and other
+   */
+  public float calculateDistance(Position other) { 
+    float distX = other.getPosX()-posX;
+    float distY = other.getPosY()-posX;
+    return (float) Math.sqrt((Math.pow(distX,2))+Math.pow(distY, 2));    
+  }
+  
+  /**
+   * This boolean checks if the position is on the screen.
+   * @return true if the position is on the screen.
+   */
+  public final boolean isOnScreen() {
+    if (posX >= 0 && posX <= WidthPanel && posY >= 0 && posY <= HeightPanel) {
+      return true;
+    }
+    return false;
   }
   
 }
