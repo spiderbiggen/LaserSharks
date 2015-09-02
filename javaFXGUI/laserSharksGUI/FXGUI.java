@@ -27,7 +27,7 @@ public class FXGUI extends Application {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 
-		BackgroundImage myBI = new BackgroundImage(new Image("better background.png", 1920, 1080, false, true), 
+		BackgroundImage myBI = new BackgroundImage(new Image("better background.jpg", 1920, 1080, false, true), 
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
 		root.setBackground(new Background(myBI));
