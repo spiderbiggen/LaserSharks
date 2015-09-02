@@ -5,8 +5,6 @@ package lasersharks;
  */
 public interface Fish {
   
-  protected Direction direction;
-
   public abstract Position getPosition();
 
   public abstract float getSize();
