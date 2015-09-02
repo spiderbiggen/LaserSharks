@@ -82,30 +82,41 @@ public class Position {
    * @return false if fish moves off the screen
    */
   public boolean updatePosition(Direction dir) {
+    return updatePosition(dir,1);
+  }
+  
+  /**
+   * Updates the position with a speed parameter
+   * 
+   * @param dir
+   * @return false if fish moves off the screen
+   */
+  public boolean updatePosition(Direction dir, int sp) {
+    int negSp = sp*-1;
     switch (dir) {
       case North:
-        adjustPos(1, 0);
+        adjustPos(sp, 0);
         break;
       case NorthEast:
-        adjustPos(1, 1);
+        adjustPos(sp, sp);
         break;
       case East:
-        adjustPos(0, 1);
+        adjustPos(0, sp);
         break;
       case SouthEast:
-        adjustPos(-1, 1);
+        adjustPos(negSp, sp);
         break;
       case South:
-        adjustPos(-1, 0);
+        adjustPos(negSp, 0);
         break;
       case SoutWest:
-        adjustPos(-1, -1);
+        adjustPos(negSp, negSp);
         break;
       case West:
-        adjustPos(0, -1);
+        adjustPos(0, negSp);
         break;
       case NorthWest:
-        adjustPos(1, -1);
+        adjustPos(sp, negSp);
         break;
       default:
         break;
@@ -114,4 +125,5 @@ public class Position {
     // TODO check if fish is outside of the view and then return false
     return true;
   }
+  
 }

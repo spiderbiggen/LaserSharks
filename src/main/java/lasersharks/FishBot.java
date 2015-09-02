@@ -4,12 +4,14 @@ public class FishBot implements Fish{
 
   Position position;
   float size;
-  float speed;
+  int speed;
+  Direction direction;
 
-  public FishBot (Position pos, float siz, float sp) {
+  public FishBot (Position pos, float siz, int sp, Direction dir) {
     position = pos;
     size = siz;
     speed = sp;
+    direction = dir;
   }
   
   @Override
@@ -25,6 +27,10 @@ public class FishBot implements Fish{
   public float getSpeed() {
     return speed;
   }
+  
+  public Direction getDirection() {
+    return direction;
+  }
 
   @Override
   public boolean collision(Fish fish) {
@@ -34,11 +40,10 @@ public class FishBot implements Fish{
 
   @Override
   public boolean move() {
-    // TODO Auto-generated method stub
-    return false;
+      return position.updatePosition(direction, speed);
   }
   
-  public static FishBot RandomFish() {
+  public static FishBot RandomFish() {      
     //TODO make a fishbot object that is random generated what could be used to represent the random fishes appearing on the screen
     return null;
   }
