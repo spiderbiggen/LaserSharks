@@ -4,5 +4,5 @@ package lasersharks;
  * Direction Enum.
  */
 public enum Direction {
-  North, NorthEast, East, SouthEast, South, SoutWest, West, NorthWest
+  North, NorthEast, East, SouthEast, South, SoutWest, West, NorthWest, Default
 }
