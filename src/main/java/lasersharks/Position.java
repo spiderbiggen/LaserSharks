@@ -8,9 +8,10 @@ public class Position {
   private int posY;
 
   /**
+   * Initialize a position object.
    * 
-   * @param posX
-   * @param posY
+   * @param posX initial x position
+   * @param posY initial y position
    */
   public Position(int posX, int posY) {
     this.posX = posX;
@@ -18,8 +19,9 @@ public class Position {
   }
 
   /**
+   * Return the current x position.
    * 
-   * @return
+   * @return current x position
    */
   public int getPosX() {
     return posX;
@@ -42,8 +44,9 @@ public class Position {
   }
 
   /**
+   * Return the current y position.
    * 
-   * @return
+   * @return current y position
    */
   public int getPosY() {
     return posY;
@@ -51,7 +54,7 @@ public class Position {
 
   /**
    * 
-   * @param posY
+   * @param posY the amount to change posX with
    */
   public void setPosY(int posY) {
     this.posY = posY;
@@ -59,7 +62,7 @@ public class Position {
 
   /**
    * 
-   * @param deltaY
+   * @param deltaY the amount to change posY with
    */
   public void adjustPosY(int deltaY) {
     this.posY += deltaY;
@@ -67,8 +70,8 @@ public class Position {
 
   /**
    * 
-   * @param deltaX
-   * @param deltaY
+   * @param deltaX the amount to change posX with
+   * @param deltaY the amount to change posY with
    */
   public void adjustPos(int deltaX, int deltaY) {
     this.adjustPosX(deltaX);
@@ -78,10 +81,11 @@ public class Position {
   /**
    * Updates the position.
    * 
-   * @param dir
+   * @param dir the direction to move in
    * @return false if fish moves off the screen
    */
-  public boolean updatePosition(Direction dir) {
+  public boolean updatePosition(Direction dir) { 
+    //TODO Maybe Rename to update checkstyle thinks it's too long
     switch (dir) {
       case North:
         adjustPos(1, 0);

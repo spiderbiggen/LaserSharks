@@ -1,7 +1,7 @@
 package lasersharks;
 
 /**
- * @author Stefan .
+ * LaserShark class.
  *
  */
 public class LaserShark implements Fish {
@@ -12,9 +12,13 @@ public class LaserShark implements Fish {
 
   /**
    * Initializes the laserShark(player).
-   * @param position the starting position
-   * @param direction the starting direction
-   * @param size the starting size
+   * 
+   * @param position
+   *          the starting position
+   * @param direction
+   *          the starting direction
+   * @param size
+   *          the starting size
    */
   public LaserShark(Position position, Direction direction, float size) {
     this.position = position;
@@ -46,13 +50,12 @@ public class LaserShark implements Fish {
   public void setNextMove(Direction newDirection) {
     this.direction = newDirection;
   }
-  
+
   @Override
   public float getSize() {
     return size;
   }
 
-  @Override
   public boolean collision(Fish fish) {
     // TODO Auto-generated method stub
     return false;
