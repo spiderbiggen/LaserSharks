@@ -18,8 +18,10 @@ public class Position {
   
   /**
    * 
-   * @param posX the x value of the position.
-   * @param posY the y value of the position.
+   * @param posX
+   *          initial x position
+   * @param posY
+   *          initial y position
    */
   public Position(int posX, int posY) {
     this.posX = posX;
@@ -74,7 +76,8 @@ public class Position {
 
   /**
    * 
-   * @param posY the y value
+   * @param posY
+   *          the amount to change posX with
    */
   public void setPosY(int posY) {
     this.posY = posY;
@@ -82,7 +85,8 @@ public class Position {
 
   /**
    * 
-   * @param deltaY the amount we want to increase the y value.
+   * @param deltaY
+   *          the amount to change posY with
    */
   public void adjustPosY(int deltaY) {
     this.posY += deltaY;
@@ -90,8 +94,10 @@ public class Position {
 
   /**
    * 
-   * @param deltaX the amount we want to increase the x value.
-   * @param deltaY the amount we want to increase the y value.
+   * @param deltaX
+   *          the amount to change posX with
+   * @param deltaY
+   *          the amount to change posY with
    */
   public void adjustPos(int deltaX, int deltaY) {
     this.adjustPosX(deltaX);
@@ -170,7 +176,31 @@ public class Position {
   public String toString() {
     return "Position [posX=" + posX + ", posY=" + posY + "]";
   }
-  
-  
-  
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (!(obj instanceof Position)) {
+      return false;
+    }
+
+    Position position = (Position) obj;
+    if (this.getPosX() != position.getPosX() || this.getPosY() != position.getPosY()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 17;
+    int prime = 31;
+    hash = prime * hash + getPosX(); 
+    hash = prime * hash + getPosY();
+    return hash;
+  }
 }

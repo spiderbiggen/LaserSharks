@@ -71,7 +71,7 @@ public class LaserShark implements Fish {
    * @param newDirection the direction to set to.
    */
   public void setNextMove(Direction newDirection) {
-    this.direction = newDirection;
+    setDirection(newDirection);
   }
 
   /**
@@ -88,7 +88,6 @@ public class LaserShark implements Fish {
    * @return true if it collides.
    */
   public boolean collision(Fish fish) {
-    // TODO Auto-generated method stub
     return false;
   }
 
