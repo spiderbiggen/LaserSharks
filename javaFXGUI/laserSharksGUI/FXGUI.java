@@ -39,19 +39,14 @@ public class FXGUI extends Application {
 	public void start(Stage stage) throws Exception {
 					
 		StackPane imageContainer = new StackPane();
-        ImageView image = new ImageView("better background.jpg");
+        ImageView image = new ImageView("SharkToTheRight.gif");
         
-        final Circle circle = new Circle(100, 75, 25, Color.ORANGE);
-		circle.setOpacity(1);
-		
         imageContainer.getChildren().addAll(image);
         
-        Pane pane = new Pane(circle);	
+        Pane pane = new Pane();	
         pane.getChildren().add(image);
         
 		final Scene scene = new Scene(pane, 1920, 1080, Color.BLUE);
-
-		// Scene scene = new Scene(root);
 
 		BackgroundImage myBI = new BackgroundImage(new Image(
 				"better background.jpg", 1920, 1080, false, true),
