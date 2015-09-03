@@ -8,6 +8,7 @@ public class Position {
   private int posY;
 
   //these are now static values inside Position. These represent the height and width of the screen.
+  //TODO: when the gui is a bit programmed, replace these static variables by getting the resolution of the panel
   static int HeightPanel = 600;
   static int WidthPanel = 800;
   
@@ -86,7 +87,7 @@ public class Position {
    * @return false if fish moves off the screen
    */
   public boolean updatePosition(Direction dir) {
-    return updatePosition(dir,1);
+    return updatePosition(dir, 1);
   }
   
   /**
@@ -96,7 +97,7 @@ public class Position {
    * @return false if fish moves off the screen.
    */
   public boolean updatePosition(Direction dir, int sp) {
-    int negSp = sp*-1;
+    int negSp = sp * -1;
     switch (dir) {
       case North:
         adjustPos(0, sp);
@@ -105,7 +106,7 @@ public class Position {
         adjustPos(sp, sp);
         break;
       case East:
-        adjustPos(sp,0);
+        adjustPos(sp, 0);
         break;
       case SouthEast:
         adjustPos(sp, negSp);
@@ -134,9 +135,9 @@ public class Position {
    * @return the distance between this position and other
    */
   public float calculateDistance(Position other) { 
-    float distX = other.getPosX()-posX;
-    float distY = other.getPosY()-posX;
-    return (float) Math.sqrt((Math.pow(distX,2))+Math.pow(distY, 2));    
+    return 
+        (float) Math.sqrt((Math.pow(other.getPosX()-posX,2))
+            + Math.pow(other.getPosY()-posX, 2));    
   }
   
   /**
@@ -144,10 +145,7 @@ public class Position {
    * @return true if the position is on the screen.
    */
   public final boolean isOnScreen() {
-    if (posX >= 0 && posX <= WidthPanel && posY >= 0 && posY <= HeightPanel) {
-      return true;
-    }
-    return false;
+    return (posX >= 0 && posX <= WidthPanel && posY >= 0 && posY <= HeightPanel);
   }
 
   @Override
