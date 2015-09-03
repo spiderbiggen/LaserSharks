@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Class for controlling fishdata
+ * Class for controlling fishdata.
  * @author Youri
  *
  */
 public class FishController {
     /**
-     * Holder for fishdata
+     * Holder for fishdata.
      */
     private List<Fish> fishList;
     
@@ -21,7 +21,7 @@ public class FishController {
     private static final float FISHSPAWNCHANCE = 0.0173f;
     
     /**
-     * Random Number Generator holder
+     * Random Number Generator holder.
      */
     private Random rng;
     
@@ -53,9 +53,11 @@ public class FishController {
      * Update all fish positions.
      */
     private void updatePositions() {
-      for(Fish f: this.fishList) {
+      for (Fish f: this.fishList) {
         f.move();
-        if(!f.getPosition().onScreen()) this.fishList.remove(f);
+        if (!f.getPosition().onScreen()) {
+          this.fishList.remove(f);
+        }
       }
     }
     
@@ -69,8 +71,9 @@ public class FishController {
     }
     
     /**
-     * Add new fish with chance of SELF::FISHSPAWNCHANCE, update fish positions and delete offscreen fish.
-     * @return
+     * Add new fish with chance of SELF::FISHSPAWNCHANCE,
+     * then update fish positions and delete offscreen fish.
+     * @return List<Fish> list of fishes at there current position.
      */
     public List<Fish> getNextCycleInformation() {
      //if(this.rng.nextFloat() <= FISHSPAWNCHANCE)
@@ -78,6 +81,4 @@ public class FishController {
         
       return this.getNewFishPositions();
     }
-    
-    
 }
