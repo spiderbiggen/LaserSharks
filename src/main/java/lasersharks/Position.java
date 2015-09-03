@@ -95,28 +95,28 @@ public class Position {
     // TODO Maybe Rename to update checkstyle thinks it's too long
     switch (dir) {
       case North:
-        adjustPos(1, 0);
+        adjustPos(0, 1);
         break;
       case NorthEast:
         adjustPos(1, 1);
         break;
       case East:
-        adjustPos(0, 1);
+        adjustPos(1, 0);
         break;
       case SouthEast:
-        adjustPos(-1, 1);
+        adjustPos(1, -1);
         break;
       case South:
-        adjustPos(-1, 0);
+        adjustPos(0, -1);
         break;
       case SoutWest:
         adjustPos(-1, -1);
         break;
       case West:
-        adjustPos(0, -1);
+        adjustPos(-1, 0);
         break;
       case NorthWest:
-        adjustPos(1, -1);
+        adjustPos(-1, 1);
         break;
       default:
         break;
@@ -148,7 +148,7 @@ public class Position {
   public int hashCode() {
     int hash = 17;
     int prime = 31;
-    hash = prime * hash + getPosX(); 
+    hash = prime * hash + getPosX();
     hash = prime * hash + getPosY();
     return hash;
   }
