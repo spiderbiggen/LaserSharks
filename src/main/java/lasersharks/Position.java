@@ -8,14 +8,13 @@ public class Position {
   private int posY;
 
   /**
-   * these are now static values inside Position. 
-   * These represent the height and width of the screen.
-   * TODO: when the gui is added, 
-   * replace these static variables by getting the resolution of the panel.
+   * these are now static values inside Position. These represent the height and width of the
+   * screen. TODO: when the gui is added, replace these static variables by getting the resolution
+   * of the panel.
    */
   private static int heightPanel = 1080;
   private static int widthPanel = 1920;
-  
+
   /**
    * 
    * @param posX
@@ -27,14 +26,14 @@ public class Position {
     this.posX = posX;
     this.posY = posY;
   }
-  
+
   /**
    * @return the height of the panel.
    */
   public static int getHeightPanel() {
     return heightPanel;
   }
-  
+
   /**
    * @return the width of the panel.
    */
@@ -52,7 +51,8 @@ public class Position {
 
   /**
    * 
-   * @param posX the x value.
+   * @param posX
+   *          the x value.
    */
   public void setPosX(int posX) {
     this.posX = posX;
@@ -60,7 +60,8 @@ public class Position {
 
   /**
    * 
-   * @param deltaX the amount we want to increase the x value.
+   * @param deltaX
+   *          the amount we want to increase the x value.
    */
   public void adjustPosX(int deltaX) {
     this.posX += deltaX;
@@ -107,17 +108,21 @@ public class Position {
   /**
    * Updates the position.
    * 
-   * @param dir the direction the position should shift to.
+   * @param dir
+   *          the direction the position should shift to.
    * @return false if fish moves off the screen
    */
   public boolean updatePosition(Direction dir) {
     return updatePosition(dir, 1);
   }
-  
+
   /**
    * Updates the position with a speed parameter.
    * 
-   * @param dir the direction the position should shift to.
+   * @param dir
+   *          the direction the position should shift to.
+   * @param sp
+   *          the speed to move at
    * @return false if fish moves off the screen.
    */
   public boolean updatePosition(Direction dir, int sp) {
@@ -152,20 +157,22 @@ public class Position {
     }
     return isOnScreen();
   }
-  
+
   /**
    * Returns the distance between the two positions using pythagoras.
-   * @param other The other position that should be compared to this position.
+   * 
+   * @param other
+   *          The other position that should be compared to this position.
    * @return the distance between this position and other.
    */
-  public float calculateDistance(Position other) { 
-    return 
-        (float) Math.sqrt((Math.pow(other.getPosX() - posX, 2))
-            + Math.pow(other.getPosY() - posX, 2));    
+  public float calculateDistance(Position other) {
+    return (float) Math.sqrt((Math.pow(other.getPosX() - posX, 2))
+        + Math.pow(other.getPosY() - posX, 2));
   }
-  
+
   /**
    * This boolean checks if the position is on the screen.
+   * 
    * @return true if the position is on the screen.
    */
   public final boolean isOnScreen() {
