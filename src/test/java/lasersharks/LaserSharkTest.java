@@ -1,7 +1,6 @@
 package lasersharks;
 
 import static org.junit.Assert.fail;
-import junit.*;
 import org.junit.Test;
 
 public class LaserSharkTest {
