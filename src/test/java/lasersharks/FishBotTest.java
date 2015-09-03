@@ -15,41 +15,46 @@ public class FishBotTest {
 
   @Before
   public void setUp() throws Exception {
-    posOnScreen = new Position(50,50);
-    posOffScreen = new Position(-1,-1);
-    fishbot1 = new FishBot(posOnScreen,30,40,Direction.East);
-    fishbot2 = new FishBot(posOffScreen,30,40,Direction.East);
-  }
-
-  @After
-  public void tearDown() throws Exception {
-    
-  }
-
-  @Test
-  public void testFishBot() {
+    posOnScreen = new Position(50, 50);
+    posOffScreen = new Position(-1, -1);
+    fishbot1 = new FishBot(posOnScreen, 30, 40, Direction.East);
+    fishbot2 = new FishBot(posOffScreen, 30, 40, Direction.West);
+    generatedFish = FishBot.generateFish();
   }
 
   @Test
   public void testGetPosition() {
+    assertEquals(posOnScreen,fishbot1.getPosition());
   }
 
   @Test
   public void testGetSize() {
+    assertEquals(fishbot1.getSize(),30,0);
   }
 
   @Test
   public void testGetSpeed() {
+    assertEquals(fishbot1.getSpeed(),40,0);
   }
 
   @Test
   public void testGetDirection() {
+    assertEquals(fishbot1.getDirection(), Direction.East);
   }
 
   @Test
-  public void testCollision() {
+  public void testCollisionFalse() {
+    assertFalse(fishbot1.collision(fishbot2));
   }
 
+  @Test
+  public void testCollisionTrue() {
+    FishBot fishbot3 = fishbot1;
+    assertFalse(fishbot3.collision(fishbot2));
+    fishbot3.move();
+    assert(fishbot3.collision(fishbot2));
+  }
+  
   @Test
   public void testMove() {
     int oldX = fishbot1.getPosition().getPosX();
@@ -61,8 +66,9 @@ public class FishBotTest {
 
   @Test
   public void testRandomFish() {
-    generatedFish = FishBot.generateFish();
     System.out.println(generatedFish.toString());
+    assert(generatedFish.getSize()>=0);
+    assert(generatedFish.getSize()<=100);
   }
 
   @Test
