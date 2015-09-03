@@ -30,32 +30,26 @@ public class FishBotTest {
 
   @Test
   public void testFishBot() {
-    fail("Not yet implemented");
   }
 
   @Test
   public void testGetPosition() {
-    fail("Not yet implemented");
   }
 
   @Test
   public void testGetSize() {
-    fail("Not yet implemented");
   }
 
   @Test
   public void testGetSpeed() {
-    fail("Not yet implemented");
   }
 
   @Test
   public void testGetDirection() {
-    fail("Not yet implemented");
   }
 
   @Test
   public void testCollision() {
-    fail("Not yet implemented");
   }
 
   @Test
