@@ -60,7 +60,6 @@ public class FishBot implements Fish {
    * The sum of the size of both fishes is our hitbox.
    * Hitbox is now a circle, with size the radius in pixels.
    */
-  @Override
   public boolean collision(Fish fish) {
     if (position.calculateDistance(fish.getPosition()) < size + fish.getSize()) {
       return true;
@@ -90,7 +89,7 @@ public class FishBot implements Fish {
     
     int posY = (int) (Position.HeightPanel * Math.random());
     int posX;
-    if (Math.random() > ChanceForLeft) {
+    if (Math.random()*100 > ChanceForLeft) {
       //starts on the right side
       dir = Direction.East;
       posX = Position.WidthPanel;
@@ -100,8 +99,8 @@ public class FishBot implements Fish {
       dir = Direction.West;
     }
     pos = new Position(posX, posY);
-    si = (int) Math.random() * SizeModifier;
-    sp = (int) Math.random() * SpeedModifier;
+    si = (int) Math.round(Math.random() * SizeModifier);
+    sp = (int) Math.round(Math.random() * SpeedModifier);
     
     return new FishBot(pos, si, sp, dir);
   }
@@ -112,5 +111,11 @@ public class FishBot implements Fish {
    */
   public final boolean isOnScreen() {
     return position.isOnScreen();
+  }
+
+  @Override
+  public String toString() {
+    return "FishBot [position=" + position.toString() + ", size=" + size + ", speed=" + speed + ", direction="
+        + direction + "]";
   }
 }

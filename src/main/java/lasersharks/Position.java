@@ -99,28 +99,28 @@ public class Position {
     int negSp = sp*-1;
     switch (dir) {
       case North:
-        adjustPos(sp, 0);
+        adjustPos(0, sp);
         break;
       case NorthEast:
         adjustPos(sp, sp);
         break;
       case East:
-        adjustPos(0, sp);
+        adjustPos(sp,0);
         break;
       case SouthEast:
-        adjustPos(negSp, sp);
+        adjustPos(sp, negSp);
         break;
       case South:
-        adjustPos(negSp, 0);
+        adjustPos(0, negSp);
         break;
       case SoutWest:
         adjustPos(negSp, negSp);
         break;
       case West:
-        adjustPos(0, negSp);
+        adjustPos(negSp, 0);
         break;
       case NorthWest:
-        adjustPos(sp, negSp);
+        adjustPos(negSp, sp);
         break;
       default:
         break;
@@ -149,5 +149,12 @@ public class Position {
     }
     return false;
   }
+
+  @Override
+  public String toString() {
+    return "Position [posX=" + posX + ", posY=" + posY + "]";
+  }
+  
+  
   
 }
