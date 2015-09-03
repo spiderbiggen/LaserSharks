@@ -34,17 +34,9 @@ public class LaserSharkTest {
   }
 
   @Test
-  public void testSetPosition() {
-  }
-
-  @Test
   public void testSetSize() {
     laserShark.setDirection(Direction.West);
     assertEquals(Direction.West, laserShark.getDirection());
-  }
-
-  @Test
-  public void testGetPosition() {
   }
 
   @Test
@@ -59,19 +51,8 @@ public class LaserSharkTest {
   }
 
   @Test
-  public void testGetSize() {
-  }
-
-  @Test
   public void testCollision() {
     assertTrue(size == laserShark.getSize());
-  }
-
-  @Test
-  public void testSetSize() {
-    float size2 = 5.0f;
-    laserShark.setSize(size2);
-    assertTrue(size2 == laserShark.getSize());
   }
 
   /*
