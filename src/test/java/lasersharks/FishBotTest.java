@@ -3,6 +3,8 @@ package lasersharks;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.util.Random;
+
 import org.junit.*;
 
 public class FishBotTest {
@@ -12,6 +14,7 @@ public class FishBotTest {
   FishBot generatedFish;
   Position posOnScreen;
   Position posOffScreen;
+  Random seed;
 
   @Before
   public void setUp() throws Exception {
@@ -19,7 +22,6 @@ public class FishBotTest {
     posOffScreen = new Position(-1, -1);
     fishbot1 = new FishBot(posOnScreen, 30, 40, Direction.East);
     fishbot2 = new FishBot(posOffScreen, 30, 40, Direction.West);
-    generatedFish = FishBot.generateFish();
   }
 
   @Test
@@ -66,20 +68,30 @@ public class FishBotTest {
 
   @Test
   public void testRandomFish() {
+
+    seed = new Random(10);
+    FishBot.setRng(seed);
+    generatedFish = FishBot.generateFish();
     System.out.println(generatedFish.toString());
-    assert(generatedFish.getSize()>=0);
-    assert(generatedFish.getSize()<=100);
+    assertEquals(generatedFish.getDirection(), Direction.East);
+    assertEquals(generatedFish.getPosition(), new Position(1920,481));
+    assertEquals(generatedFish.getSize(), 10, 0);
+    assertEquals(generatedFish.getSpeed(), 12, 0);
+    generatedFish = FishBot.generateFish();
+    System.out.println(generatedFish.toString());
+    assertEquals(generatedFish.getDirection(), Direction.West);
+    assertEquals(generatedFish.getPosition(), new Position(0, 725));
+    assertEquals(generatedFish.getSize(), 10, 0);
+    assertEquals(generatedFish.getSpeed(), 11, 0);
   }
 
   @Test
   public void testIsOnScreen() {
-    assert(fishbot1.isOnScreen());
+    assert(fishbot1.onScreen());
   }
   
   @Test
   public void testIsOffScreen() {
-    assertFalse(fishbot2.isOnScreen());
+    assertFalse(fishbot2.onScreen());
   }
-
-
 }
