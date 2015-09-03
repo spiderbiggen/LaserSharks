@@ -1,2 +1,3 @@
 target/
 .checkstyle
+.settings/edu.umd.cs.findbugs.core.prefs
