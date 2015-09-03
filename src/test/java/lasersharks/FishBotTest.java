@@ -70,7 +70,7 @@ public class FishBotTest {
 
   @Test
   public void testRandomFish() {
-    generatedFish = FishBot.RandomFish();
+    generatedFish = FishBot.generateFish();
     System.out.println(generatedFish.toString());
   }
 
