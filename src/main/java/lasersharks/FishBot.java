@@ -124,7 +124,7 @@ public class FishBot implements Fish {
    * @return true if the fish is on the screen, and false if not.
    */
   public final boolean isOnScreen() {
-    return position.isOnScreen();
+    return position.onScreen();
   }
 
   @Override

@@ -119,14 +119,18 @@ public class Position {
   /**
    * Updates the position with a speed parameter.
    * 
+<<<<<<< HEAD
+   * @param dir the direction the position should shift to.
+   * @param sp the speed in witch the fish moves.
+=======
    * @param dir
    *          the direction the position should shift to.
    * @param sp
    *          the speed to move at
+>>>>>>> master
    * @return false if fish moves off the screen.
    */
   public boolean updatePosition(Direction dir, int sp) {
-    int negSp = sp * -1;
     switch (dir) {
       case North:
         adjustPos(0, sp);
@@ -138,24 +142,24 @@ public class Position {
         adjustPos(sp, 0);
         break;
       case SouthEast:
-        adjustPos(sp, negSp);
+        adjustPos(sp, sp * -1);
         break;
       case South:
-        adjustPos(0, negSp);
+        adjustPos(0, sp * -1);
         break;
       case SoutWest:
-        adjustPos(negSp, negSp);
+        adjustPos(sp * -1, sp * -1);
         break;
       case West:
-        adjustPos(negSp, 0);
+        adjustPos(sp * -1, 0);
         break;
       case NorthWest:
-        adjustPos(negSp, sp);
+        adjustPos(sp * -1, sp);
         break;
       default:
         break;
     }
-    return isOnScreen();
+    return onScreen();
   }
 
   /**
@@ -175,7 +179,7 @@ public class Position {
    * 
    * @return true if the position is on the screen.
    */
-  public final boolean isOnScreen() {
+  public final boolean onScreen() {
     return (posX >= 0 && posX <= widthPanel && posY >= 0 && posY <= heightPanel);
   }
 
