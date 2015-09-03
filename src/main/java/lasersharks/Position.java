@@ -199,7 +199,7 @@ public class Position {
   public int hashCode() {
     int hash = 17;
     int prime = 31;
-    hash = prime * hash + getPosX(); 
+    hash = prime * hash + getPosX();
     hash = prime * hash + getPosY();
     return hash;
   }
