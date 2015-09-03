@@ -150,7 +150,7 @@ public class Position {
       default:
         break;
     }
-    return isOnScreen();
+    return onScreen();
   }
   
   /**
@@ -168,7 +168,7 @@ public class Position {
    * This boolean checks if the position is on the screen.
    * @return true if the position is on the screen.
    */
-  public final boolean isOnScreen() {
+  public final boolean onScreen() {
     return (posX >= 0 && posX <= widthPanel && posY >= 0 && posY <= heightPanel);
   }
 
