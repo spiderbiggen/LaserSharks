@@ -55,7 +55,6 @@ public class FishBotTest {
   @Test
   public void testMove() {
     int oldX = fishbot1.getPosition().getPosX();
-    Direction direction = fishbot1.getDirection();
     fishbot1.move();
     int newX = fishbot1.getPosition().getPosX();
     assertEquals(oldX+fishbot1.getSpeed(), newX, 0);

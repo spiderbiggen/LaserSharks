@@ -25,11 +25,18 @@ public class FishBot implements Fish {
    */
   private static int chanceForLeft = 50;
 
-  Position position;
-  float size;
-  int speed;
-  Direction direction;
+  private Position position;
+  private float size;
+  private int speed;
+  private Direction direction;
 
+  /**
+   * The constructor for fishbot.
+   * @param pos the position where the fishbot is.
+   * @param siz the size of the fishbot.
+   * @param sp the speed parameter of the fishbot.
+   * @param dir the direction the fishbot is heading to.
+   */
   public FishBot(Position pos, float siz, int sp, Direction dir) {
     position = pos;
     size = siz;
@@ -37,20 +44,32 @@ public class FishBot implements Fish {
     direction = dir;
   }
 
+  /**
+   * @return the position
+   */
   @Override
   public Position getPosition() {
     return position;
   }
 
+  /**
+   * @return the size
+   */
   @Override
   public float getSize() {
     return size;
   }
 
+  /**
+   * @return the size
+   */
   public float getSpeed() {
     return speed;
   }
 
+  /**
+   * @return the direction
+   */
   public Direction getDirection() {
     return direction;
   }
@@ -59,7 +78,8 @@ public class FishBot implements Fish {
    * We calculate the distance between the fishes. The sum of the size of both fishes is our hitbox.
    * Hitbox is now a circle, with size the radius in pixels.
    * 
-   * @
+   * @param fish we want to check if the fishbot collides with this fish,
+   * @return true if the fishes collide and false if not.
    */
   public boolean collision(Fish fish) {
     return (position.calculateDistance(fish.getPosition()) < size + fish.getSize());
@@ -86,14 +106,14 @@ public class FishBot implements Fish {
     if (Math.random() * 100 > chanceForLeft) {
       // starts on the right side
       dir = Direction.East;
-      posX = Position.WidthPanel;
+      posX = Position.getWidthPanel();
     } else {
       // starts on the left side
       posX = 0;
       dir = Direction.West;
     }
 
-    return new FishBot(new Position(posX, (int) (Position.HeightPanel * Math.random())),
+    return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * Math.random())),
         (int) Math.round(Math.random() * sizeModifier),
         (int) Math.round(Math.random() * speedModifier), dir);
   }
