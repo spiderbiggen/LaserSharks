@@ -24,7 +24,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class FXGUI extends Application {
+
   Label lb_text;
+  private static final int KEYBOARD_MOVEMENT_DELTA = 5;
+  private int sizeX = 80;
+  private int sizeY = 40;
+  private double growSize = 1;
 
   public static void main(String[] args) {
     launch(args);
@@ -33,13 +38,13 @@ public class FXGUI extends Application {
   @Override
   public void start(Stage stage) throws Exception {
 
-    StackPane imageContainer = new StackPane();
+    Image imageright = new Image("SharkToTheRight.gif", sizeX, sizeY, true, true);
+    Image imageleft = new Image("SharkToTheLeft.gif", sizeX, sizeY, false, true);
     ImageView image = new ImageView("SharkToTheRight.gif");
-
-    imageContainer.getChildren().addAll(image);
 
     Pane pane = new Pane();
     pane.getChildren().add(image);
+    image.setImage(imageright);
 
     final Scene scene = new Scene(pane, 1920, 1080, Color.BLUE);
 
@@ -48,8 +53,6 @@ public class FXGUI extends Application {
         BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
     pane.setBackground(new Background(myBI));
-
-    moveCircleOnKeyPress(scene, image);
 
     final double rectangleHSpeed = 500; // pixels per second
     final double rectangleVSpeed = 500;
@@ -85,16 +88,25 @@ public class FXGUI extends Application {
               break;
             case LEFT:
               deltaX = -rectangleHSpeed * elapsedSeconds;
+              image.setImage(imageleft);
               break;
             case RIGHT:
               deltaX = rectangleHSpeed * elapsedSeconds;
+              image.setImage(imageright);
+              break;
+            case H:
+              // image.setImage(imageright1);
+              growSize = growSize * 1.01;
+              image.setScaleX(growSize);
+              image.setScaleY(growSize);
             default:
               break;
           }
-          double oldX = image.getTranslateX();
-          double oldY = image.getTranslateY();
-          image.setTranslateX(clamp(oldX + deltaX, minX, maxX));
-          image.setTranslateY(clamp(oldY + deltaY, minY, maxY));
+          double oldXr = image.getTranslateX();
+          double oldYr = image.getTranslateY();
+          image.setTranslateX(clamp(oldXr + deltaX, minX, maxX));
+          image.setTranslateY(clamp(oldYr + deltaY, minY, maxY));
+
         }
         lastUpdateTime.set(timestamp);
       }
@@ -108,20 +120,6 @@ public class FXGUI extends Application {
 
   private double clamp(double value, double min, double max) {
     return Math.max(min, Math.min(max, value));
-  }
-
-  private void moveCircleOnKeyPress(Scene scene, final ImageView image) {
-    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-      @Override
-      public void handle(KeyEvent event) {
-        while (event.getCode() == KeyCode.UP) {
-          // image.setCenterY(image.getCenterY() - KEYBOARD_MOVEMENT_DELTA);
-          if (KeyEvent.KEY_RELEASED != null) {
-            break;
-          }
-        }
-      }
-    });
   }
 
 }
