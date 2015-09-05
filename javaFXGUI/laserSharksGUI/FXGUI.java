@@ -39,7 +39,7 @@ public class FXGUI extends Application {
   public void start(Stage stage) throws Exception {
 
     Image imageright = new Image("SharkToTheRight.gif", sizeX, sizeY, true, true);
-    Image imageleft = new Image("SharkToTheLeft.gif", sizeX, sizeY, false, true);
+    Image imageleft = new Image("SharkToTheLeft.gif", sizeX, sizeY, true, true);
     ImageView image = new ImageView("SharkToTheRight.gif");
 
     Pane pane = new Pane();
