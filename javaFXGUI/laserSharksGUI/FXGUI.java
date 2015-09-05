@@ -23,18 +23,29 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * @author michiel, daan
+ *
+ */
 public class FXGUI extends Application {
 
   Label lb_text;
   private static final int KEYBOARD_MOVEMENT_DELTA = 5;
-  private int sizeX = 80;
-  private int sizeY = 40;
+  private int sizeX = 160;
+  private int sizeY = 80;
   private double growSize = 1;
 
+  /**
+   * @param args
+   */
   public static void main(String[] args) {
     launch(args);
   }
 
+  /**
+   * Set the complete stage for the view in the GUI, this method will be split among smaller methods
+   * later
+   */
   @Override
   public void start(Stage stage) throws Exception {
 
@@ -118,6 +129,13 @@ public class FXGUI extends Application {
 
   }
 
+  /**
+   * Clamps a value between a minimum double and maximum double value.
+   * @param value
+   * @param min
+   * @param max
+   * @return a value between a minimum double and maximum double
+   */
   private double clamp(double value, double min, double max) {
     return Math.max(min, Math.min(max, value));
   }
