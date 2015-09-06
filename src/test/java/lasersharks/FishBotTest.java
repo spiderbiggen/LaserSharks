@@ -1,7 +1,6 @@
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import java.util.Random;
 
@@ -52,9 +51,10 @@ public class FishBotTest {
   @Test
   public void testCollisionTrue() {
     FishBot fishbot3 = fishbot1;
-    assertFalse(fishbot3.collision(fishbot2));
-    fishbot3.move();
-    assert(fishbot3.collision(fishbot2));
+    FishBot fishbot4 = fishbot2;
+    assertFalse(fishbot3.collision(fishbot4));
+    fishbot4.setPosition(new Position(50,30));
+    assertTrue(fishbot3.collision(fishbot2));
   }
   
   @Test
@@ -68,7 +68,6 @@ public class FishBotTest {
 
   @Test
   public void testRandomFish() {
-
     seed = new Random(10);
     FishBot.setRng(seed);
     generatedFish = FishBot.generateFish();
