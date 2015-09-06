@@ -125,7 +125,7 @@ public class Position {
    */
   public boolean updatePosition(Direction dir, int sp) {
     if (dir != null && !dir.equals(Direction.None)) {
-      adjustPos(dir.getDeltaX(), dir.getDeltaY());
+      adjustPos(sp*dir.getDeltaX(), sp*dir.getDeltaY());
     }
     return onScreen();
   }
