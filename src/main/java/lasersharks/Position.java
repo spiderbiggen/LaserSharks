@@ -119,45 +119,13 @@ public class Position {
   /**
    * Updates the position with a speed parameter.
    * 
-<<<<<<< HEAD
    * @param dir the direction the position should shift to.
    * @param sp the speed in witch the fish moves.
-=======
-   * @param dir
-   *          the direction the position should shift to.
-   * @param sp
-   *          the speed to move at
->>>>>>> master
    * @return false if fish moves off the screen.
    */
   public boolean updatePosition(Direction dir, int sp) {
-    switch (dir) {
-      case North:
-        adjustPos(0, sp);
-        break;
-      case NorthEast:
-        adjustPos(sp, sp);
-        break;
-      case East:
-        adjustPos(sp, 0);
-        break;
-      case SouthEast:
-        adjustPos(sp, sp * -1);
-        break;
-      case South:
-        adjustPos(0, sp * -1);
-        break;
-      case SoutWest:
-        adjustPos(sp * -1, sp * -1);
-        break;
-      case West:
-        adjustPos(sp * -1, 0);
-        break;
-      case NorthWest:
-        adjustPos(sp * -1, sp);
-        break;
-      default:
-        break;
+    if (dir != null && !dir.equals(Direction.None)) {
+      adjustPos(dir.getDeltaX(), dir.getDeltaY());
     }
     return onScreen();
   }
