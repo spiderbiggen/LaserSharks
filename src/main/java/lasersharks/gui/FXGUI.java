@@ -1,4 +1,4 @@
-package laserSharksGUI;
+package lasersharks.gui;
 
 import java.util.LinkedList;
 
@@ -31,8 +31,8 @@ public class FXGUI extends Application {
 
   Label lb_text;
   private static final int KEYBOARD_MOVEMENT_DELTA = 5;
-  private int size = 40;
-  private double growSize = 1;
+  private double size = 40;
+  private double growth = 1.01;
 
   /**
    * @param args
@@ -45,6 +45,7 @@ public class FXGUI extends Application {
    * Set the complete stage for the view in the GUI, this method will be split among smaller methods
    * later
    */
+  @SuppressWarnings("restriction")
   @Override
   public void start(Stage stage) throws Exception {
 
@@ -85,6 +86,8 @@ public class FXGUI extends Application {
 
     final LongProperty lastUpdateTime = new SimpleLongProperty();
     final AnimationTimer rectangleAnimation = new AnimationTimer() {
+      
+
       @Override
       public void handle(long timestamp) {
         if (!keyStack.isEmpty() && lastUpdateTime.get() > 0) {
@@ -108,16 +111,19 @@ public class FXGUI extends Application {
               break;
             case H:
               // image.setImage(imageright1);
-              growSize = growSize * 1.01;
-              image.setScaleX(growSize);
-              image.setScaleY(growSize);
+              size = size * growth;
+              image.setFitHeight(size);
+              image.setFitWidth(2 * size);
+             /* image.setScaleX(growSize);
+              image.setScaleY(growSize);*/
+              break;
             default:
               break;
           }
           double oldXr = image.getTranslateX();
           double oldYr = image.getTranslateY();
-          image.setTranslateX(clamp(oldXr + deltaX, minX, maxX));
-          image.setTranslateY(clamp(oldYr + deltaY, minY, maxY));
+          image.setTranslateX(clamp(oldXr + deltaX, minX, maxX - image.getBoundsInParent().getWidth()));
+          image.setTranslateY(clamp(oldYr + deltaY, minY, maxY - image.getBoundsInParent().getHeight()));
 
         }
         lastUpdateTime.set(timestamp);
