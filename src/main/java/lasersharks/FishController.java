@@ -19,7 +19,7 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static final float FISHSPAWNCHANCE = 0.0173f;
+  private static final float FISHSPAWNCHANCE = 0.5173f;
 
   /**
    * Random Number Generator holder.

@@ -104,7 +104,7 @@ public class LaserShark implements Fish {
    * @param fish the fish the shark eats
    */
   public void eat(Fish fish){
-    fish.setPosition(new Position(1,-1));
+    fish.setPosition(new Position(-100, -100));
     size += fish.getSize()/10.0;
   }
 
