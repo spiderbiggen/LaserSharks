@@ -222,14 +222,4 @@ public class FishBot implements Fish {
     return "FishBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
         + ", direction=" + direction + "]";
   }
-
-  /**
-   * Set the position
-   * @param pos The position to set
-   */
-  @Override
-  public void setPosition(Position pos) {
-    position = pos;
-    
-  }
 }
