@@ -1,5 +1,7 @@
 package lasersharks;
 
+import java.util.Random;
+
 /**
  * This class represent the fishes on the screen that are not player controllable.
  * 
@@ -25,6 +27,11 @@ public class FishBot implements Fish {
    */
   private static int chanceForLeft = 50;
 
+  /**
+   * this is the seed used to create the random fishes.
+   */
+  private static Random rng;
+  
   private Position position;
   private float size;
   private int speed;
@@ -43,9 +50,79 @@ public class FishBot implements Fish {
     speed = sp;
     direction = dir;
   }
+  
+  /**
+   * @return the direction
+   */
+  public Direction getDirection() {
+    return direction;
+  }
 
   /**
-   * @return the position
+   * @param direction the direction to set
+   */
+  public void setDirection(Direction direction) {
+    this.direction = direction;
+  }
+
+  /**
+   * @return the speedModifier
+   */
+  public static int getSpeedModifier() {
+    return speedModifier;
+  }
+
+  /**
+   * @param speedModifier the speedModifier to set
+   */
+  public static void setSpeedModifier(int speedModifier) {
+    FishBot.speedModifier = speedModifier;
+  }
+
+  /**
+   * @return the sizeModifier
+   */
+  public static int getSizeModifier() {
+    return sizeModifier;
+  }
+  
+  /**
+   * @param sizeModifier the sizeModifier to set
+   */
+  public static void setSizeModifier(int sizeModifier) {
+    FishBot.sizeModifier = sizeModifier;
+  }
+
+  /**
+   * @return the chanceForLeft
+   */
+  public static int getChanceForLeft() {
+    return chanceForLeft;
+  }
+
+  /**
+   * @param chanceForLeft the chanceForLeft to set
+   */
+  public static void setChanceForLeft(int chanceForLeft) {
+    FishBot.chanceForLeft = chanceForLeft;
+  }
+
+  /**
+   * @return the rng
+   */
+  public static Random getRng() {
+    return rng;
+  }
+
+  /**
+   * @param rng the rng to set
+   */
+  public static void setRng(Random newRng) {
+    rng = newRng;
+  }
+    
+  /**
+   * @return position
    */
   @Override
   public Position getPosition() {
@@ -53,25 +130,39 @@ public class FishBot implements Fish {
   }
 
   /**
-   * @return the size
+   * @return size
    */
   @Override
   public float getSize() {
     return size;
   }
-
+  
   /**
-   * @return the size
+   * @return the speed
    */
-  public float getSpeed() {
+  public int getSpeed() {
     return speed;
   }
 
   /**
-   * @return the direction
+   * @param speed the speed to set
    */
-  public Direction getDirection() {
-    return direction;
+  public void setSpeed(int speed) {
+    this.speed = speed;
+  }
+
+  /**
+   * @param position the position to set
+   */
+  public void setPosition(Position position) {
+    this.position = position;
+  }
+
+  /**
+   * @param size the size to set
+   */
+  public void setSize(float size) {
+    this.size = size;
   }
 
   /**
@@ -96,14 +187,13 @@ public class FishBot implements Fish {
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
    * Starts on either the left side on
-   * 
+   * @param rng the rng we use, useful for setting seeds.
    * @return a random fish with random speed, size and position.
    */
   public static FishBot generateFish() {
     int posX;
     Direction dir;
-
-    if (Math.random() * 100 > chanceForLeft) {
+    if (rng.nextBoolean()) {
       // starts on the right side
       dir = Direction.East;
       posX = Position.getWidthPanel();
@@ -113,9 +203,9 @@ public class FishBot implements Fish {
       dir = Direction.West;
     }
 
-    return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * Math.random())),
-        (int) Math.round(Math.random() * sizeModifier),
-        (int) Math.round(Math.random() * speedModifier), dir);
+    return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * rng.nextFloat())),
+        (int) Math.round(rng.nextFloat() * sizeModifier),
+        (int) Math.round(rng.nextFloat() * speedModifier), dir);
   }
 
   /**
@@ -123,7 +213,7 @@ public class FishBot implements Fish {
    * 
    * @return true if the fish is on the screen, and false if not.
    */
-  public final boolean isOnScreen() {
+  public final boolean onScreen() {
     return position.onScreen();
   }
 
