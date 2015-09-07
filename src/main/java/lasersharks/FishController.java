@@ -19,7 +19,7 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static final float FISHSPAWNCHANCE = 0.0173f;
+  private static final float FISHSPAWNCHANCE = 0.5173f;
 
   /**
    * Random Number Generator holder.
@@ -49,7 +49,7 @@ public class FishController {
    * 
    * @param fish
    */
-  private void addFish(Fish fish) {
+  public void addFish(Fish fish) {
     this.fishList.add(fish);
   }
 

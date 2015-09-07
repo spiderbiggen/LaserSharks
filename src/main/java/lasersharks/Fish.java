@@ -25,4 +25,7 @@ public interface Fish {
    * @return true if fish is in view
    */
   boolean move();
+  
+  
+  void setPosition(Position position);
 }

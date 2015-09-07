@@ -30,7 +30,7 @@ public class FishBot implements Fish {
   /**
    * this is the seed used to create the random fishes.
    */
-  private static Random rng;
+  private static Random rng = new Random();
   
   private Position position;
   private float size;
