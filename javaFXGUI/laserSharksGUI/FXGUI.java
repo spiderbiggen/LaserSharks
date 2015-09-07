@@ -31,8 +31,7 @@ public class FXGUI extends Application {
 
   Label lb_text;
   private static final int KEYBOARD_MOVEMENT_DELTA = 5;
-  private int sizeX = 160;
-  private int sizeY = 80;
+  private int size = 40;
   private double growSize = 1;
 
   /**
@@ -49,9 +48,11 @@ public class FXGUI extends Application {
   @Override
   public void start(Stage stage) throws Exception {
 
-    Image imageright = new Image("SharkToTheRight.gif", sizeX, sizeY, true, true);
-    Image imageleft = new Image("SharkToTheLeft.gif", sizeX, sizeY, true, true);
+    Image imageright = new Image("SharkToTheRight.gif", true);
+    Image imageleft = new Image("SharkToTheLeft.gif", true);
     ImageView image = new ImageView("SharkToTheRight.gif");
+    image.setFitHeight(size);
+    image.setFitWidth(2 * size);
 
     Pane pane = new Pane();
     pane.getChildren().add(image);
