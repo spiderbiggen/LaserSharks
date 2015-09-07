@@ -98,5 +98,14 @@ public class LaserShark implements Fish {
   public boolean move() {
     return getPosition().updatePosition(getDirection());
   }
+  
+  /**
+   * The LaserShark eats a fish.
+   * @param fish the fish the shark eats
+   */
+  public void eat(Fish fish){
+    fish.setPosition(new Position(1,-1));
+    size += fish.getSize()/10.0;
+  }
 
 }

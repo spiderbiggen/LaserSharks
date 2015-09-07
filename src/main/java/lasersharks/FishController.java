@@ -49,7 +49,7 @@ public class FishController {
    * 
    * @param fish
    */
-  private void addFish(Fish fish) {
+  public void addFish(Fish fish) {
     this.fishList.add(fish);
   }
 
