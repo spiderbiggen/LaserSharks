@@ -6,12 +6,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Class for testing Lazershark object
+ * @author Youri
+ *
+ */
 public class LaserSharkTest {
-
-  @Test
-  public void tearDown() throws Exception {
-  }
-
+  /**
+   * Container for test object
+   */
   private LaserShark laserShark;
   private Position position;
   private float size;
