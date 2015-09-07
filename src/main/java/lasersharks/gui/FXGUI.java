@@ -1,41 +1,50 @@
 package lasersharks.gui;
 
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
-import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
  * @author michiel, daan
  *
  */
+@SuppressWarnings("restriction")
 public class FXGUI extends Application {
 
-  Label lb_text;
-  private static final int KEYBOARD_MOVEMENT_DELTA = 5;
-  private double size = 40;
-  private double growth = 1.01;
+  private double size = 80;
+  private final double growth = 1.01;
+
+  private final double rectangleHSpeed = 500; // pixels per second
+  private final double rectangleVSpeed = 500;
+  private final double minX = 0;
+  private final double maxX = 1920;
+  private final double minY = 0;
+  private final double maxY = 1080;
+
+  private final DecimalFormat df = new DecimalFormat("#.##");
 
   /**
    * @param args
+   *          parameters to influence the startup of this game
    */
   public static void main(String[] args) {
     launch(args);
@@ -43,36 +52,31 @@ public class FXGUI extends Application {
 
   /**
    * Set the complete stage for the view in the GUI, this method will be split among smaller methods
-   * later
+   * later.
    */
-  @SuppressWarnings("restriction")
   @Override
   public void start(Stage stage) throws Exception {
 
-    Image imageright = new Image("SharkToTheRight.gif", true);
-    Image imageleft = new Image("SharkToTheLeft.gif", true);
     ImageView image = new ImageView("SharkToTheRight.gif");
     image.setFitHeight(size);
     image.setFitWidth(2 * size);
+    String fps = "FPS: ";
+    Text text = new Text(fps + "ofzo");
+    text.setFont(new Font(20));
+    text.setX(maxX - text.getBoundsInParent().getWidth() - 20);
+    text.setY(20);
 
     Pane pane = new Pane();
     pane.getChildren().add(image);
-    image.setImage(imageright);
+    pane.getChildren().add(text);
 
-    final Scene scene = new Scene(pane, 1920, 1080, Color.BLUE);
+    final Scene scene = new Scene(pane, maxX, maxY, Color.BLUE);
 
-    BackgroundImage myBI = new BackgroundImage(new Image("better background.jpg", 1920, 1080,
-        false, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-        BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(
+        new Image("background2.jpg", maxX, maxY, true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
     pane.setBackground(new Background(myBI));
-
-    final double rectangleHSpeed = 500; // pixels per second
-    final double rectangleVSpeed = 500;
-    final double minX = 0;
-    final double maxX = 1920;
-    final double minY = 0;
-    final double maxY = 1080;
 
     final LinkedList<KeyCode> keyStack = new LinkedList<>();
     scene.setOnKeyPressed(event -> {
@@ -86,7 +90,6 @@ public class FXGUI extends Application {
 
     final LongProperty lastUpdateTime = new SimpleLongProperty();
     final AnimationTimer rectangleAnimation = new AnimationTimer() {
-      
 
       @Override
       public void handle(long timestamp) {
@@ -103,34 +106,35 @@ public class FXGUI extends Application {
               break;
             case LEFT:
               deltaX = -rectangleHSpeed * elapsedSeconds;
-              image.setImage(imageleft);
+              image.setScaleX(-1);
               break;
             case RIGHT:
               deltaX = rectangleHSpeed * elapsedSeconds;
-              image.setImage(imageright);
+              image.setScaleX(1);
               break;
             case H:
-              // image.setImage(imageright1);
               size = size * growth;
               image.setFitHeight(size);
               image.setFitWidth(2 * size);
-             /* image.setScaleX(growSize);
-              image.setScaleY(growSize);*/
               break;
             default:
               break;
           }
           double oldXr = image.getTranslateX();
           double oldYr = image.getTranslateY();
-          image.setTranslateX(clamp(oldXr + deltaX, minX, maxX - image.getBoundsInParent().getWidth()));
-          image.setTranslateY(clamp(oldYr + deltaY, minY, maxY - image.getBoundsInParent().getHeight()));
+          Bounds bounds = image.getBoundsInParent();
+          image.setTranslateX(clamp(oldXr + deltaX, minX, maxX - bounds.getWidth()));
+          image.setTranslateY(clamp(oldYr + deltaY, minY, maxY - bounds.getHeight()));
 
         }
+
+        final double fpsnum = 1_000_000_000.0 / (timestamp - lastUpdateTime.get());
+
+        text.setText(fps + df.format(fpsnum));
         lastUpdateTime.set(timestamp);
       }
     };
     rectangleAnimation.start();
-
     stage.setScene(scene);
     stage.show();
 
@@ -138,6 +142,7 @@ public class FXGUI extends Application {
 
   /**
    * Clamps a value between a minimum double and maximum double value.
+   * 
    * @param value
    * @param min
    * @param max
