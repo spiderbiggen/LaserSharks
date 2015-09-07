@@ -100,7 +100,8 @@ public class LaserShark implements Fish {
   }
   
   /**
-   * The LaserShark eats a fish.
+   * The LaserShark eats a fish. 
+   * As a result: the fish is placed out of the board and the shark grows according to the size of the fish.
    * @param fish the fish the shark eats
    */
   public void eat(Fish fish){
