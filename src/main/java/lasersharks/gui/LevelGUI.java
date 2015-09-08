@@ -2,6 +2,7 @@ package lasersharks.gui;
 
 import java.text.DecimalFormat;
 import java.util.LinkedList;
+import java.util.List;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -22,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lasersharks.*;
 
 /**
  * @author michiel, daan
@@ -29,12 +31,13 @@ import javafx.stage.Stage;
  */
 @SuppressWarnings("restriction")
 public class LevelGUI extends Application {
-  private final double minX      = 0;
-  private final double maxX      = 1920;
-  private final double minY      = 0;
-  private final double maxY      = 1080;
-  private final DecimalFormat df = new DecimalFormat("#.##");
-  
+  private static final double maxX = 1920;
+  private static final double maxY = 1080;
+  private static final Color backColor = Color.BLUE;
+
+  private Pane pane;
+  private Scene scene;
+
   /**
    * @param args
    *          parameters to influence the startup of this game
@@ -43,106 +46,64 @@ public class LevelGUI extends Application {
     launch(args);
   }
 
-  /**
-   * Constructor.
-   * 
-   */
-  @Override
-  public void start(Stage stage) throws Exception {
+  public void start(Stage stage) {
+    pane = new Pane();
+    scene = new Scene(pane, maxX, maxY, backColor);
+    addElements(pane);
+    stage.setScene(scene);
+    stage.show();
+  }
 
-    ImageView image = new ImageView("SharkToTheRight.gif");
-    image.setFitHeight(size);
-    image.setFitWidth(2 * size);
+  public Pane addElements(Pane pane) {
+    // TODO: add a background
+    BackgroundImage myBI = new BackgroundImage(
+        new Image("background.jpg", maxX, maxY, true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    pane.setBackground(new Background(myBI));
+    // TODO: add the fps counter
+    pane.getChildren().add(fpsCounter());
+    return pane;
+  }
+
+  public Text fpsCounter() {
+
+    DecimalFormat df = new DecimalFormat("#.##");
     String fps = "FPS: ";
     Text text = new Text(fps + "ofzo");
     text.setFont(new Font(20));
     text.setX(maxX - text.getBoundsInParent().getWidth() - 20);
     text.setY(20);
 
-    Pane pane = new Pane();
-    pane.getChildren().add(image);
-    pane.getChildren().add(text);
-
-    final Scene scene = new Scene(pane, maxX, maxY, Color.BLUE);
-
-    BackgroundImage myBI = new BackgroundImage(
-        new Image("background2.jpg", maxX, maxY, true, false), BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-    pane.setBackground(new Background(myBI));
-
-    final LinkedList<KeyCode> keyStack = new LinkedList<>();
-    scene.setOnKeyPressed(event -> {
-      KeyCode code = event.getCode();
-      if (!keyStack.contains(code)) {
-        keyStack.push(code);
-      }
-    });
-
-    scene.setOnKeyReleased(event -> keyStack.remove(event.getCode()));
-
-    final LongProperty lastUpdateTime = new SimpleLongProperty();
-    final AnimationTimer rectangleAnimation = new AnimationTimer() {
-
-      @Override
-      public void handle(long timestamp) {
-        if (!keyStack.isEmpty() && lastUpdateTime.get() > 0) {
-          final double elapsedSeconds = (timestamp - lastUpdateTime.get()) / 1_000_000_000.0;
-          double deltaX = 0;
-          double deltaY = 0;
-          switch (keyStack.peek()) {
-            case UP:
-              deltaY = -rectangleVSpeed * elapsedSeconds;
-              break;
-            case DOWN:
-              deltaY = rectangleVSpeed * elapsedSeconds;
-              break;
-            case LEFT:
-              deltaX = -rectangleHSpeed * elapsedSeconds;
-              image.setScaleX(-1);
-              break;
-            case RIGHT:
-              deltaX = rectangleHSpeed * elapsedSeconds;
-              image.setScaleX(1);
-              break;
-            case H:
-              size = size * growth;
-              image.setFitHeight(size);
-              image.setFitWidth(2 * size);
-              break;
-            default:
-              break;
-          }
-          double oldXr = image.getTranslateX();
-          double oldYr = image.getTranslateY();
-          Bounds bounds = image.getBoundsInParent();
-          image.setTranslateX(clamp(oldXr + deltaX, minX, maxX - bounds.getWidth()));
-          image.setTranslateY(clamp(oldYr + deltaY, minY, maxY - bounds.getHeight()));
-
-        }
-
-        final double fpsnum = 1_000_000_000.0 / (timestamp - lastUpdateTime.get());
-
-        text.setText(fps + df.format(fpsnum));
-        lastUpdateTime.set(timestamp);
-      }
-    };
-    rectangleAnimation.start();
-    stage.setScene(scene);
-    stage.show();
-
+    return text;
   }
-
-  /**
-   * Clamps a value between a minimum double and maximum double value.
-   * 
-   * @param value
-   * @param min
-   * @param max
-   * @return a value between a minimum double and maximum double
-   */
-  private double clamp(double value, double min, double max) {
-    return Math.max(min, Math.min(max, value));
+  
+  public void addFishList(List<Fish> list) {
+    for (int i = 0; i< list.size(); i++){
+      this.pane.getChildren().add(fishImage(list.get(i)));
+    }
   }
+  
+  public ImageView fishImage(Fish fish) {
+    Position position = fish.getPosition();
+    double size = fish.getSize();
+    Direction dir = fish.getDirection();
 
+    ImageView image;
+    if (fish instanceof LaserShark) {
+      image = new ImageView("LaserRight.gif");
+    } else {
+      image = new ImageView("FishBot.gif");
+    }
+    //flip the image according to the direction.
+    if (dir != Direction.None) {
+      image.setScaleX(dir.getDeltaX());
+    }
+    image.setFitHeight(size);
+    image.setFitWidth(size);
+    
+    image.setX(position.getPosX());
+    image.setY(position.getPosY());
+    
+    return image;
+  }
 }
