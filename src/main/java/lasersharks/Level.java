@@ -25,12 +25,12 @@ public class Level {
    * @param game controller from witch to take commands and where to find env data.
    */
   public Level(Game game) {
-    fishCon = new FishController();
-    shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, Direction.East);
-    fishCon.addFish(shark);
-    
-    screenCon = new ScreenController(this);
-    keyboardCon = new KeyboardController(screenCon, this);
+    this.fishCon = new FishController();
+    this.shark =  new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, Direction.East);
+    this.fishCon.addFish(shark);
+    this.game = game;
+    this.screenCon = new ScreenController(this);
+    this.keyboardCon = new KeyboardController(screenCon, this);
   }
 
   /**
