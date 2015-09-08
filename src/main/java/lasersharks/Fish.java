@@ -27,7 +27,7 @@ public interface Fish {
   boolean move();
   
   /**
-   * sets the position
+   * sets the position.
    * @param position position
    */
   void setPosition(Position position);

@@ -19,7 +19,7 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static final float FISHSPAWNCHANCE = 0.5173f;
+  private static final float FISH_SPAWN_CHANCE = 0.5173f;
 
   /**
    * Random Number Generator holder.
@@ -47,7 +47,7 @@ public class FishController {
   /**
    * Add a fish to the controller.
    * 
-   * @param fish
+   * @param fish fish to add.
    */
   public void addFish(Fish fish) {
     this.fishList.add(fish);
@@ -80,7 +80,7 @@ public class FishController {
    * @return List<Fish> list of fishes at there current position.
    */
   public List<Fish> getNextCycleInformation() {
-    if (this.rng.nextFloat() <= FISHSPAWNCHANCE) {
+    if (this.rng.nextFloat() <= FISH_SPAWN_CHANCE) {
       this.addFish(FishBot.generateFish());
     }
     return this.getNewFishPositions();
