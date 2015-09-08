@@ -70,7 +70,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
    */
   private void handleInput() {
     Direction dir = Direction.None;
-    if (pressedUp) {
+    if (pressedDown) {
       if (pressedLeft && !pressedRight) {
         dir = Direction.NorthWest;
       } else if (pressedRight) {
@@ -78,7 +78,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
       } else {
         dir = Direction.North;
       }
-    } else if (pressedDown) {
+    } else if (pressedUp) {
       if (pressedLeft && !pressedRight) {
         dir = Direction.SouthWest;
       } else if (pressedRight) {
