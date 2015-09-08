@@ -36,7 +36,8 @@ public class LaserShark implements Fish {
 
   /**
    * 
-   * @param direction the direction to set.
+   * @param direction
+   *          the direction to set.
    */
   public void setDirection(Direction direction) {
     this.direction = direction;
@@ -44,7 +45,8 @@ public class LaserShark implements Fish {
 
   /**
    * 
-   * @param position the position to set.
+   * @param position
+   *          the position to set.
    */
   public void setPosition(Position position) {
     this.position = position;
@@ -52,7 +54,8 @@ public class LaserShark implements Fish {
 
   /**
    * 
-   * @param size the size to set.
+   * @param size
+   *          the size to set.
    */
   public void setSize(float size) {
     this.size = size;
@@ -68,7 +71,8 @@ public class LaserShark implements Fish {
 
   /**
    * 
-   * @param newDirection the direction to set to.
+   * @param newDirection
+   *          the direction to set to.
    */
   public void setNextMove(Direction newDirection) {
     setDirection(newDirection);
@@ -84,11 +88,12 @@ public class LaserShark implements Fish {
 
   /**
    * 
-   * @param fish the fish we want to check if it collides with.
+   * @param fish
+   *          the fish we want to check if it collides with.
    * @return true if it collides.
    */
   public boolean collision(Fish fish) {
-    
+
     return false;
   }
 
@@ -99,21 +104,25 @@ public class LaserShark implements Fish {
   public boolean move() {
     return getPosition().updatePosition(getDirection());
   }
-  
+
   /**
-   * The LaserShark eats a fish. 
-   * As a result: the fish is placed out of the board and the shark grows according to the size of the fish.
-   * @param fish the fish the shark eats
+   * The LaserShark eats a fish. As a result: the fish is placed out of the board and the shark
+   * grows according to the size of the fish.
+   * 
+   * @param fish
+   *          the fish the shark eats
    */
-  public void eat(Fish fish){
+  public void eat(Fish fish) {
     fish.setPosition(new Position(-100, -100));
-    size += fish.getSize()/10.0;
+    size += fish.getSize() / 10.0;
   }
 
   @Override
   public Position getMiddlePoint() {
-    // TODO Auto-generated method stub
-    return null;
+    Position startPos = this.getPosition();
+    Position middlePointPosition = new Position(startPos.getPosX() + (int) this.getSize(),
+        startPos.getPosY() + (int) (0.5 * this.getSize()));
+    return middlePointPosition;
   }
 
 }
