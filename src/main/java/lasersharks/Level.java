@@ -10,6 +10,8 @@ import java.util.TimerTask;
  * @author Sytze
  */
 public class Level {
+  private static final float START_SIZE = 1.0f;
+  private static final int START_SPEED = 1;
   private LaserShark shark;
   private FishController fishCon;
   private ScreenController screenCon;
@@ -20,27 +22,28 @@ public class Level {
   
   /**
    * this is the constructor of the level class.
+   * @param game controller from witch to take commands and where to find env data.
    */
   public Level(Game game) {
     fishCon = new FishController();
-    shark = new LaserShark(Position.middlePosition(), Direction.East, 1.0f);
+    shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, Direction.East);
     fishCon.addFish(shark);
     
     screenCon = new ScreenController(this);
     keyboardCon = new KeyboardController(screenCon, this);
   }
-  
+
   /**
    * Set shark direction.
-   * @param dir
+   * @param dir direction in witch to move.
    */
   public void setSharkDirection(Direction dir) {
     this.shark.setDirection(dir);
   }
-  
+
   /**
    * Method for getting information for next frame.
-   * @return
+   * @return info for next frame
    */
   public List<Fish> getNextFrameInfo() {
     return this.fishCon.getNextCycleInformation();
@@ -54,7 +57,8 @@ public class Level {
   }
 
   /**
-   * @param fishCon the fishCon to set
+   * @param fishCon
+   *          the fishCon to set
    */
   public void setFishCon(FishController fishCon) {
     this.fishCon = fishCon;
@@ -68,7 +72,8 @@ public class Level {
   }
 
   /**
-   * @param shark the shark to set
+   * @param shark
+   *          the shark to set
    */
   public void setShark(LaserShark shark) {
     this.shark = shark;
@@ -82,7 +87,8 @@ public class Level {
   }
 
   /**
-   * @param screenCon the screenCon to set
+   * @param screenCon
+   *          the screenCon to set
    */
   public void setScreenCon(ScreenController screenCon) {
     this.screenCon = screenCon;
@@ -96,7 +102,8 @@ public class Level {
   }
 
   /**
-   * @param score the score to set
+   * @param score
+   *          the score to set
    */
   public void setScore(int score) {
     this.score = score;
