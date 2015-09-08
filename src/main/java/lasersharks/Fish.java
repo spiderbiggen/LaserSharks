@@ -2,15 +2,17 @@ package lasersharks;
 
 /**
  * Abstract class for Floating creatures of the great blue.
+ * 
  * @author Youri
  */
 public abstract class Fish {
-  
+
   private Position position;
   private float size;
   private int speed;
   private Direction direction;
   private boolean alive;
+  private static final double HALF_SCALE = 0.5;
 
   /**
    * <abstract> Method for creating a fish.
@@ -49,15 +51,17 @@ public abstract class Fish {
   public float getSize() {
     return this.size;
   }
-  
+
   /**
    * Method used for growing fish.
-   * @param size the delta by which to increase.
+   * 
+   * @param size
+   *          the delta by which to increase.
    */
   protected void increaseSize(float size) {
     this.size += size;
   }
-  
+
   /**
    * @return the speed
    */
@@ -66,7 +70,8 @@ public abstract class Fish {
   }
 
   /**
-   * @param speed the speed to set
+   * @param speed
+   *          the speed to set
    */
   public void setSpeed(int speed) {
     this.speed = speed;
@@ -80,7 +85,8 @@ public abstract class Fish {
   }
 
   /**
-   * @param direction the direction to set
+   * @param direction
+   *          the direction to set
    */
   public void setDirection(Direction direction) {
     this.direction = direction;
@@ -94,16 +100,27 @@ public abstract class Fish {
   public boolean move() {
     return position.updatePosition(direction, speed);
   }
-  
+
   /**
    * We calculate the distance between the fishes. The sum of the size of both fishes is our hitbox.
    * Hitbox is now a circle, with size the radius in pixels.
    * 
-   * @param fish we want to check if the fishbot collides with this fish,
+   * @param fish
+   *          we want to check if the fishbot collides with this fish,
    * @return true if the fishes collide and false if not.
    */
   public boolean collision(Fish fish) {
-    return (position.calculateDistance(fish.getPosition()) < size + fish.getSize());
+    float distance = this.getMiddlePoint().calculateDistance(fish.getMiddlePoint());
+    return distance < this.size + fish.getSize();
+  }
+
+  private Position getMiddlePoint() {
+    Position startPos = this.getPosition();
+
+    Position middlePointPosition = new Position(
+        startPos.getPosX() + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()),
+        startPos.getPosY() + (int) (HALF_SCALE * this.getSize()));
+    return middlePointPosition;
   }
 
   /**
@@ -114,25 +131,41 @@ public abstract class Fish {
   public boolean isOnScreen() {
     return this.alive && position.onScreen();
   }
-  
+
   /**
    * Method for killing fish.
    */
   public void kill() {
     this.alive = false;
   }
-  
+
   /**
    * Check if fish is alive.
+   * 
    * @return aliveness of the fish.
    */
   public boolean isAlive() {
     return this.alive;
   }
-  
+
   @Override
   public String toString() {
     return "FishBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
         + ", direction=" + direction + "]";
   }
+
+  /**
+   * Will return the string resource for this fish.
+   * 
+   * @return The resource's name
+   */
+  public abstract String getImageResource();
+
+  /**
+   * return the aspect ratio between the width and the height. height/width
+   * 
+   * @return the aspect ratio
+   */
+  public abstract double getWidthScale();
+
 }

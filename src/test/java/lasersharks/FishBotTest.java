@@ -10,6 +10,7 @@ import org.junit.Test;
 
 /**
  * Class for testing fishbot.
+ * 
  * @author Youri
  *
  */
@@ -32,7 +33,6 @@ public class FishBotTest extends FishTest {
     fish1 = new FishBot(posOnScreen, size, speed, direction);
   }
 
-  
   /**
    * 
    */
@@ -41,19 +41,19 @@ public class FishBotTest extends FishTest {
     Random random = new Random(seed);
     generatedFish = FishBot.generateFish(random);
     System.out.println(generatedFish.toString());
-    
-//    assertEquals(generatedFish.getDirection(), Direction.East);
-//    assertEquals(generatedFish.getPosition(), new Position(1920, 481));
-//    assertEquals(generatedFish.getSize(), 10, 0);
-//    assertEquals(generatedFish.getSpeed(), 12, 0);
-//    generatedFish = FishBot.generateFish();
-    
+
+    // assertEquals(generatedFish.getDirection(), Direction.East);
+    // assertEquals(generatedFish.getPosition(), new Position(1920, 481));
+    // assertEquals(generatedFish.getSize(), 10, 0);
+    // assertEquals(generatedFish.getSpeed(), 12, 0);
+    // generatedFish = FishBot.generateFish();
+
     assertEquals(generatedFish.getDirection(), Direction.East);
     assertEquals(generatedFish.getPosition().getPosX(), 0);
     assertEquals(generatedFish.getSize(), expectedSize1, 0);
     assertTrue(generatedFish.getSpeed() == expectedSpeed1);
     generatedFish = FishBot.generateFish(random);
-    
+
     System.out.println(generatedFish.toString());
     assertEquals(generatedFish.getDirection(), Direction.East);
     assertEquals(generatedFish.getPosition().getPosX(), 0);
@@ -62,5 +62,5 @@ public class FishBotTest extends FishTest {
     assertEquals(generatedFish.getSize(), expectedSize2, 0);
     assertTrue(generatedFish.getSpeed() == expectedSpeed2);
   }
-  
+
 }
