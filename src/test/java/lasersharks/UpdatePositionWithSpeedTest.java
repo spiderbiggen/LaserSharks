@@ -64,7 +64,7 @@ public class UpdatePositionWithSpeedTest {
     return Arrays.asList(new Object[][] { { Direction.North, 1, 0, 1 },
         { Direction.NorthEast, 4, 4, 4 }, { Direction.East, -5, -5, 0 },
         { Direction.SouthEast, 3, 3, -3 }, { Direction.South, -8, 0, 8 },
-        { Direction.SoutWest, 2, -2, -2 }, { Direction.West, -2, 2, 0 },
+        { Direction.SouthWest, 2, -2, -2 }, { Direction.West, -2, 2, 0 },
         { Direction.NorthWest, -10, 10, -10 }, { Direction.None, 10, 0, 0 } });
   }
 

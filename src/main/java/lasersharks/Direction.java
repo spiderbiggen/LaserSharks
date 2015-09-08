@@ -9,7 +9,7 @@ public enum Direction {
   East(1, 0), 
   SouthEast(1, -1), 
   South(0, -1), 
-  SoutWest(-1, -1), 
+  SouthWest(-1, -1), 
   West(-1, 0), 
   NorthWest(-1, 1), 
   None(0, 0);
