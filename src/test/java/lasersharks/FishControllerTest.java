@@ -1,9 +1,9 @@
 package lasersharks;
 
 import static org.junit.Assert.*;
+import org.junit.*;
+
 import java.util.Random;
-import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mockito;
 
 /**
