@@ -184,10 +184,10 @@ public class Position {
   }
   
   /**
-   * This position represents the middle of the screen
+   * This position represents the middle of the screen.
    * @return a position with coordinates on the middle of the screen
    */
   public static Position middlePosition() {
-    return new Position((int) Math.round(widthPanel/2.0), (int) Math.round(heightPanel/2.0));
+    return new Position((int) Math.round(widthPanel / 2.0), (int) Math.round(heightPanel / 2.0));
   }
 }
