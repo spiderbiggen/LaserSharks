@@ -20,8 +20,8 @@ public class LaserSharkTest extends FishTest {
    * Container for test object.
    */
   private LaserShark laserShark;
-  private final int DEFAULT_SHARK_SIZE = 30;
-  private final int EXPECTED_AFTER_EATING_SHARK_SIZE = 50;
+  private static final int DEFAULT_SHARK_SIZE = 30;
+  private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 50;
 
   /**
    * Set up which is used before the tests.

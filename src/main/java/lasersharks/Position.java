@@ -4,6 +4,8 @@ package lasersharks;
  * Class Position.
  */
 public class Position {
+  private static final int SECOND_HASH_PRIME = 31;
+  private static final int HASH_PRIME = 17;
   private int posX;
   private int posY;
 
@@ -12,8 +14,8 @@ public class Position {
    * screen. TODO: when the gui is added, replace these static variables by getting the resolution
    * of the panel.
    */
-  private static int heightPanel = 1080;
-  private static int widthPanel = 1920;
+  private static final int HEIGHT = 1080;
+  private static final int WIDTH = 1920;
 
   /**
    * 
@@ -31,14 +33,14 @@ public class Position {
    * @return the height of the panel.
    */
   public static int getHeightPanel() {
-    return heightPanel;
+    return HEIGHT;
   }
 
   /**
    * @return the width of the panel.
    */
   public static int getWidthPanel() {
-    return widthPanel;
+    return WIDTH;
   }
 
   /**
@@ -148,7 +150,7 @@ public class Position {
    * @return true if the position is on the screen.
    */
   public final boolean onScreen() {
-    return (posX >= 0 && posX <= widthPanel && posY >= 0 && posY <= heightPanel);
+    return (posX >= 0 && posX <= WIDTH && posY >= 0 && posY <= HEIGHT);
   }
 
   @Override
@@ -176,10 +178,8 @@ public class Position {
 
   @Override
   public int hashCode() {
-    int hash = 17;
-    int prime = 31;
-    hash = prime * hash + getPosX();
-    hash = prime * hash + getPosY();
+    int hash = SECOND_HASH_PRIME * HASH_PRIME + getPosX();
+    hash = SECOND_HASH_PRIME * hash + getPosY();
     return hash;
   }
   
@@ -188,6 +188,6 @@ public class Position {
    * @return a position with coordinates on the middle of the screen
    */
   public static Position middlePosition() {
-    return new Position((int) Math.round(widthPanel / 2.0), (int) Math.round(heightPanel / 2.0));
+    return new Position((int) Math.round(WIDTH / 2.0), (int) Math.round(HEIGHT / 2.0));
   }
 }

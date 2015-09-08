@@ -8,7 +8,11 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-
+/**
+ * Class for testing fishbot.
+ * @author Youri
+ *
+ */
 public class FishBotTest extends FishTest {
 
   private Fish generatedFish;
@@ -21,7 +25,7 @@ public class FishBotTest extends FishTest {
   private final int expectedSpeed2 = 9;
 
   /**
-   * Set up which is used before the tests
+   * Set up which is used before the tests.
    */
   @Before
   public void setUp() {

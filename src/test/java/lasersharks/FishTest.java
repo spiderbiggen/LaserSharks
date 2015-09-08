@@ -12,7 +12,7 @@ import static org.mockito.Mockito.mock;
 
 
 /**
- * Class for testing Fish object
+ * Class for testing Fish object.
  * @author Stefan
  *
  */
@@ -27,7 +27,7 @@ public abstract class FishTest {
 
 
   /**
-   * Tear down the fish Object after the test
+   * Tear down the fish Object after the test.
    */
   @After
   public void tearDown() {
