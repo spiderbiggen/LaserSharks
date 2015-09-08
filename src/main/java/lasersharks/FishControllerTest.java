@@ -1,9 +1,7 @@
 package lasersharks;
 
 import static org.junit.Assert.*;
-
 import java.util.Random;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -17,7 +15,7 @@ public class FishControllerTest {
   FishController fishCon;
   
   /**
-   * 
+   * Sets up a fishcontroller object.
    * @throws Exception
    */
   @Before
@@ -25,15 +23,17 @@ public class FishControllerTest {
     fishCon = new FishController();
   }
 
-  @Test
-  public void testFishController() {
-  }
-
+  /**
+   * test the setter for the setRng() method
+   */
   @Test
   public void testSetRng() {
     fishCon.setRng(new Random(10));
   }
 
+  /**
+   * test the function to add fish to the cycle.
+   */
   @Test
   public void testAddFish() {
     FishBot fishBot = new FishBot(new Position(10,10),10,10,Direction.East);
