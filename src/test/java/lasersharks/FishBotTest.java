@@ -48,14 +48,14 @@ public class FishBotTest extends FishTest {
 //    assertEquals(generatedFish.getSpeed(), 12, 0);
 //    generatedFish = FishBot.generateFish();
     
-    assertEquals(generatedFish.getDirection(), Direction.West);
+    assertEquals(generatedFish.getDirection(), Direction.East);
     assertEquals(generatedFish.getPosition().getPosX(), 0);
     assertEquals(generatedFish.getSize(), expectedSize1, 0);
     assertTrue(generatedFish.getSpeed() == expectedSpeed1);
     generatedFish = FishBot.generateFish(random);
     
     System.out.println(generatedFish.toString());
-    assertEquals(generatedFish.getDirection(), Direction.West);
+    assertEquals(generatedFish.getDirection(), Direction.East);
     assertEquals(generatedFish.getPosition().getPosX(), 0);
     // TODO change 1920 to pull from the level class so that it changes depending on the size of the
     // level
