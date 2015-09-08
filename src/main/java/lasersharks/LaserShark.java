@@ -10,6 +10,7 @@ public class LaserShark implements Fish {
   private Direction direction;
   private float size;
 
+  static private final double growSpeed = 0.1;
   /**
    * Initializes the laserShark(player).
    * 
@@ -83,15 +84,6 @@ public class LaserShark implements Fish {
   }
 
   /**
-   * 
-   * @param fish the fish we want to check if it collides with.
-   * @return true if it collides.
-   */
-  public boolean collision(Fish fish) {
-    return false;
-  }
-
-  /**
    * moves the shark.
    */
   @Override
@@ -107,7 +99,7 @@ public class LaserShark implements Fish {
    */
   public void eat(Fish fish) {
     fish.setPosition(new Position(-100, -100));
-    size += fish.getSize() / 10.0;
+    size += fish.getSize() * growSpeed;
   }
 
 }
