@@ -74,7 +74,7 @@ public class UpdatePositionWithSpeedTest {
   @Test
   public void testUpdatePosition() {
     System.out.println("Parameterized direction is : " + direction.toString());
-    position.updatePosition(direction, speed);
+    position.updatePosition(direction, speed, 0);
     assertEquals(expectedX, position.getPosX());
     assertEquals(expectedY, position.getPosY());
   }
