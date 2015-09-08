@@ -11,6 +11,7 @@ public class Game {
   
   /**
    * Launch game.
+   * @param gui the pointer to the active gui.
    */
   public void launch(LevelGUI gui) {
     Level level = new Level(this, gui);

@@ -13,22 +13,21 @@ import lasersharks.gui.LevelGUI;
  */
 @SuppressWarnings("restriction")
 public class ScreenController {
-  private static final int FRAME_DELAY = 20;
   private LevelGUI gui;
   private Level level;
   private Scene scene;
-  private boolean running;
 
   /**
    * Constructor.
    * 
    * @param level
    *          the level from witch to recieve data.
+   * @param gui
+   *          pointer to the active gui.
    */
   public ScreenController(Level level, LevelGUI gui) {
     super();
     this.level = level;
-    this.running = true;
     this.gui = gui;
     this.gui.setScreenController(this);
     this.scene = gui.getScene();
