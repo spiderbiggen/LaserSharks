@@ -29,19 +29,12 @@ import javafx.stage.Stage;
  */
 @SuppressWarnings("restriction")
 public class FXGUI extends Application {
-
-  private double size = 80;
-  private final double growth = 1.01;
-
-  private final double rectangleHSpeed = 500; // pixels per second
-  private final double rectangleVSpeed = 500;
-  private final double minX = 0;
-  private final double maxX = 1920;
-  private final double minY = 0;
-  private final double maxY = 1080;
-
+  private final double minX      = 0;
+  private final double maxX      = 1920;
+  private final double minY      = 0;
+  private final double maxY      = 1080;
   private final DecimalFormat df = new DecimalFormat("#.##");
-
+  
   /**
    * @param args
    *          parameters to influence the startup of this game
@@ -51,8 +44,8 @@ public class FXGUI extends Application {
   }
 
   /**
-   * Set the complete stage for the view in the GUI, this method will be split among smaller methods
-   * later.
+   * Constructor.
+   * 
    */
   @Override
   public void start(Stage stage) throws Exception {
