@@ -178,7 +178,7 @@ public class LevelGUI extends Application {
     ImageView image;
     image = new ImageView(fish.getImageResource());
     // flip the image according to the direction.
-    if (dir != Direction.None) {
+    if (dir.getDeltaX() != 0) {
       image.setScaleX(dir.getDeltaX());
     }
     image.setFitHeight(size);
