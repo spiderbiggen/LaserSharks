@@ -178,7 +178,7 @@ public class LevelGUI extends Application {
       image = new ImageView("LaserShark.gif");
       image.setFitWidth(1.5 * size);
     } else {
-      image = new ImageView("FishBot.jpg");
+      image = new ImageView("FishBotSmall.png");
       image.setFitWidth(size);
     }
     // flip the image according to the direction.
