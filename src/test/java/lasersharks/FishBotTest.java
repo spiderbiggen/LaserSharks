@@ -71,13 +71,13 @@ public class FishBotTest {
     seed = new Random(10);
     FishBot.setRng(seed);
     generatedFish = FishBot.generateFish();
-    System.out.println(generatedFish.toString());
+   // System.out.println(generatedFish.toString());
     assertEquals(generatedFish.getDirection(), Direction.East);
     assertEquals(generatedFish.getPosition(), new Position(1920,481));
     assertEquals(generatedFish.getSize(), 10, 0);
     assertEquals(generatedFish.getSpeed(), 12, 0);
     generatedFish = FishBot.generateFish();
-    System.out.println(generatedFish.toString());
+   // System.out.println(generatedFish.toString());
     assertEquals(generatedFish.getDirection(), Direction.West);
     assertEquals(generatedFish.getPosition(), new Position(0, 725));
     assertEquals(generatedFish.getSize(), 10, 0);
@@ -92,5 +92,12 @@ public class FishBotTest {
   @Test
   public void testIsOffScreen() {
     assertFalse(fishbot2.onScreen());
+  }
+  
+  @Test
+  public void testGetMiddlePoint() {
+    fishbot1.setPosition(posOnScreen);
+    Position middlePoint = fishbot1.getMiddlePoint();
+    assertEquals(middlePoint.toString(), "Position [posX=80, posY=65]");
   }
 }
