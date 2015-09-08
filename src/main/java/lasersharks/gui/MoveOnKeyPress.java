@@ -1,4 +1,4 @@
-package laserSharksGUI;
+package lasersharks.gui;
 
 /**
  * This class is for moving around the lasershark when pressing a button

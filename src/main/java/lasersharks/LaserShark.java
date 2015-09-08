@@ -5,6 +5,9 @@ package lasersharks;
  *
  */
 public class LaserShark extends Fish {
+  
+  private static final float ENERGY_DISSERPATION_RATE = 1.5f;
+  
   /**
    * Constructor class for FishBot.
    * @param position initial position
@@ -14,5 +17,17 @@ public class LaserShark extends Fish {
    */
   public LaserShark(Position position, float size, int speed, Direction direction) {
     super(position, size, speed, direction);
+  }
+  
+  /**
+   * The LaserShark eats a fish. 
+   * This kills fish and increases size of the shark.
+   * @param fish the fish the shark eats
+   */
+  public void eat(Fish fish) {
+    if (fish.isAlive()) {
+      this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
+    }
+    fish.kill();
   }
 }
