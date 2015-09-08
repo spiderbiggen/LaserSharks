@@ -5,16 +5,20 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This level represents the connection between the fishController, game and screen controller.
+ * @author Sytze
+ */
 public class Level {
-  FishController fishCon;
-  LaserShark shark;
-  ScreenController screenCon;
-  Boolean running;
-  List<Fish> currentFish;
-  Timer timer;
-  TimerTask task;
-  Date date;
-  int score;
+  private FishController fishCon;
+  private LaserShark shark;
+  private ScreenController screenCon;
+  private Boolean running;
+  private List<Fish> currentFish;
+  private Timer timer;
+  private TimerTask task;
+  private Date date;
+  private int score;
   
   private static int startSize = 20;
   private static long tickTime = 20;
@@ -59,10 +63,10 @@ public class Level {
   private void gameLoop() {
     currentFish = fishCon.getNextCycleInformation();
    // screenCon.projectFish(currentFish);    
-    for(int i=0;i<currentFish.size();i++){
+    for (int i = 0; i < currentFish.size(); i++) {
       Fish fish = currentFish.get(i);
-      if(shark.collision(fish) && !shark.equals(fish)){
-        if(shark.getSize() < fish.getSize()) {
+      if (shark.collision(fish) && !shark.equals(fish)) {
+        if (shark.getSize() < fish.getSize()) {
           shark.eat(fish);
         } else {
           //TODO: implement that the game ends because the fish is larger than the shark

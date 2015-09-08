@@ -73,7 +73,7 @@ public class FishBotTest {
     generatedFish = FishBot.generateFish();
     System.out.println(generatedFish.toString());
     assertEquals(generatedFish.getDirection(), Direction.East);
-    assertEquals(generatedFish.getPosition(), new Position(1920,481));
+    assertEquals(generatedFish.getPosition(), new Position(1920, 481));
     assertEquals(generatedFish.getSize(), 10, 0);
     assertEquals(generatedFish.getSpeed(), 12, 0);
     generatedFish = FishBot.generateFish();
