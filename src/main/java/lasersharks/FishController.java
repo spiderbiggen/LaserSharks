@@ -47,7 +47,7 @@ public class FishController {
   /**
    * Add a fish to the controller.
    * 
-   * @param fish
+   * @param fish fish to add
    */
   public void addFish(Fish fish) {
     this.fishList.add(fish);
