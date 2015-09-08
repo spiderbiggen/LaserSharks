@@ -10,6 +10,7 @@ public abstract class Fish {
   private float size;
   private int speed;
   private Direction direction;
+  private boolean alive;
 
   /**
    * <abstract> Method for creating a fish.
@@ -29,6 +30,7 @@ public abstract class Fish {
     this.size = size;
     this.speed = speed;
     this.direction = direction;
+    this.alive = true;
   }
 
   /**
@@ -48,7 +50,15 @@ public abstract class Fish {
   public float getSize() {
     return this.size;
   }
-
+  
+  /**
+   * Method used for growing fish.
+   * @param size the delta by which to increase.
+   */
+  protected void increaseSize(float size) {
+    this.size += size;
+  }
+  
   /**
    * @return the speed
    */
@@ -102,10 +112,25 @@ public abstract class Fish {
    * 
    * @return true if the fish is on the screen, and false if not.
    */
-  public final boolean isOnScreen() {
-    return position.onScreen();
+  public boolean isOnScreen() {
+    return this.alive && position.onScreen();
   }
-
+  
+  /**
+   * Method for killing fish.
+   */
+  public void kill() {
+    this.alive = false;
+  }
+  
+  /**
+   * Check if fish is alive.
+   * @return aliveness of the fish.
+   */
+  public boolean isAlive() {
+    return this.alive;
+  }
+  
   @Override
   public String toString() {
     return "FishBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
