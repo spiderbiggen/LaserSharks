@@ -65,11 +65,14 @@ public class Level {
    // screenCon.projectFish(currentFish);    
     for (int i = 0; i < currentFish.size(); i++) {
       Fish fish = currentFish.get(i);
-      if (shark.collision(fish) && !shark.equals(fish)) {
-        if (shark.getSize() < fish.getSize()) {
-          shark.eat(fish);
-        } else {
-          //TODO: implement that the game ends because the fish is larger than the shark
+      if (fish instanceof FishBot) {
+        FishBot fishBot = (FishBot) fish;
+        if (fishBot.collision(shark)) {
+          if (shark.getSize() < fish.getSize()) {
+            shark.eat(fish);
+          } else {
+            //TODO: implement that the game ends because the fish is larger than the shark.
+          }
         }
       }
     }

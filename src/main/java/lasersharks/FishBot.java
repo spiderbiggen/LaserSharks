@@ -115,7 +115,7 @@ public class FishBot implements Fish {
   }
 
   /**
-   * @param rng the rng to set
+   * @param newRng the rng to set
    */
   public static void setRng(Random newRng) {
     rng = newRng;
@@ -187,7 +187,6 @@ public class FishBot implements Fish {
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
    * Starts on either the left side on.
-   * @param rng the rng we use, useful for setting seeds.
    * @return a random fish with random speed, size and position.
    */
   public static FishBot generateFish() {
