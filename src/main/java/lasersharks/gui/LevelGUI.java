@@ -3,6 +3,9 @@ package lasersharks.gui;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -17,12 +20,10 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.animation.*;
 import javafx.util.Duration;
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
-import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -34,6 +35,7 @@ import lasersharks.ScreenController;
  */
 @SuppressWarnings("restriction")
 public class LevelGUI extends Application {
+  
   private static final double FRAME_DELAY = 0.06;
   /**
    * the x resolution of the screen.
@@ -174,18 +176,13 @@ public class LevelGUI extends Application {
     Direction dir = fish.getDirection();
 
     ImageView image;
-    if (fish instanceof LaserShark) {
-      image = new ImageView("LaserShark.gif");
-      image.setFitWidth(1.5 * size);
-    } else {
-      image = new ImageView("FishBotSmall.png");
-      image.setFitWidth(size);
-    }
+    image = new ImageView(fish.getImageResource());
     // flip the image according to the direction.
     if (dir.getDeltaX() != 0) {
       image.setScaleX(dir.getDeltaX());
     }
     image.setFitHeight(size);
+    image.setFitWidth(fish.getWidthScale() * size);
 
     image.setX(position.getPosX());
     image.setY(position.getPosY());

@@ -23,6 +23,7 @@ public class UpdatePositionTest {
 
   private Position position;
   private Direction direction;
+  private int speed;
   private int expectedX;
   private int expectedY;
 
@@ -39,13 +40,16 @@ public class UpdatePositionTest {
    * 
    * @param direction
    *          direction to update to
+   * @param speed
+   *          speed to update with
    * @param expectedX
    *          expected X result from running the method
    * @param expectedY
    *          expected Y from running the method
    */
-  public UpdatePositionTest(Direction direction, int expectedX, int expectedY) {
+  public UpdatePositionTest(Direction direction, int speed, int expectedX, int expectedY) {
     this.direction = direction;
+    this.speed = speed;
     this.expectedX = expectedX;
     this.expectedY = expectedY;
   }
@@ -57,10 +61,11 @@ public class UpdatePositionTest {
    */
   @Parameters
   public static Collection<Object[]> data() {
-    return Arrays.asList(new Object[][] { { Direction.North, 0, 1 }, { Direction.NorthEast, 1, 1 },
-        { Direction.East, 1, 0 }, { Direction.SouthEast, 1, -1 }, { Direction.South, 0, -1 },
-        { Direction.SouthWest, -1, -1 }, { Direction.West, -1, 0 }, { Direction.NorthWest, -1, 1 },
-        { Direction.None, 0, 0 } });
+    return Arrays.asList(new Object[][] { { Direction.North, 1, 0, 1 },
+        { Direction.NorthEast, 1, 1, 1 }, { Direction.East, -1, -1, 0 },
+        { Direction.SouthEast, 1, 1, -1 }, { Direction.South, -1, 0, 1 },
+        { Direction.SouthWest, 1, -1, -1 }, { Direction.West, -1, 1, 0 },
+        { Direction.NorthWest, -1, 1, -1 }, { Direction.None, 1, 0, 0 } });
   }
 
   /**
@@ -69,7 +74,7 @@ public class UpdatePositionTest {
   @Test
   public void testUpdatePosition() {
     System.out.println("Parameterized direction is : " + direction.toString());
-    position.updatePosition(direction);
+    position.updatePosition(direction, speed, 0);
     assertEquals(expectedX, position.getPosX());
     assertEquals(expectedY, position.getPosY());
   }
