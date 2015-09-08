@@ -2,72 +2,61 @@ package lasersharks;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class LaserSharkTest {
-
-  @Test
-  public void tearDown() throws Exception {
-  }
-
+/**
+ * Class for testing Lazershark object.
+ * 
+ * @author Michiel
+ *
+ */
+public class LaserSharkTest extends FishTest {
+  /**
+   * Container for test object.
+   */
   private LaserShark laserShark;
-  private Position position;
-  private float size;
-  
+  private static final int DEFAULT_SHARK_SIZE = 30;
+  private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 50;
+
+  /**
+   * Set up which is used before the tests.
+   */
   @Before
   public void setUp() {
-    position = new Position(0, 0);
-    size = 1.0f;
-    laserShark = new LaserShark(position, Direction.East, size);
+    fish1 = new LaserShark(posOnScreen, size, speed, direction);
+    laserShark = new LaserShark(posOnScreen, size, speed, direction);
   }
 
-  @Test
-  public void testGetDirection() {
-    assertEquals(Direction.East, laserShark.getDirection());
-  }
-
-  @Test
-  public void testSetDirection() {
-  }
-
-  @Test
-  public void testSetSize() {
-    laserShark.setDirection(Direction.West);
-    assertEquals(Direction.West, laserShark.getDirection());
-  }
-
-  @Test
-  public void testSetNextMove() {
-  }
-
-  @Test
-  public void testSetPosition() {
-    Position position1 = new Position(10, 10);
-    laserShark.setPosition(position1);
-    assertEquals(position1, laserShark.getPosition());
-  }
-
-  @Test
-  public void testCollision() {
-    assertTrue(size == laserShark.getSize());
-  }
-
-  /*
-   * @Test public void testSetNextMove() { fail("Not yet implemented"); // TODO }
-   * 
-   * 
-   * @Test public void testCollision() { fail("Not yet implemented"); // TODO }
+  /**
+   * When the laser sharks eats a fish, it grows.
    */
-
   @Test
-  public void testMove() {
-    assertEquals(position, laserShark.getPosition());
-    
-    laserShark.move();
-    position.updatePosition(Direction.East);
-    assertEquals(position, laserShark.getPosition());
+  public void testLaserSharkGrowsWhenEatingFish() {
+    Fish mockedFish = mock(Fish.class);
+    when(mockedFish.getSize()).thenReturn(size);
+    when(mockedFish.isAlive()).thenReturn(true);
+
+    assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
+    laserShark.eat(mockedFish);
+    assertEquals(laserShark.getSize(), EXPECTED_AFTER_EATING_SHARK_SIZE, 0);
+  }
+
+  /**
+   * When the lasershark eats a fish, the fish schould be killed.
+   */
+  @Test
+  public void testEatenFishIsKilled() {
+    Fish mockedFish = mock(Fish.class);
+    when(mockedFish.isAlive()).thenReturn(true);
+
+    assertTrue(mockedFish.isAlive());
+    laserShark.eat(mockedFish);
+    verify(mockedFish).kill();
   }
 
 }

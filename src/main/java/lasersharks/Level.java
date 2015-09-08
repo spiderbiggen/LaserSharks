@@ -5,67 +5,69 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Class for managing level.
+ * @author Youri
+ *
+ */
 public class Level {
-  FishController fishCon;
-  LaserShark shark;
-  ScreenController screenCon;
-  Boolean running;
-  List<Fish> currentFish;
-  Timer timer;
-  TimerTask task;
-  Date date;
-  int score;
-  
-  private static int startSize = 20;
-  private static long tickTime = 20;
-  
+  private FishController fishCon;
+  private LaserShark shark;
+  private ScreenController screenCon;
+  private Boolean running;
+  private List<Fish> currentFish;
+  private Timer timer;
+  private TimerTask task;
+  private Date date;
+  private int score;
+
+  private static final int START_SIZE = 20;
+  private static final long TICK_TIME = 20;
+
   /**
    * this is the constructor of the level class.
    */
   public Level() {
     fishCon = new FishController();
-    shark = new LaserShark(Position.middlePosition(), Direction.East, startSize);
+    shark = new LaserShark(Position.middlePosition(), 1.0f, START_SIZE, Direction.East);
     running = false;
     fishCon.addFish(shark);
     timer = new Timer();
   }
-  
+
   /**
    * calling this method causes the timertask to start.
    */
   public void start() {
     running = true;
-    
-    timer.schedule(new TimerTask() {      
+
+    timer.schedule(new TimerTask() {
       @Override
       public void run() {
-        gameLoop();       
+        gameLoop();
       }
-    }, new Date(0), tickTime);
+    }, new Date(0), TICK_TIME);
   }
-  
+
   /**
    * calling this method causes the timerTask to stop.
    */
   public void stop() {
     running = false;
-    //TODO: stop the ticker
+    // TODO: stop the ticker
   }
-  
+
   /**
-   * this function is run at each tick.
-   * It includes checking for collisions, 
+   * this function is run at each tick. It includes checking for collisions,
    */
   private void gameLoop() {
     currentFish = fishCon.getNextCycleInformation();
-   // screenCon.projectFish(currentFish);    
-    for(int i=0;i<currentFish.size();i++){
+    // screenCon.projectFish(currentFish);
+    for (int i = 0; i < currentFish.size(); i++) {
       Fish fish = currentFish.get(i);
-      if(shark.collision(fish) && !shark.equals(fish)){
-        if(shark.getSize() < fish.getSize()) {
+      if (shark.collision(fish) && !shark.equals(fish)) {
+        if (shark.getSize() < fish.getSize()) {
           shark.eat(fish);
-        } else {
-          //TODO: implement that the game ends because the fish is larger than the shark
         }
       }
     }
@@ -79,7 +81,8 @@ public class Level {
   }
 
   /**
-   * @param fishCon the fishCon to set
+   * @param fishCon
+   *          the fishCon to set
    */
   public void setFishCon(FishController fishCon) {
     this.fishCon = fishCon;
@@ -93,7 +96,8 @@ public class Level {
   }
 
   /**
-   * @param shark the shark to set
+   * @param shark
+   *          the shark to set
    */
   public void setShark(LaserShark shark) {
     this.shark = shark;
@@ -107,7 +111,8 @@ public class Level {
   }
 
   /**
-   * @param screenCon the screenCon to set
+   * @param screenCon
+   *          the screenCon to set
    */
   public void setScreenCon(ScreenController screenCon) {
     this.screenCon = screenCon;
@@ -121,7 +126,8 @@ public class Level {
   }
 
   /**
-   * @param running the running to set
+   * @param running
+   *          the running to set
    */
   public void setRunning(Boolean running) {
     this.running = running;
@@ -135,7 +141,8 @@ public class Level {
   }
 
   /**
-   * @param currentFish the currentFish to set
+   * @param currentFish
+   *          the currentFish to set
    */
   public void setCurrentFish(List<Fish> currentFish) {
     this.currentFish = currentFish;
@@ -149,7 +156,8 @@ public class Level {
   }
 
   /**
-   * @param timer the timer to set
+   * @param timer
+   *          the timer to set
    */
   public void setTimer(Timer timer) {
     this.timer = timer;
@@ -163,7 +171,8 @@ public class Level {
   }
 
   /**
-   * @param task the task to set
+   * @param task
+   *          the task to set
    */
   public void setTask(TimerTask task) {
     this.task = task;
@@ -177,7 +186,8 @@ public class Level {
   }
 
   /**
-   * @param date the date to set
+   * @param date
+   *          the date to set
    */
   public void setDate(Date date) {
     this.date = date;
@@ -191,7 +201,8 @@ public class Level {
   }
 
   /**
-   * @param score the score to set
+   * @param score
+   *          the score to set
    */
   public void setScore(int score) {
     this.score = score;
@@ -201,31 +212,19 @@ public class Level {
    * @return the startSize
    */
   public static int getStartSize() {
-    return startSize;
-  }
-
-  /**
-   * @param startSize the startSize to set
-   */
-  public static void setStartSize(int startSize) {
-    Level.startSize = startSize;
+    return START_SIZE;
   }
 
   /**
    * @return the tickTime
    */
   public static long getTickTime() {
-    return tickTime;
+    return TICK_TIME;
   }
 
-  /**
-   * @param tickTime the tickTime to set
-   */
-  public static void setTickTime(long tickTime) {
-    Level.tickTime = tickTime;
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override
@@ -234,7 +233,5 @@ public class Level {
         + ", running=" + running + ", currentFish=" + currentFish + ", timer=" + timer + ", task="
         + task + ", date=" + date + ", score=" + score + "]";
   }
-  
-  
-  
+
 }
