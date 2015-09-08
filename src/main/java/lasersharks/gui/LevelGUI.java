@@ -182,7 +182,7 @@ public class LevelGUI extends Application {
       image.setFitWidth(size);
     }
     // flip the image according to the direction.
-    if (dir != Direction.None && dir != Direction.North && dir != Direction.South) {
+    if (dir.getDeltaX() != 0) {
       image.setScaleX(dir.getDeltaX());
     }
     image.setFitHeight(size);
