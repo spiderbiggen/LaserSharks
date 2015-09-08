@@ -28,7 +28,7 @@ import javafx.stage.Stage;
  *
  */
 @SuppressWarnings("restriction")
-public class FXGUI extends Application {
+public class LevelGUI extends Application {
   private final double minX      = 0;
   private final double maxX      = 1920;
   private final double minY      = 0;
