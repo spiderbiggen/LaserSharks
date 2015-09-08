@@ -8,10 +8,7 @@ import java.util.List;
  *
  */
 public class ScreenController {
+  private FXGUI gui;
   
   
-  public void projectFish(List<Fish> listOfFish) {
-    //TODO: implement this function so it projects all the fish on the list on our screen.
-  }
-
 }
