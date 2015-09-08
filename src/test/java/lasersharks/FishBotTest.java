@@ -18,11 +18,11 @@ public class FishBotTest extends FishTest {
   private Fish generatedFish;
   private final long seed = 123456L;
 
-  private final float expectedSize1 = 40;
-  private final int expectedSpeed1 = 14;
+  private final float expectedSize1 = 228;
+  private final int expectedSpeed1 = 17;
 
-  private final float expectedSize2 = 28;
-  private final int expectedSpeed2 = 9;
+  private final float expectedSize2 = 171;
+  private final int expectedSpeed2 = 13;
 
   /**
    * Set up which is used before the tests.
