@@ -2,6 +2,8 @@ package lasersharks;
 
 import java.util.List;
 
+import lasersharks.gui.LevelGUI;
+
 /**
  * This level represents the connection between the fishController, game and screen controller.
  * @author Sytze, Youri
@@ -21,8 +23,9 @@ public class Level {
   /**
    * this is the constructor of the level class.
    * @param game controller from witch to take commands and where to find env data.
+   * @param gui reference to the GUI Object.
    */
-  public Level(Game game) {
+  public Level(Game game, LevelGUI gui) {
     this.fishCon = new FishController();
     this.shark = new LaserShark(
             Position.middlePosition(), 
@@ -32,7 +35,7 @@ public class Level {
      );
     this.fishCon.addFish(this.shark);
     this.game = game;
-    this.screenCon = new ScreenController(this);
+    this.screenCon = new ScreenController(this, gui);
     this.keyboardCon = new KeyboardController(this.screenCon, this);
     this.game = game;
   }

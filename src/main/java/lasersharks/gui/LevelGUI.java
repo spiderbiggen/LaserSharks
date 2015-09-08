@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lasersharks.Direction;
 import lasersharks.Fish;
+import lasersharks.Game;
 import lasersharks.LaserShark;
 import lasersharks.Position;
 
@@ -46,14 +47,6 @@ public class LevelGUI extends Application {
   private Scene scene;
 
   /**
-   * @param args
-   *          parameters to influence the startup of this game
-   */
-  public static void main(String[] args) {
-    launch(args);
-  }
-
-  /**
    * gets the scene of the gui.
    * @return the scene
    */
@@ -69,6 +62,13 @@ public class LevelGUI extends Application {
     this.scene = scene;
   }
   
+  /**
+   * @param args parameters to influence the startup of this game
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
+
   
   /**
    * This function is called by the application.
@@ -81,8 +81,11 @@ public class LevelGUI extends Application {
     scene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
     addElements();
     stage.setScene(scene);
-    
     stage.show();
+    
+    Game g = new Game();
+    g.launch(this);
+    
   }
 
   /**
@@ -135,7 +138,7 @@ public class LevelGUI extends Application {
 
     ImageView image;
     if (fish instanceof LaserShark) {
-      image = new ImageView("LaserRight.gif");
+      image = new ImageView("LaserShark.gif");
     } else {
       image = new ImageView("FishBot.gif");
     }

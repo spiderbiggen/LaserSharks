@@ -23,10 +23,12 @@ public class ScreenController extends Thread {
    * @param level
    *          the level from witch to recieve data.
    */
-  public ScreenController(Level level) {
+  public ScreenController(Level level, LevelGUI gui) {
     super();
     this.level = level;
-    this.running = false;
+    this.running = true;
+    this.gui = gui;
+    this.scene = gui.getScene();
   }
 
   /**
@@ -40,20 +42,6 @@ public class ScreenController extends Thread {
       } catch (InterruptedException e) { }
     }
   }
-  
-  /**
-   * Pauze the game.
-   */
-  public void pauze() {
-    this.running = false;
-  }
-  
-  /**
-   * Start / resume the game.
-   */
-  public void start() {
-    this.running = true;
-  }
 
   /**
    * get the scene from the gui.
@@ -61,5 +49,13 @@ public class ScreenController extends Thread {
    */
   public Scene getScene() {
     return this.scene;
+  }
+  
+  /**
+   * Returns the static LevelGUI.
+   * @return the gui
+   */
+  public LevelGUI getGui() {
+    return gui;
   }
 }
