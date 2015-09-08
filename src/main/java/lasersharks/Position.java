@@ -108,28 +108,18 @@ public class Position {
   }
 
   /**
-   * Updates the position.
-   * 
-   * @param dir
-   *          the direction the position should shift to.
-   * @return false if fish moves off the screen
-   */
-  public boolean updatePosition(Direction dir) {
-    return updatePosition(dir, 1);
-  }
-
-  /**
    * Updates the position with a speed parameter.
    * 
    * @param dir the direction the position should shift to.
    * @param sp the speed in witch the fish moves.
+   * @param margin size of object to make sure it's entirely offscreen.
    * @return false if fish moves off the screen.
    */
-  public boolean updatePosition(Direction dir, int sp) {
+  public boolean updatePosition(Direction dir, int sp, int margin) {
     if (dir != null && !dir.equals(Direction.None)) {
       adjustPos(sp * dir.getDeltaX(), sp * dir.getDeltaY());
     }
-    return onScreen();
+    return onScreen(margin);
   }
 
   /**
@@ -150,9 +140,19 @@ public class Position {
    * @return true if the position is on the screen.
    */
   public final boolean onScreen() {
-    return (posX >= 0 && posX <= WIDTH && posY >= 0 && posY <= HEIGHT);
+    return onScreen(0);
   }
-
+  
+  /**
+   * 
+   * This boolean checks if the position is on the screen.
+   * 
+   * @return true if the position is on the screen.
+   * @param xMargin max ofset margin
+   */
+  public final boolean onScreen(int xMargin) {
+    return (posX + xMargin >= 0 && posX <= WIDTH + xMargin && posY >= 0 && posY <= HEIGHT);
+  }
   @Override
   public String toString() {
     return "Position [posX=" + posX + ", posY=" + posY + "]";

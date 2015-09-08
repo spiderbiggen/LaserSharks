@@ -66,6 +66,7 @@ public class UpdatePositionTest {
   /**
    * Test methods for {@link laserSharks.Position#updatePosition(Direction) }.
    */
+  /*
   @Test
   public void testUpdatePosition() {
     System.out.println("Parameterized direction is : " + direction.toString());
@@ -73,5 +74,6 @@ public class UpdatePositionTest {
     assertEquals(expectedX, position.getPosX());
     assertEquals(expectedY, position.getPosY());
   }
+  */
 
 }

@@ -92,7 +92,7 @@ public abstract class Fish {
    * @return true if fish is in view
    */
   public boolean move() {
-    return position.updatePosition(direction, speed);
+    return position.updatePosition(direction, speed, (int) size);
   }
   
   /**
@@ -112,7 +112,7 @@ public abstract class Fish {
    * @return true if the fish is on the screen, and false if not.
    */
   public boolean isOnScreen() {
-    return this.alive && position.onScreen();
+    return this.alive && position.onScreen((int) this.size);
   }
   
   /**
