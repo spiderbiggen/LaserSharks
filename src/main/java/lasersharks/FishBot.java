@@ -14,13 +14,15 @@ public class FishBot extends Fish {
    * This value is used to modify the speed of the fishes that are generated. The generated speed is
    * equal to SpeedModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
    */
-  private static final int SPEED_MODIFIER = 30;
+  private static final int SPEED_MODIFIER = 25;
+  private static final int BASE_SPEED = 5;
 
   /**
    * This value is used to modify the size of the fishes that are generated. The generated speed is
    * equal to SizeModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
    */
-  private static final int SIZE_MODIFIER = 40;
+  private static final int SIZE_MODIFIER = 200;
+  private static final int BASE_SIZE = 30;
   
   /**
    * Constructor class for FishBot.
@@ -62,7 +64,7 @@ public class FishBot extends Fish {
     }
 
     return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * rng.nextFloat())),
-        (int) Math.round(rng.nextFloat() * SIZE_MODIFIER),
-        (int) Math.round(rng.nextFloat() * SPEED_MODIFIER), dir);
+        (int) Math.round(rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE),
+        (int) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
   }
 }

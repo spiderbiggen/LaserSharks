@@ -2,6 +2,7 @@ package lasersharks.gui;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -34,7 +35,7 @@ import lasersharks.ScreenController;
  */
 @SuppressWarnings("restriction")
 public class LevelGUI extends Application {
-  private static final double FRAME_DELAY = 0.1;
+  private static final double FRAME_DELAY = 0.06;
   /**
    * the x resolution of the screen.
    */
@@ -140,13 +141,11 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-    Iterator<Node> it = list.iterator();
-    while (it.hasNext()) {
-      Node node = it.next();
-      if (node instanceof ImageView) {
-        list.remove(node);
-      }
-    }
+    
+    list.removeAll(
+        list.stream().filter(v -> v instanceof ImageView)
+        .collect(Collectors.toList())
+    );
   }
 
   /**
@@ -178,15 +177,16 @@ public class LevelGUI extends Application {
     ImageView image;
     if (fish instanceof LaserShark) {
       image = new ImageView("LaserShark.gif");
+      image.setFitWidth(1.5 * size);
     } else {
       image = new ImageView("FishBot.jpg");
+      image.setFitWidth(size);
     }
     // flip the image according to the direction.
     if (dir != Direction.None) {
       image.setScaleX(dir.getDeltaX());
     }
     image.setFitHeight(size);
-    image.setFitWidth(size);
 
     image.setX(position.getPosX());
     image.setY(position.getPosY());

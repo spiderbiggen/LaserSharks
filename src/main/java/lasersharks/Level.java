@@ -9,9 +9,9 @@ import lasersharks.gui.LevelGUI;
  * @author Sytze, Youri
  */
 public class Level {
-  private static final float START_SIZE = 40.0f;
-  private static final int START_SPEED = 1;
-  private static final Direction START_DIRECTION = Direction.East;
+  private static final float START_SIZE = 80.0f;
+  private static final int START_SPEED = 40;
+  private static final Direction START_DIRECTION = Direction.None;
   private LaserShark shark;
   private FishController fishCon;
   private ScreenController screenCon;
