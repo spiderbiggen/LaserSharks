@@ -77,7 +77,7 @@
     <module name="IllegalInstantiation"/>
     <module name="InnerAssignment"/>
     <module name="MagicNumber">
-      <property name="tokens" value="NUM_DOUBLE, NUM_FLOAT"/>
+      <property name="tokens" value="NUM_INT, NUM_DOUBLE, NUM_FLOAT"/>
     </module>
     <module name="MissingSwitchDefault"/>
     <module name="SimplifyBooleanExpression"/>
@@ -89,7 +89,9 @@
     <module name="FinalClass"/>
     <module name="HideUtilityClassConstructor"/>
     <module name="InterfaceIsType"/>
-    <module name="VisibilityModifier"/>
+    <module name="VisibilityModifier" >
+    	<property name="protectedAllowed" value="true"/>
+    </module>
     <module name="ArrayTypeStyle"/>
     <module name="FinalParameters">
       <property name="severity" value="ignore"/>

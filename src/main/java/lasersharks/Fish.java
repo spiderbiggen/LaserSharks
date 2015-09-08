@@ -25,7 +25,6 @@ public abstract class Fish {
    *          start direction.
    */
   public Fish(Position position, float size, int speed, Direction direction) {
-    super();
     this.position = position;
     this.size = size;
     this.speed = speed;

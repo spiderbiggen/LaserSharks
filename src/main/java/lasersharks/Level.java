@@ -24,7 +24,7 @@ public class Level {
    */
   public Level() {
     fishCon = new FishController();
-    shark = new LaserShark(Position.middlePosition(), Direction.East, startSize);
+    shark = new LaserShark(Position.middlePosition(), 1.0f, startSize, Direction.East);
     running = false;
     fishCon.addFish(shark);
     timer = new Timer();
