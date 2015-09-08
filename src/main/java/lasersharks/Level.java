@@ -22,12 +22,12 @@ public class Level {
    * this is the constructor of the level class.
    */
   public Level(Game game) {
-    fishCon = new FishController();
-    shark = new LaserShark(Position.middlePosition(), Direction.East, 1.0f);
-    fishCon.addFish(shark);
-    
-    screenCon = new ScreenController(this);
-    keyboardCon = new KeyboardController(screenCon, this);
+    this.fishCon = new FishController();
+    this.shark = new LaserShark(Position.middlePosition(), Direction.East, 1.0f);
+    this.fishCon.addFish(shark);
+    this.game = game;
+    this.screenCon = new ScreenController(this);
+    this.keyboardCon = new KeyboardController(screenCon, this);
   }
   
   /**
