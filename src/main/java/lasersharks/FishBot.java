@@ -53,12 +53,12 @@ public class FishBot extends Fish {
     Direction dir;
     if (rng.nextBoolean()) {
       // starts on the right side
-      dir = Direction.East;
+      dir = Direction.West;
       posX = Position.getWidthPanel();
     } else {
       // starts on the left side
       posX = 0;
-      dir = Direction.West;
+      dir = Direction.East;
     }
 
     return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * rng.nextFloat())),

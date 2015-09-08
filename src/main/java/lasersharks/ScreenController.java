@@ -1,5 +1,7 @@
 package lasersharks;
 
+import java.util.List;
+
 import javafx.scene.Scene;
 import lasersharks.gui.LevelGUI;
 
@@ -10,7 +12,7 @@ import lasersharks.gui.LevelGUI;
  *
  */
 @SuppressWarnings("restriction")
-public class ScreenController extends Thread {
+public class ScreenController {
   private static final int FRAME_DELAY = 20;
   private LevelGUI gui;
   private Level level;
@@ -28,19 +30,16 @@ public class ScreenController extends Thread {
     this.level = level;
     this.running = true;
     this.gui = gui;
+    this.gui.setScreenController(this);
     this.scene = gui.getScene();
   }
-
+  
   /**
-   * Executable part of the Screencontroler, forwards fishdata to the gui.
+   * Get infor for next frame.
+   * @return FishInfo
    */
-  public void run() {
-    while (this.running) {
-      try {
-        this.gui.showFishList(this.level.getNextFrameInfo());
-        sleep(FRAME_DELAY);
-      } catch (InterruptedException e) { }
-    }
+  public List<Fish> getNextFrameInfo() {
+    return this.level.getNextFrameInfo();
   }
 
   /**
@@ -57,5 +56,12 @@ public class ScreenController extends Thread {
    */
   public LevelGUI getGui() {
     return gui;
+  }
+  
+  /**
+   * Propagation function for starting the game.
+   */
+  public void start() {
+    this.gui.startGame();
   }
 }

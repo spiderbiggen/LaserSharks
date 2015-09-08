@@ -81,6 +81,7 @@ public class FishController {
    */
   public List<Fish> getNextCycleInformation() {
     if (this.rng.nextFloat() <= FISH_SPAWN_CHANCE) {
+      System.out.println("Fishadded");
       this.addFish(FishBot.generateFish());
     }
     return this.getNewFishPositions();
