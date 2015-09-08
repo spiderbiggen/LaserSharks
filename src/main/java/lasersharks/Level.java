@@ -14,13 +14,14 @@ public class Level {
   private FishController fishCon;
   private ScreenController screenCon;
   private KeyboardController keyboardCon;
+  private Game game;
   
   private int score;
   
   /**
    * this is the constructor of the level class.
    */
-  public Level() {
+  public Level(Game game) {
     fishCon = new FishController();
     shark = new LaserShark(Position.middlePosition(), Direction.East, 1.0f);
     fishCon.addFish(shark);
@@ -105,5 +106,12 @@ public class Level {
   public String toString() {
     return "Level [shark=" + shark + ", fishCon=" + fishCon + ", screenCon=" + screenCon
         + ", score=" + score + "]";
+  }
+  
+  /**
+   * Launch game.
+   */
+  public void launch() {
+    this.screenCon.start();
   }
 }
