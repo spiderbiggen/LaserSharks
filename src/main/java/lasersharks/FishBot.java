@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * This class represent the fishes on the screen that are not player controllable.
  * 
- * @author Sytze
+ * @author Sytze & Daan
  *
  */
 public class FishBot implements Fish {
@@ -31,7 +31,7 @@ public class FishBot implements Fish {
    * this is the seed used to create the random fishes.
    */
   private static Random rng = new Random();
-  
+
   private Position position;
   private float size;
   private int speed;
@@ -39,10 +39,15 @@ public class FishBot implements Fish {
 
   /**
    * The constructor for fishbot.
-   * @param pos the position where the fishbot is.
-   * @param siz the size of the fishbot.
-   * @param sp the speed parameter of the fishbot.
-   * @param dir the direction the fishbot is heading to.
+   * 
+   * @param pos
+   *          the position where the fishbot is.
+   * @param siz
+   *          the size of the fishbot.
+   * @param sp
+   *          the speed parameter of the fishbot.
+   * @param dir
+   *          the direction the fishbot is heading to.
    */
   public FishBot(Position pos, float siz, int sp, Direction dir) {
     position = pos;
@@ -50,7 +55,7 @@ public class FishBot implements Fish {
     speed = sp;
     direction = dir;
   }
-  
+
   /**
    * @return the direction
    */
@@ -59,7 +64,8 @@ public class FishBot implements Fish {
   }
 
   /**
-   * @param direction the direction to set
+   * @param direction
+   *          the direction to set
    */
   public void setDirection(Direction direction) {
     this.direction = direction;
@@ -73,7 +79,8 @@ public class FishBot implements Fish {
   }
 
   /**
-   * @param speedModifier the speedModifier to set
+   * @param speedModifier
+   *          the speedModifier to set
    */
   public static void setSpeedModifier(int speedModifier) {
     FishBot.speedModifier = speedModifier;
@@ -85,9 +92,10 @@ public class FishBot implements Fish {
   public static int getSizeModifier() {
     return sizeModifier;
   }
-  
+
   /**
-   * @param sizeModifier the sizeModifier to set
+   * @param sizeModifier
+   *          the sizeModifier to set
    */
   public static void setSizeModifier(int sizeModifier) {
     FishBot.sizeModifier = sizeModifier;
@@ -101,7 +109,8 @@ public class FishBot implements Fish {
   }
 
   /**
-   * @param chanceForLeft the chanceForLeft to set
+   * @param chanceForLeft
+   *          the chanceForLeft to set
    */
   public static void setChanceForLeft(int chanceForLeft) {
     FishBot.chanceForLeft = chanceForLeft;
@@ -115,12 +124,13 @@ public class FishBot implements Fish {
   }
 
   /**
-   * @param rng the rng to set
+   * @param rng
+   *          the rng to set
    */
   public static void setRng(Random newRng) {
     rng = newRng;
   }
-    
+
   /**
    * @return position
    */
@@ -136,7 +146,7 @@ public class FishBot implements Fish {
   public float getSize() {
     return size;
   }
-  
+
   /**
    * @return the speed
    */
@@ -145,35 +155,54 @@ public class FishBot implements Fish {
   }
 
   /**
-   * @param speed the speed to set
+   * @param speed
+   *          the speed to set
    */
   public void setSpeed(int speed) {
     this.speed = speed;
   }
 
   /**
-   * @param position the position to set
+   * @param position
+   *          the position to set
    */
   public void setPosition(Position position) {
     this.position = position;
   }
 
   /**
-   * @param size the size to set
+   * @param size
+   *          the size to set
    */
   public void setSize(float size) {
     this.size = size;
   }
 
   /**
+   * Calculate the middle position of the fish. The default position is in the upper left corner of
+   * the image.
+   * 
+   * @return the middle position of the fish
+   */
+  public Position getMiddlePoint() {
+    Position startPos = this.getPosition();
+    Position middlePointPosition = new Position(startPos.getPosX() + (int) this.getSize(),
+        startPos.getPosY() + (int) (0.5 * this.getSize()));
+    return middlePointPosition;
+
+  }
+
+  /**
    * We calculate the distance between the fishes. The sum of the size of both fishes is our hitbox.
    * Hitbox is now a circle, with size the radius in pixels.
    * 
-   * @param fish we want to check if the fishbot collides with this fish,
+   * @param fish
+   *          we want to check if the fishbot collides with this fish,
    * @return true if the fishes collide and false if not.
    */
   public boolean collision(Fish fish) {
-    return (position.calculateDistance(fish.getPosition()) < size + fish.getSize());
+    float distance = this.getMiddlePoint().calculateDistance(fish.getMiddlePoint());
+    return distance < this.size + fish.getSize();
   }
 
   /**
@@ -187,7 +216,7 @@ public class FishBot implements Fish {
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
    * Starts on either the left side on
-   * @param rng the rng we use, useful for setting seeds.
+   * 
    * @return a random fish with random speed, size and position.
    */
   public static FishBot generateFish() {
@@ -204,8 +233,8 @@ public class FishBot implements Fish {
     }
 
     return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * rng.nextFloat())),
-        (int) Math.round(rng.nextFloat() * sizeModifier),
-        (int) Math.round(rng.nextFloat() * speedModifier), dir);
+        (int) Math.round(rng.nextFloat() * sizeModifier), (int) Math.round(rng.nextFloat()
+            * speedModifier), dir);
   }
 
   /**

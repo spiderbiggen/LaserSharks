@@ -88,6 +88,7 @@ public class LaserShark implements Fish {
    * @return true if it collides.
    */
   public boolean collision(Fish fish) {
+    
     return false;
   }
 
@@ -107,6 +108,12 @@ public class LaserShark implements Fish {
   public void eat(Fish fish){
     fish.setPosition(new Position(-100, -100));
     size += fish.getSize()/10.0;
+  }
+
+  @Override
+  public Position getMiddlePoint() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

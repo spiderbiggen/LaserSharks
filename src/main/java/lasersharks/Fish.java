@@ -28,4 +28,6 @@ public interface Fish {
   
   
   void setPosition(Position position);
+
+  Position getMiddlePoint();
 }
