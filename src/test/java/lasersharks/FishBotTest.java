@@ -1,10 +1,13 @@
 package lasersharks;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
+
 
 public class FishBotTest extends FishTest {
 
@@ -18,13 +21,17 @@ public class FishBotTest extends FishTest {
   private final int expectedSpeed2 = 9;
 
   /**
-   * 
+   * Set up which is used before the tests
    */
   @Before
   public void setUp() {
     fish1 = new FishBot(posOnScreen, size, speed, direction);
   }
 
+  
+  /**
+   * 
+   */
   @Test
   public void testRandomFish() {
     Random random = new Random(seed);
@@ -43,9 +50,5 @@ public class FishBotTest extends FishTest {
     assertEquals(generatedFish.getSize(), expectedSize2, 0);
     assertTrue(generatedFish.getSpeed() == expectedSpeed2);
   }
-  /*
-   * @Test public void testIsOnScreen() { assert(fishbot1.onScreen()); }
-   * 
-   * @Test public void testIsOffScreen() { assertFalse(fishbot2.onScreen()); }
-   */
+  
 }

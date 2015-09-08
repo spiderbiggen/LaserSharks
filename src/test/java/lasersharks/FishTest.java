@@ -1,19 +1,18 @@
-/**
- * 
- */
 package lasersharks;
 
-import static org.junit.Assert.*;
-
-import java.util.Random;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.mock;
+
 
 /**
+ * Class for testing Fish object
  * @author Stefan
  *
  */
@@ -26,18 +25,9 @@ public abstract class FishTest {
   protected final int speed = 40;
   protected final Direction direction = Direction.East;
 
-  // Random seed;
 
   /**
-   * 
-   * @throws Exception
-   */
-  @Before
-  public void setUp() {
-  }
-
-  /**
-   * 
+   * Tear down the fish Object after the test
    */
   @After
   public void tearDown() {
