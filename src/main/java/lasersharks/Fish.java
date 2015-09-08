@@ -31,4 +31,10 @@ public interface Fish {
    * @param position position
    */
   void setPosition(Position position);
+  
+  /**
+   * gets the direction.
+   * @return the direction.
+   */
+  Direction getDirection();
 }
