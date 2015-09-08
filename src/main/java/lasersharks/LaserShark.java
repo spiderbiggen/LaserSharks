@@ -8,7 +8,7 @@ public class LaserShark extends Fish {
 
   private static final float ENERGY_DISSERPATION_RATE = 1.5f;
   private final String imageResource = "LaserShark.gif";
-  private final float widthScale = 0.9f;
+  private final float widthScale = 2.0f;
 
   /**
    * Constructor class for FishBot.

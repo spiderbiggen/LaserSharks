@@ -17,7 +17,7 @@ public class FishBot extends Fish {
   private static final int SPEED_MODIFIER = 25;
   private static final int BASE_SPEED = 5;
   private final String imageResource = "FishBot.jpg";
-  private final float widthScale = 1.5f;
+  private final float widthScale = 1.1f;
 
   /**
    * This value is used to modify the size of the fishes that are generated. The generated speed is
