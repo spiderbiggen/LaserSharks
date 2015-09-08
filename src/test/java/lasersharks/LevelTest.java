@@ -15,13 +15,21 @@ public class LevelTest {
     level1 = new Level();
   }
   
+  /**
+   * prints information of what fishes are on the screen at the start.
+   * after 10 seconds of waiting, this is repeated.
+   * some fishes should have been spawned and moved from the sides of the screen.
+   * @param level
+   * @return
+   */
   public String getInfo(Level level) {
     List<Fish> list = level.getFishCon().getNextCycleInformation();
+    StringBuilder result = new StringBuilder();
     String res = "";
-    for(int i=0;i<list.size();i++){
-      res = res+list.get(i).getClass().getName()+" at pos: "+list.get(i).getPosition().toString();
+    for (int i = 0; i < list.size(); i++) {
+      result.append(list.get(i).getClass().getName() + " at pos: " + list.get(i).getPosition().toString());
     }
-     return res;
+     return result.toString();
   }
   
   @Test
@@ -36,5 +44,5 @@ public class LevelTest {
     }
     System.out.println(getInfo(level1));
   }
-
+  
 }

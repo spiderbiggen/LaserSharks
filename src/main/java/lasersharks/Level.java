@@ -241,7 +241,4 @@ public class Level {
         + ", running=" + running + ", currentFish=" + currentFish + ", timer=" + timer + ", task="
         + task + ", date=" + date + ", score=" + score + "]";
   }
-  
-  
-  
 }
