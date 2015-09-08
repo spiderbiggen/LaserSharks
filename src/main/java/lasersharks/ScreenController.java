@@ -1,7 +1,7 @@
 package lasersharks;
 
-import lasersharks.gui.LevelGUI;
 import javafx.scene.Scene;
+import lasersharks.gui.LevelGUI;
 
 /**
  * This is the class that will manage the screen.

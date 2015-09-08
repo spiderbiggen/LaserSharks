@@ -1,18 +1,14 @@
 package lasersharks.gui;
 
-import java.text.DecimalFormat;
-import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.List;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.geometry.Bounds;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -20,20 +16,30 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import lasersharks.*;
+import lasersharks.Direction;
+import lasersharks.Fish;
+import lasersharks.LaserShark;
+import lasersharks.Position;
 
 /**
+ * This class represents the gui of our application.
  * @author michiel, daan
  *
  */
-@SuppressWarnings("restriction")
 public class LevelGUI extends Application {
-  private static final double maxX = 1920;
-  private static final double maxY = 1080;
-  private static final Color backColor = Color.BLUE;
+  /**
+   * the x resolution of the screen.
+   */
+  private static final double XRES = 1920;
+  /**
+   * the y resolution of the screen.
+   */
+  private static final double YRES = 1080;
+  /**
+   * The background colour of the gui.
+   */
+  private static final Color BACKCOLOUR = Color.BLUE;
 
   private Pane pane;
   private Scene scene;
@@ -46,43 +52,81 @@ public class LevelGUI extends Application {
     launch(args);
   }
 
+  /**
+   * gets the scene of the gui.
+   * @return the scene
+   */
+  public Scene getScene() {
+    return scene;
+  }
+  
+  /**
+   * sets the scene.
+   * @param scene the scene
+   */
+  public void setScene(Scene scene) {
+    this.scene = scene;
+  }
+  
+  
+  /**
+   * This function is called by the application.
+   * This sets up a scene and pane.
+   * @param stage the stage the scene is set to.
+   */
   public void start(Stage stage) {
     pane = new Pane();
-    scene = new Scene(pane, maxX, maxY, backColor);
-    addElements(pane);
+    stage.setFullScreen(true);
+    scene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
+    addElements();
     stage.setScene(scene);
+    
     stage.show();
   }
 
-  public Pane addElements(Pane pane) {
-    // TODO: add a background
+  /**
+   * Add some key elements to the pane.
+   * This includes: Background
+   * @return the pane with elements
+   */
+  public Pane addElements() {
     BackgroundImage myBI = new BackgroundImage(
-        new Image("background.jpg", maxX, maxY, true, false), BackgroundRepeat.REPEAT,
+        new Image("background.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
-    // TODO: add the fps counter
-    pane.getChildren().add(fpsCounter());
     return pane;
   }
-
-  public Text fpsCounter() {
-
-    DecimalFormat df = new DecimalFormat("#.##");
-    String fps = "FPS: ";
-    Text text = new Text(fps + "ofzo");
-    text.setFont(new Font(20));
-    text.setX(maxX - text.getBoundsInParent().getWidth() - 20);
-    text.setY(20);
-
-    return text;
+  
+  /**
+   * This function removes all the ImageView objects.
+   * This is used to remove all the fish images on the screen.
+   */
+  public void clearPaneOfImageView() {
+    ObservableList<Node> list = pane.getChildren();
+    Iterator<Node> it = list.iterator();   
+    while (it.hasNext()) {
+      Node node = it.next();
+      if (node instanceof ImageView) {
+        list.remove(node);
+      }
+    }
   }
   
-  public void addFishList(List<Fish> list) {
-    for (int i = 0; i< list.size(); i++){
+  /**
+   * This method displays a list<Fish> on the scene of the gui.
+   * @param list the list of fish that needs to be displayed.
+   */
+  public void showFishList(List<Fish> list) {
+    for (int i = 0; i < list.size(); i++) {
       this.pane.getChildren().add(fishImage(list.get(i)));
     }
   }
   
+  /**
+   * an image object of a fish.
+   * @param fish the fish to display.
+   * @return an imageview of the fish.
+   */
   public ImageView fishImage(Fish fish) {
     Position position = fish.getPosition();
     double size = fish.getSize();
