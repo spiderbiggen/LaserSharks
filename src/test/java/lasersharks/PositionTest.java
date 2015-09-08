@@ -13,6 +13,8 @@ import org.junit.Test;
  */
 public class PositionTest {
 
+  private static final int POSITION_Y = 5;
+  private static final int POSITION_X = 5;
   private Position position;
   private int posX;
   private int posY;
@@ -40,8 +42,8 @@ public class PositionTest {
    */
   @Test
   public void testSetPosX() {
-    position.setPosX(5);
-    assertEquals(5, position.getPosX());
+    position.setPosX(POSITION_X);
+    assertEquals(POSITION_X, position.getPosX());
   }
 
   /**
@@ -71,8 +73,8 @@ public class PositionTest {
    */
   @Test
   public void testSetPosY() {
-    position.setPosY(5);
-    assertEquals(5, position.getPosY());
+    position.setPosY(POSITION_Y);
+    assertEquals(POSITION_Y, position.getPosY());
   }
 
   /**

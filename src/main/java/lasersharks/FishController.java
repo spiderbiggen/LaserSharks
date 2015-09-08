@@ -3,6 +3,7 @@ package lasersharks;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Class for controlling fishdata.
@@ -19,7 +20,7 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static final float FISHSPAWNCHANCE = 0.5173f;
+  private static final float FISH_SPAWN_CHANCE = 0.06258f;
 
   /**
    * Random Number Generator holder.
@@ -57,11 +58,11 @@ public class FishController {
    * Update all fish positions.
    */
   private void updatePositions() {
-    for (Fish f : this.fishList) {
-      if (!f.move()) {
-        this.fishList.remove(f);
-      }
-    }
+    this.fishList.removeAll(
+        this.fishList.stream()
+          .filter(v -> !v.move())
+        .collect(Collectors.toList())
+    );
   }
 
   /**
@@ -80,7 +81,8 @@ public class FishController {
    * @return List<Fish> list of fishes at there current position.
    */
   public List<Fish> getNextCycleInformation() {
-    if (this.rng.nextFloat() <= FISHSPAWNCHANCE) {
+    if (this.rng.nextFloat() <= FISH_SPAWN_CHANCE) {
+      System.out.println("Fishadded");
       this.addFish(FishBot.generateFish());
     }
     return this.getNewFishPositions();

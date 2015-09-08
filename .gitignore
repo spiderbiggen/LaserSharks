@@ -1,3 +1,5 @@
 target/
 .checkstyle
 .settings/
+.classpath
+/bin/

@@ -4,125 +4,50 @@ package lasersharks;
  * LaserShark class.
  *
  */
-public class LaserShark implements Fish {
+public class LaserShark extends Fish {
 
-  private Position position;
-  private Direction direction;
-  private float size;
+  private static final float ENERGY_DISSERPATION_RATE = 1.5f;
+  private final String imageResource = "LaserShark.gif";
+  private final float widthScale = 0.9f;
 
   /**
-   * Initializes the laserShark(player).
+   * Constructor class for FishBot.
    * 
    * @param position
-   *          the starting position
-   * @param direction
-   *          the starting direction
+   *          initial position
    * @param size
-   *          the starting size
-   */
-  public LaserShark(Position position, Direction direction, float size) {
-    this.position = position;
-    this.direction = direction;
-    this.size = size;
-  }
-
-  /**
-   * 
-   * @return the direction.
-   */
-  public Direction getDirection() {
-    return direction;
-  }
-
-  /**
-   * 
+   *          init size
+   * @param speed
+   *          init speed
    * @param direction
-   *          the direction to set.
+   *          init direction
    */
-  public void setDirection(Direction direction) {
-    this.direction = direction;
+  public LaserShark(Position position, float size, int speed, Direction direction) {
+    super(position, size, speed, direction);
   }
 
   /**
-   * 
-   * @param position
-   *          the position to set.
-   */
-  public void setPosition(Position position) {
-    this.position = position;
-  }
-
-  /**
-   * 
-   * @param size
-   *          the size to set.
-   */
-  public void setSize(float size) {
-    this.size = size;
-  }
-
-  /**
-   * @return the position
-   */
-  @Override
-  public Position getPosition() {
-    return this.position;
-  }
-
-  /**
-   * 
-   * @param newDirection
-   *          the direction to set to.
-   */
-  public void setNextMove(Direction newDirection) {
-    setDirection(newDirection);
-  }
-
-  /**
-   * @return the size.
-   */
-  @Override
-  public float getSize() {
-    return size;
-  }
-
-  /**
-   * 
-   * @param fish
-   *          the fish we want to check if it collides with.
-   * @return true if it collides.
-   */
-  public boolean collision(Fish fish) {
-
-    return false;
-  }
-
-  /**
-   * moves the shark.
-   */
-  @Override
-  public boolean move() {
-    return getPosition().updatePosition(getDirection());
-  }
-
-  /**
-   * The LaserShark eats a fish. As a result: the fish is placed out of the board and the shark
-   * grows according to the size of the fish.
+   * The LaserShark eats a fish. This kills fish and increases size of the shark.
    * 
    * @param fish
    *          the fish the shark eats
    */
   public void eat(Fish fish) {
-    fish.setPosition(new Position(-100, -100));
-    size += fish.getSize() / 10.0;
+    if (fish.isAlive()) {
+      this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
+    }
+    fish.kill();
+
   }
 
   @Override
-  public Position getMiddlePoint() {
-    Position startPos = this.getPosition();
-    Position middlePointPosition = new Position(startPos.getPosX() + (int) this.getSize(),
-        startPos.getPosY() + (int) (0.5 * this.getSize()));
-    return middlePointPosition;
+  public String getImageResource() {
+    // TODO Auto-generated method stub
+    return imageResource;
   }
 
+  @Override
+  public double getWidthScale() {
+    return widthScale;
+  }
 }

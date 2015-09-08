@@ -1,74 +1,59 @@
 package lasersharks;
 
-import java.sql.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
+import lasersharks.gui.LevelGUI;
+
+/**
+ * This level represents the connection between the fishController, game and screen controller.
+ * @author Sytze, Youri
+ */
 public class Level {
-  FishController fishCon;
-  LaserShark shark;
-  ScreenController screenCon;
-  Boolean running;
-  List<Fish> currentFish;
-  Timer timer;
-  TimerTask task;
-  Date date;
-  int score;
+  private static final float START_SIZE = 80.0f;
+  private static final int START_SPEED = 40;
+  private static final Direction START_DIRECTION = Direction.None;
+  private LaserShark shark;
+  private FishController fishCon;
+  private ScreenController screenCon;
+  private KeyboardController keyboardCon;
+  private Game game;
   
-  private static int startSize = 20;
-  private static long tickTime = 20;
+  private int score;
   
   /**
    * this is the constructor of the level class.
+   * @param game controller from witch to take commands and where to find env data.
+   * @param gui reference to the GUI Object.
    */
-  public Level() {
-    fishCon = new FishController();
-    shark = new LaserShark(Position.middlePosition(), Direction.East, startSize);
-    running = false;
-    fishCon.addFish(shark);
-    timer = new Timer();
+  public Level(Game game, LevelGUI gui) {
+    this.fishCon = new FishController();
+    this.shark = new LaserShark(
+            Position.middlePosition(), 
+            START_SIZE, 
+            START_SPEED, 
+            START_DIRECTION
+     );
+    this.fishCon.addFish(this.shark);
+    this.game = game;
+    this.screenCon = new ScreenController(this, gui);
+    this.keyboardCon = new KeyboardController(this.screenCon, this);
+    this.game = game;
   }
-  
+
   /**
-   * calling this method causes the timertask to start.
+   * Set shark direction.
+   * @param dir direction in witch to move.
    */
-  public void start() {
-    running = true;
-    
-    timer.schedule(new TimerTask() {      
-      @Override
-      public void run() {
-        gameLoop();       
-      }
-    }, new Date(0), tickTime);
+  public void setSharkDirection(Direction dir) {
+    this.shark.setDirection(dir);
   }
-  
+
   /**
-   * calling this method causes the timerTask to stop.
+   * Method for getting information for next frame.
+   * @return info for next frame
    */
-  public void stop() {
-    running = false;
-    //TODO: stop the ticker
-  }
-  
-  /**
-   * this function is run at each tick.
-   * It includes checking for collisions, 
-   */
-  private void gameLoop() {
-    currentFish = fishCon.getNextCycleInformation();
-   // screenCon.projectFish(currentFish);    
-    for(int i=0;i<currentFish.size();i++){
-      Fish fish = currentFish.get(i);
-      if(shark.collision(fish) && !shark.equals(fish)){
-        if(shark.getSize() < fish.getSize()) {
-          shark.eat(fish);
-        } else {
-          //TODO: implement that the game ends because the fish is larger than the shark
-        }
-      }
-    }
+  public List<Fish> getNextFrameInfo() {
+    return this.fishCon.getNextCycleInformation();
   }
 
   /**
@@ -79,7 +64,8 @@ public class Level {
   }
 
   /**
-   * @param fishCon the fishCon to set
+   * @param fishCon
+   *          the fishCon to set
    */
   public void setFishCon(FishController fishCon) {
     this.fishCon = fishCon;
@@ -93,7 +79,8 @@ public class Level {
   }
 
   /**
-   * @param shark the shark to set
+   * @param shark
+   *          the shark to set
    */
   public void setShark(LaserShark shark) {
     this.shark = shark;
@@ -107,80 +94,11 @@ public class Level {
   }
 
   /**
-   * @param screenCon the screenCon to set
+   * @param screenCon
+   *          the screenCon to set
    */
   public void setScreenCon(ScreenController screenCon) {
     this.screenCon = screenCon;
-  }
-
-  /**
-   * @return the running
-   */
-  public Boolean getRunning() {
-    return running;
-  }
-
-  /**
-   * @param running the running to set
-   */
-  public void setRunning(Boolean running) {
-    this.running = running;
-  }
-
-  /**
-   * @return the currentFish
-   */
-  public List<Fish> getCurrentFish() {
-    return currentFish;
-  }
-
-  /**
-   * @param currentFish the currentFish to set
-   */
-  public void setCurrentFish(List<Fish> currentFish) {
-    this.currentFish = currentFish;
-  }
-
-  /**
-   * @return the timer
-   */
-  public Timer getTimer() {
-    return timer;
-  }
-
-  /**
-   * @param timer the timer to set
-   */
-  public void setTimer(Timer timer) {
-    this.timer = timer;
-  }
-
-  /**
-   * @return the task
-   */
-  public TimerTask getTask() {
-    return task;
-  }
-
-  /**
-   * @param task the task to set
-   */
-  public void setTask(TimerTask task) {
-    this.task = task;
-  }
-
-  /**
-   * @return the date
-   */
-  public Date getDate() {
-    return date;
-  }
-
-  /**
-   * @param date the date to set
-   */
-  public void setDate(Date date) {
-    this.date = date;
   }
 
   /**
@@ -191,50 +109,51 @@ public class Level {
   }
 
   /**
-   * @param score the score to set
+   * @param score
+   *          the score to set
    */
   public void setScore(int score) {
     this.score = score;
   }
-
+  
   /**
-   * @return the startSize
+   * @return the keyboardCon
    */
-  public static int getStartSize() {
-    return startSize;
+  public KeyboardController getKeyboardCon() {
+    return keyboardCon;
   }
 
   /**
-   * @param startSize the startSize to set
+   * @param keyboardCon the keyboardCon to set
    */
-  public static void setStartSize(int startSize) {
-    Level.startSize = startSize;
+  public void setKeyboardCon(KeyboardController keyboardCon) {
+    this.keyboardCon = keyboardCon;
   }
 
   /**
-   * @return the tickTime
+   * @return the game
    */
-  public static long getTickTime() {
-    return tickTime;
+  public Game getGame() {
+    return game;
   }
 
   /**
-   * @param tickTime the tickTime to set
+   * @param game the game to set
    */
-  public static void setTickTime(long tickTime) {
-    Level.tickTime = tickTime;
+  public void setGame(Game game) {
+    this.game = game;
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
   @Override
   public String toString() {
-    return "Level [fishCon=" + fishCon + ", shark=" + shark + ", screenCon=" + screenCon
-        + ", running=" + running + ", currentFish=" + currentFish + ", timer=" + timer + ", task="
-        + task + ", date=" + date + ", score=" + score + "]";
+    return "Level [shark=" + shark + ", fishCon=" + fishCon + ", screenCon=" + screenCon
+        + ", score=" + score + "]";
   }
   
-  
-  
+  /**
+   * Launch game.
+   */
+  public void launch() {
+    this.screenCon.start();
+  }
 }
