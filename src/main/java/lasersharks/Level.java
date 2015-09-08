@@ -1,17 +1,15 @@
 package lasersharks;
 
-import java.sql.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * This level represents the connection between the fishController, game and screen controller.
- * @author Sytze
+ * @author Sytze, Youri
  */
 public class Level {
   private static final float START_SIZE = 1.0f;
   private static final int START_SPEED = 1;
+  private static final Direction START_DIRECTION = Direction.East;
   private LaserShark shark;
   private FishController fishCon;
   private ScreenController screenCon;
@@ -26,11 +24,17 @@ public class Level {
    */
   public Level(Game game) {
     this.fishCon = new FishController();
-    this.shark =  new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, Direction.East);
-    this.fishCon.addFish(shark);
+    this.shark = new LaserShark(
+            Position.middlePosition(), 
+            START_SIZE, 
+            START_SPEED, 
+            START_DIRECTION
+     );
+    this.fishCon.addFish(this.shark);
     this.game = game;
     this.screenCon = new ScreenController(this);
-    this.keyboardCon = new KeyboardController(screenCon, this);
+    this.keyboardCon = new KeyboardController(this.screenCon, this);
+    this.game = game;
   }
 
   /**
@@ -109,6 +113,34 @@ public class Level {
     this.score = score;
   }
   
+  /**
+   * @return the keyboardCon
+   */
+  public KeyboardController getKeyboardCon() {
+    return keyboardCon;
+  }
+
+  /**
+   * @param keyboardCon the keyboardCon to set
+   */
+  public void setKeyboardCon(KeyboardController keyboardCon) {
+    this.keyboardCon = keyboardCon;
+  }
+
+  /**
+   * @return the game
+   */
+  public Game getGame() {
+    return game;
+  }
+
+  /**
+   * @param game the game to set
+   */
+  public void setGame(Game game) {
+    this.game = game;
+  }
+
   @Override
   public String toString() {
     return "Level [shark=" + shark + ", fishCon=" + fishCon + ", screenCon=" + screenCon

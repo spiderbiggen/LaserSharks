@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
  * @author Stefan
  *
  */
+@SuppressWarnings("restriction")
 public class KeyboardController implements EventHandler<KeyEvent> {
   private Level callback;
   private Scene scene;

@@ -27,6 +27,7 @@ import lasersharks.Position;
  * @author michiel, daan
  *
  */
+@SuppressWarnings("restriction")
 public class LevelGUI extends Application {
   /**
    * the x resolution of the screen.

@@ -9,6 +9,7 @@ import lasersharks.gui.LevelGUI;
  * @author Youri
  *
  */
+@SuppressWarnings("restriction")
 public class ScreenController extends Thread {
   private static final int FRAME_DELAY = 20;
   private LevelGUI gui;
@@ -56,7 +57,7 @@ public class ScreenController extends Thread {
 
   /**
    * get the scene from the gui.
-   * @return
+   * @return the scene from the gui
    */
   public Scene getScene() {
     return this.scene;
