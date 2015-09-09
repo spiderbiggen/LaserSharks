@@ -88,5 +88,13 @@ public class FishController {
     return this.getNewFishPositions();
   }
   
+  /**
+   * Clear the fishList when the game ends.
+   * 
+   */
+  public void clearFish() {
+    this.fishList.clear();
+  }
+  
   
 }
