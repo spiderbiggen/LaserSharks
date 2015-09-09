@@ -175,7 +175,7 @@ public class LevelGUI extends Application {
     for (int i = 0; i < list.size(); i++) {
       this.pane.getChildren().add(fishImage(list.get(i)));
       Rectangle hitBox = list.get(i).makeHitbox();
-      //hitBox.setOpacity(0);
+      //hitBox.setOpacity(0);   //comment if you want to see the hitboxes as black boxes
       this.pane.getChildren().add(hitBox);
     }
   }

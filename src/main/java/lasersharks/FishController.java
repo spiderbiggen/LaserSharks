@@ -93,18 +93,18 @@ public class FishController {
     if (shark == null) {
       return;
     }
-    System.out.println("we check for collisions");
     Rectangle sharkHitbox = shark.makeHitbox();
     for (int i = 0; i < fishList.size(); i++) {
       Rectangle fishHitbox = fishList.get(i).makeHitbox();
       if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
         System.out.println("shark collides with fish");
-        if (fishList.get(i).getSize() >= shark.getSize()) {
-          // fish eats shark
-          shark.kill();
-        } else {
+        if (fishList.get(i).getSize() < shark.getSize()) {
           // shark eats fish
           shark.eat(fishList.get(i));
+
+        } else {
+          // fish eats shark
+          //shark.kill();
         }
       }
     }
