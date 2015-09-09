@@ -39,6 +39,10 @@ public class LaserShark extends Fish {
     fish.kill();
 
   }
+  
+  public void sharkGetsEaten() {
+    this.kill();
+  }
 
   @Override
   public String getImageResource() {
