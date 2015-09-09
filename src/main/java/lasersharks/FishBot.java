@@ -16,7 +16,7 @@ public class FishBot extends Fish {
    */
   private static final int SPEED_MODIFIER = 25;
   private static final int BASE_SPEED = 5;
-  private final String imageResource = "FishBot.jpg";
+  private final String imageResource = "FishBotSmall.png";
   private final float widthScale = 1.1f;
 
   /**
@@ -78,7 +78,7 @@ public class FishBot extends Fish {
         (int) Math.round(rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE),
         (int) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
   }
-  
+
   @Override
   public String getImageResource() {
     return imageResource;
