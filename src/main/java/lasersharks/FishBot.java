@@ -89,7 +89,7 @@ public class FishBot extends Fish {
   public Rectangle makeHitbox() {
     int xcoordinate = this.getPosition().getPosX();
     int ycoordinate = this.getPosition().getPosY();
-    Rectangle rekt = new Rectangle(xcoordinate, ycoordinate, this.getSize(), this.getSize());
+    Rectangle rekt = new Rectangle(xcoordinate, ycoordinate, this.getSize() * 1.1, this.getSize());
     return rekt;
   }
 
