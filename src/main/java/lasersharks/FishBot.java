@@ -78,7 +78,7 @@ public class FishBot extends Fish {
         (int) Math.round(rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE),
         (int) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
   }
-  
+
   @Override
   public String getImageResource() {
     return imageResource;
