@@ -81,12 +81,44 @@ public class FishController {
    * @return List<Fish> list of fishes at there current position.
    */
   public List<Fish> getNextCycleInformation() {
+    checkForCollisions();
     if (this.rng.nextFloat() <= FISH_SPAWN_CHANCE) {
-      System.out.println("Fishadded");
       this.addFish(FishBot.generateFish());
     }
     return this.getNewFishPositions();
   }
   
+  private void checkForCollisions() {
+    LaserShark shark = getShark(fishList);
+    if (shark == null) return;
+    System.out.println("we check for collisions");
+    for (int i = 0; i < fishList.size(); i++) {
+      if (fishList.get(i).collision(shark)) {
+        System.out.println("shark collides with fish");
+        if (fishList.get(i).getSize() >= shark.getSize()) {
+          //fish eats shark
+        } else {
+          //shark eats fish
+          shark.eat(fishList.get(i));
+        }
+      }
+    }
+  }
   
+  /**
+   * returns the first lasershark from a list of fish.
+   * if no lasershark is present, it returns null.
+   * @param list
+   * @return
+   */
+  private LaserShark getShark(List<Fish> list) {
+    Fish res = null;
+    for (int i = 0; i < list.size(); i++) {
+      if(list.get(i) instanceof LaserShark) {
+        res = list.get(i);
+        return (LaserShark) res;
+      }
+    }
+    return (LaserShark) res;
+  }
 }

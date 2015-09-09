@@ -98,7 +98,8 @@ public abstract class Fish {
    * @return true if fish is in view
    */
   public boolean move() {
-    return position.updatePosition(direction, speed, (int) size);
+    position.updatePosition(direction, speed, (int) size);
+    return this.isOnScreen();
   }
 
   /**
@@ -110,6 +111,7 @@ public abstract class Fish {
    * @return true if the fishes collide and false if not.
    */
   public boolean collision(Fish fish) {
+    if (fish.equals(this)) return false;
     float distance = this.getMiddlePoint().calculateDistance(fish.getMiddlePoint());
     return distance < this.size + fish.getSize();
   }
