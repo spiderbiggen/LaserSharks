@@ -1,5 +1,7 @@
 package lasersharks;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  * Abstract class for Floating creatures of the great blue.
  * 
@@ -176,4 +178,11 @@ public abstract class Fish {
    */
   public abstract double getWidthScale();
 
+  /**
+   * Draw a rectangle shaped hitbox around the fishbot.
+   * 
+   * @return a rectangle hitbox.
+   */
+  public abstract Rectangle makeHitbox();
+  
 }
