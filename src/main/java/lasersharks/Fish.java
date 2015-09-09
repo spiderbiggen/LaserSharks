@@ -7,7 +7,6 @@ import javafx.scene.shape.Rectangle;
  * 
  * @author Youri
  */
-@SuppressWarnings("restriction")
 public abstract class Fish {
 
   private Position position;
@@ -120,9 +119,9 @@ public abstract class Fish {
   private Position getMiddlePoint() {
     Position startPos = this.getPosition();
 
-    Position middlePointPosition = new Position(
-        startPos.getPosX() + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()),
-        startPos.getPosY() + (int) (HALF_SCALE * this.getSize()));
+    Position middlePointPosition = new Position(startPos.getPosX()
+        + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()), startPos.getPosY()
+        + (int) (HALF_SCALE * this.getSize()));
     return middlePointPosition;
   }
 
@@ -182,5 +181,5 @@ public abstract class Fish {
     Rectangle r = new Rectangle(x, y, this.getWidthScale() * this.getSize(), this.getSize());
     return r;
   }
-  
+
 }

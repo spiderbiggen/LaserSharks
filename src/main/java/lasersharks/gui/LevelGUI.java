@@ -34,7 +34,7 @@ import lasersharks.ScreenController;
  * @author michiel, daan
  *
  */
-@SuppressWarnings("restriction")
+
 public class LevelGUI extends Application {
 
   private static final double FRAME_DELAY = 0.06;
@@ -55,7 +55,7 @@ public class LevelGUI extends Application {
   private Scene scene;
 
   /**
-   * @return the screenController
+   * @return the screenController.
    */
   public ScreenController getScreenController() {
     return screenController;
@@ -63,7 +63,7 @@ public class LevelGUI extends Application {
 
   /**
    * @param screenController
-   *          the screenController to set
+   *          the screenController to set.
    */
   public void setScreenController(ScreenController screenController) {
     this.screenController = screenController;
@@ -90,7 +90,7 @@ public class LevelGUI extends Application {
 
   /**
    * @param args
-   *          parameters to influence the startup of this game
+   *          parameters to influence the startup of this game.
    */
   public static void main(String[] args) {
     launch(args);
@@ -110,8 +110,8 @@ public class LevelGUI extends Application {
     stage.setScene(scene);
     stage.show();
 
-    Game g = new Game();
-    g.launch(this);
+    Game game = new Game();
+    game.launch(this);
   }
 
   /**
@@ -131,10 +131,10 @@ public class LevelGUI extends Application {
    * @return the pane with elements
    */
   public Pane addElements() {
-    BackgroundImage myBI = new BackgroundImage(
+    BackgroundImage myBackground = new BackgroundImage(
         new Image("background.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-    pane.setBackground(new Background(myBI));
+    pane.setBackground(new Background(myBackground));
     return pane;
   }
 

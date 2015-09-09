@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
  * @author Youri
  *
  */
-@SuppressWarnings("restriction")
+
 public class FishController {
   /**
    * Holder for fishdata.
@@ -62,8 +62,8 @@ public class FishController {
    * Update all fish positions.
    */
   private void updatePositions() {
-    this.fishList
-        .removeAll(this.fishList.stream().filter(v -> !v.move()).collect(Collectors.toList()));
+    this.fishList.removeAll(this.fishList.stream().filter(v -> !v.move())
+        .collect(Collectors.toList()));
   }
 
   /**
