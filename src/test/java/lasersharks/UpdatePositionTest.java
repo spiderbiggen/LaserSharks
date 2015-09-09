@@ -23,8 +23,9 @@ public class UpdatePositionTest {
 
   private Position position;
   private Direction direction;
-  private int expectedX;
-  private int expectedY;
+  private int speed;
+  private Position expectedPosition;
+  private boolean expectedOnScreen;
 
   /**
    * Setup the test scenario.
@@ -39,15 +40,21 @@ public class UpdatePositionTest {
    * 
    * @param direction
    *          direction to update to
+   * @param speed
+   *          speed to update with
    * @param expectedX
    *          expected X result from running the method
    * @param expectedY
    *          expected Y from running the method
+   * @param expectedOnScreen
+   *          the expected return value
    */
-  public UpdatePositionTest(Direction direction, int expectedX, int expectedY) {
+  public UpdatePositionTest(Direction direction, int speed, int expectedX, int expectedY,
+      boolean expectedOnScreen) {
     this.direction = direction;
-    this.expectedX = expectedX;
-    this.expectedY = expectedY;
+    this.speed = speed;
+    this.expectedPosition = new Position(expectedX, expectedY);
+    this.expectedOnScreen = expectedOnScreen;
   }
 
   /**
@@ -57,23 +64,21 @@ public class UpdatePositionTest {
    */
   @Parameters
   public static Collection<Object[]> data() {
-    return Arrays.asList(new Object[][] { { Direction.North, 0, 1 }, { Direction.NorthEast, 1, 1 },
-        { Direction.East, 1, 0 }, { Direction.SouthEast, 1, -1 }, { Direction.South, 0, -1 },
-        { Direction.SouthWest, -1, -1 }, { Direction.West, -1, 0 }, { Direction.NorthWest, -1, 1 },
-        { Direction.None, 0, 0 } });
+    return Arrays.asList(new Object[][] { { Direction.North, 1, 0, 1 , true},
+        { Direction.NorthEast, 1, 1, 1 , true}, { Direction.East, -1, -1, 0 , false},
+        { Direction.SouthEast, 1, 1, -1 , false}, { Direction.South, -1, 0, 1 , true },
+        { Direction.SouthWest, 1, -1, -1 , false}, { Direction.West, -1, 1, 0 , true},
+        { Direction.NorthWest, -1, 1, -1 , false}, { Direction.None, 1, 0, 0 , true} });
   }
 
   /**
    * Test methods for {@link laserSharks.Position#updatePosition(Direction) }.
    */
-  /*
   @Test
   public void testUpdatePosition() {
     System.out.println("Parameterized direction is : " + direction.toString());
-    position.updatePosition(direction);
-    assertEquals(expectedX, position.getPosX());
-    assertEquals(expectedY, position.getPosY());
+    assertEquals(position.updatePosition(direction, speed, 0), expectedOnScreen);
+    assertEquals(expectedPosition, position);
   }
-  */
 
 }
