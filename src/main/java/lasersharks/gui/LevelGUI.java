@@ -18,7 +18,9 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lasersharks.Direction;
@@ -35,7 +37,7 @@ import lasersharks.ScreenController;
  */
 @SuppressWarnings("restriction")
 public class LevelGUI extends Application {
-  
+
   private static final double FRAME_DELAY = 0.06;
   /**
    * the x resolution of the screen.
@@ -51,7 +53,9 @@ public class LevelGUI extends Application {
   private static final Color BACKCOLOUR = Color.BLUE;
   private ScreenController screenController;
   private Pane pane;
+  private StackPane stackPane;
   private Scene scene;
+  private Scene winningScene;
 
   /**
    * @return the screenController
@@ -61,7 +65,8 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * @param screenController the screenController to set
+   * @param screenController
+   *          the screenController to set
    */
   public void setScreenController(ScreenController screenController) {
     this.screenController = screenController;
@@ -111,7 +116,7 @@ public class LevelGUI extends Application {
     Game g = new Game();
     g.launch(this);
   }
-  
+
   /**
    * Function for start of drawing fish on screen.
    */
@@ -124,14 +129,33 @@ public class LevelGUI extends Application {
   }
 
   /**
+   * This function is called when the game is over.
+   * 
+   * @param stage
+   *          the stage the scene is set to.
+   */
+  public void endGame(Stage stage) {
+
+    stackPane = new StackPane();
+    stage.setFullScreen(true);
+    Text endGameText = new Text("End game");
+    stackPane.getChildren().add(endGameText);
+    winningScene = new Scene(stackPane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
+    addElements();
+    stage.setScene(winningScene);
+    stage.show();
+
+  }
+
+  /**
    * Add some key elements to the pane. This includes: Background
    * 
    * @return the pane with elements
    */
   public Pane addElements() {
-    BackgroundImage myBI = new BackgroundImage(new Image("background.jpg", XRES, YRES, true, false),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(
+        new Image("background.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
     return pane;
   }
@@ -142,11 +166,8 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-    
-    list.removeAll(
-        list.stream().filter(v -> v instanceof ImageView)
-        .collect(Collectors.toList())
-    );
+
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView).collect(Collectors.toList()));
   }
 
   /**
