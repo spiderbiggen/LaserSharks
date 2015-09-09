@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lasersharks.Direction;
 import lasersharks.Fish;
+import lasersharks.FishController;
 import lasersharks.Game;
 import lasersharks.Position;
 import lasersharks.ScreenController;
@@ -58,6 +59,7 @@ public class LevelGUI extends Application {
   private Scene endScene;
   private boolean choosePlayScene = true;
   private boolean chooseEndScene = false;
+  private Stage stage;
 
   /**
    * @return the screenController
@@ -114,12 +116,9 @@ public class LevelGUI extends Application {
     endScene = makeEndScene(stage);
     addElements();
 
-    if (choosePlayScene) {
-      stage.setScene(playScene);
-    } else if (chooseEndScene) {
-      stage.setScene(endScene);
-    }
-
+    this.stage = stage;
+    chooseScene();
+    
     stage.show();
 
     Game g = new Game();
@@ -133,6 +132,7 @@ public class LevelGUI extends Application {
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DELAY), ev -> {
       this.showFishList(this.screenController.getNextFrameInfo());
     }));
+    
     timeline.setCycleCount(Animation.INDEFINITE);
     timeline.play();
   }
@@ -151,6 +151,19 @@ public class LevelGUI extends Application {
     Scene escene = new Scene(stackPane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
 
     return escene;
+  }
+  
+  /**
+   * Method to choose which scene is used.
+   */
+  public void chooseScene(){
+    if (choosePlayScene) {
+      stage.setScene(playScene);
+      
+    } else if (chooseEndScene) {
+      stage.setScene(endScene);
+      
+    }
   }
 
   /**
