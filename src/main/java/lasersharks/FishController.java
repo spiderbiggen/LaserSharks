@@ -20,7 +20,7 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static final float FISH_SPAWN_CHANCE = 0.06258f;
+  private static float FISH_SPAWN_CHANCE = 0.06258f;
 
   /**
    * Random Number Generator holder.
@@ -48,7 +48,8 @@ public class FishController {
   /**
    * Add a fish to the controller.
    * 
-   * @param fish the fish to add
+   * @param fish
+   *          the fish to add
    */
   public void addFish(Fish fish) {
     this.fishList.add(fish);
@@ -58,11 +59,8 @@ public class FishController {
    * Update all fish positions.
    */
   private void updatePositions() {
-    this.fishList.removeAll(
-        this.fishList.stream()
-          .filter(v -> !v.move())
-        .collect(Collectors.toList())
-    );
+    this.fishList.removeAll(this.fishList.stream().filter(v -> !v.move())
+        .collect(Collectors.toList()));
   }
 
   /**
@@ -87,7 +85,7 @@ public class FishController {
     }
     return this.getNewFishPositions();
   }
-  
+
   /**
    * Clear the fishList when the game ends.
    * 
@@ -96,5 +94,12 @@ public class FishController {
     this.fishList.clear();
   }
   
-  
+  /**
+   * Method to set the value of the fish spawn chance.
+   */
+  public void setFishSpawnChance(int chance) {
+    FISH_SPAWN_CHANCE = chance;
+  }
+
+
 }
