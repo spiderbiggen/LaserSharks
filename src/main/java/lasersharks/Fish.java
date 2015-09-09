@@ -63,6 +63,8 @@ public abstract class Fish {
   }
 
   /**
+   * Get the speed of the fish.
+   * 
    * @return the speed
    */
   public int getSpeed() {
@@ -70,6 +72,7 @@ public abstract class Fish {
   }
 
   /**
+   * Set the speed of the fish.
    * @param speed
    *          the speed to set
    */
@@ -78,6 +81,7 @@ public abstract class Fish {
   }
 
   /**
+   * Get the direction of the fish.
    * @return the direction
    */
   public Direction getDirection() {
@@ -85,6 +89,7 @@ public abstract class Fish {
   }
 
   /**
+   * Set the direction of the fish.
    * @param direction
    *          the direction to set
    */
@@ -98,7 +103,8 @@ public abstract class Fish {
    * @return true if fish is in view
    */
   public boolean move() {
-    return position.updatePosition(direction, speed, (int) size);
+    position.updatePosition(direction, speed, (int) size);
+    return this.isOnScreen();
   }
 
   /**
@@ -110,6 +116,8 @@ public abstract class Fish {
    * @return true if the fishes collide and false if not.
    */
   public boolean collision(Fish fish) {
+    if (fish.equals(this))
+      return false;
     float distance = this.getMiddlePoint().calculateDistance(fish.getMiddlePoint());
     return distance < this.size + fish.getSize();
   }
@@ -117,9 +125,9 @@ public abstract class Fish {
   private Position getMiddlePoint() {
     Position startPos = this.getPosition();
 
-    Position middlePointPosition = new Position(
-        startPos.getPosX() + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()),
-        startPos.getPosY() + (int) (HALF_SCALE * this.getSize()));
+    Position middlePointPosition = new Position(startPos.getPosX()
+        + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()), startPos.getPosY()
+        + (int) (HALF_SCALE * this.getSize()));
     return middlePointPosition;
   }
 
