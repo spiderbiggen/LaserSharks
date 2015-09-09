@@ -54,8 +54,10 @@ public class LevelGUI extends Application {
   private ScreenController screenController;
   private Pane pane;
   private StackPane stackPane;
-  private Scene scene;
-  private Scene winningScene;
+  private Scene playScene;
+  private Scene endScene;
+  private boolean choosePlayScene = true;
+  private boolean chooseEndScene = false;
 
   /**
    * @return the screenController
@@ -78,7 +80,7 @@ public class LevelGUI extends Application {
    * @return the scene
    */
   public Scene getScene() {
-    return scene;
+    return playScene;
   }
 
   /**
@@ -88,7 +90,7 @@ public class LevelGUI extends Application {
    *          the scene
    */
   public void setScene(Scene scene) {
-    this.scene = scene;
+    this.playScene = scene;
   }
 
   /**
@@ -108,9 +110,16 @@ public class LevelGUI extends Application {
   public void start(Stage stage) {
     pane = new Pane();
     stage.setFullScreen(true);
-    scene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
+    playScene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
+    endScene = makeEndScene(stage);
     addElements();
-    stage.setScene(scene);
+
+    if (choosePlayScene) {
+      stage.setScene(playScene);
+    } else if (chooseEndScene) {
+      stage.setScene(endScene);
+    }
+
     stage.show();
 
     Game g = new Game();
@@ -129,35 +138,40 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * This function is called when the game is over.
+   * This function makes an end screen.
    * 
    * @param stage
    *          the stage the scene is set to.
    */
-  public void endGame(Stage stage) {
+  public Scene makeEndScene(Stage stage) {
 
     stackPane = new StackPane();
-    stage.setFullScreen(true);
     Text endGameText = new Text("End game");
     stackPane.getChildren().add(endGameText);
-    winningScene = new Scene(stackPane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
-    addElements();
-    stage.setScene(winningScene);
-    stage.show();
+    Scene escene = new Scene(stackPane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
 
+    return escene;
   }
 
   /**
-   * Add some key elements to the pane. This includes: Background
+   * Add some key elements to the pane. This includes: Background.
    * 
    * @return the pane with elements
    */
-  public Pane addElements() {
+  public void addElements() {
     BackgroundImage myBI = new BackgroundImage(
         new Image("background.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
-    return pane;
+    stackPane.setBackground(new Background(myBI));
+  }
+
+  /**
+   * This method set the end scene true and the playscene false.
+   */
+  public void setEndSceneTrue() {
+    chooseEndScene = true;
+    choosePlayScene = false;
   }
 
   /**
