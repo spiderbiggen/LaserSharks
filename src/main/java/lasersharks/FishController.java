@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  * Class for controlling fishdata.
  * 
@@ -65,7 +67,7 @@ public class FishController {
 
   /**
    * 
-   * @return List of fish and there positions.
+   * @return List of fish and their positions.
    */
   private List<Fish> getNewFishPositions() {
     this.updatePositions();
@@ -92,8 +94,10 @@ public class FishController {
       return;
     }
     System.out.println("we check for collisions");
+    Rectangle sharkHitbox = shark.makeHitbox();
     for (int i = 0; i < fishList.size(); i++) {
-      if (fishList.get(i).collision(shark)) {
+      Rectangle fishHitbox = fishList.get(i).makeHitbox();
+      if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
         System.out.println("shark collides with fish");
         if (fishList.get(i).getSize() >= shark.getSize()) {
           // fish eats shark
