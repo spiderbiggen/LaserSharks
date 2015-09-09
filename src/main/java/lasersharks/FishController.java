@@ -48,7 +48,8 @@ public class FishController {
   /**
    * Add a fish to the controller.
    * 
-   * @param fish the fish to add
+   * @param fish
+   *          the fish to add
    */
   public void addFish(Fish fish) {
     this.fishList.add(fish);
@@ -58,11 +59,8 @@ public class FishController {
    * Update all fish positions.
    */
   private void updatePositions() {
-    this.fishList.removeAll(
-        this.fishList.stream()
-          .filter(v -> !v.move())
-        .collect(Collectors.toList())
-    );
+    this.fishList.removeAll(this.fishList.stream().filter(v -> !v.move())
+        .collect(Collectors.toList()));
   }
 
   /**
@@ -81,12 +79,52 @@ public class FishController {
    * @return List<Fish> list of fishes at there current position.
    */
   public List<Fish> getNextCycleInformation() {
+    checkForCollisions();
     if (this.rng.nextFloat() <= FISH_SPAWN_CHANCE) {
-      System.out.println("Fishadded");
       this.addFish(FishBot.generateFish());
     }
     return this.getNewFishPositions();
   }
   
-  
+  /**
+   * this function checks if there are any collisions between the shark and other fish.
+   * if so, this function checks if the size of the fish is smaller or bigger than the shark.
+   * If smaller, the fish is eaten by the shark. If bigger, the game ends.
+   */
+  private void checkForCollisions() {
+    LaserShark shark = getShark(fishList);
+    if (shark == null) {
+      return; 
+    }
+    
+    for (int i = 0; i < fishList.size(); i++) {
+      if (fishList.get(i).collision(shark)) {
+        if (fishList.get(i).getSize() >= shark.getSize()) {
+          // fish eats shark
+          shark.kill();
+        } else {
+          // shark eats fish
+          shark.eat(fishList.get(i));
+        }
+      }
+    }
+  }
+
+  /**
+   * returns the first lasershark from a list of fish. if no lasershark is present, it returns null.
+   * 
+   * @param list
+   *          of Fishes on the board
+   * @return the LaserShark
+   */
+  private LaserShark getShark(List<Fish> list) {
+    Fish res = null;
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i) instanceof LaserShark) {
+        res = list.get(i);
+        return (LaserShark) res;
+      }
+    }
+    return (LaserShark) res;
+  }
 }
