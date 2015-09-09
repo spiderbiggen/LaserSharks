@@ -88,15 +88,22 @@ public class FishController {
     return this.getNewFishPositions();
   }
   
+  /**
+   * this function checks if there are any collisions between the shark and other fish.
+   * if so, this function checks if the size of the fish is smaller or bigger than the shark.
+   * If smaller, the fish is eaten by the shark. If bigger, the game ends.
+   */
   private void checkForCollisions() {
     LaserShark shark = getShark(fishList);
-    if (shark == null) return;
+    if (shark == null) {
+      return; 
+      }
     System.out.println("we check for collisions");
     for (int i = 0; i < fishList.size(); i++) {
       if (fishList.get(i).collision(shark)) {
         System.out.println("shark collides with fish");
         if (fishList.get(i).getSize() >= shark.getSize()) {
-          //fish eats shark
+          //TODO: implement that the game ends
         } else {
           //shark eats fish
           shark.eat(fishList.get(i));
@@ -114,7 +121,7 @@ public class FishController {
   private LaserShark getShark(List<Fish> list) {
     Fish res = null;
     for (int i = 0; i < list.size(); i++) {
-      if(list.get(i) instanceof LaserShark) {
+      if (list.get(i) instanceof LaserShark) {
         res = list.get(i);
         return (LaserShark) res;
       }
