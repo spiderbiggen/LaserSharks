@@ -65,7 +65,7 @@ public abstract class Fish {
   }
 
   /**
-   * @return the speed
+   * @return the speed.
    */
   public int getSpeed() {
     return speed;
@@ -73,14 +73,14 @@ public abstract class Fish {
 
   /**
    * @param speed
-   *          the speed to set
+   *          the speed to set.
    */
   public void setSpeed(int speed) {
     this.speed = speed;
   }
 
   /**
-   * @return the direction
+   * @return the direction.
    */
   public Direction getDirection() {
     return direction;
@@ -88,7 +88,7 @@ public abstract class Fish {
 
   /**
    * @param direction
-   *          the direction to set
+   *          the direction to set.
    */
   public void setDirection(Direction direction) {
     this.direction = direction;
@@ -176,10 +176,11 @@ public abstract class Fish {
    * @return a rectangle hitbox.
    */
   public Rectangle makeHitbox() {
-    int x = this.getPosition().getPosX();
-    int y = this.getPosition().getPosY();
-    Rectangle r = new Rectangle(x, y, this.getWidthScale() * this.getSize(), this.getSize());
-    return r;
+    int xcoordinate = this.getPosition().getPosX();
+    int ycoordinate = this.getPosition().getPosY();
+    Rectangle rekt = new Rectangle(xcoordinate, ycoordinate, this.getWidthScale() * this.getSize(),
+        this.getSize());
+    return rekt;
   }
 
 }

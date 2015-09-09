@@ -11,7 +11,6 @@ import lasersharks.gui.LevelGUI;
  * @author Youri
  *
  */
-@SuppressWarnings("restriction")
 public class ScreenController {
   private LevelGUI gui;
   private Level level;
@@ -21,7 +20,7 @@ public class ScreenController {
    * Constructor.
    * 
    * @param level
-   *          the level from witch to recieve data.
+   *          the level from witch to receive data.
    * @param gui
    *          pointer to the active gui.
    */
@@ -34,7 +33,7 @@ public class ScreenController {
   }
   
   /**
-   * Get infor for next frame.
+   * Get information for next frame.
    * @return FishInfo
    */
   public List<Fish> getNextFrameInfo() {

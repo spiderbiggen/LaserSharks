@@ -47,7 +47,7 @@ public class LevelGUI extends Application {
    */
   private static final double YRES = 1080;
   /**
-   * The background colour of the gui.
+   * The background color of the gui.
    */
   private static final Color BACKCOLOUR = Color.BLUE;
   private ScreenController screenController;
@@ -131,9 +131,9 @@ public class LevelGUI extends Application {
    * @return the pane with elements
    */
   public Pane addElements() {
-    BackgroundImage myBackground = new BackgroundImage(
-        new Image("background.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    BackgroundImage myBackground = new BackgroundImage(new Image("background.jpg", XRES, YRES,
+        true, false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
+        BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBackground));
     return pane;
   }
@@ -145,17 +145,7 @@ public class LevelGUI extends Application {
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
 
-    list.removeAll(list.stream().filter(v -> v instanceof ImageView).collect(Collectors.toList()));
-  }
-
-  /**
-   * This function removes all the ImageView objects. This is used to remove all the fish images on
-   * the screen.
-   */
-  public void clearPaneOfOldHitboxes() {
-    ObservableList<Node> list = pane.getChildren();
-
-    list.removeAll(list.stream().filter(v -> v instanceof Rectangle).collect(Collectors.toList()));
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle).collect(Collectors.toList()));
   }
 
   /**
@@ -166,12 +156,11 @@ public class LevelGUI extends Application {
    */
   public void showFishList(List<Fish> list) {
     clearPaneOfImageView();
-    clearPaneOfOldHitboxes();
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).isAlive()) {
         this.pane.getChildren().add(fishImage(list.get(i)));
         Rectangle hitBox = list.get(i).makeHitbox();
-        hitBox.setOpacity(0); // comment if you want to see the hitboxes as black boxes
+        hitBox.setOpacity(0); // comment this line if you want to see the hitboxes as black boxes
         this.pane.getChildren().add(hitBox);
       }
     }
