@@ -19,6 +19,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lasersharks.Direction;
@@ -159,10 +160,13 @@ public class LevelGUI extends Application {
     clearPaneOfImageView();
     for (int i = 0; i < list.size(); i++) {
       this.pane.getChildren().add(fishImage(list.get(i)));
+      Rectangle hitBox = list.get(i).makeHitbox();
+      //hitBox.setOpacity(0);
+      this.pane.getChildren().add(hitBox);
     }
   }
 
-  /**
+   /**
    * an image object of a fish.
    * 
    * @param fish
