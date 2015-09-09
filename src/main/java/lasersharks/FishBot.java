@@ -2,8 +2,6 @@ package lasersharks;
 
 import java.util.Random;
 
-import javafx.scene.shape.Rectangle;
-
 /**
  * This class represent the fishes on the screen that are not player controllable.
  * 
@@ -18,7 +16,7 @@ public class FishBot extends Fish {
    */
   private static final int SPEED_MODIFIER = 25;
   private static final int BASE_SPEED = 5;
-  private final String imageResource = "FishBot.jpg";
+  private final String imageResource = "FishBotSmall.png";
   private final float widthScale = 1.1f;
 
   /**
@@ -79,18 +77,6 @@ public class FishBot extends Fish {
     return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * rng.nextFloat())),
         (int) Math.round(rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE), (int) Math.round(rng
             .nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
-  }
-
-  /**
-   * Draw a rectangle shaped hitbox around the fishbot.
-   * 
-   * @return a rectangle hitbox.
-   */
-  public Rectangle makeHitbox() {
-    int xcoordinate = this.getPosition().getPosX();
-    int ycoordinate = this.getPosition().getPosY();
-    Rectangle rekt = new Rectangle(xcoordinate, ycoordinate, this.getSize() * 1.1, this.getSize());
-    return rekt;
   }
 
   @Override

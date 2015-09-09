@@ -1,7 +1,5 @@
 package lasersharks;
 
-import javafx.scene.shape.Rectangle;
-
 /**
  * LaserShark class.
  *
@@ -40,18 +38,6 @@ public class LaserShark extends Fish {
     }
     fish.kill();
 
-  }
-
-  /**
-   * Draw a rectangle shaped hitbox around the fishbot.
-   * 
-   * @return a rectangle hitbox.
-   */
-  public Rectangle makeHitbox() {
-    int x = this.getPosition().getPosX();
-    int y = this.getPosition().getPosY();
-    Rectangle r = new Rectangle(x, y, 2 * this.getSize(), this.getSize());
-    return r;
   }
 
   @Override

@@ -7,6 +7,7 @@ import javafx.scene.shape.Rectangle;
  * 
  * @author Youri
  */
+@SuppressWarnings("restriction")
 public abstract class Fish {
 
   private Position position;
@@ -65,8 +66,6 @@ public abstract class Fish {
   }
 
   /**
-   * Get the speed of the fish.
-   * 
    * @return the speed
    */
   public int getSpeed() {
@@ -74,7 +73,6 @@ public abstract class Fish {
   }
 
   /**
-   * Set the speed of the fish.
    * @param speed
    *          the speed to set
    */
@@ -83,7 +81,6 @@ public abstract class Fish {
   }
 
   /**
-   * Get the direction of the fish.
    * @return the direction
    */
   public Direction getDirection() {
@@ -91,7 +88,6 @@ public abstract class Fish {
   }
 
   /**
-   * Set the direction of the fish.
    * @param direction
    *          the direction to set
    */
@@ -105,8 +101,7 @@ public abstract class Fish {
    * @return true if fish is in view
    */
   public boolean move() {
-    position.updatePosition(direction, speed, (int) size);
-    return this.isOnScreen();
+    return position.updatePosition(direction, speed, (int) size);
   }
 
   /**
@@ -118,8 +113,6 @@ public abstract class Fish {
    * @return true if the fishes collide and false if not.
    */
   public boolean collision(Fish fish) {
-    if (fish.equals(this))
-      return false;
     float distance = this.getMiddlePoint().calculateDistance(fish.getMiddlePoint());
     return distance < this.size + fish.getSize();
   }
@@ -127,9 +120,9 @@ public abstract class Fish {
   private Position getMiddlePoint() {
     Position startPos = this.getPosition();
 
-    Position middlePointPosition = new Position(startPos.getPosX()
-        + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()), startPos.getPosY()
-        + (int) (HALF_SCALE * this.getSize()));
+    Position middlePointPosition = new Position(
+        startPos.getPosX() + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()),
+        startPos.getPosY() + (int) (HALF_SCALE * this.getSize()));
     return middlePointPosition;
   }
 
@@ -183,6 +176,11 @@ public abstract class Fish {
    * 
    * @return a rectangle hitbox.
    */
-  public abstract Rectangle makeHitbox();
+  public Rectangle makeHitbox() {
+    int x = this.getPosition().getPosX();
+    int y = this.getPosition().getPosY();
+    Rectangle r = new Rectangle(x, y, this.getWidthScale() * this.getSize(), this.getSize());
+    return r;
+  }
   
 }

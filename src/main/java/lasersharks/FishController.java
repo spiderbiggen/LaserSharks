@@ -13,6 +13,7 @@ import javafx.scene.shape.Rectangle;
  * @author Youri
  *
  */
+@SuppressWarnings("restriction")
 public class FishController {
   /**
    * Holder for fishdata.
@@ -61,8 +62,8 @@ public class FishController {
    * Update all fish positions.
    */
   private void updatePositions() {
-    this.fishList.removeAll(this.fishList.stream().filter(v -> !v.move())
-        .collect(Collectors.toList()));
+    this.fishList
+        .removeAll(this.fishList.stream().filter(v -> !v.move()).collect(Collectors.toList()));
   }
 
   /**
@@ -97,14 +98,17 @@ public class FishController {
     for (int i = 0; i < fishList.size(); i++) {
       Rectangle fishHitbox = fishList.get(i).makeHitbox();
       if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
-        System.out.println("shark collides with fish");
-        if (fishList.get(i).getSize() < shark.getSize()) {
-          // shark eats fish
-          shark.eat(fishList.get(i));
+        // System.out.println("shark collides with fish");
+        if (!(fishList.get(i) instanceof LaserShark)) {
+          if (fishList.get(i).getSize() < shark.getSize()) {
+            // shark eats fish
+            shark.eat(fishList.get(i));
 
-        } else {
-          // fish eats shark
-          //shark.kill();
+          } else {
+            // fish eats shark
+            shark.kill();
+            System.out.println(shark.getSize() + ":" + fishList.get(i).getSize());
+          }
         }
       }
     }
