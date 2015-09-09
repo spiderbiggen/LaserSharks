@@ -66,14 +66,15 @@ public class UpdatePositionTest {
   /**
    * Test methods for {@link laserSharks.Position#updatePosition(Direction) }.
    */
-  /*
+  
   @Test
   public void testUpdatePosition() {
     System.out.println("Parameterized direction is : " + direction.toString());
-    position.updatePosition(direction);
-    assertEquals(expectedX, position.getPosX());
-    assertEquals(expectedY, position.getPosY());
+    //TODO: fix these tests, as they make now no sense
+ //   position.adjustPos(deltaX, deltaY);
+ //   assertEquals(expectedX, position.getPosX());
+ //   assertEquals(expectedY, position.getPosY());
   }
-  */
+  
 
 }
