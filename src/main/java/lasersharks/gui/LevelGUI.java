@@ -36,7 +36,7 @@ import lasersharks.ScreenController;
  */
 @SuppressWarnings("restriction")
 public class LevelGUI extends Application {
-  
+
   private static final double FRAME_DELAY = 0.06;
   /**
    * the x resolution of the screen.
@@ -62,7 +62,8 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * @param screenController the screenController to set
+   * @param screenController
+   *          the screenController to set
    */
   public void setScreenController(ScreenController screenController) {
     this.screenController = screenController;
@@ -112,7 +113,7 @@ public class LevelGUI extends Application {
     Game g = new Game();
     g.launch(this);
   }
-  
+
   /**
    * Function for start of drawing fish on screen.
    */
@@ -130,9 +131,9 @@ public class LevelGUI extends Application {
    * @return the pane with elements
    */
   public Pane addElements() {
-    BackgroundImage myBI = new BackgroundImage(new Image("background.jpg", XRES, YRES, true, false),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(
+        new Image("background.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
     return pane;
   }
@@ -143,24 +144,18 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-    
-    list.removeAll(
-        list.stream().filter(v -> v instanceof ImageView)
-        .collect(Collectors.toList())
-    );
+
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView).collect(Collectors.toList()));
   }
-  
+
   /**
    * This function removes all the ImageView objects. This is used to remove all the fish images on
    * the screen.
    */
   public void clearPaneOfOldHitboxes() {
     ObservableList<Node> list = pane.getChildren();
-    
-    list.removeAll(
-        list.stream().filter(v -> v instanceof Rectangle)
-        .collect(Collectors.toList())
-    );
+
+    list.removeAll(list.stream().filter(v -> v instanceof Rectangle).collect(Collectors.toList()));
   }
 
   /**
@@ -173,14 +168,16 @@ public class LevelGUI extends Application {
     clearPaneOfImageView();
     clearPaneOfOldHitboxes();
     for (int i = 0; i < list.size(); i++) {
-      this.pane.getChildren().add(fishImage(list.get(i)));
-      Rectangle hitBox = list.get(i).makeHitbox();
-      //hitBox.setOpacity(0);   //comment if you want to see the hitboxes as black boxes
-      this.pane.getChildren().add(hitBox);
+      if (list.get(i).isAlive()) {
+        this.pane.getChildren().add(fishImage(list.get(i)));
+        Rectangle hitBox = list.get(i).makeHitbox();
+        hitBox.setOpacity(0); // comment if you want to see the hitboxes as black boxes
+        this.pane.getChildren().add(hitBox);
+      }
     }
   }
 
-   /**
+  /**
    * an image object of a fish.
    * 
    * @param fish
