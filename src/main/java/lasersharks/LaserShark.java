@@ -1,5 +1,8 @@
 package lasersharks;
 
+import javafx.scene.shape.Rectangle;
+
+
 /**
  * LaserShark class.
  *
@@ -40,9 +43,13 @@ public class LaserShark extends Fish {
 
   }
   
-  public void sharkGetsEaten() {
-    this.kill();
+  public Rectangle makeHitbox() {
+    int x = this.getPosition().getPosX();
+    int y = this.getPosition().getPosY();
+    Rectangle r = new Rectangle(x,y, 2*this.getSize(), this.getSize());
+    return r;
   }
+    
 
   @Override
   public String getImageResource() {

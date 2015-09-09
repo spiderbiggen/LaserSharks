@@ -97,7 +97,7 @@ public class FishController {
         System.out.println("shark collides with fish");
         if (fishList.get(i).getSize() >= shark.getSize()) {
           // fish eats shark
-          shark.sharkGetsEaten();
+          shark.kill();
         } else {
           // shark eats fish
           shark.eat(fishList.get(i));
