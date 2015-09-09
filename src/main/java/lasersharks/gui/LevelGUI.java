@@ -149,6 +149,19 @@ public class LevelGUI extends Application {
         .collect(Collectors.toList())
     );
   }
+  
+  /**
+   * This function removes all the ImageView objects. This is used to remove all the fish images on
+   * the screen.
+   */
+  public void clearPaneOfOldHitboxes() {
+    ObservableList<Node> list = pane.getChildren();
+    
+    list.removeAll(
+        list.stream().filter(v -> v instanceof Rectangle)
+        .collect(Collectors.toList())
+    );
+  }
 
   /**
    * This method displays a list<Fish> on the scene of the gui.
@@ -158,6 +171,7 @@ public class LevelGUI extends Application {
    */
   public void showFishList(List<Fish> list) {
     clearPaneOfImageView();
+    clearPaneOfOldHitboxes();
     for (int i = 0; i < list.size(); i++) {
       this.pane.getChildren().add(fishImage(list.get(i)));
       Rectangle hitBox = list.get(i).makeHitbox();
