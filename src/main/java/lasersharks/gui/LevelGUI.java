@@ -25,6 +25,7 @@ import javafx.util.Duration;
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
+import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -174,6 +175,10 @@ public class LevelGUI extends Application {
    * @return an imageview of the fish.
    */
   public ImageView fishImage(Fish fish) {
+    double widthScale = 1;
+    if(fish instanceof LaserShark) {
+      widthScale = 1.2;
+    }
     Position position = fish.getPosition();
     double size = fish.getSize();
     Direction dir = fish.getDirection();
@@ -185,7 +190,7 @@ public class LevelGUI extends Application {
       image.setScaleX(dir.getDeltaX());
     }
     image.setFitHeight(size);
-    image.setFitWidth(size * 1.2);
+    image.setFitWidth(size * widthScale);
 
     image.setX(position.getPosX());
     image.setY(position.getPosY());
