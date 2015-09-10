@@ -121,7 +121,7 @@ public class FishController {
    *          of Fishes on the board
    * @return the LaserShark
    */
-  private LaserShark getShark(List<Fish> list) {
+  public LaserShark getShark(List<Fish> list) {
     Fish res = null;
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) instanceof LaserShark) {
@@ -130,5 +130,14 @@ public class FishController {
       }
     }
     return (LaserShark) res;
+  }
+  
+  /**
+   * returns the lasershark from the fishlist of the class.
+   * If no LaserShark is present, it returns null.
+   * @return the LaserShark of the fishList and null if there ain't one.
+   */
+  public LaserShark getShark() {
+    return getShark(fishList);
   }
 }
