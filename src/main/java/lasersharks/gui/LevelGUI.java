@@ -132,8 +132,8 @@ public class LevelGUI extends Application {
    * @return the pane with elements
    */
   public Pane addElements() {
-    BackgroundImage myBackground = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES,
-        true, false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
+    BackgroundImage myBackground = new BackgroundImage(new Image("somber sea floor.jpg", XRES,
+        YRES, true, false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
         BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBackground));
     return pane;
@@ -146,7 +146,8 @@ public class LevelGUI extends Application {
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
 
-    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle).collect(Collectors.toList()));
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle)
+        .collect(Collectors.toList()));
   }
 
   /**
@@ -176,8 +177,8 @@ public class LevelGUI extends Application {
    */
   public ImageView fishImage(Fish fish) {
     double widthScale = 1;
-    if(fish instanceof LaserShark) {
-      widthScale = 1.2;
+    if (fish instanceof LaserShark) {
+      widthScale = 1.5;
     }
     Position position = fish.getPosition();
     double size = fish.getSize();
