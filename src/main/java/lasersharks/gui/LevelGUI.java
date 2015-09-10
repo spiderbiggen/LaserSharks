@@ -131,7 +131,7 @@ public class LevelGUI extends Application {
    * @return the pane with elements
    */
   public Pane addElements() {
-    BackgroundImage myBackground = new BackgroundImage(new Image("background.jpg", XRES, YRES,
+    BackgroundImage myBackground = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES,
         true, false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
         BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBackground));
@@ -185,7 +185,7 @@ public class LevelGUI extends Application {
       image.setScaleX(dir.getDeltaX());
     }
     image.setFitHeight(size);
-    image.setFitWidth(fish.getWidthScale() * size);
+    image.setFitWidth(size * 1.2);
 
     image.setX(position.getPosX());
     image.setY(position.getPosY());
