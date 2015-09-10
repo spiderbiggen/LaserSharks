@@ -17,8 +17,7 @@ public class ScreenController {
   private LevelGUI gui;
   private Level level;
   private Scene scene;
-  private Stage stage;
-  private final int GAME_WINNING_SIZE = 50;
+  private static final int GAME_WINNING_SIZE = 50;
 
   /**
    * Constructor.
@@ -46,11 +45,12 @@ public class ScreenController {
 
     //GET SHARK METHOD IS IN MASTER
     //if (this.level.getFishCon().getShark().getSize() > GAME_WINNING_SIZE) {
-     if (false) {
+    
       this.gui.setEndSceneTrue();
       this.gui.chooseScene();
       
-     }
+      
+     //}
 
     return this.level.getNextFrameInfo();
   }

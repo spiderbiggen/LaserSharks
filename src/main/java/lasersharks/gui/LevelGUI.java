@@ -51,7 +51,7 @@ public class LevelGUI extends Application {
    * The background colour of the gui.
    */
   private static final Color BACKCOLOUR = Color.BLUE;
-  private final int TEXT_SCALE_SIZE = 10;
+  private static final int TEXT_SCALE_SIZE = 10;
   private ScreenController screenController;
   private Pane pane;
   private StackPane stackPane;
