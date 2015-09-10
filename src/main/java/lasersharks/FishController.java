@@ -93,7 +93,7 @@ public class FishController {
   public void clearFish() {
     this.fishList.clear();
   }
-  
+
   /**
    * Method to set the value of the fish spawn chance.
    */
@@ -101,5 +101,15 @@ public class FishController {
     FISH_SPAWN_CHANCE = chance;
   }
 
+  public LaserShark getShark() {
+    Fish res = null;
+    for (int i = 0; i < fishList.size(); i++) {
+      if (fishList.get(i) instanceof LaserShark) {
+        res = fishList.get(i);
+        return (LaserShark) res;
+      }
+    }
+    return (LaserShark) res;
+  }
 
 }
