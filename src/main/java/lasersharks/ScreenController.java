@@ -16,7 +16,7 @@ public class ScreenController {
   private LevelGUI gui;
   private Level level;
   private Scene scene;
-  private static final int GAME_WINNING_SIZE = 500;
+  private static final int GAME_WINNING_SIZE = 1000;
 
   /**
    * Constructor.
@@ -36,7 +36,7 @@ public class ScreenController {
   }
 
   /**
-   * Get infor for next frame.
+   * Get information for next frame and checks if the lasershark size is bigger than the winning size.
    * 
    * @return FishInfo
    */
