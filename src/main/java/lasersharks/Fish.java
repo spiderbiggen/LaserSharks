@@ -44,6 +44,14 @@ public abstract class Fish {
   public Position getPosition() {
     return this.position;
   }
+  
+  /**
+   * Sets the position of the fish.
+   * @param position the position to set to.
+   */
+  public void setPosition(Position position) {
+    this.position = position;
+  }
 
   /**
    * Returns the Size of this fish.

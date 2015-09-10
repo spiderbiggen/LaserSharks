@@ -18,12 +18,13 @@ public class FishBotTest extends FishTest {
 
   private Fish generatedFish;
   private final long seed = 123456L;
+  private final long seedWest = 11L;
 
   private final float expectedSize1 = 228;
   private final int expectedSpeed1 = 17;
 
-  private final float expectedSize2 = 171;
-  private final int expectedSpeed2 = 13;
+  private final float expectedSize2 = 115;
+  private final int expectedSpeed2 = 10;
 
   /**
    * Set up which is used before the tests.
@@ -37,28 +38,28 @@ public class FishBotTest extends FishTest {
    * 
    */
   @Test
-  public void testRandomFish() {
+  public void testRandomFish1() {
     Random random = new Random(seed);
     generatedFish = FishBot.generateFish(random);
     System.out.println(generatedFish.toString());
-
-    // assertEquals(generatedFish.getDirection(), Direction.East);
-    // assertEquals(generatedFish.getPosition(), new Position(1920, 481));
-    // assertEquals(generatedFish.getSize(), 10, 0);
-    // assertEquals(generatedFish.getSpeed(), 12, 0);
-    // generatedFish = FishBot.generateFish();
 
     assertEquals(generatedFish.getDirection(), Direction.East);
     assertEquals(generatedFish.getPosition().getPosX(), 0);
     assertEquals(generatedFish.getSize(), expectedSize1, 0);
     assertTrue(generatedFish.getSpeed() == expectedSpeed1);
+  }
+  
+  /**
+   * 
+   */
+  @Test
+  public void testRandomFish2() {
+    Random random = new Random(seedWest);
     generatedFish = FishBot.generateFish(random);
 
     System.out.println(generatedFish.toString());
-    assertEquals(generatedFish.getDirection(), Direction.East);
-    assertEquals(generatedFish.getPosition().getPosX(), 0);
-    // TODO change 1920 to pull from the level class so that it changes depending on the size of the
-    // level
+    assertEquals(generatedFish.getDirection(), Direction.West);
+    assertEquals(generatedFish.getPosition().getPosX(), Position.getWidthPanel());
     assertEquals(generatedFish.getSize(), expectedSize2, 0);
     assertTrue(generatedFish.getSpeed() == expectedSpeed2);
   }
