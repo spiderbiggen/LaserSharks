@@ -1,26 +1,27 @@
 package lasersharks;
 
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
-import javafx.scene.input.KeyCode;
+import static org.mockito.Mockito.when;
+import org.mockito.ArgumentCaptor;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.mockito.ArgumentCaptor;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventType;
+import javafx.scene.input.KeyCode;
 
 /**
  * Class for testion KeyboardController.
