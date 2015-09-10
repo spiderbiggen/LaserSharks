@@ -51,6 +51,7 @@ public class LevelGUI extends Application {
    * The background colour of the gui.
    */
   private static final Color BACKCOLOUR = Color.BLUE;
+  private final int TEXT_SCALE_SIZE = 10;
   private ScreenController screenController;
   private Pane pane;
   private StackPane stackPane;
@@ -59,6 +60,7 @@ public class LevelGUI extends Application {
   private boolean choosePlayScene = true;
   private boolean chooseEndScene = false;
   private Stage stage;
+  private Timeline timeline;
 
   /**
    * @return the screenController
@@ -128,7 +130,7 @@ public class LevelGUI extends Application {
    * Function for start of drawing fish on screen.
    */
   public void startGame() {
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DELAY), ev -> {
+    timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DELAY), ev -> {
       this.showFishList(this.screenController.getNextFrameInfo());
     }));
     
@@ -149,6 +151,8 @@ public class LevelGUI extends Application {
     stackPane = new StackPane();
     Text endGameText = new Text("End game");
     stackPane.getChildren().add(endGameText);
+    endGameText.setScaleX(TEXT_SCALE_SIZE);
+    endGameText.setScaleY(TEXT_SCALE_SIZE);
     Scene escene = new Scene(stackPane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
 
     return escene;
@@ -163,6 +167,9 @@ public class LevelGUI extends Application {
       
     } else if (chooseEndScene) {
       stage.setScene(endScene);
+      timeline.stop();
+      stage.setFullScreen(true);
+      stage.show();
       
     }
   }
