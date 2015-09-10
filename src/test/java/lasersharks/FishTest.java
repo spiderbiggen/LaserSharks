@@ -127,5 +127,33 @@ public abstract class FishTest {
     int newX = fish1.getPosition().getPosX();
     assertEquals(oldX + fish1.getSpeed(), newX);
   }
+  
+  /**
+   * test a fish that is alive and on the screen.
+   */
+  @Test
+  public void testOnScreenTrue() {
+    assertTrue(fish1.isOnScreen());
+  }
+  
+  /**
+   * Tests if a s fish is considered off screen when it is killed.
+   */
+  @Test
+  public void testIsOnScreenFalseDeadFish() {
+    Fish fish1 = this.fish1;
+    fish1.kill();
+    assertFalse(fish1.isOnScreen());
+  }
+  
+  /**
+   * Tests if a fish is considered off screen when it's position is out of bounds.
+   */
+  @Test
+  public void testIsOnScreenFalseOffScreen() {
+    Fish fish1 = this.fish1;
+    fish1.setPosition(posOffScreen);
+    assertFalse(fish1.isOnScreen());
+  }
 
 }
