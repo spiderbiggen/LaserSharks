@@ -212,7 +212,6 @@ public class LevelGUI extends Application {
    */
   public void showFishList(List<Fish> list) {
     clearPaneOfImageView();
-    System.out.println("ShowFishCalled");
     for (int i = 0; i < list.size(); i++) {
       this.pane.getChildren().add(fishImage(list.get(i)));
     }

@@ -16,7 +16,7 @@ public class FishBot extends Fish {
    */
   private static final int SPEED_MODIFIER = 25;
   private static final int BASE_SPEED = 5;
-  private final String imageResource = "FishBot.jpg";
+  private final String imageResource = "FishBotSmall.png";
   private final float widthScale = 1.1f;
 
   /**
