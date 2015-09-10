@@ -20,6 +20,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lasersharks.Direction;
@@ -109,7 +110,6 @@ public class LevelGUI extends Application {
     addElements();
     stage.setScene(scene);
     stage.show();
-
     Game game = new Game();
     game.launch(this);
   }
@@ -145,7 +145,8 @@ public class LevelGUI extends Application {
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
 
-    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle).collect(Collectors.toList()));
+    list.removeAll(list.stream().filter(
+        v -> v instanceof ImageView || v instanceof Rectangle).collect(Collectors.toList()));
   }
 
   /**
@@ -191,5 +192,33 @@ public class LevelGUI extends Application {
     image.setY(position.getPosY());
 
     return image;
+  }
+  
+  /**
+   * calling this method clears the board of fish and show a winning message.
+   */
+  public void showWinningScreen() {
+    clearPaneOfImageView();
+    pane.getChildren().add(textInMiddle("You are now the biggest fish in the sea!"));
+  }
+  
+  /**
+   * calling this method clears the board of fish and show a game over message.
+   */
+  public void showGameOverScreen() {
+    clearPaneOfImageView();
+    pane.getChildren().add(textInMiddle("Game Over!"));
+  }
+  
+  /**
+   * make a message block that is in the middle of our screen.
+   * @param message the message to display.
+   * @return a text object displaying the message in the middle of the screen.
+   */
+  private Text textInMiddle(String message) {
+    Text text = new Text(message);
+    text.setX(Position.middlePosition().getPosX());
+    text.setX(Position.middlePosition().getPosY());
+    return text;
   }
 }

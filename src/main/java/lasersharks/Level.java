@@ -12,6 +12,7 @@ public class Level {
   private static final float START_SIZE = 80.0f;
   private static final int START_SPEED = 40;
   private static final Direction START_DIRECTION = Direction.None;
+  private static final double WINNING_SIZE = 100.0f;
   private LaserShark shark;
   private FishController fishCon;
   private ScreenController screenCon;
@@ -50,9 +51,18 @@ public class Level {
 
   /**
    * Method for getting information for next frame.
+   * Jumps to the winning screen if the size of the shark is higher than WINNING_SIZE.
+   * Jumps to the losing screen if the shark is no more in the list.
    * @return info for next frame
    */
   public List<Fish> getNextFrameInfo() {
+    List<Fish> fishList = fishCon.getNextCycleInformation();
+    LaserShark tempShark = fishCon.getShark(fishList);
+    if (tempShark == null) {
+      screenCon.loseGame();
+    } else if (tempShark.getSize() > WINNING_SIZE) {
+      screenCon.winGame();
+    }
     return this.fishCon.getNextCycleInformation();
   }
 

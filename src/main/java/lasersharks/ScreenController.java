@@ -62,4 +62,19 @@ public class ScreenController {
   public void start() {
     this.gui.startGame();
   }
+  
+  /**
+   * Calling this message will display the loosing screen.
+   */
+  public void loseGame() {
+    System.out.println("lostGame");
+    gui.showGameOverScreen();
+  }
+  
+  /**
+   * Calling this message will display the winning screen.
+   */
+  public void winGame() {
+    gui.showWinningScreen();
+  }
 }
