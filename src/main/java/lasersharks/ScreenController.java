@@ -22,7 +22,7 @@ public class ScreenController {
    * Constructor.
    * 
    * @param level
-   *          the level from witch to recieve data.
+   *          the level from witch to receive data.
    * @param gui
    *          pointer to the active gui.
    */
@@ -36,8 +36,12 @@ public class ScreenController {
   }
 
   /**
+<<<<<<< HEAD
    * Get information for next frame and checks if the shark is bigger than the winning size.
    * 
+=======
+   * Get information for next frame.
+>>>>>>> master
    * @return FishInfo
    */
   public List<Fish> getNextFrameInfo() {

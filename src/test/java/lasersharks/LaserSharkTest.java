@@ -21,7 +21,7 @@ public class LaserSharkTest extends FishTest {
    */
   private LaserShark laserShark;
   private static final int DEFAULT_SHARK_SIZE = 30;
-  private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 50;
+  private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 34;
 
   /**
    * Set up which is used before the tests.
@@ -46,6 +46,20 @@ public class LaserSharkTest extends FishTest {
     assertEquals(laserShark.getSize(), EXPECTED_AFTER_EATING_SHARK_SIZE, 0);
   }
 
+  /**
+   * When the laser sharks eats a fish that is dead, no changes should happen.
+   */
+  @Test
+  public void testLaserSharkGrowsWhenEatingDeadFish() {
+    Fish mockedFish = mock(Fish.class);
+    when(mockedFish.getSize()).thenReturn(size);
+    when(mockedFish.isAlive()).thenReturn(false);
+
+    assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
+    laserShark.eat(mockedFish);
+    assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
+  }
+  
   /**
    * When the lasershark eats a fish, the fish schould be killed.
    */

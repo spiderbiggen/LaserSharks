@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  * Class for controlling fishdata.
  * 
  * @author Youri
  *
  */
+
+@SuppressWarnings("restriction")
 public class FishController {
   /**
    * Holder for fishdata.
@@ -20,7 +24,8 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static float FISH_SPAWN_CHANCE = 0.06258f;
+  private static final float FISH_SPAWN_CHANCE_BASE = 0.06258f;
+  private float fishSpawnChance;
 
   /**
    * Random Number Generator holder.
@@ -33,6 +38,7 @@ public class FishController {
   public FishController() {
     this.fishList = new LinkedList<Fish>();
     this.rng = new Random();
+    fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
   }
 
   /**
@@ -65,7 +71,7 @@ public class FishController {
 
   /**
    * 
-   * @return List of fish and there positions.
+   * @return List of fish and their positions.
    */
   private List<Fish> getNewFishPositions() {
     this.updatePositions();
@@ -80,7 +86,7 @@ public class FishController {
    */
   public List<Fish> getNextCycleInformation() {
     checkForCollisions();
-    if (this.rng.nextFloat() <= FISH_SPAWN_CHANCE) {
+    if (this.rng.nextFloat() <= fishSpawnChance) {
       this.addFish(FishBot.generateFish());
     }
     return this.getNewFishPositions();
@@ -100,7 +106,7 @@ public class FishController {
    * @param chance The int which is used as the new fish spawn chance.
    */
   public void setFishSpawnChance(int chance) {
-    FISH_SPAWN_CHANCE = chance;
+    fishSpawnChance = chance;
   }
 
   /**
@@ -129,17 +135,23 @@ public class FishController {
   private void checkForCollisions() {
     LaserShark shark = getShark(fishList);
     if (shark == null) {
-      return; 
+      return;
     }
-    
+    Rectangle sharkHitbox = shark.makeHitbox();
     for (int i = 0; i < fishList.size(); i++) {
-      if (fishList.get(i).collision(shark)) {
-        if (fishList.get(i).getSize() >= shark.getSize()) {
-          // fish eats shark
-          shark.kill();
-        } else {
-          // shark eats fish
-          shark.eat(fishList.get(i));
+      Rectangle fishHitbox = fishList.get(i).makeHitbox();
+      if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
+        // System.out.println("shark collides with fish");
+        if (!(fishList.get(i) instanceof LaserShark)) {
+          if (fishList.get(i).getSize() < shark.getSize()) {
+            // shark eats fish
+            shark.eat(fishList.get(i));
+
+          } else {
+            // fish eats shark
+            shark.kill();
+            System.out.println(shark.getSize() + ":" + fishList.get(i).getSize());
+          }
         }
       }
     }

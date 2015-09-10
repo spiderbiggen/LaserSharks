@@ -21,8 +21,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
@@ -35,6 +37,7 @@ import lasersharks.ScreenController;
  * @author michiel, daan
  *
  */
+
 @SuppressWarnings("restriction")
 public class LevelGUI extends Application {
 
@@ -48,7 +51,7 @@ public class LevelGUI extends Application {
    */
   private static final double YRES = 1080;
   /**
-   * The background colour of the gui.
+   * The background color of the gui.
    */
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
@@ -63,7 +66,7 @@ public class LevelGUI extends Application {
   private Timeline timeline;
 
   /**
-   * @return the screenController
+   * @return the screenController.
    */
   public ScreenController getScreenController() {
     return screenController;
@@ -71,7 +74,7 @@ public class LevelGUI extends Application {
 
   /**
    * @param screenController
-   *          the screenController to set
+   *          the screenController to set.
    */
   public void setScreenController(ScreenController screenController) {
     this.screenController = screenController;
@@ -98,7 +101,7 @@ public class LevelGUI extends Application {
 
   /**
    * @param args
-   *          parameters to influence the startup of this game
+   *          parameters to influence the startup of this game.
    */
   public static void main(String[] args) {
     launch(args);
@@ -119,11 +122,13 @@ public class LevelGUI extends Application {
 
     this.stage = stage;
     chooseScene();
-    
-    stage.show();
 
-    Game g = new Game();
-    g.launch(this);
+    stage.show();
+    Position.setHeightPanel((int) Math.round(stage.getHeight()));
+    Position.setWidthPanel((int) Math.round(stage.getWidth()));
+
+    Game game = new Game();
+    game.launch(this);
   }
 
   /**
@@ -133,7 +138,7 @@ public class LevelGUI extends Application {
     timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DELAY), ev -> {
       this.showFishList(this.screenController.getNextFrameInfo());
     }));
-    
+
     timeline.setCycleCount(Animation.INDEFINITE);
     timeline.play();
   }
@@ -143,7 +148,7 @@ public class LevelGUI extends Application {
    * 
    * @param stage
    *          the stage the scene is set to.
-   *    
+   * 
    * @return the scene of the end screen
    */
   public Scene makeWinScene(Stage stage) {
@@ -157,20 +162,20 @@ public class LevelGUI extends Application {
 
     return escene;
   }
-  
+
   /**
    * Method to choose which scene is used.
    */
   public void chooseScene() {
     if (choosePlayScene) {
       stage.setScene(playScene);
-      
+
     } else if (chooseWinScene) {
       stage.setScene(winScene);
       timeline.stop();
       stage.setFullScreen(true);
       stage.show();
-      
+
     }
   }
 
@@ -179,9 +184,9 @@ public class LevelGUI extends Application {
    * 
    */
   public void addElements() {
-    BackgroundImage myBI = new BackgroundImage(
-        new Image("background.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(new Image("background.jpg", XRES, YRES, true, false),
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
     stackPane.setBackground(new Background(myBI));
   }
@@ -200,8 +205,8 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-
-    list.removeAll(list.stream().filter(v -> v instanceof ImageView).collect(Collectors.toList()));
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle)
+        .collect(Collectors.toList()));
   }
 
   /**
@@ -213,7 +218,12 @@ public class LevelGUI extends Application {
   public void showFishList(List<Fish> list) {
     clearPaneOfImageView();
     for (int i = 0; i < list.size(); i++) {
-      this.pane.getChildren().add(fishImage(list.get(i)));
+      if (list.get(i).isAlive()) {
+        this.pane.getChildren().add(fishImage(list.get(i)));
+        Rectangle hitBox = list.get(i).makeHitbox();
+        hitBox.setOpacity(0); // comment this line if you want to see the hitboxes as black boxes
+        this.pane.getChildren().add(hitBox);
+      }
     }
   }
 

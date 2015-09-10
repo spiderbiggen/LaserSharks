@@ -75,8 +75,8 @@ public class FishBot extends Fish {
     }
 
     return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * rng.nextFloat())),
-        (int) Math.round(rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE),
-        (int) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
+        (int) Math.round(rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE), (int) Math.round(rng
+            .nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
   }
 
   @Override
