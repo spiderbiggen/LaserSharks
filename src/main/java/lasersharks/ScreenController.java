@@ -11,7 +11,6 @@ import lasersharks.gui.LevelGUI;
  * @author Youri
  *
  */
-@SuppressWarnings("restriction")
 public class ScreenController {
   private LevelGUI gui;
   private Level level;
@@ -36,17 +35,11 @@ public class ScreenController {
   }
 
   /**
-<<<<<<< HEAD
    * Get information for next frame and checks if the shark is bigger than the winning size.
-   * 
-=======
-   * Get information for next frame.
->>>>>>> master
    * @return FishInfo
    */
   public List<Fish> getNextFrameInfo() {
-
-    if (this.level.getFishCon().getShark().getSize() > GAME_WINNING_SIZE) {
+    if (this.level.getShark().getSize() > GAME_WINNING_SIZE) {
       this.gui.setWinSceneTrue();
       this.gui.chooseScene();
     }
