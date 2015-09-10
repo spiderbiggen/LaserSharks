@@ -56,9 +56,9 @@ public class LevelGUI extends Application {
   private Pane pane;
   private StackPane stackPane;
   private Scene playScene;
-  private Scene endScene;
+  private Scene winScene;
   private boolean choosePlayScene = true;
-  private boolean chooseEndScene = false;
+  private boolean chooseWinScene = false;
   private Stage stage;
   private Timeline timeline;
 
@@ -114,7 +114,7 @@ public class LevelGUI extends Application {
     pane = new Pane();
     stage.setFullScreen(true);
     playScene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
-    endScene = makeEndScene(stage);
+    winScene = makeEndScene(stage);
     addElements();
 
     this.stage = stage;
@@ -149,7 +149,7 @@ public class LevelGUI extends Application {
   public Scene makeEndScene(Stage stage) {
 
     stackPane = new StackPane();
-    Text endGameText = new Text("End game");
+    Text endGameText = new Text("You won!");
     stackPane.getChildren().add(endGameText);
     endGameText.setScaleX(TEXT_SCALE_SIZE);
     endGameText.setScaleY(TEXT_SCALE_SIZE);
@@ -165,8 +165,8 @@ public class LevelGUI extends Application {
     if (choosePlayScene) {
       stage.setScene(playScene);
       
-    } else if (chooseEndScene) {
-      stage.setScene(endScene);
+    } else if (chooseWinScene) {
+      stage.setScene(winScene);
       timeline.stop();
       stage.setFullScreen(true);
       stage.show();
@@ -189,8 +189,8 @@ public class LevelGUI extends Application {
   /**
    * This method set the end scene true and the playscene false.
    */
-  public void setEndSceneTrue() {
-    chooseEndScene = true;
+  public void setWinSceneTrue() {
+    chooseWinScene = true;
     choosePlayScene = false;
   }
 

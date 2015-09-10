@@ -46,7 +46,7 @@ public class ScreenController {
     //GET SHARK METHOD IS IN MASTER
     //if (this.level.getFishCon().getShark().getSize() > GAME_WINNING_SIZE) {
     
-      this.gui.setEndSceneTrue();
+      this.gui.setWinSceneTrue();
       this.gui.chooseScene();
       
       
