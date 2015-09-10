@@ -7,6 +7,7 @@ package lasersharks;
 public class LaserShark extends Fish {
 
   private static final float ENERGY_DISSERPATION_RATE = 7.5f;
+  private static final float HALF_RATE = 0.5F;
   private final String imageResource = "LaserShark.gif";
   private final float widthScale = 2.0f;
 
@@ -41,13 +42,23 @@ public class LaserShark extends Fish {
   }
 
   @Override
+  public boolean move() {
+    super.move();
+    //this will make sure the fish stay within both
+    
+    this.getPosition().clipPosition(
+        (int) (this.getSize() * this.getWidthScale() * HALF_RATE),
+        (int) (this.getSize() * HALF_RATE));
+    return true;
+  }
+
+  @Override
   public String getImageResource() {
-    // TODO Auto-generated method stub
     return imageResource;
   }
 
   @Override
   public double getWidthScale() {
     return widthScale;
-  }  
+  }
 }
