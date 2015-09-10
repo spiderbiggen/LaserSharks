@@ -1,5 +1,7 @@
 package lasersharks;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  * Abstract class for Floating creatures of the great blue.
  * 
@@ -63,7 +65,7 @@ public abstract class Fish {
   }
 
   /**
-   * @return the speed
+   * @return the speed.
    */
   public int getSpeed() {
     return speed;
@@ -71,14 +73,14 @@ public abstract class Fish {
 
   /**
    * @param speed
-   *          the speed to set
+   *          the speed to set.
    */
   public void setSpeed(int speed) {
     this.speed = speed;
   }
 
   /**
-   * @return the direction
+   * @return the direction.
    */
   public Direction getDirection() {
     return direction;
@@ -86,7 +88,7 @@ public abstract class Fish {
 
   /**
    * @param direction
-   *          the direction to set
+   *          the direction to set.
    */
   public void setDirection(Direction direction) {
     this.direction = direction;
@@ -117,9 +119,9 @@ public abstract class Fish {
   private Position getMiddlePoint() {
     Position startPos = this.getPosition();
 
-    Position middlePointPosition = new Position(
-        startPos.getPosX() + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()),
-        startPos.getPosY() + (int) (HALF_SCALE * this.getSize()));
+    Position middlePointPosition = new Position(startPos.getPosX()
+        + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()), startPos.getPosY()
+        + (int) (HALF_SCALE * this.getSize()));
     return middlePointPosition;
   }
 
@@ -167,5 +169,18 @@ public abstract class Fish {
    * @return the aspect ratio
    */
   public abstract double getWidthScale();
+
+  /**
+   * Draw a rectangle shaped hitbox around the fishbot.
+   * 
+   * @return a rectangle hitbox.
+   */
+  public Rectangle makeHitbox() {
+    int xcoordinate = this.getPosition().getPosX();
+    int ycoordinate = this.getPosition().getPosY();
+    Rectangle rekt = new Rectangle(xcoordinate, ycoordinate, this.getWidthScale() * this.getSize(),
+        this.getSize());
+    return rekt;
+  }
 
 }

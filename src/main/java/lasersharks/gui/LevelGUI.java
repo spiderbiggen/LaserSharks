@@ -19,6 +19,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lasersharks.Direction;
@@ -33,9 +34,9 @@ import lasersharks.ScreenController;
  * @author michiel, daan
  *
  */
-@SuppressWarnings("restriction")
+
 public class LevelGUI extends Application {
-  
+
   private static final double FRAME_DELAY = 0.06;
   /**
    * the x resolution of the screen.
@@ -46,7 +47,7 @@ public class LevelGUI extends Application {
    */
   private static final double YRES = 1080;
   /**
-   * The background colour of the gui.
+   * The background color of the gui.
    */
   private static final Color BACKCOLOUR = Color.BLUE;
   private ScreenController screenController;
@@ -54,14 +55,15 @@ public class LevelGUI extends Application {
   private Scene scene;
 
   /**
-   * @return the screenController
+   * @return the screenController.
    */
   public ScreenController getScreenController() {
     return screenController;
   }
 
   /**
-   * @param screenController the screenController to set
+   * @param screenController
+   *          the screenController to set.
    */
   public void setScreenController(ScreenController screenController) {
     this.screenController = screenController;
@@ -88,7 +90,7 @@ public class LevelGUI extends Application {
 
   /**
    * @param args
-   *          parameters to influence the startup of this game
+   *          parameters to influence the startup of this game.
    */
   public static void main(String[] args) {
     launch(args);
@@ -108,10 +110,10 @@ public class LevelGUI extends Application {
     stage.setScene(scene);
     stage.show();
 
-    Game g = new Game();
-    g.launch(this);
+    Game game = new Game();
+    game.launch(this);
   }
-  
+
   /**
    * Function for start of drawing fish on screen.
    */
@@ -129,10 +131,10 @@ public class LevelGUI extends Application {
    * @return the pane with elements
    */
   public Pane addElements() {
-    BackgroundImage myBI = new BackgroundImage(new Image("background.jpg", XRES, YRES, true, false),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
-    pane.setBackground(new Background(myBI));
+    BackgroundImage myBackground = new BackgroundImage(new Image("background.jpg", XRES, YRES,
+        true, false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
+        BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    pane.setBackground(new Background(myBackground));
     return pane;
   }
 
@@ -142,11 +144,8 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-    
-    list.removeAll(
-        list.stream().filter(v -> v instanceof ImageView)
-        .collect(Collectors.toList())
-    );
+
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle).collect(Collectors.toList()));
   }
 
   /**
@@ -158,7 +157,12 @@ public class LevelGUI extends Application {
   public void showFishList(List<Fish> list) {
     clearPaneOfImageView();
     for (int i = 0; i < list.size(); i++) {
-      this.pane.getChildren().add(fishImage(list.get(i)));
+      if (list.get(i).isAlive()) {
+        this.pane.getChildren().add(fishImage(list.get(i)));
+        Rectangle hitBox = list.get(i).makeHitbox();
+        hitBox.setOpacity(0); // comment this line if you want to see the hitboxes as black boxes
+        this.pane.getChildren().add(hitBox);
+      }
     }
   }
 

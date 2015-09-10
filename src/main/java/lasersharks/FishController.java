@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  * Class for controlling fishdata.
  * 
  * @author Youri
  *
  */
+
 public class FishController {
   /**
    * Holder for fishdata.
@@ -65,7 +68,7 @@ public class FishController {
 
   /**
    * 
-   * @return List of fish and there positions.
+   * @return List of fish and their positions.
    */
   private List<Fish> getNewFishPositions() {
     this.updatePositions();
@@ -85,26 +88,27 @@ public class FishController {
     }
     return this.getNewFishPositions();
   }
-  
-  /**
-   * this function checks if there are any collisions between the shark and other fish.
-   * if so, this function checks if the size of the fish is smaller or bigger than the shark.
-   * If smaller, the fish is eaten by the shark. If bigger, the game ends.
-   */
+
   private void checkForCollisions() {
     LaserShark shark = getShark(fishList);
     if (shark == null) {
-      return; 
+      return;
     }
-    
+    Rectangle sharkHitbox = shark.makeHitbox();
     for (int i = 0; i < fishList.size(); i++) {
-      if (fishList.get(i).collision(shark)) {
-        if (fishList.get(i).getSize() >= shark.getSize()) {
-          // fish eats shark
-          shark.kill();
-        } else {
-          // shark eats fish
-          shark.eat(fishList.get(i));
+      Rectangle fishHitbox = fishList.get(i).makeHitbox();
+      if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
+        // System.out.println("shark collides with fish");
+        if (!(fishList.get(i) instanceof LaserShark)) {
+          if (fishList.get(i).getSize() < shark.getSize()) {
+            // shark eats fish
+            shark.eat(fishList.get(i));
+
+          } else {
+            // fish eats shark
+            shark.kill();
+            System.out.println(shark.getSize() + ":" + fishList.get(i).getSize());
+          }
         }
       }
     }
