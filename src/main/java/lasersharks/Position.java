@@ -14,8 +14,8 @@ public class Position {
    * screen. TODO: when the gui is added, replace these static variables by getting the resolution
    * of the panel.
    */
-  private static final int HEIGHT = 1080;
-  private static final int WIDTH = 1920;
+  private static int HEIGHT = 1080;
+  private static int WIDTH = 1920;
 
   /**
    * 
@@ -41,6 +41,22 @@ public class Position {
    */
   public static int getWidthPanel() {
     return WIDTH;
+  }
+  
+  /**
+   * sets the height of the panel.
+   * @param newHeight the new height of the panel to set.
+   */
+  public static void setHeightPanel(int newHeight) {
+    HEIGHT = newHeight;
+  }
+  
+  /**
+   * sets the width of the panel.
+   * @param newWidth the new width of the panel to set.
+   */
+  public static void setWidthPanel(int newWidth) {
+    WIDTH = newWidth;
   }
 
   /**
@@ -132,15 +148,6 @@ public class Position {
   public float calculateDistance(Position other) {
     return (float) Math.sqrt((Math.pow(other.getPosX() - posX, 2))
         + Math.pow(other.getPosY() - posX, 2));
-  }
-
-  /**
-   * This boolean checks if the position is on the screen.
-   * 
-   * @return true if the position is on the screen.
-   */
-  public final boolean onScreen() {
-    return onScreen(0);
   }
   
   /**

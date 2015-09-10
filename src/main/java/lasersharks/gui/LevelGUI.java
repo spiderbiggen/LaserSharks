@@ -107,6 +107,8 @@ public class LevelGUI extends Application {
     addElements();
     stage.setScene(scene);
     stage.show();
+    Position.setHeightPanel((int) Math.round(stage.getHeight()));
+    Position.setWidthPanel((int) Math.round(stage.getWidth()));
 
     Game g = new Game();
     g.launch(this);
