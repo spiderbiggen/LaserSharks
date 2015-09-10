@@ -9,7 +9,7 @@ import lasersharks.gui.LevelGUI;
  */
 public class Game {
   
-  Level level;
+  private Level level;
   
   /**
    * Launch game.

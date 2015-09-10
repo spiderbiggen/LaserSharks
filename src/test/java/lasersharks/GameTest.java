@@ -1,7 +1,6 @@
 package lasersharks;
 
 import static org.junit.Assert.assertEquals;
-import lasersharks.gui.LevelGUI;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,29 +12,28 @@ import org.mockito.Mockito;
  */
 public class GameTest {
 
-  Game game;
-  Level level;
-  LevelGUI gui;
+  private Game game;
+  private Level level;
   
-  private final int SCORE = 10;
+  private final int score = 10;
   
   /**
-   * Set up the game
+   * Set up the game.
    */
   @Before
   public void setUp() {
     game = new Game();
     level = Mockito.mock(Level.class);
-    gui = Mockito.mock(LevelGUI.class);    
     game.setLevel(level);
-    Mockito.when(level.getScore()).thenReturn(SCORE);
+    Mockito.when(level.getScore()).thenReturn(score);
   }
   
   /**
-   * Test the getter
+   * Test the getter.
    */
+  @Test
   public void testGetLevel() {
-    assertEquals(SCORE, game.getLevel().getScore(), 0);
+    assertEquals(score, game.getLevel().getScore(), 0);
   }
   
 }
