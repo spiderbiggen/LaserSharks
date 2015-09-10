@@ -114,7 +114,7 @@ public class LevelGUI extends Application {
     pane = new Pane();
     stage.setFullScreen(true);
     playScene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
-    winScene = makeEndScene(stage);
+    winScene = makeWinScene(stage);
     addElements();
 
     this.stage = stage;
@@ -146,13 +146,13 @@ public class LevelGUI extends Application {
    *    
    * @return the scene of the end screen
    */
-  public Scene makeEndScene(Stage stage) {
+  public Scene makeWinScene(Stage stage) {
 
     stackPane = new StackPane();
-    Text endGameText = new Text("You won!");
-    stackPane.getChildren().add(endGameText);
-    endGameText.setScaleX(TEXT_SCALE_SIZE);
-    endGameText.setScaleY(TEXT_SCALE_SIZE);
+    Text winGameText = new Text("You won!");
+    stackPane.getChildren().add(winGameText);
+    winGameText.setScaleX(TEXT_SCALE_SIZE);
+    winGameText.setScaleY(TEXT_SCALE_SIZE);
     Scene escene = new Scene(stackPane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
 
     return escene;
