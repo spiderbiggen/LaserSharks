@@ -96,11 +96,18 @@ public class FishController {
 
   /**
    * Method to set the value of the fish spawn chance.
+   * 
+   * @param chance The int which is used as the new fish spawn chance.
    */
   public void setFishSpawnChance(int chance) {
     FISH_SPAWN_CHANCE = chance;
   }
 
+  /**
+   * Method to get the lasershark out of the fishlist.
+   * 
+   * @return the lasershark
+   */
   public LaserShark getShark() {
     Fish res = null;
     for (int i = 0; i < fishList.size(); i++) {
