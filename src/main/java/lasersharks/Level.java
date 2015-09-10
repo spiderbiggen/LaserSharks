@@ -75,7 +75,7 @@ public class Level {
    * @return the shark
    */
   public LaserShark getShark() {
-    return shark;
+    return fishCon.getShark();
   }
 
   /**

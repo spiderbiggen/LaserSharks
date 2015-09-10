@@ -38,7 +38,6 @@ import lasersharks.ScreenController;
  *
  */
 
-@SuppressWarnings("restriction")
 public class LevelGUI extends Application {
 
   private static final double FRAME_DELAY = 0.06;

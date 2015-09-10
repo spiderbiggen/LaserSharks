@@ -36,12 +36,9 @@ public class ScreenController {
 
   /**
    * Get information for next frame and checks if the shark is bigger than the winning size.
-   * 
-   * Get information for next frame.
    * @return FishInfo
    */
   public List<Fish> getNextFrameInfo() {
-
     if (this.level.getShark().getSize() > GAME_WINNING_SIZE) {
       this.gui.setWinSceneTrue();
       this.gui.chooseScene();
