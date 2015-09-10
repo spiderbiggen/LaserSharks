@@ -12,20 +12,20 @@ public class FishBot extends Fish {
 
   /**
    * This value is used to modify the speed of the fishes that are generated. The generated speed is
-   * equal to SpeedModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
+   * equal to SPEED_MODIFIER * RandomNumber + BASE_SPEED, where RandomNumber is a random float between 0.0 and 1.0.
    */
-  private static final int SPEED_MODIFIER = 25;
+  private static final int SPEED_MODIFIER = 30;
   private static final int BASE_SPEED = 5;
   private final String imageResource = "FishBotSmall.png";
   private final float widthScale = 1.1f;
 
   /**
    * This value is used to modify the size of the fishes that are generated. The generated speed is
-   * equal to SizeModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
+   * equal to SIZE_MODIFIER * RandomNumber + BASE_SIZE, where RandomNumber is a random float between 0.0 and 1.0
    */
 
-  private static final int SIZE_MODIFIER = 200;
-  private static final int BASE_SIZE = 30;
+  private static final int SIZE_MODIFIER = 300;
+  private static final int BASE_SIZE = 10;
 
   /**
    * Constructor class for FishBot.

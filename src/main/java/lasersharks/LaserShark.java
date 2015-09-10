@@ -6,7 +6,7 @@ package lasersharks;
  */
 public class LaserShark extends Fish {
 
-  private static final float ENERGY_DISSERPATION_RATE = 7.5f;
+  private static final float ENERGY_DISSERPATION_RATE = 13.5f;
   private final String imageResource = "LaserShark.gif";
   private final float widthScale = 2.0f;
 
