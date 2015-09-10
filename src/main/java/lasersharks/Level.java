@@ -18,7 +18,6 @@ public class Level {
   private ScreenController screenCon;
   private KeyboardController keyboardCon;
   private Game game;
-  
   private int score;
   
   /**

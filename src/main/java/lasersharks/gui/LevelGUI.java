@@ -54,6 +54,7 @@ public class LevelGUI extends Application {
   private ScreenController screenController;
   private Pane pane;
   private Scene scene;
+  private Stage stage;
 
   /**
    * @return the screenController.
@@ -105,6 +106,7 @@ public class LevelGUI extends Application {
    */
   public void start(Stage stage) {
     pane = new Pane();
+    this.stage = stage;
     stage.setFullScreen(true);
     scene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
     addElements();
@@ -206,6 +208,8 @@ public class LevelGUI extends Application {
    * calling this method clears the board of fish and show a game over message.
    */
   public void showGameOverScreen() {
+    System.out.println("gui says game lost.");
+    stage.close();
     clearPaneOfImageView();
     pane.getChildren().add(textInMiddle("Game Over!"));
   }
