@@ -49,5 +49,5 @@ public class LaserShark extends Fish {
   @Override
   public double getWidthScale() {
     return widthScale;
-  }
+  }  
 }
