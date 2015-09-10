@@ -16,6 +16,7 @@ public class ScreenController {
   private LevelGUI gui;
   private Level level;
   private Scene scene;
+  private static final int GAME_WINNING_SIZE = 1000;
 
   /**
    * Constructor.
@@ -31,32 +32,45 @@ public class ScreenController {
     this.gui = gui;
     this.gui.setScreenController(this);
     this.scene = gui.getScene();
+
   }
-  
+
   /**
+<<<<<<< HEAD
+   * Get information for next frame and checks if the shark is bigger than the winning size.
+   * 
+=======
    * Get information for next frame.
+>>>>>>> master
    * @return FishInfo
    */
   public List<Fish> getNextFrameInfo() {
+
+    if (this.level.getFishCon().getShark().getSize() > GAME_WINNING_SIZE) {
+      this.gui.setWinSceneTrue();
+      this.gui.chooseScene();
+    }
     return this.level.getNextFrameInfo();
   }
 
   /**
    * get the scene from the gui.
+   * 
    * @return the scene from the gui
    */
   public Scene getScene() {
     return this.scene;
   }
-  
+
   /**
    * Returns the static LevelGUI.
+   * 
    * @return the gui
    */
   public LevelGUI getGui() {
     return gui;
   }
-  
+
   /**
    * Propagation function for starting the game.
    */

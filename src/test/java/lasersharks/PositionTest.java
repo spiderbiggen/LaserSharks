@@ -130,13 +130,24 @@ public class PositionTest {
    * Test method for {@link lasersharks.Position#equals(java.lang.Object)}.
    */
   @Test
-  public void testEqualsObjectFalse() {
-    Position testPosition = new Position(1, 0);
-    assertFalse(position.equals(testPosition));
-    testPosition = new Position(0, 1);
-    assertFalse(position.equals(testPosition));
-    testPosition = new Position(1, 1);
-    assertFalse(position.equals(testPosition));
+  public void testEqualsObjectFalse1() {
+    assertFalse(position.equals(new Position(1, 0)));
+  }
+  
+  /**
+   * Test method for {@link lasersharks.Position#equals(java.lang.Object)}.
+   */
+  @Test
+  public void testEqualsObjectFalse2() {
+    assertFalse(position.equals(new Position(0, 1)));
+  }
+  
+  /**
+   * Test method for {@link lasersharks.Position#equals(java.lang.Object)}.
+   */
+  @Test
+  public void testEqualsObjectFalse3() {
+    assertFalse(position.equals(new Position(1, 1)));
   }
 
   /**
@@ -149,5 +160,4 @@ public class PositionTest {
     testPosition = new Position(1, 1);
     assertTrue(position.hashCode() != testPosition.hashCode());
   }
-
 }
