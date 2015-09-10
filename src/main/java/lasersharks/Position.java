@@ -30,9 +30,9 @@ public class Position {
   public Position(int posX, int posY) {
     this.posX = posX;
     this.posY = posY;
-  
-    //TODO: fix this Findbugs warning by moving the screensize out of Position
-    height = START_HEIGHT; 
+
+    // TODO: fix this Findbugs warning by moving the screensize out of Position
+    height = START_HEIGHT;
     width = START_WIDTH;
   }
 
@@ -176,6 +176,19 @@ public class Position {
     return (posX + xMargin >= 0 && posX <= width + xMargin && posY >= 0 && posY <= height);
   }
 
+  /**
+   * Will make sure the position is within the the given boundaries.
+   * 
+   * @param xMargin
+   *          how far something can go outside of the screen on the x axis
+   * @param yMargin
+   *          how far something can go outside of the screen on the y axis
+   */
+  public void clipPosition(int xMargin, int yMargin) {
+    this.posX = (int) Math.min(Math.max(0 - xMargin, this.posX), width + xMargin);
+    this.posY = (int) Math.min(Math.max(0 - yMargin, this.posY), width + yMargin);
+  }
+
   @Override
   public String toString() {
     return "Position [posX=" + posX + ", posY=" + posY + "]";
@@ -214,4 +227,5 @@ public class Position {
   public static Position middlePosition() {
     return new Position((int) Math.round(width / 2.0), (int) Math.round(height / 2.0));
   }
+
 }
