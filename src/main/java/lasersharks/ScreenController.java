@@ -3,7 +3,6 @@ package lasersharks;
 import java.util.List;
 
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import lasersharks.gui.LevelGUI;
 
 /**
