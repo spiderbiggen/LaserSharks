@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lasersharks.Direction;
 import lasersharks.Fish;
-import lasersharks.FishController;
 import lasersharks.Game;
 import lasersharks.Position;
 import lasersharks.ScreenController;
@@ -142,6 +141,8 @@ public class LevelGUI extends Application {
    * 
    * @param stage
    *          the stage the scene is set to.
+   *    
+   * @return the scene of the end screen
    */
   public Scene makeEndScene(Stage stage) {
 
@@ -156,7 +157,7 @@ public class LevelGUI extends Application {
   /**
    * Method to choose which scene is used.
    */
-  public void chooseScene(){
+  public void chooseScene() {
     if (choosePlayScene) {
       stage.setScene(playScene);
       
@@ -169,7 +170,6 @@ public class LevelGUI extends Application {
   /**
    * Add some key elements to the pane. This includes: Background.
    * 
-   * @return the pane with elements
    */
   public void addElements() {
     BackgroundImage myBI = new BackgroundImage(
