@@ -18,10 +18,13 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
@@ -35,6 +38,7 @@ import lasersharks.ScreenController;
  *
  */
 
+@SuppressWarnings("restriction")
 public class LevelGUI extends Application {
 
   private static final double FRAME_DELAY = 0.06;
@@ -50,9 +54,16 @@ public class LevelGUI extends Application {
    * The background color of the gui.
    */
   private static final Color BACKCOLOUR = Color.BLUE;
+  private static final int TEXT_SCALE_SIZE = 10;
   private ScreenController screenController;
   private Pane pane;
-  private Scene scene;
+  private StackPane stackPane;
+  private Scene playScene;
+  private Scene winScene;
+  private boolean choosePlayScene = true;
+  private boolean chooseWinScene = false;
+  private Stage stage;
+  private Timeline timeline;
 
   /**
    * @return the screenController.
@@ -75,7 +86,7 @@ public class LevelGUI extends Application {
    * @return the scene
    */
   public Scene getScene() {
-    return scene;
+    return playScene;
   }
 
   /**
@@ -85,7 +96,7 @@ public class LevelGUI extends Application {
    *          the scene
    */
   public void setScene(Scene scene) {
-    this.scene = scene;
+    this.playScene = scene;
   }
 
   /**
@@ -105,9 +116,13 @@ public class LevelGUI extends Application {
   public void start(Stage stage) {
     pane = new Pane();
     stage.setFullScreen(true);
-    scene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
+    playScene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
+    winScene = makeWinScene(stage);
     addElements();
-    stage.setScene(scene);
+
+    this.stage = stage;
+    chooseScene();
+
     stage.show();
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
@@ -120,24 +135,68 @@ public class LevelGUI extends Application {
    * Function for start of drawing fish on screen.
    */
   public void startGame() {
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DELAY), ev -> {
+    timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DELAY), ev -> {
       this.showFishList(this.screenController.getNextFrameInfo());
     }));
+
     timeline.setCycleCount(Animation.INDEFINITE);
     timeline.play();
   }
 
   /**
-   * Add some key elements to the pane. This includes: Background
+   * This function makes an end screen.
    * 
-   * @return the pane with elements
+   * @param stage
+   *          the stage the scene is set to.
+   * 
+   * @return the scene of the end screen
    */
-  public Pane addElements() {
-    BackgroundImage myBackground = new BackgroundImage(new Image("background.jpg", XRES, YRES,
-        true, false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
-        BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-    pane.setBackground(new Background(myBackground));
-    return pane;
+  public Scene makeWinScene(Stage stage) {
+
+    stackPane = new StackPane();
+    Text winGameText = new Text("You won!");
+    stackPane.getChildren().add(winGameText);
+    winGameText.setScaleX(TEXT_SCALE_SIZE);
+    winGameText.setScaleY(TEXT_SCALE_SIZE);
+    Scene escene = new Scene(stackPane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
+
+    return escene;
+  }
+
+  /**
+   * Method to choose which scene is used.
+   */
+  public void chooseScene() {
+    if (choosePlayScene) {
+      stage.setScene(playScene);
+
+    } else if (chooseWinScene) {
+      stage.setScene(winScene);
+      timeline.stop();
+      stage.setFullScreen(true);
+      stage.show();
+
+    }
+  }
+
+  /**
+   * Add some key elements to the pane. This includes: Background.
+   * 
+   */
+  public void addElements() {
+    BackgroundImage myBI = new BackgroundImage(new Image("background.jpg", XRES, YRES, true, false),
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
+    pane.setBackground(new Background(myBI));
+    stackPane.setBackground(new Background(myBI));
+  }
+
+  /**
+   * This method set the end scene true and the playscene false.
+   */
+  public void setWinSceneTrue() {
+    chooseWinScene = true;
+    choosePlayScene = false;
   }
 
   /**
@@ -146,8 +205,8 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-
-    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle).collect(Collectors.toList()));
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle)
+        .collect(Collectors.toList()));
   }
 
   /**
