@@ -25,7 +25,7 @@ public class GameTest {
     game = new Game();
     level = Mockito.mock(Level.class);
     game.setLevel(level);
-    Mockito.when(level.getScore()).thenReturn(score);
+    Mockito.when(level.getGame()).thenReturn(game);
   }
   
   /**
@@ -33,7 +33,7 @@ public class GameTest {
    */
   @Test
   public void testGetLevel() {
-    assertEquals(score, game.getLevel().getScore(), 0);
+    assertEquals(game, game.getLevel().getGame());
   }
   
 }
