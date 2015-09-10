@@ -36,7 +36,7 @@ public class ScreenController {
   }
 
   /**
-   * Get information for next frame and checks if the lasershark size is bigger than the winning size.
+   * Get information for next frame and checks if the shark is bigger than the winning size.
    * 
    * @return FishInfo
    */
