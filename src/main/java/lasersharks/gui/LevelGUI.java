@@ -59,8 +59,10 @@ public class LevelGUI extends Application {
   private StackPane stackPane;
   private Scene playScene;
   private Scene winScene;
+  private Scene loseScene;
   private boolean choosePlayScene = true;
   private boolean chooseWinScene = false;
+  private boolean chooseLoseScene = false;
   private Stage stage;
   private Timeline timeline;
 
@@ -116,7 +118,8 @@ public class LevelGUI extends Application {
     pane = new Pane();
     stage.setFullScreen(true);
     playScene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
-    winScene = makeWinScene(stage);
+    winScene = makeMessageScene(stage, "You won!");
+    loseScene = makeMessageScene(stage, "Game Over!");
     addElements();
 
     this.stage = stage;
@@ -143,17 +146,19 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * This function makes an end screen.
+   * This function makes a scene with a message to display
    * 
    * @param stage
    *          the stage the scene is set to.
+   * @param message
+   *          the message to display
    * 
    * @return the scene of the end screen
    */
-  public Scene makeWinScene(Stage stage) {
+  public Scene makeMessageScene(Stage stage, String message) {
 
     stackPane = new StackPane();
-    Text winGameText = new Text("You won!");
+    Text winGameText = new Text(message);
     stackPane.getChildren().add(winGameText);
     winGameText.setScaleX(TEXT_SCALE_SIZE);
     winGameText.setScaleY(TEXT_SCALE_SIZE);
@@ -175,6 +180,11 @@ public class LevelGUI extends Application {
       stage.setFullScreen(true);
       stage.show();
 
+    } else if (chooseLoseScene) {
+      stage.setScene(loseScene);
+      timeline.stop();
+      stage.setFullScreen(true);
+      stage.show();
     }
   }
 
@@ -196,6 +206,16 @@ public class LevelGUI extends Application {
   public void setWinSceneTrue() {
     chooseWinScene = true;
     choosePlayScene = false;
+    chooseLoseScene = false;
+  }
+  
+  /**
+   * This method sets only the lose scene true.
+   */
+  public void setLoseSceneTrue() {
+    chooseWinScene = false;
+    choosePlayScene = false;
+    chooseLoseScene = true;
   }
 
   /**
