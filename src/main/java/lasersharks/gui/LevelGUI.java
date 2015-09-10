@@ -34,7 +34,7 @@ import lasersharks.ScreenController;
  * @author michiel, daan
  *
  */
-
+@SuppressWarnings("restriction")
 public class LevelGUI extends Application {
 
   private static final double FRAME_DELAY = 0.06;
@@ -145,7 +145,13 @@ public class LevelGUI extends Application {
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
 
-    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle).collect(Collectors.toList()));
+    list.removeAll(
+        list.stream()
+        .filter(v -> 
+          v instanceof ImageView 
+          || v instanceof Rectangle
+        ).collect(Collectors.toList())
+    );
   }
 
   /**

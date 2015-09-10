@@ -7,6 +7,7 @@ import javafx.scene.shape.Rectangle;
  * 
  * @author Youri
  */
+@SuppressWarnings("restriction")
 public abstract class Fish {
 
   private Position position;

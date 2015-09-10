@@ -11,6 +11,7 @@ import lasersharks.gui.LevelGUI;
  * @author Youri
  *
  */
+@SuppressWarnings("restriction")
 public class ScreenController {
   private LevelGUI gui;
   private Level level;
