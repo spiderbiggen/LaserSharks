@@ -14,7 +14,6 @@ import javafx.scene.shape.Rectangle;
  *
  */
 
-@SuppressWarnings("restriction")
 public class FishController {
   /**
    * Holder for fishdata.

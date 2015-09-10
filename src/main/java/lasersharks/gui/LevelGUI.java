@@ -204,8 +204,13 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle)
-        .collect(Collectors.toList()));
+    list.removeAll(
+        list.stream()
+        .filter(v -> 
+          v instanceof ImageView 
+          || v instanceof Rectangle
+        ).collect(Collectors.toList())
+    );
   }
 
   /**
