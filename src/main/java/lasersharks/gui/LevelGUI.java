@@ -133,13 +133,13 @@ public class LevelGUI extends Application {
     winPane.setOpacity(0.0);
     losePane = showMessageScene("Game Over!");
     losePane.setOpacity(0.0);
-    
+
     stackPane.getChildren().add(pane);
     stackPane.getChildren().add(winPane);
     stackPane.getChildren().add(losePane);
-    
+
     playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
-    
+
     this.stage = stage;
     chooseScene();
 
@@ -205,7 +205,7 @@ public class LevelGUI extends Application {
       animation.stop();
       pane.setOpacity(0.0);
       losePane.setOpacity(1.0);
-      
+
     }
   }
 
@@ -213,6 +213,7 @@ public class LevelGUI extends Application {
    * Add some key elements to the pane. This includes: Background.
    * 
    * @param pane
+   *          the pane to add elements to
    * 
    */
   public void addElements(Pane pane) {
