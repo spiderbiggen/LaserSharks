@@ -74,8 +74,6 @@ public class LevelGUI extends Application {
 
   private long time = 0;
   private final double timeToMilis = 1_000_000;
-  private Text fps = new Text();
-  private DecimalFormat df = new DecimalFormat("#.00");
 
   /**
    * @return the screenController.
@@ -143,12 +141,6 @@ public class LevelGUI extends Application {
     Game game = new Game();
     game.launch(this);
     startMusic(MUSIC_FILENAME);
-
-    final int textsize = 20;
-    fps.setX(textsize);
-    fps.setY(textsize);
-    fps.setFont(new Font(textsize));
-    fps.setFill(Color.WHITESMOKE);
   }
 
   /**
@@ -161,13 +153,8 @@ public class LevelGUI extends Application {
       public void handle(long now) {
         double frametime = (now - time) / timeToMilis;
         final double milis = 1000;
-        pane.getChildren().remove(fps);
-        fps.setText("frametime: " + frametime + System.lineSeparator() + "fps: "
-            + df.format(milis / frametime) + System.lineSeparator());
-
         showFishList(screenController.getNextFrameInfo(milis / frametime));
         showShark(screenController.getShark());
-        pane.getChildren().add(fps);
         time = now;
       }
 
