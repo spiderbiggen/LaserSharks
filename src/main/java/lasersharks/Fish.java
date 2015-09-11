@@ -7,6 +7,7 @@ import javafx.scene.shape.Rectangle;
  * 
  * @author Youri
  */
+@SuppressWarnings("restriction")
 public abstract class Fish {
 
   private Position position;
@@ -43,6 +44,14 @@ public abstract class Fish {
    */
   public Position getPosition() {
     return this.position;
+  }
+  
+  /**
+   * Sets the position of the fish.
+   * @param position the position to set to.
+   */
+  public void setPosition(Position position) {
+    this.position = position;
   }
 
   /**

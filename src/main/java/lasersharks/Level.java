@@ -100,21 +100,21 @@ public class Level {
   public void setScreenCon(ScreenController screenCon) {
     this.screenCon = screenCon;
   }
-
-  /**
-   * @return the score
-   */
-  public int getScore() {
-    return score;
-  }
-
-  /**
-   * @param score
-   *          the score to set
-   */
-  public void setScore(int score) {
-    this.score = score;
-  }
+//
+//  /**
+//   * @return the score
+//   */
+//  public int getScore() {
+//    return score;
+//  }
+//
+//  /**
+//   * @param score
+//   *          the score to set
+//   */
+//  public void setScore(int score) {
+//    this.score = score;
+//  }
   
   /**
    * @return the keyboardCon
@@ -142,12 +142,6 @@ public class Level {
    */
   public void setGame(Game game) {
     this.game = game;
-  }
-
-  @Override
-  public String toString() {
-    return "Level [shark=" + shark + ", fishCon=" + fishCon + ", screenCon=" + screenCon
-        + ", score=" + score + "]";
   }
   
   /**
