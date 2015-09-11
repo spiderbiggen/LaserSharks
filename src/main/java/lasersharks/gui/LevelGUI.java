@@ -57,10 +57,10 @@ public class LevelGUI extends Application {
   private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private ScreenController screenController;
   private Pane pane;
+  private Pane winPane;
+  private Pane losePane;
   private StackPane stackPane;
   private Scene playScene;
-  private Scene winScene;
-  private Scene loseScene;
   private boolean choosePlayScene = true;
   private boolean chooseWinScene = false;
   private boolean chooseLoseScene = false;
@@ -124,13 +124,22 @@ public class LevelGUI extends Application {
   @Override
   public void start(Stage stage) {
     pane = new Pane();
+    stackPane = new StackPane();
     stage.setFullScreen(true);
-    playScene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
-    winScene = makeMessageScene(stage, "You won!");
-    addElements();
-    loseScene = makeMessageScene(stage, "Game Over!");
-    addElements();
 
+    addElements(pane);
+
+    winPane = showMessageScene("You Win!");
+    winPane.setOpacity(0.0);
+    losePane = showMessageScene("Game Over!");
+    losePane.setOpacity(0.0);
+    
+    stackPane.getChildren().add(pane);
+    stackPane.getChildren().add(winPane);
+    stackPane.getChildren().add(losePane);
+    
+    playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
+    
     this.stage = stage;
     chooseScene();
 
@@ -164,23 +173,20 @@ public class LevelGUI extends Application {
   /**
    * This function makes a scene with a message to display.
    * 
-   * @param stage
-   *          the stage the scene is set to.
    * @param message
    *          the message to display
-   * 
-   * @return the scene of the end screen
+   * @return new scene
    */
-  public Scene makeMessageScene(Stage stage, String message) {
-
-    stackPane = new StackPane();
-    Text winGameText = new Text(message);
-    stackPane.getChildren().add(winGameText);
-    winGameText.setScaleX(TEXT_SCALE_SIZE);
-    winGameText.setScaleY(TEXT_SCALE_SIZE);
-    Scene escene = new Scene(stackPane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
-
-    return escene;
+  public Pane showMessageScene(String message) {
+    Pane pane = new Pane();
+    addElements(pane);
+    Text gameText = new Text(message);
+    pane.getChildren().add(gameText);
+    gameText.setScaleX(TEXT_SCALE_SIZE);
+    gameText.setScaleY(TEXT_SCALE_SIZE);
+    gameText.setX(Position.middlePosition().getPosX());
+    gameText.setY(Position.middlePosition().getPosY());
+    return pane;
   }
 
   /**
@@ -192,28 +198,28 @@ public class LevelGUI extends Application {
 
     } else if (chooseWinScene) {
       animation.stop();
-      stage.setScene(winScene);
-      stage.setFullScreen(true);
-      stage.show();
+      pane.setOpacity(0.0);
+      winPane.setOpacity(1.0);
 
     } else if (chooseLoseScene) {
       animation.stop();
-      stage.setScene(loseScene);
-      stage.setFullScreen(true);
-      stage.show();
+      pane.setOpacity(0.0);
+      losePane.setOpacity(1.0);
+      
     }
   }
 
   /**
    * Add some key elements to the pane. This includes: Background.
    * 
+   * @param pane
+   * 
    */
-  public void addElements() {
+  public void addElements(Pane pane) {
     BackgroundImage myBI = new BackgroundImage(
         new Image("somber sea floor.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
-    stackPane.setBackground(new Background(myBI));
   }
 
   /**
