@@ -56,7 +56,7 @@ public class LevelGUI extends Application {
    */
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
-  private static final String musicFileName = "src/main/resources/music.mp3";
+  private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private ScreenController screenController;
   private Pane pane;
   private StackPane stackPane;
@@ -132,7 +132,7 @@ public class LevelGUI extends Application {
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
     Game game = new Game();
     game.launch(this);
-    startMusic(musicFileName);
+    startMusic(MUSIC_FILENAME);
   }
 
   /**
