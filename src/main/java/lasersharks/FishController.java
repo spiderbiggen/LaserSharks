@@ -124,7 +124,7 @@ public class FishController {
       }
     }
     return (LaserShark) res;
-      }
+  }
   
   /**
    * this function checks if there are any collisions between the shark and other fish.
