@@ -44,7 +44,6 @@ public class ScreenController {
    */
   public List<Fish> getNextFrameInfo(double frametime) {
     if (!this.level.getFishCon().getShark().isAlive()) {
-      System.out.println("poep");
       this.gui.setLoseSceneTrue();
       this.gui.chooseScene();
     } else if (this.level.getShark().getSize() > GAME_WINNING_SIZE) {

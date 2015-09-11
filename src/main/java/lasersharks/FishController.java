@@ -160,7 +160,6 @@ public class FishController {
         } else {
           // fish eats shark
           shark.kill();
-          System.out.println(shark.getSize() + ":" + fishList.get(i).getSize());
         }
       }
     }
