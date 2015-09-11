@@ -18,8 +18,6 @@ public class Level {
   private KeyboardController keyboardCon;
   private Game game;
   
-  private int score;
-  
   /**
    * this is the constructor of the level class.
    * @param game controller from witch to take commands and where to find env data.

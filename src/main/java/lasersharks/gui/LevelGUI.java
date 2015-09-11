@@ -146,7 +146,7 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * This function makes a scene with a message to display
+   * This function makes a scene with a message to display.
    * 
    * @param stage
    *          the stage the scene is set to.

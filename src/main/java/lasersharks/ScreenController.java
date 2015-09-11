@@ -43,7 +43,7 @@ public class ScreenController {
       System.out.println("poep");
       this.gui.setLoseSceneTrue();
       this.gui.chooseScene();
-    }else if (this.level.getShark().getSize() > GAME_WINNING_SIZE) {
+    } else if (this.level.getShark().getSize() > GAME_WINNING_SIZE) {
       this.gui.setWinSceneTrue();
       this.gui.chooseScene();
     }
