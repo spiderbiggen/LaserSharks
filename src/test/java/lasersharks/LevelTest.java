@@ -2,37 +2,38 @@ package lasersharks;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import lasersharks.gui.LevelGUI;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
 import javafx.scene.Scene;
+import lasersharks.gui.LevelGUI;
 
 /**
  * Testclass for Level class.
+ * 
  * @author Youri
  *
  */
+@SuppressWarnings("restriction")
 public class LevelTest {
   private Level level;
   private Game game;
   private LevelGUI levelGUI;
-  
+
   /**
    * Setup all classes and mocks for testing.
    */
   @Before
-  @SuppressWarnings("restriction")
   public void setUp() {
     this.game = mock(Game.class);
     this.levelGUI = mock(LevelGUI.class);
     Scene sc = mock(Scene.class);
     when(this.levelGUI.getScene()).thenReturn(sc);
-    
+
     this.level = new Level(this.game, this.levelGUI);
   }
 
@@ -43,7 +44,7 @@ public class LevelTest {
   public void testGetFishCon() {
     assertTrue(this.level.getFishCon() != null);
   }
-  
+
   /**
    * Make sure the getter functions properly.
    */
@@ -53,7 +54,7 @@ public class LevelTest {
     this.level.setFishCon(fc);
     assertEquals(fc, this.level.getFishCon());
   }
-  
+
   /**
    * Make sure the nextCyleInformation propagates properly.
    */
@@ -61,10 +62,10 @@ public class LevelTest {
   public void testNextCycleInformation() {
     FishController fc = mock(FishController.class);
     this.level.setFishCon(fc);
-    this.level.getNextFrameInfo();
-    verify(fc).getNextCycleInformation();
+    this.level.getNextFrameInfo(1);
+    verify(fc).getNextCycleInformation(1);
   }
-  
+
   /**
    * Make sure the shark request is propagated to the correct source.
    */
@@ -72,7 +73,6 @@ public class LevelTest {
   public void testGetShark() {
     assertTrue(this.level.getShark() != null);
   }
-  
 
   /**
    * Test fishCon getter.
@@ -81,7 +81,7 @@ public class LevelTest {
   public void testGetScreenCon() {
     assertTrue(this.level.getScreenCon() != null);
   }
-  
+
   /**
    * Make sure the getter functions properly.
    */
@@ -109,7 +109,7 @@ public class LevelTest {
     this.level.setShark(ls);
     assertEquals(ls, this.level.getShark());
   }
-  
+
   /**
    * Test to see if set SharkDirection functions properly.
    */
@@ -121,7 +121,7 @@ public class LevelTest {
     this.level.setSharkDirection(dr);
     verify(ls).setDirection(dr);
   }
-  
+
   /**
    * Make sure default keyboard controller != null.
    */
@@ -129,7 +129,7 @@ public class LevelTest {
   public void testGetKeyboardController() {
     assertTrue(this.level.getKeyboardCon() != null);
   }
-  
+
   /**
    * Test the keyboardcontroller getter.
    */
@@ -139,7 +139,7 @@ public class LevelTest {
     this.level.setKeyboardCon(kbc);
     assertEquals(kbc, this.level.getKeyboardCon());
   }
-  
+
   /**
    * Make sure default game != null.
    */
@@ -147,7 +147,7 @@ public class LevelTest {
   public void testGetGame() {
     assertTrue(this.level.getGame() != null);
   }
-  
+
   /**
    * Test the game getter.
    */
@@ -157,7 +157,7 @@ public class LevelTest {
     this.level.setGame(game);
     assertEquals(game, this.level.getGame());
   }
-  
+
   /**
    * Test launch method.
    */

@@ -12,7 +12,7 @@ public abstract class Fish {
 
   private Position position;
   private float size;
-  private int speed;
+  private double speed;
   private Direction direction;
   private boolean alive;
   private static final double HALF_SCALE = 0.5;
@@ -24,15 +24,15 @@ public abstract class Fish {
    *          start position.
    * @param size
    *          start size.
-   * @param speed
+   * @param startSpeed
    *          start speed.
    * @param direction
    *          start direction.
    */
-  public Fish(Position position, float size, int speed, Direction direction) {
+  public Fish(Position position, float size, double startSpeed, Direction direction) {
     this.position = position;
     this.size = size;
-    this.speed = speed;
+    this.speed = startSpeed;
     this.direction = direction;
     this.alive = true;
   }
@@ -45,10 +45,12 @@ public abstract class Fish {
   public Position getPosition() {
     return this.position;
   }
-  
+
   /**
    * Sets the position of the fish.
-   * @param position the position to set to.
+   * 
+   * @param position
+   *          the position to set to.
    */
   public void setPosition(Position position) {
     this.position = position;
@@ -76,7 +78,7 @@ public abstract class Fish {
   /**
    * @return the speed.
    */
-  public int getSpeed() {
+  public double getSpeed() {
     return speed;
   }
 
@@ -106,10 +108,13 @@ public abstract class Fish {
   /**
    * The current fish will move, this will return false if it moves out of the view.
    * 
+   * @param frametime
+   *          the time between frames in seconds
+   * 
    * @return true if fish is in view
    */
-  public boolean move() {
-    return position.updatePosition(direction, speed, (int) size);
+  public boolean move(double frametime) {
+    return position.updatePosition(direction, (speed / frametime), size);
   }
 
   /**
@@ -128,9 +133,9 @@ public abstract class Fish {
   private Position getMiddlePoint() {
     Position startPos = this.getPosition();
 
-    Position middlePointPosition = new Position(startPos.getPosX()
-        + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()), startPos.getPosY()
-        + (int) (HALF_SCALE * this.getSize()));
+    Position middlePointPosition = new Position(
+        startPos.getPosX() + (HALF_SCALE * this.getWidthScale() * this.getSize()),
+        startPos.getPosY() + (HALF_SCALE * this.getSize()));
     return middlePointPosition;
   }
 
@@ -185,8 +190,8 @@ public abstract class Fish {
    * @return a rectangle hitbox.
    */
   public Rectangle makeHitbox() {
-    int xcoordinate = this.getPosition().getPosX();
-    int ycoordinate = this.getPosition().getPosY();
+    double xcoordinate = this.getPosition().getPosX();
+    double ycoordinate = this.getPosition().getPosY();
     Rectangle rekt = new Rectangle(xcoordinate, ycoordinate, this.getWidthScale() * this.getSize(),
         this.getSize());
     return rekt;

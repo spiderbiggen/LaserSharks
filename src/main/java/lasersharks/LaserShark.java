@@ -19,13 +19,13 @@ public class LaserShark extends Fish {
    *          initial position
    * @param size
    *          init size
-   * @param speed
+   * @param startSpeed
    *          init speed
    * @param direction
    *          init direction
    */
-  public LaserShark(Position position, float size, int speed, Direction direction) {
-    super(position, size, speed, direction);
+  public LaserShark(Position position, float size, double startSpeed, Direction direction) {
+    super(position, size, startSpeed, direction);
   }
 
   /**
@@ -43,12 +43,11 @@ public class LaserShark extends Fish {
   }
 
   @Override
-  public boolean move() {
-    super.move();
-    //this will make sure the fish stay within both
-    
-    this.getPosition().clipPosition(
-        (int) (this.getSize() * this.getWidthScale() * HALF_RATE),
+  public boolean move(double frametime) {
+    super.move(frametime);
+    // this will make sure the fish stay within both
+
+    this.getPosition().clipPosition((int) (this.getSize() * this.getWidthScale() * HALF_RATE),
         (int) (this.getSize() * HALF_RATE));
     return true;
   }

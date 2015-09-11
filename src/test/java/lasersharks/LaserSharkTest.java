@@ -3,8 +3,8 @@ package lasersharks;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,6 @@ public class LaserSharkTest extends FishTest {
   private LaserShark laserShark;
   private static final int DEFAULT_SHARK_SIZE = 30;
   private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 34;
-  private final String imageResource = "shark.png";
 
   /**
    * Set up which is used before the tests.
@@ -46,7 +45,7 @@ public class LaserSharkTest extends FishTest {
     laserShark.eat(mockedFish);
     assertEquals(laserShark.getSize(), EXPECTED_AFTER_EATING_SHARK_SIZE, 0);
   }
-  
+
   /**
    * When the laser sharks eats a dead fish, it doenst grows.
    */
@@ -74,7 +73,7 @@ public class LaserSharkTest extends FishTest {
     laserShark.eat(mockedFish);
     assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
   }
-  
+
   /**
    * When the lasershark eats a fish, the fish schould be killed.
    */
@@ -86,14 +85,6 @@ public class LaserSharkTest extends FishTest {
     assertTrue(mockedFish.isAlive());
     laserShark.eat(mockedFish);
     verify(mockedFish).kill();
-  }
-  
-  /**
-   * Make sure the shark returns proper image recource.
-   */
-  @Test
-  public void getImageResourceTest() {
-      assertEquals(this.imageResource, fish1.getImageResource());
   }
 
 }

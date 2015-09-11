@@ -34,7 +34,7 @@ public class PositionTest {
    */
   @Test
   public void testGetPosX() {
-    assertEquals(posX, position.getPosX());
+    assertEquals(posX, position.getPosX(), 0);
   }
 
   /**
@@ -43,7 +43,7 @@ public class PositionTest {
   @Test
   public void testSetPosX() {
     position.setPosX(POSITION_X);
-    assertEquals(POSITION_X, position.getPosX());
+    assertEquals(POSITION_X, position.getPosX(), 0);
   }
 
   /**
@@ -51,7 +51,7 @@ public class PositionTest {
    */
   @Test
   public void testGetPosY() {
-    assertEquals(posY, position.getPosY());
+    assertEquals(posY, position.getPosY(), 0);
   }
 
   /**
@@ -60,7 +60,7 @@ public class PositionTest {
   @Test
   public void testSetPosY() {
     position.setPosY(POSITION_Y);
-    assertEquals(POSITION_Y, position.getPosY());
+    assertEquals(POSITION_Y, position.getPosY(), 0);
   }
 
   /**
@@ -70,7 +70,7 @@ public class PositionTest {
   public void testSetHeightPanel() {
     final int height = 500;
     Position.setHeightPanel(height);
-    assertEquals(height, Position.getHeightPanel());
+    assertEquals(height, Position.getHeightPanel(), 0);
   }
 
   /**
@@ -80,7 +80,7 @@ public class PositionTest {
   public void testSetWidthPanel() {
     final int width = 500;
     Position.setWidthPanel(width);
-    assertEquals(width, Position.getWidthPanel());
+    assertEquals(width, Position.getWidthPanel(), 0);
   }
 
   /**
@@ -89,7 +89,7 @@ public class PositionTest {
   @Test
   public void testAdjustPosX1() {
     position.adjustPosX(1);
-    assertEquals(posX + 1, position.getPosX());
+    assertEquals(posX + 1, position.getPosX(), 0);
   }
 
   /**
@@ -98,7 +98,7 @@ public class PositionTest {
   @Test
   public void testAdjustPosX2() {
     position.adjustPosX(-1);
-    assertEquals(posX - 1, position.getPosX());
+    assertEquals(posX - 1, position.getPosX(), 0);
   }
 
   /**
@@ -107,7 +107,7 @@ public class PositionTest {
   @Test
   public void testAdjustPosY1() {
     position.adjustPosY(1);
-    assertEquals(posY + 1, position.getPosY());
+    assertEquals(posY + 1, position.getPosY(), 0);
   }
 
   /**
@@ -116,7 +116,7 @@ public class PositionTest {
   @Test
   public void testAdjustPosY2() {
     position.adjustPosY(-1);
-    assertEquals(posY - 1, position.getPosY());
+    assertEquals(posY - 1, position.getPosY(), 0);
   }
 
   /**

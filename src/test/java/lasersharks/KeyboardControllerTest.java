@@ -1,27 +1,25 @@
 package lasersharks;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.Collection;
-
-import static org.junit.Assert.assertEquals;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
-import org.mockito.ArgumentCaptor;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.mockito.ArgumentCaptor;
 
-import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.event.EventType;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * Class for testion KeyboardController.
@@ -120,12 +118,9 @@ public class KeyboardControllerTest {
   @Test
   public void testDirectionAfterFirstKeyPress() {
     pressKey(this.keyCode1);
-    
+
     verify(level, times(1)).setSharkDirection(this.directionCaptor.capture());
-    assertEquals(
-        this.expectedDirectionAfterKeyPress1, 
-        this.directionCaptor.getAllValues().get(0)
-     );
+    assertEquals(this.expectedDirectionAfterKeyPress1, this.directionCaptor.getAllValues().get(0));
   }
 
   /**
@@ -148,10 +143,10 @@ public class KeyboardControllerTest {
     pressKey(this.keyCode1);
     pressKey(this.keyCode2);
     releaseKey(this.keyCode2);
-    
+
     verify(level, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE))
         .setSharkDirection(this.directionCaptor.capture());
-    
+
     assertEquals(this.expectedDirectionAfterKeyPress1,
         this.directionCaptor.getAllValues().get(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE - 1));
   }
@@ -165,10 +160,10 @@ public class KeyboardControllerTest {
     pressKey(this.keyCode2);
     releaseKey(this.keyCode2);
     releaseKey(this.keyCode1);
-    
+
     verify(level, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE))
         .setSharkDirection(this.directionCaptor.capture());
-    
+
     assertEquals(this.defaultDirection, this.directionCaptor.getAllValues()
         .get(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE - 1));
   }
@@ -182,10 +177,10 @@ public class KeyboardControllerTest {
     pressKey(this.keyCode2);
     releaseKey(this.keyCode1);
     releaseKey(this.keyCode2);
-    
+
     verify(level, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE))
         .setSharkDirection(this.directionCaptor.capture());
-    
+
     assertEquals(this.defaultDirection, this.directionCaptor.getAllValues()
         .get(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE - 1));
   }
@@ -210,9 +205,9 @@ public class KeyboardControllerTest {
   public void testDirectionAfterSecondKeyPressedAndReleased() {
     pressKey(this.keyCode1);
     releaseKey(this.keyCode1);
-    
+
     verify(level, times(2)).setSharkDirection(this.directionCaptor.capture());
-    
+
     assertEquals(this.defaultDirection, this.directionCaptor.getAllValues().get(1));
   }
 
@@ -224,8 +219,7 @@ public class KeyboardControllerTest {
   @Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(
-        new Object[][] { 
-            { KeyCode.DOWN, KeyCode.LEFT, Direction.North, Direction.NorthWest },
+        new Object[][] { { KeyCode.DOWN, KeyCode.LEFT, Direction.North, Direction.NorthWest },
             { KeyCode.DOWN, KeyCode.RIGHT, Direction.North, Direction.NorthEast },
             { KeyCode.UP, KeyCode.LEFT, Direction.South, Direction.SouthWest },
             { KeyCode.UP, KeyCode.RIGHT, Direction.South, Direction.SouthEast },

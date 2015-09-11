@@ -23,7 +23,7 @@ public class FishControllerTest {
   private FishController fishCon;
   private static final int FISHAMOUNT = 10;
   private static final int DIST_BETW_FISH = 30;
-  
+
   /**
    * Sets up a fishcontroller object.
    * 
@@ -48,63 +48,54 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
-    FishBot fishBot = new FishBot(
-        new Position(POSITION_X, POSITION_Y), 
-        SIZE, 
-        SPEED, 
-        Direction.East
-    );
-    assertFalse(fishCon.getNextCycleInformation().contains(fishBot));
+    FishBot fishBot = new FishBot(new Position(POSITION_X, POSITION_Y), SIZE, SPEED,
+        Direction.East);
+    assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addFish(fishBot);
-    assertTrue(fishCon.getNextCycleInformation().contains(fishBot));
+    assertTrue(fishCon.getNextCycleInformation(1).contains(fishBot));
   }
 
   /**
-   * A fishcontroller containing 10 fishes and 1 shark. one fish collides with the shark.
-   * The fishes are size 10. 
-   * Useful for testing multiple methods.
-   * @param sizeOfShark the size of the shark to set to.
+   * A fishcontroller containing 10 fishes and 1 shark. one fish collides with the shark. The fishes
+   * are size 10. Useful for testing multiple methods.
+   * 
+   * @param sizeOfShark
+   *          the size of the shark to set to.
    * @return a fishcontroller with 10 fish and 1 shark. one shark and 1 fish collide.
    */
   public FishController fishConFilled(int sizeOfShark) {
     fishCon = new FishController();
-    fishCon.addFish(new LaserShark(
-        new Position(POSITION_X, POSITION_Y), 
-        sizeOfShark, 
-        SPEED, 
-        Direction.East
-    ));
+    fishCon.setShark(
+        new LaserShark(new Position(POSITION_X, POSITION_Y), sizeOfShark, SPEED, Direction.East));
     for (int i = 0; i < FISHAMOUNT; i++) {
       fishCon.addFish(new FishBot(
-        new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH), 
-        SIZE, 
-        SPEED, 
-        Direction.East));
+          new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH), SIZE,
+          SPEED, Direction.East));
     }
-    return fishCon;    
+    return fishCon;
   }
-  
+
   /**
-   * A cycle is tested where the shark gets killed.
-   * After the cycle, the shark should not be alive.
+   * A cycle is tested where the shark gets killed. After the cycle, the shark should not be alive.
    */
   @Test
   public void testGetNextCycleSharkKilled() {
     FishController fishCon = fishConFilled(SIZE);
     assertTrue(fishCon.getShark().isAlive());
-    fishCon.getNextCycleInformation();
+    fishCon.getNextCycleInformation(1);
     assertFalse(fishCon.getShark().isAlive());
   }
+
   /**
-   * A cycle is tested where the shark eats an other fish.
-   * After the cycle the shark should have grown in size.
+   * A cycle is tested where the shark eats an other fish. After the cycle the shark should have
+   * grown in size.
    */
   @Test
   public void testGetNextCycleFishKilled() {
     FishController fishCon = fishConFilled(SIZE + 1);
     assertTrue(fishCon.getShark().isAlive());
     double oldSize = fishCon.getShark().getSize();
-    fishCon.getNextCycleInformation();
+    fishCon.getNextCycleInformation(1);
     assertTrue(fishCon.getShark().getSize() > oldSize);
   }
 }

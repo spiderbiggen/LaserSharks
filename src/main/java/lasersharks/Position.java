@@ -6,8 +6,8 @@ package lasersharks;
 public class Position {
   private static final int SECOND_HASH_PRIME = 31;
   private static final int HASH_PRIME = 17;
-  private int posX;
-  private int posY;
+  private double posX;
+  private double posY;
 
   /**
    * these are now static values inside Position. These represent the height and width of the
@@ -27,7 +27,7 @@ public class Position {
    * @param posY
    *          initial y position
    */
-  public Position(int posX, int posY) {
+  public Position(double posX, double posY) {
     this.posX = posX;
     this.posY = posY;
   }
@@ -35,14 +35,14 @@ public class Position {
   /**
    * @return the height of the panel.
    */
-  public static int getHeightPanel() {
+  public static double getHeightPanel() {
     return height;
   }
 
   /**
    * @return the width of the panel.
    */
-  public static int getWidthPanel() {
+  public static double getWidthPanel() {
     return width;
   }
 
@@ -70,7 +70,7 @@ public class Position {
    * 
    * @return the x value.
    */
-  public int getPosX() {
+  public double getPosX() {
     return posX;
   }
 
@@ -79,7 +79,7 @@ public class Position {
    * @param posX
    *          the x value.
    */
-  public void setPosX(int posX) {
+  public void setPosX(double posX) {
     this.posX = posX;
   }
 
@@ -88,7 +88,7 @@ public class Position {
    * @param deltaX
    *          the amount we want to increase the x value.
    */
-  public void adjustPosX(int deltaX) {
+  public void adjustPosX(double deltaX) {
     this.posX += deltaX;
   }
 
@@ -96,7 +96,7 @@ public class Position {
    * 
    * @return the y value
    */
-  public int getPosY() {
+  public double getPosY() {
     return posY;
   }
 
@@ -105,7 +105,7 @@ public class Position {
    * @param posY
    *          the amount to change posX with
    */
-  public void setPosY(int posY) {
+  public void setPosY(double posY) {
     this.posY = posY;
   }
 
@@ -114,7 +114,7 @@ public class Position {
    * @param deltaY
    *          the amount to change posY with
    */
-  public void adjustPosY(int deltaY) {
+  public void adjustPosY(double deltaY) {
     this.posY += deltaY;
   }
 
@@ -125,7 +125,7 @@ public class Position {
    * @param deltaY
    *          the amount to change posY with
    */
-  public void adjustPos(int deltaX, int deltaY) {
+  public void adjustPos(double deltaX, double deltaY) {
     this.adjustPosX(deltaX);
     this.adjustPosY(deltaY);
   }
@@ -141,7 +141,7 @@ public class Position {
    *          size of object to make sure it's entirely offscreen.
    * @return false if fish moves off the screen.
    */
-  public boolean updatePosition(Direction dir, int sp, int margin) {
+  public boolean updatePosition(Direction dir, double sp, double margin) {
     if (dir != null && !dir.equals(Direction.None)) {
       adjustPos(sp * dir.getDeltaX(), sp * dir.getDeltaY());
     }
@@ -168,7 +168,7 @@ public class Position {
    * @param xMargin
    *          max offset margin
    */
-  public final boolean onScreen(int xMargin) {
+  public final boolean onScreen(double xMargin) {
     return (posX + xMargin >= 0 && posX - xMargin <= width && posY >= 0 && posY <= height);
   }
 
@@ -180,9 +180,9 @@ public class Position {
    * @param yMargin
    *          how far something can go outside of the screen on the y axis
    */
-  public void clipPosition(int xMargin, int yMargin) {
-    this.posX = (int) Math.min(Math.max(0 - xMargin, this.posX), width + xMargin);
-    this.posY = (int) Math.min(Math.max(0 - yMargin, this.posY), height + yMargin);
+  public void clipPosition(double xMargin, double yMargin) {
+    this.posX = Math.min(Math.max(0 - xMargin, this.posX), width + xMargin);
+    this.posY = Math.min(Math.max(0 - yMargin, this.posY), height + yMargin);
   }
 
   @Override
@@ -210,8 +210,8 @@ public class Position {
 
   @Override
   public int hashCode() {
-    int hash = SECOND_HASH_PRIME * HASH_PRIME + getPosX();
-    hash = SECOND_HASH_PRIME * hash + getPosY();
+    int hash = (int) (SECOND_HASH_PRIME * HASH_PRIME + getPosX());
+    hash = (int) (SECOND_HASH_PRIME * hash + getPosY());
     return hash;
   }
 
@@ -221,7 +221,7 @@ public class Position {
    * @return a position with coordinates on the middle of the screen
    */
   public static Position middlePosition() {
-    return new Position((int) Math.round(width / 2.0), (int) Math.round(height / 2.0));
+    return new Position(Math.round(width / 2.0), Math.round(height / 2.0));
   }
 
 }

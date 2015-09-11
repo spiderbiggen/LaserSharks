@@ -3,13 +3,12 @@
  */
 package lasersharks;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -43,7 +42,7 @@ public class OnScreenTest {
    * @param expectedBool
    *          expected return value from running the method
    */
-  public OnScreenTest(int posX, int posY, boolean expectedBool) {
+  public OnScreenTest(double posX, double posY, boolean expectedBool) {
     this.position = new Position(posX, posY);
     this.expectedBool = expectedBool;
   }
