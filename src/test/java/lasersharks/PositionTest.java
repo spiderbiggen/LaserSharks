@@ -47,20 +47,6 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosX(int)}.
-   */
-  @Test
-  public void testAdjustPosX() {
-    assertEquals(posX, position.getPosX());
-    // Delta 1
-    position.adjustPosX(1);
-    assertEquals(posX + 1, position.getPosX());
-    // Delta -1
-    position.adjustPosX(-1);
-    assertEquals(posX, position.getPosX());
-  }
-
-  /**
    * Test method for {@link lasersharks.Position#getPosY()}.
    */
   @Test
@@ -78,51 +64,76 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosY(int)}.
+   * Test method for {@link lasersharks.Position#setHeightPanel(int)}.
    */
   @Test
-  public void testAdjustPosY() {
-    assertEquals(posY, position.getPosY());
-    // Delta 1
-    position.adjustPosY(1);
-    assertEquals(posY + 1, position.getPosY());
-    // Delta -1
-    position.adjustPosY(-1);
-    assertEquals(posY, position.getPosY());
+  public void testSetHeightPanel() {
+    final int height = 500;
+    Position.setHeightPanel(height);
+    assertEquals(height, Position.getHeightPanel());
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPos(int, int)}.
+   * Test method for {@link lasersharks.Position#setWidthPanel(int)}.
    */
   @Test
-  public void testAdjustPos() {
-    assertEquals(posX, position.getPosY());
-    assertEquals(posY, position.getPosY());
-    // Delta x 1
-    position.adjustPos(1, 0);
+  public void testSetWidthPanel() {
+    final int width = 500;
+    Position.setWidthPanel(width);
+    assertEquals(width, Position.getWidthPanel());
+  }
+
+  /**
+   * Test method for {@link lasersharks.Position#adjustPosX(int)}.
+   */
+  @Test
+  public void testAdjustPosX1() {
+    position.adjustPosX(1);
     assertEquals(posX + 1, position.getPosX());
-    assertEquals(posY, position.getPosY());
-    // Delta x -1
-    position.adjustPos(-1, 0);
-    assertEquals(posX, position.getPosX());
-    assertEquals(posY, position.getPosY());
-    // Delta y 1
-    position.adjustPos(0, 1);
-    assertEquals(posX, position.getPosX());
+  }
+
+  /**
+   * Test method for {@link lasersharks.Position#adjustPosX(int)}.
+   */
+  @Test
+  public void testAdjustPosX2() {
+    position.adjustPosX(-1);
+    assertEquals(posX - 1, position.getPosX());
+  }
+
+  /**
+   * Test method for {@link lasersharks.Position#adjustPosY(int)}.
+   */
+  @Test
+  public void testAdjustPosY1() {
+    position.adjustPosY(1);
     assertEquals(posY + 1, position.getPosY());
-    // Delta y -1
-    position.adjustPos(0, -1);
-    assertEquals(posX, position.getPosX());
-    assertEquals(posY, position.getPosY());
+  }
+
+  /**
+   * Test method for {@link lasersharks.Position#adjustPosY(int)}.
+   */
+  @Test
+  public void testAdjustPosY2() {
+    position.adjustPosY(-1);
+    assertEquals(posY - 1, position.getPosY());
   }
 
   /**
    * Test method for {@link lasersharks.Position#equals(java.lang.Object)}.
    */
   @Test
-  public void testEqualsObjectTrue() {
+  public void testEqualsObjectTrue1() {
     Position testPosition = new Position(0, 0);
     assertTrue(position.equals(testPosition));
+    assertTrue(position.equals(position));
+  }
+
+  /**
+   * Test method for {@link lasersharks.Position#equals(java.lang.Object)}.
+   */
+  @Test
+  public void testEqualsObjectTrue2() {
     assertTrue(position.equals(position));
   }
 
@@ -133,7 +144,7 @@ public class PositionTest {
   public void testEqualsObjectFalse1() {
     assertFalse(position.equals(new Position(1, 0)));
   }
-  
+
   /**
    * Test method for {@link lasersharks.Position#equals(java.lang.Object)}.
    */
@@ -141,13 +152,32 @@ public class PositionTest {
   public void testEqualsObjectFalse2() {
     assertFalse(position.equals(new Position(0, 1)));
   }
-  
+
   /**
    * Test method for {@link lasersharks.Position#equals(java.lang.Object)}.
    */
   @Test
   public void testEqualsObjectFalse3() {
     assertFalse(position.equals(new Position(1, 1)));
+  }
+
+  /**
+   * Test method for {@link lasersharks.Position#equals(java.lang.Object)}.
+   */
+  @Test
+  public void testEqualsObjectFalse4() {
+    assertFalse(position.equals("string"));
+  }
+
+  /**
+   * Test method for {@link lasersharks.Position#calculateDistance(Position)}.
+   */
+  @Test
+  public void testCalculateDistance() {
+    final double doubleDelta = Math.pow(10, 6);
+    Position testPosition = new Position(1, 1);
+    assertEquals(Math.sqrt(2), position.calculateDistance(testPosition),
+        Math.sqrt(2) / doubleDelta);
   }
 
   /**
@@ -159,5 +189,18 @@ public class PositionTest {
     assertTrue(position.hashCode() == testPosition.hashCode());
     testPosition = new Position(1, 1);
     assertTrue(position.hashCode() != testPosition.hashCode());
+  }
+
+  /**
+   * Test method for {@link lasersharks.Position#middlePosition()}.
+   */
+  @Test
+  public void testMiddlePosition() {
+    final int size = 200;
+    final int halfScale = 2;
+    Position.setHeightPanel(size);
+    Position.setWidthPanel(size);
+    Position testPosition = new Position(size / halfScale, size / halfScale);
+    assertEquals(testPosition, Position.middlePosition());
   }
 }
