@@ -186,7 +186,7 @@ public class Position {
    */
   public void clipPosition(int xMargin, int yMargin) {
     this.posX = (int) Math.min(Math.max(0 - xMargin, this.posX), width + xMargin);
-    this.posY = (int) Math.min(Math.max(0 - yMargin, this.posY), width + yMargin);
+    this.posY = (int) Math.min(Math.max(0 - yMargin, this.posY), height + yMargin);
   }
 
   @Override

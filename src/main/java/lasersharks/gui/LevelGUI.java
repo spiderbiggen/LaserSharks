@@ -28,6 +28,7 @@ import javafx.util.Duration;
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
+import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -38,6 +39,7 @@ import lasersharks.ScreenController;
  *
  */
 
+@SuppressWarnings("restriction")
 public class LevelGUI extends Application {
 
   private static final double FRAME_DELAY = 0.06;
@@ -193,7 +195,8 @@ public class LevelGUI extends Application {
    * 
    */
   public void addElements() {
-    BackgroundImage myBI = new BackgroundImage(new Image("background.jpg", XRES, YRES, true, false),
+    BackgroundImage myBI = new BackgroundImage(
+        new Image("somber sea floor.jpg", XRES, YRES, true, false),
         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
@@ -270,7 +273,7 @@ public class LevelGUI extends Application {
       image.setScaleX(dir.getDeltaX());
     }
     image.setFitHeight(size);
-    image.setFitWidth(fish.getWidthScale() * size);
+    image.setFitWidth(size * fish.getWidthScale());
 
     image.setX(position.getPosX());
     image.setY(position.getPosY());
