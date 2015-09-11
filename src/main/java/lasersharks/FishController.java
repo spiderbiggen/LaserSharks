@@ -163,7 +163,7 @@ public class FishController {
    *          of Fishes on the board
    * @return the LaserShark
    */
-  private LaserShark getShark(List<Fish> list) {
+  public LaserShark getShark(List<Fish> list) {
     Fish res = null;
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) instanceof LaserShark) {

@@ -20,6 +20,7 @@ public class ScreenControllerTest {
   private Scene scene;
   private ScreenController screenCon;
   private LaserShark shark;
+  private FishController fishCon;
   private static final float ABOVE_WIN_SIZE = 1001.0f;
   private static final float UNDER_WIN_SIZE = 999.0f;
   
@@ -32,9 +33,14 @@ public class ScreenControllerTest {
     gui = Mockito.mock(LevelGUI.class);
     level = Mockito.mock(Level.class);
     scene = Mockito.mock(Scene.class);
+    fishCon = Mockito.mock(FishController.class);
     shark = Mockito.mock(LaserShark.class);
+    
     Mockito.when(gui.getScene()).thenReturn(scene);
     Mockito.when(level.getShark()).thenReturn(shark);
+    Mockito.when(level.getFishCon()).thenReturn(fishCon);
+    Mockito.when(shark.isAlive()).thenReturn(true);
+    Mockito.when(fishCon.getShark()).thenReturn(shark);
     Mockito.when(level.getNextFrameInfo()).thenReturn(new LinkedList<Fish>());
     screenCon = new ScreenController(level, gui);
   }
