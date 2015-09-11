@@ -1,7 +1,6 @@
 package lasersharks.gui;
 
 import java.io.File;
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +22,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
@@ -129,6 +127,7 @@ public class LevelGUI extends Application {
     stage.setFullScreen(true);
     playScene = new Scene(pane, stage.getHeight(), stage.getWidth(), BACKCOLOUR);
     winScene = makeMessageScene(stage, "You won!");
+    addElements();
     loseScene = makeMessageScene(stage, "Game Over!");
     addElements();
 
