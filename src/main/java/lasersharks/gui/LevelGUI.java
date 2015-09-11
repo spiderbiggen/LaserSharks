@@ -1,5 +1,6 @@
 package lasersharks.gui;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +20,13 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
@@ -56,6 +58,7 @@ public class LevelGUI extends Application {
    */
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
+  private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private ScreenController screenController;
   private Pane pane;
   private StackPane stackPane;
@@ -67,6 +70,8 @@ public class LevelGUI extends Application {
   private boolean chooseLoseScene = false;
   private Stage stage;
   private Timeline timeline;
+  private Media media;
+  private MediaPlayer mediaPlayer;
 
   /**
    * @return the screenController.
@@ -130,9 +135,9 @@ public class LevelGUI extends Application {
     stage.show();
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
-
     Game game = new Game();
     game.launch(this);
+    startMusic(MUSIC_FILENAME);
   }
 
   /**
@@ -279,5 +284,15 @@ public class LevelGUI extends Application {
     image.setY(position.getPosY());
 
     return image;
+  }
+  
+  /**
+   * plays a music track on autoloop. Mp3 is an acceptable format.
+   * @param path the path to the music track.
+   */
+  public void startMusic(String path) {
+    media = new Media(new File(path).toURI().toString());
+    mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.play();
   }
 }
