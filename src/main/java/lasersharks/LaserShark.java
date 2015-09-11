@@ -8,8 +8,8 @@ public class LaserShark extends Fish {
 
   private static final float ENERGY_DISSERPATION_RATE = 7.5f;
 
-  private final String imageResource = "shark.png";
-  private final float widthScale = 1.5f;
+  private final String imageResource = "LaserShark.gif";
+  private final float widthScale = 2.0f;
   private static final float HALF_RATE = 0.5F;
 
   /**
