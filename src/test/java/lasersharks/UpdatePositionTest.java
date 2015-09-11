@@ -3,6 +3,8 @@
  */
 package lasersharks;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -21,8 +23,7 @@ public class UpdatePositionTest {
 
   private Position position;
   private Direction direction;
-  private int expectedX;
-  private int expectedY;
+  private Position expectedPosition;
 
   /**
    * Setup the test scenario.
@@ -44,8 +45,7 @@ public class UpdatePositionTest {
    */
   public UpdatePositionTest(Direction direction, int expectedX, int expectedY) {
     this.direction = direction;
-    this.expectedX = expectedX;
-    this.expectedY = expectedY;
+    this.expectedPosition = new Position(expectedX, expectedY);
   }
 
   /**
@@ -58,7 +58,7 @@ public class UpdatePositionTest {
     return Arrays.asList(new Object[][] { { Direction.North, 0, 1 }, { Direction.NorthEast, 1, 1 },
         { Direction.East, 1, 0 }, { Direction.SouthEast, 1, -1 }, { Direction.South, 0, -1 },
         { Direction.SouthWest, -1, -1 }, { Direction.West, -1, 0 }, { Direction.NorthWest, -1, 1 },
-        { Direction.None, 0, 0 } });
+        { Direction.None, 0, 0 }, {null, 0, 0} });
   }
 
   /**
@@ -67,11 +67,8 @@ public class UpdatePositionTest {
   
   @Test
   public void testUpdatePosition() {
-    System.out.println("Parameterized direction is : " + direction.toString());
-    //TODO: fix these tests, as they make now no sense
- //   position.adjustPos(deltaX, deltaY);
- //   assertEquals(expectedX, position.getPosX());
- //   assertEquals(expectedY, position.getPosY());
+    position.updatePosition(direction, 1, 0);
+    assertEquals(expectedPosition, position);
   }
   
 

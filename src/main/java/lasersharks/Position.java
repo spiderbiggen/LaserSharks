@@ -17,8 +17,8 @@ public class Position {
   private static final int START_HEIGHT = 1080;
   private static final int START_WIDTH = 1920;
 
-  private static int height;
-  private static int width;
+  private static int height = START_HEIGHT;
+  private static int width = START_WIDTH;
 
   /**
    * 
@@ -30,10 +30,6 @@ public class Position {
   public Position(int posX, int posY) {
     this.posX = posX;
     this.posY = posY;
-
-    // TODO: fix this Findbugs warning by moving the screensize out of Position
-    height = START_HEIGHT;
-    width = START_WIDTH;
   }
 
   /**
@@ -170,10 +166,10 @@ public class Position {
    * 
    * @return true if the position is on the screen.
    * @param xMargin
-   *          max ofset margin
+   *          max offset margin
    */
   public final boolean onScreen(int xMargin) {
-    return (posX + xMargin >= 0 && posX <= width + xMargin && posY >= 0 && posY <= height);
+    return (posX + xMargin >= 0 && posX - xMargin <= width && posY >= 0 && posY <= height);
   }
 
   /**
