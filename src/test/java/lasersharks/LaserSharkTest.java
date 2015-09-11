@@ -22,7 +22,7 @@ public class LaserSharkTest extends FishTest {
   private LaserShark laserShark;
   private static final int DEFAULT_SHARK_SIZE = 30;
   private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 34;
-  private final String imageResource = "LaserShark.gif";
+  private final String imageResource = "shark.png";
 
   /**
    * Set up which is used before the tests.
