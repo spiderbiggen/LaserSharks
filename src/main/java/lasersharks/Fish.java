@@ -45,10 +45,12 @@ public abstract class Fish {
   public Position getPosition() {
     return this.position;
   }
-  
+
   /**
    * Sets the position of the fish.
-   * @param position the position to set to.
+   * 
+   * @param position
+   *          the position to set to.
    */
   public void setPosition(Position position) {
     this.position = position;
@@ -128,9 +130,9 @@ public abstract class Fish {
   private Position getMiddlePoint() {
     Position startPos = this.getPosition();
 
-    Position middlePointPosition = new Position(startPos.getPosX()
-        + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()), startPos.getPosY()
-        + (int) (HALF_SCALE * this.getSize()));
+    Position middlePointPosition = new Position(
+        startPos.getPosX() + (int) (HALF_SCALE * this.getWidthScale() * this.getSize()),
+        startPos.getPosY() + (int) (HALF_SCALE * this.getSize()));
     return middlePointPosition;
   }
 

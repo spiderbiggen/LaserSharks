@@ -68,7 +68,7 @@ public class FishControllerTest {
    */
   public FishController fishConFilled(int sizeOfShark) {
     fishCon = new FishController();
-    fishCon.addFish(new LaserShark(
+    fishCon.setShark(new LaserShark(
         new Position(POSITION_X, POSITION_Y), 
         sizeOfShark, 
         SPEED, 

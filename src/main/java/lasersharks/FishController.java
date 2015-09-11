@@ -19,6 +19,7 @@ public class FishController {
    * Holder for fishdata.
    */
   private List<Fish> fishList;
+  private LaserShark shark;
 
   /**
    * Spawnchance for new fishes.
@@ -61,11 +62,33 @@ public class FishController {
   }
 
   /**
+   * Sets the shark object.
+   * 
+   * @param shark
+   *          the new shark;
+   */
+  public void setShark(LaserShark shark) {
+    this.shark = shark;
+  }
+
+  /**
+   * Method to get the lasershark.
+   * 
+   * @return the lasershark
+   */
+  public LaserShark getShark() {
+    return this.shark;
+  }
+
+  /**
    * Update all fish positions.
    */
   private void updatePositions() {
-    this.fishList.removeAll(this.fishList.stream().filter(v -> !v.move())
-        .collect(Collectors.toList()));
+    this.fishList
+        .removeAll(this.fishList.stream().filter(v -> !v.move()).collect(Collectors.toList()));
+    if (this.shark != null) {
+      this.shark.move();
+    }
   }
 
   /**
@@ -102,37 +125,20 @@ public class FishController {
   /**
    * Method to set the value of the fish spawn chance.
    * 
-   * @param chance The int which is used as the new fish spawn chance.
+   * @param chance
+   *          The int which is used as the new fish spawn chance.
    */
   public void setFishSpawnChance(int chance) {
     fishSpawnChance = chance;
   }
 
   /**
-   * Method to get the lasershark out of the fishlist.
-   * 
-   * @return the lasershark
-   */
-  public LaserShark getShark() {
-    Fish res = null;
-    for (int i = 0; i < fishList.size(); i++) {
-      if (fishList.get(i) instanceof LaserShark) {
-        res = fishList.get(i);
-        
-
-        return (LaserShark) res;
-      }
-    }
-    return (LaserShark) res;
-  }
-  
-  /**
-   * this function checks if there are any collisions between the shark and other fish.
-   * if so, this function checks if the size of the fish is smaller or bigger than the shark.
-   * If smaller, the fish is eaten by the shark. If bigger, the game ends.
+   * this function checks if there are any collisions between the shark and other fish. if so, this
+   * function checks if the size of the fish is smaller or bigger than the shark. If smaller, the
+   * fish is eaten by the shark. If bigger, the game ends.
    */
   private void checkForCollisions() {
-    LaserShark shark = getShark(fishList);
+    LaserShark shark = this.shark;
     if (shark == null) {
       return;
     }
@@ -141,38 +147,17 @@ public class FishController {
       Rectangle fishHitbox = fishList.get(i).makeHitbox();
       if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
         // System.out.println("shark collides with fish");
-        if (!(fishList.get(i) instanceof LaserShark)) {
-          if (fishList.get(i).getSize() < shark.getSize()) {
-            // shark eats fish
-            shark.eat(fishList.get(i));
+        if (fishList.get(i).getSize() < shark.getSize()) {
+          // shark eats fish
+          shark.eat(fishList.get(i));
 
-          } else {
-            // fish eats shark
-            shark.kill();
-            System.out.println(shark.getSize() + ":" + fishList.get(i).getSize());
-          }
+        } else {
+          // fish eats shark
+          shark.kill();
+          System.out.println(shark.getSize() + ":" + fishList.get(i).getSize());
         }
       }
     }
-  }
-
-  /**
-   * returns the first lasershark from a list of fish. if no lasershark is present, it returns null.
-   * 
-   * @param list
-   *          of Fishes on the board
-   * @return the LaserShark
-   */
-  public LaserShark getShark(List<Fish> list) {
-    Fish res = null;
-    for (int i = 0; i < list.size(); i++) {
-      if (list.get(i) instanceof LaserShark) {
-        res = list.get(i);
-
-        return (LaserShark) res;
-      }
-    }
-    return (LaserShark) res;
   }
 
 }

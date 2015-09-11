@@ -72,6 +72,7 @@ public class LevelGUI extends Application {
   private Timeline timeline;
   private Media media;
   private MediaPlayer mediaPlayer;
+  private ImageView sharkImage;
 
   /**
    * @return the screenController.
@@ -146,6 +147,7 @@ public class LevelGUI extends Application {
   public void startGame() {
     timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DELAY), ev -> {
       this.showFishList(this.screenController.getNextFrameInfo());
+      this.showShark(this.screenController.getShark());
     }));
 
     timeline.setCycleCount(Animation.INDEFINITE);
@@ -201,9 +203,8 @@ public class LevelGUI extends Application {
    */
   public void addElements() {
     BackgroundImage myBI = new BackgroundImage(
-        new Image("somber sea floor.jpg", XRES, YRES, true, false),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
+        new Image("somber sea floor.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
     stackPane.setBackground(new Background(myBI));
   }
@@ -216,7 +217,7 @@ public class LevelGUI extends Application {
     choosePlayScene = false;
     chooseLoseScene = false;
   }
-  
+
   /**
    * This method sets only the lose scene true.
    */
@@ -232,13 +233,33 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-    list.removeAll(
-        list.stream()
-        .filter(v -> 
-          v instanceof ImageView 
-          || v instanceof Rectangle
-        ).collect(Collectors.toList())
-    );
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle)
+        .collect(Collectors.toList()));
+  }
+
+  /**
+   * This method will display the shark on the screen.
+   * 
+   * @param shark the shark to display
+   */
+  public void showShark(LaserShark shark) {
+    if (sharkImage == null) {
+      sharkImage = new ImageView(shark.getImageResource());
+    }
+    Position position = shark.getPosition();
+    double size = shark.getSize();
+    Direction dir = shark.getDirection();
+
+    // flip the image according to the direction.
+    if (dir.getDeltaX() != 0) {
+      sharkImage.setScaleX(dir.getDeltaX());
+    }
+    sharkImage.setFitHeight(size);
+    sharkImage.setFitWidth(size * shark.getWidthScale());
+
+    sharkImage.setX(position.getPosX());
+    sharkImage.setY(position.getPosY());
+    this.pane.getChildren().add(sharkImage);
   }
 
   /**
@@ -285,10 +306,12 @@ public class LevelGUI extends Application {
 
     return image;
   }
-  
+
   /**
    * plays a music track on autoloop. Mp3 is an acceptable format.
-   * @param path the path to the music track.
+   * 
+   * @param path
+   *          the path to the music track.
    */
   public void startMusic(String path) {
     media = new Media(new File(path).toURI().toString());

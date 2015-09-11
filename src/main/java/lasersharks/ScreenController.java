@@ -36,6 +36,7 @@ public class ScreenController {
 
   /**
    * Get information for next frame and checks if the shark is bigger than the winning size.
+   * 
    * @return FishInfo
    */
   public List<Fish> getNextFrameInfo() {
@@ -48,6 +49,15 @@ public class ScreenController {
       this.gui.chooseScene();
     }
     return this.level.getNextFrameInfo();
+  }
+
+  /**
+   * get the shark from the level.
+   * 
+   * @return the shark
+   */
+  public LaserShark getShark() {
+    return this.level.getShark();
   }
 
   /**

@@ -31,7 +31,7 @@ public class Level {
             START_SPEED, 
             START_DIRECTION
      );
-    this.fishCon.addFish(this.shark);
+    this.fishCon.setShark(this.shark);
     this.game = game;
     this.screenCon = new ScreenController(this, gui);
     this.keyboardCon = new KeyboardController(this.screenCon, this);
