@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
  *
  */
 
+@SuppressWarnings("restriction")
 public class FishController {
   /**
    * Holder for fishdata.
@@ -24,7 +25,7 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static final float FISH_SPAWN_CHANCE_BASE = 0.06258f;
+  private static final float FISH_SPAWN_CHANCE_BASE = 1.043f;
   private float fishSpawnChance;
 
   /**
@@ -82,21 +83,24 @@ public class FishController {
 
   /**
    * Update all fish positions.
+   * 
+   * @param frametime
    */
-  private void updatePositions() {
-    this.fishList
-        .removeAll(this.fishList.stream().filter(v -> !v.move()).collect(Collectors.toList()));
+  private void updatePositions(double frametime) {
+    this.fishList.removeAll(
+        this.fishList.stream().filter(v -> !v.move(frametime)).collect(Collectors.toList()));
     if (this.shark != null) {
-      this.shark.move();
+      this.shark.move(frametime);
     }
   }
 
   /**
    * 
+   * @param frametime
    * @return List of fish and their positions.
    */
-  private List<Fish> getNewFishPositions() {
-    this.updatePositions();
+  private List<Fish> getNewFishPositions(double frametime) {
+    this.updatePositions(frametime);
     return this.fishList;
   }
 
@@ -104,14 +108,16 @@ public class FishController {
    * Add new fish with chance of SELF::FISHSPAWNCHANCE, then update fish positions and delete
    * offscreen fish.
    * 
+   * @param frametime the time between frames in seconds
+   * 
    * @return List<Fish> list of fishes at there current position.
    */
-  public List<Fish> getNextCycleInformation() {
+  public List<Fish> getNextCycleInformation(double frametime) {
     checkForCollisions();
-    if (this.rng.nextFloat() <= fishSpawnChance) {
+    if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
       this.addFish(FishBot.generateFish());
     }
-    return this.getNewFishPositions();
+    return this.getNewFishPositions(frametime);
   }
 
   /**

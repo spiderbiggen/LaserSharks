@@ -5,8 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
 /**
  * Test class for Game.
+ * 
  * @author Sytze
  *
  */
@@ -14,9 +16,9 @@ public class GameTest {
 
   private Game game;
   private Level level;
-  
-  private final int score = 10;
-  
+
+  // private final int score = 10;
+
   /**
    * Set up the game.
    */
@@ -27,7 +29,7 @@ public class GameTest {
     game.setLevel(level);
     Mockito.when(level.getGame()).thenReturn(game);
   }
-  
+
   /**
    * Test the getter.
    */
@@ -35,5 +37,5 @@ public class GameTest {
   public void testGetLevel() {
     assertEquals(game, game.getLevel().getGame());
   }
-  
+
 }

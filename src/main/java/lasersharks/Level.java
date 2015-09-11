@@ -6,31 +6,31 @@ import lasersharks.gui.LevelGUI;
 
 /**
  * This level represents the connection between the fishController, game and screen controller.
+ * 
  * @author Sytze, Youri
  */
 public class Level {
   private static final float START_SIZE = 80.0f;
-  private static final int START_SPEED = 40;
+  private static final double START_SPEED = 670;
   private static final Direction START_DIRECTION = Direction.None;
   private LaserShark shark;
   private FishController fishCon;
   private ScreenController screenCon;
   private KeyboardController keyboardCon;
   private Game game;
-  
+
   /**
    * this is the constructor of the level class.
-   * @param game controller from witch to take commands and where to find env data.
-   * @param gui reference to the GUI Object.
+   * 
+   * @param game
+   *          controller from witch to take commands and where to find env data.
+   * @param gui
+   *          reference to the GUI Object.
    */
   public Level(Game game, LevelGUI gui) {
     this.fishCon = new FishController();
-    this.shark = new LaserShark(
-            Position.middlePosition(), 
-            START_SIZE, 
-            START_SPEED, 
-            START_DIRECTION
-     );
+    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
+        START_DIRECTION);
     this.fishCon.setShark(this.shark);
     this.game = game;
     this.screenCon = new ScreenController(this, gui);
@@ -40,7 +40,9 @@ public class Level {
 
   /**
    * Set shark direction.
-   * @param dir direction in witch to move.
+   * 
+   * @param dir
+   *          direction in witch to move.
    */
   public void setSharkDirection(Direction dir) {
     this.shark.setDirection(dir);
@@ -48,10 +50,13 @@ public class Level {
 
   /**
    * Method for getting information for next frame.
+   * 
+   * @param frametime
+   *          time between frames in seconds
    * @return info for next frame
    */
-  public List<Fish> getNextFrameInfo() {
-    return this.fishCon.getNextCycleInformation();
+  public List<Fish> getNextFrameInfo(double frametime) {
+    return this.fishCon.getNextCycleInformation(frametime);
   }
 
   /**
@@ -98,22 +103,22 @@ public class Level {
   public void setScreenCon(ScreenController screenCon) {
     this.screenCon = screenCon;
   }
-//
-//  /**
-//   * @return the score
-//   */
-//  public int getScore() {
-//    return score;
-//  }
-//
-//  /**
-//   * @param score
-//   *          the score to set
-//   */
-//  public void setScore(int score) {
-//    this.score = score;
-//  }
-  
+  //
+  // /**
+  // * @return the score
+  // */
+  // public int getScore() {
+  // return score;
+  // }
+  //
+  // /**
+  // * @param score
+  // * the score to set
+  // */
+  // public void setScore(int score) {
+  // this.score = score;
+  // }
+
   /**
    * @return the keyboardCon
    */
@@ -122,7 +127,8 @@ public class Level {
   }
 
   /**
-   * @param keyboardCon the keyboardCon to set
+   * @param keyboardCon
+   *          the keyboardCon to set
    */
   public void setKeyboardCon(KeyboardController keyboardCon) {
     this.keyboardCon = keyboardCon;
@@ -136,12 +142,13 @@ public class Level {
   }
 
   /**
-   * @param game the game to set
+   * @param game
+   *          the game to set
    */
   public void setGame(Game game) {
     this.game = game;
   }
-  
+
   /**
    * Launch game.
    */

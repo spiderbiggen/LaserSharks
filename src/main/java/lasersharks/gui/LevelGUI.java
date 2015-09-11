@@ -1,12 +1,11 @@
 package lasersharks.gui;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -23,10 +22,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
@@ -44,7 +43,6 @@ import lasersharks.ScreenController;
 @SuppressWarnings("restriction")
 public class LevelGUI extends Application {
 
-  private static final double FRAME_DELAY = 0.06;
   /**
    * the x resolution of the screen.
    */
@@ -69,10 +67,15 @@ public class LevelGUI extends Application {
   private boolean chooseWinScene = false;
   private boolean chooseLoseScene = false;
   private Stage stage;
-  private Timeline timeline;
+  private AnimationTimer animation;
   private Media media;
   private MediaPlayer mediaPlayer;
   private ImageView sharkImage;
+
+  private long time = 0;
+  private final double timeToMilis = 1_000_000;
+  private Text fps = new Text();
+  private DecimalFormat df = new DecimalFormat("#.00");
 
   /**
    * @return the screenController.
@@ -122,6 +125,7 @@ public class LevelGUI extends Application {
    * @param stage
    *          the stage the scene is set to.
    */
+  @Override
   public void start(Stage stage) {
     pane = new Pane();
     stage.setFullScreen(true);
@@ -139,19 +143,36 @@ public class LevelGUI extends Application {
     Game game = new Game();
     game.launch(this);
     startMusic(MUSIC_FILENAME);
+
+    final int textsize = 20;
+    fps.setX(textsize);
+    fps.setY(textsize);
+    fps.setFont(new Font(textsize));
+    fps.setFill(Color.WHITESMOKE);
   }
 
   /**
    * Function for start of drawing fish on screen.
    */
   public void startGame() {
-    timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DELAY), ev -> {
-      this.showFishList(this.screenController.getNextFrameInfo());
-      this.showShark(this.screenController.getShark());
-    }));
+    animation = new AnimationTimer() {
 
-    timeline.setCycleCount(Animation.INDEFINITE);
-    timeline.play();
+      @Override
+      public void handle(long now) {
+        double frametime = (now - time) / timeToMilis;
+        final double milis = 1000;
+        pane.getChildren().remove(fps);
+        fps.setText("frametime: " + frametime + System.lineSeparator() + "fps: "
+            + df.format(milis / frametime) + System.lineSeparator());
+
+        showFishList(screenController.getNextFrameInfo(milis / frametime));
+        showShark(screenController.getShark());
+        pane.getChildren().add(fps);
+        time = now;
+      }
+
+    };
+    animation.start();
   }
 
   /**
@@ -184,14 +205,14 @@ public class LevelGUI extends Application {
       stage.setScene(playScene);
 
     } else if (chooseWinScene) {
+      animation.stop();
       stage.setScene(winScene);
-      timeline.stop();
       stage.setFullScreen(true);
       stage.show();
 
     } else if (chooseLoseScene) {
+      animation.stop();
       stage.setScene(loseScene);
-      timeline.stop();
       stage.setFullScreen(true);
       stage.show();
     }
@@ -240,7 +261,8 @@ public class LevelGUI extends Application {
   /**
    * This method will display the shark on the screen.
    * 
-   * @param shark the shark to display
+   * @param shark
+   *          the shark to display
    */
   public void showShark(LaserShark shark) {
     if (sharkImage == null) {

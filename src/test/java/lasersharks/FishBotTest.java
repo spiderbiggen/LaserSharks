@@ -20,11 +20,11 @@ public class FishBotTest extends FishTest {
   private final long seed = 123456L;
   private final long seedWest = 11L;
 
-  private final float expectedSize1 = 228;
-  private final int expectedSpeed1 = 17;
+  private final float expectedSize1 = 206;
+  private final int expectedSpeed1 = 277;
 
-  private final float expectedSize2 = 115;
-  private final int expectedSpeed2 = 10;
+  private final float expectedSize2 = 172;
+  private final int expectedSpeed2 = 170;
 
   /**
    * Set up which is used before the tests.
@@ -44,11 +44,11 @@ public class FishBotTest extends FishTest {
     System.out.println(generatedFish.toString());
 
     assertEquals(generatedFish.getDirection(), Direction.East);
-    assertEquals(generatedFish.getPosition().getPosX(), 0);
-    assertEquals(generatedFish.getSize(), expectedSize1, 0);
+    assertEquals(generatedFish.getPosition().getPosX(), 0, 0);
+    assertEquals(expectedSize1, generatedFish.getSize(), 1);
     assertTrue(generatedFish.getSpeed() == expectedSpeed1);
   }
-  
+
   /**
    * 
    */
@@ -59,8 +59,8 @@ public class FishBotTest extends FishTest {
 
     System.out.println(generatedFish.toString());
     assertEquals(generatedFish.getDirection(), Direction.West);
-    assertEquals(generatedFish.getPosition().getPosX(), Position.getWidthPanel());
-    assertEquals(generatedFish.getSize(), expectedSize2, 0);
+    assertEquals(generatedFish.getPosition().getPosX(), Position.getWidthPanel(), 0);
+    assertEquals(expectedSize2, generatedFish.getSize(), 1);
     assertTrue(generatedFish.getSpeed() == expectedSpeed2);
   }
 

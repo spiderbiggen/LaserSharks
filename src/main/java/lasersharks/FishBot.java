@@ -14,8 +14,8 @@ public class FishBot extends Fish {
    * This value is used to modify the speed of the fishes that are generated. The generated speed is
    * equal to SpeedModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
    */
-  private static final int SPEED_MODIFIER = 25;
-  private static final int BASE_SPEED = 5;
+  private static final int SPEED_MODIFIER = 420;
+  private static final int BASE_SPEED = 80;
   private final String imageResource = "FishBotSmall.png";
   private final float widthScale = 1.1f;
 
@@ -39,7 +39,7 @@ public class FishBot extends Fish {
    * @param direction
    *          init direction
    */
-  public FishBot(Position position, float size, int speed, Direction direction) {
+  public FishBot(Position position, float size, double speed, Direction direction) {
     super(position, size, speed, direction);
   }
 
@@ -62,7 +62,7 @@ public class FishBot extends Fish {
    *          random number generator to use.
    */
   public static FishBot generateFish(Random rng) {
-    int posX;
+    double posX;
     Direction dir;
     if (rng.nextBoolean()) {
       // starts on the right side
@@ -74,9 +74,11 @@ public class FishBot extends Fish {
       dir = Direction.East;
     }
 
-    return new FishBot(new Position(posX, (int) (Position.getHeightPanel() * rng.nextFloat())),
-        (int) Math.round(rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE), (int) Math.round(rng
-            .nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
+    float size = rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE;
+
+    return new FishBot(
+        new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), size,
+        Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
   }
 
   @Override

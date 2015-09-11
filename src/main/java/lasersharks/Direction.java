@@ -19,8 +19,11 @@ public enum Direction {
   
   /**
    * Constructor for Direction.
-   * @param deltaX deltaX of direction
-   * @param deltaY deltaY op direction
+   * 
+   * @param deltaX
+   *          deltaX of direction
+   * @param deltaY
+   *          deltaY op direction
    */
   Direction(int deltaX, int deltaY) {
     this.deltaX = deltaX;
@@ -29,6 +32,7 @@ public enum Direction {
   
   /**
    * Get delta x of direction.
+   * 
    * @return Delta x
    */
   public int getDeltaX() {
@@ -37,6 +41,7 @@ public enum Direction {
   
   /**
    * Get delta y of direction.
+   * 
    * @return Delta y
    */
   public int getDeltaY() {

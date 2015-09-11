@@ -1,18 +1,17 @@
 package lasersharks;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.After;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.mock;
-
-
 /**
  * Class for testing Fish object.
+ * 
  * @author Stefan
  *
  */
@@ -24,7 +23,6 @@ public abstract class FishTest {
   protected final float size = 30;
   protected final int speed = 40;
   protected final Direction direction = Direction.East;
-
 
   /**
    * Tear down the fish Object after the test.
@@ -75,7 +73,7 @@ public abstract class FishTest {
   public void testSetSpeed() {
     int newSpeed = 2;
     fish1.setSpeed(newSpeed);
-    assertEquals(newSpeed, fish1.getSpeed());
+    assertEquals(newSpeed, fish1.getSpeed(), 0);
   }
 
   /**
@@ -85,6 +83,7 @@ public abstract class FishTest {
   public void testGetDirection() {
     assertEquals(fish1.getDirection(), Direction.East);
   }
+
   /**
    * Test for {@link Fish#setDirection(Direction)}.
    */
@@ -122,12 +121,12 @@ public abstract class FishTest {
    */
   @Test
   public void testMove() {
-    int oldX = fish1.getPosition().getPosX();
-    fish1.move();
-    int newX = fish1.getPosition().getPosX();
-    assertEquals(oldX + fish1.getSpeed(), newX);
+    double oldX = fish1.getPosition().getPosX();
+    fish1.move(1);
+    double newX = fish1.getPosition().getPosX();
+    assertEquals(oldX + fish1.getSpeed(), newX, 1);
   }
-  
+
   /**
    * test a fish that is alive and on the screen.
    */
@@ -135,7 +134,7 @@ public abstract class FishTest {
   public void testOnScreenTrue() {
     assertTrue(fish1.isOnScreen());
   }
-  
+
   /**
    * Tests if a s fish is considered off screen when it is killed.
    */
@@ -145,7 +144,7 @@ public abstract class FishTest {
     fish1.kill();
     assertFalse(fish1.isOnScreen());
   }
-  
+
   /**
    * Tests if a fish is considered off screen when it's position is out of bounds.
    */
