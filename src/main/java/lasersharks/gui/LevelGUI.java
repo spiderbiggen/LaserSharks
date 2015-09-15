@@ -313,7 +313,7 @@ public class LevelGUI extends Application {
 
     try (FileWriter fw = new FileWriter("highscores")) {
       for (int i = 0; i < list.size(); i++) {
-        if (i < 4) {
+        if (i < list.size() -1) {
           fw.write(list.get(i) + System.lineSeparator());
         } else {
           fw.write(list.get(i));
