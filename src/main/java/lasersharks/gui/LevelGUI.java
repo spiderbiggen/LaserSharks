@@ -53,9 +53,10 @@ public class LevelGUI extends Application {
    */
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
+  private static final float HALF_SCALE = 0.5f;
   private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static LevelGUI instance;
-  private int score = 0;
+  private static int score = 0;
   private ScreenController screenController;
   private Pane pane;
   private Pane winPane;
@@ -219,9 +220,9 @@ public class LevelGUI extends Application {
    * 
    */
   public void addElements(Pane pane) {
-    BackgroundImage myBI = new BackgroundImage(
-        new Image("somber sea floor.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES, true,
+        false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
   }
 
@@ -251,7 +252,8 @@ public class LevelGUI extends Application {
     ObservableList<Node> list = pane.getChildren();
     list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle)
         .collect(Collectors.toList()));
-  }
+    System.out.println(score);
+   }
 
   /**
    * This method will display the shark on the screen.
@@ -344,7 +346,7 @@ public class LevelGUI extends Application {
   public static LevelGUI getInstance() {
     return LevelGUI.instance;
   }
-  
+
   /**
    * Returns the stage used to start this gui.
    * 
@@ -353,27 +355,23 @@ public class LevelGUI extends Application {
   public Stage getStage() {
     return this.stage;
   }
-  
-  /**
-   * Returns the current score the player has.
-   * 
-   * @return current score
-   */
-  public int getScore() {
-    return score;
-  }
+
   /**
    * Set the current score the player has.
    * 
    */
-  public void setScore(int score) {
-    this.score = score;
+  public static void increaseScore(Fish fish) {
+    if(fish.isAlive()){
+      score = (int) (score + fish.getSize() * HALF_SCALE + 20);
+    }
+    
   }
 
   /**
    * Sets the stage to the new stage.
    * 
-   * @param stage the new stage object
+   * @param stage
+   *          the new stage object
    */
   public void setStage(Stage stage) {
     this.stage = stage;

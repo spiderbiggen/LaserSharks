@@ -1,5 +1,7 @@
 package lasersharks;
 
+import lasersharks.gui.LevelGUI;
+
 /**
  * LaserShark class.
  *
@@ -38,8 +40,9 @@ public class LaserShark extends Fish {
     if (fish.isAlive()) {
       this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
     }
+    LevelGUI.increaseScore(fish);
     fish.kill();
-
+    
   }
 
   @Override
