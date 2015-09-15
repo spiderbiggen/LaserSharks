@@ -16,7 +16,7 @@ public class ScreenController {
   private LevelGUI gui;
   private Level level;
   private Scene scene;
-  private static final int GAME_WINNING_SIZE = 1000;
+  private static final int GAME_WINNING_SIZE = 320;
 
   /**
    * Constructor.
