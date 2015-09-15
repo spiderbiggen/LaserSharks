@@ -21,7 +21,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
@@ -166,11 +169,21 @@ public class LevelGUI extends Application {
         final double milis = 1000;
         showFishList(screenController.getNextFrameInfo(milis / frametime));
         showShark(screenController.getShark());
+        showScore();
         time = now;
       }
 
     };
     animation.start();
+  }
+
+  public void showScore() {
+    Text gameText = new Text("Score: " + score);
+    gameText.setX(Position.upperCornerPosition().getPosX());
+    gameText.setY(Position.upperCornerPosition().getPosY());
+    gameText.setScaleX(TEXT_SCALE_SIZE / 2.5);
+    gameText.setScaleY(TEXT_SCALE_SIZE / 2.5);
+    this.pane.getChildren().add(gameText);
   }
 
   /**
@@ -250,10 +263,10 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle)
+    list.removeAll(list.stream()
+        .filter(v -> v instanceof ImageView || v instanceof Rectangle || v instanceof Text)
         .collect(Collectors.toList()));
-    System.out.println(score);
-   }
+  }
 
   /**
    * This method will display the shark on the screen.
@@ -357,14 +370,14 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * Set the current score the player has.
+   * Increase the current score the player has according to the size of the fish eaten.
    * 
    */
   public static void increaseScore(Fish fish) {
-    if(fish.isAlive()){
+    if (fish.isAlive()) {
       score = (int) (score + fish.getSize() * HALF_SCALE + 20);
     }
-    
+
   }
 
   /**
