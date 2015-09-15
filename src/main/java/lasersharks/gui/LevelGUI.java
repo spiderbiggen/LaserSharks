@@ -55,6 +55,7 @@ public class LevelGUI extends Application {
   private static final int TEXT_SCALE_SIZE = 10;
   private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static LevelGUI instance;
+  private int score = 0;
   private ScreenController screenController;
   private Pane pane;
   private Pane winPane;
@@ -336,7 +337,7 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * Returns a singleton of the levelgui class.
+   * Returns a singleton of the levelGUI class.
    * 
    * @return singleton instance
    */
@@ -353,6 +354,22 @@ public class LevelGUI extends Application {
     return this.stage;
   }
   
+  /**
+   * Returns the current score the player has.
+   * 
+   * @return current score
+   */
+  public int getScore() {
+    return score;
+  }
+  /**
+   * Set the current score the player has.
+   * 
+   */
+  public void setScore(int score) {
+    this.score = score;
+  }
+
   /**
    * Sets the stage to the new stage.
    * 
