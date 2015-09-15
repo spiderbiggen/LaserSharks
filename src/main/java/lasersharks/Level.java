@@ -30,7 +30,7 @@ public class Level {
   public Level(Game game, LevelGUI gui) {
     this.fishCon = new FishController();
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
-        START_DIRECTION);
+        START_DIRECTION, 0);
     this.fishCon.setShark(this.shark);
     this.game = game;
     this.screenCon = new ScreenController(this, gui);
