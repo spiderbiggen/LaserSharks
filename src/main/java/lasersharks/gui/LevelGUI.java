@@ -186,7 +186,9 @@ public class LevelGUI extends Application {
     };
     animation.start();
   }
-
+/**
+ * Displays the score in the upper right corner of the screen.
+ */
   public void showScore() {
     Text gameText = new Text("Score: " + score);
     gameText.setX(Position.upperCornerPosition().getPosX());
