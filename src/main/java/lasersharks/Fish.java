@@ -133,9 +133,9 @@ public abstract class Fish {
   private Position getMiddlePoint() {
     Position startPos = this.getPosition();
 
-    Position middlePointPosition = new Position(
-        startPos.getPosX() + (HALF_SCALE * this.getWidthScale() * this.getSize()),
-        startPos.getPosY() + (HALF_SCALE * this.getSize()));
+    Position middlePointPosition = new Position(startPos.getPosX()
+        + (HALF_SCALE * this.getWidthScale() * this.getSize()), startPos.getPosY()
+        + (HALF_SCALE * this.getSize()));
     return middlePointPosition;
   }
 
@@ -192,8 +192,8 @@ public abstract class Fish {
   public Rectangle makeHitbox() {
     double xcoordinate = this.getPosition().getPosX();
     double ycoordinate = this.getPosition().getPosY();
-    Rectangle rekt = new Rectangle(xcoordinate, ycoordinate, this.getWidthScale() * this.getSize(),
-        this.getSize());
+    Rectangle rekt = new Rectangle(xcoordinate + 0.075 * this.getSize(), ycoordinate + 0.075 * this.getSize(), this.getWidthScale() * this.getSize()
+        * 0.85, this.getSize() * 0.85);
     return rekt;
   }
 
