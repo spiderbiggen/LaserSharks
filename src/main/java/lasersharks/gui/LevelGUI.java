@@ -37,7 +37,6 @@ import lasersharks.ScreenController;
  * @author michiel, daan
  *
  */
-
 @SuppressWarnings("restriction")
 public class LevelGUI extends Application {
 
@@ -55,6 +54,7 @@ public class LevelGUI extends Application {
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
   private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
+  private static LevelGUI instance;
   private ScreenController screenController;
   private Pane pane;
   private Pane winPane;
@@ -123,6 +123,7 @@ public class LevelGUI extends Application {
    */
   @Override
   public void start(Stage stage) {
+    LevelGUI.instance = this;
     pane = new Pane();
     stackPane = new StackPane();
     stage.setFullScreen(true);
@@ -332,5 +333,32 @@ public class LevelGUI extends Application {
     media = new Media(new File(path).toURI().toString());
     mediaPlayer = new MediaPlayer(media);
     mediaPlayer.play();
+  }
+
+  /**
+   * Returns a singleton of the levelgui class.
+   * 
+   * @return singleton instance
+   */
+  public static LevelGUI getInstance() {
+    return LevelGUI.instance;
+  }
+  
+  /**
+   * Returns the stage used to start this gui.
+   * 
+   * @return current stage
+   */
+  public Stage getStage() {
+    return this.stage;
+  }
+  
+  /**
+   * Sets the stage to the new stage.
+   * 
+   * @param stage the new stage object
+   */
+  public void setStage(Stage stage) {
+    this.stage = stage;
   }
 }
