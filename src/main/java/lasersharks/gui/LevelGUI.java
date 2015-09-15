@@ -301,8 +301,8 @@ public class LevelGUI extends Application {
    * @throws IOException
    */
   public static void writeHighscore() throws IOException {
-    for (int i = 0; i < 5; i++) {
-      if (score > Integer.parseInt(list.get(i).substring(3))) {
+    for (int i = 0; i < list.size(); i++) {
+      if (score >= Integer.parseInt(list.get(i).substring(3))) {
         list.remove(i);
         list.add(i, i + ". " + score);
         break;
