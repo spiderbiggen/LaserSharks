@@ -1,7 +1,12 @@
 package lasersharks.gui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import javafx.animation.AnimationTimer;
@@ -74,6 +79,7 @@ public class LevelGUI extends Application {
   private Media media;
   private MediaPlayer mediaPlayer;
   private ImageView sharkImage;
+  private static ArrayList<String> list;
 
   private long time = 0;
   private final double timeToMilis = 1_000_000;
@@ -167,7 +173,11 @@ public class LevelGUI extends Application {
       public void handle(long now) {
         double frametime = (now - time) / timeToMilis;
         final double milis = 1000;
-        showFishList(screenController.getNextFrameInfo(milis / frametime));
+        try {
+          showFishList(screenController.getNextFrameInfo(milis / frametime));
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         showShark(screenController.getShark());
         showScore();
         time = now;
@@ -241,8 +251,12 @@ public class LevelGUI extends Application {
 
   /**
    * This method set the end scene true and the playscene false.
+   * 
+   * @throws IOException
    */
-  public void setWinSceneTrue() {
+  public void setWinSceneTrue() throws IOException {
+    list = readHighscore();
+    writeHighscore();
     chooseWinScene = true;
     choosePlayScene = false;
     chooseLoseScene = false;
@@ -250,11 +264,62 @@ public class LevelGUI extends Application {
 
   /**
    * This method sets only the lose scene true.
+   * @throws IOException 
    */
-  public void setLoseSceneTrue() {
+  public void setLoseSceneTrue() throws IOException {
+    list = readHighscore();
+    writeHighscore();
     chooseWinScene = false;
     choosePlayScene = false;
     chooseLoseScene = true;
+  }
+
+  public static ArrayList<String> readHighscore() throws FileNotFoundException {
+    @SuppressWarnings("resource")
+    Scanner sc = new Scanner(new File("highscores"));
+    ArrayList<String> list = new ArrayList<String>();
+    while (sc.hasNextLine()) {
+      list.add(sc.nextLine());
+    }
+
+    return list;
+
+  }
+
+  public static void writeHighscore() throws IOException {
+    for (int i = 0; i < 5; i++) {
+      if (score > Integer.parseInt(list.get(i).substring(3))) {
+        list.remove(i);
+        list.add(i, i + ". " + score);
+        break;
+      }
+
+    }
+    fixHighscoreCount(list);
+
+    try (FileWriter fw = new FileWriter("highscores")) {
+      for (int i = 0; i < list.size(); i++) {
+        if (i < 4)
+          fw.write(list.get(i) + System.lineSeparator());
+        else
+          fw.write(list.get(i));
+      }
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static ArrayList<String> fixHighscoreCount(ArrayList<String> list) {
+    for (int i = 0; i < list.size(); i++) {
+      String s = list.get(i);
+      list.remove(i);
+
+      s = (i + 1) + ". " + s.substring(3);
+      list.add(i, s);
+    }
+
+    return list;
   }
 
   /**
@@ -367,6 +432,10 @@ public class LevelGUI extends Application {
    */
   public Stage getStage() {
     return this.stage;
+  }
+
+  public int getScore() {
+    return score;
   }
 
   /**
