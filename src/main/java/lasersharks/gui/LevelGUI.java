@@ -264,7 +264,8 @@ public class LevelGUI extends Application {
 
   /**
    * This method sets only the lose scene true.
-   * @throws IOException 
+   * 
+   * @throws IOException
    */
   public void setLoseSceneTrue() throws IOException {
     list = readHighscore();
@@ -274,6 +275,12 @@ public class LevelGUI extends Application {
     chooseLoseScene = true;
   }
 
+  /**
+   * Reads the current highscore list so it can be edited.
+   * 
+   * @return the current highscore list.
+   * @throws FileNotFoundException
+   */
   public static ArrayList<String> readHighscore() throws FileNotFoundException {
     @SuppressWarnings("resource")
     Scanner sc = new Scanner(new File("highscores"));
@@ -286,6 +293,11 @@ public class LevelGUI extends Application {
 
   }
 
+  /**
+   * Method for writing the highscores. The highscores are saved in highscores.txt .
+   * 
+   * @throws IOException
+   */
   public static void writeHighscore() throws IOException {
     for (int i = 0; i < 5; i++) {
       if (score > Integer.parseInt(list.get(i).substring(3))) {
@@ -299,10 +311,11 @@ public class LevelGUI extends Application {
 
     try (FileWriter fw = new FileWriter("highscores")) {
       for (int i = 0; i < list.size(); i++) {
-        if (i < 4)
+        if (i < 4) {
           fw.write(list.get(i) + System.lineSeparator());
-        else
+        } else {
           fw.write(list.get(i));
+        }
       }
 
     } catch (IOException e) {
@@ -310,13 +323,20 @@ public class LevelGUI extends Application {
     }
   }
 
+  /**
+   * Fixes the still erroneous list after the new score has been inserted in the writeHighscore()
+   * method. An example would be 1. 500 2. 250 2. 250 3. 100 4. 50.
+   * 
+   * @param list
+   * @return the correct highscore list
+   */
   public static ArrayList<String> fixHighscoreCount(ArrayList<String> list) {
     for (int i = 0; i < list.size(); i++) {
-      String s = list.get(i);
+      String newEntry = list.get(i);
       list.remove(i);
 
-      s = (i + 1) + ". " + s.substring(3);
-      list.add(i, s);
+      newEntry = (i + 1) + ". " + newEntry.substring(3);
+      list.add(i, newEntry);
     }
 
     return list;
