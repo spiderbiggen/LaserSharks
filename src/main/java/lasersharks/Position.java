@@ -181,8 +181,8 @@ public class Position {
    *          how far something can go outside of the screen on the y axis
    */
   public void clipPosition(double xMargin, double yMargin) {
-    this.posX = Math.min(Math.max(0 - xMargin, this.posX), width + xMargin);
-    this.posY = Math.min(Math.max(0 - yMargin, this.posY), height + yMargin);
+    this.posX = Math.min(Math.max(0 - xMargin, this.posX), width - xMargin);
+    this.posY = Math.min(Math.max(0 - yMargin, this.posY), height - yMargin);
   }
 
   @Override
