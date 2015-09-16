@@ -79,4 +79,10 @@ public class LaserShark extends Fish {
     }
     super.setDirection(dir);
   }
+  
+  @Override
+  public void kill() {
+    Logger.getInstance().write("Loss", "Player has colided with a bigger fish");
+    super.kill();
+  }
 }
