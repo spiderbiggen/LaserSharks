@@ -54,8 +54,8 @@ public class LaserShark extends Fish {
     super.move(frametime);
     // this will make sure the fish stay within both
 
-    this.getPosition().clipPosition((int) (this.getSize() * this.getWidthScale() * HALF_RATE),
-        (int) (this.getSize() * HALF_RATE));
+    this.getPosition().clipPosition((this.getSize() * this.getWidthScale() * HALF_RATE),
+        (this.getSize() * HALF_RATE));
     return true;
   }
 
