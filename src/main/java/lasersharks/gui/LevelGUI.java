@@ -131,9 +131,10 @@ public class LevelGUI extends Application {
    * 
    * @param stage
    *          the stage the scene is set to.
+   * @throws FileNotFoundException
    */
   @Override
-  public void start(Stage stage) {
+  public void start(Stage stage) throws FileNotFoundException {
     LevelGUI.instance = this;
     pane = new Pane();
     stackPane = new StackPane();
@@ -186,9 +187,10 @@ public class LevelGUI extends Application {
     };
     animation.start();
   }
-/**
- * Displays the score in the upper right corner of the screen.
- */
+
+  /**
+   * Displays the score in the upper right corner of the screen.
+   */
   public void showScore() {
     Text gameText = new Text("Score: " + score);
     gameText.setX(Position.upperCornerPosition().getPosX());
@@ -204,16 +206,24 @@ public class LevelGUI extends Application {
    * @param message
    *          the message to display
    * @return new scene
+   * @throws FileNotFoundException
    */
-  public Pane showMessageScene(String message) {
+  public Pane showMessageScene(String message) throws FileNotFoundException {
+    list = readHighscore();
     Pane pane = new Pane();
     addElements(pane);
     Text gameText = new Text(message);
+    Text highScore = new Text(makeHighscoreString());
     pane.getChildren().add(gameText);
+    pane.getChildren().add(highScore);
+    highScore.setScaleX(TEXT_SCALE_SIZE/2.5);
+    highScore.setScaleY(TEXT_SCALE_SIZE/2.5);
     gameText.setScaleX(TEXT_SCALE_SIZE);
     gameText.setScaleY(TEXT_SCALE_SIZE);
     gameText.setX(Position.middlePosition().getPosX());
-    gameText.setY(Position.middlePosition().getPosY());
+    gameText.setY(Position.middlePosition().getPosY() - 250);
+    highScore.setX(Position.middlePosition().getPosX());
+    highScore.setY(Position.middlePosition().getPosY());
     return pane;
   }
 
@@ -313,7 +323,7 @@ public class LevelGUI extends Application {
 
     try (FileWriter fw = new FileWriter("highscores")) {
       for (int i = 0; i < list.size(); i++) {
-        if (i < list.size() -1) {
+        if (i < list.size() - 1) {
           fw.write(list.get(i) + System.lineSeparator());
         } else {
           fw.write(list.get(i));
@@ -342,6 +352,20 @@ public class LevelGUI extends Application {
     }
 
     return list;
+  }
+
+  /**
+   * Makes a nicely displayed string of the highscore
+   */
+
+  public static String makeHighscoreString() {
+    String res = "";
+    String li = System.lineSeparator();
+    for (int i = 0; i < list.size(); i++) {
+      res = res + "   " + list.get(i) + li;
+    }
+
+    return "Highscores:" + li + res;
   }
 
   /**
