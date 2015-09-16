@@ -150,6 +150,7 @@ public class LevelGUI extends Application {
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
     Game game = new Game();
     game.launch(this);
+    Logger.getInstance().write("Starting Music", "Starting");
     startMusic(MUSIC_FILENAME);
   }
 
