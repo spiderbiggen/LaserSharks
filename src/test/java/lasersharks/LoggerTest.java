@@ -103,7 +103,7 @@ public class LoggerTest {
           )
       );
     } else {
-      fail();
+      assertEquals(null, content);
     }
   }
 }
