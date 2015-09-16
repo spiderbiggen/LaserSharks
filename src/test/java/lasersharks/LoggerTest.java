@@ -75,7 +75,7 @@ public class LoggerTest {
    */
   @Test
   public void cleanWriteTest() throws IOException {
-    File f = new File("/logs/test.txt");
+    File f = new File("logs/test.txt");
     f.getParentFile().mkdirs();
     if (f.exists()) {
       f.delete();
