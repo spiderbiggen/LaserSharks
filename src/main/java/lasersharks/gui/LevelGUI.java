@@ -28,6 +28,7 @@ import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
 import lasersharks.LaserShark;
+import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -123,6 +124,7 @@ public class LevelGUI extends Application {
    */
   @Override
   public void start(Stage stage) {
+    Logger.getInstance().write("Starting game", "Starting");
     pane = new Pane();
     stackPane = new StackPane();
     stage.setFullScreen(true);
