@@ -68,4 +68,15 @@ public class LaserShark extends Fish {
   public double getWidthScale() {
     return widthScale;
   }
+  
+  @Override
+  public void setDirection(Direction dir) {
+    if (this.isAlive() && this.getDirection() != dir) {
+      Logger.getInstance().write(
+          "Change of direction", 
+          "From: " + this.getDirection() + ", to: " + dir
+      );
+    }
+    super.setDirection(dir);
+  }
 }
