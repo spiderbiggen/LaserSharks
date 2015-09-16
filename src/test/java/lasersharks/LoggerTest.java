@@ -89,7 +89,10 @@ public class LoggerTest {
     FileReader fr = new FileReader(f);
     BufferedReader reader = new BufferedReader(fr);
     String content = reader.readLine();
-    content = reader.readLine();
+    String c2content = reader.readLine();
+    if (c2content != null) {
+      content = c2content;
+    }
     reader.close();
     if (content != null) {
       assertEquals(
