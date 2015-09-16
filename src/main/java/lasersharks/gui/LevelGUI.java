@@ -186,9 +186,10 @@ public class LevelGUI extends Application {
     };
     animation.start();
   }
-/**
- * Displays the score in the upper right corner of the screen.
- */
+
+  /**
+   * Displays the score in the upper right corner of the screen.
+   */
   public void showScore() {
     Text gameText = new Text("Score: " + score);
     gameText.setX(Position.upperCornerPosition().getPosX());
@@ -252,7 +253,7 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * This method set the end scene true and the playscene false.
+   * This method set the end scene true and the playscene false. Also updates the highscores.
    * 
    * @throws IOException
    */
@@ -265,7 +266,7 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * This method sets only the lose scene true.
+   * This method sets only the lose scene true. Also updates the highscores.
    * 
    * @throws IOException
    */
@@ -313,7 +314,7 @@ public class LevelGUI extends Application {
 
     try (FileWriter fw = new FileWriter("highscores")) {
       for (int i = 0; i < list.size(); i++) {
-        if (i < list.size() -1) {
+        if (i < list.size() - 1) {
           fw.write(list.get(i) + System.lineSeparator());
         } else {
           fw.write(list.get(i));
@@ -456,7 +457,7 @@ public class LevelGUI extends Application {
     return this.stage;
   }
 
-  public int getScore() {
+  public static int getScore() {
     return score;
   }
 
