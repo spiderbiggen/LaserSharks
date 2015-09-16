@@ -115,7 +115,14 @@ public class FishController {
   public List<Fish> getNextCycleInformation(double frametime) {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
-      this.addFish(FishBot.generateFish());
+      Fish f = FishBot.generateFish();
+      this.addFish(f);
+      Logger.getInstance().write("Fish spawned",
+          "Speed: " + f.getSpeed() + ", "
+          + "Size: " + f.getSize() + ", "
+          + "Direction: " + f.getDirection() + ", "
+          + "Position: " + f.getPosition()
+      );
     }
     return this.getNewFishPositions(frametime);
   }
