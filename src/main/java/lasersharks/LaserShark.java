@@ -36,6 +36,13 @@ public class LaserShark extends Fish {
    */
   public void eat(Fish fish) {
     if (fish.isAlive()) {
+      Logger.getInstance().write(
+          "Fish eaten", 
+          "Old sharksize: " + this.getSize() + ","
+          + "Fish size: " + fish.getSize() + ", "
+          + "New sharksize: " 
+          + (this.getSize() + (fish.getSize() / ENERGY_DISSERPATION_RATE))
+      );
       this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
     }
     fish.kill();
