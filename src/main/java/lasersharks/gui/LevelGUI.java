@@ -131,10 +131,10 @@ public class LevelGUI extends Application {
    * 
    * @param stage
    *          the stage the scene is set to.
-   * @throws FileNotFoundException
+   * @throws IOException
    */
   @Override
-  public void start(Stage stage) throws FileNotFoundException {
+  public void start(Stage stage) throws IOException {
     LevelGUI.instance = this;
     pane = new Pane();
     stackPane = new StackPane();
@@ -142,15 +142,7 @@ public class LevelGUI extends Application {
 
     addElements(pane);
 
-    winPane = showMessageScene("You Win!");
-    winPane.setOpacity(0.0);
-    losePane = showMessageScene("Game Over!");
-    losePane.setOpacity(0.0);
-
     stackPane.getChildren().add(pane);
-    stackPane.getChildren().add(winPane);
-    stackPane.getChildren().add(losePane);
-
     playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
 
     this.stage = stage;
@@ -212,34 +204,58 @@ public class LevelGUI extends Application {
     list = readHighscore();
     Pane pane = new Pane();
     addElements(pane);
+
+    if (score == getHighScore()) {
+      Text newHighScore = new Text("NEW HIGHSCORE!");
+      newHighScore.setScaleX(TEXT_SCALE_SIZE * 1.7);
+      newHighScore.setScaleY(TEXT_SCALE_SIZE * 1.7);
+      newHighScore.setX(Position.middlePosition().getPosX());
+      newHighScore.setY(Position.middlePosition().getPosY() - 420);
+      pane.getChildren().add(newHighScore);
+    }
+
     Text gameText = new Text(message);
-    Text highScore = new Text(makeHighscoreString());
-    pane.getChildren().add(gameText);
-    pane.getChildren().add(highScore);
-    highScore.setScaleX(TEXT_SCALE_SIZE/2.5);
-    highScore.setScaleY(TEXT_SCALE_SIZE/2.5);
     gameText.setScaleX(TEXT_SCALE_SIZE);
     gameText.setScaleY(TEXT_SCALE_SIZE);
     gameText.setX(Position.middlePosition().getPosX());
-    gameText.setY(Position.middlePosition().getPosY() - 250);
+    gameText.setY(Position.middlePosition().getPosY() - 230);
+    pane.getChildren().add(gameText);
+
+    Text highScore = new Text(makeHighscoreString());
+    highScore.setScaleX(TEXT_SCALE_SIZE / 2.5);
+    highScore.setScaleY(TEXT_SCALE_SIZE / 2.5);
     highScore.setX(Position.middlePosition().getPosX());
-    highScore.setY(Position.middlePosition().getPosY());
+    highScore.setY(Position.middlePosition().getPosY() + 100);
+    pane.getChildren().add(highScore);
+
     return pane;
   }
 
   /**
    * Method to choose which scene is used.
+   * 
+   * @throws IOException
    */
-  public void chooseScene() {
+  public void chooseScene() throws IOException {
     if (choosePlayScene) {
       stage.setScene(playScene);
 
     } else if (chooseWinScene) {
+      list = readHighscore();
+      writeHighscore();
+      winPane = showMessageScene("You Win!");
+      winPane.setOpacity(0.0);
+      stackPane.getChildren().add(winPane);
       animation.stop();
       pane.setOpacity(0.0);
       winPane.setOpacity(1.0);
 
     } else if (chooseLoseScene) {
+      list = readHighscore();
+      writeHighscore();
+      losePane = showMessageScene("Game Over!");
+      losePane.setOpacity(0.0);
+      stackPane.getChildren().add(losePane);
       animation.stop();
       pane.setOpacity(0.0);
       losePane.setOpacity(1.0);
@@ -251,9 +267,9 @@ public class LevelGUI extends Application {
    * Add some key elements to the pane. This includes: Background.
    * 
    * @param pane
-   *          the pane to add elements to
-   * 
+   *          the pane to add elements to add elements to
    */
+
   public void addElements(Pane pane) {
     BackgroundImage myBI = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES, true,
         false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -263,12 +279,8 @@ public class LevelGUI extends Application {
 
   /**
    * This method set the end scene true and the playscene false.
-   * 
-   * @throws IOException
    */
   public void setWinSceneTrue() throws IOException {
-    list = readHighscore();
-    writeHighscore();
     chooseWinScene = true;
     choosePlayScene = false;
     chooseLoseScene = false;
@@ -280,8 +292,6 @@ public class LevelGUI extends Application {
    * @throws IOException
    */
   public void setLoseSceneTrue() throws IOException {
-    list = readHighscore();
-    writeHighscore();
     chooseWinScene = false;
     choosePlayScene = false;
     chooseLoseScene = true;
@@ -355,6 +365,20 @@ public class LevelGUI extends Application {
   }
 
   /**
+   * Gets the highest score from the highscore list
+   * 
+   * @return
+   * @throws FileNotFoundException
+   */
+  public static int getHighScore() throws FileNotFoundException {
+    Scanner sc = new Scanner(new File("highscores"));
+    String firstLine = sc.nextLine();
+    int highestScore = Integer.parseInt(firstLine.substring(3));
+    return highestScore;
+
+  }
+
+  /**
    * Makes a nicely displayed string of the highscore
    */
 
@@ -362,10 +386,10 @@ public class LevelGUI extends Application {
     String res = "";
     String li = System.lineSeparator();
     for (int i = 0; i < list.size(); i++) {
-      res = res + "   " + list.get(i) + li;
+      res = res + "     " + list.get(i) + li;
     }
 
-    return "Highscores:" + li + res;
+    return "Highscores:" + li + res + li + "Your score: " + score;
   }
 
   /**
