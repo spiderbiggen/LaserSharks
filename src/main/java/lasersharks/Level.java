@@ -17,7 +17,6 @@ public class Level {
   private FishController fishCon;
   private ScreenController screenCon;
   private KeyboardController keyboardCon;
-  private Game game;
 
   /**
    * this is the constructor of the level class.
@@ -27,15 +26,13 @@ public class Level {
    * @param gui
    *          reference to the GUI Object.
    */
-  public Level(Game game, LevelGUI gui) {
+  public Level(LevelGUI gui) {
     this.fishCon = new FishController();
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);
     this.fishCon.setShark(this.shark);
-    this.game = game;
     this.screenCon = new ScreenController(this, gui);
     this.keyboardCon = new KeyboardController(this.screenCon, this);
-    this.game = game;
   }
 
   /**
@@ -117,21 +114,6 @@ public class Level {
    */
   public void setKeyboardCon(KeyboardController keyboardCon) {
     this.keyboardCon = keyboardCon;
-  }
-
-  /**
-   * @return the game
-   */
-  public Game getGame() {
-    return game;
-  }
-
-  /**
-   * @param game
-   *          the game to set
-   */
-  public void setGame(Game game) {
-    this.game = game;
   }
 
   /**
