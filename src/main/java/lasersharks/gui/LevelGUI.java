@@ -26,15 +26,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Game;
+import lasersharks.Highscores;
 import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.ScreenController;
@@ -201,7 +199,7 @@ public class LevelGUI extends Application {
    * @throws FileNotFoundException
    */
   public Pane showMessageScene(String message) throws FileNotFoundException {
-    list = readHighscore();
+    list = Highscores.readHighscore();
     Pane pane = new Pane();
     addElements(pane);
 
@@ -241,7 +239,7 @@ public class LevelGUI extends Application {
       stage.setScene(playScene);
 
     } else if (chooseWinScene) {
-      list = readHighscore();
+      list = Highscores.readHighscore();
       writeHighscore();
       winPane = showMessageScene("You Win!");
       winPane.setOpacity(0.0);
@@ -251,7 +249,7 @@ public class LevelGUI extends Application {
       winPane.setOpacity(1.0);
 
     } else if (chooseLoseScene) {
-      list = readHighscore();
+      list = Highscores.readHighscore();
       writeHighscore();
       losePane = showMessageScene("Game Over!");
       losePane.setOpacity(0.0);
@@ -295,24 +293,6 @@ public class LevelGUI extends Application {
     chooseWinScene = false;
     choosePlayScene = false;
     chooseLoseScene = true;
-  }
-
-  /**
-   * Reads the current highscore list so it can be edited.
-   * 
-   * @return the current highscore list.
-   * @throws FileNotFoundException
-   */
-  public static ArrayList<String> readHighscore() throws FileNotFoundException {
-    @SuppressWarnings("resource")
-    Scanner sc = new Scanner(new File("highscores"));
-    ArrayList<String> list = new ArrayList<String>();
-    while (sc.hasNextLine()) {
-      list.add(sc.nextLine());
-    }
-
-    return list;
-
   }
 
   /**
