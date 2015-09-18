@@ -73,6 +73,7 @@ public class Highscores {
    * method. An example would be 1. 500 2. 250 2. 250 3. 100 4. 50.
    * 
    * @param list
+   *          the list containing the highscore elements.
    * @return the correct highscore list
    */
   public static ArrayList<String> fixHighscoreCount(ArrayList<String> list) {
@@ -90,7 +91,7 @@ public class Highscores {
   /**
    * Gets the highest score from the highscore list
    * 
-   * @return
+   * @return the highest score in the list.
    * @throws FileNotFoundException
    */
   public static int getHighScore() throws FileNotFoundException {
@@ -102,9 +103,10 @@ public class Highscores {
   }
 
   /**
-   * Makes a nicely displayed string of the highscore
+   * Makes a nicely displayed string to output on the end screen
+   * 
+   * @return a String containing the highscores
    */
-
   public static String makeHighscoreString() {
     String res = "";
     String li = System.lineSeparator();
