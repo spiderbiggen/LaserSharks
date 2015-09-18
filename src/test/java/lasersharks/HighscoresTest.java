@@ -61,4 +61,10 @@ public class HighscoresTest {
   public void testReadHighscoresFalse() throws IOException {
     assertNotEquals(Highscores.readHighscore().toString(), "[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]");
   }
+  
+  
+  @Test
+  public void testWriteHighscores() throws IOException {
+    
+  }
 }

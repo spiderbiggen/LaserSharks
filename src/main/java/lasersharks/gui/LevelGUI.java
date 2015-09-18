@@ -406,6 +406,10 @@ public class LevelGUI extends Application {
   public static int getScore() {
     return score;
   }
+  
+  public static void getScore(int newScore) {
+    score = newScore;
+  }
 
   /**
    * Increase the current score the player has according to the size of the fish eaten.
