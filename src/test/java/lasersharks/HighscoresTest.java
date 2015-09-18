@@ -20,6 +20,7 @@ public class HighscoresTest {
 
   @Before
   public void setUp() throws Exception {
+    
   }
 
   @After

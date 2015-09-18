@@ -13,7 +13,7 @@ public class Highscores {
 
   private static ArrayList<String> list;
   private static int score = LevelGUI.getScore();
-
+  private static final String INPUT_FILE =  "src/main/resources/highscores";
   /**
    * Reads the current highscore list so it can be edited.
    * 
@@ -22,7 +22,7 @@ public class Highscores {
    */
   public static ArrayList<String> readHighscore() throws FileNotFoundException {
     @SuppressWarnings("resource")
-    Scanner sc = new Scanner(new File("highscores"));
+    Scanner sc = new Scanner(new File(INPUT_FILE));
     ArrayList<String> list = new ArrayList<String>();
     while (sc.hasNextLine()) {
       list.add(sc.nextLine());
@@ -54,7 +54,7 @@ public class Highscores {
     }
     fixHighscoreCount(list);
 
-    try (FileWriter fw = new FileWriter("highscores")) {
+    try (FileWriter fw = new FileWriter(INPUT_FILE)) {
       for (int i = 0; i < list.size(); i++) {
         if (i < list.size() - 1) {
           fw.write(list.get(i) + System.lineSeparator());
@@ -95,7 +95,7 @@ public class Highscores {
    * @throws FileNotFoundException
    */
   public static int getHighScore() throws FileNotFoundException {
-    Scanner sc = new Scanner(new File("highscores"));
+    Scanner sc = new Scanner(new File(INPUT_FILE));
     String firstLine = sc.nextLine();
     int highestScore = Integer.parseInt(firstLine.substring(3));
     return highestScore;
