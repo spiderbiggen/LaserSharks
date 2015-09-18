@@ -43,12 +43,22 @@ public class HighscoresTest {
   }
 
   /**
-   * Test case for readHighScores.
+   * Test case for readHighScores, when the resulting list equals the expected list.
    * 
    * @throws IOException
    */
   @Test
-  public void testReadHighscores() throws IOException {
-   
+  public void testReadHighscoresTrue() throws IOException {
+    assertEquals(Highscores.readHighscore().toString(), "[1. 1, 2. 2, 3. 3, 4. 4, 5. 5]");
+  }
+  
+  /**
+   * Test case for readHighScores, when the resulting list is not the same as expected.
+   * 
+   * @throws IOException
+   */
+  @Test
+  public void testReadHighscoresFalse() throws IOException {
+    assertNotEquals(Highscores.readHighscore().toString(), "[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]");
   }
 }
