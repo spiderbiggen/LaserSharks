@@ -77,7 +77,6 @@ public class LevelGUI extends Application {
   private Media media;
   private MediaPlayer mediaPlayer;
   private ImageView sharkImage;
-  private static ArrayList<String> list;
 
   private long time = 0;
   private final double timeToMilis = 1_000_000;
@@ -199,11 +198,10 @@ public class LevelGUI extends Application {
    * @throws FileNotFoundException
    */
   public Pane showMessageScene(String message) throws FileNotFoundException {
-    list = Highscores.readHighscore();
     Pane pane = new Pane();
     addElements(pane);
 
-    if (score == getHighScore()) {
+    if (score == Highscores.getHighScore()) {
       Text newHighScore = new Text("NEW HIGHSCORE!");
       newHighScore.setScaleX(TEXT_SCALE_SIZE * 1.7);
       newHighScore.setScaleY(TEXT_SCALE_SIZE * 1.7);
@@ -219,7 +217,7 @@ public class LevelGUI extends Application {
     gameText.setY(Position.middlePosition().getPosY() - 230);
     pane.getChildren().add(gameText);
 
-    Text highScore = new Text(makeHighscoreString());
+    Text highScore = new Text(Highscores.makeHighscoreString());
     highScore.setScaleX(TEXT_SCALE_SIZE / 2.5);
     highScore.setScaleY(TEXT_SCALE_SIZE / 2.5);
     highScore.setX(Position.middlePosition().getPosX());
@@ -239,8 +237,7 @@ public class LevelGUI extends Application {
       stage.setScene(playScene);
 
     } else if (chooseWinScene) {
-      list = Highscores.readHighscore();
-      writeHighscore();
+      Highscores.writeHighscore();
       winPane = showMessageScene("You Win!");
       winPane.setOpacity(0.0);
       stackPane.getChildren().add(winPane);
@@ -249,8 +246,7 @@ public class LevelGUI extends Application {
       winPane.setOpacity(1.0);
 
     } else if (chooseLoseScene) {
-      list = Highscores.readHighscore();
-      writeHighscore();
+      Highscores.writeHighscore();
       losePane = showMessageScene("Game Over!");
       losePane.setOpacity(0.0);
       stackPane.getChildren().add(losePane);
@@ -293,83 +289,6 @@ public class LevelGUI extends Application {
     chooseWinScene = false;
     choosePlayScene = false;
     chooseLoseScene = true;
-  }
-
-  /**
-   * Method for writing the highscores. The highscores are saved in highscores.txt .
-   * 
-   * @throws IOException
-   */
-  public static void writeHighscore() throws IOException {
-    for (int i = 0; i < list.size(); i++) {
-      if (score >= Integer.parseInt(list.get(i).substring(3))) {
-        list.remove(i);
-        list.add(i, i + ". " + score);
-        break;
-      }
-
-    }
-    fixHighscoreCount(list);
-
-    try (FileWriter fw = new FileWriter("highscores")) {
-      for (int i = 0; i < list.size(); i++) {
-        if (i < list.size() - 1) {
-          fw.write(list.get(i) + System.lineSeparator());
-        } else {
-          fw.write(list.get(i));
-        }
-      }
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * Fixes the still erroneous list after the new score has been inserted in the writeHighscore()
-   * method. An example would be 1. 500 2. 250 2. 250 3. 100 4. 50.
-   * 
-   * @param list
-   * @return the correct highscore list
-   */
-  public static ArrayList<String> fixHighscoreCount(ArrayList<String> list) {
-    for (int i = 0; i < list.size(); i++) {
-      String newEntry = list.get(i);
-      list.remove(i);
-
-      newEntry = (i + 1) + ". " + newEntry.substring(3);
-      list.add(i, newEntry);
-    }
-
-    return list;
-  }
-
-  /**
-   * Gets the highest score from the highscore list
-   * 
-   * @return
-   * @throws FileNotFoundException
-   */
-  public static int getHighScore() throws FileNotFoundException {
-    Scanner sc = new Scanner(new File("highscores"));
-    String firstLine = sc.nextLine();
-    int highestScore = Integer.parseInt(firstLine.substring(3));
-    return highestScore;
-
-  }
-
-  /**
-   * Makes a nicely displayed string of the highscore
-   */
-
-  public static String makeHighscoreString() {
-    String res = "";
-    String li = System.lineSeparator();
-    for (int i = 0; i < list.size(); i++) {
-      res = res + "     " + list.get(i) + li;
-    }
-
-    return "Highscores:" + li + res + li + "Your score: " + score;
   }
 
   /**
@@ -484,7 +403,7 @@ public class LevelGUI extends Application {
     return this.stage;
   }
 
-  public int getScore() {
+  public static int getScore() {
     return score;
   }
 
