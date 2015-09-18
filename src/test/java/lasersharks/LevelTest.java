@@ -21,7 +21,6 @@ import lasersharks.gui.LevelGUI;
 @SuppressWarnings("restriction")
 public class LevelTest {
   private Level level;
-  private Game game;
   private LevelGUI levelGUI;
 
   /**
@@ -29,12 +28,11 @@ public class LevelTest {
    */
   @Before
   public void setUp() {
-    this.game = mock(Game.class);
     this.levelGUI = mock(LevelGUI.class);
     Scene sc = mock(Scene.class);
     when(this.levelGUI.getScene()).thenReturn(sc);
 
-    this.level = new Level(this.game, this.levelGUI);
+    this.level = new Level(this.levelGUI);
   }
 
   /**
@@ -138,24 +136,6 @@ public class LevelTest {
     KeyboardController kbc = mock(KeyboardController.class);
     this.level.setKeyboardCon(kbc);
     assertEquals(kbc, this.level.getKeyboardCon());
-  }
-
-  /**
-   * Make sure default game != null.
-   */
-  @Test
-  public void testGetGame() {
-    assertTrue(this.level.getGame() != null);
-  }
-
-  /**
-   * Test the game getter.
-   */
-  @Test
-  public void testSetGame() {
-    Game game = mock(Game.class);
-    this.level.setGame(game);
-    assertEquals(game, this.level.getGame());
   }
 
   /**
