@@ -2,6 +2,10 @@ package lasersharks;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,26 +14,25 @@ import org.junit.Test;
 
 public class HighscoresTest {
 
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
-  }
+  private static final String INPUT_FILE = "src/main/resources/highscoresTestFile";
 
   @Before
   public void setUp() throws Exception {
-    
+    Highscores.setInputFile(INPUT_FILE);
   }
 
   @After
   public void tearDown() throws Exception {
+
+  }
+
+  public void rewrite() throws IOException {
+
   }
 
   @Test
-  public void test() {
-    fail("Not yet implemented");
+  public void testReadHighscores() throws IOException {
+  System.out.println(Highscores.readHighscore()); 
   }
 
 }

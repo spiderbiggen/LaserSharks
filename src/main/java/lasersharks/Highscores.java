@@ -38,6 +38,10 @@ public class Highscores {
     return list;
   }
 
+   public static void setInputFile(String inputFile) {
+    Highscores.inputFile = inputFile;
+  }
+
   /**
    * Method for writing the highscores. The highscores are saved in highscores.txt .
    * 
