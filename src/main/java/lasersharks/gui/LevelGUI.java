@@ -407,7 +407,7 @@ public class LevelGUI extends Application {
     return score;
   }
   
-  public static void getScore(int newScore) {
+  public static void setScore(int newScore) {
     score = newScore;
   }
 
