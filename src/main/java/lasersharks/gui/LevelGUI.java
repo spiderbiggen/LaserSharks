@@ -26,9 +26,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
 import lasersharks.Fish;
-import lasersharks.Game;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
+import lasersharks.Level;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -149,9 +149,9 @@ public class LevelGUI extends Application {
     stage.show();
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
-    Game game = new Game();
-    game.launch(this);
     Logger.getInstance().write("Starting Music", "Starting");
+    Level level = new Level(this);
+    level.launch();
     startMusic(MUSIC_FILENAME);
   }
 
