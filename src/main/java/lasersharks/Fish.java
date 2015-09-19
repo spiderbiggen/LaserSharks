@@ -10,6 +10,8 @@ import javafx.scene.shape.Rectangle;
 @SuppressWarnings("restriction")
 public abstract class Fish {
 
+  private static final double WIDTH_TO_COORD = 0.85;
+  private static final double SIZE_TO_COORD = 0.075;
   private Position position;
   private float size;
   private double speed;
@@ -192,8 +194,12 @@ public abstract class Fish {
   public Rectangle makeHitbox() {
     double xcoordinate = this.getPosition().getPosX();
     double ycoordinate = this.getPosition().getPosY();
-    Rectangle rekt = new Rectangle(xcoordinate + 0.075 * this.getSize(), ycoordinate + 0.075 * this.getSize(), this.getWidthScale() * this.getSize()
-        * 0.85, this.getSize() * 0.85);
+    Rectangle rekt = new Rectangle(
+        xcoordinate + SIZE_TO_COORD * this.getSize(), 
+        ycoordinate + SIZE_TO_COORD * this.getSize(), 
+        this.getWidthScale() * this.getSize() * WIDTH_TO_COORD, 
+        this.getSize() * WIDTH_TO_COORD
+    );
     return rekt;
   }
 

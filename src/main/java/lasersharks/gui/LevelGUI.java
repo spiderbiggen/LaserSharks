@@ -1,12 +1,7 @@
 package lasersharks.gui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import javafx.animation.AnimationTimer;
@@ -31,9 +26,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
 import lasersharks.Fish;
-import lasersharks.Game;
-import lasersharks.Highscores;
 import lasersharks.LaserShark;
+import lasersharks.Logger;
+import lasersharks.Level;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -59,10 +54,8 @@ public class LevelGUI extends Application {
    */
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
-  private static final float HALF_SCALE = 0.5f;
   private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static LevelGUI instance;
-  private static int score = 0;
   private ScreenController screenController;
   private Pane pane;
   private Pane winPane;
@@ -128,10 +121,10 @@ public class LevelGUI extends Application {
    * 
    * @param stage
    *          the stage the scene is set to.
-   * @throws IOException
    */
   @Override
-  public void start(Stage stage) throws IOException {
+  public void start(Stage stage) {
+    Logger.getInstance().write("Starting game", "Starting");
     LevelGUI.instance = this;
     pane = new Pane();
     stackPane = new StackPane();
@@ -139,7 +132,15 @@ public class LevelGUI extends Application {
 
     addElements(pane);
 
+    winPane = showMessageScene("You Win!");
+    winPane.setOpacity(0.0);
+    losePane = showMessageScene("Game Over!");
+    losePane.setOpacity(0.0);
+
     stackPane.getChildren().add(pane);
+    stackPane.getChildren().add(winPane);
+    stackPane.getChildren().add(losePane);
+
     playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
 
     this.stage = stage;
@@ -148,8 +149,9 @@ public class LevelGUI extends Application {
     stage.show();
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
-    Game game = new Game();
-    game.launch(this);
+    Logger.getInstance().write("Starting Music", "Starting");
+    Level level = new Level(this);
+    level.launch();
     startMusic(MUSIC_FILENAME);
   }
 
@@ -163,13 +165,8 @@ public class LevelGUI extends Application {
       public void handle(long now) {
         double frametime = (now - time) / timeToMilis;
         final double milis = 1000;
-        try {
-          showFishList(screenController.getNextFrameInfo(milis / frametime));
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+        showFishList(screenController.getNextFrameInfo(milis / frametime));
         showShark(screenController.getShark());
-        showScore();
         time = now;
       }
 
@@ -178,78 +175,37 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * Displays the score in the upper right corner of the screen.
-   */
-  public void showScore() {
-    Text gameText = new Text("Score: " + score);
-    gameText.setX(Position.upperCornerPosition().getPosX());
-    gameText.setY(Position.upperCornerPosition().getPosY());
-    gameText.setScaleX(TEXT_SCALE_SIZE / 2.5);
-    gameText.setScaleY(TEXT_SCALE_SIZE / 2.5);
-    this.pane.getChildren().add(gameText);
-  }
-
-  /**
    * This function makes a scene with a message to display.
    * 
    * @param message
    *          the message to display
    * @return new scene
-   * @throws FileNotFoundException
    */
-  public Pane showMessageScene(String message) throws FileNotFoundException {
+  public Pane showMessageScene(String message) {
     Pane pane = new Pane();
     addElements(pane);
-
-    if (score == Highscores.getHighScore()) {
-      Text newHighScore = new Text("NEW HIGHSCORE!");
-      newHighScore.setScaleX(TEXT_SCALE_SIZE * 1.7);
-      newHighScore.setScaleY(TEXT_SCALE_SIZE * 1.7);
-      newHighScore.setX(Position.middlePosition().getPosX());
-      newHighScore.setY(Position.middlePosition().getPosY() - 420);
-      pane.getChildren().add(newHighScore);
-    }
-
     Text gameText = new Text(message);
+    pane.getChildren().add(gameText);
     gameText.setScaleX(TEXT_SCALE_SIZE);
     gameText.setScaleY(TEXT_SCALE_SIZE);
     gameText.setX(Position.middlePosition().getPosX());
-    gameText.setY(Position.middlePosition().getPosY() - 230);
-    pane.getChildren().add(gameText);
-
-    Text highScore = new Text(Highscores.makeHighscoreString());
-    highScore.setScaleX(TEXT_SCALE_SIZE / 2.5);
-    highScore.setScaleY(TEXT_SCALE_SIZE / 2.5);
-    highScore.setX(Position.middlePosition().getPosX());
-    highScore.setY(Position.middlePosition().getPosY() + 100);
-    pane.getChildren().add(highScore);
-
+    gameText.setY(Position.middlePosition().getPosY());
     return pane;
   }
 
   /**
    * Method to choose which scene is used.
-   * 
-   * @throws IOException
    */
-  public void chooseScene() throws IOException {
+  public void chooseScene() {
     if (choosePlayScene) {
       stage.setScene(playScene);
 
     } else if (chooseWinScene) {
-      Highscores.writeHighscore();
-      winPane = showMessageScene("You Win!");
-      winPane.setOpacity(0.0);
-      stackPane.getChildren().add(winPane);
       animation.stop();
       pane.setOpacity(0.0);
       winPane.setOpacity(1.0);
 
     } else if (chooseLoseScene) {
-      Highscores.writeHighscore();
-      losePane = showMessageScene("Game Over!");
-      losePane.setOpacity(0.0);
-      stackPane.getChildren().add(losePane);
       animation.stop();
       pane.setOpacity(0.0);
       losePane.setOpacity(1.0);
@@ -261,20 +217,20 @@ public class LevelGUI extends Application {
    * Add some key elements to the pane. This includes: Background.
    * 
    * @param pane
-   *          the pane to add elements to add elements to
+   *          the pane to add elements to
+   * 
    */
-
   public void addElements(Pane pane) {
-    BackgroundImage myBI = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES, true,
-        false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(
+        new Image("somber sea floor.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
   }
 
   /**
    * This method set the end scene true and the playscene false.
    */
-  public void setWinSceneTrue() throws IOException {
+  public void setWinSceneTrue() {
     chooseWinScene = true;
     choosePlayScene = false;
     chooseLoseScene = false;
@@ -282,10 +238,8 @@ public class LevelGUI extends Application {
 
   /**
    * This method sets only the lose scene true.
-   * 
-   * @throws IOException
    */
-  public void setLoseSceneTrue() throws IOException {
+  public void setLoseSceneTrue() {
     chooseWinScene = false;
     choosePlayScene = false;
     chooseLoseScene = true;
@@ -297,8 +251,7 @@ public class LevelGUI extends Application {
    */
   public void clearPaneOfImageView() {
     ObservableList<Node> list = pane.getChildren();
-    list.removeAll(list.stream()
-        .filter(v -> v instanceof ImageView || v instanceof Rectangle || v instanceof Text)
+    list.removeAll(list.stream().filter(v -> v instanceof ImageView || v instanceof Rectangle)
         .collect(Collectors.toList()));
   }
 
@@ -386,14 +339,14 @@ public class LevelGUI extends Application {
   }
 
   /**
-   * Returns a singleton of the levelGUI class.
+   * Returns a singleton of the levelgui class.
    * 
    * @return singleton instance
    */
   public static LevelGUI getInstance() {
     return LevelGUI.instance;
   }
-
+  
   /**
    * Returns the stage used to start this gui.
    * 
@@ -402,31 +355,11 @@ public class LevelGUI extends Application {
   public Stage getStage() {
     return this.stage;
   }
-
-  public static int getScore() {
-    return score;
-  }
   
-  public static void setScore(int newScore) {
-    score = newScore;
-  }
-
-  /**
-   * Increase the current score the player has according to the size of the fish eaten.
-   * 
-   */
-  public static void increaseScore(Fish fish) {
-    if (fish.isAlive()) {
-      score = (int) (score + fish.getSize() * HALF_SCALE + 20);
-    }
-
-  }
-
   /**
    * Sets the stage to the new stage.
    * 
-   * @param stage
-   *          the new stage object
+   * @param stage the new stage object
    */
   public void setStage(Stage stage) {
     this.stage = stage;

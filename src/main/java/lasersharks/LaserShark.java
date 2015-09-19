@@ -38,6 +38,13 @@ public class LaserShark extends Fish {
    */
   public void eat(Fish fish) {
     if (fish.isAlive()) {
+      Logger.getInstance().write(
+          "Fish eaten", 
+          "Old sharksize: " + this.getSize() + ","
+          + "Fish size: " + fish.getSize() + ", "
+          + "New sharksize: " 
+          + (this.getSize() + (fish.getSize() / ENERGY_DISSERPATION_RATE))
+      );
       this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
     }
     LevelGUI.increaseScore(fish);
@@ -63,5 +70,22 @@ public class LaserShark extends Fish {
   @Override
   public double getWidthScale() {
     return widthScale;
+  }
+  
+  @Override
+  public void setDirection(Direction dir) {
+    if (this.isAlive() && this.getDirection() != dir) {
+      Logger.getInstance().write(
+          "Change of direction", 
+          "From: " + this.getDirection() + ", to: " + dir
+      );
+    }
+    super.setDirection(dir);
+  }
+  
+  @Override
+  public void kill() {
+    Logger.getInstance().write("Loss", "Player has colided with a bigger fish");
+    super.kill();
   }
 }
