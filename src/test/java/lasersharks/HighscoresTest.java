@@ -1,9 +1,9 @@
 package lasersharks;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,23 +13,23 @@ import java.util.ArrayList;
 import lasersharks.gui.LevelGUI;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class HighscoresTest {
 
   private static final String INPUT_FILE = "src/main/resources/highscoresTestFile";
-  private LevelGUI levelGUI;
   private ArrayList<String> list = new ArrayList<String>();
 
+  /**
+   * Set the input file to the test file.
+   * 
+   * @throws Exception
+   *           when the file is not found.
+   */
   @Before
   public void setUp() throws Exception {
     Highscores.setInputFile(INPUT_FILE);
-    this.levelGUI = mock(LevelGUI.class);
-    // when(LevelGUI.getScore()).thenReturn(6);
-
   }
 
   /**
@@ -57,6 +57,7 @@ public class HighscoresTest {
    * Test case for readHighScores, when the resulting list equals the expected list.
    * 
    * @throws IOException
+   *           when there is an erroneous input.
    */
   @Test
   public void testReadHighscoresTrue() throws IOException {
@@ -67,6 +68,7 @@ public class HighscoresTest {
    * Test case for readHighScores, when the resulting list is not the same as expected.
    * 
    * @throws IOException
+   *           when there is an erroneous input.
    */
   @Test
   public void testReadHighscoresFalse() throws IOException {

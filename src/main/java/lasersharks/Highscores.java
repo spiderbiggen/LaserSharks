@@ -20,6 +20,7 @@ public class Highscores {
    * 
    * @return the current highscore list.
    * @throws FileNotFoundException
+   *           when the file is not found.
    */
   public static ArrayList<String> readHighscore() throws FileNotFoundException {
     @SuppressWarnings("resource")
@@ -36,7 +37,7 @@ public class Highscores {
   public static void setList(ArrayList<String> inputList) {
     list = inputList;
   }
-  
+
   public static ArrayList<String> getList() throws FileNotFoundException {
     list = readHighscore();
     return list;
@@ -50,6 +51,7 @@ public class Highscores {
    * Method for writing the highscores. The highscores are saved in highscores.txt .
    * 
    * @throws IOException
+   *           when there is an erroneous input.
    */
   public static void writeHighscore() throws IOException {
     list = readHighscore();
@@ -83,7 +85,7 @@ public class Highscores {
    * 
    * @param list
    *          the list containing the highscore elements.
-   * @return the correct highscore list
+   * @return the correct highscore list.
    */
   public static ArrayList<String> fixHighscoreCount(ArrayList<String> list) {
     for (int i = 0; i < list.size(); i++) {
@@ -98,10 +100,11 @@ public class Highscores {
   }
 
   /**
-   * Gets the highest score from the highscore list
+   * Gets the highest score from the highscore list.
    * 
    * @return the highest score in the list.
    * @throws FileNotFoundException
+   *           when the file is not found.
    */
   public static int getHighScore() throws FileNotFoundException {
     Scanner sc = new Scanner(new File(inputFile));
@@ -112,9 +115,9 @@ public class Highscores {
   }
 
   /**
-   * Makes a nicely displayed string to output on the end screen
+   * Makes a nicely displayed string to output on the end screen.
    * 
-   * @return a String containing the highscores
+   * @return a String containing the highscores.
    */
   public static String makeHighscoreString() {
     String res = "";
