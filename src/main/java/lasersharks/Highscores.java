@@ -38,7 +38,7 @@ public class Highscores {
     return list;
   }
 
-   public static void setInputFile(String inputFile) {
+  public static void setInputFile(String inputFile) {
     Highscores.inputFile = inputFile;
   }
 
