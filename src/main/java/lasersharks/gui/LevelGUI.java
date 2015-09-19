@@ -139,6 +139,7 @@ public class LevelGUI extends Application {
     addElements(pane);
 
     stackPane.getChildren().add(pane);
+
     playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
 
     this.stage = stage;
