@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class HighscoresTest {
    * @Test public void testWriteHighscores() throws IOException { Highscores.writeHighscore();
    * assertEquals(Highscores.readHighscore().toString(), "[1. 6, 2. 5, 3. 4, 4. 3, 5. 2]"); }
    */
-  
+
   /**
    * Test method for FixHighscoreCount(). We enter a 'bad' highscore list and a new good numbered
    * list should come out.
@@ -123,6 +124,28 @@ public class HighscoresTest {
     assertEquals(Highscores.fixHighscoreCount(list).toString(),
         "[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]");
 
+  }
+
+  /**
+   * Test method for the getHighScore() method.
+   * 
+   * @throws FileNotFoundException
+   *           when the file is not found (highly unlikely).
+   */
+  @Test
+  public void testGetHighScoreTrue() throws FileNotFoundException {
+    assertTrue(Highscores.getHighScore() == 5);
+  }
+  
+  /**
+   * Test method for the getHighScore() method.
+   * 
+   * @throws FileNotFoundException
+   *           when the file is not found (highly unlikely).
+   */
+  @Test
+  public void testGetHighScoreFalse() throws FileNotFoundException {
+    assertFalse(Highscores.getHighScore() == 4);
   }
 
 }
