@@ -73,11 +73,6 @@ public class HighscoresTest {
     assertNotEquals(Highscores.readHighscore().toString(), "[1. 1, 2. 2, 3. 3, 4. 4, 5. 5]");
   }
 
-  /*
-   * @Test public void testWriteHighscores() throws IOException { Highscores.writeHighscore();
-   * assertEquals(Highscores.readHighscore().toString(), "[1. 6, 2. 5, 3. 4, 4. 3, 5. 2]"); }
-   */
-
   /**
    * Test method for FixHighscoreCount(). We enter a 'bad' highscore list and a new good numbered
    * list should come out.
@@ -136,7 +131,7 @@ public class HighscoresTest {
   public void testGetHighScoreTrue() throws FileNotFoundException {
     assertTrue(Highscores.getHighScore() == 5);
   }
-  
+
   /**
    * Test method for the getHighScore() method.
    * 
@@ -148,4 +143,20 @@ public class HighscoresTest {
     assertFalse(Highscores.getHighScore() == 4);
   }
 
+  /**
+   * Test method for the makeHighscoreString() method in Highscores.
+   * 
+   * @throws FileNotFoundException
+   *           when the file is not found (highly unlikely).
+   */
+  @Test
+  public void testMakeHighscoreString() throws FileNotFoundException {
+    Highscores.setList(Highscores.readHighscore());
+    String li = System.lineSeparator();
+    LevelGUI.setScore(0);
+    assertEquals(Highscores.makeHighscoreString(), "Highscores:" + li + "     " + "1. 5" + li
+        + "     " + "2. 4" + li + "     " + "3. 3" + li + "     " + "4. 2" + li + "     " + "5. 1"
+        + li + li + "Your score: " + LevelGUI.getScore());
+
+  }
 }

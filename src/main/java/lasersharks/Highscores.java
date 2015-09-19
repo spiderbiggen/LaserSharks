@@ -33,6 +33,10 @@ public class Highscores {
 
   }
 
+  public static void setList(ArrayList<String> inputList) {
+    list = inputList;
+  }
+  
   public static ArrayList<String> getList() throws FileNotFoundException {
     list = readHighscore();
     return list;
