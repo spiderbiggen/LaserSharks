@@ -18,8 +18,9 @@ import lasersharks.gui.LevelGUI;
 public class Highscores {
 
   private static ArrayList<String> list;
-  private static String inputFile = "highscores";
+  private static String inputFile = "src/main/resources/highscores";
   private static final int DATA_OFFSET = 3;
+  private static final int FISH_BONUS = 20;
 
   /**
    * Reads the current highscore list so it can be edited.
@@ -140,6 +141,13 @@ public class Highscores {
       return highestScore;
     }
 
+  }
+
+  /**
+   * @return the fishBonus
+   */
+  public static int getFishBonus() {
+    return FISH_BONUS;
   }
 
   /**

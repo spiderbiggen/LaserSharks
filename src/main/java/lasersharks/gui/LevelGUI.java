@@ -2,11 +2,8 @@ package lasersharks.gui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import javafx.animation.AnimationTimer;
@@ -31,9 +28,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
 import lasersharks.Fish;
-import lasersharks.Game;
 import lasersharks.Highscores;
 import lasersharks.LaserShark;
+import lasersharks.Level;
+import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -132,6 +130,7 @@ public class LevelGUI extends Application {
    */
   @Override
   public void start(Stage stage) throws IOException {
+    Logger.getInstance().write("Starting game", "Starting");
     LevelGUI.instance = this;
     pane = new Pane();
     stackPane = new StackPane();
@@ -148,8 +147,9 @@ public class LevelGUI extends Application {
     stage.show();
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
-    Game game = new Game();
-    game.launch(this);
+    Logger.getInstance().write("Starting Music", "Starting");
+    Level level = new Level(this);
+    level.launch();
     startMusic(MUSIC_FILENAME);
   }
 
@@ -196,6 +196,7 @@ public class LevelGUI extends Application {
    *          the message to display
    * @return new scene
    * @throws FileNotFoundException
+   *           highscore file not found
    */
   public Pane showMessageScene(String message) throws FileNotFoundException {
     Pane pane = new Pane();
@@ -231,6 +232,7 @@ public class LevelGUI extends Application {
    * Method to choose which scene is used.
    * 
    * @throws IOException
+   *           highscore file not found
    */
   public void chooseScene() throws IOException {
     if (choosePlayScene) {
@@ -265,16 +267,16 @@ public class LevelGUI extends Application {
    */
 
   public void addElements(Pane pane) {
-    BackgroundImage myBI = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES, true,
-        false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(
+        new Image("somber sea floor.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
   }
 
   /**
    * This method set the end scene true and the playscene false.
    */
-  public void setWinSceneTrue() throws IOException {
+  public void setWinSceneTrue() {
     chooseWinScene = true;
     choosePlayScene = false;
     chooseLoseScene = false;
@@ -282,10 +284,8 @@ public class LevelGUI extends Application {
 
   /**
    * This method sets only the lose scene true.
-   * 
-   * @throws IOException
    */
-  public void setLoseSceneTrue() throws IOException {
+  public void setLoseSceneTrue() {
     chooseWinScene = false;
     choosePlayScene = false;
     chooseLoseScene = true;
@@ -403,10 +403,21 @@ public class LevelGUI extends Application {
     return this.stage;
   }
 
+  /**
+   * Get's the current score from this game.
+   * 
+   * @return the score
+   */
   public static int getScore() {
     return score;
   }
-  
+
+  /**
+   * Set the score to newScore.
+   * 
+   * @param newScore
+   *          the newScore
+   */
   public static void setScore(int newScore) {
     score = newScore;
   }
@@ -414,10 +425,12 @@ public class LevelGUI extends Application {
   /**
    * Increase the current score the player has according to the size of the fish eaten.
    * 
+   * @param fish
+   *          the fish that is used to calculate the additional score
    */
   public static void increaseScore(Fish fish) {
     if (fish.isAlive()) {
-      score = (int) (score + fish.getSize() * HALF_SCALE + 20);
+      score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
     }
 
   }

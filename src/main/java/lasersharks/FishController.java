@@ -25,7 +25,7 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static final float FISH_SPAWN_CHANCE_BASE = 1.043f;
+  private static final float FISH_SPAWN_CHANCE_BASE = 1.0f;
   private float fishSpawnChance;
 
   /**
@@ -115,7 +115,14 @@ public class FishController {
   public List<Fish> getNextCycleInformation(double frametime) {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
-      this.addFish(FishBot.generateFish());
+      Fish f = FishBot.generateFish();
+      this.addFish(f);
+      Logger.getInstance().write("Fish spawned",
+          "Speed: " + f.getSpeed() + ", "
+          + "Size: " + f.getSize() + ", "
+          + "Direction: " + f.getDirection() + ", "
+          + "Position: " + f.getPosition()
+      );
     }
     return this.getNewFishPositions(frametime);
   }
