@@ -9,11 +9,17 @@ import java.util.Scanner;
 
 import lasersharks.gui.LevelGUI;
 
+/**
+ * A class that handles anything to do with highscores.
+ * 
+ * @author Daan
+ *
+ */
 public class Highscores {
 
   private static ArrayList<String> list;
-  private static int score = LevelGUI.getScore();
-  private static String inputFile = "src/main/resources/highscores";
+  private static String inputFile = "highscores";
+  private static final int DATA_OFFSET = 3;
 
   /**
    * Reads the current highscore list so it can be edited.
@@ -23,26 +29,47 @@ public class Highscores {
    *           when the file is not found.
    */
   public static ArrayList<String> readHighscore() throws FileNotFoundException {
-    @SuppressWarnings("resource")
-    Scanner sc = new Scanner(new File(inputFile));
-    ArrayList<String> list = new ArrayList<String>();
-    while (sc.hasNextLine()) {
-      list.add(sc.nextLine());
-    }
+    try (Scanner sc = new Scanner(new File(inputFile))) {
+      ArrayList<String> list = new ArrayList<String>();
+      while (sc.hasNextLine()) {
+        list.add(sc.nextLine());
+      }
 
-    return list;
+      return list;
+    }
 
   }
 
+  /**
+   * Sets the list of highscores to inputList.
+   * 
+   * @param inputList
+   *          the list of new highscores.
+   */
   public static void setList(ArrayList<String> inputList) {
     list = inputList;
   }
 
+  /**
+   * Will return the current list. If the list doesn't exist yet read the one from the file.
+   * 
+   * @return the list of highscores.
+   * @throws FileNotFoundException
+   *           if the file doesn't exist or is in the wrong location.
+   */
   public static ArrayList<String> getList() throws FileNotFoundException {
-    list = readHighscore();
+    if (list == null || list.size() == 0) {
+      list = readHighscore();
+    }
     return list;
   }
 
+  /**
+   * Set the inputfile to the one specified with inputFile.
+   * 
+   * @param inputFile
+   *          the relative path to the new inputfile.
+   */
   public static void setInputFile(String inputFile) {
     Highscores.inputFile = inputFile;
   }
@@ -56,9 +83,9 @@ public class Highscores {
   public static void writeHighscore() throws IOException {
     list = readHighscore();
     for (int i = 0; i < list.size(); i++) {
-      if (score >= Integer.parseInt(list.get(i).substring(3))) {
+      if (LevelGUI.getScore() >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
         list.remove(list.size() - 1);
-        list.add(i, i + ". " + score);
+        list.add(i, i + ". " + LevelGUI.getScore());
         break;
       }
 
@@ -92,7 +119,7 @@ public class Highscores {
       String newEntry = list.get(i);
       list.remove(i);
 
-      newEntry = (i + 1) + ". " + newEntry.substring(3);
+      newEntry = (i + 1) + ". " + newEntry.substring(DATA_OFFSET);
       list.add(i, newEntry);
     }
 
@@ -107,10 +134,11 @@ public class Highscores {
    *           when the file is not found.
    */
   public static int getHighScore() throws FileNotFoundException {
-    Scanner sc = new Scanner(new File(inputFile));
-    String firstLine = sc.nextLine();
-    int highestScore = Integer.parseInt(firstLine.substring(3));
-    return highestScore;
+    try (Scanner sc = new Scanner(new File(inputFile))) {
+      String firstLine = sc.nextLine();
+      int highestScore = Integer.parseInt(firstLine.substring(DATA_OFFSET));
+      return highestScore;
+    }
 
   }
 
@@ -126,7 +154,7 @@ public class Highscores {
       res = res + "     " + list.get(i) + li;
     }
 
-    return "Highscores:" + li + res + li + "Your score: " + score;
+    return "Highscores:" + li + res + li + "Your score: " + LevelGUI.getScore();
   }
 
 }
