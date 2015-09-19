@@ -1,5 +1,6 @@
 package lasersharks;
 
+import java.io.IOException;
 import java.util.List;
 
 import javafx.scene.Scene;
@@ -41,8 +42,9 @@ public class ScreenController {
    *          time between frames in seconds
    * 
    * @return FishInfo
+   * @throws IOException 
    */
-  public List<Fish> getNextFrameInfo(double frametime) {
+  public List<Fish> getNextFrameInfo(double frametime) throws IOException {
     if (!this.level.getFishCon().getShark().isAlive()) {
       this.gui.setLoseSceneTrue();
       this.gui.chooseScene();
