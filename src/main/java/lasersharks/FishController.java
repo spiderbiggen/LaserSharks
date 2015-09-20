@@ -25,7 +25,7 @@ public class FishController {
   /**
    * Spawnchance for new fishes.
    */
-  private static final float FISH_SPAWN_CHANCE_BASE = 1.043f;
+  private static final float FISH_SPAWN_CHANCE_BASE = 1.0f;
   private float fishSpawnChance;
 
   /**
