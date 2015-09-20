@@ -32,6 +32,7 @@ import lasersharks.Highscores;
 import lasersharks.LaserShark;
 import lasersharks.Level;
 import lasersharks.Logger;
+import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -139,15 +140,13 @@ public class LevelGUI extends Application {
     addElements(pane);
 
     stackPane.getChildren().add(pane);
-
-    playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
+    
+    playScene = new Scene(stackPane, Options.getGlobalWidth(), Options.getGlobalHeight(), BACKCOLOUR);
 
     this.stage = stage;
     chooseScene();
 
     stage.show();
-    Position.setHeightPanel((int) Math.round(stage.getHeight()));
-    Position.setWidthPanel((int) Math.round(stage.getWidth()));
     Logger.getInstance().write("Starting Music", "Starting");
     Level level = new Level(this);
     level.launch();

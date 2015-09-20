@@ -98,4 +98,23 @@ public class Options {
   public void setDimension(Dimension dimension) {
     this.dimension = dimension;
   }
+  
+  public static double getGlobalHeight() {
+    return getInstance().getDimension().getHeight();
+  }
+  
+  public static double getGlobalWidth() {
+    return getInstance().getDimension().getWidth();
+  }
+  
+  public static void setGlobalHeight(double height) {
+    double oldWidth = getInstance().getDimension().getWidth();
+    getInstance().getDimension().setSize(oldWidth, height);
+  }
+  
+  public static void setGlobalWidth(double width) {
+    double oldHeight = getInstance().getDimension().getHeight();
+    getInstance().getDimension().setSize(width, oldHeight);
+  }
+  
 }
