@@ -98,4 +98,4 @@ public class Options {
   public void setDimension(Dimension dimension) {
     this.dimension = dimension;
   }
-...
+}
