@@ -141,7 +141,10 @@ public class LevelGUI extends Application {
 
     stackPane.getChildren().add(pane);
     
-    playScene = new Scene(stackPane, Options.getGlobalWidth(), Options.getGlobalHeight(), BACKCOLOUR);
+    playScene = new Scene(stackPane, 
+        Options.getGlobalWidth(), 
+        Options.getGlobalHeight(), 
+        BACKCOLOUR);
 
     this.stage = stage;
     chooseScene();
@@ -432,7 +435,6 @@ public class LevelGUI extends Application {
     if (fish.isAlive()) {
       score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
     }
-
   }
 
   /**
