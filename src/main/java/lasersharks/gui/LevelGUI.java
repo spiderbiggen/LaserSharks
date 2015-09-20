@@ -135,11 +135,8 @@ public class LevelGUI extends Application {
     pane = new Pane();
     stackPane = new StackPane();
     stage.setFullScreen(true);
-
     addElements(pane);
-
-    stackPane.getChildren().add(pane);
-    
+    stackPane.getChildren().add(pane);    
     playScene = new Scene(stackPane, 
         Options.getGlobalWidth(), 
         Options.getGlobalHeight(), 
