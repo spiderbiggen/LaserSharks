@@ -59,7 +59,6 @@ public class LevelGUI extends Application {
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
   private static final float HALF_SCALE = 0.5f;
-  private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static LevelGUI instance;
   private static int score = 0;
   private ScreenController screenController;
@@ -153,7 +152,7 @@ public class LevelGUI extends Application {
     Logger.getInstance().write("Starting Music", "Starting");
     Level level = new Level(this);
     level.launch();
-    startMusic(MUSIC_FILENAME);
+    startMusic(Options.getInstance().getMusicFileName());
   }
 
   /**
@@ -271,8 +270,12 @@ public class LevelGUI extends Application {
 
   public void addElements(Pane pane) {
     BackgroundImage myBI = new BackgroundImage(
-        new Image("somber sea floor.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        new Image(Options.getInstance().getBackGroundImage(), 
+            XRES, YRES, true, false), 
+            BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, 
+        BackgroundPosition.DEFAULT, 
+        BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
   }
 

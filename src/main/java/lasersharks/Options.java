@@ -14,6 +14,11 @@ import lasersharks.gui.LevelGUI;
 public class Options {
   
   private Dimension dimension;
+  private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
+  private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
+  
+  private String musicFileName;
+  private String backGround;
   
   private static Options currentOptions;
   
@@ -35,6 +40,8 @@ public class Options {
       return currentOptions;
     }
     currentOptions = new Options(getScreenSize());
+    currentOptions.setBackGround(DEFAULT_BACKGROUND_IMAGE);
+    currentOptions.setMusicFilename(DEFAULT_MUSIC_FILENAME);
     return currentOptions;
   }
   
@@ -99,22 +106,70 @@ public class Options {
     this.dimension = dimension;
   }
   
+  /**
+   * Gets the height of the screen now used.
+   * @return the height of the screen.
+   */
   public static double getGlobalHeight() {
     return getInstance().getDimension().getHeight();
   }
   
+  /**
+   * Gets the Width of the screen now used.
+   * @return the width of the screen.
+   */
   public static double getGlobalWidth() {
     return getInstance().getDimension().getWidth();
   }
   
+  /**
+   * sets the height of the screen.
+   * @param height the height to set.
+   */
   public static void setGlobalHeight(double height) {
     double oldWidth = getInstance().getDimension().getWidth();
     getInstance().getDimension().setSize(oldWidth, height);
   }
-  
+
+  /**
+   * sets the width of the screen.
+   * @param width the height to set.
+   */
   public static void setGlobalWidth(double width) {
     double oldHeight = getInstance().getDimension().getHeight();
     getInstance().getDimension().setSize(width, oldHeight);
+  }
+  
+  /**
+   * sets the background image.
+   * @param backGround the background to set.
+   */
+  public void setBackGround(String backGround) {
+    this.backGround = backGround;
+  }
+  
+  /**
+   * sets the music in terms of a filename.
+   * @param musicFile the music to set.
+   */
+  public void setMusicFilename(String musicFile) {
+    this.musicFileName = musicFile;   
+  }
+  
+  /**
+   * Get the musicFileName.
+   * @return the musicFileName.
+   */
+  public String getMusicFileName() {
+    return musicFileName;
+  }
+  
+  /**
+   * Get the backGroundImage.
+   * @return the backGroundImage.
+   */
+  public String getBackGroundImage() {
+    return backGround;
   }
   
 }
