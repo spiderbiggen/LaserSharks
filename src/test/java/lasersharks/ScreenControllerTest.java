@@ -101,5 +101,12 @@ public class ScreenControllerTest {
   public void testGetGui() {
     screenCon.getGui();
   }
+  
+  @Test
+  public void testRestart() {
+    screenCon.restart();
+    Mockito.verify(gui).setRestartGameTrue();
+    Mockito.verify(gui).restartGame();
+  }
 
 }
