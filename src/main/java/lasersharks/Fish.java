@@ -165,6 +165,10 @@ public abstract class Fish {
   public boolean isAlive() {
     return this.alive;
   }
+  
+  public void setAlive() {
+    this.alive = true;
+  }
 
   @Override
   public String toString() {
