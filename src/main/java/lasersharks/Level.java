@@ -123,6 +123,9 @@ public class Level {
     this.screenCon.start();
   }
   
+  /**
+   * Restart game.
+   */
   public void restartGame() {
     screenCon.restart();
   }
