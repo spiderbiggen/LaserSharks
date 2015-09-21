@@ -100,7 +100,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
       dir = Direction.East;
     } 
     if (restartGame) {
-      callback.setRestartGame();
+      callback.restartGame();
     }    
     callback.setSharkDirection(dir);
   }
