@@ -19,6 +19,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
   private boolean pressedDown;
   private boolean pressedLeft;
   private boolean pressedRight;
+  private boolean restartGame;
 
   /**
    * Constructor.
@@ -48,6 +49,9 @@ public class KeyboardController implements EventHandler<KeyEvent> {
     if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
       pressedRight = true;
     }
+    if (event.getCode() == KeyCode.R) {
+      restartGame = true;      
+    }
   }
 
   private void keyReleased(KeyEvent event) {
@@ -63,6 +67,9 @@ public class KeyboardController implements EventHandler<KeyEvent> {
     if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
       pressedRight = false;
     }
+    if (event.getCode() == KeyCode.R) {
+      restartGame = false;      
+    }
   }
 
   /**
@@ -70,6 +77,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
    */
   private void handleInput() {
     Direction dir = Direction.None;
+
     if (pressedDown) {
       if (pressedLeft && !pressedRight) {
         dir = Direction.NorthWest;
@@ -90,7 +98,10 @@ public class KeyboardController implements EventHandler<KeyEvent> {
       dir = Direction.West;
     } else if (pressedRight) {
       dir = Direction.East;
-    }
+    } 
+    if (restartGame) {
+      callback.setRestartGame();
+    }    
     callback.setSharkDirection(dir);
   }
 
