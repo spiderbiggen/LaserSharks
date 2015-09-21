@@ -102,6 +102,9 @@ public class ScreenControllerTest {
     screenCon.getGui();
   }
   
+  /**
+   * test dor restart().
+   */
   @Test
   public void testRestart() {
     screenCon.restart();

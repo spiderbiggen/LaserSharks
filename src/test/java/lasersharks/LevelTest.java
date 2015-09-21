@@ -150,11 +150,14 @@ public class LevelTest {
     verify(sc).start();
   }
   
+  /**
+   * test for restartGame().
+   */
   @Test
   public void testRestartGame() {
     ScreenController sc = mock(ScreenController.class);
     this.level.setScreenCon(sc);
-    this.level.restartGame();;
+    this.level.restartGame();
     verify(sc).restart();
   }
 }
