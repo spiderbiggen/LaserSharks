@@ -87,7 +87,10 @@ public class ScreenController {
   public void start() {
     this.gui.startGame();
   }
-
+  
+  /**
+   * Restart the game.
+   */
   public void restart() {
     this.gui.setRestartGameTrue();
     this.gui.restartGame();
