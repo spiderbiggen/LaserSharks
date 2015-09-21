@@ -92,9 +92,16 @@ public class ScreenController {
    * Restart the game.
    */
   public void restart() {
-    this.gui.setRestartGameTrue();
+    //this.gui.setRestartGameTrue();    
+    
+    this.gui.stopAnimation();
     this.gui.restartGame();
-
+    this.level.getFishCon().clearFish();
+    this.level.getFishCon().getShark().setAlive();
+    this.gui.setPlaySceneTrue();
+   
+    System.out.println("screenr");
+    this.gui.chooseScene();
   }
 
 }
