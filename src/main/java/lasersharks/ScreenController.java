@@ -50,6 +50,7 @@ public class ScreenController {
       this.gui.setWinSceneTrue();
       this.gui.chooseScene();
     }
+
     return this.level.getNextFrameInfo(frametime);
   }
 
@@ -86,4 +87,11 @@ public class ScreenController {
   public void start() {
     this.gui.startGame();
   }
+
+  public void restart() {
+    this.gui.setRestartGameTrue();
+    this.gui.restartGame();
+
+  }
+
 }
