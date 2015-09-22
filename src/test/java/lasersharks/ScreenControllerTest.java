@@ -103,13 +103,19 @@ public class ScreenControllerTest {
   }
   
   /**
-   * test dor restart().
+   * test for restart().
    */
   @Test
   public void testRestart() {
     screenCon.restart();
-    Mockito.verify(gui).setRestartGameTrue();
+    Mockito.verify(gui).stopAnimation();
     Mockito.verify(gui).restartGame();
+    Mockito.verify(gui).setPlaySceneTrue();
+    Mockito.verify(gui).chooseScene();
+    Mockito.verify(shark).setAlive();
+    Mockito.verify(fishCon).getShark();
+    Mockito.verify(fishCon).clearFish();
+    Mockito.verify(level).setBeginShark();
   }
 
 }
