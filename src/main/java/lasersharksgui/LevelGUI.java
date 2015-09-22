@@ -35,6 +35,7 @@ import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.ScreenController;
+import lasersharks.Swimmer;
 
 /**
  * This class represents the gui of our application.
@@ -343,7 +344,7 @@ public class LevelGUI extends Application {
    * @param list
    *          the list of fish that needs to be displayed.
    */
-  public void showFishList(List<Fish> list) {
+  public void showFishList(List<Swimmer> list) {
     clearPaneOfImageView();
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).isAlive()) {
@@ -362,7 +363,7 @@ public class LevelGUI extends Application {
    *          the fish to display.
    * @return an imageview of the fish.
    */
-  public ImageView fishImage(Fish fish) {
+  public ImageView fishImage(Swimmer fish) {
     Position position = fish.getPosition();
     double size = fish.getSize();
     Direction dir = fish.getDirection();
@@ -437,7 +438,7 @@ public class LevelGUI extends Application {
    * @param fish
    *          the fish that is used to calculate the additional score
    */
-  public static void increaseScore(Fish fish) {
+  public static void increaseScore(Swimmer fish) {
     if (fish.isAlive()) {
       score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
     }
