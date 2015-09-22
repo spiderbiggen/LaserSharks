@@ -86,6 +86,9 @@ public class Level {
     this.shark = shark;
   }
   
+  /**
+   * Set the shark to his beginning state.
+   */
   public void setBeginShark() {
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);

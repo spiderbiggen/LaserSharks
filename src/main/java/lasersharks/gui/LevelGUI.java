@@ -146,7 +146,6 @@ public class LevelGUI extends Application {
 
     this.stage = stage;
     chooseScene();
-
     stage.show();
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
@@ -176,6 +175,9 @@ public class LevelGUI extends Application {
 
   }
   
+  /**
+   * Method to stop the animation timer.
+   */
   public void stopAnimation() {
     animation.stop();
   }
@@ -218,7 +220,9 @@ public class LevelGUI extends Application {
     } 
   }
 
-  
+  /**
+   * Restart the game.
+   */
   public void restartGame() {    
     pane.setOpacity(1.0);
     losePane.setOpacity(0.0);
@@ -264,6 +268,9 @@ public class LevelGUI extends Application {
     chooseLoseScene = true;
   }
   
+  /**
+   * This method set only the play scene true.
+   */
   public void setPlaySceneTrue() {
     chooseWinScene = false;
     choosePlayScene = true;
