@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 
-import lasersharks.gui.LevelGUI;
-
 /**
  * An options object is responsible for handling everything that has to do with options. 
  * This includes resolution.

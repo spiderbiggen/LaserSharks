@@ -4,6 +4,8 @@ package lasersharks;
  * Class Position.
  */
 public class Position {
+  private static final double HEIGHT_MULTIPLIER = 0.035;
+  private static final double WIDTH_MULTIPLYER = 0.9;
   private static final int SECOND_HASH_PRIME = 31;
   private static final int HASH_PRIME = 17;
   private double posX;
@@ -219,7 +221,10 @@ public class Position {
    * @return a position with coordinates on the middle of the screen
    */
   public static Position upperCornerPosition() {
-    return new Position(Math.round(Options.getGlobalWidth() * 0.9), Math.round(Options.getGlobalHeight() * 0.035));
+    return new Position(
+        Math.round(Options.getGlobalWidth() * WIDTH_MULTIPLYER), 
+        Math.round(Options.getGlobalHeight() * HEIGHT_MULTIPLIER)
+    );
   }
   
 
