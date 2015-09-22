@@ -12,17 +12,6 @@ public class Position {
   private double posY;
 
   /**
-   * these are now static values inside Position. These represent the height and width of the
-   * screen. TODO: when the gui is added, replace these static variables by getting the resolution
-   * of the panel.
-   */
-  private static final int START_HEIGHT = 1080;
-  private static final int START_WIDTH = 1920;
-
-  private static int height = START_HEIGHT;
-  private static int width = START_WIDTH;
-
-  /**
    * 
    * @param posX
    *          initial x position
@@ -38,14 +27,14 @@ public class Position {
    * @return the height of the panel.
    */
   public static double getHeightPanel() {
-    return height;
+    return Options.getGlobalHeight();
   }
 
   /**
    * @return the width of the panel.
    */
   public static double getWidthPanel() {
-    return width;
+    return Options.getGlobalWidth();
   }
 
   /**
@@ -55,7 +44,7 @@ public class Position {
    *          the new height of the panel to set.
    */
   public static void setHeightPanel(int newHeight) {
-    height = newHeight;
+    Options.setGlobalHeight(newHeight);
   }
 
   /**
@@ -65,7 +54,7 @@ public class Position {
    *          the new width of the panel to set.
    */
   public static void setWidthPanel(int newWidth) {
-    width = newWidth;
+    Options.setGlobalWidth(newWidth);
   }
 
   /**
@@ -171,7 +160,7 @@ public class Position {
    *          max offset margin
    */
   public final boolean onScreen(double xMargin) {
-    return (posX + xMargin >= 0 && posX - xMargin <= width && posY >= 0 && posY <= height);
+    return (posX + xMargin >= 0 && posX - xMargin <= Options.getGlobalWidth() && posY >= 0 && posY <= Options.getGlobalHeight());
   }
 
   /**
@@ -183,8 +172,8 @@ public class Position {
    *          how far something can go outside of the screen on the y axis
    */
   public void clipPosition(double xMargin, double yMargin) {
-    this.posX = Math.min(Math.max(0 - xMargin, this.posX), width - xMargin);
-    this.posY = Math.min(Math.max(0 - yMargin, this.posY), height - yMargin);
+    this.posX = Math.min(Math.max(0 - xMargin, this.posX), Options.getGlobalWidth() - xMargin);
+    this.posY = Math.min(Math.max(0 - yMargin, this.posY), Options.getGlobalHeight() - yMargin);
   }
 
   @Override
@@ -223,7 +212,7 @@ public class Position {
    * @return a position with coordinates on the middle of the screen
    */
   public static Position middlePosition() {
-    return new Position(Math.round(width / 2.0), Math.round(height / 2.0));
+    return new Position(Math.round(Options.getGlobalWidth() / 2.0), Math.round(Options.getGlobalHeight() / 2.0));
   }
   
   /**
@@ -233,8 +222,8 @@ public class Position {
    */
   public static Position upperCornerPosition() {
     return new Position(
-        Math.round(width * WIDTH_MULTIPLYER), 
-        Math.round(height * HEIGHT_MULTIPLIER)
+        Math.round(Options.getGlobalWidth() * WIDTH_MULTIPLYER), 
+        Math.round(Options.getGlobalHeight() * HEIGHT_MULTIPLIER)
     );
   }
   

@@ -5,3 +5,4 @@ target/
 /bin/
 highscores/
 logs/
+src/main/resources/highscores
