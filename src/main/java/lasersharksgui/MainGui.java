@@ -24,17 +24,18 @@ public class MainGui extends Application {
   
   @Override
   public void start(Stage stage) throws Exception {
-    stage.show();
     stage.setFullScreen(true);
+    stackPane = new StackPane();
     currentScene = new Scene(stackPane, 
         Options.getGlobalWidth(), 
         Options.getGlobalHeight(), 
         Options.getBackGroundColor()
         );
     stage.setScene(currentScene);
-    
+    currentPane = new Pane();
     //we start the application by showing the gamePanel
     showPane(GamePane.class);
+    stage.show();
   }
   
   public void showPane(Class paneClass) {
