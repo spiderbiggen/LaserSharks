@@ -141,7 +141,8 @@ public class HighscoresTest {
    */
   @Test
   public void testGetHighScoreTrue() throws FileNotFoundException {
-    assertTrue(highscores.getHighScore() == testSize);
+    int highestScore = highscores.getHighScore();
+    assertTrue(highestScore == testSize);
   }
 
   /**
@@ -152,7 +153,8 @@ public class HighscoresTest {
    */
   @Test
   public void testGetHighScoreFalse() throws FileNotFoundException {
-    assertFalse(highscores.getHighScore() == testSize - 1);
+    int highestScore = highscores.getHighScore();
+    assertFalse(highestScore == testSize - 1);
   }
 
   /**
@@ -274,7 +276,7 @@ public class HighscoresTest {
   public void testGetInstanceNotNull() {
     assertTrue(Highscores.getInstance() != null);
   }
-  
+
   /**
    * Make sure getInstance always returns same object if no setters used.
    */
@@ -283,6 +285,17 @@ public class HighscoresTest {
     Highscores l = Highscores.getInstance();
     assertEquals(l, Highscores.getInstance());
   }
-  
-  
+
+  /**
+   * Test method for setInstance()
+   */
+  @SuppressWarnings("static-access")
+  @Test
+  public void testSetInstance() {
+    Highscores testH = new Highscores();
+    highscores.setInstance(testH);
+    assertEquals(testH, testH.getInstance());
+
+  }
+
 }
