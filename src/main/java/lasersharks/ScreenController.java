@@ -16,7 +16,7 @@ public class ScreenController {
   private LevelGUI gui;
   private Level level;
   private Scene scene;
-  private static final int GAME_WINNING_SIZE = 320;
+  private static final int GAME_WINNING_SIZE = 80;
 
   /**
    * Constructor.
@@ -92,16 +92,14 @@ public class ScreenController {
    * Restart the game.
    */
   public void restart() {
-    //this.gui.setRestartGameTrue();    
     
     this.gui.stopAnimation();
-    this.gui.restartGame();
-    this.level.getFishCon().clearFish();
+    this.gui.restartGame();    
     this.level.getFishCon().getShark().setAlive();
     this.gui.setPlaySceneTrue();
-   
-    System.out.println("screenr");
     this.gui.chooseScene();
+    this.level.getFishCon().clearFish();
+    this.level.setBeginShark();
   }
 
 }
