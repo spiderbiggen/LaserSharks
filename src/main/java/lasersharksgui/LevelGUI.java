@@ -235,13 +235,19 @@ public class LevelGUI extends Application {
       newHighScore.setY(Position.middlePosition().getPosY() - 420);
       pane.getChildren().add(newHighScore);
     }
-
     Text gameText = new Text(message);
     gameText.setScaleX(TEXT_SCALE_SIZE);
     gameText.setScaleY(TEXT_SCALE_SIZE);
     gameText.setX(Position.middlePosition().getPosX());
     gameText.setY(Position.middlePosition().getPosY() - 230);
     pane.getChildren().add(gameText);
+    
+    Text restartText = new Text("Press R to restart");
+    restartText.setScaleX(TEXT_SCALE_SIZE / 4.5);
+    restartText.setScaleY(TEXT_SCALE_SIZE / 4.5);
+    restartText.setX(Position.middlePosition().getPosX());
+    restartText.setY(Position.middlePosition().getPosY() + 500);
+    pane.getChildren().add(restartText);
 
     Text highScore = new Text(Highscores.makeHighscoreString());
     highScore.setScaleX(TEXT_SCALE_SIZE / 2.5);
