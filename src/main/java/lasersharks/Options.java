@@ -1,5 +1,6 @@
 package lasersharks;
 
+import java.awt.AWTError;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -14,6 +15,8 @@ import lasersharks.gui.LevelGUI;
 public class Options {
   
   private Dimension dimension;
+  private static final int DEFAULT_WIDTH = 1920;
+  private static final int DEFAULT_HEIGHT = 1080;
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
   
@@ -87,7 +90,11 @@ public class Options {
    * @return the screen resolution of the systems screen.
    */
   public static Dimension getScreenSize() {
+    try{
     return Toolkit.getDefaultToolkit().getScreenSize();
+    } catch(AWTError e ) {
+      return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    }
   }
 
   /**
