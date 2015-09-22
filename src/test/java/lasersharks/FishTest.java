@@ -154,5 +154,12 @@ public abstract class FishTest {
     fish1.setPosition(posOffScreen);
     assertFalse(fish1.isOnScreen());
   }
+  
+  @Test
+  public void testSetAlive() {
+    fish1.kill();
+    fish1.setAlive();
+    assertTrue(fish1.isAlive());
+  }
 
 }
