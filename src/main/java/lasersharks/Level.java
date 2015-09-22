@@ -85,6 +85,12 @@ public class Level {
   public void setShark(LaserShark shark) {
     this.shark = shark;
   }
+  
+  public void setBeginShark() {
+    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
+        START_DIRECTION);
+    this.fishCon.setShark(this.shark);
+  }
 
   /**
    * @return the screenCon
@@ -128,6 +134,7 @@ public class Level {
    */
   public void restartGame() {
     screenCon.restart();
+    fishCon.clearFish();
   }
 
 }
