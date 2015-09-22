@@ -60,6 +60,7 @@ public class LevelGUI extends Application {
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
   private static final float HALF_SCALE = 0.5f;
+  private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static LevelGUI instance;
   private static int score = 0;
   private ScreenController screenController;
@@ -139,7 +140,17 @@ public class LevelGUI extends Application {
     stackPane = new StackPane();
     stage.setFullScreen(true);
     addElements(pane);
-    stackPane.getChildren().add(pane);    
+
+    stackPane.getChildren().add(pane);
+    
+    Highscores.writeHighscore();
+    winPane = showMessageScene("You Win!");
+    winPane.setOpacity(0.0);
+    stackPane.getChildren().add(winPane);    
+    losePane = showMessageScene("Game Over!");
+    losePane.setOpacity(0.0);
+    stackPane.getChildren().add(losePane);
+    
     playScene = new Scene(stackPane, 
         Options.getGlobalWidth(), 
         Options.getGlobalHeight(), 
@@ -147,7 +158,6 @@ public class LevelGUI extends Application {
 
     this.stage = stage;
     chooseScene();
-
     stage.show();
     Logger.getInstance().write("Starting Music", "Starting");
 
@@ -165,7 +175,7 @@ public class LevelGUI extends Application {
    */
   public void startGame() {
     animation = new AnimationTimer() {
-
+      
       @Override
       public void handle(long now) {
         double frametime = (now - time) / timeToMilis;
@@ -182,6 +192,14 @@ public class LevelGUI extends Application {
 
     };
     animation.start();
+
+  }
+  
+  /**
+   * Method to stop the animation timer.
+   */
+  public void stopAnimation() {
+    animation.stop();
   }
 
   /**
@@ -217,13 +235,19 @@ public class LevelGUI extends Application {
       newHighScore.setY(Position.middlePosition().getPosY() - 420);
       pane.getChildren().add(newHighScore);
     }
-
     Text gameText = new Text(message);
     gameText.setScaleX(TEXT_SCALE_SIZE);
     gameText.setScaleY(TEXT_SCALE_SIZE);
     gameText.setX(Position.middlePosition().getPosX());
     gameText.setY(Position.middlePosition().getPosY() - 230);
     pane.getChildren().add(gameText);
+    
+    Text restartText = new Text("Press R to restart");
+    restartText.setScaleX(TEXT_SCALE_SIZE / 4.5);
+    restartText.setScaleY(TEXT_SCALE_SIZE / 4.5);
+    restartText.setX(Position.middlePosition().getPosX());
+    restartText.setY(Position.middlePosition().getPosY() + 500);
+    pane.getChildren().add(restartText);
 
     Text highScore = new Text(Highscores.makeHighscoreString());
     highScore.setScaleX(TEXT_SCALE_SIZE / 2.5);
@@ -234,6 +258,7 @@ public class LevelGUI extends Application {
 
     return pane;
   }
+  
 
   /**
    * Method to choose which scene is used.
@@ -262,10 +287,23 @@ public class LevelGUI extends Application {
       animation.stop();
       pane.setOpacity(0.0);
       losePane.setOpacity(1.0);
-
-    }
+    } 
   }
 
+  /**
+   * Restart the game.
+   */
+  public void restartGame() {    
+    pane.setOpacity(1.0);
+    losePane.setOpacity(0.0);
+    winPane.setOpacity(0.0);
+    
+    Position.setHeightPanel((int) Math.round(stage.getHeight()));
+    Position.setWidthPanel((int) Math.round(stage.getWidth()));
+    
+    this.screenCon.start();
+  }
+  
   /**
    * Add some key elements to the pane. This includes: Background.
    * 
@@ -300,6 +338,15 @@ public class LevelGUI extends Application {
     chooseWinScene = false;
     choosePlayScene = false;
     chooseLoseScene = true;
+  }
+  
+  /**
+   * This method set only the play scene true.
+   */
+  public void setPlaySceneTrue() {
+    chooseWinScene = false;
+    choosePlayScene = true;
+    chooseLoseScene = false;
   }
 
   /**

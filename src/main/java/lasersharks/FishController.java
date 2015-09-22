@@ -93,6 +93,23 @@ public class FishController {
   public LaserShark getShark() {
     return this.shark;
   }
+  
+  /**
+   * Set the shark to his beginning state.
+   */
+  public void setBeginShark() {
+    this.setShark(new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
+        START_DIRECTION));
+    System.out.println("begin shark");
+  }
+  
+  /**
+   * method to return the start size.
+   * @return the start size
+   */
+  public float getStartSize() {
+    return this.START_SIZE;
+  }
 
   /**
    * Update all fish positions.

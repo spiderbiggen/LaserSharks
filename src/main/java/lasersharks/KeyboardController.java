@@ -1,5 +1,7 @@
 package lasersharks;
 
+import java.io.IOException;
+
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -14,11 +16,13 @@ import javafx.scene.input.KeyEvent;
 public class KeyboardController implements EventHandler<KeyEvent> {
   private DirectionCallback callback;
   private Scene scene;
+  private ScreenController screenConCallback;
 
   private boolean pressedUp;
   private boolean pressedDown;
   private boolean pressedLeft;
   private boolean pressedRight;
+  private boolean restartGame;
 
   /**
    * Constructor.
@@ -31,6 +35,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
   public KeyboardController(ScreenController screenCon, DirectionCallback fishCon) {
     this.scene = screenCon.getScene();
     this.callback = fishCon;
+    this.screenConCallback = screenCon;
 
     scene.addEventHandler(KeyEvent.ANY, this);
   }
@@ -48,6 +53,9 @@ public class KeyboardController implements EventHandler<KeyEvent> {
     if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
       pressedRight = true;
     }
+    if (event.getCode() == KeyCode.R) {
+      restartGame = true;      
+    }
   }
 
   private void keyReleased(KeyEvent event) {
@@ -63,13 +71,18 @@ public class KeyboardController implements EventHandler<KeyEvent> {
     if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
       pressedRight = false;
     }
+    if (event.getCode() == KeyCode.R) {
+      restartGame = false;      
+    }
   }
 
   /**
    * Will pass the keyboard input on to the Level to set the sharks direction.
+   * @throws IOException 
    */
-  private void handleInput() {
+  private void handleInput() throws IOException {
     Direction dir = Direction.None;
+
     if (pressedDown) {
       if (pressedLeft && !pressedRight) {
         dir = Direction.NorthWest;
@@ -90,7 +103,10 @@ public class KeyboardController implements EventHandler<KeyEvent> {
       dir = Direction.West;
     } else if (pressedRight) {
       dir = Direction.East;
-    }
+    } 
+    if (restartGame) {
+        screenConCallback.restart();
+      }    
     callback.putDirection(dir);
   }
 
@@ -101,6 +117,11 @@ public class KeyboardController implements EventHandler<KeyEvent> {
     } else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
       keyReleased(event);
     }
-    handleInput();
+    try {
+      handleInput();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 }

@@ -52,6 +52,7 @@ public class ScreenController {
       this.gui.setWinSceneTrue();
       this.gui.chooseScene();
     }
+
     return this.fishCon.getNextCycleInformation(frametime);
   }
 
@@ -88,4 +89,21 @@ public class ScreenController {
   public void start() {
     this.gui.startGame();
   }
+  
+  /**
+   * Restart the game.
+   * @throws IOException 
+   */
+  public void restart() throws IOException {
+    
+    this.gui.stopAnimation();
+    this.gui.restartGame();    
+    this.fishCon.getShark().setAlive();
+    this.gui.setPlaySceneTrue();
+    this.gui.chooseScene();
+    this.fishCon.clearFish();
+    this.fishCon.getShark().setSize(fishCon.getStartSize());
+    this.gui.setScore(0);
+  }
+
 }
