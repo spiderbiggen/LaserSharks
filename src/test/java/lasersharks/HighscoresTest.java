@@ -27,6 +27,7 @@ public class HighscoresTest {
   private static final String INPUT_FILE = "highscoresTestFile";
   private ArrayList<String> list = new ArrayList<String>();
   private final int testSize = 5;
+  private Highscores highscores = new Highscores();
 
   /**
    * Set the input file to the test file.
@@ -36,7 +37,7 @@ public class HighscoresTest {
    */
   @Before
   public void setUp() throws Exception {
-    Highscores.setInputFile(INPUT_FILE);
+    highscores.setInputFile(INPUT_FILE);
   }
 
   /**
@@ -69,7 +70,7 @@ public class HighscoresTest {
    */
   @Test
   public void testReadHighscoresTrue() throws IOException {
-    assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", Highscores.readHighscore().toString());
+    assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", highscores.readHighscore().toString());
   }
 
   /**
@@ -80,7 +81,7 @@ public class HighscoresTest {
    */
   @Test
   public void testReadHighscoresFalse() throws IOException {
-    assertNotEquals("[1. 1, 2. 2, 3. 3, 4. 4, 5. 5]", Highscores.readHighscore().toString());
+    assertNotEquals("[1. 1, 2. 2, 3. 3, 4. 4, 5. 5]", highscores.readHighscore().toString());
   }
 
   /**
@@ -94,8 +95,8 @@ public class HighscoresTest {
     list.add("2. 400");
     list.add("3. 300");
     list.add("4. 200");
-    assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]",
-        Highscores.fixHighscoreCount(list).toString());
+    assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]", highscores.fixHighscoreCount(list)
+        .toString());
 
   }
 
@@ -110,8 +111,8 @@ public class HighscoresTest {
     list.add("3. 400");
     list.add("4. 300");
     list.add("5. 200");
-    assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]",
-        Highscores.fixHighscoreCount(list).toString());
+    assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]", highscores.fixHighscoreCount(list)
+        .toString());
 
   }
 
@@ -126,8 +127,8 @@ public class HighscoresTest {
     list.add("1. 400");
     list.add("5. 300");
     list.add("2. 200");
-    assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]",
-        Highscores.fixHighscoreCount(list).toString());
+    assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]", highscores.fixHighscoreCount(list)
+        .toString());
 
   }
 
@@ -139,7 +140,7 @@ public class HighscoresTest {
    */
   @Test
   public void testGetHighScoreTrue() throws FileNotFoundException {
-    assertTrue(Highscores.getHighScore() == testSize);
+    assertTrue(highscores.getHighScore() == testSize);
   }
 
   /**
@@ -150,7 +151,7 @@ public class HighscoresTest {
    */
   @Test
   public void testGetHighScoreFalse() throws FileNotFoundException {
-    assertFalse(Highscores.getHighScore() == testSize - 1);
+    assertFalse(highscores.getHighScore() == testSize - 1);
   }
 
   /**
@@ -161,12 +162,12 @@ public class HighscoresTest {
    */
   @Test
   public void testMakeHighscoreString() throws FileNotFoundException {
-    Highscores.setList(Highscores.readHighscore());
+    highscores.setList(highscores.readHighscore());
     String li = System.lineSeparator();
     LevelGUI.setScore(0);
     assertEquals("Highscores:" + li + "     " + "1. 5" + li + "     " + "2. 4" + li + "     "
         + "3. 3" + li + "     " + "4. 2" + li + "     " + "5. 1" + li + li + "Your score: "
-        + LevelGUI.getScore(), Highscores.makeHighscoreString());
+        + LevelGUI.getScore(), highscores.makeHighscoreString());
 
   }
 }

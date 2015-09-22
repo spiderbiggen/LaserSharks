@@ -75,6 +75,7 @@ public class LevelGUI extends Application {
   private Media media;
   private MediaPlayer mediaPlayer;
   private ImageView sharkImage;
+  private Highscores highscores = Highscores.getInstance();
 
   private long time = 0;
   private final double timeToMilis = 1_000_000;
@@ -203,7 +204,7 @@ public class LevelGUI extends Application {
     Pane pane = new Pane();
     addElements(pane);
 
-    if (score == Highscores.getHighScore()) {
+    if (score == highscores.getHighScore()) {
       Text newHighScore = new Text("NEW HIGHSCORE!");
       newHighScore.setScaleX(TEXT_SCALE_SIZE * 1.7);
       newHighScore.setScaleY(TEXT_SCALE_SIZE * 1.7);
@@ -219,7 +220,7 @@ public class LevelGUI extends Application {
     gameText.setY(Position.middlePosition().getPosY() - 230);
     pane.getChildren().add(gameText);
 
-    Text highScore = new Text(Highscores.makeHighscoreString());
+    Text highScore = new Text(highscores.makeHighscoreString());
     highScore.setScaleX(TEXT_SCALE_SIZE / 2.5);
     highScore.setScaleY(TEXT_SCALE_SIZE / 2.5);
     highScore.setX(Position.middlePosition().getPosX());
@@ -240,7 +241,7 @@ public class LevelGUI extends Application {
       stage.setScene(playScene);
 
     } else if (chooseWinScene) {
-      Highscores.writeHighscore();
+      highscores.writeHighscore();
       winPane = showMessageScene("You Win!");
       winPane.setOpacity(0.0);
       stackPane.getChildren().add(winPane);
@@ -249,7 +250,7 @@ public class LevelGUI extends Application {
       winPane.setOpacity(1.0);
 
     } else if (chooseLoseScene) {
-      Highscores.writeHighscore();
+      highscores.writeHighscore();
       losePane = showMessageScene("Game Over!");
       losePane.setOpacity(0.0);
       stackPane.getChildren().add(losePane);
@@ -268,9 +269,9 @@ public class LevelGUI extends Application {
    */
 
   public void addElements(Pane pane) {
-    BackgroundImage myBI = new BackgroundImage(
-        new Image("somber sea floor.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES, true,
+        false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
   }
 
