@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import lasersharksgui.MainGui;
 
 /**
  * 
@@ -29,7 +30,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
    *          callback
    */
   public KeyboardController(ScreenController screenCon, DirectionCallback fishCon) {
-    this.scene = screenCon.getScene();
+    this.scene = MainGui.getInstance().getCurrentScene();
     this.callback = fishCon;
 
     scene.addEventHandler(KeyEvent.ANY, this);

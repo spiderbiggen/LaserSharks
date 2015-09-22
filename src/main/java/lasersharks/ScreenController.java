@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.scene.Scene;
+import lasersharksgui.GamePane;
 import lasersharksgui.LevelGUI;
+import lasersharksgui.LosingPane;
+import lasersharksgui.MainGui;
+import lasersharksgui.StandardPane;
+import lasersharksgui.WinPane;
 
 /**
  * This is the class that will manage the screen.
@@ -14,8 +19,7 @@ import lasersharksgui.LevelGUI;
  */
 @SuppressWarnings("restriction")
 public class ScreenController {
-  private LevelGUI gui;
-  private Scene scene;
+  private GamePane currentPane;
   private FishController fishCon;
   private static final int GAME_WINNING_SIZE = 320;
 
@@ -27,12 +31,11 @@ public class ScreenController {
    * @param gui
    *          pointer to the active gui.
    */
-  public ScreenController(FishController fishCon, LevelGUI gui) {
+  public ScreenController(GamePane pane) {
     super();
-    this.fishCon = fishCon;
-    this.gui = gui;
-    this.gui.setScreenController(this);
-    this.scene = gui.getScene();
+    this.fishCon = new FishController();
+    this.currentPane = pane;
+    this.currentPane.setScreenController(this);
   }
 
   /**
@@ -46,11 +49,9 @@ public class ScreenController {
    */
   public List<Fish> getNextFrameInfo(double frametime) throws IOException {
     if (!this.fishCon.getShark().isAlive()) {
-      this.gui.setLoseSceneTrue();
-      this.gui.chooseScene();
+      MainGui.browseTo(LosingPane.class);
     } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
-      this.gui.setWinSceneTrue();
-      this.gui.chooseScene();
+      MainGui.browseTo(WinPane.class);
     }
     return this.fishCon.getNextCycleInformation(frametime);
   }
@@ -65,27 +66,9 @@ public class ScreenController {
   }
 
   /**
-   * get the scene from the gui.
-   * 
-   * @return the scene from the gui
-   */
-  public Scene getScene() {
-    return this.scene;
-  }
-
-  /**
-   * Returns the static LevelGUI.
-   * 
-   * @return the gui
-   */
-  public LevelGUI getGui() {
-    return gui;
-  }
-
-  /**
    * Propagation function for starting the game.
    */
   public void start() {
-    this.gui.startGame();
+    this.currentPane.startGame();
   }
 }

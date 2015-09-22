@@ -13,7 +13,9 @@ public class MainGui extends Application {
   
   private Scene currentScene;
   private Pane currentPane;
-  private StackPane stackPane;  
+  private StackPane stackPane;
+  private static MainGui instance;
+  
   /**
    * @param args
    *          parameters to influence the startup of this game.
@@ -36,6 +38,7 @@ public class MainGui extends Application {
     //we start the application by showing the gamePanel
     showPane(GamePane.class);
     stage.show();
+    instance = this;
   }
   
   public void showPane(Class paneClass) {
@@ -48,10 +51,29 @@ public class MainGui extends Application {
            System.out.println("could not browse");
            e.printStackTrace();
        }       
- }
+  }
   
+  public static MainGui getInstance() {
+    return instance;
+  }
   
+  public static void browseTo(Class paneClass) {
+    instance.showPane(paneClass);
+  }
 
+  /**
+   * @return the currentScene
+   */
+  public Scene getCurrentScene() {
+    return currentScene;
+  }
+
+  /**
+   * @return the currentPane
+   */
+  public Pane getCurrentPane() {
+    return currentPane;
+  }
 
 
 }

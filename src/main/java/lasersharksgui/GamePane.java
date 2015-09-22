@@ -17,7 +17,7 @@ import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
-public class GamePane extends StandardPane{
+public class GamePane extends StandardPane {
 
   private static final float HALF_SCALE = 0.5f;
   AnimationTimer animation;
@@ -25,8 +25,10 @@ public class GamePane extends StandardPane{
   private ScreenController screenController;
   private static long time = 0;
   private static int score;
+  
   public GamePane() {
-    
+    screenController = new ScreenController(this);
+    startGame();
   }
   
   
@@ -58,7 +60,7 @@ public class GamePane extends StandardPane{
    * Displays the score in the upper right corner of the screen.
    */
   public void showScore() {
-    addText("Score: " + score, TEXT_SCALE_SIZE_MED , Position.upperCornerPosition());  
+    addText("Score: " + score, TEXT_SCALE_SIZE_SMALL , Position.upperCornerPosition());  
   }
   
   /**
@@ -174,4 +176,23 @@ public class GamePane extends StandardPane{
       score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
     }
   }
+
+
+  /**
+   * @return the screenController
+   */
+  public ScreenController getScreenController() {
+    return screenController;
+  }
+
+
+  /**
+   * @param screenController the screenController to set
+   */
+  public void setScreenController(ScreenController screenController) {
+    this.screenController = screenController;
+  }
+  
+  
+  
 }

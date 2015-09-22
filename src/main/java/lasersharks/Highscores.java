@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import lasersharksgui.GamePane;
 import lasersharksgui.LevelGUI;
 
 /**
@@ -84,9 +85,9 @@ public class Highscores {
   public static void writeHighscore() throws IOException {
     list = readHighscore();
     for (int i = 0; i < list.size(); i++) {
-      if (LevelGUI.getScore() >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
+      if (GamePane.getScore() >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
         list.remove(list.size() - 1);
-        list.add(i, i + ". " + LevelGUI.getScore());
+        list.add(i, i + ". " + GamePane.getScore());
         break;
       }
 
@@ -162,7 +163,7 @@ public class Highscores {
       res = res + "     " + list.get(i) + li;
     }
 
-    return "Highscores:" + li + res + li + "Your score: " + LevelGUI.getScore();
+    return "Highscores:" + li + res + li + "Your score: " + GamePane.getScore();
   }
 
 }
