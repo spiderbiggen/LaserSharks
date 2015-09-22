@@ -33,6 +33,7 @@ import lasersharks.Highscores;
 import lasersharks.KeyboardController;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
+import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -59,7 +60,6 @@ public class LevelGUI extends Application {
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
   private static final float HALF_SCALE = 0.5f;
-  private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static LevelGUI instance;
   private static int score = 0;
   private ScreenController screenController;
@@ -138,26 +138,24 @@ public class LevelGUI extends Application {
     pane = new Pane();
     stackPane = new StackPane();
     stage.setFullScreen(true);
-
     addElements(pane);
-
-    stackPane.getChildren().add(pane);
-
-    playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
+    stackPane.getChildren().add(pane);    
+    playScene = new Scene(stackPane, 
+        Options.getGlobalWidth(), 
+        Options.getGlobalHeight(), 
+        BACKCOLOUR);
 
     this.stage = stage;
     chooseScene();
 
     stage.show();
-    Position.setHeightPanel((int) Math.round(stage.getHeight()));
-    Position.setWidthPanel((int) Math.round(stage.getWidth()));
     Logger.getInstance().write("Starting Music", "Starting");
 
     this.fishCon = new FishController();
     this.screenCon = new ScreenController(this.fishCon, this);
     new KeyboardController(this.screenCon, this.fishCon.getShark());
-    
-    startMusic(MUSIC_FILENAME);
+
+    startMusic(Options.getInstance().getMusicFileName());
     
     this.screenCon.start();
   }
@@ -277,8 +275,12 @@ public class LevelGUI extends Application {
 
   public void addElements(Pane pane) {
     BackgroundImage myBI = new BackgroundImage(
-        new Image("somber sea floor.jpg", XRES, YRES, true, false), BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        new Image(Options.getInstance().getBackGroundImage(), 
+            XRES, YRES, true, false), 
+            BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, 
+        BackgroundPosition.DEFAULT, 
+        BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
   }
 
@@ -441,7 +443,6 @@ public class LevelGUI extends Application {
     if (fish.isAlive()) {
       score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
     }
-
   }
 
   /**
