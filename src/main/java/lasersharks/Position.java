@@ -223,5 +223,15 @@ public class Position {
   public static Position middlePosition() {
     return new Position(Math.round(width / 2.0), Math.round(height / 2.0));
   }
+  
+  /**
+   * This position represents the middle of the screen.
+   * 
+   * @return a position with coordinates on the middle of the screen
+   */
+  public static Position upperCornerPosition() {
+    return new Position(Math.round(width * 0.9), Math.round(height * 0.035));
+  }
+  
 
 }

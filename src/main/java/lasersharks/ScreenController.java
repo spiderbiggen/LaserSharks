@@ -1,5 +1,6 @@
 package lasersharks;
 
+import java.io.IOException;
 import java.util.List;
 
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ public class ScreenController {
   private LevelGUI gui;
   private Level level;
   private Scene scene;
-  private static final int GAME_WINNING_SIZE = 80;
+  private static final int GAME_WINNING_SIZE = 800;
 
   /**
    * Constructor.
@@ -41,8 +42,9 @@ public class ScreenController {
    *          time between frames in seconds
    * 
    * @return FishInfo
+   * @throws IOException 
    */
-  public List<Fish> getNextFrameInfo(double frametime) {
+  public List<Fish> getNextFrameInfo(double frametime) throws IOException {
     if (!this.level.getFishCon().getShark().isAlive()) {
       this.gui.setLoseSceneTrue();
       this.gui.chooseScene();
@@ -90,8 +92,9 @@ public class ScreenController {
   
   /**
    * Restart the game.
+   * @throws IOException 
    */
-  public void restart() {
+  public void restart() throws IOException {
     
     this.gui.stopAnimation();
     this.gui.restartGame();    

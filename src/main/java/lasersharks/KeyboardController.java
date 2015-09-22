@@ -1,5 +1,7 @@
 package lasersharks;
 
+import java.io.IOException;
+
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -100,7 +102,12 @@ public class KeyboardController implements EventHandler<KeyEvent> {
       dir = Direction.East;
     } 
     if (restartGame) {
-      callback.restartGame();
+      try {
+        callback.restartGame();
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }    
     callback.setSharkDirection(dir);
   }

@@ -1,5 +1,6 @@
 package lasersharks;
 
+import java.io.IOException;
 import java.util.List;
 
 import lasersharks.gui.LevelGUI;
@@ -134,8 +135,9 @@ public class Level {
   
   /**
    * Restart game.
+   * @throws IOException 
    */
-  public void restartGame() {
+  public void restartGame() throws IOException {
     screenCon.restart();
     fishCon.clearFish();
   }

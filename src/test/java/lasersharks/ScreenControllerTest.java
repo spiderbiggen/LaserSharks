@@ -1,5 +1,6 @@
 package lasersharks;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 import org.junit.Before;
@@ -59,18 +60,20 @@ public class ScreenControllerTest {
 
   /**
    * test getNextFrameInfo() with the shark not having the size needed to win.
+   * @throws IOException 
    */
   @Test
-  public void testGetNextFrameInfoNoWin() {
+  public void testGetNextFrameInfoNoWin() throws IOException {
     Mockito.when(shark.getSize()).thenReturn(UNDER_WIN_SIZE);
     screenCon.getNextFrameInfo(1);
   }
 
   /**
    * test getNextFrameInfo() with the shark having the size needed to win.
+   * @throws IOException 
    */
   @Test
-  public void testGetNextFrameInfoWin() {
+  public void testGetNextFrameInfoWin() throws IOException {
     Mockito.when(shark.getSize()).thenReturn(ABOVE_WIN_SIZE);
     screenCon.getNextFrameInfo(1);
     Mockito.verify(gui).setWinSceneTrue();
