@@ -79,7 +79,29 @@ public class ScreenControllerTest {
     Mockito.verify(gui).setWinSceneTrue();
     Mockito.verify(gui).chooseScene();
   }
+  
+  /**
+   * Test getNextFramInfo() when the shark is dead.
+   * @throws IOException
+   */
+  @Test
+  public void testGetNextFrameInfoDead() throws IOException {
+    Mockito.when(shark.isAlive()).thenReturn(false);
+    screenCon.getNextFrameInfo(1);
+    Mockito.verify(gui).setLoseSceneTrue();
+    Mockito.verify(gui).chooseScene();
+  }
 
+  /**
+   * Test getNextFramInfo() when the shark is alive.
+   * @throws IOException
+   */
+  @Test
+  public void testGetNextFrameInfoAlive() throws IOException {
+    Mockito.when(shark.isAlive()).thenReturn(true);
+    screenCon.getNextFrameInfo(1);
+  }
+  
   /**
    * Tests the start().
    */
@@ -107,9 +129,10 @@ public class ScreenControllerTest {
   
   /**
    * test for restart().
+   * @throws IOException 
    */
   @Test
-  public void testRestart() {
+  public void testRestart() throws IOException {
     screenCon.restart();
     Mockito.verify(gui).stopAnimation();
     Mockito.verify(gui).restartGame();
@@ -120,5 +143,4 @@ public class ScreenControllerTest {
     Mockito.verify(fishCon).clearFish();
     Mockito.verify(level).setBeginShark();
   }
-
 }

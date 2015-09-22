@@ -6,6 +6,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -152,12 +154,14 @@ public class LevelTest {
   
   /**
    * test for restartGame().
+   * @throws IOException 
    */
   @Test
-  public void testRestartGame() {
+  public void testRestartGame() throws IOException {
     ScreenController sc = mock(ScreenController.class);
     this.level.setScreenCon(sc);
     this.level.restartGame();
     verify(sc).restart();
   }
+
 }
