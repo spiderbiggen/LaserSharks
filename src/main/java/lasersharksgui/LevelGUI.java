@@ -1,4 +1,4 @@
-package lasersharks.gui;
+package lasersharksgui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,9 +28,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
 import lasersharks.Fish;
+import lasersharks.FishController;
 import lasersharks.Highscores;
+import lasersharks.KeyboardController;
 import lasersharks.LaserShark;
-import lasersharks.Level;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.ScreenController;
@@ -78,6 +79,8 @@ public class LevelGUI extends Application {
 
   private long time = 0;
   private final double timeToMilis = 1_000_000;
+  private FishController fishCon;
+  private ScreenController screenCon;
 
   /**
    * @return the screenController.
@@ -149,9 +152,14 @@ public class LevelGUI extends Application {
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
     Logger.getInstance().write("Starting Music", "Starting");
-    Level level = new Level(this);
-    level.launch();
+
+    this.fishCon = new FishController();
+    this.screenCon = new ScreenController(this.fishCon, this);
+    new KeyboardController(this.screenCon, this.fishCon.getShark());
+    
     startMusic(MUSIC_FILENAME);
+    
+    this.screenCon.start();
   }
 
   /**

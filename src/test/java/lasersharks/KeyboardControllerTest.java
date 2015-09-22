@@ -32,7 +32,6 @@ import javafx.scene.input.KeyEvent;
 public class KeyboardControllerTest {
   private static final int SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE = 4;
   private static final int SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE = 3;
-  private Level level;
   private Scene scene;
   private ScreenController screenCon;
   private KeyboardController keyboardController;
@@ -44,6 +43,7 @@ public class KeyboardControllerTest {
   private ArgumentCaptor<Direction> directionCaptor;
 
   private final Direction defaultDirection = Direction.None;
+  private DirectionCallback callback;
 
   /**
    * Constructor for parameterized tests.
@@ -72,11 +72,11 @@ public class KeyboardControllerTest {
    */
   @Before
   public void setUp() {
-    this.level = mock(Level.class);
+    this.callback = mock(DirectionCallback.class);
     this.scene = mock(Scene.class);
     this.screenCon = mock(ScreenController.class);
     when(this.screenCon.getScene()).thenReturn(this.scene);
-    this.keyboardController = new KeyboardController(screenCon, level);
+    this.keyboardController = new KeyboardController(this.screenCon, this.callback);
   }
 
   /**
@@ -119,7 +119,7 @@ public class KeyboardControllerTest {
   public void testDirectionAfterFirstKeyPress() {
     pressKey(this.keyCode1);
 
-    verify(level, times(1)).setSharkDirection(this.directionCaptor.capture());
+    verify(callback, times(1)).putDirection(this.directionCaptor.capture());
     assertEquals(this.expectedDirectionAfterKeyPress1, this.directionCaptor.getAllValues().get(0));
   }
 
@@ -130,7 +130,7 @@ public class KeyboardControllerTest {
   public void testDirectionAfterSecondKeyPress() {
     pressKey(this.keyCode1);
     pressKey(this.keyCode2);
-    verify(level, times(2)).setSharkDirection(this.directionCaptor.capture());
+    verify(callback, times(2)).putDirection(this.directionCaptor.capture());
     assertEquals(this.expectedDirectionAfterKeyPress2, this.directionCaptor.getAllValues().get(1));
 
   }
@@ -144,8 +144,8 @@ public class KeyboardControllerTest {
     pressKey(this.keyCode2);
     releaseKey(this.keyCode2);
 
-    verify(level, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE))
-        .setSharkDirection(this.directionCaptor.capture());
+    verify(callback, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE))
+        .putDirection(this.directionCaptor.capture());
 
     assertEquals(this.expectedDirectionAfterKeyPress1,
         this.directionCaptor.getAllValues().get(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE - 1));
@@ -161,8 +161,8 @@ public class KeyboardControllerTest {
     releaseKey(this.keyCode2);
     releaseKey(this.keyCode1);
 
-    verify(level, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE))
-        .setSharkDirection(this.directionCaptor.capture());
+    verify(callback, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE))
+        .putDirection(this.directionCaptor.capture());
 
     assertEquals(this.defaultDirection, this.directionCaptor.getAllValues()
         .get(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE - 1));
@@ -178,8 +178,8 @@ public class KeyboardControllerTest {
     releaseKey(this.keyCode1);
     releaseKey(this.keyCode2);
 
-    verify(level, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE))
-        .setSharkDirection(this.directionCaptor.capture());
+    verify(callback, times(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE))
+        .putDirection(this.directionCaptor.capture());
 
     assertEquals(this.defaultDirection, this.directionCaptor.getAllValues()
         .get(SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE - 1));
@@ -193,7 +193,7 @@ public class KeyboardControllerTest {
     pressKey(this.keyCode1);
     releaseKey(this.keyCode1);
 
-    verify(level, times(2)).setSharkDirection(this.directionCaptor.capture());
+    verify(callback, times(2)).putDirection(this.directionCaptor.capture());
 
     assertEquals(this.defaultDirection, this.directionCaptor.getAllValues().get(1));
   }
@@ -206,7 +206,7 @@ public class KeyboardControllerTest {
     pressKey(this.keyCode1);
     releaseKey(this.keyCode1);
 
-    verify(level, times(2)).setSharkDirection(this.directionCaptor.capture());
+    verify(callback, times(2)).putDirection(this.directionCaptor.capture());
 
     assertEquals(this.defaultDirection, this.directionCaptor.getAllValues().get(1));
   }

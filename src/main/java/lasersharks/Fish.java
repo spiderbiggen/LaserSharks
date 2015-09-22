@@ -169,7 +169,7 @@ public abstract class Fish {
   @Override
   public String toString() {
     return "FishBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
-        + ", direction=" + direction + "]";
+        + ", direction=" + direction + ", Alive =" + alive + "]";
   }
 
   /**

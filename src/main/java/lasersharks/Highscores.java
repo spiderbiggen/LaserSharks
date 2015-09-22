@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import lasersharks.gui.LevelGUI;
+import lasersharksgui.LevelGUI;
 
 /**
  * A class that handles anything to do with highscores.
