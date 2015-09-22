@@ -28,7 +28,7 @@ public class Highscores {
   }
 
   public static Highscores getInstance() {
-    if(highscores == null) {
+    if (highscores == null) {
       highscores = new Highscores();
     }
     return highscores;
@@ -175,6 +175,16 @@ public class Highscores {
     }
 
     return "Highscores:" + li + res + li + "Your score: " + LevelGUI.getScore();
+  }
+
+  /**
+   * Method so we can mock highscores in tests of other classes.
+   * 
+   * @param highscores
+   *          highscores to be used.
+   */
+  public static void setInstance(Highscores highscores) {
+    Highscores.highscores = highscores;
   }
 
 }
