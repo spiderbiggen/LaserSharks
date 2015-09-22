@@ -173,7 +173,6 @@ public class LevelGUI extends Application {
 
     };
     animation.start();
-    System.out.println("test");
 
   }
   
@@ -206,36 +205,29 @@ public class LevelGUI extends Application {
   public void chooseScene() {
     if (choosePlayScene) {
       stage.setScene(playScene);
-      System.out.println("playstrue");
 
     } else if (chooseWinScene) {
       animation.stop();
       pane.setOpacity(0.0);
       winPane.setOpacity(1.0);
-      System.out.println("win");
 
     } else if (chooseLoseScene) {
       animation.stop();
       pane.setOpacity(0.0);
       losePane.setOpacity(1.0);
-      System.out.println("lose");
     } 
   }
 
   
-  public void restartGame() {
-    
+  public void restartGame() {    
     pane.setOpacity(1.0);
     losePane.setOpacity(0.0);
     winPane.setOpacity(0.0);
-
-    //stage.show();
     
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
     
-    level.launch();
-   
+    level.launch();   
   }
   
   
