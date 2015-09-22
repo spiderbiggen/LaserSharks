@@ -53,7 +53,6 @@ public class FishController {
         START_SPEED,
         START_DIRECTION
     );
-    this.fishList.add(this.shark);
   }
 
   /**
