@@ -55,23 +55,16 @@ public class LevelGUI extends Application {
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
   private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
-  private static LevelGUI instance;
-  private static LevelGUI instancer;
+  private static LevelGUI instance;;
   private ScreenController screenController;
   private Pane pane;
   private Pane winPane;
   private Pane losePane;
   private StackPane stackPane;
-  private Pane paner;
-  private Pane winPaner;
-  private Pane losePaner;
-  private StackPane stackPaner;
   private Scene playScene;
-  private Scene playScener;
   private boolean choosePlayScene = true;
   private boolean chooseWinScene = false;
   private boolean chooseLoseScene = false;
-  private boolean chooseRestartGame = false;
   private Stage stage;
   private AnimationTimer animation;
   private Media media;
@@ -219,6 +212,7 @@ public class LevelGUI extends Application {
       animation.stop();
       pane.setOpacity(0.0);
       winPane.setOpacity(1.0);
+      System.out.println("win");
 
     } else if (chooseLoseScene) {
       animation.stop();
@@ -228,40 +222,18 @@ public class LevelGUI extends Application {
     } 
   }
 
+  
   public void restartGame() {
-    //animation.stop();
-    
-    stage.close();
     
     pane.setOpacity(1.0);
     losePane.setOpacity(0.0);
-    
-//    LevelGUI.instance = this;
-//    pane = new Pane();
-//    stackPane = new StackPane();
-//    stage.setFullScreen(true);
-//    
-//    addElements(pane);
-    
-//
-//    stackPane.getChildren().add(pane);
-//    stackPane.getChildren().add(winPane);
-//    stackPane.getChildren().add(losePane);
-//
-//    playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
+    winPane.setOpacity(0.0);
 
-    //this.stage = stage;
-    //System.out.println(chooseLoseScene);
-//    this.setPlaySceneTrue();
-//    this.chooseScene();
-    
-//    animation.start();
-    //stage.setScene(playScene);
-    stage.show();
+    //stage.show();
     
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
-//    level = new Level(this);
+    
     level.launch();
    
   }
@@ -289,7 +261,6 @@ public class LevelGUI extends Application {
     chooseWinScene = true;
     choosePlayScene = false;
     chooseLoseScene = false;
-    chooseRestartGame = false;
   }
 
   /**
@@ -299,21 +270,12 @@ public class LevelGUI extends Application {
     chooseWinScene = false;
     choosePlayScene = false;
     chooseLoseScene = true;
-    chooseRestartGame = false;
   }
   
   public void setPlaySceneTrue() {
     chooseWinScene = false;
     choosePlayScene = true;
     chooseLoseScene = false;
-    chooseRestartGame = false;
-  }
-  
-  public void setRestartGameTrue() {
-    chooseWinScene = false;
-    choosePlayScene = false;
-    chooseLoseScene = false;
-    chooseRestartGame = true;
   }
 
   /**
