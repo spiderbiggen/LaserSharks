@@ -1,7 +1,5 @@
 package lasersharksgui;
 
-import javax.swing.JPanel;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -16,6 +14,8 @@ public class MainGui extends Application {
   private StackPane stackPane;
   private static MainGui instance;
   
+
+  
   /**
    * @param args
    *          parameters to influence the startup of this game.
@@ -26,6 +26,7 @@ public class MainGui extends Application {
   
   @Override
   public void start(Stage stage) throws Exception {
+    instance = this;
     stage.setFullScreen(true);
     stackPane = new StackPane();
     currentScene = new Scene(stackPane, 
@@ -38,7 +39,6 @@ public class MainGui extends Application {
     //we start the application by showing the gamePanel
     showPane(GamePane.class);
     stage.show();
-    instance = this;
   }
   
   public void showPane(Class paneClass) {
@@ -74,6 +74,5 @@ public class MainGui extends Application {
   public Pane getCurrentPane() {
     return currentPane;
   }
-
-
+  
 }

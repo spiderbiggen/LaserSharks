@@ -27,8 +27,9 @@ public abstract class StandardPane extends Pane {
   protected static final int TEXT_SCALE_SIZE_SMALL = 4;
   
   //audio variables
-  private Media media;
-  private MediaPlayer mediaPlayer;
+  protected static Media media;
+  protected static MediaPlayer mediaPlayer;
+  private static boolean musicIsPlaying = false;
   
   //sprite and image variables
   protected ImageView sharkImage;
@@ -37,8 +38,9 @@ public abstract class StandardPane extends Pane {
   public StandardPane() {
     super();
     addBackGround();
-    playMusic(Options.getInstance().getMusicFileName());
-    
+    if(!musicIsPlaying){
+      playMusic(Options.getInstance().getMusicFileName());
+    }
   }
   
   /**
@@ -59,10 +61,12 @@ public abstract class StandardPane extends Pane {
    * This function plays a music track on repeat
    * @param path
    */
-  public void playMusic(String path) {
+  public static void playMusic(String path) {
     media = new Media(new File(path).toURI().toString());
     mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.setAutoPlay(true);
     mediaPlayer.play();
+    musicIsPlaying = true;
   }
   
   /**
@@ -82,6 +86,7 @@ public abstract class StandardPane extends Pane {
   }
   
   public void addMidText(String message, int textSize, double deltaY) {
-    addText(message, textSize, new Position(Position.middlePosition().getPosX(),Position.middlePosition().getPosY() - deltaY ));
+    addText(message, textSize, new Position(Position.middlePosition().getPosX(), 
+        Position.middlePosition().getPosY() - deltaY ));
   }
 }

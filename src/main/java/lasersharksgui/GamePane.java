@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import lasersharks.Direction;
 import lasersharks.Fish;
 import lasersharks.Highscores;
+import lasersharks.KeyboardController;
 import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.ScreenController;
@@ -29,6 +30,9 @@ public class GamePane extends StandardPane {
   public GamePane() {
     screenController = new ScreenController(this);
     startGame();
+    
+
+    new KeyboardController(this.screenController, this.screenController.getShark());
   }
   
   
@@ -36,6 +40,7 @@ public class GamePane extends StandardPane {
    * Function for start of drawing fish on screen.
    */
   public void startGame() {
+    
     animation = new AnimationTimer() {
 
       @Override
