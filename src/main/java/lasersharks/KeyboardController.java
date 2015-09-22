@@ -14,8 +14,9 @@ import javafx.scene.input.KeyEvent;
  */
 @SuppressWarnings("restriction")
 public class KeyboardController implements EventHandler<KeyEvent> {
-  private Level callback;
+  private DirectionCallback callback;
   private Scene scene;
+  private ScreenController screenConCallback;
 
   private boolean pressedUp;
   private boolean pressedDown;
@@ -28,12 +29,13 @@ public class KeyboardController implements EventHandler<KeyEvent> {
    * 
    * @param screenCon
    *          scene holder
-   * @param level
+   * @param fishCon
    *          callback
    */
-  public KeyboardController(ScreenController screenCon, Level level) {
+  public KeyboardController(ScreenController screenCon, DirectionCallback fishCon) {
     this.scene = screenCon.getScene();
-    this.callback = level;
+    this.callback = fishCon;
+    this.screenConCallback = screenCon;
 
     scene.addEventHandler(KeyEvent.ANY, this);
   }
@@ -76,8 +78,9 @@ public class KeyboardController implements EventHandler<KeyEvent> {
 
   /**
    * Will pass the keyboard input on to the Level to set the sharks direction.
+   * @throws IOException 
    */
-  private void handleInput() {
+  private void handleInput() throws IOException {
     Direction dir = Direction.None;
 
     if (pressedDown) {
@@ -102,14 +105,9 @@ public class KeyboardController implements EventHandler<KeyEvent> {
       dir = Direction.East;
     } 
     if (restartGame) {
-      try {
-        callback.restartGame();
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    }    
-    callback.setSharkDirection(dir);
+        screenConCallback.restart();
+      }    
+    callback.putDirection(dir);
   }
 
   @Override
@@ -119,6 +117,11 @@ public class KeyboardController implements EventHandler<KeyEvent> {
     } else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
       keyReleased(event);
     }
-    handleInput();
+    try {
+      handleInput();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 }

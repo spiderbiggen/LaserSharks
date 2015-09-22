@@ -76,6 +76,14 @@ public abstract class Fish {
   protected void increaseSize(float size) {
     this.size += size;
   }
+  
+  /**
+   * Method to set the size of the fish.
+   * @param size
+   */
+  public void setSize(float size) {
+    this.size = size;
+  }
 
   /**
    * @return the speed.
@@ -176,7 +184,7 @@ public abstract class Fish {
   @Override
   public String toString() {
     return "FishBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
-        + ", direction=" + direction + "]";
+        + ", direction=" + direction + ", Alive =" + alive + "]";
   }
 
   /**
