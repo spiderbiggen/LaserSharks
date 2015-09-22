@@ -44,7 +44,7 @@ public class ScreenController {
    * @return FishInfo
    * @throws IOException 
    */
-  public List<Fish> getNextFrameInfo(double frametime) throws IOException {
+  public List<Swimmer> getNextFrameInfo(double frametime) throws IOException {
     if (!this.fishCon.getShark().isAlive()) {
       this.gui.setLoseSceneTrue();
       this.gui.chooseScene();
