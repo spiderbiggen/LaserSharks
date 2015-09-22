@@ -17,13 +17,20 @@ import javafx.scene.shape.Rectangle;
 @SuppressWarnings("restriction")
 public class FishController {
   /**
-   * Holder for fishdata.
+   * Holder for fish data.
    */
   private List<Fish> fishList;
   private LaserShark shark;
-
+  
   /**
-   * Spawnchance for new fishes.
+   * Holder for shark data.
+   */
+  private static final float START_SIZE = 80.0f;
+  private static final double START_SPEED = 670;
+  private static final Direction START_DIRECTION = Direction.None;
+  
+  /**
+   * Spawn-chance for new fishes.
    */
   private static final float FISH_SPAWN_CHANCE_BASE = 1.0f;
   private float fishSpawnChance;
@@ -32,7 +39,7 @@ public class FishController {
    * Random Number Generator holder.
    */
   private Random rng;
-
+  
   /**
    * Constructor.
    */
@@ -40,6 +47,13 @@ public class FishController {
     this.fishList = new LinkedList<Fish>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
+    this.shark = new LaserShark(
+        Position.middlePosition(), 
+        START_SIZE, 
+        START_SPEED,
+        START_DIRECTION
+    );
+    this.fishList.add(this.shark);
   }
 
   /**
