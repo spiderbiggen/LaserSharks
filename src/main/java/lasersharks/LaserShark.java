@@ -1,12 +1,12 @@
 package lasersharks;
 
-import lasersharks.gui.LevelGUI;
+import lasersharksgui.LevelGUI;
 
 /**
  * LaserShark class.
  *
  */
-public class LaserShark extends Fish {
+public class LaserShark extends Fish implements DirectionCallback {
 
   private static final float ENERGY_DISSERPATION_RATE = 7.5f;
 
@@ -87,5 +87,10 @@ public class LaserShark extends Fish {
   public void kill() {
     Logger.getInstance().write("Loss", "Player has colided with a bigger fish");
     super.kill();
+  }
+
+  @Override
+  public void putDirection(Direction dir) {
+    this.setDirection(dir);
   }
 }
