@@ -24,6 +24,7 @@ public class OptionsTest {
   private static int YRES_OTHER = 2000;
   private Dimension dim;
   private Dimension dimOther;
+  private static final Dimension DEFAULTDIM = new Dimension(1920,1080);
   
   /**
    * Sets up a few objects for testing.
@@ -51,10 +52,20 @@ public class OptionsTest {
   @Test
   public void testNewInstance() {
     Options.setInstance(null);
+    
+    try {
+    //in case of a non-maven test, it should equal the screen size of the monitor.
     assertEquals(
         Options.getInstance().getDimension(),
         Toolkit.getDefaultToolkit().getScreenSize()
         );
+    //in case of a maven test, the dimensionhas 1920x1080 values.
+    } catch( Exception e) {
+      assertEquals(
+          Options.getInstance().getDimension(),
+          DEFAULTDIM
+          );
+    }
   }
   
   /**
