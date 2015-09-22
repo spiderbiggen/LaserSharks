@@ -2,6 +2,7 @@ package lasersharks;
 
 import java.awt.AWTError;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 
 import lasersharks.gui.LevelGUI;
@@ -90,9 +91,9 @@ public class Options {
    * @return the screen resolution of the systems screen.
    */
   public static Dimension getScreenSize() {
-    try{
+    try {
     return Toolkit.getDefaultToolkit().getScreenSize();
-    } catch(AWTError e ) {
+    } catch (HeadlessException e ) {
       return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
   }
