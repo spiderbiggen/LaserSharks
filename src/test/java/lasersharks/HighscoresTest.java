@@ -117,8 +117,8 @@ public class HighscoresTest {
   }
 
   /**
-   * Test method for FixHighscoreCount(). We enter completely erronous list and a good one should
-   * still come out. same.
+   * Test method for FixHighscoreCount(). We enter completely erroneous list and a good one should
+   * still come out.
    */
   @Test
   public void testFixHighscoreCountCompletelyBadList() {
@@ -169,5 +169,85 @@ public class HighscoresTest {
         + "3. 3" + li + "     " + "4. 2" + li + "     " + "5. 1" + li + li + "Your score: "
         + LevelGUI.getScore(), highscores.makeHighscoreString());
 
+  }
+
+  /**
+   * Test method for the getList() method.
+   * 
+   * @throws FileNotFoundException
+   *           when the file is not found (highly unlikely).
+   */
+
+  @Test
+  public void testGetListInitialEmptyList() throws FileNotFoundException {
+    assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", highscores.getList().toString());
+  }
+
+  /**
+   * Test method for the getList() method.
+   * 
+   * @throws FileNotFoundException
+   *           when the file is not found (highly unlikely).
+   */
+
+  @Test
+  public void testGetListInitialNullList() throws FileNotFoundException {
+    highscores.setList(null);
+    assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", highscores.getList().toString());
+  }
+
+  /**
+   * Test method for the getList() method.
+   * 
+   * @throws FileNotFoundException
+   *           when the file is not found (highly unlikely).
+   */
+
+  @Test
+  public void testGetListNormalList() throws FileNotFoundException {
+    list.add("1. 5");
+    list.add("2. 4");
+    list.add("3. 3");
+    list.add("4. 2");
+    list.add("5. 1");
+
+    highscores.setList(list);
+    assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", highscores.getList().toString());
+  }
+
+  /**
+   * Test method for the writeHighscore() method.
+   * 
+   * @throws IOException
+   *           when there is an erroneous input.
+   */
+  public void testWriteHighscoreNewHighscoreEntry() throws IOException {
+    LevelGUI.setScore(50); // the highest score is now 50
+    highscores.writeHighscore();
+    assertEquals("[1. 50, 2. 5, 3. 4, 4. 3, 5. 2]", highscores.readHighscore().toString());
+  }
+
+  /**
+   * Test method for the writeHighscore() method.
+   * 
+   * @throws IOException
+   *           when there is an erroneous input.
+   */
+  public void testWriteHighscoreNoNewEntry() throws IOException {
+    LevelGUI.setScore(0); // the score should not be written in the list
+    highscores.writeHighscore();
+    assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", highscores.readHighscore().toString());
+  }
+  
+  /**
+   * Test method for the writeHighscore() method.
+   * 
+   * @throws IOException
+   *           when there is an erroneous input.
+   */
+  public void testWriteHighscoreMiddleEntry() throws IOException {
+    LevelGUI.setScore(3); // the score should be entered in the middle of the list
+    highscores.writeHighscore();
+    assertEquals("[1. 5, 2. 4, 3. 3, 4. 3, 5. 2]", highscores.readHighscore().toString());
   }
 }
