@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -180,6 +181,8 @@ public class HighscoresTest {
 
   @Test
   public void testGetListInitialEmptyList() throws FileNotFoundException {
+    highscores.setList(new ArrayList<String>());
+    ;
     assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", highscores.getList().toString());
   }
 
@@ -253,4 +256,33 @@ public class HighscoresTest {
     highscores.writeHighscore();
     assertEquals("[1. 5, 2. 4, 3. 3, 4. 3, 5. 2]", highscores.readHighscore().toString());
   }
+
+  /**
+   * Test method for the getFishBonus() method
+   */
+  @SuppressWarnings("static-access")
+  @Test
+  public void testGetFishBonus() {
+    int expectedFishBonus = 20;
+    assertEquals(expectedFishBonus, highscores.getFishBonus());
+  }
+
+  /**
+   * Make sure get instance doesn't return null.
+   */
+  @Test
+  public void testGetInstanceNotNull() {
+    assertTrue(Highscores.getInstance() != null);
+  }
+  
+  /**
+   * Make sure getInstance always returns same object if no setters used.
+   */
+  @Test
+  public void testAlwaysSameInstance() {
+    Highscores l = Highscores.getInstance();
+    assertEquals(l, Highscores.getInstance());
+  }
+  
+  
 }
