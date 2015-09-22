@@ -92,8 +92,8 @@ public class Options {
    */
   public static Dimension getScreenSize() {
     try {
-    return Toolkit.getDefaultToolkit().getScreenSize();
-    } catch (HeadlessException e ) {
+      return Toolkit.getDefaultToolkit().getScreenSize();
+    } catch (Exception e ) {
       return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
   }
