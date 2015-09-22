@@ -103,6 +103,7 @@ public class ScreenController {
     this.gui.chooseScene();
     this.level.getFishCon().clearFish();
     this.level.setBeginShark();
+    this.gui.setScore(0);
   }
 
 }
