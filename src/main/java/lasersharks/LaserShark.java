@@ -49,9 +49,8 @@ public class LaserShark extends Fish implements DirectionCallback {
     }
     LevelGUI.increaseScore(fish);
     fish.kill();
-    
   }
-
+  
   @Override
   public boolean move(double frametime) {
     super.move(frametime);
