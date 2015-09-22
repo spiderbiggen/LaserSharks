@@ -27,14 +27,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
+import lasersharks.DirectionInputController;
 import lasersharks.Fish;
 import lasersharks.FishController;
 import lasersharks.Highscores;
-import lasersharks.KeyboardController;
+import javafx.scene.input.KeyEvent;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.Position;
+import lasersharks.RestartGameController;
 import lasersharks.ScreenController;
 
 /**
@@ -142,18 +144,16 @@ public class LevelGUI extends Application {
     addElements(pane);
 
     stackPane.getChildren().add(pane);
-    
+
     Highscores.writeHighscore();
     winPane = showMessageScene("You Win!");
     winPane.setOpacity(0.0);
-    stackPane.getChildren().add(winPane);    
+    stackPane.getChildren().add(winPane);
     losePane = showMessageScene("Game Over!");
     losePane.setOpacity(0.0);
     stackPane.getChildren().add(losePane);
-    
-    playScene = new Scene(stackPane, 
-        Options.getGlobalWidth(), 
-        Options.getGlobalHeight(), 
+
+    playScene = new Scene(stackPane, Options.getGlobalWidth(), Options.getGlobalHeight(),
         BACKCOLOUR);
 
     this.stage = stage;
@@ -163,10 +163,16 @@ public class LevelGUI extends Application {
 
     this.fishCon = new FishController();
     this.screenCon = new ScreenController(this.fishCon, this);
-    new KeyboardController(this.screenCon, this.fishCon.getShark());
+
+
+    this.getScene().addEventHandler(KeyEvent.KEY_PRESSED,
+        new DirectionInputController(this.fishCon.getShark()));
+    this.getScene().addEventHandler(KeyEvent.ANY,
+        new RestartGameController(this.getScreenController()));
+
 
     startMusic(Options.getInstance().getMusicFileName());
-    
+
     this.screenCon.start();
   }
 
@@ -175,7 +181,7 @@ public class LevelGUI extends Application {
    */
   public void startGame() {
     animation = new AnimationTimer() {
-      
+
       @Override
       public void handle(long now) {
         double frametime = (now - time) / timeToMilis;
@@ -194,7 +200,7 @@ public class LevelGUI extends Application {
     animation.start();
 
   }
-  
+
   /**
    * Method to stop the animation timer.
    */
@@ -241,7 +247,7 @@ public class LevelGUI extends Application {
     gameText.setX(Position.middlePosition().getPosX());
     gameText.setY(Position.middlePosition().getPosY() - 230);
     pane.getChildren().add(gameText);
-    
+
     Text restartText = new Text("Press R to restart");
     restartText.setScaleX(TEXT_SCALE_SIZE / 4.5);
     restartText.setScaleY(TEXT_SCALE_SIZE / 4.5);
@@ -258,7 +264,6 @@ public class LevelGUI extends Application {
 
     return pane;
   }
-  
 
   /**
    * Method to choose which scene is used.
@@ -287,23 +292,23 @@ public class LevelGUI extends Application {
       animation.stop();
       pane.setOpacity(0.0);
       losePane.setOpacity(1.0);
-    } 
+    }
   }
 
   /**
    * Restart the game.
    */
-  public void restartGame() {    
+  public void restartGame() {
     pane.setOpacity(1.0);
     losePane.setOpacity(0.0);
     winPane.setOpacity(0.0);
-    
+
     Position.setHeightPanel((int) Math.round(stage.getHeight()));
     Position.setWidthPanel((int) Math.round(stage.getWidth()));
-    
+
     this.screenCon.start();
   }
-  
+
   /**
    * Add some key elements to the pane. This includes: Background.
    * 
@@ -313,11 +318,8 @@ public class LevelGUI extends Application {
 
   public void addElements(Pane pane) {
     BackgroundImage myBI = new BackgroundImage(
-        new Image(Options.getInstance().getBackGroundImage(), 
-            XRES, YRES, true, false), 
-            BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, 
-        BackgroundPosition.DEFAULT, 
+        new Image(Options.getInstance().getBackGroundImage(), XRES, YRES, true, false),
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
     pane.setBackground(new Background(myBI));
   }
@@ -339,7 +341,7 @@ public class LevelGUI extends Application {
     choosePlayScene = false;
     chooseLoseScene = true;
   }
-  
+
   /**
    * This method set only the play scene true.
    */
