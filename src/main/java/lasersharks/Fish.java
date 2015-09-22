@@ -166,6 +166,9 @@ public abstract class Fish {
     return this.alive;
   }
   
+  /**
+   * Set the fish alive.
+   */
   public void setAlive() {
     this.alive = true;
   }
