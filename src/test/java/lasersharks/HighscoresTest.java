@@ -221,6 +221,7 @@ public class HighscoresTest {
    * @throws IOException
    *           when there is an erroneous input.
    */
+  @Test
   public void testWriteHighscoreNewHighscoreEntry() throws IOException {
     LevelGUI.setScore(50); // the highest score is now 50
     highscores.writeHighscore();
@@ -233,18 +234,20 @@ public class HighscoresTest {
    * @throws IOException
    *           when there is an erroneous input.
    */
+  @Test
   public void testWriteHighscoreNoNewEntry() throws IOException {
     LevelGUI.setScore(0); // the score should not be written in the list
     highscores.writeHighscore();
     assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", highscores.readHighscore().toString());
   }
-  
+
   /**
    * Test method for the writeHighscore() method.
    * 
    * @throws IOException
    *           when there is an erroneous input.
    */
+  @Test
   public void testWriteHighscoreMiddleEntry() throws IOException {
     LevelGUI.setScore(3); // the score should be entered in the middle of the list
     highscores.writeHighscore();
