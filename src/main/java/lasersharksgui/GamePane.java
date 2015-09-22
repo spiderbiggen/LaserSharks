@@ -20,12 +20,10 @@ import lasersharks.ScreenController;
 
 public class GamePane extends StandardPane {
 
-  private static final float HALF_SCALE = 0.5f;
   AnimationTimer animation;
   private final double timeToMilis = 1_000_000;
   private ScreenController screenController;
   private static long time = 0;
-  private static int score;
   
   public GamePane() {
     screenController = new ScreenController(this);
@@ -40,9 +38,8 @@ public class GamePane extends StandardPane {
    * Function for start of drawing fish on screen.
    */
   public void startGame() {
-    
+    Highscores.setScore(0);
     animation = new AnimationTimer() {
-
       @Override
       public void handle(long now) {
         double frametime = (now - time) / timeToMilis;
@@ -56,16 +53,30 @@ public class GamePane extends StandardPane {
         showScore();
         time = now;
       }
-
     };
     animation.start();
   }
 
   /**
+   * Stops the game. Can be resumed by calling resumeGame().
+   */
+  public void stopGame() {
+    animation.stop();
+  }
+  
+  /**
+   * resumes the game. Game has first to be started before it can be resumed.
+   */
+  public void resumeGame() {
+    animation.start();
+  }
+  
+  
+  /**
    * Displays the score in the upper right corner of the screen.
    */
   public void showScore() {
-    addText("Score: " + score, TEXT_SCALE_SIZE_SMALL , Position.upperCornerPosition());  
+    addText("Score: " + Highscores.getScore(), TEXT_SCALE_SIZE_SMALL , Position.upperCornerPosition());  
   }
   
   /**
@@ -150,37 +161,6 @@ public class GamePane extends StandardPane {
 
     return image;
   }
-  
-  /**
-   * Get's the current score from this game.
-   * 
-   * @return the score
-   */
-  public static int getScore() {
-    return score;
-  }
-
-  /**
-   * Set the score to newScore.
-   * 
-   * @param newScore
-   *          the newScore
-   */
-  public static void setScore(int newScore) {
-    score = newScore;
-  }
-
-  /**
-   * Increase the current score the player has according to the size of the fish eaten.
-   * 
-   * @param fish
-   *          the fish that is used to calculate the additional score
-   */
-  public static void increaseScore(Fish fish) {
-    if (fish.isAlive()) {
-      score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
-    }
-  }
 
 
   /**
@@ -197,7 +177,5 @@ public class GamePane extends StandardPane {
   public void setScreenController(ScreenController screenController) {
     this.screenController = screenController;
   }
-  
-  
   
 }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import lasersharksgui.GamePane;
-import lasersharksgui.LevelGUI;
 
 /**
  * A class that handles anything to do with highscores.
@@ -18,11 +17,13 @@ import lasersharksgui.LevelGUI;
  */
 public class Highscores {
 
+  private static final float HALF_SCALE = 0.5f;
   private static ArrayList<String> list;
   private static String inputFile = "src/main/resources/highscores";
   private static final int DATA_OFFSET = 3;
   private static final int FISH_BONUS = 20;
-
+  private static int score;
+  
   /**
    * Reads the current highscore list so it can be edited.
    * 
@@ -85,9 +86,9 @@ public class Highscores {
   public static void writeHighscore() throws IOException {
     list = readHighscore();
     for (int i = 0; i < list.size(); i++) {
-      if (GamePane.getScore() >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
+      if (score >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
         list.remove(list.size() - 1);
-        list.add(i, i + ". " + GamePane.getScore());
+        list.add(i, i + ". " + score);
         break;
       }
 
@@ -163,7 +164,34 @@ public class Highscores {
       res = res + "     " + list.get(i) + li;
     }
 
-    return "Highscores:" + li + res + li + "Your score: " + GamePane.getScore();
+    return "Highscores:" + li + res + li + "Your score: " + score;
   }
 
+  /**
+   * Increase the current score the player has according to the size of the fish eaten.
+   * 
+   * @param fish
+   *          the fish that is used to calculate the additional score
+   */
+  public static void increaseScore(Fish fish) {
+    if (fish.isAlive()) {
+      score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
+    }
+  }
+
+  /**
+   * @return the score
+   */
+  public static int getScore() {
+    return score;
+  }
+
+  /**
+   * @param score the score to set
+   */
+  public static void setScore(int score) {
+    Highscores.score = score;
+  }
+  
+  
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javafx.scene.Scene;
 import lasersharksgui.GamePane;
-import lasersharksgui.LevelGUI;
 import lasersharksgui.LosingPane;
 import lasersharksgui.MainGui;
 import lasersharksgui.StandardPane;
@@ -48,10 +47,15 @@ public class ScreenController {
    * @throws IOException 
    */
   public List<Fish> getNextFrameInfo(double frametime) throws IOException {
-    if (!this.fishCon.getShark().isAlive()) {
-      MainGui.browseTo(LosingPane.class);
-    } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
-      MainGui.browseTo(WinPane.class);
+    if (MainGui.getInstance().getCurrentPane() instanceof GamePane){
+      GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
+      if (!this.fishCon.getShark().isAlive()) {
+        MainGui.browseTo(LosingPane.class);
+        gamePane.stopGame();
+      } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
+        MainGui.browseTo(WinPane.class);
+        gamePane.stopGame();
+      }
     }
     return this.fishCon.getNextCycleInformation(frametime);
   }

@@ -46,6 +46,7 @@ public class MainGui extends Application {
            Pane paneToShow = (Pane) paneClass.newInstance();
            paneToShow.setOpacity(1.0);
            currentPane.setOpacity(0.0);
+           currentPane = paneToShow;
            stackPane.getChildren().add(paneToShow);
        } catch (Exception e) {
            System.out.println("could not browse");
