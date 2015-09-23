@@ -5,6 +5,7 @@ package lasersharks;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Toolkit;
 import java.util.Arrays;
 import java.util.Collection;
 

@@ -75,4 +75,9 @@ public class ScreenController {
   public void start() {
     this.currentPane.startGame();
   }
+
+  public Scene getGlobalScene() {
+    // TODO Auto-generated method stub
+    return MainGui.getInstance().getCurrentScene();
+  }
 }

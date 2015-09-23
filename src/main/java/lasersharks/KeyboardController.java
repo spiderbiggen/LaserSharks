@@ -30,7 +30,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
    *          callback
    */
   public KeyboardController(ScreenController screenCon, DirectionCallback fishCon) {
-    this.scene = MainGui.getInstance().getCurrentScene();
+    this.scene = screenCon.getGlobalScene();
     this.callback = fishCon;
 
     scene.addEventHandler(KeyEvent.ANY, this);
