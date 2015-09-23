@@ -19,7 +19,7 @@ public class FishController {
   /**
    * Holder for fish data.
    */
-  private List<Fish> fishList;
+  private List<Swimmer> fishList;
   private LaserShark shark;
   
   /**
@@ -44,7 +44,7 @@ public class FishController {
    * Constructor.
    */
   public FishController() {
-    this.fishList = new LinkedList<Fish>();
+    this.fishList = new LinkedList<Swimmer>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
     this.shark = new LaserShark(
@@ -69,9 +69,9 @@ public class FishController {
    * Add a fish to the controller.
    * 
    * @param fish
-   *          the fish to add
+   *          the Swimmer to add
    */
-  public void addFish(Fish fish) {
+  public void addFish(Swimmer fish) {
     this.fishList.add(fish);
   }
 
@@ -112,7 +112,7 @@ public class FishController {
    * @param frametime
    * @return List of fish and their positions.
    */
-  private List<Fish> getNewFishPositions(double frametime) {
+  private List<Swimmer> getNewFishPositions(double frametime) {
     this.updatePositions(frametime);
     return this.fishList;
   }
@@ -123,9 +123,9 @@ public class FishController {
    * 
    * @param frametime the time between frames in seconds
    * 
-   * @return List<Fish> list of fishes at there current position.
+   * @return List<Swimmer> list of fishes at there current position.
    */
-  public List<Fish> getNextCycleInformation(double frametime) {
+  public List<Swimmer> getNextCycleInformation(double frametime) {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
       Fish f = FishBot.generateFish();

@@ -47,6 +47,13 @@ public class Options {
     return currentOptions;
   }
   
+  /**
+   * Destroy current options.
+   */
+  public static void destroyInstance() {
+    currentOptions = null;
+  }
+  
 
   /**
    * generates the hashCode for this object.

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +36,14 @@ public class OptionsTest {
     dim = new Dimension(XRES,YRES);
     dimOther = new Dimension(XRES_OTHER,YRES_OTHER);
     options = new Options(dim);
+  }
+  
+  /**
+   * Make sure everything is cleaned up properly
+   */
+  @After
+  public void tearDown() {
+    Options.destroyInstance();
   }
   
   /**
