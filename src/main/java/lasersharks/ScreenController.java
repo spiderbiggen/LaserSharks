@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import lasersharksgui.GamePane;
 import lasersharksgui.LosingPane;
 import lasersharksgui.MainGui;
-import lasersharksgui.StandardPane;
 import lasersharksgui.WinPane;
 
 /**
@@ -24,11 +23,8 @@ public class ScreenController {
 
   /**
    * Constructor.
-   * 
-   * @param fishCon
-   *          the fishController from wich to receive data.
-   * @param gui
-   *          pointer to the active gui.
+   * @param pane 
+   *          the GamePane this screencontroller is set to
    */
   public ScreenController(GamePane pane) {
     super();
@@ -47,13 +43,13 @@ public class ScreenController {
    * @throws IOException 
    */
   public List<Fish> getNextFrameInfo(double frametime) throws IOException {
-    if (MainGui.getInstance().getCurrentPane() instanceof GamePane){
+    if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
       GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
       if (!this.fishCon.getShark().isAlive()) {
-        MainGui.browseTo(LosingPane.class);
+        MainGui.browseToGlobal(LosingPane.class);
         gamePane.stopGame();
       } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
-        MainGui.browseTo(WinPane.class);
+        MainGui.browseToGlobal(WinPane.class);
         gamePane.stopGame();
       }
     }
@@ -76,8 +72,10 @@ public class ScreenController {
     this.currentPane.startGame();
   }
 
+  /**
+   * @return the scene used for this screencontroller.
+   */
   public Scene getGlobalScene() {
-    // TODO Auto-generated method stub
     return MainGui.getInstance().getCurrentScene();
   }
 }

@@ -1,7 +1,6 @@
 package lasersharksgui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,11 +13,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
-import lasersharks.Direction;
-import lasersharks.LaserShark;
 import lasersharks.Options;
 import lasersharks.Position;
 
+/**
+ * The standardPane is the standard for creating new panes.
+ * It is an empty pane containing the background and music playing.
+ * @author sytze
+ *
+ */
 public abstract class StandardPane extends Pane {
 
   //text variables
@@ -34,17 +37,23 @@ public abstract class StandardPane extends Pane {
   //sprite and image variables
   protected ImageView sharkImage;
   
+  protected static final int SCREEN_POSITION_THREE = 3;
+  protected static final int SCREEN_POSITION_FIVE = 5;
+  protected static final int SCREEN_POSITION_TEN = 10;
   
+  /**
+   * Constructor of the StandardPane.
+   */
   public StandardPane() {
     super();
     addBackGround();
-    if(!musicIsPlaying){
+    if (!musicIsPlaying) {
       playMusic(Options.getInstance().getMusicFileName());
     }
   }
   
   /**
-   * This function adds a background to the panel
+   * This function adds a background to the panel.
    */
   public void addBackGround() {
     BackgroundImage myBI = new BackgroundImage(
@@ -58,8 +67,8 @@ public abstract class StandardPane extends Pane {
   }
   
   /**
-   * This function plays a music track on repeat
-   * @param path
+   * This function plays a music track on repeat.
+   * @param path the path of the musicfile that should be played.
    */
   public static void playMusic(String path) {
     media = new Media(new File(path).toURI().toString());
@@ -71,12 +80,19 @@ public abstract class StandardPane extends Pane {
   
   /**
    * Displays the score in the upper right corner of the screen.
+   * @param score a string containing the score of the player.
    */
   public void showScore(String score) {
-    addText("Score: " + score,TEXT_SCALE_SIZE_SMALL,Position.upperCornerPosition());
+    addText("Score: " + score, TEXT_SCALE_SIZE_SMALL, Position.upperCornerPosition());
   }
   
-  public void addText(String message, int textSize, Position position){
+  /**
+   * This function adds a textbox directly on the screen.
+   * @param message The message that should be shown.
+   * @param textSize The size of the message.
+   * @param position the position of the message on the screen.
+   */
+  public void addText(String message, int textSize, Position position) {
     Text gameText = new Text(message);
     gameText.setScaleX(textSize);
     gameText.setScaleY(textSize);
@@ -85,8 +101,15 @@ public abstract class StandardPane extends Pane {
     getChildren().add(gameText);
   }
   
+  /**
+   * This function adds a textbox directly on the screen. 
+   * The X position here is automatically set to the middle.
+   * @param message The message that should be shown.
+   * @param textSize The size of the message.
+   * @param deltaY how far from the middle of the screen the message should be shown.
+   */
   public void addMidText(String message, int textSize, double deltaY) {
     addText(message, textSize, new Position(Position.middlePosition().getPosX(), 
-        Position.middlePosition().getPosY() - deltaY ));
+        Position.middlePosition().getPosY() - deltaY));
   }
 }

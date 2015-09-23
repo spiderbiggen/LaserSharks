@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 import lasersharks.Logger;
 import lasersharks.Options;
 
+/**
+ * The MainGui class is used for running the game.
+ * @author Sytze
+ *
+ */
 public class MainGui extends Application {
   
   private Scene currentScene;
@@ -25,6 +30,9 @@ public class MainGui extends Application {
     launch(args);
   }
   
+  /**
+   * The start method is the first method run when we launch our application.
+   */
   @Override
   public void start(Stage stage) throws Exception {
     instance = this;
@@ -40,11 +48,15 @@ public class MainGui extends Application {
     currentPane = new Pane();
     
     //we start the application by showing the gamePanel
-    showPane(GamePane.class);
+    browseTo(GamePane.class);
     stage.show();
   }
   
-  public void showPane(Class<? extends StandardPane> paneClass) {
+  /**
+   * This function is used to browse to an other panel.
+   * @param paneClass The class of the panel we should browse to.
+   */
+  public void browseTo(Class<? extends StandardPane> paneClass) {
     try {
            Pane paneToShow = (Pane) paneClass.newInstance();
            paneToShow.setOpacity(1.0);
@@ -56,12 +68,20 @@ public class MainGui extends Application {
        }       
   }
   
+  /**
+   * Returns the current MainGui instance.
+   * @return the current instance.
+   */
   public static MainGui getInstance() {
     return instance;
   }
   
-  public static void browseTo(Class<? extends StandardPane>  paneClass) {
-    instance.showPane(paneClass);
+  /**
+   * This is the static version of the browseTo method.
+   * @param paneClass The class of the panel we should browse to.
+   */
+  public static void browseToGlobal(Class<? extends StandardPane>  paneClass) {
+    instance.browseTo(paneClass);
   }
 
   /**

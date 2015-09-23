@@ -18,22 +18,21 @@ import org.junit.Test;
 public class OptionsTest {
   
   private Options options;
-  private static int XRES = 1100;
-  private static int YRES = 1000;
-  private static int XRES_OTHER = 2200;
-  private static int YRES_OTHER = 2000;
+  private static final int XRES = 1100;
+  private static final int YRES = 1000;
+  private static final int XRES_OTHER = 2200;
+  private static final int YRES_OTHER = 2000;
   private Dimension dim;
   private Dimension dimOther;
-  private static final Dimension DEFAULTDIM = new Dimension(1920,1080);
+  private static final Dimension DEFAULTDIM = new Dimension(1920, 1080);
   
   /**
    * Sets up a few objects for testing.
-   * @throws Exception
    */
   @Before
-  public void setUp() throws Exception {
-    dim = new Dimension(XRES,YRES);
-    dimOther = new Dimension(XRES_OTHER,YRES_OTHER);
+  public void setUp() {
+    dim = new Dimension(XRES, YRES);
+    dimOther = new Dimension(XRES_OTHER, YRES_OTHER);
     options = new Options(dim);
   }
   
@@ -60,7 +59,7 @@ public class OptionsTest {
         Toolkit.getDefaultToolkit().getScreenSize()
         );
     //in case of a maven test, the dimensionhas 1920x1080 values.
-    } catch( Exception e) {
+    } catch (Exception e) {
       assertEquals(
           Options.getInstance().getDimension(),
           DEFAULTDIM

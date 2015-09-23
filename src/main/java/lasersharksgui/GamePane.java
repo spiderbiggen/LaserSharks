@@ -19,13 +19,22 @@ import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
+/**
+ * This is the pane representing the gameplay.
+ * @author Sytze
+ *
+ */
 public class GamePane extends StandardPane {
 
-  AnimationTimer animation;
+  private AnimationTimer animation;
   private final double timeToMilis = 1_000_000;
   private ScreenController screenController;
   private static long time = 0;
   
+  /**
+   * The constructor creates a new keyboardcontroller and screencontroller. 
+   * The GamePane connects these to itself.
+   */
   public GamePane() {
     screenController = new ScreenController(this);
     startGame();
@@ -48,7 +57,9 @@ public class GamePane extends StandardPane {
         try {
           showFishList(screenController.getNextFrameInfo(milis / frametime));
         } catch (IOException e) {
-          Logger.getInstance().write("IOException getting fishlist in Gamepane::startGame", e.getMessage());
+          Logger.getInstance().write(
+              "IOException getting fishlist in Gamepane::startGame", 
+              e.getMessage());
         }
         showShark(screenController.getShark());
         showScore();
@@ -77,7 +88,9 @@ public class GamePane extends StandardPane {
    * Displays the score in the upper right corner of the screen.
    */
   public void showScore() {
-    addText("Score: " + Highscores.getScore(), TEXT_SCALE_SIZE_SMALL , Position.upperCornerPosition());  
+    addText("Score: " + Highscores.getScore(), 
+        TEXT_SCALE_SIZE_SMALL , 
+        Position.upperCornerPosition());  
   }
   
   /**

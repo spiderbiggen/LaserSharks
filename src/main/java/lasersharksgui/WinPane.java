@@ -2,23 +2,41 @@ package lasersharksgui;
 
 import java.io.IOException;
 
-import javafx.scene.text.Text;
 import lasersharks.Highscores;
-import lasersharks.Position;
+import lasersharks.Logger;
+import lasersharks.Options;
 
+/**
+ * This pane represents the screen that is shown when a player loses.
+ * @author Sytze
+ *
+ */
 public class WinPane extends StandardPane {
-
+  
+  
+  
+  /**
+   * The constructor makes a new panel with a few text objects shown.
+   */
   public WinPane() {
-    
-    addMidText("YOU WON!!!", TEXT_SCALE_SIZE_BIG, -230);
-    try {
-      Highscores.writeHighscore();
-      addMidText(Highscores.makeHighscoreString(), TEXT_SCALE_SIZE_SMALL, 100);
-    } catch (IOException e) {
-      addMidText("highscores failed to load", TEXT_SCALE_SIZE_MED, 100);
-      e.printStackTrace();
+      
+      addMidText("YOU WON!", 
+          TEXT_SCALE_SIZE_BIG, 
+          Options.getGlobalHeight() / SCREEN_POSITION_THREE);
+      String message;
+      try {
+        Highscores.writeHighscore();
+        message = Highscores.makeHighscoreString();
+      } catch (IOException e) {
+        message = "Highscores failed to load";
+        Logger.getInstance().write("IOException ", e.getMessage());
+        e.printStackTrace();
+      }
+      addMidText(message, 
+          TEXT_SCALE_SIZE_SMALL, 
+          Options.getGlobalHeight() / SCREEN_POSITION_TEN);
+      addMidText("try again?", 
+          TEXT_SCALE_SIZE_SMALL, 
+          -Options.getGlobalHeight() / SCREEN_POSITION_FIVE);
     }
-
-    addMidText("try again?", TEXT_SCALE_SIZE_SMALL, -200);
-  }
 }
