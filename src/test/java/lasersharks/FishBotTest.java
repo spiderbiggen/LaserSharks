@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class FishBotTest extends FishTest {
 
-  private Fish generatedFish;
+  private Swimmer generatedFish;
   private final long seed = 123456L;
   private final long seedWest = 11L;
 

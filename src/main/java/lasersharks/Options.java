@@ -1,8 +1,6 @@
 package lasersharks;
 
-import java.awt.AWTError;
 import java.awt.Dimension;
-import java.awt.HeadlessException;
 import java.awt.Toolkit;
 
 import javafx.scene.paint.Color;
@@ -48,6 +46,13 @@ public class Options {
     currentOptions.setBackGround(DEFAULT_BACKGROUND_IMAGE);
     currentOptions.setMusicFilename(DEFAULT_MUSIC_FILENAME);
     return currentOptions;
+  }
+  
+  /**
+   * Destroy current options.
+   */
+  public static void destroyInstance() {
+    currentOptions = null;
   }
   
 

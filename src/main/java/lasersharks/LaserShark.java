@@ -35,7 +35,7 @@ public class LaserShark extends Fish implements DirectionCallback {
    * @param fish
    *          the fish the shark eats
    */
-  public void eat(Fish fish) {
+  public void eat(Swimmer fish) {
     if (fish.isAlive()) {
       Logger.getInstance().write(
           "Fish eaten", 

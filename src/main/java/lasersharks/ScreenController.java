@@ -42,7 +42,7 @@ public class ScreenController {
    * @return FishInfo
    * @throws IOException 
    */
-  public List<Fish> getNextFrameInfo(double frametime) throws IOException {
+  public List<Swimmer> getNextFrameInfo(double frametime) throws IOException {
     if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
       GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
       if (!this.fishCon.getShark().isAlive()) {

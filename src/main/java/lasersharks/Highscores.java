@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import lasersharksgui.GamePane;
-
 /**
  * A class that handles anything to do with highscores.
  * 
@@ -173,7 +171,7 @@ public class Highscores {
    * @param fish
    *          the fish that is used to calculate the additional score
    */
-  public static void increaseScore(Fish fish) {
+  public static void increaseScore(Swimmer fish) {
     if (fish.isAlive()) {
       score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
     }

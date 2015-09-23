@@ -11,13 +11,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lasersharks.Direction;
-import lasersharks.Fish;
 import lasersharks.Highscores;
 import lasersharks.KeyboardController;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.ScreenController;
+import lasersharks.Swimmer;
 
 /**
  * This is the pane representing the gameplay.
@@ -136,7 +136,7 @@ public class GamePane extends StandardPane {
    * @param list
    *          the list of fish that needs to be displayed.
    */
-  public void showFishList(List<Fish> list) {
+  public void showFishList(List<Swimmer> list) {
     clearPaneOfImageView();
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).isAlive()) {
@@ -152,23 +152,23 @@ public class GamePane extends StandardPane {
   /**
    * an image object of a fish.
    * 
-   * @param fish
+   * @param swimmer
    *          the fish to display.
    * @return an imageview of the fish.
    */
-  public ImageView fishImage(Fish fish) {
-    Position position = fish.getPosition();
-    double size = fish.getSize();
-    Direction dir = fish.getDirection();
+  public ImageView fishImage(Swimmer swimmer) {
+    Position position = swimmer.getPosition();
+    double size = swimmer.getSize();
+    Direction dir = swimmer.getDirection();
 
     ImageView image;
-    image = new ImageView(fish.getImageResource());
+    image = new ImageView(swimmer.getImageResource());
     // flip the image according to the direction.
     if (dir.getDeltaX() != 0) {
       image.setScaleX(dir.getDeltaX());
     }
     image.setFitHeight(size);
-    image.setFitWidth(size * fish.getWidthScale());
+    image.setFitWidth(size * swimmer.getWidthScale());
 
     image.setX(position.getPosX());
     image.setY(position.getPosY());
