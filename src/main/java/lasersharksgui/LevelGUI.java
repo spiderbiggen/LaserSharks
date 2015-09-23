@@ -165,9 +165,9 @@ public class LevelGUI extends Application {
     this.screenCon = new ScreenController(this.fishCon, this);
 
 
-    this.getScene().addEventHandler(KeyEvent.KEY_PRESSED,
-        new DirectionInputController(this.fishCon.getShark()));
     this.getScene().addEventHandler(KeyEvent.ANY,
+        new DirectionInputController(this.fishCon.getShark()));
+    this.getScene().addEventHandler(KeyEvent.KEY_PRESSED,
         new RestartGameController(this.getScreenController()));
 
 

@@ -107,25 +107,25 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
   private void handleInput() {
     Direction dir = Direction.None;
 
-    if (pressedDown) {
+    if (pressedDown && !pressedUp) {
       if (pressedLeft && !pressedRight) {
         dir = Direction.NorthWest;
-      } else if (pressedRight) {
+      } else if (pressedRight && !pressedLeft) {
         dir = Direction.NorthEast;
       } else {
         dir = Direction.North;
       }
-    } else if (pressedUp) {
+    } else if (pressedUp && !pressedDown) {
       if (pressedLeft && !pressedRight) {
         dir = Direction.SouthWest;
-      } else if (pressedRight) {
+      } else if (pressedRight && !pressedLeft) {
         dir = Direction.SouthEast;
       } else {
         dir = Direction.South;
       }
     } else if (pressedLeft && !pressedRight) {
       dir = Direction.West;
-    } else if (pressedRight) {
+    } else if (pressedRight && !pressedLeft) {
       dir = Direction.East;
     }
 
