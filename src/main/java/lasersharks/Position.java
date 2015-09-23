@@ -160,7 +160,11 @@ public class Position {
    *          max offset margin
    */
   public final boolean onScreen(double xMargin) {
-    return (posX + xMargin >= 0 && posX - xMargin <= Options.getGlobalWidth() && posY >= 0 && posY <= Options.getGlobalHeight());
+    return (
+        (posX + xMargin) >= 0 
+        && (posX - xMargin) <= Options.getGlobalWidth() 
+        && (posY >= 0) 
+        && (posY <= Options.getGlobalHeight()));
   }
 
   /**
