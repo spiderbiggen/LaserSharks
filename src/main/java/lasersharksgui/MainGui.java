@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import lasersharks.Logger;
 import lasersharks.Options;
 
 public class MainGui extends Application {
@@ -29,19 +30,21 @@ public class MainGui extends Application {
     instance = this;
     stage.setFullScreen(true);
     stackPane = new StackPane();
-    currentScene = new Scene(stackPane, 
+    currentScene = new Scene(
+        stackPane, 
         Options.getGlobalWidth(), 
         Options.getGlobalHeight(), 
         Options.getBackGroundColor()
-        );
+    );
     stage.setScene(currentScene);
     currentPane = new Pane();
+    
     //we start the application by showing the gamePanel
     showPane(GamePane.class);
     stage.show();
   }
   
-  public void showPane(Class paneClass) {
+  public void showPane(Class<? extends StandardPane> paneClass) {
     try {
            Pane paneToShow = (Pane) paneClass.newInstance();
            paneToShow.setOpacity(1.0);
@@ -49,8 +52,7 @@ public class MainGui extends Application {
            currentPane = paneToShow;
            stackPane.getChildren().add(paneToShow);
        } catch (Exception e) {
-           System.out.println("could not browse");
-           e.printStackTrace();
+           Logger.getInstance().write(e.getClass().getName() + "could not browse", e.getMessage());
        }       
   }
   
@@ -58,7 +60,7 @@ public class MainGui extends Application {
     return instance;
   }
   
-  public static void browseTo(Class paneClass) {
+  public static void browseTo(Class<? extends StandardPane>  paneClass) {
     instance.showPane(paneClass);
   }
 
@@ -75,5 +77,4 @@ public class MainGui extends Application {
   public Pane getCurrentPane() {
     return currentPane;
   }
-  
 }

@@ -15,6 +15,7 @@ import lasersharks.Fish;
 import lasersharks.Highscores;
 import lasersharks.KeyboardController;
 import lasersharks.LaserShark;
+import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -47,7 +48,7 @@ public class GamePane extends StandardPane {
         try {
           showFishList(screenController.getNextFrameInfo(milis / frametime));
         } catch (IOException e) {
-          e.printStackTrace();
+          Logger.getInstance().write("IOException getting fishlist in Gamepane::startGame", e.getMessage());
         }
         showShark(screenController.getShark());
         showScore();
