@@ -1,9 +1,9 @@
 package lasersharks;
 
-import java.awt.AWTError;
 import java.awt.Dimension;
-import java.awt.HeadlessException;
 import java.awt.Toolkit;
+
+import javafx.scene.paint.Color;
 
 /**
  * An options object is responsible for handling everything that has to do with options. 
@@ -18,6 +18,7 @@ public class Options {
   private static final int DEFAULT_HEIGHT = 1080;
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
+  private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
   
   private String musicFileName;
   private String backGround;
@@ -183,6 +184,14 @@ public class Options {
    */
   public String getBackGroundImage() {
     return backGround;
+  }
+  
+  /**
+   * Get the backGroundColor
+   * @return
+   */
+  public static Color getBackGroundColor() {
+    return DEFAULT_BACKCOLOUR;
   }
   
 }
