@@ -1,6 +1,7 @@
 package lasersharks;
 
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -13,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 public class DirectionInputController implements EventHandler<KeyEvent> {
 
   private DirectionCallback callback;
+  private Scene scene;
 
   private boolean pressedUp;
   private boolean pressedDown;
@@ -25,10 +27,12 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
    * @param fishCon
    *          callback
    */
-  public DirectionInputController(DirectionCallback fishCon) {
+  public DirectionInputController(ScreenController screenCon, DirectionCallback fishCon) {
+    this.scene = screenCon.getGlobalScene();
     this.callback = fishCon;
+  
+    scene.addEventHandler(KeyEvent.ANY, this);
   }
-
   /**
    * Will handle the actuation of keypresses.
    * 

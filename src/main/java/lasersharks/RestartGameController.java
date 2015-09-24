@@ -6,6 +6,7 @@ package lasersharks;
 import java.io.IOException;
 
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -17,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 public class RestartGameController implements EventHandler<KeyEvent> {
 
   private ScreenController screenController;
+  private Scene scene;
 
   /**
    * Constructor.
@@ -25,7 +27,10 @@ public class RestartGameController implements EventHandler<KeyEvent> {
    *          scene holder
    */
   public RestartGameController(ScreenController screenCon) {
+    this.scene = screenCon.getGlobalScene();
     this.screenController = screenCon;
+  
+    scene.addEventHandler(KeyEvent.ANY, this);
   }
 
   private boolean restartGame() {

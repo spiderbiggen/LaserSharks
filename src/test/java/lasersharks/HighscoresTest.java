@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import lasersharksgui.LevelGUI;
 
 import org.junit.After;
 import org.junit.Before;
@@ -163,10 +162,10 @@ public class HighscoresTest {
   public void testMakeHighscoreString() throws FileNotFoundException {
     Highscores.setList(Highscores.readHighscore());
     String li = System.lineSeparator();
-    LevelGUI.setScore(0);
+    Highscores.setScore(0);
     assertEquals("Highscores:" + li + "     " + "1. 5" + li + "     " + "2. 4" + li + "     "
         + "3. 3" + li + "     " + "4. 2" + li + "     " + "5. 1" + li + li + "Your score: "
-        + LevelGUI.getScore(), Highscores.makeHighscoreString());
+        + Highscores.getScore(), Highscores.makeHighscoreString());
 
   }
 }

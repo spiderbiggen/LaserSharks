@@ -140,7 +140,7 @@ public abstract class FishTest {
    */
   @Test
   public void testIsOnScreenFalseDeadFish() {
-    Fish fish1 = this.fish1;
+    Swimmer fish1 = this.fish1;
     fish1.kill();
     assertFalse(fish1.isOnScreen());
   }
@@ -150,7 +150,7 @@ public abstract class FishTest {
    */
   @Test
   public void testIsOnScreenFalseOffScreen() {
-    Fish fish1 = this.fish1;
+    Swimmer fish1 = this.fish1;
     fish1.setPosition(posOffScreen);
     assertFalse(fish1.isOnScreen());
   }

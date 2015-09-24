@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
  * @author Youri
  */
 @SuppressWarnings("restriction")
-public abstract class Fish {
+public abstract class Fish implements Swimmer {
 
   private static final double WIDTH_TO_COORD = 0.85;
   private static final double SIZE_TO_COORD = 0.075;

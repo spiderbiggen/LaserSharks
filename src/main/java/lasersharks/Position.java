@@ -160,7 +160,11 @@ public class Position {
    *          max offset margin
    */
   public final boolean onScreen(double xMargin) {
-    return (posX + xMargin >= 0 && posX - xMargin <= Options.getGlobalWidth() && posY >= 0 && posY <= Options.getGlobalHeight());
+    return (
+        posX + xMargin >= 0 
+        && posX - xMargin <= Position.getWidthPanel() 
+        && posY >= 0 
+        && posY <= Position.getHeightPanel());
   }
 
   /**
@@ -212,7 +216,8 @@ public class Position {
    * @return a position with coordinates on the middle of the screen
    */
   public static Position middlePosition() {
-    return new Position(Math.round(Options.getGlobalWidth() / 2.0), Math.round(Options.getGlobalHeight() / 2.0));
+    return new Position(Math.round(Options.getGlobalWidth() / 2.0), 
+        Math.round(Options.getGlobalHeight() / 2.0));
   }
   
   /**

@@ -1,6 +1,5 @@
 package lasersharks;
 
-import lasersharksgui.LevelGUI;
 
 /**
  * LaserShark class.
@@ -36,7 +35,7 @@ public class LaserShark extends Fish implements DirectionCallback {
    * @param fish
    *          the fish the shark eats
    */
-  public void eat(Fish fish) {
+  public void eat(Swimmer fish) {
     if (fish.isAlive()) {
       Logger.getInstance().write(
           "Fish eaten", 
@@ -47,7 +46,7 @@ public class LaserShark extends Fish implements DirectionCallback {
       );
       this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
     }
-    LevelGUI.increaseScore(fish);
+    Highscores.increaseScore(fish);
     fish.kill();
   }
   
