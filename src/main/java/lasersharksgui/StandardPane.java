@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.Position;
 
@@ -73,20 +74,27 @@ public abstract class StandardPane extends Pane {
    * @param path the path of the musicfile that should be played.
    */
   public static void playMusic(String path) {
+    try {
     mediaPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
     mediaPlayer.setAutoPlay(true);
     mediaPlayer.play();
     musicIsPlaying = true;
+    } catch (Exception e) {
+      Logger.getInstance().write("MusicPlay failed", e.getMessage());
+    }
   }
   
   /**
-   * This function plays a sound effect
+   * This function plays a sound effect.
    * @param path the path of the sound file that should be played.
    */
   public static void playSoundEffect(String path) {
+    try {
     soundPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-    soundPlayer.setVolume(0.4);
     soundPlayer.play();
+    } catch (Exception e) {
+      Logger.getInstance().write("AudioPlay failed", e.getMessage());
+    }
   }
   
   /**
