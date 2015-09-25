@@ -26,7 +26,10 @@ public class Highscores {
   protected Highscores() {
     this.inputFile = "src/main/resources/highscores";
   }
-
+/**
+ * return the instance
+ * @return highscores instance
+ */
   public static Highscores getInstance() {
     if (highscores == null) {
       highscores = new Highscores();
