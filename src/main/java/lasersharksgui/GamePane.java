@@ -16,7 +16,6 @@ import lasersharks.DirectionInputController;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.RestartGameController;
 import lasersharks.ScreenController;
 import lasersharks.Swimmer;
 
@@ -81,11 +80,6 @@ public class GamePane extends StandardPane {
   public void resumeGame() {
     animation.start();
   }
-  
-  public void restartGame() {
-    System.out.println("restart");
-  }
-  
   
   /**
    * Displays the score in the upper right corner of the screen.
