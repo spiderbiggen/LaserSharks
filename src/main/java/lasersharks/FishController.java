@@ -100,7 +100,6 @@ public class FishController {
   public void setBeginShark() {
     this.setShark(new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION));
-    System.out.println("begin shark");
   }
   
   /**
