@@ -39,7 +39,7 @@ public abstract class StandardPane extends Pane {
   
   protected static final int SCREEN_POSITION_THREE = 3;
   protected static final int SCREEN_POSITION_FIVE = 5;
-  protected static final int SCREEN_POSITION_TEN = 10;
+  protected static final int SCREEN_POSITION_HUNDRED = 100;
   
   /**
    * Constructor of the StandardPane.

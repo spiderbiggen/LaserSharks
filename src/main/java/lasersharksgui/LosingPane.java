@@ -15,9 +15,6 @@ import lasersharks.ScreenController;
  */
 public class LosingPane extends StandardPane {
   
-  private ScreenController screenController;
-  
-
   /**
    * The constructor makes a new panel with a few text objects shown.
    */
@@ -38,8 +35,8 @@ public class LosingPane extends StandardPane {
       }
       addMidText(message, 
           TEXT_SCALE_SIZE_SMALL, 
-          Options.getGlobalHeight() / SCREEN_POSITION_TEN);
-      addMidText("try again?", 
+          Options.getGlobalHeight() / SCREEN_POSITION_HUNDRED);
+      addMidText("\n Press R to restart", 
           TEXT_SCALE_SIZE_SMALL, 
           -Options.getGlobalHeight() / SCREEN_POSITION_FIVE);
     }
