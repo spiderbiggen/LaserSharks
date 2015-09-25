@@ -34,8 +34,8 @@ public class WinPane extends StandardPane {
       }
       addMidText(message, 
           TEXT_SCALE_SIZE_SMALL, 
-          Options.getGlobalHeight() / SCREEN_POSITION_TEN);
-      addMidText("try again?", 
+          Options.getGlobalHeight() / SCREEN_POSITION_HUNDRED);
+      addMidText("\n Press R to restart", 
           TEXT_SCALE_SIZE_SMALL, 
           -Options.getGlobalHeight() / SCREEN_POSITION_FIVE);
     }

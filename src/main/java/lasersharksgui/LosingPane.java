@@ -5,6 +5,8 @@ import java.io.IOException;
 import lasersharks.Highscores;
 import lasersharks.Logger;
 import lasersharks.Options;
+import lasersharks.RestartGameController;
+import lasersharks.ScreenController;
 
 /**
  * This pane represents the screen that is shown when a player loses.
@@ -17,6 +19,7 @@ public class LosingPane extends StandardPane {
    * The constructor makes a new panel with a few text objects shown.
    */
   public LosingPane() {
+
       
       addMidText("YOU LOSE!", 
           TEXT_SCALE_SIZE_BIG, 
@@ -32,8 +35,8 @@ public class LosingPane extends StandardPane {
       }
       addMidText(message, 
           TEXT_SCALE_SIZE_SMALL, 
-          Options.getGlobalHeight() / SCREEN_POSITION_TEN);
-      addMidText("try again?", 
+          Options.getGlobalHeight() / SCREEN_POSITION_HUNDRED);
+      addMidText("\n Press R to restart", 
           TEXT_SCALE_SIZE_SMALL, 
           -Options.getGlobalHeight() / SCREEN_POSITION_FIVE);
     }

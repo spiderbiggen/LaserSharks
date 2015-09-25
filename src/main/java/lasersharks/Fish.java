@@ -76,6 +76,14 @@ public abstract class Fish implements Swimmer {
   protected void increaseSize(float size) {
     this.size += size;
   }
+  
+  /**
+   * Method to set the size of the fish.
+   * @param size
+   */
+  public void setSize(float size) {
+    this.size = size;
+  }
 
   /**
    * @return the speed.
@@ -164,6 +172,13 @@ public abstract class Fish implements Swimmer {
    */
   public boolean isAlive() {
     return this.alive;
+  }
+  
+  /**
+   * Set the fish alive.
+   */
+  public void setAlive() {
+    this.alive = true;
   }
 
   @Override

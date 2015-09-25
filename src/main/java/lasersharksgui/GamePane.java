@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lasersharks.Direction;
 import lasersharks.Highscores;
-import lasersharks.KeyboardController;
+import lasersharks.DirectionInputController;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
@@ -38,9 +38,7 @@ public class GamePane extends StandardPane {
   public GamePane() {
     screenController = new ScreenController(this);
     startGame();
-    
-
-    new KeyboardController(this.screenController, this.screenController.getShark());
+    new DirectionInputController(this.screenController, this.screenController.getShark());
   }
   
   
@@ -82,7 +80,6 @@ public class GamePane extends StandardPane {
   public void resumeGame() {
     animation.start();
   }
-  
   
   /**
    * Displays the score in the upper right corner of the screen.

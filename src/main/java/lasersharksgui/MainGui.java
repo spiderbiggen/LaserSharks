@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lasersharks.Logger;
 import lasersharks.Options;
+import lasersharks.RestartGameController;
 
 /**
  * The MainGui class is used for running the game.
@@ -50,6 +51,7 @@ public class MainGui extends Application {
     //we start the application by showing the gamePanel
     browseTo(GamePane.class);
     stage.show();
+    new RestartGameController();
   }
   
   /**
@@ -61,6 +63,10 @@ public class MainGui extends Application {
            Pane paneToShow = (Pane) paneClass.newInstance();
            paneToShow.setOpacity(1.0);
            currentPane.setOpacity(0.0);
+           if(currentPane instanceof GamePane) {
+             GamePane gamePane = (GamePane) currentPane;
+             gamePane.stopGame();
+           }
            currentPane = paneToShow;
            stackPane.getChildren().add(paneToShow);
        } catch (Exception e) {

@@ -33,6 +33,7 @@ public class ScreenController {
     this.currentPane.setScreenController(this);
   }
 
+
   /**
    * Get information for next frame and checks if the shark is bigger than the winning size.
    * 
@@ -53,6 +54,7 @@ public class ScreenController {
         gamePane.stopGame();
       }
     }
+
     return this.fishCon.getNextCycleInformation(frametime);
   }
 
@@ -78,4 +80,5 @@ public class ScreenController {
   public Scene getGlobalScene() {
     return MainGui.getInstance().getCurrentScene();
   }
+
 }
