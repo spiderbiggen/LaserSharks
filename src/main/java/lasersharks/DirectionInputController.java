@@ -30,9 +30,10 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
   public DirectionInputController(ScreenController screenCon, DirectionCallback fishCon) {
     this.scene = screenCon.getGlobalScene();
     this.callback = fishCon;
-  
+
     scene.addEventHandler(KeyEvent.ANY, this);
   }
+
   /**
    * Will handle the actuation of keypresses.
    * 

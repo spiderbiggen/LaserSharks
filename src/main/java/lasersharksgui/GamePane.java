@@ -21,32 +21,33 @@ import lasersharks.Swimmer;
 
 /**
  * This is the pane representing the gameplay.
+ * 
  * @author Sytze
  *
  */
+@SuppressWarnings("restriction")
 public class GamePane extends StandardPane {
 
   private AnimationTimer animation;
   private final double timeToMilis = 1_000_000;
   private ScreenController screenController;
   private static long time = 0;
-  
+
   /**
-   * The constructor creates a new keyboardcontroller and screencontroller. 
-   * The GamePane connects these to itself.
+   * The constructor creates a new keyboardcontroller and screencontroller. The GamePane connects
+   * these to itself.
    */
   public GamePane() {
     screenController = new ScreenController(this);
     startGame();
     new DirectionInputController(this.screenController, this.screenController.getShark());
   }
-  
-  
+
   /**
    * Function for start of drawing fish on screen.
    */
   public void startGame() {
-    Highscores.setScore(0);
+    Highscores.getInstance().setScore(0);
     animation = new AnimationTimer() {
       @Override
       public void handle(long now) {
@@ -55,8 +56,7 @@ public class GamePane extends StandardPane {
         try {
           showFishList(screenController.getNextFrameInfo(milis / frametime));
         } catch (IOException e) {
-          Logger.getInstance().write(
-              "IOException getting fishlist in Gamepane::startGame", 
+          Logger.getInstance().write("IOException getting fishlist in Gamepane::startGame",
               e.getMessage());
         }
         showShark(screenController.getShark());
@@ -73,23 +73,22 @@ public class GamePane extends StandardPane {
   public void stopGame() {
     animation.stop();
   }
-  
+
   /**
    * resumes the game. Game has first to be started before it can be resumed.
    */
   public void resumeGame() {
     animation.start();
   }
-  
+
   /**
    * Displays the score in the upper right corner of the screen.
    */
   public void showScore() {
-    addText("Score: " + Highscores.getScore(), 
-        TEXT_SCALE_SIZE_SMALL , 
-        Position.upperCornerPosition());  
+    addText("Score: " + Highscores.getInstance().getScore(), TEXT_SCALE_SIZE_SMALL,
+        Position.upperCornerPosition());
   }
-  
+
   /**
    * This function removes all the ImageView objects. This is used to remove all the fish images on
    * the screen.
@@ -100,7 +99,7 @@ public class GamePane extends StandardPane {
         .filter(v -> v instanceof ImageView || v instanceof Rectangle || v instanceof Text)
         .collect(Collectors.toList()));
   }
-  
+
   /**
    * This method will display the shark on the screen.
    * 
@@ -126,7 +125,7 @@ public class GamePane extends StandardPane {
     sharkImage.setY(position.getPosY());
     getChildren().add(sharkImage);
   }
-  
+
   /**
    * This method displays a list<Fish> on the scene of the gui.
    * 
@@ -144,7 +143,6 @@ public class GamePane extends StandardPane {
       }
     }
   }
-  
 
   /**
    * an image object of a fish.
@@ -173,7 +171,6 @@ public class GamePane extends StandardPane {
     return image;
   }
 
-
   /**
    * @return the screenController
    */
@@ -181,12 +178,12 @@ public class GamePane extends StandardPane {
     return screenController;
   }
 
-
   /**
-   * @param screenController the screenController to set
+   * @param screenController
+   *          the screenController to set
    */
   public void setScreenController(ScreenController screenController) {
     this.screenController = screenController;
   }
-  
+
 }

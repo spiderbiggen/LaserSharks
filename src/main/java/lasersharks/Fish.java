@@ -76,9 +76,10 @@ public abstract class Fish implements Swimmer {
   protected void increaseSize(float size) {
     this.size += size;
   }
-  
+
   /**
    * Method to set the size of the fish.
+   * 
    * @param size
    */
   public void setSize(float size) {
@@ -143,9 +144,9 @@ public abstract class Fish implements Swimmer {
   private Position getMiddlePoint() {
     Position startPos = this.getPosition();
 
-    Position middlePointPosition = new Position(startPos.getPosX()
-        + (HALF_SCALE * this.getWidthScale() * this.getSize()), startPos.getPosY()
-        + (HALF_SCALE * this.getSize()));
+    Position middlePointPosition = new Position(
+        startPos.getPosX() + (HALF_SCALE * this.getWidthScale() * this.getSize()),
+        startPos.getPosY() + (HALF_SCALE * this.getSize()));
     return middlePointPosition;
   }
 
@@ -173,7 +174,7 @@ public abstract class Fish implements Swimmer {
   public boolean isAlive() {
     return this.alive;
   }
-  
+
   /**
    * Set the fish alive.
    */
@@ -209,12 +210,9 @@ public abstract class Fish implements Swimmer {
   public Rectangle makeHitbox() {
     double xcoordinate = this.getPosition().getPosX();
     double ycoordinate = this.getPosition().getPosY();
-    Rectangle rekt = new Rectangle(
-        xcoordinate + SIZE_TO_COORD * this.getSize(), 
-        ycoordinate + SIZE_TO_COORD * this.getSize(), 
-        this.getWidthScale() * this.getSize() * WIDTH_TO_COORD, 
-        this.getSize() * WIDTH_TO_COORD
-    );
+    Rectangle rekt = new Rectangle(xcoordinate + SIZE_TO_COORD * this.getSize(),
+        ycoordinate + SIZE_TO_COORD * this.getSize(),
+        this.getWidthScale() * this.getSize() * WIDTH_TO_COORD, this.getSize() * WIDTH_TO_COORD);
     return rekt;
   }
 

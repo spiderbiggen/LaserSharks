@@ -15,30 +15,48 @@ import java.util.Scanner;
  */
 public class Highscores {
 
+  private static Highscores instance;
+  private ArrayList<String> highscores;
+  private String inputFile;
   private static final float HALF_SCALE = 0.5f;
-  private static ArrayList<String> list;
-  private static String inputFile = "src/main/resources/highscores";
   private static final int DATA_OFFSET = 3;
   private static final int FISH_BONUS = 20;
-  private static int score;
-  
+  private int score;
+
+  /**
+   * create a new instance of highscores.
+   */
+  protected Highscores() {
+    this.inputFile = "src/main/resources/highscores";
+  }
+
+  /**
+   * return the instance.
+   * 
+   * @return highscores instance
+   */
+  public static Highscores getInstance() {
+    if (instance == null) {
+      instance = new Highscores();
+    }
+    return instance;
+  }
+
   /**
    * Reads the current highscore list so it can be edited.
    * 
-   * @return the current highscore list.
-   * @throws FileNotFoundException
-   *           when the file is not found.
    */
-  public static ArrayList<String> readHighscore() throws FileNotFoundException {
+  public void readHighscore() {
+    ArrayList<String> list = new ArrayList<String>();
     try (Scanner sc = new Scanner(new File(inputFile))) {
-      ArrayList<String> list = new ArrayList<String>();
+
       while (sc.hasNextLine()) {
         list.add(sc.nextLine());
       }
-
-      return list;
+    } catch (FileNotFoundException e) {
+      list.add("1. 0");
     }
-
+    highscores = list;
   }
 
   /**
@@ -47,8 +65,8 @@ public class Highscores {
    * @param inputList
    *          the list of new highscores.
    */
-  public static void setList(ArrayList<String> inputList) {
-    list = inputList;
+  public void setList(ArrayList<String> inputList) {
+    highscores = inputList;
   }
 
   /**
@@ -58,11 +76,11 @@ public class Highscores {
    * @throws FileNotFoundException
    *           if the file doesn't exist or is in the wrong location.
    */
-  public static ArrayList<String> getList() throws FileNotFoundException {
-    if (list == null || list.size() == 0) {
-      list = readHighscore();
+  public ArrayList<String> getList() {
+    if (highscores == null || highscores.size() == 0) {
+      readHighscore();
     }
-    return list;
+    return highscores;
   }
 
   /**
@@ -71,8 +89,8 @@ public class Highscores {
    * @param inputFile
    *          the relative path to the new inputfile.
    */
-  public static void setInputFile(String inputFile) {
-    Highscores.inputFile = inputFile;
+  public void setInputFile(String inputFile) {
+    this.inputFile = inputFile;
   }
 
   /**
@@ -81,8 +99,8 @@ public class Highscores {
    * @throws IOException
    *           when there is an erroneous input.
    */
-  public static void writeHighscore() throws IOException {
-    list = readHighscore();
+  public void writeHighscore() throws IOException {
+    ArrayList<String> list = getList();
     for (int i = 0; i < list.size(); i++) {
       if (score >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
         list.remove(list.size() - 1);
@@ -115,7 +133,7 @@ public class Highscores {
    *          the list containing the highscore elements.
    * @return the correct highscore list.
    */
-  public static ArrayList<String> fixHighscoreCount(ArrayList<String> list) {
+  public ArrayList<String> fixHighscoreCount(ArrayList<String> list) {
     for (int i = 0; i < list.size(); i++) {
       String newEntry = list.get(i);
       list.remove(i);
@@ -134,7 +152,7 @@ public class Highscores {
    * @throws FileNotFoundException
    *           when the file is not found.
    */
-  public static int getHighScore() throws FileNotFoundException {
+  public int getHighScore() throws FileNotFoundException {
     try (Scanner sc = new Scanner(new File(inputFile))) {
       String firstLine = sc.nextLine();
       int highestScore = Integer.parseInt(firstLine.substring(DATA_OFFSET));
@@ -155,11 +173,12 @@ public class Highscores {
    * 
    * @return a String containing the highscores.
    */
-  public static String makeHighscoreString() {
+  public String makeHighscoreString() {
+    getList();
     String res = "";
     String li = System.lineSeparator();
-    for (int i = 0; i < list.size(); i++) {
-      res = res + "     " + list.get(i) + li;
+    for (int i = 0; i < highscores.size(); i++) {
+      res = res + "     " + highscores.get(i) + li;
     }
 
     return "Highscores:" + li + res + li + "Your score: " + score;
@@ -171,25 +190,35 @@ public class Highscores {
    * @param fish
    *          the fish that is used to calculate the additional score
    */
-  public static void increaseScore(Swimmer fish) {
+  public void increaseScore(Swimmer fish) {
     if (fish.isAlive()) {
       score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
     }
   }
 
   /**
-   * @return the score
+   * Method so we can mock highscores in tests of other classes.
+   * 
+   * @param highscores
+   *          highscores to be used.
    */
-  public static int getScore() {
-    return score;
+  public static void setInstance(Highscores highscores) {
+    Highscores.instance = highscores;
   }
 
   /**
-   * @param score the score to set
+   * @return the score
    */
-  public static void setScore(int score) {
-    Highscores.score = score;
+  public int getScore() {
+    return this.score;
   }
-  
-  
+
+  /**
+   * @param score
+   *          the score to set
+   */
+  public void setScore(int score) {
+    this.score = score;
+  }
+
 }

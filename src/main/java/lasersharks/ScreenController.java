@@ -23,7 +23,8 @@ public class ScreenController {
 
   /**
    * Constructor.
-   * @param pane 
+   * 
+   * @param pane
    *          the GamePane this screencontroller is set to
    */
   public ScreenController(GamePane pane) {
@@ -33,7 +34,6 @@ public class ScreenController {
     this.currentPane.setScreenController(this);
   }
 
-
   /**
    * Get information for next frame and checks if the shark is bigger than the winning size.
    * 
@@ -41,7 +41,7 @@ public class ScreenController {
    *          time between frames in seconds
    * 
    * @return FishInfo
-   * @throws IOException 
+   * @throws IOException
    */
   public List<Swimmer> getNextFrameInfo(double frametime) throws IOException {
     if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
