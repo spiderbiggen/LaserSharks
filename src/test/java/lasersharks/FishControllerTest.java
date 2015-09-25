@@ -8,6 +8,8 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.enemies.Enemy1;
+
 /**
  * the test class for the FishController class.
  * 
@@ -48,8 +50,8 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
-    FishBot fishBot = new FishBot(new Position(POSITION_X, POSITION_Y), SIZE, SPEED,
-        Direction.East);
+    FishBot fishBot = new Enemy1(new Position(POSITION_X, POSITION_Y), Float.valueOf(SIZE),
+        Double.valueOf(SPEED), Direction.East);
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addFish(fishBot);
     assertTrue(fishCon.getNextCycleInformation(1).contains(fishBot));
@@ -68,9 +70,9 @@ public class FishControllerTest {
     fishCon.setShark(
         new LaserShark(new Position(POSITION_X, POSITION_Y), sizeOfShark, SPEED, Direction.East));
     for (int i = 0; i < FISHAMOUNT; i++) {
-      fishCon.addFish(new FishBot(
-          new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH), SIZE,
-          SPEED, Direction.East));
+      fishCon.addFish(new Enemy1(
+          new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH), Float.valueOf(SIZE),
+          Double.valueOf(SPEED), Direction.East));
     }
     return fishCon;
   }
