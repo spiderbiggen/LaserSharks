@@ -29,12 +29,12 @@ import javafx.scene.input.KeyEvent;
  */
 @SuppressWarnings("restriction")
 @RunWith(Parameterized.class)
-public class KeyboardControllerTest {
+public class DirectionInputControllerTest {
   private static final int SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE = 4;
   private static final int SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE = 3;
   private Scene scene;
   private ScreenController screenCon;
-  private KeyboardController keyboardController;
+  private DirectionInputController directionInputController;
 
   private KeyCode keyCode1;
   private KeyCode keyCode2;
@@ -57,7 +57,7 @@ public class KeyboardControllerTest {
    * @param expectedDirectionAfterKeyPress2
    *          direction after secondkeypress
    */
-  public KeyboardControllerTest(KeyCode keyCode1, KeyCode keyCode2,
+  public DirectionInputControllerTest(KeyCode keyCode1, KeyCode keyCode2,
       Direction expectedDirectionAfterKeyPress1, Direction expectedDirectionAfterKeyPress2) {
     super();
     this.keyCode1 = keyCode1;
@@ -76,7 +76,7 @@ public class KeyboardControllerTest {
     this.scene = mock(Scene.class);
     this.screenCon = mock(ScreenController.class);
     when(this.screenCon.getGlobalScene()).thenReturn(this.scene);
-    this.keyboardController = new KeyboardController(this.screenCon, this.callback);
+    this.directionInputController = new DirectionInputController(this.screenCon, this.callback);
   }
 
   /**
@@ -109,7 +109,7 @@ public class KeyboardControllerTest {
    */
   private void keyAction(KeyCode keyCode, EventType<KeyEvent> keyEvent) {
     KeyEvent k = new KeyEvent(keyEvent, "", "", keyCode, false, false, false, false);
-    this.keyboardController.handle(k);
+    this.directionInputController.handle(k);
   }
 
   /**
