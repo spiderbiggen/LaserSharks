@@ -1,4 +1,4 @@
-package lasersharksgui;
+package lasersharks.gui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

@@ -1,4 +1,4 @@
-package lasersharksgui;
+package lasersharks.gui;
 
 import java.io.IOException;
 import java.util.List;

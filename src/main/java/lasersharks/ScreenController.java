@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.scene.Scene;
-import lasersharksgui.GamePane;
-import lasersharksgui.LosingPane;
-import lasersharksgui.MainGui;
-import lasersharksgui.WinPane;
+import lasersharks.gui.GamePane;
+import lasersharks.gui.LosingPane;
+import lasersharks.gui.MainGui;
+import lasersharks.gui.WinPane;
 
 /**
  * This is the class that will manage the screen.
