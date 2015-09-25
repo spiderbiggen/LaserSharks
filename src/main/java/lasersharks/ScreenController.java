@@ -80,20 +80,5 @@ public class ScreenController {
   public Scene getGlobalScene() {
     return MainGui.getInstance().getCurrentScene();
   }
-  
-  /**
-   * Restart the game.
-   * @throws IOException 
-   */
-  public void restart() throws IOException {
-    this.currentPane.stopGame();
-    this.currentPane.restartGame();
-    this.fishCon.getShark().setAlive();
-    this.fishCon.clearFish();
-    this.fishCon.getShark().setSize(fishCon.getStartSize());    
-    Highscores.setScore(0);    
-    //MainGui.browseToGlobal(GamePane.class);
-    this.currentPane.resumeGame();
-  }
 
 }

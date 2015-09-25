@@ -39,10 +39,7 @@ public class GamePane extends StandardPane {
   public GamePane() {
     screenController = new ScreenController(this);
     startGame();
-    
-
     new DirectionInputController(this.screenController, this.screenController.getShark());
-    new RestartGameController(this.screenController);
   }
   
   

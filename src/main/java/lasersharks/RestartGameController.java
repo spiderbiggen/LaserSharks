@@ -9,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import lasersharksgui.GamePane;
+import lasersharksgui.MainGui;
 
 /**
  * @author Stefan
@@ -17,32 +19,19 @@ import javafx.scene.input.KeyEvent;
 @SuppressWarnings("restriction")
 public class RestartGameController implements EventHandler<KeyEvent> {
 
-  private ScreenController screenController;
-  private Scene scene;
-
   /**
    * Constructor.
    * 
    * @param screenCon
    *          scene holder
    */
-  public RestartGameController(ScreenController screenCon) {
-    this.scene = screenCon.getGlobalScene();
-    this.screenController = screenCon;
-  
-    scene.addEventHandler(KeyEvent.ANY, this);
+  public RestartGameController() {
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, this);
   }
 
-  private boolean restartGame() {
-    boolean handled = true;
-    try {
-      this.screenController.restart();
-      Logger.getInstance().write("Game", "Restarted");
-    } catch (IOException e) {
-      Logger.getInstance().write("IOException", e.getMessage());
-      handled = false;
-    }
-    return handled;
+  private void restartGame() {
+    MainGui.getInstance().browseTo(GamePane.class);
+    Logger.getInstance().write("Game", "Restarted");
   }
 
   @Override
