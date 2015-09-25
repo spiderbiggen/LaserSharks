@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import lasersharksgui.LevelGUI;
-
 /**
  * A class that handles anything to do with highscores.
  * 
@@ -17,43 +15,48 @@ import lasersharksgui.LevelGUI;
  */
 public class Highscores {
 
-  private static Highscores highscores;
-  private ArrayList<String> list;
+  private static Highscores instance;
+  private ArrayList<String> highscores;
   private String inputFile;
+  private static final float HALF_SCALE = 0.5f;
   private static final int DATA_OFFSET = 3;
   private static final int FISH_BONUS = 20;
+  private int score;
 
+  /**
+   * create a new instance of highscores.
+   */
   protected Highscores() {
     this.inputFile = "src/main/resources/highscores";
   }
-/**
- * return the instance
- * @return highscores instance
- */
+
+  /**
+   * return the instance.
+   * 
+   * @return highscores instance
+   */
   public static Highscores getInstance() {
-    if (highscores == null) {
-      highscores = new Highscores();
+    if (instance == null) {
+      instance = new Highscores();
     }
-    return highscores;
+    return instance;
   }
 
   /**
    * Reads the current highscore list so it can be edited.
    * 
-   * @return the current highscore list.
-   * @throws FileNotFoundException
-   *           when the file is not found.
    */
-  public ArrayList<String> readHighscore() throws FileNotFoundException {
+  public void readHighscore() {
+    ArrayList<String> list = new ArrayList<String>();
     try (Scanner sc = new Scanner(new File(inputFile))) {
-      ArrayList<String> list = new ArrayList<String>();
+
       while (sc.hasNextLine()) {
         list.add(sc.nextLine());
       }
-
-      return list;
+    } catch (FileNotFoundException e) {
+      list.add("1. 0");
     }
-
+    highscores = list;
   }
 
   /**
@@ -63,7 +66,7 @@ public class Highscores {
    *          the list of new highscores.
    */
   public void setList(ArrayList<String> inputList) {
-    list = inputList;
+    highscores = inputList;
   }
 
   /**
@@ -73,11 +76,11 @@ public class Highscores {
    * @throws FileNotFoundException
    *           if the file doesn't exist or is in the wrong location.
    */
-  public ArrayList<String> getList() throws FileNotFoundException {
-    if (list == null || list.size() == 0) {
-      list = readHighscore();
+  public ArrayList<String> getList() {
+    if (highscores == null || highscores.size() == 0) {
+      readHighscore();
     }
-    return list;
+    return highscores;
   }
 
   /**
@@ -97,11 +100,11 @@ public class Highscores {
    *           when there is an erroneous input.
    */
   public void writeHighscore() throws IOException {
-    list = readHighscore();
+    ArrayList<String> list = getList();
     for (int i = 0; i < list.size(); i++) {
-      if (LevelGUI.getScore() >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
+      if (score >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
         list.remove(list.size() - 1);
-        list.add(i, i + ". " + LevelGUI.getScore());
+        list.add(i, i + ". " + score);
         break;
       }
 
@@ -171,13 +174,26 @@ public class Highscores {
    * @return a String containing the highscores.
    */
   public String makeHighscoreString() {
+    getList();
     String res = "";
     String li = System.lineSeparator();
-    for (int i = 0; i < list.size(); i++) {
-      res = res + "     " + list.get(i) + li;
+    for (int i = 0; i < highscores.size(); i++) {
+      res = res + "     " + highscores.get(i) + li;
     }
 
-    return "Highscores:" + li + res + li + "Your score: " + LevelGUI.getScore();
+    return "Highscores:" + li + res + li + "Your score: " + score;
+  }
+
+  /**
+   * Increase the current score the player has according to the size of the fish eaten.
+   * 
+   * @param fish
+   *          the fish that is used to calculate the additional score
+   */
+  public void increaseScore(Swimmer fish) {
+    if (fish.isAlive()) {
+      score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
+    }
   }
 
   /**
@@ -187,7 +203,22 @@ public class Highscores {
    *          highscores to be used.
    */
   public static void setInstance(Highscores highscores) {
-    Highscores.highscores = highscores;
+    Highscores.instance = highscores;
+  }
+
+  /**
+   * @return the score
+   */
+  public int getScore() {
+    return this.score;
+  }
+
+  /**
+   * @param score
+   *          the score to set
+   */
+  public void setScore(int score) {
+    this.score = score;
   }
 
 }

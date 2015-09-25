@@ -54,11 +54,18 @@ public class OnScreenTest {
    */
   @Parameters
   public static Collection<Object[]> data() {
-    return Arrays.asList(new Object[][] { { 0, 0, true }, { -1, 0, false }, { 0, -1, false },
-        { -1, -1, false }, { Position.getWidthPanel(), 0, true },
-        { Position.getWidthPanel() + 1, 0, false }, { Position.getWidthPanel(), -1, false },
-        { Position.getWidthPanel() + 1, -1, false }, { 0, Position.getHeightPanel(), true },
-        { -1, Position.getHeightPanel(), false }, { 0, Position.getHeightPanel() + 1, false },
+    return Arrays.asList(new Object[][] { 
+        { 0, 0, true }, 
+        { -1, 0, false }, 
+        { 0, -1, false },
+        { -1, -1, false }, 
+        { Position.getWidthPanel(), 0, true },
+        { Position.getWidthPanel() + 1, 0, false }, 
+        { Position.getWidthPanel(), -1, false },
+        { Position.getWidthPanel() + 1, -1, false }, 
+        { 0, Position.getHeightPanel(), true },
+        { -1, Position.getHeightPanel(), false }, 
+        { 0, Position.getHeightPanel() + 1, false },
         { -1, Position.getHeightPanel() + 1, false },
         { Position.getWidthPanel(), Position.getHeightPanel(), true },
         { Position.getWidthPanel() + 1, Position.getHeightPanel(), false },

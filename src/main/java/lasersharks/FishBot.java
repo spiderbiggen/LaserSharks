@@ -1,6 +1,17 @@
 package lasersharks;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
+
+import lasersharks.enemies.Enemy1;
+import lasersharks.enemies.Enemy10;
+import lasersharks.enemies.Enemy12;
+import lasersharks.enemies.Enemy2;
+import lasersharks.enemies.Enemy4;
+import lasersharks.enemies.Enemy5;
+import lasersharks.enemies.Enemy6;
+import lasersharks.enemies.Enemy7;
+import lasersharks.enemies.Enemy8;
 
 /**
  * This class represent the fishes on the screen that are not player controllable.
@@ -8,7 +19,7 @@ import java.util.Random;
  * @author Sytze, Youri
  *
  */
-public class FishBot extends Fish {
+public abstract class FishBot extends Fish {
 
   /**
    * This value is used to modify the speed of the fishes that are generated. The generated speed is
@@ -16,8 +27,6 @@ public class FishBot extends Fish {
    */
   private static final int SPEED_MODIFIER = 420;
   private static final int BASE_SPEED = 80;
-  private final String imageResource = "FishBotSmall.png";
-  private final float widthScale = 1.1f;
 
   /**
    * This value is used to modify the size of the fishes that are generated. The generated speed is
@@ -26,7 +35,29 @@ public class FishBot extends Fish {
 
   private static final int SIZE_MODIFIER = 200;
   private static final int BASE_SIZE = 30;
+  
+  @SuppressWarnings("unchecked")
+  private static final Class<? extends FishBot>[] FISH_CLASSES = new Class[] {
+      Enemy1.class,
+      Enemy2.class,
+      Enemy4.class,
+      Enemy5.class,
+      Enemy6.class,
+      Enemy7.class,
+      Enemy8.class,
+      Enemy10.class,
+      Enemy12.class
+  };
 
+  @SuppressWarnings("unchecked")
+  private static final Class<? extends Object>[] CONSTRUCTOR_HEAD = new Class[] {
+      Position.class, 
+      java.lang.Float.class, 
+      java.lang.Double.class, 
+      Direction.class
+  };
+  
+  
   /**
    * Constructor class for FishBot.
    * 
@@ -75,19 +106,23 @@ public class FishBot extends Fish {
     }
 
     float size = rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE;
-
-    return new FishBot(
-        new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), size,
-        Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
+    try {
+      return getRandomFishClass(rng).getDeclaredConstructor(CONSTRUCTOR_HEAD).newInstance(
+          new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), 
+          Float.valueOf(size),
+          Double.valueOf(Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED)), 
+          dir    
+      );
+    } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+        | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+      Logger.getInstance().write(e.getClass().getName() + " exception", e.getMessage());
+      e.printStackTrace();
+      return null;
+    }
   }
+  
 
-  @Override
-  public String getImageResource() {
-    return imageResource;
-  }
-
-  @Override
-  public double getWidthScale() {
-    return widthScale;
+  private static Class<? extends FishBot> getRandomFishClass(Random rng) {
+    return FISH_CLASSES[rng.nextInt(FISH_CLASSES.length)];
   }
 }
