@@ -12,7 +12,7 @@ import javafx.scene.input.KeyEvent;
  */
 @SuppressWarnings("restriction")
 public class KeyboardController implements EventHandler<KeyEvent> {
-  private Level callback;
+  private DirectionCallback callback;
   private Scene scene;
 
   private boolean pressedUp;
@@ -25,12 +25,12 @@ public class KeyboardController implements EventHandler<KeyEvent> {
    * 
    * @param screenCon
    *          scene holder
-   * @param level
+   * @param fishCon
    *          callback
    */
-  public KeyboardController(ScreenController screenCon, Level level) {
+  public KeyboardController(ScreenController screenCon, DirectionCallback fishCon) {
     this.scene = screenCon.getScene();
-    this.callback = level;
+    this.callback = fishCon;
 
     scene.addEventHandler(KeyEvent.ANY, this);
   }
@@ -91,7 +91,7 @@ public class KeyboardController implements EventHandler<KeyEvent> {
     } else if (pressedRight) {
       dir = Direction.East;
     }
-    callback.setSharkDirection(dir);
+    callback.putDirection(dir);
   }
 
   @Override

@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import lasersharks.gui.LevelGUI;
+import lasersharksgui.LevelGUI;
 
 import org.junit.After;
 import org.junit.Before;

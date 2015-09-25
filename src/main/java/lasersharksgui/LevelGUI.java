@@ -1,4 +1,4 @@
-package lasersharks.gui;
+package lasersharksgui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,10 +28,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lasersharks.Direction;
 import lasersharks.Fish;
+import lasersharks.FishController;
 import lasersharks.Highscores;
+import lasersharks.KeyboardController;
 import lasersharks.LaserShark;
-import lasersharks.Level;
 import lasersharks.Logger;
+import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.ScreenController;
 
@@ -58,7 +60,6 @@ public class LevelGUI extends Application {
   private static final Color BACKCOLOUR = Color.BLUE;
   private static final int TEXT_SCALE_SIZE = 10;
   private static final float HALF_SCALE = 0.5f;
-  private static final String MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static LevelGUI instance;
   private static int score = 0;
   private ScreenController screenController;
@@ -79,6 +80,8 @@ public class LevelGUI extends Application {
 
   private long time = 0;
   private final double timeToMilis = 1_000_000;
+  private FishController fishCon;
+  private ScreenController screenCon;
 
   /**
    * @return the screenController.
@@ -136,23 +139,24 @@ public class LevelGUI extends Application {
     pane = new Pane();
     stackPane = new StackPane();
     stage.setFullScreen(true);
-
     addElements(pane);
-
     stackPane.getChildren().add(pane);
-
-    playScene = new Scene(stackPane, stage.getWidth(), stage.getHeight(), BACKCOLOUR);
+    playScene = new Scene(stackPane, Options.getGlobalWidth(), Options.getGlobalHeight(),
+        BACKCOLOUR);
 
     this.stage = stage;
     chooseScene();
 
     stage.show();
-    Position.setHeightPanel((int) Math.round(stage.getHeight()));
-    Position.setWidthPanel((int) Math.round(stage.getWidth()));
     Logger.getInstance().write("Starting Music", "Starting");
-    Level level = new Level(this);
-    level.launch();
-    startMusic(MUSIC_FILENAME);
+
+    this.fishCon = new FishController();
+    this.screenCon = new ScreenController(this.fishCon, this);
+    new KeyboardController(this.screenCon, this.fishCon.getShark());
+
+    startMusic(Options.getInstance().getMusicFileName());
+
+    this.screenCon.start();
   }
 
   /**
@@ -269,10 +273,12 @@ public class LevelGUI extends Application {
    */
 
   public void addElements(Pane pane) {
-    BackgroundImage myBI = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES, true,
+
+    BackgroundImage myBi = new BackgroundImage(new Image("somber sea floor.jpg", XRES, YRES, true,
         false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
-    pane.setBackground(new Background(myBI));
+
+    pane.setBackground(new Background(myBi));
   }
 
   /**
@@ -434,7 +440,6 @@ public class LevelGUI extends Application {
     if (fish.isAlive()) {
       score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
     }
-
   }
 
   /**

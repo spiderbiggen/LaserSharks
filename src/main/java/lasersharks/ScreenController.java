@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.scene.Scene;
-import lasersharks.gui.LevelGUI;
+import lasersharksgui.LevelGUI;
 
 /**
  * This is the class that will manage the screen.
@@ -15,21 +15,21 @@ import lasersharks.gui.LevelGUI;
 @SuppressWarnings("restriction")
 public class ScreenController {
   private LevelGUI gui;
-  private Level level;
   private Scene scene;
+  private FishController fishCon;
   private static final int GAME_WINNING_SIZE = 320;
 
   /**
    * Constructor.
    * 
-   * @param level
-   *          the level from witch to receive data.
+   * @param fishCon
+   *          the fishController from wich to receive data.
    * @param gui
    *          pointer to the active gui.
    */
-  public ScreenController(Level level, LevelGUI gui) {
+  public ScreenController(FishController fishCon, LevelGUI gui) {
     super();
-    this.level = level;
+    this.fishCon = fishCon;
     this.gui = gui;
     this.gui.setScreenController(this);
     this.scene = gui.getScene();
@@ -45,14 +45,14 @@ public class ScreenController {
    * @throws IOException 
    */
   public List<Fish> getNextFrameInfo(double frametime) throws IOException {
-    if (!this.level.getFishCon().getShark().isAlive()) {
+    if (!this.fishCon.getShark().isAlive()) {
       this.gui.setLoseSceneTrue();
       this.gui.chooseScene();
-    } else if (this.level.getShark().getSize() > GAME_WINNING_SIZE) {
+    } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
       this.gui.setWinSceneTrue();
       this.gui.chooseScene();
     }
-    return this.level.getNextFrameInfo(frametime);
+    return this.fishCon.getNextCycleInformation(frametime);
   }
 
   /**
@@ -61,7 +61,7 @@ public class ScreenController {
    * @return the shark
    */
   public LaserShark getShark() {
-    return this.level.getShark();
+    return this.fishCon.getShark();
   }
 
   /**
