@@ -75,7 +75,7 @@ public class KeyboardControllerTest {
     this.callback = mock(DirectionCallback.class);
     this.scene = mock(Scene.class);
     this.screenCon = mock(ScreenController.class);
-    when(this.screenCon.getScene()).thenReturn(this.scene);
+    when(this.screenCon.getGlobalScene()).thenReturn(this.scene);
     this.keyboardController = new KeyboardController(this.screenCon, this.callback);
   }
 

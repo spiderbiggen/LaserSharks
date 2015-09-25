@@ -1,6 +1,5 @@
 package lasersharks;
 
-import lasersharksgui.LevelGUI;
 
 /**
  * LaserShark class.
@@ -47,7 +46,7 @@ public class LaserShark extends Fish implements DirectionCallback {
       );
       this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
     }
-    LevelGUI.increaseScore(fish);
+    Highscores.increaseScore(fish);
     fish.kill();
   }
   
