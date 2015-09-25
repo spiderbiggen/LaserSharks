@@ -2,6 +2,8 @@ package lasersharksgui;
 
 import java.io.File;
 
+import com.sun.media.jfxmedia.MediaException;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -30,8 +32,8 @@ public abstract class StandardPane extends Pane {
   protected static final int TEXT_SCALE_SIZE_SMALL = 4;
   
   //audio variables
-  protected static Media media;
   protected static MediaPlayer mediaPlayer;
+  protected static MediaPlayer soundPlayer;
   private static boolean musicIsPlaying = false;
   
   //sprite and image variables
@@ -71,11 +73,20 @@ public abstract class StandardPane extends Pane {
    * @param path the path of the musicfile that should be played.
    */
   public static void playMusic(String path) {
-    media = new Media(new File(path).toURI().toString());
-    mediaPlayer = new MediaPlayer(media);
+    mediaPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
     mediaPlayer.setAutoPlay(true);
     mediaPlayer.play();
     musicIsPlaying = true;
+  }
+  
+  /**
+   * This function plays a sound effect
+   * @param path the path of the sound file that should be played.
+   */
+  public static void playSoundEffect(String path) {
+    soundPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
+    soundPlayer.setVolume(0.4);
+    soundPlayer.play();
   }
   
   /**
