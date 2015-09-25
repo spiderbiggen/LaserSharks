@@ -21,14 +21,14 @@ public class FishController {
    */
   private List<Swimmer> fishList;
   private LaserShark shark;
-  
+
   /**
    * Holder for shark data.
    */
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 670;
   private static final Direction START_DIRECTION = Direction.None;
-  
+
   /**
    * Spawn-chance for new fishes.
    */
@@ -39,7 +39,7 @@ public class FishController {
    * Random Number Generator holder.
    */
   private Random rng;
-  
+
   /**
    * Constructor.
    */
@@ -47,12 +47,8 @@ public class FishController {
     this.fishList = new LinkedList<Swimmer>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
-    this.shark = new LaserShark(
-        Position.middlePosition(), 
-        START_SIZE, 
-        START_SPEED,
-        START_DIRECTION
-    );
+    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
+        START_DIRECTION);
   }
 
   /**
@@ -95,6 +91,23 @@ public class FishController {
   }
 
   /**
+   * Set the shark to his beginning state.
+   */
+  public void setBeginShark() {
+    this.setShark(
+        new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION));
+  }
+
+  /**
+   * method to return the start size.
+   * 
+   * @return the start size
+   */
+  public float getStartSize() {
+    return this.START_SIZE;
+  }
+
+  /**
    * Update all fish positions.
    * 
    * @param frametime
@@ -121,7 +134,8 @@ public class FishController {
    * Add new fish with chance of SELF::FISHSPAWNCHANCE, then update fish positions and delete
    * offscreen fish.
    * 
-   * @param frametime the time between frames in seconds
+   * @param frametime
+   *          the time between frames in seconds
    * 
    * @return List<Swimmer> list of fishes at there current position.
    */
@@ -131,11 +145,8 @@ public class FishController {
       Fish f = FishBot.generateFish();
       this.addFish(f);
       Logger.getInstance().write("Fish spawned",
-          "Speed: " + f.getSpeed() + ", "
-          + "Size: " + f.getSize() + ", "
-          + "Direction: " + f.getDirection() + ", "
-          + "Position: " + f.getPosition()
-      );
+          "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
+              + f.getDirection() + ", " + "Position: " + f.getPosition());
     }
     return this.getNewFishPositions(frametime);
   }

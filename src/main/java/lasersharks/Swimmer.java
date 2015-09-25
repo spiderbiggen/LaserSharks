@@ -4,6 +4,7 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * Interface for swimmer class.
+ * 
  * @author Youri
  *
  */
@@ -92,7 +93,7 @@ public interface Swimmer {
    * @return aliveness of the fish.
    */
   boolean isAlive();
-  
+
   /**
    * Will return the string resource for this fish.
    * 

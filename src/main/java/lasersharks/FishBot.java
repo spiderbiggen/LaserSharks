@@ -35,29 +35,16 @@ public abstract class FishBot extends Fish {
 
   private static final int SIZE_MODIFIER = 200;
   private static final int BASE_SIZE = 30;
-  
-  @SuppressWarnings("unchecked")
-  private static final Class<? extends FishBot>[] FISH_CLASSES = new Class[] {
-      Enemy1.class,
-      Enemy2.class,
-      Enemy4.class,
-      Enemy5.class,
-      Enemy6.class,
-      Enemy7.class,
-      Enemy8.class,
-      Enemy10.class,
-      Enemy12.class
-  };
 
   @SuppressWarnings("unchecked")
-  private static final Class<? extends Object>[] CONSTRUCTOR_HEAD = new Class[] {
-      Position.class, 
-      java.lang.Float.class, 
-      java.lang.Double.class, 
-      Direction.class
-  };
-  
-  
+  private static final Class<? extends FishBot>[] FISH_CLASSES = new Class[] { Enemy1.class,
+      Enemy2.class, Enemy4.class, Enemy5.class, Enemy6.class, Enemy7.class, Enemy8.class,
+      Enemy10.class, Enemy12.class };
+
+  @SuppressWarnings("unchecked")
+  private static final Class<? extends Object>[] CONSTRUCTOR_HEAD = new Class[] { Position.class,
+      java.lang.Float.class, java.lang.Double.class, Direction.class };
+
   /**
    * Constructor class for FishBot.
    * 
@@ -108,11 +95,9 @@ public abstract class FishBot extends Fish {
     float size = rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE;
     try {
       return getRandomFishClass(rng).getDeclaredConstructor(CONSTRUCTOR_HEAD).newInstance(
-          new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), 
+          new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())),
           Float.valueOf(size),
-          Double.valueOf(Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED)), 
-          dir    
-      );
+          Double.valueOf(Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED)), dir);
     } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
         | InvocationTargetException | NoSuchMethodException | SecurityException e) {
       Logger.getInstance().write(e.getClass().getName() + " exception", e.getMessage());
@@ -120,7 +105,6 @@ public abstract class FishBot extends Fish {
       return null;
     }
   }
-  
 
   private static Class<? extends FishBot> getRandomFishClass(Random rng) {
     return FISH_CLASSES[rng.nextInt(FISH_CLASSES.length)];
