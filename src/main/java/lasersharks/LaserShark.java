@@ -1,5 +1,8 @@
 package lasersharks;
 
+import lasersharksgui.MainGui;
+import lasersharksgui.StandardPane;
+
 
 /**
  * LaserShark class.
@@ -8,6 +11,7 @@ package lasersharks;
 public class LaserShark extends Fish implements DirectionCallback {
 
   private static final float ENERGY_DISSERPATION_RATE = 7.5f;
+  private static final String EAT_FISH_SOUND = "src/main/resources/soundEffect1.wav";
 
   private final String imageResource = "shark.png";
   private final float widthScale = 1.5f;
@@ -45,6 +49,7 @@ public class LaserShark extends Fish implements DirectionCallback {
           + (this.getSize() + (fish.getSize() / ENERGY_DISSERPATION_RATE))
       );
       this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
+      StandardPane.playSoundEffect(EAT_FISH_SOUND);
     }
     Highscores.increaseScore(fish);
     fish.kill();

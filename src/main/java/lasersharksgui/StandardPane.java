@@ -2,6 +2,8 @@ package lasersharksgui;
 
 import java.io.File;
 
+import com.sun.media.jfxmedia.MediaException;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -13,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.Position;
 
@@ -30,8 +33,8 @@ public abstract class StandardPane extends Pane {
   protected static final int TEXT_SCALE_SIZE_SMALL = 4;
   
   //audio variables
-  protected static Media media;
   protected static MediaPlayer mediaPlayer;
+  protected static MediaPlayer soundPlayer;
   private static boolean musicIsPlaying = false;
   
   //sprite and image variables
@@ -71,11 +74,27 @@ public abstract class StandardPane extends Pane {
    * @param path the path of the musicfile that should be played.
    */
   public static void playMusic(String path) {
-    media = new Media(new File(path).toURI().toString());
-    mediaPlayer = new MediaPlayer(media);
+    try {
+    mediaPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
     mediaPlayer.setAutoPlay(true);
     mediaPlayer.play();
     musicIsPlaying = true;
+    } catch (Exception e) {
+      Logger.getInstance().write("MusicPlay failed", e.getMessage());
+    }
+  }
+  
+  /**
+   * This function plays a sound effect.
+   * @param path the path of the sound file that should be played.
+   */
+  public static void playSoundEffect(String path) {
+    try {
+    soundPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
+    soundPlayer.play();
+    } catch (Exception e) {
+      Logger.getInstance().write("AudioPlay failed", e.getMessage());
+    }
   }
   
   /**
