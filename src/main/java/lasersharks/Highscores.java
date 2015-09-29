@@ -162,13 +162,6 @@ public class Highscores {
   }
 
   /**
-   * @return the fishBonus
-   */
-  public static int getFishBonus() {
-    return FISH_BONUS;
-  }
-
-  /**
    * Makes a nicely displayed string to output on the end screen.
    * 
    * @return a String containing the highscores.
@@ -192,7 +185,7 @@ public class Highscores {
    */
   public void increaseScore(Swimmer fish) {
     if (fish.isAlive()) {
-      score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
+      score = (int) (score + fish.getSize() * HALF_SCALE + FISH_BONUS);
     }
   }
 
