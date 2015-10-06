@@ -32,9 +32,10 @@ public class Logger {
     Logger.instance = this;
     this.printWriter.println("__________________ LAUNCHED ________________");
   }
-  
+
   /**
    * getCurrentFileWriter.
+   * 
    * @return current file writer.
    */
   public FileWriter getFileWriter() {
@@ -43,21 +44,18 @@ public class Logger {
 
   /**
    * Write event to log.
-   * @param event the event that happend.
-   * @param specifics the specifics about the event.
+   * 
+   * @param event
+   *          the event that happend.
+   * @param specifics
+   *          the specifics about the event.
    */
   public void write(String event, String specifics) {
-    this.printWriter.println(
-        dateFormat.format(new Date())
-        + " : "
-        + event
-        + " : "
-        + specifics
-        + "\n"
-    );
+    this.printWriter
+        .println(dateFormat.format(new Date()) + " : " + event + " : " + specifics + "\n");
     this.printWriter.flush();
   }
-  
+
   /**
    * Get correct instance of Logger class. If it currently doesn't exists one is created.
    * 
@@ -67,14 +65,12 @@ public class Logger {
     if (Logger.instance != null) {
       return Logger.instance;
     }
-    
+
     DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     FileWriter fw;
     try {
-      File f = new File(
-          LOG_DIRECTORY + dateFormat.format(new Date()) + ".txt"
-      );
-      
+      File f = new File(LOG_DIRECTORY + dateFormat.format(new Date()) + ".txt");
+
       f.getParentFile().mkdirs();
       if (!f.exists()) {
         f.createNewFile();
@@ -84,13 +80,15 @@ public class Logger {
       System.err.println(e);
       return null;
     }
-    
+
     return Logger.getInstance(fw);
   }
-  
+
   /**
    * Get instance of Logger class, if none exists one is created using the given filename.
-   * @param filename filename to use.
+   * 
+   * @param filename
+   *          filename to use.
    * @return instance of Logger Class.
    */
   public static Logger getInstance(FileWriter filename) {
@@ -99,10 +97,12 @@ public class Logger {
     }
     return Logger.instance;
   }
-  
+
   /**
    * Method so we can mock logger in tests of other classes.
-   * @param logger logger to be used.
+   * 
+   * @param logger
+   *          logger to be used.
    */
   public static void setInstance(Logger logger) {
     Logger.instance = logger;

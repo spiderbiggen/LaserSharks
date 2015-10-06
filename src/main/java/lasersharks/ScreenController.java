@@ -23,7 +23,8 @@ public class ScreenController {
 
   /**
    * Constructor.
-   * @param pane 
+   * 
+   * @param pane
    *          the GamePane this screencontroller is set to
    */
   public ScreenController(GamePane pane) {
@@ -40,7 +41,7 @@ public class ScreenController {
    *          time between frames in seconds
    * 
    * @return FishInfo
-   * @throws IOException 
+   * @throws IOException
    */
   public List<Swimmer> getNextFrameInfo(double frametime) throws IOException {
     if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
@@ -53,6 +54,7 @@ public class ScreenController {
         gamePane.stopGame();
       }
     }
+
     return this.fishCon.getNextCycleInformation(frametime);
   }
 
@@ -78,4 +80,5 @@ public class ScreenController {
   public Scene getGlobalScene() {
     return MainGui.getInstance().getCurrentScene();
   }
+
 }
