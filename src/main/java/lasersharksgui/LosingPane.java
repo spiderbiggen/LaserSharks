@@ -17,14 +17,18 @@ import lasersharks.ScreenController;
  */
 public class LosingPane extends StandardPane {
 
-  
   /**
    * The constructor makes a new panel with a few text objects shown.
-   * @throws FileNotFoundException 
+   * 
+   * @throws FileNotFoundException
    */
+
+  private static final double ADJUST_DY_FOR_BOTTOM = -400;
+  private static final int CUSTOM_TEXT_SIZE = TEXT_SCALE_SIZE_SMALL + 10;
+
   public LosingPane() throws FileNotFoundException {
-    if(Highscores.getInstance().getHighScore() < Highscores.getInstance().getScore()){
-      addMidText("NEW HIGHSCORE", TEXT_SCALE_SIZE_SMALL+10, -400);
+    if (Highscores.getInstance().getHighScore() < Highscores.getInstance().getScore()) {
+      addMidText("NEW HIGHSCORE!", CUSTOM_TEXT_SIZE, ADJUST_DY_FOR_BOTTOM);
     }
     addMidText("YOU LOSE!", TEXT_SCALE_SIZE_BIG, Options.getGlobalHeight() / SCREEN_POSITION_THREE);
     String message;
@@ -37,7 +41,7 @@ public class LosingPane extends StandardPane {
       e.printStackTrace();
     }
     addMidText(message, TEXT_SCALE_SIZE_SMALL, Options.getGlobalHeight() / SCREEN_POSITION_HUNDRED);
-    addMidText("Press R to restart", TEXT_SCALE_SIZE_SMALL,
-        -Options.getGlobalHeight() / SCREEN_POSITION_FIVE);
+    addMidText("Press R to restart", TEXT_SCALE_SIZE_SMALL, -Options.getGlobalHeight()
+        / SCREEN_POSITION_FIVE);
   }
 }
