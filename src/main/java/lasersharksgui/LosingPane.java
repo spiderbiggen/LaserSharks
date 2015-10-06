@@ -1,5 +1,6 @@
 package lasersharksgui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import lasersharks.Highscores;
@@ -16,11 +17,15 @@ import lasersharks.ScreenController;
  */
 public class LosingPane extends StandardPane {
 
+  
   /**
    * The constructor makes a new panel with a few text objects shown.
+   * @throws FileNotFoundException 
    */
-  public LosingPane() {
-
+  public LosingPane() throws FileNotFoundException {
+    if(Highscores.getInstance().getHighScore() < Highscores.getInstance().getScore()){
+      addMidText("NEW HIGHSCORE", TEXT_SCALE_SIZE_SMALL+10, -400);
+    }
     addMidText("YOU LOSE!", TEXT_SCALE_SIZE_BIG, Options.getGlobalHeight() / SCREEN_POSITION_THREE);
     String message;
     try {
@@ -32,7 +37,7 @@ public class LosingPane extends StandardPane {
       e.printStackTrace();
     }
     addMidText(message, TEXT_SCALE_SIZE_SMALL, Options.getGlobalHeight() / SCREEN_POSITION_HUNDRED);
-    addMidText("\n Press R to restart", TEXT_SCALE_SIZE_SMALL,
+    addMidText("Press R to restart", TEXT_SCALE_SIZE_SMALL,
         -Options.getGlobalHeight() / SCREEN_POSITION_FIVE);
   }
 }
