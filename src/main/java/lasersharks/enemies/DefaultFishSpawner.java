@@ -25,9 +25,9 @@ public class DefaultFishSpawner implements FishSpawner {
   private static final int BASE_SIZE = 30;
   
   @SuppressWarnings("unchecked")
-  private static final Class<? extends FishBot>[] FISH_CLASSES = new Class[] { ImageEnemy1.class,
-      ImageEnemy2.class, ImageEnemy4.class, ImageEnemy5.class, ImageEnemy6.class, ImageEnemy7.class, ImageEnemy8.class,
-      ImageEnemy10.class, ImageEnemy12.class };
+  private static final Class<? extends FishBot>[] FISH_CLASSES = new Class[] { Enemy1.class,
+      Enemy2.class, Enemy4.class, Enemy5.class, Enemy6.class, Enemy7.class, Enemy8.class,
+      Enemy10.class, Enemy12.class };
 
   @SuppressWarnings("unchecked")
   private static final Class<? extends Object>[] CONSTRUCTOR_HEAD = new Class[] { Position.class,
