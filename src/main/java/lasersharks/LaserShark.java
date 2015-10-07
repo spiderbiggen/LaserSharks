@@ -1,6 +1,5 @@
 package lasersharks;
 
-import lasersharksgui.MainGui;
 import lasersharksgui.StandardPane;
 
 /**
