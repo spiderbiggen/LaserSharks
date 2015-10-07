@@ -104,7 +104,7 @@ public class FishController {
    * @return the start size
    */
   public float getStartSize() {
-    return this.START_SIZE;
+    return FishController.START_SIZE;
   }
 
   /**
