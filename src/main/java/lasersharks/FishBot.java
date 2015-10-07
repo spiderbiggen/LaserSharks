@@ -82,17 +82,18 @@ public abstract class FishBot extends Fish {
   public static FishBot generateFish(Random rng) {
     double posX;
     Direction dir;
+    float size = rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE;
+    
     if (rng.nextBoolean()) {
       // starts on the right side
       dir = Direction.West;
       posX = Position.getWidthPanel();
     } else {
       // starts on the left side
-      posX = 0;
+      posX = -size;
       dir = Direction.East;
     }
 
-    float size = rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE;
     try {
       return getRandomFishClass(rng).getDeclaredConstructor(CONSTRUCTOR_HEAD).newInstance(
           new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())),
