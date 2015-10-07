@@ -16,32 +16,31 @@ import org.junit.Test;
 public abstract class FishBotTest extends FishTest {
 
   protected Swimmer generatedFish;
-  private final long seed = 123456L;
+  private final long seed = 12345622L;
   private final long seedWest = 11L;
 
-  private final float expectedSize1 = 206;
-  private final int expectedSpeed1 = 186;
+  private final float expectedSize1 = 172;
+  private final int expectedSpeed1 = 134;
 
-  private final float expectedSize2 = 172;
+  private final float expectedSize2 = 176;
   private final int expectedSpeed2 = 344;
 
   /**
-   * 
+   * Test eastgoing fish
    */
-  @SuppressWarnings("deprecation")
   @Test
   public void testRandomFish1() {
     Random random = new Random(seed);
     generatedFish = FishBot.generateFish(random);
 
     assertEquals(generatedFish.getDirection(), Direction.East);
-    assertEquals(generatedFish.getPosition().getPosX(), 0, 0);
-    assertEquals(expectedSize1, generatedFish.getSize(), 1);
-    assertEquals(expectedSpeed1, generatedFish.getSpeed(), 0.0f);
+    assertEquals(-expectedSize1, generatedFish.getPosition().getPosX(), 1.0f);
+    assertEquals(expectedSize1, generatedFish.getSize(), 1.0f);
+    assertEquals(expectedSpeed1, generatedFish.getSpeed(), 1.0f);
   }
 
   /**
-   * 
+   * Test westgoing fish
    */
   @Test
   public void testRandomFish2() {
@@ -49,8 +48,8 @@ public abstract class FishBotTest extends FishTest {
     generatedFish = FishBot.generateFish(random);
 
     assertEquals(generatedFish.getDirection(), Direction.West);
-    assertEquals(generatedFish.getPosition().getPosX(), Position.getWidthPanel(), 0);
-    assertEquals(expectedSize2, generatedFish.getSize(), 1);
+    assertEquals(generatedFish.getPosition().getPosX(), Position.getWidthPanel(), 1.0f);
+    assertEquals(expectedSize2, generatedFish.getSize(), 1.0f);
     assertEquals(expectedSpeed2, generatedFish.getSpeed(), 0.0f);
   }
 
