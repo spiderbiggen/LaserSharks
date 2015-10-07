@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * Class for controlling fishdata.
  * 
- * @author Youri
+ * @author SEMGroup27
  *
  */
 
