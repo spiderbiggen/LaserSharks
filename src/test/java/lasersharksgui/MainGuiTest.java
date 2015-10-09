@@ -33,8 +33,6 @@ public class MainGuiTest {
   private ScreenController screenCon;
   private FishController fishCon;
   private FishSpawner fishSpawner;
-  private FXer fxer;
-
   /**
    * Resets the environment for each test.
    * 
@@ -46,7 +44,7 @@ public class MainGuiTest {
   @Before
   public void setup() throws InterruptedException, TimeoutException {
     FXApp.startApp(new MainGui());
-    fxer = FXer.getUserWith(FXApp.getScene().getRoot());
+    FXer.getUserWith(FXApp.getScene().getRoot());
 
     WaitFor.waitOrTimeout(new Condition() {
 
