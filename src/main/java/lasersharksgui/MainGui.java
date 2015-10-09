@@ -106,7 +106,6 @@ public class MainGui extends Application {
 
   @Override
   public void stop() throws Exception {
-    System.out.println("wweeeee");
     Platform.exit();
   }
 
