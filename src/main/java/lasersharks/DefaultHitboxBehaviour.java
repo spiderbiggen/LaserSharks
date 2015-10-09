@@ -7,6 +7,7 @@ public class DefaultHitboxBehaviour implements HitboxBehaviour {
 
   private static final double WIDTH_TO_COORD = 0.85;
   private static final double SIZE_TO_COORD = 0.075;
+  private static final double HALF_SCALE = 0.5f;
   
   Swimmer swimmer;  
   
@@ -16,8 +17,11 @@ public class DefaultHitboxBehaviour implements HitboxBehaviour {
   
   @Override
   public Position getMiddlePoint() {
-    // TODO Auto-generated method stub
-    return null;
+    Position startPos = swimmer.getPosition();
+    Position middlePointPosition = new Position(
+        startPos.getPosX() + (HALF_SCALE * swimmer.getWidthScale() * swimmer.getSize()),
+        startPos.getPosY() + (HALF_SCALE * swimmer.getSize()));
+    return middlePointPosition;
   }
 
 
@@ -31,7 +35,7 @@ public class DefaultHitboxBehaviour implements HitboxBehaviour {
     double ycoordinate = swimmer.getPosition().getPosY();
     Rectangle rekt = new Rectangle(xcoordinate + SIZE_TO_COORD * swimmer.getSize(),
         ycoordinate + SIZE_TO_COORD * swimmer.getSize(),
-        swimmer.getWidthScale() * this.getSize() * WIDTH_TO_COORD, this.getSize() * WIDTH_TO_COORD);
+        swimmer.getWidthScale() * swimmer.getSize() * WIDTH_TO_COORD, swimmer.getSize() * WIDTH_TO_COORD);
     return rekt;
   }
 

@@ -207,6 +207,12 @@ public abstract class Fish implements Swimmer {
     return hitboxBehaviour.makeHitbox();
   }
   
+  /**
+   * The LaserShark eats a fish. This kills fish and increases size of the shark.
+   * 
+   * @param fish
+   *          the fish the shark eats
+   */
   @Override
   public void eat(Swimmer swimmer) {
     eatBehaviour.eat(swimmer);

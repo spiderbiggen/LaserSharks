@@ -26,5 +26,6 @@ public abstract class FishBot extends Fish {
     collisionBehaviour = new DefaultCollisionBehaviour(this);
     moveBehaviour = new BotMoveBehaviour(this);
     hitboxBehaviour = new DefaultHitboxBehaviour(this);
+    eatBehaviour = new CantEatBehaviour(this);
   }
 }

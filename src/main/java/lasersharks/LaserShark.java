@@ -11,7 +11,6 @@ public class LaserShark extends Fish implements DirectionCallback {
 
   private final String imageResource = "shark.png";
   private final float widthScale = 1.5f;
-  private static final float HALF_RATE = 0.5F;
 
   /**
    * Constructor class for FishBot.
@@ -30,16 +29,7 @@ public class LaserShark extends Fish implements DirectionCallback {
     collisionBehaviour = new DefaultCollisionBehaviour(this);
     hitboxBehaviour = new DefaultHitboxBehaviour(this);
     moveBehaviour = new SharkMoveBehaviour(this);
-  }
-
-  /**
-   * The LaserShark eats a fish. This kills fish and increases size of the shark.
-   * 
-   * @param fish
-   *          the fish the shark eats
-   */
-  public void eat(Swimmer fish) {
-    
+    eatBehaviour = new DefaultEatBehaviour(this);
   }
 
   @Override
