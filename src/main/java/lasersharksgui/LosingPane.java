@@ -31,6 +31,7 @@ public class LosingPane extends StandardPane {
       }
     } catch (FileNotFoundException e1) {
       addMidText("NO FILE FOUND", TEXT_SCALE_SIZE_SMALL, ADJUST_DY_FOR_BOTTOM);
+      Logger.getInstance().write("No highscores file found", e1.getMessage());
     }
     addMidText("YOU LOSE!", TEXT_SCALE_SIZE_BIG, Options.getGlobalHeight() / SCREEN_POSITION_THREE);
     String message;
