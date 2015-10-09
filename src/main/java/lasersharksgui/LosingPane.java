@@ -18,7 +18,6 @@ import lasersharks.RestartGameController;
 @SuppressWarnings("restriction")
 public class LosingPane extends StandardPane {
   private RestartGameController restartHandler;
-  
   /**
    * The constructor makes a new panel with a few text objects shown.
    */
@@ -57,5 +56,6 @@ public class LosingPane extends StandardPane {
   @Override
   public void stop() {
     MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, this.restartHandler);
+
   }
 }
