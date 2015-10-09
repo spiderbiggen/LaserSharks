@@ -3,26 +3,24 @@ package lasersharks;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import lasersharks.gui.GamePane;
-import lasersharks.gui.MainGui;
+import lasersharksgui.GamePane;
+import lasersharksgui.MainGui;
 
 /**
- * @author Stefan
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")
 public class RestartGameController implements EventHandler<KeyEvent> {
-
-  /**
-   * Constructor.
-   * 
-   */
-  public RestartGameController() {
-    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, this);
-  }
+  private static final int AFTER_RESTART_DELAY = 100;
 
   private void restartGame() {
     MainGui.getInstance().browseTo(GamePane.class);
+    try {
+      Thread.sleep(AFTER_RESTART_DELAY);
+    } catch (InterruptedException e) {
+      Logger.getInstance().write("Restart delay interrupted", e.getMessage());
+    }
     Logger.getInstance().write("Game", "Restarted");
   }
 

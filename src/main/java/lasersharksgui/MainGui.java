@@ -1,4 +1,4 @@
-package lasersharks.gui;
+package lasersharksgui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -13,14 +13,14 @@ import lasersharks.RestartGameController;
 /**
  * The MainGui class is used for running the game.
  * 
- * @author Sytze
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")
 public class MainGui extends Application {
 
   private Scene currentScene;
-  private Pane currentPane;
+  private StandardPane currentPane;
   private StackPane stackPane;
   private static MainGui instance;
 
@@ -43,12 +43,11 @@ public class MainGui extends Application {
     currentScene = new Scene(stackPane, Options.getGlobalWidth(), Options.getGlobalHeight(),
         Options.getBackGroundColor());
     stage.setScene(currentScene);
-    currentPane = new Pane();
 
     // we start the application by showing the gamePanel
-    browseTo(GamePane.class);
+    currentPane = new GamePane();
+    stackPane.getChildren().add(currentPane);
     stage.show();
-    new RestartGameController();
   }
 
   /**
@@ -59,15 +58,13 @@ public class MainGui extends Application {
    */
   public void browseTo(Class<? extends StandardPane> paneClass) {
     try {
-
-      Pane paneToShow = (Pane) paneClass.newInstance();
+      StandardPane paneToShow = (StandardPane) paneClass.newInstance();
       paneToShow.setOpacity(1.0);
+      
       currentPane.setOpacity(0.0);
-      if (currentPane instanceof GamePane) {
-        GamePane gamePane = (GamePane) currentPane;
-        gamePane.stopGame();
-      }
+      currentPane.stop();
       currentPane = paneToShow;
+      
       stackPane.getChildren().add(paneToShow);
     } catch (Exception e) {
       Logger.getInstance().write(e.getClass().getName() + "could not browse", e.getMessage());

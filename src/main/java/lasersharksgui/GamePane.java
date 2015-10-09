@@ -1,6 +1,5 @@
-package lasersharks.gui;
+package lasersharksgui;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,9 +7,11 @@ import javafx.animation.AnimationTimer;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lasersharks.Direction;
+import lasersharks.DirectionCallback;
 import lasersharks.Highscores;
 import lasersharks.DirectionInputController;
 import lasersharks.LaserShark;
@@ -22,16 +23,19 @@ import lasersharks.Swimmer;
 /**
  * This is the pane representing the gameplay.
  * 
- * @author Sytze
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")
-public class GamePane extends StandardPane {
+public class GamePane extends StandardPane implements Stoppable {
 
+  private static final int ANIMATION_SLEEP_TIMER = 10;
   private AnimationTimer animation;
   private final double timeToMilis = 1_000_000;
   private ScreenController screenController;
   private static long time = 0;
+  private DirectionCallback callback;
+  private DirectionInputController directionInputontroller;
 
   /**
    * The constructor creates a new keyboardcontroller and screencontroller. The GamePane connects
@@ -39,8 +43,10 @@ public class GamePane extends StandardPane {
    */
   public GamePane() {
     screenController = new ScreenController(this);
+    callback = this.screenController.getShark();
+    directionInputontroller = new DirectionInputController(callback);
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputontroller);
     startGame();
-    new DirectionInputController(this.screenController, this.screenController.getShark());
   }
 
   /**
@@ -48,19 +54,22 @@ public class GamePane extends StandardPane {
    */
   public void startGame() {
     Highscores.getInstance().setScore(0);
+    clearPaneOfImageView();
     animation = new AnimationTimer() {
       @Override
       public void handle(long now) {
         double frametime = (now - time) / timeToMilis;
         final double milis = 1000;
-        try {
-          showFishList(screenController.getNextFrameInfo(milis / frametime));
-        } catch (IOException e) {
-          Logger.getInstance().write("IOException getting fishlist in Gamepane::startGame",
-              e.getMessage());
-        }
+        
+        showFishList(screenController.getNextFrameInfo(milis / frametime));
         showShark(screenController.getShark());
         showScore();
+        
+        try {
+          Thread.sleep(ANIMATION_SLEEP_TIMER);
+        } catch (InterruptedException e) {
+          Logger.getInstance().write("Annimation timer Interrupted", e.getMessage());
+        }
         time = now;
       }
     };
@@ -186,4 +195,13 @@ public class GamePane extends StandardPane {
     this.screenController = screenController;
   }
 
+  @Override
+  public void stop() {
+    this.clearPaneOfImageView();
+    this.stopGame();
+    MainGui.getInstance().getCurrentScene().removeEventHandler(
+        KeyEvent.ANY, 
+        directionInputontroller
+    );
+  }
 }

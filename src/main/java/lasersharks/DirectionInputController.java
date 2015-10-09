@@ -27,11 +27,8 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
    * @param fishCon
    *          callback
    */
-  public DirectionInputController(ScreenController screenCon, DirectionCallback fishCon) {
-    this.scene = screenCon.getGlobalScene();
+  public DirectionInputController(DirectionCallback fishCon) {
     this.callback = fishCon;
-
-    scene.addEventHandler(KeyEvent.ANY, this);
   }
 
   /**

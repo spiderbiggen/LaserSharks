@@ -12,7 +12,7 @@ import lasersharks.enemies.FishSpawner;
 /**
  * Class for controlling fishdata.
  * 
- * @author Youri
+ * @author SEMGroup27
  *
  */
 
@@ -109,7 +109,7 @@ public class FishController {
    * @return the start size
    */
   public float getStartSize() {
-    return START_SIZE;
+    return FishController.START_SIZE;
   }
 
   /**
