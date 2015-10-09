@@ -113,6 +113,15 @@ public class FishController {
   }
 
   /**
+   * Method to return the FishSpawner.
+   * 
+   * @return the fishSpawner
+   */
+  public FishSpawner getFishSpawner() {
+    return fishSpawner;
+  }
+  
+  /**
    * Update all fish positions.
    * 
    * @param frametime

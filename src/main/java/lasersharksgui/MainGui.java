@@ -1,6 +1,7 @@
 package lasersharksgui;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -36,7 +37,7 @@ public class MainGui extends Application {
    */
   @Override
   public void start(Stage stage) throws Exception {
-    instance = this;
+    setInstance(this);
     stage.setFullScreen(true);
     stackPane = new StackPane();
     currentScene = new Scene(stackPane, Options.getGlobalWidth(), Options.getGlobalHeight(),
@@ -102,4 +103,14 @@ public class MainGui extends Application {
   public Pane getCurrentPane() {
     return currentPane;
   }
+
+  @Override
+  public void stop() throws Exception {
+    Platform.exit();
+  }
+
+  private static void setInstance(MainGui newInstance) {
+    instance = newInstance;
+  }
+
 }
