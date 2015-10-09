@@ -36,4 +36,16 @@ public class ScreenControllerTest {
     Mockito.when(fishCon.getShark()).thenReturn(shark);
     screenCon = new ScreenController(currentPane);
   }
+
+  @Test
+  public void testConstructor() {
+    Mockito.verify(currentPane).setScreenController(screenCon);
+  }
+
+  @Test
+  public void testStartGame() {
+    screenCon.start();
+    Mockito.verify(currentPane).startGame();
+  }
+
 }
