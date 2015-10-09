@@ -76,7 +76,7 @@ public class DirectionInputControllerTest {
     this.scene = mock(Scene.class);
     this.screenCon = mock(ScreenController.class);
     when(this.screenCon.getGlobalScene()).thenReturn(this.scene);
-    this.directionInputController = new DirectionInputController(this.screenCon, this.callback);
+    this.directionInputController = new DirectionInputController(this.callback);
   }
 
   /**
