@@ -4,7 +4,7 @@ package lasersharks;
 /**
  * This class represent the fishes on the screen that are not player controllable.
  * 
- * @author Sytze, Youri
+ * @author SEMGroup27
  *
  */
 public abstract class FishBot extends Fish {
