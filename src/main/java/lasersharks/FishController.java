@@ -109,9 +109,18 @@ public class FishController {
    * @return the start size
    */
   public float getStartSize() {
-    return this.START_SIZE;
+    return START_SIZE;
   }
 
+  /**
+   * Method to return the FishSpawner.
+   * 
+   * @return the fishSpawner
+   */
+  public FishSpawner getFishSpawner() {
+    return fishSpawner;
+  }
+  
   /**
    * Update all fish positions.
    * 

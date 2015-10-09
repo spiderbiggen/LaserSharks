@@ -8,6 +8,12 @@ import lasersharks.FishBot;
 import lasersharks.Logger;
 import lasersharks.Position;
 
+/**
+ * Default Fishfactory implementation.
+ * 
+ * @author Sytze
+ *
+ */
 public class DefaultFishSpawner implements FishSpawner {
 
   /**
@@ -16,14 +22,19 @@ public class DefaultFishSpawner implements FishSpawner {
    */
   private static final int SPEED_MODIFIER = 420;
   private static final int BASE_SPEED = 80;
-  
+
   /**
    * This value is used to modify the size of the fishes that are generated. The generated speed is
    * equal to SizeModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
    */
   private static final int SIZE_MODIFIER = 200;
   private static final int BASE_SIZE = 30;
-  
+
+  /**
+   * this value is used as the seed. Only used when useSeed = true;
+   */
+  private Random rng;
+
   @SuppressWarnings("unchecked")
   private static final Class<? extends FishBot>[] FISH_CLASSES = new Class[] { Enemy1.class,
       Enemy2.class, Enemy4.class, Enemy5.class, Enemy6.class, Enemy7.class, Enemy8.class,
@@ -32,15 +43,15 @@ public class DefaultFishSpawner implements FishSpawner {
   @SuppressWarnings("unchecked")
   private static final Class<? extends Object>[] CONSTRUCTOR_HEAD = new Class[] { Position.class,
       java.lang.Float.class, java.lang.Double.class, Direction.class };
-  
+
   /**
-   * This function creates a new FishBot with random values. This should be used to spawn fishes.
-   * Starts on either the left side or the right side.
-   * 
-   * @return a random fish with random speed, size and position.
-   * @param rng
-   *          random number generator to use.
+   * initialize the fishspawner.
    */
+  public DefaultFishSpawner() {
+    this.rng = new Random();
+  }
+
+  @Override
   public FishBot generateFish(Random rng) {
     double posX;
     Direction dir;
@@ -67,19 +78,18 @@ public class DefaultFishSpawner implements FishSpawner {
       return null;
     }
   }
-  
+
   private static Class<? extends FishBot> getRandomFishClass(Random rng) {
     return FISH_CLASSES[rng.nextInt(FISH_CLASSES.length)];
   }
-  
-  /**
-   * This function creates a new FishBot with random values. This should be used to spawn fishes.
-   * Starts on either the left side on
-   * 
-   * @return a random fish with random speed, size and position.
-   */
+
+  @Override
   public FishBot generateFish() {
-    return generateFish(new Random());
+    return generateFish(this.rng);
   }
 
+  @Override
+  public void setRng(Random newRng) {
+    this.rng = newRng;
+  }
 }

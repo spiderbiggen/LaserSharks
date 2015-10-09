@@ -21,6 +21,7 @@ import com.google.code.tempusfugit.temporal.WaitFor;
 //import javafx.scene.input.KeyCode;
 import lasersharks.FishController;
 import lasersharks.ScreenController;
+import lasersharks.enemies.FishSpawner;
 
 /**
  * @author Stefan
@@ -43,7 +44,7 @@ public class MainGuiTest {
   /**
    * Test to check if we can lose the game.
    * 
-   * @throws Exception
+   * @throws Exception timeoutException
    */
   @Test
   public void loseGame() throws Exception {
@@ -59,6 +60,8 @@ public class MainGuiTest {
     ScreenController screenCon = pane.getScreenController();
     FishController fishCon = screenCon.getFishController();
     fishCon.setRng(new Random(0));
+    FishSpawner fishSpawn = fishCon.getFishSpawner();
+    fishSpawn.setRng(new Random(0));
     
     fxer.type(KeyEvent.VK_D);
     WaitFor.waitOrTimeout(new Condition() {
@@ -76,7 +79,7 @@ public class MainGuiTest {
   /**
    * Test to check if we can win the game.
    * 
-   * @throws Exception
+   * @throws Exception timeoutException
    */
   @Test
   public void winGame() throws Exception {
@@ -92,6 +95,8 @@ public class MainGuiTest {
     ScreenController screenCon = pane.getScreenController();
     FishController fishCon = screenCon.getFishController();
     fishCon.setRng(new Random(0));
+    FishSpawner fishSpawn = fishCon.getFishSpawner();
+    fishSpawn.setRng(new Random(0));
     
     fxer.type(KeyEvent.VK_D);
     WaitFor.waitOrTimeout(new Condition() {
