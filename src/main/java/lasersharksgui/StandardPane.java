@@ -2,8 +2,6 @@ package lasersharksgui;
 
 import java.io.File;
 
-import com.sun.media.jfxmedia.MediaException;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -27,7 +25,7 @@ import lasersharks.Position;
  *
  */
 @SuppressWarnings("restriction")
-public abstract class StandardPane extends Pane {
+public abstract class StandardPane extends Pane implements Stoppable {
 
   // text variables
   protected static final int TEXT_SCALE_SIZE_BIG = 17;

@@ -6,11 +6,13 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.enemies.DefaultFishSpawner;
+import lasersharks.enemies.FishSpawner;
 
 /**
  * Class for controlling fishdata.
  * 
- * @author Youri
+ * @author SEMGroup27
  *
  */
 
@@ -21,6 +23,8 @@ public class FishController {
    */
   private List<Swimmer> fishList;
   private LaserShark shark;
+  
+  private FishSpawner fishSpawner;
 
   /**
    * Holder for shark data.
@@ -49,6 +53,7 @@ public class FishController {
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);
+    fishSpawner = new DefaultFishSpawner();
   }
 
   /**
@@ -104,7 +109,7 @@ public class FishController {
    * @return the start size
    */
   public float getStartSize() {
-    return this.START_SIZE;
+    return FishController.START_SIZE;
   }
 
   /**
@@ -142,7 +147,7 @@ public class FishController {
   public List<Swimmer> getNextCycleInformation(double frametime) {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
-      Fish f = FishBot.generateFish();
+      Fish f = fishSpawner.generateFish();
       this.addFish(f);
       Logger.getInstance().write("Fish spawned",
           "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "

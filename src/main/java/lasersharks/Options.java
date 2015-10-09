@@ -43,7 +43,7 @@ public class Options {
    * 
    * @return the options object that is currently used.
    */
-  public static Options getInstance() {
+  public static synchronized Options getInstance() {
     if (currentOptions != null) {
       return currentOptions;
     }
@@ -59,18 +59,7 @@ public class Options {
   public static void destroyInstance() {
     currentOptions = null;
   }
-
-  /**
-   * generates the hashCode for this object.
-   */
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((dimension == null) ? 0 : dimension.hashCode());
-    return result;
-  }
-
+  
   /**
    * Checks if two options objects are equal.
    * 

@@ -3,19 +3,21 @@ package lasersharksgui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javafx.scene.input.KeyEvent;
 import lasersharks.Highscores;
 import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.RestartGameController;
-import lasersharks.ScreenController;
 
 /**
  * This pane represents the screen that is shown when a player loses.
  * 
- * @author Sytze
+ * @author SEMGroup27
  *
  */
+@SuppressWarnings("restriction")
 public class LosingPane extends StandardPane {
+  private RestartGameController restartHandler;
 
   /**
    * The constructor makes a new panel with a few text objects shown.
@@ -44,7 +46,17 @@ public class LosingPane extends StandardPane {
       e.printStackTrace();
     }
     addMidText(message, TEXT_SCALE_SIZE_SMALL, Options.getGlobalHeight() / SCREEN_POSITION_HUNDRED);
+
     addMidText("Press R to restart", TEXT_SCALE_SIZE_SMALL, -Options.getGlobalHeight()
         / SCREEN_POSITION_FIVE);
+
+    this.restartHandler = new RestartGameController();
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, this.restartHandler);
+  }
+
+  @Override
+  public void stop() {
+    MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, this.restartHandler);
+
   }
 }
