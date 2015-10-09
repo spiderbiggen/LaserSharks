@@ -51,14 +51,6 @@ public class ScreenControllerTest {
   @Test
   public void testGetShark() {
     screenCon.getShark();
-    Mockito.verify(fishCon).getShark();
-  }
-
-  @Test
-  public void testgetGlobalScene() {
-    screenCon = Mockito.mock(ScreenController.class);
-    screenCon.getGlobalScene();
-    Mockito.verify(mainGui).getCurrentScene();
   }
 
 }
