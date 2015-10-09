@@ -10,14 +10,15 @@ import javafx.scene.shape.Rectangle;
 @SuppressWarnings("restriction")
 public abstract class Fish implements Swimmer {
 
-  private static final double WIDTH_TO_COORD = 0.85;
-  private static final double SIZE_TO_COORD = 0.075;
+  protected CollisionBehaviour collisionBehaviour;
+  protected MoveBehaviour moveBehaviour;
+  protected EatBehaviour eatBehaviour;
+  
   private Position position;
   private float size;
   private double speed;
   private Direction direction;
   private boolean alive;
-  private static final double HALF_SCALE = 0.5;
 
   /**
    * <abstract> Method for creating a fish.
@@ -73,7 +74,7 @@ public abstract class Fish implements Swimmer {
    * @param size
    *          the delta by which to increase.
    */
-  protected void increaseSize(float size) {
+  public void increaseSize(float size) {
     this.size += size;
   }
 
@@ -125,29 +126,27 @@ public abstract class Fish implements Swimmer {
    * @return true if fish is in view
    */
   public boolean move(double frametime) {
-    return position.updatePosition(direction, (speed / frametime), size);
+    return moveBehaviour.move(frametime);
   }
 
   /**
    * We calculate the distance between the fishes. The sum of the size of both fishes is our hitbox.
    * Hitbox is now a circle, with size the radius in pixels.
    * 
-   * @param fish
+   * @param swimmer
    *          we want to check if the fishbot collides with this fish,
    * @return true if the fishes collide and false if not.
    */
-  public boolean collision(Fish fish) {
-    float distance = this.getMiddlePoint().calculateDistance(fish.getMiddlePoint());
-    return distance < this.size + fish.getSize();
+  public boolean collision(Swimmer swimmer) {
+    return collisionBehaviour.collide(swimmer);
   }
 
-  private Position getMiddlePoint() {
-    Position startPos = this.getPosition();
-
-    Position middlePointPosition = new Position(
-        startPos.getPosX() + (HALF_SCALE * this.getWidthScale() * this.getSize()),
-        startPos.getPosY() + (HALF_SCALE * this.getSize()));
-    return middlePointPosition;
+  /**
+   * gets the middle of the fish.
+   * @return the middlepoint of the fish.
+   */
+  public Position getMiddlePoint() {
+    return collisionBehaviour.getMiddlePoint();
   }
 
   /**
@@ -208,12 +207,18 @@ public abstract class Fish implements Swimmer {
    * @return a rectangle hitbox.
    */
   public Rectangle makeHitbox() {
-    double xcoordinate = this.getPosition().getPosX();
-    double ycoordinate = this.getPosition().getPosY();
-    Rectangle rekt = new Rectangle(xcoordinate + SIZE_TO_COORD * this.getSize(),
-        ycoordinate + SIZE_TO_COORD * this.getSize(),
-        this.getWidthScale() * this.getSize() * WIDTH_TO_COORD, this.getSize() * WIDTH_TO_COORD);
-    return rekt;
+    return collisionBehaviour.makeHitbox();
+  }
+  
+  /**
+   * The LaserShark eats a fish. This kills fish and increases size of the shark.
+   * 
+   * @param fish
+   *          the fish the shark eats
+   */
+  @Override
+  public void eat(Swimmer swimmer) {
+    eatBehaviour.eat(swimmer);
   }
 
 }

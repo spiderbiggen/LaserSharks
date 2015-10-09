@@ -1,5 +1,6 @@
 package lasersharks;
 
+
 /**
  * This class represent the fishes on the screen that are not player controllable.
  * 
@@ -22,5 +23,8 @@ public abstract class FishBot extends Fish {
    */
   public FishBot(Position position, float size, double speed, Direction direction) {
     super(position, size, speed, direction);
+    collisionBehaviour = new DefaultCollisionBehaviour(this);
+    moveBehaviour = new BotMoveBehaviour(this);
+    eatBehaviour = new CantEatBehaviour(this);
   }
 }
