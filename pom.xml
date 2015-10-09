@@ -20,7 +20,7 @@
 		<repository>
 			<id>jCenter</id>
 			<name>jcenter</name>
-			<url>hhttp://jcenter.bintray.com</url>
+			<url>http://jcenter.bintray.com</url>
 		</repository>
 	</repositories>
 	
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
-			<version>2.4</version>
+			<version>2.4.5</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -51,6 +51,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.code.tempus-fugit</groupId>
+			<artifactId>tempus-fugit</artifactId>
+			<version>1.1</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

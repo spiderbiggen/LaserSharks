@@ -3,44 +3,107 @@
  */
 package lasersharks.gui;
 
+import static org.junit.Assert.assertTrue;
+
+import java.awt.event.KeyEvent;
+import java.util.Random;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.athaydes.automaton.FXApp;
+import com.athaydes.automaton.FXer;
+import com.google.code.tempusfugit.temporal.Condition;
+import com.google.code.tempusfugit.temporal.Duration;
+import com.google.code.tempusfugit.temporal.Timeout;
+import com.google.code.tempusfugit.temporal.WaitFor;
+
+//import javafx.scene.input.KeyCode;
+import lasersharks.FishController;
+import lasersharks.ScreenController;
+
 /**
  * @author Stefan
  *
  */
-public class MainGuiTest{// extends ApplicationTest {
+@SuppressWarnings("restriction")
+public class MainGuiTest {
 
-  /*@Override
-  public void start(Stage arg0) throws Exception {
-    // TODO Auto-generated method stub
-    
-  }
-  
-  @BeforeClass
-  public static void setupSpec() throws Exception {
-    Stage primaryStage = FxToolkit.registerPrimaryStage();
-    FxToolkit.setupStage(stage -> stage.show());
-  }
+  private FXer fxer;
 
+  /**
+   * Resets the environment for each test.
+   */
   @Before
-  public void setup() throws Exception {
-    FxToolkit.setupApplication(MainGui.class);
+  public void setup() {
+    FXApp.startApp(new MainGui());
+    fxer = FXer.getUserWith(FXApp.getScene().getRoot());
   }
 
+  /**
+   * Test to check if we can lose the game.
+   * 
+   * @throws Exception
+   */
   @Test
-  public void loseGame() {
-    MainGui.getInstance().browseTo(GamePane.class);
+  public void loseGame() throws Exception {
+    WaitFor.waitOrTimeout(new Condition() {
+
+      @Override
+      public boolean isSatisfied() {    
+        return MainGui.getInstance().getCurrentPane() instanceof GamePane;
+      }
+
+    }, Timeout.timeout(Duration.seconds(1L)));
     GamePane pane = (GamePane) MainGui.getInstance().getCurrentPane();
     ScreenController screenCon = pane.getScreenController();
     FishController fishCon = screenCon.getFishController();
     fishCon.setRng(new Random(0));
-    // push(KeyCode.D);
+    
+    fxer.type(KeyEvent.VK_D);
+    WaitFor.waitOrTimeout(new Condition() {
+
+      @Override
+      public boolean isSatisfied() {    
+        return MainGui.getInstance().getCurrentPane() instanceof LosingPane;
+      }
+
+    }, Timeout.timeout(Duration.seconds(20L)));
+    assertTrue(MainGui.getInstance().getCurrentPane() instanceof LosingPane);
+    MainGui.getInstance().stop();
   }
 
+  /**
+   * Test to check if we can win the game.
+   * 
+   * @throws Exception
+   */
   @Test
-  public void winGame() {
+  public void winGame() throws Exception {
+    WaitFor.waitOrTimeout(new Condition() {
 
+      @Override
+      public boolean isSatisfied() {    
+        return MainGui.getInstance().getCurrentPane() instanceof GamePane;
+      }
+
+    }, Timeout.timeout(Duration.seconds(1L)));
+    GamePane pane = (GamePane) MainGui.getInstance().getCurrentPane();
+    ScreenController screenCon = pane.getScreenController();
+    FishController fishCon = screenCon.getFishController();
+    fishCon.setRng(new Random(0));
+    
+    fxer.type(KeyEvent.VK_D);
+    WaitFor.waitOrTimeout(new Condition() {
+
+      @Override
+      public boolean isSatisfied() {    
+        return MainGui.getInstance().getCurrentPane() instanceof WinPane;
+      }
+
+    }, Timeout.timeout(Duration.seconds(20L)));
+    assertTrue(MainGui.getInstance().getCurrentPane() instanceof WinPane);
+    MainGui.getInstance().stop();
   }
-*/
-
 
 }
