@@ -3,8 +3,8 @@ package lasersharks;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import lasersharksgui.GamePane;
-import lasersharksgui.MainGui;
+import lasersharks.gui.GamePane;
+import lasersharks.gui.MainGui;
 
 /**
  * @author Stefan

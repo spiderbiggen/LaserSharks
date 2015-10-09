@@ -3,78 +3,44 @@
  */
 package lasersharks.gui;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  * @author Stefan
  *
  */
-public class MainGuiTest {
+public class MainGuiTest{// extends ApplicationTest {
 
-  /**
-   * @throws java.lang.Exception
-   */
+  /*@Override
+  public void start(Stage arg0) throws Exception {
+    // TODO Auto-generated method stub
+    
+  }
+  
+  @BeforeClass
+  public static void setupSpec() throws Exception {
+    Stage primaryStage = FxToolkit.registerPrimaryStage();
+    FxToolkit.setupStage(stage -> stage.show());
+  }
+
   @Before
-  public void setUp() throws Exception {
+  public void setup() throws Exception {
+    FxToolkit.setupApplication(MainGui.class);
   }
 
-  /**
-   * Test method for {@link lasersharks.gui.MainGui#main(java.lang.String[])}.
-   */
   @Test
-  public void testMain() {
-    fail("Not yet implemented");
+  public void loseGame() {
+    MainGui.getInstance().browseTo(GamePane.class);
+    GamePane pane = (GamePane) MainGui.getInstance().getCurrentPane();
+    ScreenController screenCon = pane.getScreenController();
+    FishController fishCon = screenCon.getFishController();
+    fishCon.setRng(new Random(0));
+    // push(KeyCode.D);
   }
 
-  /**
-   * Test method for {@link lasersharks.gui.MainGui#start(javafx.stage.Stage)}.
-   */
   @Test
-  public void testStartStage() {
-    fail("Not yet implemented");
-  }
+  public void winGame() {
 
-  /**
-   * Test method for {@link lasersharks.gui.MainGui#browseTo(java.lang.Class)}.
-   */
-  @Test
-  public void testBrowseTo() {
-    fail("Not yet implemented");
   }
+*/
 
-  /**
-   * Test method for {@link lasersharks.gui.MainGui#getInstance()}.
-   */
-  @Test
-  public void testGetInstance() {
-    fail("Not yet implemented");
-  }
-
-  /**
-   * Test method for {@link lasersharks.gui.MainGui#browseToGlobal(java.lang.Class)}.
-   */
-  @Test
-  public void testBrowseToGlobal() {
-    fail("Not yet implemented");
-  }
-
-  /**
-   * Test method for {@link lasersharks.gui.MainGui#getCurrentScene()}.
-   */
-  @Test
-  public void testGetCurrentScene() {
-    fail("Not yet implemented");
-  }
-
-  /**
-   * Test method for {@link lasersharks.gui.MainGui#getCurrentPane()}.
-   */
-  @Test
-  public void testGetCurrentPane() {
-    fail("Not yet implemented");
-  }
 
 }

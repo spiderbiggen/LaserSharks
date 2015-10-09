@@ -5,7 +5,7 @@
 	<artifactId>LaserSharks</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.0</version>
-	
+
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -15,6 +15,14 @@
 		<pmd.plugin.version>3.4</pmd.plugin.version>
 		<findbugs.version>3.0.0</findbugs.version>
 	</properties>
+	
+	<repositories>
+		<repository>
+			<id>jCenter</id>
+			<name>jcenter</name>
+			<url>hhttp://jcenter.bintray.com</url>
+		</repository>
+	</repositories>
 	
 	<name>LaserSharks</name>
 	<url>http://maven.apache.org</url>
@@ -30,6 +38,19 @@
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.athaydes.automaton</groupId>
+			<artifactId>Automaton</artifactId>
+			<version>1.2.3</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -100,7 +121,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

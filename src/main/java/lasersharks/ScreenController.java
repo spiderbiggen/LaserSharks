@@ -81,4 +81,12 @@ public class ScreenController {
     return MainGui.getInstance().getCurrentScene();
   }
 
+  /**
+   * 
+   * @return the fishcontroller used for this screencontroller.
+   */
+  public FishController getFishController() {
+    return fishCon;
+  }
+
 }
