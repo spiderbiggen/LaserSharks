@@ -9,9 +9,6 @@ import lasersharksgui.StandardPane;
  */
 public class LaserShark extends Fish implements DirectionCallback {
 
-  private static final float ENERGY_DISSERPATION_RATE = 7.5f;
-  private static final String EAT_FISH_SOUND = "src/main/resources/soundEffect1.wav";
-
   private final String imageResource = "shark.png";
   private final float widthScale = 1.5f;
   private static final float HALF_RATE = 0.5F;
@@ -30,6 +27,9 @@ public class LaserShark extends Fish implements DirectionCallback {
    */
   public LaserShark(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
+    collisionBehaviour = new DefaultCollisionBehaviour(this);
+    hitboxBehaviour = new DefaultHitboxBehaviour(this);
+    moveBehaviour = new SharkMoveBehaviour(this);
   }
 
   /**
@@ -39,25 +39,7 @@ public class LaserShark extends Fish implements DirectionCallback {
    *          the fish the shark eats
    */
   public void eat(Swimmer fish) {
-    if (fish.isAlive()) {
-      Logger.getInstance().write("Fish eaten",
-          "Old sharksize: " + this.getSize() + "," + "Fish size: " + fish.getSize() + ", "
-              + "New sharksize: " + (this.getSize() + (fish.getSize() / ENERGY_DISSERPATION_RATE)));
-      this.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
-      StandardPane.playSoundEffect(EAT_FISH_SOUND);
-    }
-    Highscores.getInstance().increaseScore(fish);
-    fish.kill();
-  }
-
-  @Override
-  public boolean move(double frametime) {
-    super.move(frametime);
-    // this will make sure the fish stay within both
-
-    this.getPosition().clipPosition((this.getSize() * this.getWidthScale() * HALF_RATE),
-        (this.getSize() * HALF_RATE));
-    return true;
+    
   }
 
   @Override

@@ -73,7 +73,7 @@ public interface Swimmer {
    *          we want to check if the fishbot collides with this fish,
    * @return true if the fishes collide and false if not.
    */
-  boolean collision(Fish fish);
+  boolean collision(Swimmer swimmer);
 
   /**
    * this function checks if the fish is on the screen or not.
@@ -114,4 +114,16 @@ public interface Swimmer {
    * @return a rectangle hitbox.
    */
   Rectangle makeHitbox();
+  
+  /**
+   * Method used for growing fish.
+   * 
+   * @param size
+   *          the delta by which to increase.
+   */
+  public void increaseSize(float size);
+  
+  public Position getMiddlePoint();
+
+  void eat(Swimmer swimmer);
 }
