@@ -1,5 +1,6 @@
 package lasersharks;
 
+
 public class BotMoveBehaviour implements MoveBehaviour {
   
   Swimmer swimmer;

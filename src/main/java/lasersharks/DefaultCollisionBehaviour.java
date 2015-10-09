@@ -1,8 +1,13 @@
 package lasersharks;
 
+
 public class DefaultCollisionBehaviour implements CollisionBehaviour {
 
   Swimmer swimmer;
+  
+  public DefaultCollisionBehaviour(Swimmer swimmer) {
+    this.swimmer = swimmer;
+  }
   
   @Override
   public boolean collide(Swimmer swimmer) {
