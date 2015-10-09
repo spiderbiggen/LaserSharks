@@ -19,16 +19,18 @@ public class LosingPane extends StandardPane {
 
   /**
    * The constructor makes a new panel with a few text objects shown.
-   * 
-   * @throws FileNotFoundException
    */
 
   private static final double ADJUST_DY_FOR_BOTTOM = -400;
   private static final int CUSTOM_TEXT_SIZE = TEXT_SCALE_SIZE_SMALL + 10;
 
-  public LosingPane() throws FileNotFoundException {
-    if (Highscores.getInstance().getHighScore() < Highscores.getInstance().getScore()) {
-      addMidText("NEW HIGHSCORE!", CUSTOM_TEXT_SIZE, ADJUST_DY_FOR_BOTTOM);
+  public LosingPane() {
+    try {
+      if (Highscores.getInstance().getHighScore() < Highscores.getInstance().getScore()) {
+        addMidText("NEW HIGHSCORE!", CUSTOM_TEXT_SIZE, ADJUST_DY_FOR_BOTTOM);
+      }
+    } catch (FileNotFoundException e1) {
+      addMidText("NO FILE FOUND", TEXT_SCALE_SIZE_SMALL, ADJUST_DY_FOR_BOTTOM);
     }
     addMidText("YOU LOSE!", TEXT_SCALE_SIZE_BIG, Options.getGlobalHeight() / SCREEN_POSITION_THREE);
     String message;
