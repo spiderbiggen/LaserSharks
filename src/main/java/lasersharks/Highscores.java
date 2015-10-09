@@ -18,6 +18,7 @@ public class Highscores {
   private static Highscores instance;
   private ArrayList<String> highscores;
   private String inputFile;
+  private int amountOfFishesEaten = 0;
   private static final float HALF_SCALE = 0.5f;
   private static final int DATA_OFFSET = 3;
   private static final int FISH_BONUS = 20;
@@ -162,13 +163,6 @@ public class Highscores {
   }
 
   /**
-   * @return the fishBonus
-   */
-  public static int getFishBonus() {
-    return FISH_BONUS;
-  }
-
-  /**
    * Makes a nicely displayed string to output on the end screen.
    * 
    * @return a String containing the highscores.
@@ -192,8 +186,13 @@ public class Highscores {
    */
   public void increaseScore(Swimmer fish) {
     if (fish.isAlive()) {
-      score = (int) (score + fish.getSize() * HALF_SCALE + Highscores.getFishBonus());
+      score = score + (int) ((fish.getSize() * HALF_SCALE + FISH_BONUS) - amountOfFishesEaten * 2);
+      amountOfFishesEaten++;
     }
+  }
+
+  public static int getFishBonus() {
+    return FISH_BONUS;
   }
 
   /**

@@ -1,5 +1,6 @@
 package lasersharksgui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.scene.input.KeyEvent;
@@ -17,12 +18,22 @@ import lasersharks.RestartGameController;
 @SuppressWarnings("restriction")
 public class LosingPane extends StandardPane {
   private RestartGameController restartHandler;
-  
   /**
    * The constructor makes a new panel with a few text objects shown.
    */
-  public LosingPane() {
 
+  private static final double ADJUST_DY_FOR_BOTTOM = -400;
+  private static final int CUSTOM_TEXT_SIZE = TEXT_SCALE_SIZE_SMALL + 10;
+
+  public LosingPane() {
+    try {
+      if (Highscores.getInstance().getHighScore() < Highscores.getInstance().getScore()) {
+        addMidText("NEW HIGHSCORE!", CUSTOM_TEXT_SIZE, ADJUST_DY_FOR_BOTTOM);
+      }
+    } catch (FileNotFoundException e1) {
+      addMidText("UNABLE TO FIND A HIGHSCORES FILE", TEXT_SCALE_SIZE_SMALL, ADJUST_DY_FOR_BOTTOM);
+      Logger.getInstance().write("No highscores file found", e1.getMessage());
+    }
     addMidText("YOU LOSE!", TEXT_SCALE_SIZE_BIG, Options.getGlobalHeight() / SCREEN_POSITION_THREE);
     String message;
     try {
@@ -34,9 +45,9 @@ public class LosingPane extends StandardPane {
       e.printStackTrace();
     }
     addMidText(message, TEXT_SCALE_SIZE_SMALL, Options.getGlobalHeight() / SCREEN_POSITION_HUNDRED);
-    addMidText("\n Press R to restart", TEXT_SCALE_SIZE_SMALL,
-        -Options.getGlobalHeight() / SCREEN_POSITION_FIVE);
-    
+
+    addMidText("Press R to restart", TEXT_SCALE_SIZE_SMALL, -Options.getGlobalHeight()
+        / SCREEN_POSITION_FIVE);
 
     this.restartHandler = new RestartGameController();
     MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, this.restartHandler);
@@ -45,5 +56,6 @@ public class LosingPane extends StandardPane {
   @Override
   public void stop() {
     MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, this.restartHandler);
+
   }
 }
