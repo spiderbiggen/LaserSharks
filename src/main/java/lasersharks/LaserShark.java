@@ -1,8 +1,5 @@
 package lasersharks;
 
-import lasersharksgui.MainGui;
-import lasersharksgui.StandardPane;
-
 /**
  * LaserShark class.
  *
@@ -27,7 +24,6 @@ public class LaserShark extends Fish implements DirectionCallback {
   public LaserShark(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
     collisionBehaviour = new DefaultCollisionBehaviour(this);
-    hitboxBehaviour = new DefaultHitboxBehaviour(this);
     moveBehaviour = new SharkMoveBehaviour(this);
     eatBehaviour = new DefaultEatBehaviour(this);
   }

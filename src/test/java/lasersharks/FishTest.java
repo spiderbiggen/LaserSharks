@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -23,7 +24,7 @@ public abstract class FishTest {
   protected final float size = 30;
   protected final int speed = 40;
   protected final Direction direction = Direction.East;
-
+  
   /**
    * Tear down the fish Object after the test.
    */

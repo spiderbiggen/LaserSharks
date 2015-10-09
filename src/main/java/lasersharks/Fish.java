@@ -11,7 +11,6 @@ import javafx.scene.shape.Rectangle;
 public abstract class Fish implements Swimmer {
 
   protected CollisionBehaviour collisionBehaviour;
-  protected HitboxBehaviour hitboxBehaviour;
   protected MoveBehaviour moveBehaviour;
   protected EatBehaviour eatBehaviour;
   
@@ -142,8 +141,12 @@ public abstract class Fish implements Swimmer {
     return collisionBehaviour.collide(swimmer);
   }
 
+  /**
+   * gets the middle of the fish.
+   * @return the middlepoint of the fish.
+   */
   public Position getMiddlePoint() {
-    return hitboxBehaviour.getMiddlePoint();
+    return collisionBehaviour.getMiddlePoint();
   }
 
   /**
@@ -204,7 +207,7 @@ public abstract class Fish implements Swimmer {
    * @return a rectangle hitbox.
    */
   public Rectangle makeHitbox() {
-    return hitboxBehaviour.makeHitbox();
+    return collisionBehaviour.makeHitbox();
   }
   
   /**
