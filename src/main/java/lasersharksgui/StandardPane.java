@@ -40,9 +40,9 @@ public abstract class StandardPane extends Pane implements Stoppable {
   // sprite and image variables
   protected ImageView sharkImage;
 
-  protected static final int SCREEN_POSITION_THREE = 3;
-  protected static final int SCREEN_POSITION_FIVE = 5;
-  protected static final int SCREEN_POSITION_HUNDRED = 100;
+  protected static final int THREE = 3;
+  protected static final int FIVE = 5;
+  protected static final int HUNDRED = 100;
 
   /**
    * Constructor of the StandardPane.

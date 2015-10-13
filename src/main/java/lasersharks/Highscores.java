@@ -191,6 +191,9 @@ public class Highscores {
     }
   }
 
+  /**
+   * @return Bonus per eaten fish.
+   */
   public static int getFishBonus() {
     return FISH_BONUS;
   }
