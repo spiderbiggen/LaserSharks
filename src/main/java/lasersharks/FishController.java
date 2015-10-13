@@ -208,5 +208,17 @@ public class FishController {
       }
     }
   }
+  
+  /**
+   * A laser appears on the screen from the position of the shark and is added to the fishList.
+   */
+  public boolean shootLaser() {
+    if(shark.getAmmo() > 0){
+      shark.decreaseAmmo();
+      addFish(fishSpawner.createLaser(this.shark));
+      return true;
+    }
+    return false;
+  }
 
 }

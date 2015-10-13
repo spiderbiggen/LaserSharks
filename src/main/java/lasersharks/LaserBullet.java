@@ -15,7 +15,7 @@ public class LaserBullet extends Fish {
   private double strength;
   
   /**
-   * The constructor of the laser
+   * The constructor of the laser.
    * @param position the position of the laser.
    * @param size the size of the laser.
    * @param startSpeed the starting speed of the laser.

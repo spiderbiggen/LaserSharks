@@ -3,6 +3,8 @@ package lasersharks.enemies;
 import java.util.Random;
 
 import lasersharks.FishBot;
+import lasersharks.LaserBullet;
+import lasersharks.Swimmer;
 
 /**
  * Interface for Fishfactory.
@@ -22,6 +24,13 @@ public interface FishSpawner {
    */
   FishBot generateFish(Random rng);
 
+  /**
+   * This function creates a laser.
+   * @param origin the swimmer that shoots a laser.
+   * @return a laserBullet object.
+   */
+  public LaserBullet createLaser(Swimmer origin);
+  
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
    * Starts on either the left side on

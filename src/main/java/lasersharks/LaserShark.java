@@ -8,7 +8,10 @@ public class LaserShark extends Fish implements DirectionCallback {
 
   private final String imageResource = "shark.png";
   private final float widthScale = 1.5f;
-
+  private static final int STARTING_AMMO = 10;
+  
+  private int ammo;
+  
   /**
    * Constructor class for FishBot.
    * 
@@ -26,6 +29,7 @@ public class LaserShark extends Fish implements DirectionCallback {
     collisionBehaviour = new DefaultCollisionBehaviour(this);
     moveBehaviour = new SharkMoveBehaviour(this);
     eatBehaviour = new DefaultEatBehaviour(this);
+    ammo = STARTING_AMMO;
   }
 
   @Override
@@ -56,5 +60,41 @@ public class LaserShark extends Fish implements DirectionCallback {
   @Override
   public void putDirection(Direction dir) {
     this.setDirection(dir);
+  }
+  
+  /**
+   * decreases the ammo.
+   * @param amount the amount to decrease.
+   * @return the current ammo of the shark.
+   */
+  public int decreaseAmmo(int amount) {
+    ammo =- amount;
+    return ammo;
+  }
+  
+  /**
+   * decreases the ammo by one.
+   * @return the current ammo of the shark.
+   */
+  public int decreaseAmmo() {
+    return decreaseAmmo(1);
+  }
+  
+  /**
+   * returns the current ammo.
+   * @return the ammo.
+   */
+  public int getAmmo() {
+    return ammo;
+  }
+  
+  /**
+   * increases the ammo.
+   * @param amount the amount to increase.
+   * @return the current ammo of the shark.
+   */
+  public int increaseAmmo(int amount) {
+    ammo =+ amount;
+    return ammo;
   }
 }

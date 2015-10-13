@@ -84,7 +84,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
       case D:
         pressedRight = pressed;
         handled = true;
-        break;
+        break; 
       default:
         break;
     }

@@ -28,6 +28,16 @@ public class DefaultEatBehaviour implements EatBehaviour {
    */
   @Override
   public void eat(Swimmer fish) {
+    if(fish instanceof FishBot) {
+      eat((FishBot) fish);
+    }
+  }
+  
+  /**
+   * eats an other FishBot. The fish grows, the score increases and a sound effect is played.
+   * @param fish the fish that should be eaten.
+   */
+  public void eat(FishBot fish) {
     if (fish.isAlive()) {
       Logger.getInstance().write("Fish eaten",
           "Old sharksize: " + swimmer.getSize() + "," + "Fish size: " + fish.getSize() + ", "

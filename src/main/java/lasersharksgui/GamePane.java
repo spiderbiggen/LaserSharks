@@ -18,6 +18,7 @@ import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.ScreenController;
+import lasersharks.ShootController;
 import lasersharks.Swimmer;
 
 /**
@@ -35,7 +36,8 @@ public class GamePane extends StandardPane implements Stoppable {
   private ScreenController screenController;
   private static long time = 0;
   private DirectionCallback callback;
-  private DirectionInputController directionInputontroller;
+  private DirectionInputController directionInputController;
+  private ShootController shootController;
 
   /**
    * The constructor creates a new keyboardcontroller and screencontroller. The GamePane connects
@@ -44,8 +46,10 @@ public class GamePane extends StandardPane implements Stoppable {
   public GamePane() {
     screenController = new ScreenController(this);
     callback = this.screenController.getShark();
-    directionInputontroller = new DirectionInputController(callback);
-    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputontroller);
+    directionInputController = new DirectionInputController(callback);
+    shootController = new ShootController(screenController.getFishController());
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputController);
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, shootController);
     startGame();
   }
 
@@ -201,7 +205,7 @@ public class GamePane extends StandardPane implements Stoppable {
     this.stopGame();
     MainGui.getInstance().getCurrentScene().removeEventHandler(
         KeyEvent.ANY, 
-        directionInputontroller
+        directionInputController
     );
   }
 }
