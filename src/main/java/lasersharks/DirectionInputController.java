@@ -88,7 +88,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
       default:
         break;
     }
-    return handle;
+    return handled;
   }
 
   /**
