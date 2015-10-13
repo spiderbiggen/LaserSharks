@@ -39,32 +39,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
    * @return true if and only if the key is properly handled
    */
   private boolean keyPressed(KeyEvent event) {
-    boolean handled = false;
-    switch (event.getCode()) {
-      case UP:
-      case W:
-        pressedUp = true;
-        handled = true;
-        break;
-      case DOWN:
-      case S:
-        pressedDown = true;
-        handled = true;
-        break;
-      case LEFT:
-      case A:
-        pressedLeft = true;
-        handled = true;
-        break;
-      case RIGHT:
-      case D:
-        pressedRight = true;
-        handled = true;
-        break;
-      default:
-        break;
-    }
-    return handled;
+    return keySwitch(event, true);
   }
 
   /**
@@ -75,33 +50,39 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
    * @return true if and only if the key is properly handled
    */
   private boolean keyReleased(KeyEvent event) {
-    boolean handled = false;
+    return keySwitch(event, false);
+  }
+  
+  
+  private boolean keySwitch(KeyEvent event, boolean pressed) {
+    boolean handle = false;
     switch (event.getCode()) {
       case UP:
       case W:
-        pressedUp = false;
-        handled = true;
+        pressedUp = pressed;
+        handle = true;
         break;
       case DOWN:
       case S:
-        pressedDown = false;
-        handled = true;
+        pressedDown = pressed;
+        handle = true;
         break;
       case LEFT:
       case A:
-        pressedLeft = false;
-        handled = true;
+        pressedLeft = pressed;
+        handle = true;
         break;
       case RIGHT:
       case D:
-        pressedRight = false;
-        handled = true;
+        pressedRight = pressed;
+        handle = true;
         break;
       default:
         break;
     }
-    return handled;
+    return handle;
   }
+  
 
   /**
    * Will parse the actions corresponding to the current key presses.
