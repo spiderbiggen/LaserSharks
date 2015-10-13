@@ -5,12 +5,12 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import lasersharks.FishBotTest;
-import lasersharks.enemies.Enemy1;
+import lasersharks.enemies.Enemy;
 
 /**
  * The test for the enemy1 class.
  * 
- * @author Youri
+ * @author SEMGroup27
  *
  */
 public class Enemy1Test extends FishBotTest {
@@ -20,7 +20,10 @@ public class Enemy1Test extends FishBotTest {
    */
   @Before
   public void setUp() {
-    this.fish1 = new Enemy1(
+    this.fish1 = new Enemy(
+        IMAGE,
+        1,
+        1,
         this.posOnScreen,
         Float.valueOf(this.size),
         Double.valueOf(this.speed),

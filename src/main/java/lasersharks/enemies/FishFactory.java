@@ -11,10 +11,10 @@ import lasersharks.Position;
 /**
  * Default Fishfactory implementation.
  * 
- * @author Sytze
+ * @author SEMGroup27
  *
  */
-public class DefaultFishSpawner implements FishSpawner {
+public class FishFactory implements FishSpawner {
 
   /**
    * This value is used to modify the speed of the fishes that are generated. The generated speed is
@@ -34,20 +34,35 @@ public class DefaultFishSpawner implements FishSpawner {
    * this value is used as the seed. Only used when useSeed = true;
    */
   private Random rng;
-
-  @SuppressWarnings("unchecked")
-  private static final Class<? extends FishBot>[] FISH_CLASSES = new Class[] { Enemy1.class,
-      Enemy2.class, Enemy4.class, Enemy5.class, Enemy6.class, Enemy7.class, Enemy8.class,
-      Enemy10.class, Enemy12.class };
-
-  @SuppressWarnings("unchecked")
-  private static final Class<? extends Object>[] CONSTRUCTOR_HEAD = new Class[] { Position.class,
-      java.lang.Float.class, java.lang.Double.class, Direction.class };
-
+  
+  private static final String[] FISH_IMAGES = {
+      "enemy-1.png",
+      "enemy-2.png",
+      "enemy-4.png",
+      "enemy-5.png",
+      "enemy-6.png",
+      "enemy-7.png",
+      "enemy-8.png",
+      "enemy-10.png",
+      "enemy-12.png",
+  };
+  
+  private static final Integer[][] IMAGE_SIZE = {
+      {36, 60},
+      {46, 49},
+      {69, 60},
+      {90, 67},
+      {69, 157},
+      {84, 113},
+      {138, 151},
+      {54, 75},
+      {54, 94}
+  };
+  
   /**
    * initialize the fishspawner.
    */
-  public DefaultFishSpawner() {
+  public FishFactory() {
     this.rng = new Random();
   }
 
@@ -67,22 +82,17 @@ public class DefaultFishSpawner implements FishSpawner {
       posX = -size;
       dir = Direction.East;
     }
-
-    try {
-      return getRandomFishClass(rng).getDeclaredConstructor(CONSTRUCTOR_HEAD).newInstance(
-          new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())),
-          Float.valueOf(size),
-          Double.valueOf(Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED)), dir);
-    } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-        | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-      Logger.getInstance().write(e.getClass().getName() + " exception", e.getMessage());
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  private static Class<? extends FishBot> getRandomFishClass(Random rng) {
-    return FISH_CLASSES[rng.nextInt(FISH_CLASSES.length)];
+    
+    int enemyImageIndex = rng.nextInt(Math.min(FISH_IMAGES.length, IMAGE_SIZE.length));
+    return new Enemy(
+        FISH_IMAGES[enemyImageIndex], 
+        IMAGE_SIZE[enemyImageIndex][1], 
+        IMAGE_SIZE[enemyImageIndex][0],
+        new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), 
+        size, 
+        (double) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), 
+        dir
+    );
   }
 
   @Override
