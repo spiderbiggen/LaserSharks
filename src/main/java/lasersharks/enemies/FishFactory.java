@@ -1,11 +1,9 @@
 package lasersharks.enemies;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 import lasersharks.Direction;
 import lasersharks.FishBot;
-import lasersharks.Logger;
 import lasersharks.Position;
 
 /**
