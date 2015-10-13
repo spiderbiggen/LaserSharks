@@ -45,6 +45,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
   // sprite and image variables
   protected ImageView sharkImage;
   protected ImageView muteButtonImage = new ImageView("mutesound.png");
+  protected ImageView unmuteButtonImage = new ImageView("unmutesound.png");
   protected static final int SCREEN_POSITION_THREE = 3;
   protected static final int SCREEN_POSITION_FIVE = 5;
   protected static final int SCREEN_POSITION_HUNDRED = 100;
@@ -75,6 +76,8 @@ public abstract class StandardPane extends Pane implements Stoppable {
   public void addMuteButton() {
     muteButtonImage.setFitHeight(18);
     muteButtonImage.setFitWidth(30);
+    unmuteButtonImage.setFitHeight(18);
+    unmuteButtonImage.setFitWidth(30);
     muteButton = new Button();
     muteButton.setGraphic(muteButtonImage);
     getChildren().add(muteButton);
@@ -82,9 +85,9 @@ public abstract class StandardPane extends Pane implements Stoppable {
     muteButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-          muteSound();
+        muteSound();
       }
-  });
+    });
   }
 
   /**
@@ -171,8 +174,10 @@ public abstract class StandardPane extends Pane implements Stoppable {
     if (musicIsPlaying) {
       mediaPlayer.pause();
       musicIsPlaying = false;
+      muteButton.setGraphic(unmuteButtonImage);
     } else {
       mediaPlayer.play();
+      muteButton.setGraphic(muteButtonImage);
       musicIsPlaying = true;
     }
 
