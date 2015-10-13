@@ -219,10 +219,10 @@ public class DirectionInputControllerTest {
   @Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(
-        new Object[][] { { KeyCode.DOWN, KeyCode.LEFT, Direction.North, Direction.NorthWest },
-            { KeyCode.DOWN, KeyCode.RIGHT, Direction.North, Direction.NorthEast },
-            { KeyCode.UP, KeyCode.LEFT, Direction.South, Direction.SouthWest },
-            { KeyCode.UP, KeyCode.RIGHT, Direction.South, Direction.SouthEast },
+        new Object[][] { { KeyCode.DOWN, KeyCode.LEFT, Direction.South, Direction.SouthWest },
+            { KeyCode.DOWN, KeyCode.RIGHT, Direction.South, Direction.SouthEast },
+            { KeyCode.UP, KeyCode.LEFT, Direction.North, Direction.NorthWest },
+            { KeyCode.UP, KeyCode.RIGHT, Direction.North, Direction.NorthEast },
 
     });
   }
