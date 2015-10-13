@@ -2,10 +2,12 @@ package lasersharksgui;
 
 import java.io.File;
 
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -38,10 +40,11 @@ public abstract class StandardPane extends Pane implements Stoppable {
   protected static MediaPlayer mediaPlayer;
   protected static MediaPlayer soundPlayer;
   private static boolean musicIsPlaying = false;
+  protected Button muteButton;
 
   // sprite and image variables
   protected ImageView sharkImage;
-  private static final String MUTESOUNDIMAGE = "mutesound.png";
+  protected ImageView muteButtonImage = new ImageView("mutesound.png");
   protected static final int SCREEN_POSITION_THREE = 3;
   protected static final int SCREEN_POSITION_FIVE = 5;
   protected static final int SCREEN_POSITION_HUNDRED = 100;
@@ -68,14 +71,20 @@ public abstract class StandardPane extends Pane implements Stoppable {
         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     setBackground(new Background(myBI));
   }
-  
-  public void addMuteButton() {
-    ImageView muteButton = new ImageView(MUTESOUNDIMAGE);
-    muteButton.setFitWidth(100);
 
+  public void addMuteButton() {
+    muteButtonImage.setFitHeight(18);
+    muteButtonImage.setFitWidth(30);
+    muteButton = new Button();
+    muteButton.setGraphic(muteButtonImage);
     getChildren().add(muteButton);
-    muteButton.setX(200);
-    muteButton.setY(200);
+
+    muteButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+          muteSound();
+      }
+  });
   }
 
   /**
@@ -160,10 +169,10 @@ public abstract class StandardPane extends Pane implements Stoppable {
    */
   public void muteSound() {
     if (musicIsPlaying) {
-      soundPlayer.pause();
+      mediaPlayer.pause();
       musicIsPlaying = false;
     } else {
-      soundPlayer.play();
+      mediaPlayer.play();
       musicIsPlaying = true;
     }
 
