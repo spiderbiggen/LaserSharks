@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
-import lasersharks.enemies.DefaultFishSpawner;
+import lasersharks.enemies.FishFactory;
 import lasersharks.enemies.FishSpawner;
 
 /**
@@ -53,7 +53,7 @@ public class FishController {
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);
-    fishSpawner = new DefaultFishSpawner();
+    fishSpawner = new FishFactory();
   }
 
   /**

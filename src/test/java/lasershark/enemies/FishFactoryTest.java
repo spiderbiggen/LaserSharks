@@ -1,22 +1,23 @@
 package lasershark.enemies;
 
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 import java.util.Random;
 
 import lasersharks.Direction;
 import lasersharks.Position;
 import lasersharks.Swimmer;
-import lasersharks.enemies.DefaultFishSpawner;
+import lasersharks.enemies.FishFactory;
 
 import org.junit.Test;
 
 /**
- * Test class for fishfactory.
+ * Test class for FishFactory.
  * @author SEMGroup27
  *
  */
-public class DefaultFishSpawnerTest {
+public class FishFactoryTest {
 
   protected Swimmer generatedFish;
   private final long seed = 12345622L;
@@ -28,7 +29,7 @@ public class DefaultFishSpawnerTest {
   private final float expectedSize2 = 176;
   private final int expectedSpeed2 = 344;
   
-  private DefaultFishSpawner fishFactory;
+  private FishFactory fishFactory;
 
   
   
@@ -37,7 +38,7 @@ public class DefaultFishSpawnerTest {
    */
   @Test
   public void testRandomFish1() {
-    fishFactory = new DefaultFishSpawner();
+    fishFactory = new FishFactory();
     Random random = new Random(seed);
     generatedFish = fishFactory.generateFish(random);
 
@@ -52,7 +53,7 @@ public class DefaultFishSpawnerTest {
    */
   @Test
   public void testRandomFish2() {
-    fishFactory = new DefaultFishSpawner();
+    fishFactory = new FishFactory();
     Random random = new Random(seedWest);
     generatedFish = fishFactory.generateFish(random);
 
