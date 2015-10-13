@@ -33,30 +33,59 @@ public class FishFactory implements FishSpawner {
    */
   private Random rng;
   
-  private static final String[] FISH_IMAGES = {
-      "enemy-1.png",
-      "enemy-2.png",
-      "enemy-4.png",
-      "enemy-5.png",
-      "enemy-6.png",
-      "enemy-7.png",
-      "enemy-8.png",
-      "enemy-10.png",
-      "enemy-12.png",
-  };
+  /**
+   * Struct for holding fishImageData.
+   * 
+   * It appears that many Java people are not familiar with the Sun Java Coding Guidelines 
+   * which say it is quite appropriate to use public instance variable
+   *  when the class is essentially a "Struct", 
+   * if Java supported "struct" (when there is no behavior).
+   * People tend to think getters and setters are the Java way, 
+   * as if they are at the heart of Java. This is not so. 
+   * If you follow the Sun Java Coding Guidelines, 
+   * using public instance variables in appropriate situations, 
+   * you are actually writing better code than cluttering it with needless getters and setters.
+   * 
+   * Java Code Conventions from 1999 and still unchanged.
+   * 10.1 Providing Access to Instance and Class Variables
+   * Don't make any instance or class variable public without good reason. Often, 
+   * instance variables don't need to be explicitly set or gotten-often 
+   * that happens as a side effect of method calls.
+   * One example of appropriate public instance variables is 
+   * the case where the class is essentially a data structure,  with no behavior. *In other words, 
+   * if you would have used a struct instead of a class (if Java supported struct), 
+   * then it's appropriate to make the class's instance variables public.*
+   * 
+   * http://www.oracle.com/technetwork/java/javase/documentation/codeconventions-137265.html#177
+   * http://en.wikipedia.org/wiki/Plain_old_data_structure
+   * http://docs.oracle.com/javase/1.3/docs/guide/collections/designfaq.html#28
+   * 
+   * @author SEMGroup27
+   *
+   */
+  private class FishImage {
+    public String image;
+    public int height;
+    public int width;
+    
+    public FishImage(String image, int height, int width) {
+      this.image = image;
+      this.height = height;
+      this.width = width;
+    }
+  }
   
-  private static final Integer[][] IMAGE_SIZE = {
-      {36, 60},
-      {46, 49},
-      {69, 60},
-      {90, 67},
-      {69, 157},
-      {84, 113},
-      {138, 151},
-      {54, 75},
-      {54, 94}
+  private final FishImage[] fishImages = {
+      new FishImage("enemy-1.png", 36, 60),
+      new FishImage("enemy-2.png", 46, 49),
+      new FishImage("enemy-4.png", 69, 60),
+      new FishImage("enemy-5.png", 36, 60),
+      new FishImage("enemy-6.png", 36, 60),
+      new FishImage("enemy-7.png", 36, 60),
+      new FishImage("enemy-8.png", 36, 60),
+      new FishImage("enemy-10.png", 36, 60),
+      new FishImage("enemy-12.png", 36, 60)
   };
-  
   /**
    * initialize the fishspawner.
    */
@@ -81,11 +110,11 @@ public class FishFactory implements FishSpawner {
       dir = Direction.East;
     }
     
-    int enemyImageIndex = rng.nextInt(Math.min(FISH_IMAGES.length, IMAGE_SIZE.length));
+    int enemyImageIndex = rng.nextInt(fishImages.length);
     return new Enemy(
-        FISH_IMAGES[enemyImageIndex], 
-        IMAGE_SIZE[enemyImageIndex][1], 
-        IMAGE_SIZE[enemyImageIndex][0],
+        fishImages[enemyImageIndex].image, 
+        fishImages[enemyImageIndex].width, 
+        fishImages[enemyImageIndex].height,
         new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), 
         size, 
         (double) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), 
