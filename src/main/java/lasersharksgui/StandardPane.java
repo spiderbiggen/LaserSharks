@@ -3,7 +3,6 @@ package lasersharksgui;
 import java.io.File;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -50,6 +49,12 @@ public abstract class StandardPane extends Pane implements Stoppable {
   protected static final int SCREEN_POSITION_FIVE = 5;
   protected static final int SCREEN_POSITION_HUNDRED = 100;
 
+  // variables for the mute button
+  protected static final int BUTTON_HEIGHT = 24;
+  protected static final int BUTTON_WIDTH = 36;
+  protected static final int BUTTON_X_OFFSET = 1850;
+  protected static final int BUTTON_Y_OFFSET = 1035;
+
   /**
    * Constructor of the StandardPane.
    */
@@ -73,13 +78,19 @@ public abstract class StandardPane extends Pane implements Stoppable {
     setBackground(new Background(myBI));
   }
 
+  /**
+   * Method for adding the mute button to the scene.
+   */
   public void addMuteButton() {
-    muteButtonImage.setFitHeight(18);
-    muteButtonImage.setFitWidth(30);
-    unmuteButtonImage.setFitHeight(18);
-    unmuteButtonImage.setFitWidth(30);
+    muteButtonImage.setFitHeight(BUTTON_HEIGHT);
+    muteButtonImage.setFitWidth(BUTTON_WIDTH);
+    unmuteButtonImage.setFitHeight(BUTTON_HEIGHT);
+    unmuteButtonImage.setFitWidth(BUTTON_WIDTH);
     muteButton = new Button();
     muteButton.setGraphic(muteButtonImage);
+    muteButton.setTranslateX(BUTTON_X_OFFSET);
+    muteButton.setTranslateY(BUTTON_Y_OFFSET);
+
     getChildren().add(muteButton);
 
     muteButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -168,7 +179,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
   }
 
   /**
-   * method for muting and unmuting the sound of the game.
+   * method for muting and unmuting the music of the game.
    */
   public void muteSound() {
     if (musicIsPlaying) {
