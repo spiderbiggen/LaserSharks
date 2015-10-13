@@ -7,7 +7,7 @@ import javafx.scene.input.KeyEvent;
 /**
  * Controller for handling the inputs to move the shark.
  * 
- * @author Stefan
+ * @author SEM Group 27
  *
  */
 @SuppressWarnings("restriction")
@@ -39,32 +39,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
    * @return true if and only if the key is properly handled
    */
   private boolean keyPressed(KeyEvent event) {
-    boolean handled = false;
-    switch (event.getCode()) {
-      case UP:
-      case W:
-        pressedUp = true;
-        handled = true;
-        break;
-      case DOWN:
-      case S:
-        pressedDown = true;
-        handled = true;
-        break;
-      case LEFT:
-      case A:
-        pressedLeft = true;
-        handled = true;
-        break;
-      case RIGHT:
-      case D:
-        pressedRight = true;
-        handled = true;
-        break;
-      default:
-        break;
-    }
-    return handled;
+    return keySwitch(event, true);
   }
 
   /**
@@ -75,26 +50,39 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
    * @return true if and only if the key is properly handled
    */
   private boolean keyReleased(KeyEvent event) {
+    return keySwitch(event, false);
+  }
+
+  /**
+   * Will handle a key event.
+   * 
+   * @param event
+   *          the event in which a key is released
+   * @param pressed
+   *          boolean for keypressed and keyreleased
+   * @return handled
+   */
+  private boolean keySwitch(KeyEvent event, boolean pressed) {
     boolean handled = false;
     switch (event.getCode()) {
       case UP:
       case W:
-        pressedUp = false;
+        pressedUp = pressed;
         handled = true;
         break;
       case DOWN:
       case S:
-        pressedDown = false;
+        pressedDown = pressed;
         handled = true;
         break;
       case LEFT:
       case A:
-        pressedLeft = false;
+        pressedLeft = pressed;
         handled = true;
         break;
       case RIGHT:
       case D:
-        pressedRight = false;
+        pressedRight = pressed;
         handled = true;
         break;
       default:

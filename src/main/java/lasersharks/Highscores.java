@@ -55,7 +55,10 @@ public class Highscores {
         list.add(sc.nextLine());
       }
     } catch (FileNotFoundException e) {
-      list.add("1. 0");
+      final int five = 5;
+      for (int i = 0; i < five; i++) {
+        list.add(i + 1 + ". 0");
+      }
     }
     highscores = list;
   }
