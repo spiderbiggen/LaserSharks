@@ -15,7 +15,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
- * @author Stefan
+ * @author SEM Group 27
  *
  */
 @RunWith(Parameterized.class)
@@ -55,9 +55,9 @@ public class UpdatePositionTest {
    */
   @Parameters
   public static Collection<Object[]> data() {
-    return Arrays.asList(new Object[][] { { Direction.North, 0, 1 }, { Direction.NorthEast, 1, 1 },
-        { Direction.East, 1, 0 }, { Direction.SouthEast, 1, -1 }, { Direction.South, 0, -1 },
-        { Direction.SouthWest, -1, -1 }, { Direction.West, -1, 0 }, { Direction.NorthWest, -1, 1 },
+    return Arrays.asList(new Object[][] { { Direction.South, 0, 1 }, { Direction.SouthEast, 1, 1 },
+        { Direction.East, 1, 0 }, { Direction.NorthEast, 1, -1 }, { Direction.North, 0, -1 },
+        { Direction.NorthWest, -1, -1 }, { Direction.West, -1, 0 }, { Direction.SouthWest, -1, 1 },
         { Direction.None, 0, 0 }, { null, 0, 0 } });
   }
 
