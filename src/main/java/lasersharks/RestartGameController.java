@@ -15,7 +15,7 @@ public class RestartGameController implements EventHandler<KeyEvent> {
   private static final int AFTER_RESTART_DELAY = 100;
 
   private void restartGame() {
-    MainGui.getInstance().browseTo(GamePane.class);
+    MainGui.getInstance().browseToPaneClass(GamePane.class);
     try {
       Thread.sleep(AFTER_RESTART_DELAY);
     } catch (InterruptedException e) {
