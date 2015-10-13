@@ -39,7 +39,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
 
   // sprite and image variables
   protected ImageView sharkImage;
-
+  private static final String MUTESOUNDIMAGE = "mutesound.png";
   protected static final int SCREEN_POSITION_THREE = 3;
   protected static final int SCREEN_POSITION_FIVE = 5;
   protected static final int SCREEN_POSITION_HUNDRED = 100;
@@ -142,5 +142,12 @@ public abstract class StandardPane extends Pane implements Stoppable {
   public void addMidText(String message, int textSize, double deltaY) {
     addText(message, textSize, new Position(Position.middlePosition().getPosX(),
         Position.middlePosition().getPosY() - deltaY));
+  }
+  /**
+   * method for muting and unmuting the sound of the game
+   */
+  public void muteSound() {
+    musicIsPlaying = !musicIsPlaying;
+    mediaPlayer.setAutoPlay(musicIsPlaying);
   }
 }
