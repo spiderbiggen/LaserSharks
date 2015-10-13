@@ -4,6 +4,8 @@ import java.io.File;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -50,6 +52,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
   public StandardPane() {
     super();
     addBackGround();
+    addMuteButton();
     if (!musicIsPlaying) {
       playMusic(Options.getInstance().getMusicFileName());
     }
@@ -64,6 +67,15 @@ public abstract class StandardPane extends Pane implements Stoppable {
         Options.getGlobalHeight(), true, false), BackgroundRepeat.REPEAT,
         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     setBackground(new Background(myBI));
+  }
+  
+  public void addMuteButton() {
+    ImageView muteButton = new ImageView(MUTESOUNDIMAGE);
+    muteButton.setFitWidth(100);
+
+    getChildren().add(muteButton);
+    muteButton.setX(200);
+    muteButton.setY(200);
   }
 
   /**
@@ -156,4 +168,5 @@ public abstract class StandardPane extends Pane implements Stoppable {
     }
 
   }
+
 }
