@@ -39,6 +39,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
   protected static MediaPlayer mediaPlayer;
   protected static MediaPlayer soundPlayer;
   private static boolean musicIsPlaying = false;
+  private static boolean shouldEffectPlay = true;
   protected Button muteButton;
 
   // sprite and image variables
@@ -127,7 +128,9 @@ public abstract class StandardPane extends Pane implements Stoppable {
   public static void playSoundEffect(String path) {
     try {
       soundPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-      soundPlayer.play();
+      if(shouldEffectPlay){
+        soundPlayer.play();
+      }
     } catch (Exception e) {
       Logger.getInstance().write("AudioPlay failed", e.getMessage());
     }
@@ -185,12 +188,14 @@ public abstract class StandardPane extends Pane implements Stoppable {
     if (musicIsPlaying) {
       mediaPlayer.pause();
       musicIsPlaying = false;
+      shouldEffectPlay = false;
       muteButton.setGraphic(unmuteButtonImage);
       Logger.getInstance().write("Sound muted", "Mute sound button pressed");
     } else {
       mediaPlayer.play();
       muteButton.setGraphic(muteButtonImage);
       musicIsPlaying = true;
+      shouldEffectPlay = true;
       Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
     }
 
