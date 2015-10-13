@@ -19,6 +19,7 @@ import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.code.tempusfugit.temporal.WaitFor;
 
 import lasersharks.FishController;
+import lasersharks.Options;
 import lasersharks.ScreenController;
 import lasersharks.enemies.FishSpawner;
 
@@ -33,6 +34,10 @@ public class MainGuiTest {
   private ScreenController screenCon;
   private FishController fishCon;
   private FishSpawner fishSpawner;
+  
+  private final int width = 800;
+  private final int height = 600;
+  
   /**
    * Resets the environment for each test.
    * 
@@ -43,6 +48,8 @@ public class MainGuiTest {
    */
   @Before
   public void setup() throws InterruptedException, TimeoutException {
+    Options.setGlobalHeight(height);
+    Options.setGlobalWidth(width);
     FXApp.startApp(new MainGui());
     FXer.getUserWith(FXApp.getScene().getRoot());
 
@@ -53,7 +60,7 @@ public class MainGuiTest {
         return MainGui.getInstance().getCurrentPane() instanceof GamePane;
       }
 
-    }, Timeout.timeout(Duration.seconds(1L)));
+    }, Timeout.timeout(Duration.seconds(4L)));
     pane = (GamePane) MainGui.getInstance().getCurrentPane();
     screenCon = pane.getScreenController();
     fishCon = screenCon.getFishController();
@@ -80,7 +87,7 @@ public class MainGuiTest {
         return MainGui.getInstance().getCurrentPane() instanceof LosingPane;
       }
 
-    }, Timeout.timeout(Duration.seconds(20L)));
+    }, Timeout.timeout(Duration.seconds(100L)));
     assertTrue(MainGui.getInstance().getCurrentPane() instanceof LosingPane);
 
   }
@@ -105,7 +112,7 @@ public class MainGuiTest {
         return MainGui.getInstance().getCurrentPane() instanceof WinPane;
       }
 
-    }, Timeout.timeout(Duration.seconds(20L)));
+    }, Timeout.timeout(Duration.seconds(100L)));
     assertTrue(MainGui.getInstance().getCurrentPane() instanceof WinPane);
   }
 
