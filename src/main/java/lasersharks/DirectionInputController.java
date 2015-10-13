@@ -7,7 +7,7 @@ import javafx.scene.input.KeyEvent;
 /**
  * Controller for handling the inputs to move the shark.
  * 
- * @author Stefan
+ * @author SEM Group 27
  *
  */
 @SuppressWarnings("restriction")
@@ -52,37 +52,44 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
   private boolean keyReleased(KeyEvent event) {
     return keySwitch(event, false);
   }
-  
-  
+
+  /**
+   * Will handle a key event.
+   * 
+   * @param event
+   *          the event in which a key is released
+   * @param pressed
+   *          boolean for keypressed and keyreleased
+   * @return handled
+   */
   private boolean keySwitch(KeyEvent event, boolean pressed) {
-    boolean handle = false;
+    boolean handled = false;
     switch (event.getCode()) {
       case UP:
       case W:
         pressedUp = pressed;
-        handle = true;
+        handled = true;
         break;
       case DOWN:
       case S:
         pressedDown = pressed;
-        handle = true;
+        handled = true;
         break;
       case LEFT:
       case A:
         pressedLeft = pressed;
-        handle = true;
+        handled = true;
         break;
       case RIGHT:
       case D:
         pressedRight = pressed;
-        handle = true;
+        handled = true;
         break;
       default:
         break;
     }
     return handle;
   }
-  
 
   /**
    * Will parse the actions corresponding to the current key presses.
