@@ -186,10 +186,12 @@ public abstract class StandardPane extends Pane implements Stoppable {
       mediaPlayer.pause();
       musicIsPlaying = false;
       muteButton.setGraphic(unmuteButtonImage);
+      Logger.getInstance().write("Sound muted", "Mute sound button pressed");
     } else {
       mediaPlayer.play();
       muteButton.setGraphic(muteButtonImage);
       musicIsPlaying = true;
+      Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
     }
 
   }
