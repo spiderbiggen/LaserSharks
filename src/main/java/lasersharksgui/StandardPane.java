@@ -2,6 +2,9 @@ package lasersharksgui;
 
 import java.io.File;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -36,13 +39,22 @@ public abstract class StandardPane extends Pane implements Stoppable {
   protected static MediaPlayer mediaPlayer;
   protected static MediaPlayer soundPlayer;
   private static boolean musicIsPlaying = false;
+  private static boolean shouldEffectPlay = true;
+  protected Button muteButton;
 
   // sprite and image variables
   protected ImageView sharkImage;
-
+  protected ImageView muteButtonImage = new ImageView("mutesound.png");
+  protected ImageView unmuteButtonImage = new ImageView("unmutesound.png");
   protected static final int SCREEN_POSITION_THREE = 3;
   protected static final int SCREEN_POSITION_FIVE = 5;
   protected static final int SCREEN_POSITION_HUNDRED = 100;
+
+  // variables for the mute button
+  protected static final int BUTTON_HEIGHT = 24;
+  protected static final int BUTTON_WIDTH = 36;
+  protected static final int BUTTON_X_OFFSET = 1850;
+  protected static final int BUTTON_Y_OFFSET = 1035;
 
   /**
    * Constructor of the StandardPane.
@@ -50,6 +62,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
   public StandardPane() {
     super();
     addBackGround();
+    addMuteButton();
     if (!musicIsPlaying) {
       playMusic(Options.getInstance().getMusicFileName());
     }
@@ -59,12 +72,34 @@ public abstract class StandardPane extends Pane implements Stoppable {
    * This function adds a background to the panel.
    */
   public void addBackGround() {
-    BackgroundImage myBI = new BackgroundImage(
-        new Image(Options.getInstance().getBackGroundImage(), Options.getGlobalWidth(),
-            Options.getGlobalHeight(), true, false),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(new Image(
+        Options.getInstance().getBackGroundImage(), Options.getGlobalWidth(),
+        Options.getGlobalHeight(), true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     setBackground(new Background(myBI));
+  }
+
+  /**
+   * Method for adding the mute button to the scene.
+   */
+  public void addMuteButton() {
+    muteButtonImage.setFitHeight(BUTTON_HEIGHT);
+    muteButtonImage.setFitWidth(BUTTON_WIDTH);
+    unmuteButtonImage.setFitHeight(BUTTON_HEIGHT);
+    unmuteButtonImage.setFitWidth(BUTTON_WIDTH);
+    muteButton = new Button();
+    muteButton.setGraphic(muteButtonImage);
+    muteButton.setTranslateX(BUTTON_X_OFFSET);
+    muteButton.setTranslateY(BUTTON_Y_OFFSET);
+
+    getChildren().add(muteButton);
+
+    muteButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        muteSound();
+      }
+    });
   }
 
   /**
@@ -93,7 +128,9 @@ public abstract class StandardPane extends Pane implements Stoppable {
   public static void playSoundEffect(String path) {
     try {
       soundPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-      soundPlayer.play();
+      if(shouldEffectPlay){
+        soundPlayer.play();
+      }
     } catch (Exception e) {
       Logger.getInstance().write("AudioPlay failed", e.getMessage());
     }
@@ -140,7 +177,28 @@ public abstract class StandardPane extends Pane implements Stoppable {
    *          how far from the middle of the screen the message should be shown.
    */
   public void addMidText(String message, int textSize, double deltaY) {
-    addText(message, textSize, new Position(Position.middlePosition().getPosX(),
-        Position.middlePosition().getPosY() - deltaY));
+    addText(message, textSize, new Position(Position.middlePosition().getPosX(), Position
+        .middlePosition().getPosY() - deltaY));
   }
+
+  /**
+   * method for muting and unmuting the music of the game.
+   */
+  public void muteSound() {
+    if (musicIsPlaying) {
+      mediaPlayer.pause();
+      musicIsPlaying = false;
+      shouldEffectPlay = false;
+      muteButton.setGraphic(unmuteButtonImage);
+      Logger.getInstance().write("Sound muted", "Mute sound button pressed");
+    } else {
+      mediaPlayer.play();
+      muteButton.setGraphic(muteButtonImage);
+      musicIsPlaying = true;
+      shouldEffectPlay = true;
+      Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
+    }
+
+  }
+
 }
