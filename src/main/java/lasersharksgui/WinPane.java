@@ -30,7 +30,7 @@ public class WinPane extends StandardPane {
       e.printStackTrace();
     }
     addMidText(message, TEXT_SCALE_SIZE_SMALL, Options.getGlobalHeight() / SCREEN_POSITION_HUNDRED);
-    addMidText("\n Press R to restart", TEXT_SCALE_SIZE_SMALL,
+    addMidText("Press R to restart", TEXT_SCALE_SIZE_SMALL,
         -Options.getGlobalHeight() / SCREEN_POSITION_FIVE);
   }
 }
