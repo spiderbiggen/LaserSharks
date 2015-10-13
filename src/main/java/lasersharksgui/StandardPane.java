@@ -59,11 +59,10 @@ public abstract class StandardPane extends Pane implements Stoppable {
    * This function adds a background to the panel.
    */
   public void addBackGround() {
-    BackgroundImage myBI = new BackgroundImage(
-        new Image(Options.getInstance().getBackGroundImage(), Options.getGlobalWidth(),
-            Options.getGlobalHeight(), true, false),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(new Image(
+        Options.getInstance().getBackGroundImage(), Options.getGlobalWidth(),
+        Options.getGlobalHeight(), true, false), BackgroundRepeat.REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     setBackground(new Background(myBI));
   }
 
@@ -140,14 +139,21 @@ public abstract class StandardPane extends Pane implements Stoppable {
    *          how far from the middle of the screen the message should be shown.
    */
   public void addMidText(String message, int textSize, double deltaY) {
-    addText(message, textSize, new Position(Position.middlePosition().getPosX(),
-        Position.middlePosition().getPosY() - deltaY));
+    addText(message, textSize, new Position(Position.middlePosition().getPosX(), Position
+        .middlePosition().getPosY() - deltaY));
   }
+
   /**
-   * method for muting and unmuting the sound of the game
+   * method for muting and unmuting the sound of the game.
    */
   public void muteSound() {
-    musicIsPlaying = !musicIsPlaying;
-    mediaPlayer.setAutoPlay(musicIsPlaying);
+    if (musicIsPlaying) {
+      soundPlayer.pause();
+      musicIsPlaying = false;
+    } else {
+      soundPlayer.play();
+      musicIsPlaying = true;
+    }
+
   }
 }
