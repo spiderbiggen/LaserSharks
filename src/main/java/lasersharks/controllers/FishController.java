@@ -201,6 +201,25 @@ public class FishController {
    *
    */
   private void checkForCollisions() {
+    collisionSharkWithFish();    
+    collisionFishWithLaser();
+  } 
+
+  
+  /**
+   * A laser appears on the screen from the position of the shark and is added to the fishList.
+   * @return true if the shark had enough ammo.
+   */
+  public boolean shootLaser() {
+    if (shark.getAmmo() > 0) {
+      shark.decreaseAmmo();
+      addFish(fishSpawner.createLaser(this.shark));
+      return true;
+    }
+    return false;
+  }
+  
+  public void collisionSharkWithFish() {
     LaserShark shark = this.shark;
     if (shark == null) {
       return;
@@ -218,7 +237,9 @@ public class FishController {
         }
       }
     }
-    
+  }
+  
+  public void collisionFishWithLaser() {
     for (int j = 0; j < fishList.size(); j++) {
       if (fishList.get(j) instanceof LaserBullet) {
         Rectangle laserHitbox = fishList.get(j).makeHitbox();
@@ -234,18 +255,4 @@ public class FishController {
       }
     }
   }
-  
-  /**
-   * A laser appears on the screen from the position of the shark and is added to the fishList.
-   * @return true if the shark had enough ammo.
-   */
-  public boolean shootLaser() {
-    if (shark.getAmmo() > 0) {
-      shark.decreaseAmmo();
-      addFish(fishSpawner.createLaser(this.shark));
-      return true;
-    }
-    return false;
-  }
-
 }
