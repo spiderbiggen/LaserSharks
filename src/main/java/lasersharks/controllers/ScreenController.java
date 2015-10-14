@@ -4,7 +4,7 @@ import java.util.List;
 
 import javafx.scene.Scene;
 import lasersharks.LaserShark;
-import lasersharks.Swimmer;
+import lasersharks.Displayable;
 import lasersharksgui.GamePane;
 import lasersharksgui.LosingPane;
 import lasersharksgui.MainGui;
@@ -43,7 +43,7 @@ public class ScreenController {
    * 
    * @return FishInfo
    */
-  public List<Swimmer> getNextFrameInfo(double frametime) {
+  public List<Displayable> getNextFrameInfo(double frametime) {
     if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
       GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
       if (!this.fishCon.getShark().isAlive()) {

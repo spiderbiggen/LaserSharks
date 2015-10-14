@@ -26,5 +26,5 @@ public interface CollisionBehaviour {
    * @param swimmer the fish to check.
    * @return true if the fish collide.
    */
-  public boolean collide(Swimmer swimmer);
+  public boolean collide(Displayable swimmer);
 }

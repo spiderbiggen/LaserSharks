@@ -9,7 +9,7 @@ import lasersharks.Direction;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
 import lasersharks.Position;
-import lasersharks.Swimmer;
+import lasersharks.Displayable;
 import lasersharks.enemies.FishFactory;
 
 import org.junit.Test;
@@ -22,7 +22,7 @@ import org.mockito.Mockito;
  */
 public class FishFactoryTest {
 
-  protected Swimmer generatedFish;
+  protected Displayable generatedFish;
   private final long seed = 12345622L;
   private final long seedWest = 11L;
 

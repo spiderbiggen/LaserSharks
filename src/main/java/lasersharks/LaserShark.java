@@ -6,7 +6,7 @@ import lasersharks.controllers.DirectionCallback;
  * LaserShark class.
  *
  */
-public class LaserShark extends Fish implements DirectionCallback {
+public class LaserShark extends SeaObject implements DirectionCallback {
 
   private final String imageResource = "shark.png";
   private final float widthScale = 1.5f;

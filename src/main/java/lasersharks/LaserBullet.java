@@ -5,7 +5,7 @@ package lasersharks;
  * @author sytze
  *
  */
-public class LaserBullet extends Fish {
+public class LaserBullet extends SeaObject {
 
   private static final String LASER_IMAGE = "greenLaserRay.png";
   private static final double LASER_DEFAULT_STRENGTH = 1.0;

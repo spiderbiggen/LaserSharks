@@ -5,7 +5,7 @@ import java.util.Random;
 import lasersharks.FishBot;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
-import lasersharks.Swimmer;
+import lasersharks.Displayable;
 
 /**
  * Interface for Fishfactory.

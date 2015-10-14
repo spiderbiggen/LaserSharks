@@ -15,7 +15,7 @@ import lasersharks.Highscores;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.Swimmer;
+import lasersharks.Displayable;
 import lasersharks.controllers.DirectionCallback;
 import lasersharks.controllers.DirectionInputController;
 import lasersharks.controllers.ScreenController;
@@ -145,7 +145,7 @@ public class GamePane extends StandardPane implements Stoppable {
    * @param list
    *          the list of fish that needs to be displayed.
    */
-  public void showFishList(List<Swimmer> list) {
+  public void showFishList(List<Displayable> list) {
     clearPaneOfImageView();
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).isAlive()) {
@@ -164,7 +164,7 @@ public class GamePane extends StandardPane implements Stoppable {
    *          the fish to display.
    * @return an imageview of the fish.
    */
-  public ImageView fishImage(Swimmer swimmer) {
+  public ImageView fishImage(Displayable swimmer) {
     Position position = swimmer.getPosition();
     double size = swimmer.getSize();
     Direction dir = swimmer.getDirection();

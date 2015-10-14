@@ -9,7 +9,7 @@ import lasersharksgui.StandardPane;
  */
 public class DefaultEatBehaviour implements EatBehaviour {
 
-  private Swimmer swimmer;
+  private Displayable swimmer;
 
   private static final float ENERGY_DISSERPATION_RATE = 7.5f;
   private static final String EAT_FISH_SOUND = "src/main/resources/soundEffect1.wav";
@@ -18,7 +18,7 @@ public class DefaultEatBehaviour implements EatBehaviour {
    * the constructor.
    * @param swimmer the swimmer it should apply to.
    */
-  public DefaultEatBehaviour(Swimmer swimmer) {
+  public DefaultEatBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
   }
   
@@ -27,7 +27,7 @@ public class DefaultEatBehaviour implements EatBehaviour {
    * @param fish the fish that should be eaten.
    */
   @Override
-  public void eat(Swimmer fish) {
+  public void eat(Displayable fish) {
     if (fish instanceof FishBot) {
       eat((FishBot) fish);
     }

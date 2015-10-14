@@ -7,13 +7,13 @@ package lasersharks;
  */
 public class SharkMoveBehaviour implements MoveBehaviour {
   private static final float HALF_RATE = 0.5F;
-  Swimmer swimmer;
+  Displayable swimmer;
   
   /**
    * the constructor.
    * @param swimmer
    */
-  public SharkMoveBehaviour(Swimmer swimmer) {
+  public SharkMoveBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
   }
   
