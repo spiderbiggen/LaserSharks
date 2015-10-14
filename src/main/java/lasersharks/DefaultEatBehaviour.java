@@ -9,16 +9,16 @@ import lasersharksgui.StandardPane;
  */
 public class DefaultEatBehaviour implements EatBehaviour {
 
-  Swimmer swimmer;
+  private Displayable swimmer;
 
   private static final float ENERGY_DISSERPATION_RATE = 7.5f;
   private static final String EAT_FISH_SOUND = "src/main/resources/soundEffect1.wav";
   
   /**
-   * the constructor
+   * the constructor.
    * @param swimmer the swimmer it should apply to.
    */
-  public DefaultEatBehaviour(Swimmer swimmer) {
+  public DefaultEatBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
   }
   
@@ -27,11 +27,21 @@ public class DefaultEatBehaviour implements EatBehaviour {
    * @param fish the fish that should be eaten.
    */
   @Override
-  public void eat(Swimmer fish) {
+  public void eat(Displayable fish) {
+    if (fish instanceof FishBot) {
+      eat((FishBot) fish);
+    }
+  }
+  
+  /**
+   * eats an other FishBot. The fish grows, the score increases and a sound effect is played.
+   * @param fish the fish that should be eaten.
+   */
+  public void eat(FishBot fish) {
     if (fish.isAlive()) {
       Logger.getInstance().write("Fish eaten",
           "Old sharksize: " + swimmer.getSize() + "," + "Fish size: " + fish.getSize() + ", "
-              + "New sharksize: " + (swimmer.getSize() + (fish.getSize() / ENERGY_DISSERPATION_RATE)));
+           + "New sharksize: " + (swimmer.getSize() + (fish.getSize() / ENERGY_DISSERPATION_RATE)));
       swimmer.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
       StandardPane.playSoundEffect(EAT_FISH_SOUND);
     }

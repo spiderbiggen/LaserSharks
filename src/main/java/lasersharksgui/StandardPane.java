@@ -17,8 +17,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import lasersharks.Logger;
-import lasersharks.Options;
 import lasersharks.Position;
+import lasersharks.controllers.Options;
 
 /**
  * The standardPane is the standard for creating new panes. It is an empty pane containing the

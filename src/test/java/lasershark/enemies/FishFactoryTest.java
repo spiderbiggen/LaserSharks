@@ -6,11 +6,14 @@ import static org.junit.Assert.assertEquals;
 import java.util.Random;
 
 import lasersharks.Direction;
+import lasersharks.LaserBullet;
+import lasersharks.LaserShark;
 import lasersharks.Position;
-import lasersharks.Swimmer;
+import lasersharks.Displayable;
 import lasersharks.enemies.FishFactory;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Test class for FishFactory.
@@ -19,7 +22,7 @@ import org.junit.Test;
  */
 public class FishFactoryTest {
 
-  protected Swimmer generatedFish;
+  protected Displayable generatedFish;
   private final long seed = 12345622L;
   private final long seedWest = 11L;
 
@@ -63,5 +66,29 @@ public class FishFactoryTest {
     assertEquals(expectedSpeed2, generatedFish.getSpeed(), 1);
   }
 
+  /**
+   * Test for creating a LaserBullet.
+   */
+  @Test
+  public void testLaserCreation() {
+    fishFactory = new FishFactory();
+    LaserShark shark = Mockito.mock(LaserShark.class);
+    Mockito.when(shark.getLastHorizontalDirection()).thenReturn(Direction.East);
+    Mockito.when(shark.getPosition()).thenReturn(Position.middlePosition());
+    LaserBullet laserBulletCreated = fishFactory.createLaser(shark);
+    assertEquals(laserBulletCreated.getPosition(), Position.middlePosition());
+  }
 
+  /**
+   * Test for creating a LaserBullet.
+   */
+  @Test
+  public void testLaserCreation2() {
+    fishFactory = new FishFactory();
+    LaserShark shark = Mockito.mock(LaserShark.class);
+    Mockito.when(shark.getLastHorizontalDirection()).thenReturn(Direction.West);
+    Mockito.when(shark.getPosition()).thenReturn(Position.middlePosition());
+    LaserBullet laserBulletCreated = fishFactory.createLaser(shark);
+    assertEquals(laserBulletCreated.getPosition(), Position.middlePosition());
+  }
 }

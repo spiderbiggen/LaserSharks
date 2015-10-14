@@ -7,8 +7,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lasersharks.Logger;
-import lasersharks.Options;
-import lasersharks.RestartGameController;
+import lasersharks.controllers.Options;
+import lasersharks.controllers.RestartGameController;
 
 /**
  * The MainGui class is used for running the game.

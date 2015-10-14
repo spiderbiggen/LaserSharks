@@ -7,7 +7,7 @@ package lasersharks;
  * @author SEMGroup27
  *
  */
-public abstract class FishBot extends Fish {
+public abstract class FishBot extends SeaObject {
 
   /**
    * Constructor class for FishBot.

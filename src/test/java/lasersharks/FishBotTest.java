@@ -6,6 +6,6 @@ package lasersharks;
  * @author SEMGroup27
  *
  */
-public abstract class FishBotTest extends FishTest { 
+public abstract class FishBotTest extends SeaObjectTest { 
   
 }

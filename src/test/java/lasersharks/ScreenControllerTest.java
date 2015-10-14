@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import javafx.scene.Scene;
+import lasersharks.controllers.FishController;
+import lasersharks.controllers.ScreenController;
 import lasersharksgui.GamePane;
 import lasersharksgui.MainGui;
 

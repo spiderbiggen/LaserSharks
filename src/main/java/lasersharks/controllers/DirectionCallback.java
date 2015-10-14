@@ -1,4 +1,6 @@
-package lasersharks;
+package lasersharks.controllers;
+
+import lasersharks.Direction;
 
 /**
  * Interface for handeling direction callbacks.

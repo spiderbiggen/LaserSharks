@@ -11,7 +11,7 @@ public class CantEatBehaviour implements EatBehaviour{
    * the constructor of the behaviour object.
    * @param swimmer the swimmer it should be applied to.
    */
-  public CantEatBehaviour(Swimmer swimmer){
+  public CantEatBehaviour(Displayable swimmer){
   }
   
   /**
@@ -19,7 +19,7 @@ public class CantEatBehaviour implements EatBehaviour{
    * @param fish the fish it should eat.
    */
   @Override
-  public void eat(Swimmer fish) {
+  public void eat(Displayable fish) {
     //DO NOTHING
   }
 
