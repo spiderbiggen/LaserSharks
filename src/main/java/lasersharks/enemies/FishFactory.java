@@ -5,6 +5,7 @@ import java.util.Random;
 import lasersharks.Direction;
 import lasersharks.FishBot;
 import lasersharks.LaserBullet;
+import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.Swimmer;
 
@@ -34,8 +35,8 @@ public class FishFactory implements FishSpawner {
   /**
    * These values imply the default values for a laser object.
    */
-  private static final int LASER_SIZE = 30;
-  private static final int LASER_SPEED = 80;
+  private static final int LASER_SIZE = 13;
+  private static final int LASER_SPEED = 800;
 
   /**
    * this value is used as the seed. Only used when useSeed = true;
@@ -143,7 +144,9 @@ public class FishFactory implements FishSpawner {
   }
   
   @Override
-  public LaserBullet createLaser(Swimmer origin) {
-    return new LaserBullet(origin.getPosition(), LASER_SIZE, LASER_SPEED, origin.getDirection());
+  public LaserBullet createLaser(LaserShark origin) {
+    Position posShark = origin.getPosition();
+    Position posLaser = new Position(posShark.getPosX(), posShark.getPosY());
+    return new LaserBullet(posLaser, LASER_SIZE, LASER_SPEED, origin.getLastHorizontalDirection());
   }
 }

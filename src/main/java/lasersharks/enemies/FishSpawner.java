@@ -4,6 +4,7 @@ import java.util.Random;
 
 import lasersharks.FishBot;
 import lasersharks.LaserBullet;
+import lasersharks.LaserShark;
 import lasersharks.Swimmer;
 
 /**
@@ -26,10 +27,10 @@ public interface FishSpawner {
 
   /**
    * This function creates a laser.
-   * @param origin the swimmer that shoots a laser.
+   * @param origin the shark that shoots a laser.
    * @return a laserBullet object.
    */
-  public LaserBullet createLaser(Swimmer origin);
+  LaserBullet createLaser(LaserShark origin);
   
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.

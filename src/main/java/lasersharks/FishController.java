@@ -200,7 +200,6 @@ public class FishController {
         if (fishList.get(i).getSize() < shark.getSize()) {
           // shark eats fish
           shark.eat(fishList.get(i));
-
         } else {
           // fish eats shark
           shark.kill();
@@ -211,9 +210,10 @@ public class FishController {
   
   /**
    * A laser appears on the screen from the position of the shark and is added to the fishList.
+   * @return true if the shark had enough ammo.
    */
   public boolean shootLaser() {
-    if(shark.getAmmo() > 0){
+    if (shark.getAmmo() > 0) {
       shark.decreaseAmmo();
       addFish(fishSpawner.createLaser(this.shark));
       return true;

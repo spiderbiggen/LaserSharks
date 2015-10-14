@@ -23,10 +23,10 @@ public class LaserBullet extends Fish {
    */
   public LaserBullet(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
+    strength = LASER_DEFAULT_STRENGTH;
     collisionBehaviour = new DefaultCollisionBehaviour(this);
     eatBehaviour = new CantEatBehaviour(this);
     moveBehaviour = new BotMoveBehaviour(this);
-    strength = LASER_DEFAULT_STRENGTH;
   }
 
   /**
@@ -42,7 +42,7 @@ public class LaserBullet extends Fish {
    */
   @Override
   public double getWidthScale() {
-    return IMG_WIDTH/IMG_HEIGHT;
+    return IMG_WIDTH / IMG_HEIGHT;
   }
   
   /**

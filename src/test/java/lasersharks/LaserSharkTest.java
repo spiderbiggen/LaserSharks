@@ -37,7 +37,7 @@ public class LaserSharkTest extends FishTest {
    */
   @Test
   public void testLaserSharkGrowsWhenEatingFish() {
-    Swimmer mockedFish = mock(Fish.class);
+    Swimmer mockedFish = mock(FishBot.class);
     when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(true);
 
@@ -79,7 +79,7 @@ public class LaserSharkTest extends FishTest {
    */
   @Test
   public void testEatenFishIsKilled() {
-    Fish mockedFish = mock(Fish.class);
+    Fish mockedFish = mock(FishBot.class);
     when(mockedFish.isAlive()).thenReturn(true);
 
     assertTrue(mockedFish.isAlive());
