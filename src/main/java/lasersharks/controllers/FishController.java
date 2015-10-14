@@ -1,4 +1,4 @@
-package lasersharks;
+package lasersharks.controllers;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,6 +6,12 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.Direction;
+import lasersharks.Fish;
+import lasersharks.LaserShark;
+import lasersharks.Logger;
+import lasersharks.Position;
+import lasersharks.Swimmer;
 import lasersharks.enemies.FishFactory;
 import lasersharks.enemies.FishSpawner;
 

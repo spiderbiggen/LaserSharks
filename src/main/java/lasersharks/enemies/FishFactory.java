@@ -7,7 +7,6 @@ import lasersharks.FishBot;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
 import lasersharks.Position;
-import lasersharks.Swimmer;
 
 /**
  * Default Fishfactory implementation.

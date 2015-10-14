@@ -1,5 +1,7 @@
 package lasersharks;
 
+import lasersharks.controllers.DirectionCallback;
+
 /**
  * LaserShark class.
  *

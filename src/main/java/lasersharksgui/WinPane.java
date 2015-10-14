@@ -6,8 +6,8 @@ import java.io.IOException;
 import javafx.scene.input.KeyEvent;
 import lasersharks.Highscores;
 import lasersharks.Logger;
-import lasersharks.Options;
-import lasersharks.RestartGameController;
+import lasersharks.controllers.Options;
+import lasersharks.controllers.RestartGameController;
 
 /**
  * This pane represents the screen that is shown when a player loses.

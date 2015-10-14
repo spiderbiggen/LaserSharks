@@ -1,17 +1,24 @@
-package lasersharks;
-
-import java.awt.Event;
+package lasersharks.controllers;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class ShootController implements EventHandler<KeyEvent>{
+/**
+ * The shootcontroller is responsible for handling the keyEvents that has to do with shooting.
+ * @author sytze
+ *
+ */
+public class ShootController implements EventHandler<KeyEvent> {
 
   private FishController fishController;
   private boolean pressedSpace; 
   
   
+  /**
+   * The constructor of the class.
+   * @param fishController the fishController that this eventHandler is linked to.
+   */
   public ShootController(FishController fishController) {
     super();
     this.fishController = fishController;
@@ -34,7 +41,7 @@ public class ShootController implements EventHandler<KeyEvent>{
   }
   
   /**
-   * shoots a laser.
+   * orders the fishController to create a laser at the shark.
    */
   public void shoot() {
     fishController.shootLaser();

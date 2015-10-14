@@ -1,8 +1,10 @@
-package lasersharks;
+package lasersharks.controllers;
 
 import java.util.List;
 
 import javafx.scene.Scene;
+import lasersharks.LaserShark;
+import lasersharks.Swimmer;
 import lasersharksgui.GamePane;
 import lasersharksgui.LosingPane;
 import lasersharksgui.MainGui;

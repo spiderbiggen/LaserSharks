@@ -11,15 +11,15 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lasersharks.Direction;
-import lasersharks.DirectionCallback;
 import lasersharks.Highscores;
-import lasersharks.DirectionInputController;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.ScreenController;
-import lasersharks.ShootController;
 import lasersharks.Swimmer;
+import lasersharks.controllers.DirectionCallback;
+import lasersharks.controllers.DirectionInputController;
+import lasersharks.controllers.ScreenController;
+import lasersharks.controllers.ShootController;
 
 /**
  * This is the pane representing the gameplay.
