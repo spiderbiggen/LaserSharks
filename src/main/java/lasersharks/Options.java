@@ -2,6 +2,7 @@ package lasersharks;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Random;
 
 import javafx.scene.paint.Color;
 
@@ -9,7 +10,7 @@ import javafx.scene.paint.Color;
  * An options object is responsible for handling everything that has to do with options. This
  * includes resolution.
  * 
- * @author Sytze
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")
@@ -24,7 +25,8 @@ public class Options {
 
   private String musicFileName;
   private String backGround;
-
+  private Random factoryRng;
+  private Random spawnRng;
   private static Options currentOptions;
 
   /**
@@ -35,8 +37,10 @@ public class Options {
    */
   public Options(Dimension screenRes) {
     this.dimension = screenRes;
+    factoryRng = new Random();
+    spawnRng = factoryRng;
   }
-
+  
   /**
    * Gets the currentOptions object that is used. If there is none, a new one is created using
    * standard values.
@@ -207,4 +211,35 @@ public class Options {
     return DEFAULT_BACKCOLOUR;
   }
 
+  /**
+   * Get random number generator for factory.
+   * @return random number generator.
+   */
+  public Random getFactoryRng() {
+    return factoryRng;
+  }
+  
+  /**
+   * set the random number generator for factory.
+   * @param rng random number generator.
+   */
+  public void setFactoryRng(Random rng) {
+    this.factoryRng = rng;
+  }
+  
+  /**
+   * Get random number generator for factory.
+   * @return random number generator.
+   */
+  public Random getSpawnRng() {
+    return spawnRng;
+  }
+  
+  /**
+   * set the random number generator for factory.
+   * @param rng random number generator.
+   */
+  public void setSpawnRng(Random rng) {
+    this.spawnRng = rng;
+  }
 }

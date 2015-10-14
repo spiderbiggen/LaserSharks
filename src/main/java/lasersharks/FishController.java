@@ -49,7 +49,7 @@ public class FishController {
    */
   public FishController() {
     this.fishList = new LinkedList<Swimmer>();
-    this.rng = new Random();
+    this.rng = Options.getInstance().getSpawnRng();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);
