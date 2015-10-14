@@ -123,6 +123,8 @@ public interface Displayable {
    */
   public void increaseSize(float size);
   
+  public void decreaseSize(float size);
+  
   public Position getMiddlePoint();
 
   void eat(Displayable swimmer);
