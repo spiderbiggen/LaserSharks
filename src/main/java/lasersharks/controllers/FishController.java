@@ -40,6 +40,7 @@ public class FishController {
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 670;
   private static final Direction START_DIRECTION = Direction.None;
+  private static final float DEVIDE_DECREASE_SIZE = 10;
 
   /**
    * Spawn-chance for new fishes.
@@ -195,6 +196,9 @@ public class FishController {
    * this function checks if there are any collisions between the shark and other fish. if so, this
    * function checks if the size of the fish is smaller or bigger than the shark. If smaller, the
    * fish is eaten by the shark. If bigger, the game ends.
+   * It also checks if there is a collision between a fish and a laser, if so, the fish will decrease in size
+   * and the laser will be removed from the screen.
+   *
    */
   private void checkForCollisions() {
     LaserShark shark = this.shark;
@@ -222,7 +226,7 @@ public class FishController {
           if (fishList.get(k) instanceof FishBot) {
             Rectangle fishHitbox = fishList.get(k).makeHitbox();
             if (laserHitbox.intersects(fishHitbox.getLayoutBounds())) {
-              fishList.get(k).decreaseSize(fishList.get(k).getSize()/10);
+              fishList.get(k).decreaseSize(fishList.get(k).getSize()/DEVIDE_DECREASE_SIZE);
               fishList.get(j).kill();
             }
           }
