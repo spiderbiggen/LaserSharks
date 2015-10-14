@@ -29,7 +29,7 @@ public class ShootController implements EventHandler<KeyEvent> {
   
   @Override
   public void handle(KeyEvent event) {    
-    if (event.getCode() == KeyCode.SPACE) {
+    if (event.getCode() == KeyCode.L) {
       if (event.getEventType() == KeyEvent.KEY_PRESSED && !pressedSpace) {
         shoot();
         pressedSpace = true;
