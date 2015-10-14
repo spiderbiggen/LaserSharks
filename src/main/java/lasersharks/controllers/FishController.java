@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
+import lasersharks.FishBot;
+import lasersharks.LaserBullet;
 import lasersharks.SeaObject;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
@@ -209,6 +211,21 @@ public class FishController {
         } else {
           // fish eats shark
           shark.kill();
+        }
+      }
+    }
+    
+    for (int j = 0; j < fishList.size(); j++) {
+      if (fishList.get(j) instanceof LaserBullet) {
+        Rectangle laserHitbox = fishList.get(j).makeHitbox();
+        for (int k = 0; k < fishList.size(); k++) {
+          if (fishList.get(k) instanceof FishBot) {
+            Rectangle fishHitbox = fishList.get(k).makeHitbox();
+            if (laserHitbox.intersects(fishHitbox.getLayoutBounds())) {
+              fishList.get(k).decreaseSize(fishList.get(k).getSize()/10);
+              fishList.get(j).kill();
+            }
+          }
         }
       }
     }
