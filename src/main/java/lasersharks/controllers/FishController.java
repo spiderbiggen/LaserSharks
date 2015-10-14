@@ -219,6 +219,11 @@ public class FishController {
     return false;
   }
   
+  /**
+   * Method to check if there is a collision between a shark and a fish, if so
+   * and the shark is bigger than the fish, it will grow.
+   * If not, it will kill the shark.
+   */
   public void collisionSharkWithFish() {
     LaserShark shark = this.shark;
     if (shark == null) {
@@ -239,6 +244,10 @@ public class FishController {
     }
   }
   
+  /**
+   * Method to check if there is a collision between a fish and a laser, if so
+   * the fish will shrink and the laser will be removed from the screen.
+   */
   public void collisionFishWithLaser() {
     for (int j = 0; j < fishList.size(); j++) {
       if (fishList.get(j) instanceof LaserBullet) {
