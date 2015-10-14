@@ -64,15 +64,15 @@ public class GamePane extends StandardPane implements Stoppable {
       public void handle(long now) {
         double frametime = (now - time) / timeToMilis;
         final double milis = 1000;
-        
+
         showFishList(screenController.getNextFrameInfo(milis / frametime));
         showShark(screenController.getShark());
         showScore();
-        
+
         try {
           Thread.sleep(ANIMATION_SLEEP_TIMER);
         } catch (InterruptedException e) {
-          Logger.getInstance().write("Annimation timer Interrupted", e.getMessage());
+          Logger.getInstance().write("Animation timer Interrupted", e.getMessage());
         }
         time = now;
       }
