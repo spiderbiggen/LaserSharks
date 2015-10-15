@@ -13,13 +13,13 @@ public class DefaultCollisionBehaviour implements CollisionBehaviour {
   private static final double SIZE_TO_COORD = 0.075;
   private static final double HALF_SCALE = 0.5f;
   
-  Swimmer swimmer;
+  Displayable swimmer;
   
   /**
    * the constructor.
    * @param swimmer the swimmer it should apply to.
    */
-  public DefaultCollisionBehaviour(Swimmer swimmer) {
+  public DefaultCollisionBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
   }
   
@@ -29,7 +29,7 @@ public class DefaultCollisionBehaviour implements CollisionBehaviour {
    * @return true if the fish collide
    */
   @Override
-  public boolean collide(Swimmer swimmer) {
+  public boolean collide(Displayable swimmer) {
     float distance = this.swimmer.getMiddlePoint().calculateDistance(swimmer.getMiddlePoint());
     return distance < this.swimmer.getSize() + swimmer.getSize();
   }

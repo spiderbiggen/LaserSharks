@@ -55,7 +55,10 @@ public class Highscores {
         list.add(sc.nextLine());
       }
     } catch (FileNotFoundException e) {
-      list.add("1. 0");
+      final int five = 5;
+      for (int i = 0; i < five; i++) {
+        list.add(i + 1 + ". 0");
+      }
     }
     highscores = list;
   }
@@ -184,7 +187,7 @@ public class Highscores {
    * @param fish
    *          the fish that is used to calculate the additional score
    */
-  public void increaseScore(Swimmer fish) {
+  public void increaseScore(Displayable fish) {
     if (fish.isAlive()) {
       score = score + (int) ((fish.getSize() * HALF_SCALE + FISH_BONUS) - amountOfFishesEaten * 2);
       amountOfFishesEaten++;

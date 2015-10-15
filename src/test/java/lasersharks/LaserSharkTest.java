@@ -15,7 +15,7 @@ import org.junit.Test;
  * @author Michiel
  *
  */
-public class LaserSharkTest extends FishTest {
+public class LaserSharkTest extends SeaObjectTest {
   /**
    * Container for test object.
    */
@@ -37,7 +37,7 @@ public class LaserSharkTest extends FishTest {
    */
   @Test
   public void testLaserSharkGrowsWhenEatingFish() {
-    Swimmer mockedFish = mock(Fish.class);
+    Displayable mockedFish = mock(FishBot.class);
     when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(true);
 
@@ -51,7 +51,7 @@ public class LaserSharkTest extends FishTest {
    */
   @Test
   public void testLaserSharkDoesntGrowsWhenEatingDeadFish() {
-    Swimmer mockedFish = mock(Fish.class);
+    Displayable mockedFish = mock(SeaObject.class);
     when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(false);
 
@@ -65,7 +65,7 @@ public class LaserSharkTest extends FishTest {
    */
   @Test
   public void testLaserSharkGrowsWhenEatingDeadFish() {
-    Swimmer mockedFish = mock(Fish.class);
+    Displayable mockedFish = mock(SeaObject.class);
     when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(false);
 
@@ -79,7 +79,7 @@ public class LaserSharkTest extends FishTest {
    */
   @Test
   public void testEatenFishIsKilled() {
-    Fish mockedFish = mock(Fish.class);
+    SeaObject mockedFish = mock(FishBot.class);
     when(mockedFish.isAlive()).thenReturn(true);
 
     assertTrue(mockedFish.isAlive());
