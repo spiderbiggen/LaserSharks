@@ -1,4 +1,4 @@
-package lasersharks;
+package lasersharks.controllers;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +8,10 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.Direction;
+import lasersharks.FishBot;
+import lasersharks.LaserShark;
+import lasersharks.Position;
 import lasersharks.controllers.FishController;
 import lasersharks.enemies.Enemy;
 import lasersharks.enemies.FishFactory;

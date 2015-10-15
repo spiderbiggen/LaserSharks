@@ -1,7 +1,7 @@
 /**
  * 
  */
-package lasersharks;
+package lasersharks.controllers;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,6 +13,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import lasersharks.Direction;
+import lasersharks.Position;
 
 /**
  * @author SEM Group 27

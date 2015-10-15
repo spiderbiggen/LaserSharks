@@ -1,4 +1,4 @@
-package lasershark.enemies;
+package lasersharks.enemies;
 
 
 import static org.junit.Assert.assertEquals;
