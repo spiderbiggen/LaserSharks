@@ -44,11 +44,11 @@ public abstract class StandardPane extends Pane implements Stoppable {
 
   // sprite and image variables
   protected ImageView sharkImage;
+  protected static final int SCALING_FACTOR_TO_UNDERNEATH_MIDDLE = 3;
+  protected static final int SCALING_FACTOR_TO_ABOVE_MIDDLE = -5;
+  protected static final int SCALING_FACTOR_TO_LITTLE_BELOW_MIDDLE = 100;
   protected ImageView muteButtonImage = new ImageView("mutesound.png");
   protected ImageView unmuteButtonImage = new ImageView("unmutesound.png");
-  protected static final int SCREEN_POSITION_THREE = 3;
-  protected static final int SCREEN_POSITION_FIVE = 5;
-  protected static final int SCREEN_POSITION_HUNDRED = 100;
 
   // variables for the mute button
   protected static final int BUTTON_HEIGHT = 24;
