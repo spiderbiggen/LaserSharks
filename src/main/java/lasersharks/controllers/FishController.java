@@ -50,7 +50,7 @@ public class FishController {
    */
 
   private static final int ONE_HUNDRED = 100;
-  private static final int AMMO_SPAWN_LIMITER = 95;
+  private static final int AMMO_SPAWN_LIMITER = 88;
 
   /**
    * Random Number Generator holder.
