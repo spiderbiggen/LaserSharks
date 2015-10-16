@@ -39,7 +39,7 @@ public class FishFactory implements FishSpawner {
   private static final int LASER_SPEED = 800;
 
   /**
-   * These values imply the default values for an ammo object
+   * These values imply the default values for an ammo object.
    */
 
   private static final int AMMO_SIZE = 40;
@@ -148,9 +148,7 @@ public class FishFactory implements FishSpawner {
     @SuppressWarnings("static-access")
     double posY = rng.nextInt((int) (Options.getInstance().getGlobalHeight() - 0) + 1);
 
-    Direction dir = Direction.None;
-
-    return new Ammo(new Position(posX, posY), AMMO_SIZE, 0, dir);
+    return new Ammo(new Position(posX, posY), AMMO_SIZE);
 
   }
 

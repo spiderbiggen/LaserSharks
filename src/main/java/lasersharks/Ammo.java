@@ -21,13 +21,9 @@ public class Ammo extends SeaObject {
    *          initial position
    * @param size
    *          init size
-   * @param startSpeed
-   *          init speed
-   * @param direction
-   *          init direction
    */
-  public Ammo(Position position, float size, double startSpeed, Direction direction) {
-    super(position, size, startSpeed, direction);
+  public Ammo(Position position, float size) {
+    super(position, size, 0, Direction.None);
     collisionBehaviour = new DefaultCollisionBehaviour(this);
     moveBehaviour = new CantMoveBehaviour();
     eatBehaviour = new CantEatBehaviour();
@@ -56,7 +52,7 @@ public class Ammo extends SeaObject {
   /**
    * @return The amount of ammo in this pack 
    */
-  public int getAmount() {
+  public int getPickupAmount() {
     return pickupAmount;
   }
 

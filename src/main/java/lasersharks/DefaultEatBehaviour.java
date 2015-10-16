@@ -70,7 +70,7 @@ public class DefaultEatBehaviour implements EatBehaviour {
     if (swimmer instanceof LaserShark && ammo.isAlive()) {
       LaserShark shark = (LaserShark) swimmer;
       if (shark.getAmmo() < shark.getMaxAmmo()) {
-        shark.increaseAmmo(ammo.getAmount());
+        shark.increaseAmmo(ammo.getPickupAmount());
         Logger.getInstance().write("Ammo", "Player has picked up some ammo");
         // TODO play a sound.
       }
