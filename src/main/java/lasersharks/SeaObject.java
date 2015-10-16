@@ -77,6 +77,15 @@ public abstract class SeaObject implements Displayable {
   public void increaseSize(float size) {
     this.size += size;
   }
+  
+  /**
+   * Method used for shrinking seaObject.
+   * 
+   * @param size
+   */
+  public void decreaseSize(float size) {
+    this.size = this.size - size;
+  }
 
   /**
    * Method to set the size of the seaObject.

@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import javafx.scene.shape.Rectangle;
 import lasersharks.AmmoSpawner;
 import lasersharks.Direction;
+import lasersharks.FishBot;
+import lasersharks.LaserBullet;
+import lasersharks.SeaObject;
 import lasersharks.Displayable;
 import lasersharks.LaserShark;
 import lasersharks.LaserSpawner;
@@ -42,6 +45,7 @@ public class FishController {
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 670;
   private static final Direction START_DIRECTION = Direction.None;
+  private static final float DEVIDE_DECREASE_SIZE = 10;
 
   /**
    * Spawn-chance for new fishes.
@@ -212,8 +216,35 @@ public class FishController {
    * this function checks if there are any collisions between the shark and other fish. if so, this
    * function checks if the size of the fish is smaller or bigger than the shark. If smaller, the
    * fish is eaten by the shark. If bigger, the game ends.
+   * It also checks if there is a collision between a fish and a laser, if so, the fish will decrease in size
+   * and the laser will be removed from the screen.
+   *
    */
   private void checkForCollisions() {
+    collisionSharkWithFish();    
+    collisionFishWithLaser();
+  } 
+
+  
+  /**
+   * A laser appears on the screen from the position of the shark and is added to the fishList.
+   * @return true if the shark had enough ammo.
+   */
+  public boolean shootLaser() {
+    if (shark.getAmmo() > 0) {
+      shark.decreaseAmmo();
+      addFish(laserSpawner.createLaser(this.shark));
+      return true;
+    }
+    return false;
+  }
+  
+  /**
+   * Method to check if there is a collision between a shark and a fish, if so
+   * and the shark is bigger than the fish, it will grow.
+   * If not, it will kill the shark.
+   */
+  public void collisionSharkWithFish() {
     LaserShark shark = this.shark;
     if (shark == null) {
       return;
@@ -234,17 +265,25 @@ public class FishController {
   }
 
   /**
-   * A laser appears on the screen from the position of the shark and is added to the fishList.
-   * 
-   * @return true if the shark had enough ammo.
+   * Method to check if there is a collision between a fish and a laser, if so
+   * the fish will shrink and the laser will be removed from the screen.
    */
-  public boolean shootLaser() {
-    if (shark.getAmmo() > 0) {
-      shark.decreaseAmmo();
-      addFish(laserSpawner.createLaser(this.shark));
-      return true;
+  public void collisionFishWithLaser() {
+    //TODO: remove these horrible instanceof statements.
+    for (int j = 0; j < fishList.size(); j++) {
+      if (fishList.get(j) instanceof LaserBullet) {        
+        Rectangle laserHitbox = fishList.get(j).makeHitbox();
+        for (int k = 0; k < fishList.size(); k++) {
+          if (fishList.get(k) instanceof FishBot) {
+            Rectangle fishHitbox = fishList.get(k).makeHitbox();
+            if (laserHitbox.intersects(fishHitbox.getLayoutBounds())) {
+              fishList.get(k).decreaseSize(fishList.get(k).getSize()/DEVIDE_DECREASE_SIZE);
+              fishList.get(j).kill();
+            }
+          }
+        }
+      }
     }
-    return false;
   }
-
+ 
 }

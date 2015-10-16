@@ -123,6 +123,14 @@ public interface Displayable {
    */
   public void increaseSize(float size);
   
+  /**
+   * Method used for decreasing Displayable.
+   * 
+   * @param size
+   *          the delta by which to increase.
+   */
+  public void decreaseSize(float size);
+  
   public Position getMiddlePoint();
 
   void eat(Displayable swimmer);
