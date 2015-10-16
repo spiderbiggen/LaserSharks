@@ -11,12 +11,13 @@ public class LaserShark extends SeaObject implements DirectionCallback {
   private final String imageResource = "shark.png";
   private final float widthScale = 1.5f;
   private static final int STARTING_AMMO = 10;
+  private static final int MAX_AMMO = 10;
   
   private int ammo;
   private Direction lastHorizontalDirection;
   
   /**
-   * Constructor class for FishBot.
+   * Constructor class for LaserShark.
    * 
    * @param position
    *          initial position
@@ -96,12 +97,20 @@ public class LaserShark extends SeaObject implements DirectionCallback {
   }
   
   /**
+   * returns the maximum ammo.
+   * @return maximum ammo.
+   */
+  public int getMaxAmmo() {
+    return MAX_AMMO;
+  }
+  
+  /**
    * increases the ammo.
    * @param amount the amount to increase.
    * @return the current ammo of the shark.
    */
   public int increaseAmmo(int amount) {
-    ammo = ammo + amount;
+    ammo = Math.min(ammo + amount, MAX_AMMO);
     return ammo;
   }
   
