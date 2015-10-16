@@ -11,14 +11,15 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lasersharks.Direction;
-import lasersharks.DirectionCallback;
 import lasersharks.Highscores;
-import lasersharks.DirectionInputController;
 import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.ScreenController;
-import lasersharks.Swimmer;
+import lasersharks.Displayable;
+import lasersharks.controllers.DirectionCallback;
+import lasersharks.controllers.DirectionInputController;
+import lasersharks.controllers.ScreenController;
+import lasersharks.controllers.ShootController;
 
 /**
  * This is the pane representing the gameplay.
@@ -35,7 +36,8 @@ public class GamePane extends StandardPane implements Stoppable {
   private ScreenController screenController;
   private static long time = 0;
   private DirectionCallback callback;
-  private DirectionInputController directionInputontroller;
+  private DirectionInputController directionInputController;
+  private ShootController shootController;
 
   /**
    * The constructor creates a new keyboardcontroller and screencontroller. The GamePane connects
@@ -44,8 +46,10 @@ public class GamePane extends StandardPane implements Stoppable {
   public GamePane() {
     screenController = new ScreenController(this);
     callback = this.screenController.getShark();
-    directionInputontroller = new DirectionInputController(callback);
-    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputontroller);
+    directionInputController = new DirectionInputController(callback);
+    shootController = new ShootController(screenController.getFishController());
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputController);
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, shootController);
     startGame();
   }
 
@@ -141,7 +145,7 @@ public class GamePane extends StandardPane implements Stoppable {
    * @param list
    *          the list of fish that needs to be displayed.
    */
-  public void showFishList(List<Swimmer> list) {
+  public void showFishList(List<Displayable> list) {
     clearPaneOfImageView();
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).isAlive()) {
@@ -160,7 +164,7 @@ public class GamePane extends StandardPane implements Stoppable {
    *          the fish to display.
    * @return an imageview of the fish.
    */
-  public ImageView fishImage(Swimmer swimmer) {
+  public ImageView fishImage(Displayable swimmer) {
     Position position = swimmer.getPosition();
     double size = swimmer.getSize();
     Direction dir = swimmer.getDirection();
@@ -199,7 +203,9 @@ public class GamePane extends StandardPane implements Stoppable {
   public void stop() {
     this.clearPaneOfImageView();
     this.stopGame();
-    MainGui.getInstance().getCurrentScene()
-        .removeEventHandler(KeyEvent.ANY, directionInputontroller);
+    MainGui.getInstance().getCurrentScene().removeEventHandler(
+        KeyEvent.ANY, 
+        directionInputController
+    );
   }
 }

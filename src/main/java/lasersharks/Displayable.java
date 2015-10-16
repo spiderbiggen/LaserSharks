@@ -9,17 +9,17 @@ import javafx.scene.shape.Rectangle;
  *
  */
 @SuppressWarnings("restriction")
-public interface Swimmer {
+public interface Displayable {
 
   /**
-   * Returns the Position of this fish.
+   * Returns the Position of this Displayable.
    * 
    * @return the current position
    */
   Position getPosition();
 
   /**
-   * Sets the position of the fish.
+   * Sets the position of the Displayable.
    * 
    * @param position
    *          the position to set to.
@@ -27,7 +27,7 @@ public interface Swimmer {
   void setPosition(Position position);
 
   /**
-   * Returns the Size of this fish.
+   * Returns the Size of this Displayable.
    * 
    * @return the current size
    */
@@ -56,46 +56,46 @@ public interface Swimmer {
   void setDirection(Direction direction);
 
   /**
-   * The current fish will move, this will return false if it moves out of the view.
+   * The current Displayable will move, this will return false if it moves out of the view.
    * 
    * @param frametime
    *          the time between frames in seconds
    * 
-   * @return true if fish is in view
+   * @return true if Displayable is in view
    */
   boolean move(double frametime);
 
   /**
-   * We calculate the distance between the fishes. The sum of the size of both fishes is our hitbox.
+   * We calculate the distance between the Displayable. The sum of the size of both Displayable is our hitbox.
    * Hitbox is now a circle, with size the radius in pixels.
    * 
-   * @param fish
-   *          we want to check if the fishbot collides with this fish,
-   * @return true if the fishes collide and false if not.
+   * @param Displayable
+   *          we want to check if the Displayable collides with this Displayable,
+   * @return true if the Displayables collide and false if not.
    */
-  boolean collision(Swimmer swimmer);
+  boolean collision(Displayable swimmer);
 
   /**
-   * this function checks if the fish is on the screen or not.
+   * this function checks if the Displayable is on the screen or not.
    * 
-   * @return true if the fish is on the screen, and false if not.
+   * @return true if the Displayable is on the screen, and false if not.
    */
   boolean isOnScreen();
 
   /**
-   * Method for killing fish.
+   * Method for killing Displayable.
    */
   void kill();
 
   /**
-   * Check if fish is alive.
+   * Check if Displayable is alive.
    * 
-   * @return aliveness of the fish.
+   * @return aliveness of the Displayable.
    */
   boolean isAlive();
 
   /**
-   * Will return the string resource for this fish.
+   * Will return the string resource for this Displayable.
    * 
    * @return The resource's name
    */
@@ -109,14 +109,14 @@ public interface Swimmer {
   double getWidthScale();
 
   /**
-   * Draw a rectangle shaped hitbox around the fishbot.
+   * Draw a rectangle shaped hitbox around the Displayable.
    * 
    * @return a rectangle hitbox.
    */
   Rectangle makeHitbox();
   
   /**
-   * Method used for growing fish.
+   * Method used for growing Displayable.
    * 
    * @param size
    *          the delta by which to increase.
@@ -125,5 +125,5 @@ public interface Swimmer {
   
   public Position getMiddlePoint();
 
-  void eat(Swimmer swimmer);
+  void eat(Displayable swimmer);
 }

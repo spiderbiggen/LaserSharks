@@ -1,4 +1,4 @@
-package lasershark.enemies;
+package lasersharks.enemies;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import lasersharks.enemies.Enemy;
  * @author SEMGroup27
  *
  */
-public class Enemy1Test extends FishBotTest {
+public class EnemyTest extends FishBotTest {
   private static final String IMAGE = "enemy-1.png";
   /**
    * Run the test on correct item.

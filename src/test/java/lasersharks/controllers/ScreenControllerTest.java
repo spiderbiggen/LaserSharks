@@ -1,4 +1,4 @@
-package lasersharks;
+package lasersharks.controllers;
 
 
 import org.junit.Before;
@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import javafx.scene.Scene;
+import lasersharks.LaserShark;
+import lasersharks.controllers.FishController;
+import lasersharks.controllers.ScreenController;
 import lasersharksgui.GamePane;
 import lasersharksgui.MainGui;
 

@@ -1,4 +1,4 @@
-package lasersharks;
+package lasersharks.controllers;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +8,11 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.Direction;
+import lasersharks.FishBot;
+import lasersharks.LaserShark;
+import lasersharks.Position;
+import lasersharks.controllers.FishController;
 import lasersharks.enemies.Enemy;
 import lasersharks.enemies.FishFactory;
 
@@ -101,5 +106,25 @@ public class FishControllerTest {
     double oldSize = fishCon.getShark().getSize();
     fishCon.getNextCycleInformation(1);
     assertTrue(fishCon.getShark().getSize() > oldSize);
+  }
+  
+  /**
+   * Test for shooting that fails.
+   */
+  @Test
+  public void testShootLaserFalse() {
+    fishCon.getShark().decreaseAmmo(Integer.MAX_VALUE);
+    assertFalse(fishCon.shootLaser());
+  }
+  
+  /**
+   * Test for shooting that succeeds.
+   */
+  @Test
+  public void testShootLaserTrue() {
+    int oldAmmo = fishCon.getShark().getAmmo();
+    assertTrue(fishCon.shootLaser());
+    int newAmmo = fishCon.getShark().getAmmo();    
+    assertTrue(oldAmmo - 1 == newAmmo);
   }
 }

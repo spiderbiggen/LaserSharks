@@ -11,5 +11,5 @@ public interface EatBehaviour {
    * eats an other fish.
    * @param fish the fish that should be eaten.
    */
-  public void eat(Swimmer fish);
+  public void eat(Displayable fish);
 }

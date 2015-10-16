@@ -187,13 +187,16 @@ public class Highscores {
    * @param fish
    *          the fish that is used to calculate the additional score
    */
-  public void increaseScore(Swimmer fish) {
+  public void increaseScore(Displayable fish) {
     if (fish.isAlive()) {
       score = score + (int) ((fish.getSize() * HALF_SCALE + FISH_BONUS) - amountOfFishesEaten * 2);
       amountOfFishesEaten++;
     }
   }
 
+  /**
+   * @return Bonus per eaten fish.
+   */
   public static int getFishBonus() {
     return FISH_BONUS;
   }

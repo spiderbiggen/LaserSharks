@@ -3,12 +3,12 @@ package lasersharks;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Abstract class for Floating creatures of the great blue.
+ * Abstract class for objects of the great blue.
  * 
  * @author Youri
  */
 @SuppressWarnings("restriction")
-public abstract class Fish implements Swimmer {
+public abstract class SeaObject implements Displayable {
 
   protected CollisionBehaviour collisionBehaviour;
   protected MoveBehaviour moveBehaviour;
@@ -21,7 +21,7 @@ public abstract class Fish implements Swimmer {
   private boolean alive;
 
   /**
-   * <abstract> Method for creating a fish.
+   * <abstract> Method for creating a seaObject.
    * 
    * @param position
    *          start position.
@@ -32,7 +32,7 @@ public abstract class Fish implements Swimmer {
    * @param direction
    *          start direction.
    */
-  public Fish(Position position, float size, double startSpeed, Direction direction) {
+  public SeaObject(Position position, float size, double startSpeed, Direction direction) {
     this.position = position;
     this.size = size;
     this.speed = startSpeed;
@@ -41,7 +41,7 @@ public abstract class Fish implements Swimmer {
   }
 
   /**
-   * Returns the Position of this fish.
+   * Returns the Position of this seaObject.
    * 
    * @return the current position
    */
@@ -50,7 +50,7 @@ public abstract class Fish implements Swimmer {
   }
 
   /**
-   * Sets the position of the fish.
+   * Sets the position of the seaObject.
    * 
    * @param position
    *          the position to set to.
@@ -60,7 +60,7 @@ public abstract class Fish implements Swimmer {
   }
 
   /**
-   * Returns the Size of this fish.
+   * Returns the Size of this seaObject.
    * 
    * @return the current size
    */
@@ -69,7 +69,7 @@ public abstract class Fish implements Swimmer {
   }
 
   /**
-   * Method used for growing fish.
+   * Method used for growing seaObject.
    * 
    * @param size
    *          the delta by which to increase.
@@ -79,7 +79,7 @@ public abstract class Fish implements Swimmer {
   }
 
   /**
-   * Method to set the size of the fish.
+   * Method to set the size of the seaObject.
    * 
    * @param size
    */
@@ -118,64 +118,64 @@ public abstract class Fish implements Swimmer {
   }
 
   /**
-   * The current fish will move, this will return false if it moves out of the view.
+   * The current seaObject will move, this will return false if it moves out of the view.
    * 
    * @param frametime
    *          the time between frames in seconds
    * 
-   * @return true if fish is in view
+   * @return true if seaObject is in view
    */
   public boolean move(double frametime) {
     return moveBehaviour.move(frametime);
   }
 
   /**
-   * We calculate the distance between the fishes. The sum of the size of both fishes is our hitbox.
+   * We calculate the distance between the seaObjectes. The sum of the size of both seaObjectes is our hitbox.
    * Hitbox is now a circle, with size the radius in pixels.
    * 
    * @param swimmer
-   *          we want to check if the fishbot collides with this fish,
-   * @return true if the fishes collide and false if not.
+   *          we want to check if the seaObjectbot collides with this seaObject,
+   * @return true if the seaObjectes collide and false if not.
    */
-  public boolean collision(Swimmer swimmer) {
+  public boolean collision(Displayable swimmer) {
     return collisionBehaviour.collide(swimmer);
   }
 
   /**
-   * gets the middle of the fish.
-   * @return the middlepoint of the fish.
+   * gets the middle of the seaObject.
+   * @return the middlepoint of the seaObject.
    */
   public Position getMiddlePoint() {
     return collisionBehaviour.getMiddlePoint();
   }
 
   /**
-   * this function checks if the fish is on the screen or not.
+   * this function checks if the seaObject is on the screen or not.
    * 
-   * @return true if the fish is on the screen, and false if not.
+   * @return true if the seaObject is on the screen, and false if not.
    */
   public boolean isOnScreen() {
     return this.alive && position.onScreen((int) this.size);
   }
 
   /**
-   * Method for killing fish.
+   * Method for killing seaObject.
    */
   public void kill() {
     this.alive = false;
   }
 
   /**
-   * Check if fish is alive.
+   * Check if seaObject is alive.
    * 
-   * @return aliveness of the fish.
+   * @return aliveness of the seaObject.
    */
   public boolean isAlive() {
     return this.alive;
   }
 
   /**
-   * Set the fish alive.
+   * Set the seaObject alive.
    */
   public void setAlive() {
     this.alive = true;
@@ -183,12 +183,12 @@ public abstract class Fish implements Swimmer {
 
   @Override
   public String toString() {
-    return "FishBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
+    return "seaObjectBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
         + ", direction=" + direction + ", Alive =" + alive + "]";
   }
 
   /**
-   * Will return the string resource for this fish.
+   * Will return the string resource for this seaObject.
    * 
    * @return The resource's name
    */
@@ -202,7 +202,7 @@ public abstract class Fish implements Swimmer {
   public abstract double getWidthScale();
 
   /**
-   * Draw a rectangle shaped hitbox around the fishbot.
+   * Draw a rectangle shaped hitbox around the seaObjectbot.
    * 
    * @return a rectangle hitbox.
    */
@@ -211,13 +211,13 @@ public abstract class Fish implements Swimmer {
   }
   
   /**
-   * The LaserShark eats a fish. This kills fish and increases size of the shark.
+   * The SeaObject eats an other seaObject. This kills seaObject and increases size of the shark.
    * 
-   * @param fish
-   *          the fish the shark eats
+   * @param seaObject
+   *          the seaObject the shark eats
    */
   @Override
-  public void eat(Swimmer swimmer) {
+  public void eat(Displayable swimmer) {
     eatBehaviour.eat(swimmer);
   }
 

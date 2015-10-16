@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.log4j.chainsaw.Main;
+//import org.apache.log4j.chainsaw.Main;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,10 +19,10 @@ import com.google.code.tempusfugit.temporal.Duration;
 import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.code.tempusfugit.temporal.WaitFor;
 
-import lasersharks.FishController;
 import lasersharks.Logger;
-import lasersharks.Options;
-import lasersharks.ScreenController;
+import lasersharks.controllers.Options;
+import lasersharks.controllers.FishController;
+import lasersharks.controllers.ScreenController;
 import lasersharks.enemies.FishSpawner;
 
 /**

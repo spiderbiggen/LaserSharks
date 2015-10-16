@@ -7,13 +7,13 @@ package lasersharks;
  */
 public class BotMoveBehaviour implements MoveBehaviour {
   
-  Swimmer swimmer;
+  Displayable swimmer;
   
   /**
    * the constructor.
    * @param swimmer the fish this behaviour applies to.
    */
-  public BotMoveBehaviour(Swimmer swimmer) {
+  public BotMoveBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
   }
   

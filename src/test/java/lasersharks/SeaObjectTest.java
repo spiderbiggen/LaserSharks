@@ -11,14 +11,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Class for testing Fish object.
+ * Class for testing SeaObjects.
  * 
  * @author Stefan
  *
  */
-public abstract class FishTest {
+public abstract class SeaObjectTest {
 
-  protected Fish fish1;
+  protected SeaObject fish1;
   protected final Position posOnScreen = new Position(50, 50);
   protected final Position posOffScreen = new Position(-1, -1);
   protected final float size = 30;
@@ -26,7 +26,7 @@ public abstract class FishTest {
   protected final Direction direction = Direction.East;
   
   /**
-   * Tear down the fish Object after the test.
+   * Tear down after the test.
    */
   @After
   public void tearDown() {
@@ -34,7 +34,7 @@ public abstract class FishTest {
   }
 
   /**
-   * Test for {@link Fish#getPosition()}.
+   * Test for {@link SeaObject#getPosition()}.
    */
   @Test
   public void testGetPosition() {
@@ -42,7 +42,7 @@ public abstract class FishTest {
   }
 
   /**
-   * Test for {@link Fish#getSize()}.
+   * Test for {@link SeaObject#getSize()}.
    */
   @Test
   public void testGetSize() {
@@ -50,7 +50,7 @@ public abstract class FishTest {
   }
 
   /**
-   * Test for {@link Fish#increaseSize(Float)}.
+   * Test for {@link SeaObject#increaseSize(Float)}.
    */
   @Test
   public void testIncreaseSize() {
@@ -60,7 +60,7 @@ public abstract class FishTest {
   }
 
   /**
-   * Test for {@link Fish#getSpeed()}.
+   * Test for {@link SeaObject#getSpeed()}.
    */
   @Test
   public void testGetSpeed() {
@@ -68,7 +68,7 @@ public abstract class FishTest {
   }
 
   /**
-   * Test for {@link Fish#setSpeed(int)}.
+   * Test for {@link SeaObject#setSpeed(int)}.
    */
   @Test
   public void testSetSpeed() {
@@ -78,7 +78,7 @@ public abstract class FishTest {
   }
 
   /**
-   * Test for {@link Fish#getDirection()}.
+   * Test for {@link SeaObject#getDirection()}.
    */
   @Test
   public void testGetDirection() {
@@ -86,7 +86,7 @@ public abstract class FishTest {
   }
 
   /**
-   * Test for {@link Fish#setDirection(Direction)}.
+   * Test for {@link SeaObject#setDirection(Direction)}.
    */
   @Test
   public void testSetDirection() {
@@ -96,11 +96,11 @@ public abstract class FishTest {
   }
 
   /**
-   * Test for {@link Fish#collision(Fish)}.
+   * Test for {@link SeaObject#collision(SeaObject)}.
    */
   @Test
   public void testCollisionTrue() {
-    Fish mockedFish = mock(Fish.class);
+    SeaObject mockedFish = mock(SeaObject.class);
     when(mockedFish.getPosition()).thenReturn(posOnScreen);
     when(mockedFish.getSize()).thenReturn(size);
     //TODO: change the way how this is tested so it doesn't give nullpointer exceptions.
@@ -110,11 +110,11 @@ public abstract class FishTest {
 
   
   /**
-   * Test for {@link Fish#collision(Fish)}.
+   * Test for {@link SeaObject#collision(SeaObject)}.
    */
   @Test
   public void testCollisionFalse() {
-    Fish mockedFish = mock(Fish.class);
+    SeaObject mockedFish = mock(SeaObject.class);
     when(mockedFish.getPosition()).thenReturn(posOffScreen);
     when(mockedFish.getSize()).thenReturn(size);
     //TODO: change the way how this is tested so it doesn't give nullpointer exceptions.
@@ -124,7 +124,7 @@ public abstract class FishTest {
   
   
   /**
-   * Test for {@link Fish#move()}.
+   * Test for {@link SeaObject#move()}.
    */
   @Test
   public void testMove() {
@@ -135,7 +135,7 @@ public abstract class FishTest {
   }
 
   /**
-   * test a fish that is alive and on the screen.
+   * test for {@link SeaObject#isOnScreen()}.
    */
   @Test
   public void testOnScreenTrue() {
@@ -143,25 +143,28 @@ public abstract class FishTest {
   }
 
   /**
-   * Tests if a s fish is considered off screen when it is killed.
+   * Tests for {@link SeaObject#isOnScreen()}.
    */
   @Test
   public void testIsOnScreenFalseDeadFish() {
-    Swimmer fish1 = this.fish1;
+    Displayable fish1 = this.fish1;
     fish1.kill();
     assertFalse(fish1.isOnScreen());
   }
 
   /**
-   * Tests if a fish is considered off screen when it's position is out of bounds.
+   * Tests for {@link SeaObject#isOnScreen()}.
    */
   @Test
   public void testIsOnScreenFalseOffScreen() {
-    Swimmer fish1 = this.fish1;
+    Displayable fish1 = this.fish1;
     fish1.setPosition(posOffScreen);
     assertFalse(fish1.isOnScreen());
   }
   
+  /**
+   * Test for {@link SeaObject#isAlive()}.
+   */
   @Test
   public void testSetAlive() {
     fish1.kill();
