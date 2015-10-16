@@ -2,6 +2,7 @@ package lasersharks.enemies;
 
 import java.util.Random;
 
+import lasersharks.Ammo;
 import lasersharks.FishBot;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
@@ -26,13 +27,6 @@ public interface FishSpawner {
   FishBot generateFish(Random rng);
 
   /**
-   * This function creates a laser.
-   * @param origin the shark that shoots a laser.
-   * @return a laserBullet object.
-   */
-  LaserBullet createLaser(LaserShark origin);
-  
-  /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
    * Starts on either the left side on
    * 
@@ -41,10 +35,10 @@ public interface FishSpawner {
   FishBot generateFish();
 
   /**
-   * Set the seed for this spawner. if the new seed is null do not use any seed.
+   * Set the seed for this spawner.
    * 
    * @param rng
    *          new seed
    */
-  void setRng(Random rng);
+  void setFishRng(Random rng);
 }

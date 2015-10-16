@@ -1,14 +1,15 @@
 package lasersharks.enemies;
 
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.Random;
 
+import lasersharks.Ammo;
 import lasersharks.Direction;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
 import lasersharks.Position;
+import lasersharks.controllers.Options;
 import lasersharks.Displayable;
 import lasersharks.enemies.FishFactory;
 
@@ -17,10 +18,14 @@ import org.mockito.Mockito;
 
 /**
  * Test class for FishFactory.
+ * 
  * @author SEMGroup27
  *
  */
 public class FishFactoryTest {
+
+  private static final int WIDTH = 1920;
+  private static final int HEIGHT = 1080;
 
   protected Displayable generatedFish;
   private final long seed = 12345622L;
@@ -31,16 +36,19 @@ public class FishFactoryTest {
 
   private final float expectedSize2 = 176;
   private final int expectedSpeed2 = 344;
-  
+
+  private final double testXPos = 787.0;
+  private final double testYPos = 214.0;
+
   private FishFactory fishFactory;
 
-  
-  
   /**
    * 
    */
   @Test
   public void testRandomFish1() {
+    Options.setGlobalHeight(HEIGHT);
+    Options.setGlobalWidth(WIDTH);
     fishFactory = new FishFactory();
     Random random = new Random(seed);
     generatedFish = fishFactory.generateFish(random);
@@ -90,5 +98,18 @@ public class FishFactoryTest {
     Mockito.when(shark.getPosition()).thenReturn(Position.middlePosition());
     LaserBullet laserBulletCreated = fishFactory.createLaser(shark);
     assertEquals(laserBulletCreated.getPosition(), Position.middlePosition());
+  }
+
+  /**
+   * Test for creating ammo.
+   */
+
+  @Test
+  public void testAmmoCreation() {
+    fishFactory = new FishFactory();
+    Position testPos = new Position(testXPos, testYPos);
+    Random random = new Random(seed);
+    Ammo ammoCreated = fishFactory.generateAmmo(random);
+    assertEquals(ammoCreated.getPosition(), testPos);
   }
 }
