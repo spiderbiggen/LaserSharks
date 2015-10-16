@@ -6,12 +6,14 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.AmmoSpawner;
 import lasersharks.Direction;
-import lasersharks.SeaObject;
+import lasersharks.Displayable;
 import lasersharks.LaserShark;
+import lasersharks.LaserSpawner;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.Displayable;
+import lasersharks.SeaObject;
 import lasersharks.enemies.FishFactory;
 import lasersharks.enemies.FishSpawner;
 
@@ -29,8 +31,10 @@ public class FishController {
    */
   private List<Displayable> fishList;
   private LaserShark shark;
-  
+
   private FishSpawner fishSpawner;
+  private AmmoSpawner ammoSpawner;
+  private LaserSpawner laserSpawner;
 
   /**
    * Holder for shark data.
@@ -44,6 +48,13 @@ public class FishController {
    */
   private static final float FISH_SPAWN_CHANCE_BASE = 1.0f;
   private float fishSpawnChance;
+
+  /**
+   * Numbers for keeping the spawn rate of ammo in check.
+   */
+
+  private static final int ONE_HUNDRED = 100;
+  private static final int AMMO_SPAWN_LIMITER = 88;
 
   /**
    * Random Number Generator holder.
@@ -60,6 +71,8 @@ public class FishController {
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);
     fishSpawner = new FishFactory();
+    ammoSpawner = (AmmoSpawner) fishSpawner;
+    laserSpawner = (LaserSpawner) fishSpawner;
   }
 
   /**
@@ -126,7 +139,7 @@ public class FishController {
   public FishSpawner getFishSpawner() {
     return fishSpawner;
   }
-  
+
   /**
    * Update all fish positions.
    * 
@@ -163,7 +176,13 @@ public class FishController {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
       SeaObject f = fishSpawner.generateFish();
+      SeaObject g = ammoSpawner.generateAmmo();
       this.addFish(f);
+
+      if (this.rng.nextInt(ONE_HUNDRED - 0) > AMMO_SPAWN_LIMITER) {
+        this.addFish(g);
+      }
+
       Logger.getInstance().write("Fish spawned",
           "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
               + f.getDirection() + ", " + "Position: " + f.getPosition());
@@ -213,15 +232,16 @@ public class FishController {
       }
     }
   }
-  
+
   /**
    * A laser appears on the screen from the position of the shark and is added to the fishList.
+   * 
    * @return true if the shark had enough ammo.
    */
   public boolean shootLaser() {
     if (shark.getAmmo() > 0) {
       shark.decreaseAmmo();
-      addFish(fishSpawner.createLaser(this.shark));
+      addFish(laserSpawner.createLaser(this.shark));
       return true;
     }
     return false;
