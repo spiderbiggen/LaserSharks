@@ -163,7 +163,9 @@ public class FishController {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
       SeaObject f = fishSpawner.generateFish();
+      SeaObject g = fishSpawner.generateAmmo();
       this.addFish(f);
+      this.addFish(g);
       Logger.getInstance().write("Fish spawned",
           "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
               + f.getDirection() + ", " + "Position: " + f.getPosition());
