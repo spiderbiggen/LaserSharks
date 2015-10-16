@@ -3,11 +3,13 @@ package lasersharks.enemies;
 import java.util.Random;
 
 import lasersharks.Ammo;
+import lasersharks.AmmoSpawner;
 //import groovyjarjarcommonscli.Options;
 import lasersharks.Direction;
 import lasersharks.FishBot;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
+import lasersharks.LaserSpawner;
 import lasersharks.Position;
 import lasersharks.controllers.Options;
 
@@ -17,7 +19,7 @@ import lasersharks.controllers.Options;
  * @author SEMGroup27
  *
  */
-public class FishFactory implements FishSpawner {
+public class FishFactory implements FishSpawner, AmmoSpawner, LaserSpawner {
 
   /**
    * This value is used to modify the speed of the fishes that are generated. The generated speed is
@@ -46,9 +48,14 @@ public class FishFactory implements FishSpawner {
   private static final int AMMO_SIZE = 40;
 
   /**
-   * this value is used as the seed. Only used when useSeed = true;
+   * this value is used as the seed for the fish.
    */
-  private Random rng;
+  private Random fishRng;
+  
+  /**
+   * this value is used as the seed for the ammo.
+   */
+  private Random ammoRng;
 
   /**
    * Struct for holding fishImageData.
@@ -98,7 +105,8 @@ public class FishFactory implements FishSpawner {
    * initialize the fishspawner.
    */
   public FishFactory() {
-    this.rng = Options.getInstance().getFactoryRng();
+    this.fishRng = Options.getInstance().getFactoryRng();
+    this.ammoRng = new Random();
   }
 
   @Override
@@ -127,12 +135,17 @@ public class FishFactory implements FishSpawner {
 
   @Override
   public FishBot generateFish() {
-    return generateFish(this.rng);
+    return generateFish(this.fishRng);
   }
 
   @Override
-  public void setRng(Random newRng) {
-    this.rng = newRng;
+  public void setFishRng(Random newRng) {
+    this.fishRng = newRng;
+  }
+  
+  @Override
+  public void setAmmoRng(Random newRng) {
+    this.ammoRng = newRng;
   }
 
   @Override
@@ -155,6 +168,6 @@ public class FishFactory implements FishSpawner {
 
   @Override
   public Ammo generateAmmo() {
-    return generateAmmo(this.rng);
+    return generateAmmo(this.ammoRng);
   }
 }

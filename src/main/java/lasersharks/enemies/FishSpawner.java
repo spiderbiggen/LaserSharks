@@ -27,15 +27,6 @@ public interface FishSpawner {
   FishBot generateFish(Random rng);
 
   /**
-   * This function creates a laser.
-   * 
-   * @param origin
-   *          the shark that shoots a laser.
-   * @return a laserBullet object.
-   */
-  LaserBullet createLaser(LaserShark origin);
-
-  /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
    * Starts on either the left side on
    * 
@@ -44,26 +35,10 @@ public interface FishSpawner {
   FishBot generateFish();
 
   /**
-   * Set the seed for this spawner. if the new seed is null do not use any seed.
+   * Set the seed for this spawner.
    * 
    * @param rng
    *          new seed
    */
-  void setRng(Random rng);
-
-  /**
-   * This function creates a new Ammo pack on the screen. This should be used to spawn ammo.
-   * 
-   * @return an ammo pack on a random position.
-   * @param rng
-   *          random number generator to use.
-   */
-  Ammo generateAmmo(Random rng);
-
-  /**
-   * This function creates a new Ammo on a random location. This should be used to spawn ammo.
-   * 
-   * @return a random ammo with a random position.
-   */
-  Ammo generateAmmo();
+  void setFishRng(Random rng);
 }
