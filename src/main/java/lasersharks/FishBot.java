@@ -25,6 +25,6 @@ public abstract class FishBot extends SeaObject {
     super(position, size, speed, direction);
     collisionBehaviour = new DefaultCollisionBehaviour(this);
     moveBehaviour = new BotMoveBehaviour(this);
-    eatBehaviour = new CantEatBehaviour(this);
+    eatBehaviour = new CantEatBehaviour();
   }
 }

@@ -6,14 +6,17 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.AmmoSpawner;
 import lasersharks.Direction;
 import lasersharks.FishBot;
 import lasersharks.LaserBullet;
 import lasersharks.SeaObject;
+import lasersharks.Displayable;
 import lasersharks.LaserShark;
+import lasersharks.LaserSpawner;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.Displayable;
+import lasersharks.SeaObject;
 import lasersharks.enemies.FishFactory;
 import lasersharks.enemies.FishSpawner;
 
@@ -31,8 +34,10 @@ public class FishController {
    */
   private List<Displayable> fishList;
   private LaserShark shark;
-  
+
   private FishSpawner fishSpawner;
+  private AmmoSpawner ammoSpawner;
+  private LaserSpawner laserSpawner;
 
   /**
    * Holder for shark data.
@@ -49,6 +54,13 @@ public class FishController {
   private float fishSpawnChance;
 
   /**
+   * Numbers for keeping the spawn rate of ammo in check.
+   */
+
+  private static final int ONE_HUNDRED = 100;
+  private static final int AMMO_SPAWN_LIMITER = 88;
+
+  /**
    * Random Number Generator holder.
    */
   private Random rng;
@@ -60,9 +72,10 @@ public class FishController {
     this.fishList = new LinkedList<Displayable>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
-    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
-        START_DIRECTION);
+    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION);
     fishSpawner = new FishFactory();
+    ammoSpawner = (AmmoSpawner) fishSpawner;
+    laserSpawner = (LaserSpawner) fishSpawner;
   }
 
   /**
@@ -108,8 +121,8 @@ public class FishController {
    * Set the shark to his beginning state.
    */
   public void setBeginShark() {
-    this.setShark(
-        new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION));
+    this.setShark(new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
+        START_DIRECTION));
   }
 
   /**
@@ -129,15 +142,15 @@ public class FishController {
   public FishSpawner getFishSpawner() {
     return fishSpawner;
   }
-  
+
   /**
    * Update all fish positions.
    * 
    * @param frametime
    */
   private void updatePositions(double frametime) {
-    this.fishList.removeAll(
-        this.fishList.stream().filter(v -> !v.move(frametime)).collect(Collectors.toList()));
+    this.fishList.removeAll(this.fishList.stream().filter(v -> !v.move(frametime))
+        .collect(Collectors.toList()));
     if (this.shark != null) {
       this.shark.move(frametime);
     }
@@ -166,8 +179,15 @@ public class FishController {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
       SeaObject f = fishSpawner.generateFish();
+      SeaObject g = ammoSpawner.generateAmmo();
       this.addFish(f);
-      Logger.getInstance().write("Fish spawned",
+
+      if (this.rng.nextInt(ONE_HUNDRED - 0) > AMMO_SPAWN_LIMITER) {
+        this.addFish(g);
+      }
+
+      Logger.getInstance().write(
+          "Fish spawned",
           "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
               + f.getDirection() + ", " + "Position: " + f.getPosition());
     }
@@ -195,34 +215,33 @@ public class FishController {
   /**
    * this function checks if there are any collisions between the shark and other fish. if so, this
    * function checks if the size of the fish is smaller or bigger than the shark. If smaller, the
-   * fish is eaten by the shark. If bigger, the game ends.
-   * It also checks if there is a collision between a fish and a laser, if so, the fish will decrease in size
-   * and the laser will be removed from the screen.
+   * fish is eaten by the shark. If bigger, the game ends. It also checks if there is a collision
+   * between a fish and a laser, if so, the fish will decrease in size and the laser will be removed
+   * from the screen.
    *
    */
   private void checkForCollisions() {
-    collisionSharkWithFish();    
+    collisionSharkWithFish();
     collisionFishWithLaser();
-  } 
+  }
 
-  
   /**
    * A laser appears on the screen from the position of the shark and is added to the fishList.
+   * 
    * @return true if the shark had enough ammo.
    */
   public boolean shootLaser() {
     if (shark.getAmmo() > 0) {
       shark.decreaseAmmo();
-      addFish(fishSpawner.createLaser(this.shark));
+      addFish(laserSpawner.createLaser(this.shark));
       return true;
     }
     return false;
   }
-  
+
   /**
-   * Method to check if there is a collision between a shark and a fish, if so
-   * and the shark is bigger than the fish, it will grow.
-   * If not, it will kill the shark.
+   * Method to check if there is a collision between a shark and a fish, if so and the shark is
+   * bigger than the fish, it will grow. If not, it will kill the shark.
    */
   public void collisionSharkWithFish() {
     LaserShark shark = this.shark;
@@ -243,10 +262,10 @@ public class FishController {
       }
     }
   }
-  
+
   /**
-   * Method to check if there is a collision between a fish and a laser, if so
-   * the fish will shrink and the laser will be removed from the screen.
+   * Method to check if there is a collision between a fish and a laser, if so the fish
+   * will shrink and the laser will be removed from the screen.
    */
   public void collisionFishWithLaser() {
     for (int j = 0; j < fishList.size(); j++) {
@@ -256,7 +275,7 @@ public class FishController {
           if (fishList.get(k) instanceof FishBot) {
             Rectangle fishHitbox = fishList.get(k).makeHitbox();
             if (laserHitbox.intersects(fishHitbox.getLayoutBounds())) {
-              fishList.get(k).decreaseSize(fishList.get(k).getSize()/DEVIDE_DECREASE_SIZE);
+              fishList.get(k).decreaseSize(fishList.get(k).getSize() / DEVIDE_DECREASE_SIZE);
               fishList.get(j).kill();
             }
           }

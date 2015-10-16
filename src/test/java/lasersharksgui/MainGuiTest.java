@@ -19,15 +19,23 @@ import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.code.tempusfugit.temporal.WaitFor;
 
 import lasersharks.controllers.FishController;
+import lasersharks.controllers.Options;
 import lasersharks.controllers.ScreenController;
 import lasersharks.enemies.FishSpawner;
 
 /**
- * @author Stefan
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")
 public class MainGuiTest {
+
+  private static final long WINNING_FACTORY_SEED = 165;
+  private static final float LOSE_GAMESIZE = 20;
+  private static final float WIN_GAMESIZE = 319;  
+  private static final float POST_GROWTH_INCREASE_TRESHHOLD = 1;  
+  private final int width = 800;
+  private final int height = 150;
 
   private GamePane pane;
   private ScreenController screenCon;
@@ -43,9 +51,15 @@ public class MainGuiTest {
    */
   @Before
   public void setup() throws InterruptedException, TimeoutException {
+    Options.setGlobalHeight(height);
+    Options.setGlobalWidth(width);
+
     FXApp.startApp(new MainGui());
     FXer.getUserWith(FXApp.getScene().getRoot());
-
+    
+    Options.getInstance().setSpawnRng(new Random(0));
+    Options.getInstance().setFactoryRng(new Random(WINNING_FACTORY_SEED));
+    
     WaitFor.waitOrTimeout(new Condition() {
 
       @Override
@@ -57,9 +71,7 @@ public class MainGuiTest {
     pane = (GamePane) MainGui.getInstance().getCurrentPane();
     screenCon = pane.getScreenController();
     fishCon = screenCon.getFishController();
-    fishCon.setRng(new Random(0));
     fishSpawner = fishCon.getFishSpawner();
-    fishSpawner.setRng(new Random(0));
 
   }
 
@@ -73,6 +85,7 @@ public class MainGuiTest {
    */
   @Test
   public void loseGame() throws InterruptedException, TimeoutException {
+    fishCon.getShark().setSize(LOSE_GAMESIZE);
     WaitFor.waitOrTimeout(new Condition() {
 
       @Override
@@ -95,8 +108,7 @@ public class MainGuiTest {
    */
   @Test
   public void winGame() throws InterruptedException, TimeoutException {
-    final int size = 319;
-    fishCon.getShark().setSize(size);
+    fishCon.getShark().setSize(WIN_GAMESIZE);
 
     WaitFor.waitOrTimeout(new Condition() {
 
@@ -107,6 +119,25 @@ public class MainGuiTest {
 
     }, Timeout.timeout(Duration.seconds(20L)));
     assertTrue(MainGui.getInstance().getCurrentPane() instanceof WinPane);
+  }
+  
+  /**
+   * Test to see if the size of the shark can increase.
+   * @throws InterruptedException interruptedException
+   * @throws TimeoutException timeoutException
+   */
+  @Test
+  public void increaseSizeTest() throws InterruptedException, TimeoutException {
+    int treshHold = (int) ((int) fishCon.getShark().getSize() + POST_GROWTH_INCREASE_TRESHHOLD);
+    WaitFor.waitOrTimeout(new Condition() {
+
+      @Override
+      public boolean isSatisfied() {
+        return fishCon.getShark().getSize() > treshHold;
+      }
+
+    }, Timeout.timeout(Duration.seconds(20L)));
+    assertTrue(fishCon.getShark().getSize() > treshHold);
   }
 
 }
