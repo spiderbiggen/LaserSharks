@@ -2,11 +2,13 @@ package lasersharks.enemies;
 
 import java.util.Random;
 
+//import groovyjarjarcommonscli.Options;
 import lasersharks.Direction;
 import lasersharks.FishBot;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
 import lasersharks.Position;
+import lasersharks.controllers.Options;
 
 /**
  * Default Fishfactory implementation.
@@ -100,7 +102,7 @@ public class FishFactory implements FishSpawner {
    * initialize the fishspawner.
    */
   public FishFactory() {
-    this.rng = new Random();
+    this.rng = Options.getInstance().getFactoryRng();
   }
 
   @Override
