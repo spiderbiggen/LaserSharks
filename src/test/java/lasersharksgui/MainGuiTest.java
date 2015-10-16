@@ -83,11 +83,20 @@ public class MainGuiTest {
    */
   @Test
   public void awinGame() throws InterruptedException, TimeoutException {
-
-    Options.getInstance().setSpawnRng(new Random(0));
+    try {
+      Options.getInstance().setSpawnRng(new Random(0));
+    } catch (Exception e) { 
+      System.err.println("" + 1 + e.getClass() + ":" + e.getMessage());  }
+    try {
     Options.getInstance().setFactoryRng(new Random(WINNING_FACTORY_SEED));
+    } catch (Exception e) { 
+      System.err.println("" + 2 + e.getClass() + ":" + e.getMessage());  }
+    try {
     MainGui.getInstance().browseTo(GamePane.class);
-
+    } catch (Exception e) { 
+      System.err.println("" + 3 + e.getClass() + ":" + e.getMessage());  }
+    
+    try {
     WaitFor.waitOrTimeout(new Condition() {
       @Override
       public boolean isSatisfied() {
@@ -96,6 +105,9 @@ public class MainGuiTest {
       }
     }, Timeout.timeout(Duration.seconds(100L)));
 
+    } catch (Exception e) { 
+      System.err.println("" + 4 + e.getClass() + ":" + e.getMessage());  }
+    
     assertTrue(MainGui.getInstance().getCurrentPane() instanceof WinPane);
     MainGui.getInstance().browseTo(LosingPane.class);
     MainGui.getInstance().browseTo(GamePane.class);
