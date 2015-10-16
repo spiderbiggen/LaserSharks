@@ -29,7 +29,7 @@ public class FishController {
    */
   private List<Displayable> fishList;
   private LaserShark shark;
-  
+
   private FishSpawner fishSpawner;
 
   /**
@@ -46,6 +46,13 @@ public class FishController {
   private float fishSpawnChance;
 
   /**
+   * Numbers for keeping the spawn rate of ammo in check 
+   */
+
+  private static final int ONE_HUNDRED = 100;
+  private static final int AMMO_SPAWN_LIMITER = 88;
+
+  /**
    * Random Number Generator holder.
    */
   private Random rng;
@@ -57,8 +64,7 @@ public class FishController {
     this.fishList = new LinkedList<Displayable>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
-    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
-        START_DIRECTION);
+    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION);
     fishSpawner = new FishFactory();
   }
 
@@ -105,8 +111,8 @@ public class FishController {
    * Set the shark to his beginning state.
    */
   public void setBeginShark() {
-    this.setShark(
-        new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION));
+    this.setShark(new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
+        START_DIRECTION));
   }
 
   /**
@@ -126,15 +132,15 @@ public class FishController {
   public FishSpawner getFishSpawner() {
     return fishSpawner;
   }
-  
+
   /**
    * Update all fish positions.
    * 
    * @param frametime
    */
   private void updatePositions(double frametime) {
-    this.fishList.removeAll(
-        this.fishList.stream().filter(v -> !v.move(frametime)).collect(Collectors.toList()));
+    this.fishList.removeAll(this.fishList.stream().filter(v -> !v.move(frametime))
+        .collect(Collectors.toList()));
     if (this.shark != null) {
       this.shark.move(frametime);
     }
@@ -163,8 +169,15 @@ public class FishController {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
       SeaObject f = fishSpawner.generateFish();
+      SeaObject g = fishSpawner.generateAmmo();
       this.addFish(f);
-      Logger.getInstance().write("Fish spawned",
+
+      if (this.rng.nextInt(ONE_HUNDRED - 0) > AMMO_SPAWN_LIMITER) {
+        this.addFish(g);
+      }
+
+      Logger.getInstance().write(
+          "Fish spawned",
           "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
               + f.getDirection() + ", " + "Position: " + f.getPosition());
     }
@@ -213,9 +226,10 @@ public class FishController {
       }
     }
   }
-  
+
   /**
    * A laser appears on the screen from the position of the shark and is added to the fishList.
+   * 
    * @return true if the shark had enough ammo.
    */
   public boolean shootLaser() {
