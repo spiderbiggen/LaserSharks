@@ -19,6 +19,7 @@ import com.google.code.tempusfugit.temporal.Duration;
 import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.code.tempusfugit.temporal.WaitFor;
 
+import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.controllers.Options;
 import lasersharks.controllers.FishController;
@@ -55,7 +56,8 @@ public class MainGuiTest {
     Options.setGlobalWidth(width);
     FXApp.startApp(new MainGui());
     FXer.getUserWith(FXApp.getScene().getRoot());
-
+    
+    /*
     WaitFor.waitOrTimeout(new Condition() {
 
       @Override
@@ -70,7 +72,7 @@ public class MainGuiTest {
     fishCon.setRng(new Random(0));
     fishSpawner = fishCon.getFishSpawner();
     fishSpawner.setRng(new Random(0));
-
+    */
   }
 
   /**
@@ -82,7 +84,7 @@ public class MainGuiTest {
    *           InterruptedException
    */
   @Test
-  public void awinGame() throws InterruptedException, TimeoutException {
+  public void winGame() throws InterruptedException, TimeoutException {
     try {
       Options.getInstance().setSpawnRng(new Random(0));
     } catch (Exception e) { 
@@ -93,6 +95,8 @@ public class MainGuiTest {
       System.err.println("" + 2 + e.getClass() + ":" + e.getMessage());  }
     try {
     MainGui.getInstance().browseTo(GamePane.class);
+
+    ((GamePane) MainGui.getInstance().getCurrentPane()).getScreenController().getShark().setSize(319);
     } catch (Exception e) { 
       System.err.println("" + 3 + e.getClass() + ":" + e.getMessage());  }
     
@@ -103,7 +107,7 @@ public class MainGuiTest {
         return MainGui.getInstance().getCurrentPane() instanceof WinPane
             || MainGui.getInstance().getCurrentPane() instanceof LosingPane;
       }
-    }, Timeout.timeout(Duration.seconds(100L)));
+    }, Timeout.timeout(Duration.seconds(10L)));
 
     } catch (Exception e) { 
       System.err.println("" + 4 + e.getClass() + ":" + e.getMessage());  }
@@ -113,6 +117,52 @@ public class MainGuiTest {
     MainGui.getInstance().browseTo(GamePane.class);
   }
 
+
+  /**
+   * Test to check if we can win the game.
+   * 
+   * @throws TimeoutException
+   *           timeoutException
+   * @throws InterruptedException
+   *           InterruptedException
+   */
+  @Test
+  public void increaseSize() throws InterruptedException, TimeoutException {
+    try {
+      Options.getInstance().setSpawnRng(new Random(0));
+    } catch (Exception e) { 
+      System.err.println("" + 1 + e.getClass() + ":" + e.getMessage());  }
+    try {
+    Options.getInstance().setFactoryRng(new Random(WINNING_FACTORY_SEED));
+    } catch (Exception e) { 
+      System.err.println("" + 2 + e.getClass() + ":" + e.getMessage());  }
+    try {
+      
+    MainGui.getInstance().browseTo(GamePane.class);
+
+    } catch (Exception e) { 
+      System.err.println("" + 3 + e.getClass() + ":" + e.getMessage());  }
+
+    LaserShark ls = 
+        ((GamePane) MainGui.getInstance().getCurrentPane())
+        .getScreenController().getShark();
+    
+    try {
+    WaitFor.waitOrTimeout(new Condition() {
+      @Override
+      public boolean isSatisfied() {
+        return ls.getSize() > 81;
+      }
+    }, Timeout.timeout(Duration.seconds(10L)));
+
+    } catch (Exception e) { 
+      System.err.println("" + 4 + e.getClass() + ":" + e.getMessage());  }
+    
+    assertTrue(ls.getSize() > 81);
+    MainGui.getInstance().browseTo(LosingPane.class);
+    MainGui.getInstance().browseTo(GamePane.class);
+  }
+  
   /**
    * Test to check if we can lose the game.
    * 
