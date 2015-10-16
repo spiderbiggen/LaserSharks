@@ -9,6 +9,7 @@ import lasersharks.Direction;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
 import lasersharks.Position;
+import lasersharks.controllers.Options;
 import lasersharks.Displayable;
 import lasersharks.enemies.FishFactory;
 
@@ -22,6 +23,9 @@ import org.mockito.Mockito;
  *
  */
 public class FishFactoryTest {
+
+  private static final int WIDTH = 1920;
+  private static final int HEIGHT = 1080;
 
   protected Displayable generatedFish;
   private final long seed = 12345622L;
@@ -43,6 +47,8 @@ public class FishFactoryTest {
    */
   @Test
   public void testRandomFish1() {
+    Options.setGlobalHeight(HEIGHT);
+    Options.setGlobalWidth(WIDTH);
     fishFactory = new FishFactory();
     Random random = new Random(seed);
     generatedFish = fishFactory.generateFish(random);
