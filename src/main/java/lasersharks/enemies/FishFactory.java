@@ -3,6 +3,7 @@ package lasersharks.enemies;
 import java.util.Random;
 
 import lasersharks.Ammo;
+//import groovyjarjarcommonscli.Options;
 import lasersharks.Direction;
 import lasersharks.FishBot;
 import lasersharks.LaserBullet;
@@ -97,7 +98,7 @@ public class FishFactory implements FishSpawner {
    * initialize the fishspawner.
    */
   public FishFactory() {
-    this.rng = new Random();
+    this.rng = Options.getInstance().getFactoryRng();
   }
 
   @Override
