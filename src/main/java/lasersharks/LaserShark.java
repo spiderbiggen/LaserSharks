@@ -30,7 +30,7 @@ public class LaserShark extends SeaObject implements DirectionCallback {
    */
   public LaserShark(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
-    collisionBehaviour = new DefaultCollisionBehaviour(this);
+    collisionBehaviour = new SharkCollisionBehaviour(this);
     moveBehaviour = new SharkMoveBehaviour(this);
     eatBehaviour = new DefaultEatBehaviour(this);
     lastHorizontalDirection = Direction.East;

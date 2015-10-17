@@ -24,7 +24,7 @@ public class LaserBullet extends SeaObject {
   public LaserBullet(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
     strength = LASER_DEFAULT_STRENGTH;
-    collisionBehaviour = new DefaultCollisionBehaviour(this);
+    collisionBehaviour = new LaserBulletCollisionBehaviour(this);
     eatBehaviour = new CantEatBehaviour();
     moveBehaviour = new BotMoveBehaviour(this);
   }
