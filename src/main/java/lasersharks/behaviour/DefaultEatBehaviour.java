@@ -3,6 +3,7 @@ package lasersharks.behaviour;
 import lasersharks.Highscores;
 import lasersharks.Logger;
 import lasersharks.behaviour.interfaces.EatBehaviour;
+import lasersharks.controllers.AudioController;
 import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.Ammo;
 import lasersharks.seaobjects.Enemy;
@@ -61,7 +62,7 @@ public class DefaultEatBehaviour implements EatBehaviour {
               + "New sharksize: "
               + (swimmer.getSize() + (fish.getSize() / ENERGY_DISSERPATION_RATE)));
       swimmer.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
-      StandardPane.playSoundEffect(EAT_FISH_SOUND);
+      AudioController.getInstance().playSoundEffect(EAT_FISH_SOUND);
     }
     Highscores.getInstance().increaseScore(fish);
     fish.kill();

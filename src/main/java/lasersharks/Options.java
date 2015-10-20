@@ -24,6 +24,12 @@ public class Options {
   private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
 
   private String musicFileName;
+  private boolean playingMusic = true;
+  private boolean mutedMusic = false;
+  private boolean mutedSfx = false;
+  private double musicVolume = 1.0f;
+  private double sfxVolume = 1.0f;
+
   private String backGround;
   private Random factoryRng;
   private Random spawnRng;
@@ -194,6 +200,93 @@ public class Options {
   }
 
   /**
+   * @return the playMusic
+   */
+  public boolean isPlayingMusic() {
+    return playingMusic;
+  }
+
+  /**
+   * @param playMusic
+   *          the playMusic to set
+   */
+  public void setPlayingMusic(boolean playMusic) {
+    this.playingMusic = playMusic;
+  }
+
+  /**
+   * @return if the music should be muted.
+   */
+  public boolean isMutedMusic() {
+    return mutedMusic;
+  }
+
+  /**
+   * Set if the music should be muted.
+   * 
+   * @param muteMusic
+   *          true if music should be muted.
+   */
+  public void setMutedMusic(boolean muteMusic) {
+    this.mutedMusic = muteMusic;
+  }
+
+  /**
+   * @return if the sfx should be muted.
+   */
+  public boolean isMutedSfx() {
+    return mutedSfx;
+  }
+
+  /**
+   * Set if the sfx should be muted.
+   * 
+   * @param muteSfx
+   *          true if music should be muted.
+   */
+  public void setMutedSfx(boolean muteSfx) {
+    this.mutedSfx = muteSfx;
+  }
+
+  /**
+   * @return the musicVolume
+   */
+  public double getMusicVolume() {
+    return musicVolume;
+  }
+
+  /**
+   * @param musicVolume
+   *          the musicVolume to set
+   */
+  public void setMusicVolume(float musicVolume) {
+    this.musicVolume = musicVolume;
+  }
+
+  /**
+   * @return the sfxVolume
+   */
+  public double getSfxVolume() {
+    return sfxVolume;
+  }
+
+  /**
+   * @param sfxVolume
+   *          the sfxVolume to set
+   */
+  public void setSfxVolume(float sfxVolume) {
+    this.sfxVolume = sfxVolume;
+  }
+
+  /**
+   * @param musicFileName
+   *          the musicFileName to set
+   */
+  public void setMusicFileName(String musicFileName) {
+    this.musicFileName = musicFileName;
+  }
+
+  /**
    * Get the backGroundImage.
    * 
    * @return the backGroundImage.
@@ -203,9 +296,9 @@ public class Options {
   }
 
   /**
-   * Get the backGroundColor
+   * Get the backGroundColor.
    * 
-   * @return
+   * @return the backgroundColour
    */
   public static Color getBackGroundColor() {
     return DEFAULT_BACKCOLOUR;
