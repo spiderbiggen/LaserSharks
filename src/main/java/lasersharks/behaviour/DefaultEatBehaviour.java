@@ -9,12 +9,12 @@ import lasersharks.interfaces.Displayable;
  * @author SEMGroup27
  *
  */
-public class CantEatBehaviour implements EatBehaviour {
+public class DefaultEatBehaviour implements EatBehaviour {
 
   /**
    * the constructor of the behaviour object.
    */
-  public CantEatBehaviour() {
+  public DefaultEatBehaviour() {
   }
 
   /**

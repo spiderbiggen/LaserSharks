@@ -7,12 +7,12 @@ import lasersharks.behaviour.interfaces.MoveBehaviour;
  * @author SEMGroup27
  *
  */
-public class CantMoveBehaviour implements MoveBehaviour {
+public class AmmunitionMoveBehaviour implements MoveBehaviour {
 
   /**
    * The constructor of the behaviour object.
    */
-  public CantMoveBehaviour() {
+  public AmmunitionMoveBehaviour() {
   }
 
   /**

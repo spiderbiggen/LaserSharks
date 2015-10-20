@@ -15,7 +15,7 @@ import lasersharksgui.panes.StandardPane;
  * @author sytze
  *
  */
-public class DefaultEatBehaviour implements EatBehaviour {
+public class LaserSharkEatBehaviour implements EatBehaviour {
 
   private Displayable swimmer;
 
@@ -28,7 +28,7 @@ public class DefaultEatBehaviour implements EatBehaviour {
    * @param swimmer
    *          the swimmer it should apply to.
    */
-  public DefaultEatBehaviour(Displayable swimmer) {
+  public LaserSharkEatBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
   }
 

@@ -8,7 +8,7 @@ import lasersharks.interfaces.Displayable;
  * @author sytze
  *
  */
-public class BotMoveBehaviour implements MoveBehaviour {
+public class DefaultMoveBehaviour implements MoveBehaviour {
   
   Displayable swimmer;
   
@@ -16,7 +16,7 @@ public class BotMoveBehaviour implements MoveBehaviour {
    * the constructor.
    * @param swimmer the fish this behaviour applies to.
    */
-  public BotMoveBehaviour(Displayable swimmer) {
+  public DefaultMoveBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
   }
   
