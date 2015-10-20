@@ -9,7 +9,7 @@ import lasersharks.Position;
 import lasersharks.interfaces.AmmoSpawner;
 import lasersharks.interfaces.LaserSpawner;
 import lasersharks.seaObjects.Ammo;
-import lasersharks.seaObjects.Enemy;
+import lasersharks.seaObjects.Fish;
 import lasersharks.seaObjects.FishBot;
 import lasersharks.seaObjects.LaserBullet;
 import lasersharks.seaObjects.LaserShark;
@@ -128,7 +128,7 @@ public class FishFactory implements FishSpawner, AmmoSpawner, LaserSpawner {
     }
 
     int enemyImageIndex = rng.nextInt(fishImages.length);
-    return new Enemy(fishImages[enemyImageIndex].image, fishImages[enemyImageIndex].width,
+    return new Fish(fishImages[enemyImageIndex].image, fishImages[enemyImageIndex].width,
         fishImages[enemyImageIndex].height, new Position(posX,
             (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), size,
         (double) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);

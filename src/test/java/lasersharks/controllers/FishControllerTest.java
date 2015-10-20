@@ -12,7 +12,7 @@ import lasersharks.Direction;
 import lasersharks.Position;
 import lasersharks.controllers.FishController;
 import lasersharks.enemies.FishFactory;
-import lasersharks.seaObjects.Enemy;
+import lasersharks.seaObjects.Fish;
 import lasersharks.seaObjects.FishBot;
 import lasersharks.seaObjects.LaserShark;
 
@@ -75,7 +75,7 @@ public class FishControllerTest {
     fishCon.setShark(
         new LaserShark(new Position(POSITION_X, POSITION_Y), sizeOfShark, SPEED, Direction.East));
     for (int i = 0; i < FISHAMOUNT; i++) {
-      fishCon.addFish(new Enemy("", 1, 1,
+      fishCon.addFish(new Fish("", 1, 1,
           new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH)
           , Float.valueOf(SIZE),
           Double.valueOf(SPEED), 
