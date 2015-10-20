@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
  * @author SEMGroup27
  *
  */
+@SuppressWarnings("restriction")
 public class ShootController implements EventHandler<KeyEvent> {
 
   private FishController fishController;
@@ -32,7 +33,6 @@ public class ShootController implements EventHandler<KeyEvent> {
     if (event.getCode() == KeyCode.L) {
       if (event.getEventType() == KeyEvent.KEY_PRESSED && !pressedSpace) {
         shoot();
-        System.out.println("shot");
         pressedSpace = true;
       }
       if (event.getEventType() == KeyEvent.KEY_RELEASED && pressedSpace) {

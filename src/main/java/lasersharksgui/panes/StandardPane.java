@@ -152,7 +152,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
       Logger.getInstance().write("Sound muted", "Mute sound button pressed");
     } else {
       muteButton.setGraphic(muteButtonImage);
-      AudioController.getInstance().unMuteAll();
+      AudioController.getInstance().unmuteAll();
       Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
     }
 

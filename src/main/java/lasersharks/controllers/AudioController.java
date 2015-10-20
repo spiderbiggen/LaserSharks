@@ -40,8 +40,7 @@ public class AudioController {
       if (!Options.getInstance().isMutedMusic()) {
         musicPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
         musicPlayer.setAutoPlay(true);
-        musicPlayer.play();
-        Options.getInstance().setPlayingMusic(true);
+        resumeMusic();
       }
     } catch (Exception e) {
       Logger.getInstance().write("MusicPlay failed", e.getMessage());
@@ -59,6 +58,7 @@ public class AudioController {
       if (!Options.getInstance().isMutedSfx()) {
         sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
         Options.getInstance().setPlayingMusic(true);
+        sfxPlayer.setVolume(Options.getInstance().getSfxVolume());
         sfxPlayer.play();
       }
     } catch (Exception e) {
@@ -95,7 +95,9 @@ public class AudioController {
    */
   public boolean resumeMusic() {
     if (musicPlayer != null) {
+      musicPlayer.setVolume(Options.getInstance().getMusicVolume());
       musicPlayer.play();
+      Options.getInstance().setPlayingMusic(true);
       return true;
     }
     return false;
@@ -145,5 +147,31 @@ public class AudioController {
    */
   public void unmuteSfx() {
     Options.getInstance().setMutedSfx(false);
+  }
+
+  /**
+   * Adjusts the music volume of the musicPlayer and in the {@link Option} Class.
+   * 
+   * @param newVolume
+   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   */
+  public void adjustMusicVolume(double newVolume) {
+    newVolume = Math.min(Math.max(newVolume, 0), 1.0);
+    Options.getInstance().setMusicVolume(newVolume);
+
+    if (musicPlayer != null) {
+      musicPlayer.setVolume(newVolume);
+    }
+  }
+
+  /**
+   * Adjusts the sound effects volume in the {@link Option} Class.
+   * 
+   * @param newVolume
+   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   */
+  public void adjustSfxVolume(double newVolume) {
+    newVolume = Math.min(Math.max(newVolume, 0), 1.0);
+    Options.getInstance().setSfxVolume(newVolume);
   }
 }

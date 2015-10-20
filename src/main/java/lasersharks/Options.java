@@ -20,10 +20,15 @@ public class Options {
   private static final int DEFAULT_WIDTH = 1920;
   private static final int DEFAULT_HEIGHT = 1080;
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
+  private static final String DEFAULT_HIT_SOUND_FILENAME = "src/main/resources/soundEffect1.wav";
+  private static final String DEFAULT_LASER_SOUND_FILENAME = "src/main/resources/shoot.wav";
+  
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
   private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
 
   private String musicFileName;
+  private String hitSoundFileName;
+  private String laserSoundFileName;
   private boolean playingMusic = true;
   private boolean mutedMusic = false;
   private boolean mutedSfx = false;
@@ -45,6 +50,11 @@ public class Options {
     this.dimension = screenRes;
     factoryRng = new Random();
     spawnRng = factoryRng;
+    
+    this.setBackGround(DEFAULT_BACKGROUND_IMAGE);
+    this.setMusicFilename(DEFAULT_MUSIC_FILENAME);
+    this.setHitSoundFileName(DEFAULT_HIT_SOUND_FILENAME);
+    this.setLaserSoundFileName(DEFAULT_LASER_SOUND_FILENAME);
   }
 
   /**
@@ -57,10 +67,7 @@ public class Options {
     if (currentOptions != null) {
       return currentOptions;
     }
-    currentOptions = new Options(getScreenSize());
-    currentOptions.setBackGround(DEFAULT_BACKGROUND_IMAGE);
-    currentOptions.setMusicFilename(DEFAULT_MUSIC_FILENAME);
-    return currentOptions;
+    return new Options(getScreenSize());
   }
 
   /**
@@ -199,6 +206,22 @@ public class Options {
     return musicFileName;
   }
 
+  public String getHitSoundFileName() {
+    return hitSoundFileName;
+  }
+
+  public void setHitSoundFileName(String hitSoundFileName) {
+    this.hitSoundFileName = hitSoundFileName;
+  }
+
+  public String getLaserSoundFileName() {
+    return laserSoundFileName;
+  }
+
+  public void setLaserSoundFileName(String laserSoundFileName) {
+    this.laserSoundFileName = laserSoundFileName;
+  }
+
   /**
    * @return the playMusic
    */
@@ -256,11 +279,11 @@ public class Options {
   }
 
   /**
-   * @param musicVolume
+   * @param newVolume
    *          the musicVolume to set
    */
-  public void setMusicVolume(float musicVolume) {
-    this.musicVolume = musicVolume;
+  public void setMusicVolume(double newVolume) {
+    this.musicVolume = newVolume;
   }
 
   /**
@@ -274,7 +297,7 @@ public class Options {
    * @param sfxVolume
    *          the sfxVolume to set
    */
-  public void setSfxVolume(float sfxVolume) {
+  public void setSfxVolume(double sfxVolume) {
     this.sfxVolume = sfxVolume;
   }
 
