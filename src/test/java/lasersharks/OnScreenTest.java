@@ -15,8 +15,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
- * @author Stefan
- *
+ * Parameterized test for the {@link Position#onScreen(double)} method.
+ * 
+ * @author SEMGroup27
  */
 @RunWith(Parameterized.class)
 public class OnScreenTest {

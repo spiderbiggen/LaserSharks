@@ -1,4 +1,4 @@
-package lasersharks;
+package lasersharks.seaobjects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -9,16 +9,17 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.Position;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaObjects.Ammo;
-import lasersharks.seaObjects.FishBot;
-import lasersharks.seaObjects.LaserShark;
-import lasersharks.seaObjects.SeaObject;
+import lasersharks.seaobjects.Ammo;
+import lasersharks.seaobjects.Enemy;
+import lasersharks.seaobjects.LaserShark;
+import lasersharks.seaobjects.SeaObject;
 
 /**
  * Class for testing Lazershark object.
  * 
- * @author Michiel
+ * @author SEMGroup27
  *
  */
 public class LaserSharkTest extends SeaObjectTest {
@@ -95,7 +96,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testLaserSharkGrowsWhenEatingFish() {
-    Displayable mockedFish = mock(FishBot.class);
+    Displayable mockedFish = mock(Enemy.class);
     when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(true);
 
@@ -123,7 +124,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testEatenFishIsKilled() {
-    SeaObject mockedFish = mock(FishBot.class);
+    SeaObject mockedFish = mock(Enemy.class);
     when(mockedFish.isAlive()).thenReturn(true);
 
     assertTrue(mockedFish.isAlive());

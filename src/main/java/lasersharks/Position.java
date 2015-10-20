@@ -2,6 +2,8 @@ package lasersharks;
 
 /**
  * Class Position.
+ * 
+ * @author SEMGroup27
  */
 public class Position {
   private static final double HEIGHT_MULTIPLIER = 0.035;

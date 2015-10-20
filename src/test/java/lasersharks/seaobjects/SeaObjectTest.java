@@ -1,4 +1,4 @@
-package lasersharks;
+package lasersharks.seaobjects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,16 +7,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.Direction;
+import lasersharks.Position;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaObjects.SeaObject;
+import lasersharks.seaobjects.SeaObject;
 
 /**
  * Class for testing SeaObjects.
  * 
- * @author Stefan
+ * @author SEMGroup27
  *
  */
 public abstract class SeaObjectTest {
@@ -27,7 +28,7 @@ public abstract class SeaObjectTest {
   protected final float size = 30;
   protected final int speed = 40;
   protected final Direction direction = Direction.East;
-  
+
   /**
    * Tear down after the test.
    */
@@ -106,12 +107,11 @@ public abstract class SeaObjectTest {
     SeaObject mockedFish = mock(SeaObject.class);
     when(mockedFish.getPosition()).thenReturn(posOnScreen);
     when(mockedFish.getSize()).thenReturn(size);
-    //TODO: change the way how this is tested so it doesn't give nullpointer exceptions.
-    //This has to do with storing mockito objects in a variable and functions missing.
-//    assertTrue(fish1.collision(mockedFish));
+    // TODO: change the way how this is tested so it doesn't give nullpointer exceptions.
+    // This has to do with storing mockito objects in a variable and functions missing.
+    // assertTrue(fish1.collision(mockedFish));
   }
 
-  
   /**
    * Test for {@link SeaObject#collision(SeaObject)}.
    */
@@ -120,12 +120,11 @@ public abstract class SeaObjectTest {
     SeaObject mockedFish = mock(SeaObject.class);
     when(mockedFish.getPosition()).thenReturn(posOffScreen);
     when(mockedFish.getSize()).thenReturn(size);
-    //TODO: change the way how this is tested so it doesn't give nullpointer exceptions.
-    //This has to do with storing mockito objects in a variable and functions missing.
- //   assertFalse(fish1.collision(mockedFish));
+    // TODO: change the way how this is tested so it doesn't give nullpointer exceptions.
+    // This has to do with storing mockito objects in a variable and functions missing.
+    // assertFalse(fish1.collision(mockedFish));
   }
-  
-  
+
   /**
    * Test for {@link SeaObject#move()}.
    */
@@ -164,7 +163,7 @@ public abstract class SeaObjectTest {
     fish1.setPosition(posOffScreen);
     assertFalse(fish1.isOnScreen());
   }
-  
+
   /**
    * Test for {@link SeaObject#isAlive()}.
    */

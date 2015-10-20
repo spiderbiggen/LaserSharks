@@ -4,15 +4,15 @@ import lasersharks.Highscores;
 import lasersharks.Logger;
 import lasersharks.behaviour.interfaces.EatBehaviour;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaObjects.Ammo;
-import lasersharks.seaObjects.FishBot;
-import lasersharks.seaObjects.LaserShark;
+import lasersharks.seaobjects.Ammo;
+import lasersharks.seaobjects.Enemy;
+import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.panes.StandardPane;
 
 /**
  * The default eat behaviour.
  * 
- * @author sytze
+ * @author SEMGroup27
  *
  */
 public class DefaultEatBehaviour implements EatBehaviour {
@@ -40,8 +40,8 @@ public class DefaultEatBehaviour implements EatBehaviour {
    */
   @Override
   public void eat(Displayable fish) {
-    if (fish instanceof FishBot) {
-      eat((FishBot) fish);
+    if (fish instanceof Enemy) {
+      eat((Enemy) fish);
     }
     if (fish instanceof Ammo) {
       eat((Ammo) fish);
@@ -54,7 +54,7 @@ public class DefaultEatBehaviour implements EatBehaviour {
    * @param fish
    *          the fish that should be eaten.
    */
-  public void eat(FishBot fish) {
+  public void eat(Enemy fish) {
     if (fish.isAlive()) {
       Logger.getInstance().write("Fish eaten",
           "Old sharksize: " + swimmer.getSize() + "," + "Fish size: " + fish.getSize() + ", "

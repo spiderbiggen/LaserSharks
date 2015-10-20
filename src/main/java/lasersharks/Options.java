@@ -40,7 +40,7 @@ public class Options {
     factoryRng = new Random();
     spawnRng = factoryRng;
   }
-  
+
   /**
    * Gets the currentOptions object that is used. If there is none, a new one is created using
    * standard values.
@@ -63,7 +63,7 @@ public class Options {
   public static void destroyInstance() {
     currentOptions = null;
   }
-  
+
   /**
    * Checks if two options objects are equal.
    * 
@@ -213,31 +213,37 @@ public class Options {
 
   /**
    * Get random number generator for factory.
+   * 
    * @return random number generator.
    */
   public Random getFactoryRng() {
     return factoryRng;
   }
-  
+
   /**
    * set the random number generator for factory.
-   * @param rng random number generator.
+   * 
+   * @param rng
+   *          random number generator.
    */
   public void setFactoryRng(Random rng) {
     this.factoryRng = rng;
   }
-  
+
   /**
    * Get random number generator for factory.
+   * 
    * @return random number generator.
    */
   public Random getSpawnRng() {
     return spawnRng;
   }
-  
+
   /**
    * set the random number generator for factory.
-   * @param rng random number generator.
+   * 
+   * @param rng
+   *          random number generator.
    */
   public void setSpawnRng(Random rng) {
     this.spawnRng = rng;

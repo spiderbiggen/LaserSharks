@@ -1,7 +1,7 @@
 /**
  * 
  */
-package lasersharks.controllers;
+package lasersharks;
 
 import static org.junit.Assert.assertEquals;
 

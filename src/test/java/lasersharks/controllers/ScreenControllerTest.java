@@ -1,34 +1,31 @@
 package lasersharks.controllers;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import javafx.scene.Scene;
-import lasersharks.controllers.FishController;
-import lasersharks.controllers.ScreenController;
-import lasersharks.seaObjects.LaserShark;
+import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 
 /**
+ * Test for {@link ScreenController} class.
  * 
- * @author SEM Group27
- *
+ * @author SEMGroup27
  */
 
 @SuppressWarnings("restriction")
 public class ScreenControllerTest {
 
   private GamePane currentPane;
+  @SuppressWarnings("unused")
   private Scene scene;
   private ScreenController screenCon;
   private LaserShark shark;
   private FishController fishCon;
+  @SuppressWarnings("unused")
   private MainGui mainGui;
-  private static final float ABOVE_WIN_SIZE = 1001.0f;
-  private static final float UNDER_WIN_SIZE = 999.0f;
 
   /**
    * Set up which is executed before every test.

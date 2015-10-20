@@ -19,7 +19,7 @@ import lasersharks.controllers.ScreenController;
 import lasersharks.controllers.ShootController;
 import lasersharks.interfaces.DirectionCallback;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaObjects.LaserShark;
+import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.interfaces.Stoppable;
 
@@ -205,9 +205,7 @@ public class GamePane extends StandardPane implements Stoppable {
   public void stop() {
     this.clearPaneOfImageView();
     this.stopGame();
-    MainGui.getInstance().getCurrentScene().removeEventHandler(
-        KeyEvent.ANY, 
-        directionInputController
-    );
+    MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY,
+        directionInputController);
   }
 }

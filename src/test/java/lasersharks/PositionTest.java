@@ -8,7 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Stefan .
+ * Test for the {@link Position} class.
+ * 
+ * @author SEMGroup27
  *
  */
 public class PositionTest {

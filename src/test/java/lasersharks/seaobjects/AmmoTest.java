@@ -1,18 +1,18 @@
 /**
  * 
  */
-package lasersharks;
+package lasersharks.seaobjects;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import lasersharks.seaObjects.Ammo;
+import lasersharks.Position;
+import lasersharks.seaobjects.Ammo;
 
 /**
- * @author Stefan Breetveld
+ * @author SEMGroup27
  *
  */
 public class AmmoTest {
@@ -32,7 +32,7 @@ public class AmmoTest {
   }
 
   /**
-   * Test method for {@link lasersharks.seaObjects.Ammo#getImageResource()}.
+   * Test method for {@link lasersharks.seaobjects.Ammo#getImageResource()}.
    */
   @Test
   public void testGetImageResource() {
@@ -40,7 +40,7 @@ public class AmmoTest {
   }
 
   /**
-   * Test method for {@link lasersharks.seaObjects.Ammo#getWidthScale()}.
+   * Test method for {@link lasersharks.seaobjects.Ammo#getWidthScale()}.
    */
   @Test
   public void testGetWidthScale() {
@@ -51,7 +51,7 @@ public class AmmoTest {
   }
 
   /**
-   * Test method for {@link lasersharks.seaObjects.Ammo#getPickupAmount()}.
+   * Test method for {@link lasersharks.seaobjects.Ammo#getPickupAmount()}.
    */
   @Test
   public void testGetAmount() {

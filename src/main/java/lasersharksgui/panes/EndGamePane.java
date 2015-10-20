@@ -14,7 +14,7 @@ import lasersharks.controllers.RestartGameController;
 import lasersharksgui.MainGui;
 
 /**
- * @author Stefan
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")

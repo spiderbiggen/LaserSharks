@@ -1,7 +1,10 @@
-package lasersharks.seaObjects;
+package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
+import lasersharks.behaviour.BotMoveBehaviour;
+import lasersharks.behaviour.CantEatBehaviour;
+import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
  * Class for the first enemy.
@@ -9,7 +12,7 @@ import lasersharks.Position;
  * @author SEMGroup27
  *
  */
-public class Enemy extends FishBot {
+public class Enemy extends SeaObject {
   private String image;
   private int imgHeight;
   private int imgWidth;
@@ -32,19 +35,15 @@ public class Enemy extends FishBot {
    * @param direction
    *          Starting direction.
    */
-  public Enemy(
-      String image, 
-      int imgHeight, 
-      int imgWidth, 
-      Position position, 
-      Float size, 
-      Double speed, 
-      Direction direction
-  ) {
+  public Enemy(String image, int imgHeight, int imgWidth, Position position, Float size,
+      Double speed, Direction direction) {
     super(position, size, speed, direction);
     this.image = image;
     this.imgHeight = imgHeight;
     this.imgWidth = imgWidth;
+    collisionBehaviour = new DefaultCollisionBehaviour(this);
+    moveBehaviour = new BotMoveBehaviour(this);
+    eatBehaviour = new CantEatBehaviour();
   }
 
   @Override

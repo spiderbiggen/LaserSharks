@@ -1,7 +1,5 @@
 package lasersharksgui;
 
-import java.util.Random;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -10,7 +8,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lasersharks.Logger;
 import lasersharks.Options;
-import lasersharks.controllers.RestartGameController;
 import lasersharksgui.panes.GamePane;
 import lasersharksgui.panes.StandardPane;
 
@@ -64,11 +61,11 @@ public class MainGui extends Application {
     try {
       StandardPane paneToShow = (StandardPane) paneClass.newInstance();
       paneToShow.setOpacity(1.0);
-      
+
       currentPane.setOpacity(0.0);
       currentPane.stop();
       currentPane = paneToShow;
-      
+
       stackPane.getChildren().add(paneToShow);
     } catch (Exception e) {
       Logger.getInstance().write(e.getClass().getName() + "could not browse", e.getMessage());
@@ -116,7 +113,7 @@ public class MainGui extends Application {
   private static void setInstance(MainGui newInstance) {
     instance = newInstance;
   }
-  
+
   public static void clearInstance() {
     instance = null;
   }

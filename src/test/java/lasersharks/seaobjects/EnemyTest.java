@@ -1,11 +1,11 @@
-package lasersharks.enemies;
+package lasersharks.seaobjects;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
-import lasersharks.FishBotTest;
-import lasersharks.seaObjects.Enemy;
+import lasersharks.seaobjects.Enemy;
 
 /**
  * The test for the enemy1 class.
@@ -13,24 +13,18 @@ import lasersharks.seaObjects.Enemy;
  * @author SEMGroup27
  *
  */
-public class EnemyTest extends FishBotTest {
+public class EnemyTest extends SeaObjectTest {
   private static final String IMAGE = "enemy-1.png";
+
   /**
    * Run the test on correct item.
    */
   @Before
   public void setUp() {
-    this.fish1 = new Enemy(
-        IMAGE,
-        1,
-        1,
-        this.posOnScreen,
-        Float.valueOf(this.size),
-        Double.valueOf(this.speed),
-        this.direction
-    );
-  } 
-  
+    this.fish1 = new Enemy(IMAGE, 1, 1, this.posOnScreen, Float.valueOf(this.size),
+        Double.valueOf(this.speed), this.direction);
+  }
+
   /**
    * See if proper image is being used.
    */

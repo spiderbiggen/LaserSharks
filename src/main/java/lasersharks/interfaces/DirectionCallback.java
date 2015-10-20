@@ -5,7 +5,7 @@ import lasersharks.Direction;
 /**
  * Interface for handeling direction callbacks.
  * 
- * @author Youri
+ * @author SEMGroup27
  *
  */
 public interface DirectionCallback {
