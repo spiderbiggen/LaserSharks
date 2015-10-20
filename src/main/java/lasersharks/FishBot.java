@@ -7,7 +7,7 @@ package lasersharks;
  * @author SEMGroup27
  *
  */
-public abstract class FishBot extends Fish {
+public abstract class FishBot extends SeaObject {
 
   /**
    * Constructor class for FishBot.
@@ -25,6 +25,6 @@ public abstract class FishBot extends Fish {
     super(position, size, speed, direction);
     collisionBehaviour = new DefaultCollisionBehaviour(this);
     moveBehaviour = new BotMoveBehaviour(this);
-    eatBehaviour = new CantEatBehaviour(this);
+    eatBehaviour = new CantEatBehaviour();
   }
 }

@@ -1,5 +1,7 @@
 package lasersharksgui;
 
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -7,8 +9,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lasersharks.Logger;
-import lasersharks.Options;
-import lasersharks.RestartGameController;
+import lasersharks.controllers.Options;
+import lasersharks.controllers.RestartGameController;
 
 /**
  * The MainGui class is used for running the game.
@@ -109,7 +111,7 @@ public class MainGui extends Application {
   /**
    * @return the currentPane
    */
-  public Pane getCurrentPane() {
+  public synchronized Pane getCurrentPane() {
     return currentPane;
   }
 
@@ -120,6 +122,10 @@ public class MainGui extends Application {
 
   private static void setInstance(MainGui newInstance) {
     instance = newInstance;
+  }
+  
+  public static void clearInstance() {
+    instance = null;
   }
 
 }

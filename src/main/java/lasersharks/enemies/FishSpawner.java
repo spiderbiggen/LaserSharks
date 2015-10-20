@@ -2,7 +2,11 @@ package lasersharks.enemies;
 
 import java.util.Random;
 
+import lasersharks.Ammo;
 import lasersharks.FishBot;
+import lasersharks.LaserBullet;
+import lasersharks.LaserShark;
+import lasersharks.Displayable;
 
 /**
  * Interface for Fishfactory.
@@ -31,10 +35,10 @@ public interface FishSpawner {
   FishBot generateFish();
 
   /**
-   * Set the seed for this spawner. if the new seed is null do not use any seed.
+   * Set the seed for this spawner.
    * 
    * @param rng
    *          new seed
    */
-  void setRng(Random rng);
+  void setFishRng(Random rng);
 }
