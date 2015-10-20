@@ -11,16 +11,16 @@ import lasersharks.interfaces.Displayable;
  */
 public class BotMoveBehaviour implements MoveBehaviour {
 
-  Displayable swimmer;
+  private Displayable displayable;
 
   /**
    * the constructor.
    * 
-   * @param swimmer
+   * @param displayable
    *          the fish this behaviour applies to.
    */
-  public BotMoveBehaviour(Displayable swimmer) {
-    this.swimmer = swimmer;
+  public BotMoveBehaviour(Displayable displayable) {
+    this.displayable = displayable;
   }
 
   /**
@@ -32,8 +32,8 @@ public class BotMoveBehaviour implements MoveBehaviour {
    */
   @Override
   public boolean move(double frametime) {
-    return swimmer.getPosition().updatePosition(swimmer.getDirection(),
-        (swimmer.getSpeed() / frametime), swimmer.getSize());
+    return displayable.getPosition().updatePosition(displayable.getDirection(),
+        (displayable.getSpeed() / frametime), displayable.getSize());
   }
 
 }
