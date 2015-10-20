@@ -6,7 +6,6 @@ import lasersharks.Ammo;
 import lasersharks.AmmoSpawner;
 //import groovyjarjarcommonscli.Options;
 import lasersharks.Direction;
-import lasersharks.FishBot;
 import lasersharks.LaserBullet;
 import lasersharks.LaserShark;
 import lasersharks.LaserSpawner;
@@ -51,7 +50,7 @@ public class FishFactory implements FishSpawner, AmmoSpawner, LaserSpawner {
    * this value is used as the seed for the fish.
    */
   private Random fishRng;
-  
+
   /**
    * this value is used as the seed for the ammo.
    */
@@ -110,7 +109,7 @@ public class FishFactory implements FishSpawner, AmmoSpawner, LaserSpawner {
   }
 
   @Override
-  public FishBot generateFish(Random rng) {
+  public Enemy generateFish(Random rng) {
     double posX;
     Direction dir;
 
@@ -128,13 +127,13 @@ public class FishFactory implements FishSpawner, AmmoSpawner, LaserSpawner {
 
     int enemyImageIndex = rng.nextInt(fishImages.length);
     return new Enemy(fishImages[enemyImageIndex].image, fishImages[enemyImageIndex].width,
-        fishImages[enemyImageIndex].height, new Position(posX,
-            (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), size,
+        fishImages[enemyImageIndex].height,
+        new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), size,
         (double) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
   }
 
   @Override
-  public FishBot generateFish() {
+  public Enemy generateFish() {
     return generateFish(this.fishRng);
   }
 
@@ -142,7 +141,7 @@ public class FishFactory implements FishSpawner, AmmoSpawner, LaserSpawner {
   public void setFishRng(Random newRng) {
     this.fishRng = newRng;
   }
-  
+
   @Override
   public void setAmmoRng(Random newRng) {
     this.ammoRng = newRng;

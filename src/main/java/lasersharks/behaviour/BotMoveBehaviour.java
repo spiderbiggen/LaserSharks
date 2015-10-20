@@ -1,4 +1,6 @@
-package lasersharks;
+package lasersharks.behaviour;
+
+import lasersharks.Displayable;
 
 /**
  * represents the moving behaviour of a FishBot.

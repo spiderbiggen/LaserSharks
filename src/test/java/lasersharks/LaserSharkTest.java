@@ -9,6 +9,8 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.enemies.Enemy;
+
 /**
  * Class for testing Lazershark object.
  * 
@@ -89,7 +91,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testLaserSharkGrowsWhenEatingFish() {
-    Displayable mockedFish = mock(FishBot.class);
+    Displayable mockedFish = mock(Enemy.class);
     when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(true);
 
@@ -117,7 +119,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testEatenFishIsKilled() {
-    SeaObject mockedFish = mock(FishBot.class);
+    SeaObject mockedFish = mock(Enemy.class);
     when(mockedFish.isAlive()).thenReturn(true);
 
     assertTrue(mockedFish.isAlive());

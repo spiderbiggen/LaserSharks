@@ -2,12 +2,6 @@ package lasersharks.enemies;
 
 import java.util.Random;
 
-import lasersharks.Ammo;
-import lasersharks.FishBot;
-import lasersharks.LaserBullet;
-import lasersharks.LaserShark;
-import lasersharks.Displayable;
-
 /**
  * Interface for Fishfactory.
  * 
@@ -24,7 +18,7 @@ public interface FishSpawner {
    * @param rng
    *          random number generator to use.
    */
-  FishBot generateFish(Random rng);
+  Enemy generateFish(Random rng);
 
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
@@ -32,7 +26,7 @@ public interface FishSpawner {
    * 
    * @return a random fish with random speed, size and position.
    */
-  FishBot generateFish();
+  Enemy generateFish();
 
   /**
    * Set the seed for this spawner.

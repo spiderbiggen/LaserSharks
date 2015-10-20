@@ -1,5 +1,8 @@
 package lasersharks;
 
+import lasersharks.behaviour.DefaultCollisionBehaviour;
+import lasersharks.behaviour.DefaultEatBehaviour;
+import lasersharks.behaviour.SharkMoveBehaviour;
 import lasersharks.controllers.DirectionCallback;
 
 /**

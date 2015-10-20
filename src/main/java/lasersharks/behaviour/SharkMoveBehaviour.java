@@ -1,4 +1,6 @@
-package lasersharks;
+package lasersharks.behaviour;
+
+import lasersharks.Displayable;
 
 /**
  * represents the default move behaviour of a shark the player controls.

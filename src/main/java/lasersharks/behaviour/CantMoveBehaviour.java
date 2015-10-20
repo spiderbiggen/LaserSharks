@@ -1,4 +1,4 @@
-package lasersharks;
+package lasersharks.behaviour;
 
 /**
  * Represents behaviour of a displayable that can't move.

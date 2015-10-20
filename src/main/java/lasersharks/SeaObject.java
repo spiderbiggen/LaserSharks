@@ -1,6 +1,9 @@
 package lasersharks;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.behaviour.CollisionBehaviour;
+import lasersharks.behaviour.EatBehaviour;
+import lasersharks.behaviour.MoveBehaviour;
 
 /**
  * Abstract class for objects of the great blue.

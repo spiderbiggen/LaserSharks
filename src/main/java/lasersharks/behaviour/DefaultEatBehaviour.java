@@ -1,5 +1,11 @@
-package lasersharks;
+package lasersharks.behaviour;
 
+import lasersharks.Ammo;
+import lasersharks.Displayable;
+import lasersharks.Highscores;
+import lasersharks.LaserShark;
+import lasersharks.Logger;
+import lasersharks.enemies.Enemy;
 import lasersharksgui.StandardPane;
 
 /**
@@ -33,8 +39,8 @@ public class DefaultEatBehaviour implements EatBehaviour {
    */
   @Override
   public void eat(Displayable fish) {
-    if (fish instanceof FishBot) {
-      eat((FishBot) fish);
+    if (fish instanceof Enemy) {
+      eat((Enemy) fish);
     }
     if (fish instanceof Ammo) {
       eat((Ammo) fish);
@@ -47,7 +53,7 @@ public class DefaultEatBehaviour implements EatBehaviour {
    * @param fish
    *          the fish that should be eaten.
    */
-  public void eat(FishBot fish) {
+  public void eat(Enemy fish) {
     if (fish.isAlive()) {
       Logger.getInstance().write("Fish eaten",
           "Old sharksize: " + swimmer.getSize() + "," + "Fish size: " + fish.getSize() + ", "

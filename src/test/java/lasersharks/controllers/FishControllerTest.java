@@ -9,10 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import lasersharks.Direction;
-import lasersharks.FishBot;
 import lasersharks.LaserShark;
 import lasersharks.Position;
-import lasersharks.controllers.FishController;
 import lasersharks.enemies.Enemy;
 import lasersharks.enemies.FishFactory;
 
@@ -56,7 +54,7 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
-    FishBot fishBot = new FishFactory().generateFish();
+    Enemy fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addFish(fishBot);
     assertTrue(fishCon.getNextCycleInformation(1).contains(fishBot));
@@ -76,10 +74,8 @@ public class FishControllerTest {
         new LaserShark(new Position(POSITION_X, POSITION_Y), sizeOfShark, SPEED, Direction.East));
     for (int i = 0; i < FISHAMOUNT; i++) {
       fishCon.addFish(new Enemy("", 1, 1,
-          new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH)
-          , Float.valueOf(SIZE),
-          Double.valueOf(SPEED), 
-          Direction.East));
+          new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH),
+          Float.valueOf(SIZE), Double.valueOf(SPEED), Direction.East));
     }
     return fishCon;
   }
@@ -107,7 +103,7 @@ public class FishControllerTest {
     fishCon.getNextCycleInformation(1);
     assertTrue(fishCon.getShark().getSize() > oldSize);
   }
-  
+
   /**
    * Test for shooting that fails.
    */
@@ -116,7 +112,7 @@ public class FishControllerTest {
     fishCon.getShark().decreaseAmmo(Integer.MAX_VALUE);
     assertFalse(fishCon.shootLaser());
   }
-  
+
   /**
    * Test for shooting that succeeds.
    */
@@ -124,7 +120,7 @@ public class FishControllerTest {
   public void testShootLaserTrue() {
     int oldAmmo = fishCon.getShark().getAmmo();
     assertTrue(fishCon.shootLaser());
-    int newAmmo = fishCon.getShark().getAmmo();    
+    int newAmmo = fishCon.getShark().getAmmo();
     assertTrue(oldAmmo - 1 == newAmmo);
   }
 }
