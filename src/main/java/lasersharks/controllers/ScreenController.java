@@ -4,7 +4,7 @@ import java.util.List;
 
 import javafx.scene.Scene;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaObjects.LaserShark;
+import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 import lasersharksgui.panes.LosingPane;

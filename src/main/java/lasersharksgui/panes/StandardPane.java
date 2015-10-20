@@ -25,7 +25,7 @@ import lasersharksgui.interfaces.Stoppable;
  * The standardPane is the standard for creating new panes. It is an empty pane containing the
  * background and music playing.
  * 
- * @author sytze
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")
@@ -73,10 +73,11 @@ public abstract class StandardPane extends Pane implements Stoppable {
    * This function adds a background to the panel.
    */
   public void addBackGround() {
-    BackgroundImage myBI = new BackgroundImage(new Image(
-        Options.getInstance().getBackGroundImage(), Options.getGlobalWidth(),
-        Options.getGlobalHeight(), true, false), BackgroundRepeat.REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    BackgroundImage myBI = new BackgroundImage(
+        new Image(Options.getInstance().getBackGroundImage(), Options.getGlobalWidth(),
+            Options.getGlobalHeight(), true, false),
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
     setBackground(new Background(myBI));
   }
 
@@ -129,7 +130,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
   public static void playSoundEffect(String path) {
     try {
       soundPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-      if(shouldEffectPlay){
+      if (shouldEffectPlay) {
         soundPlayer.play();
       }
     } catch (Exception e) {
@@ -178,8 +179,8 @@ public abstract class StandardPane extends Pane implements Stoppable {
    *          how far from the middle of the screen the message should be shown.
    */
   public void addMidText(String message, int textSize, double deltaY) {
-    addText(message, textSize, new Position(Position.middlePosition().getPosX(), Position
-        .middlePosition().getPosY() - deltaY));
+    addText(message, textSize, new Position(Position.middlePosition().getPosX(),
+        Position.middlePosition().getPosY() - deltaY));
   }
 
   /**

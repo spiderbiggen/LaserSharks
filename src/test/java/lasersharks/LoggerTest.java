@@ -15,7 +15,8 @@ import org.junit.Test;
 
 /**
  * Test for logger classe.
- * @author Youri
+ * 
+ * @author SEMGroup27
  *
  */
 public class LoggerTest {
@@ -28,7 +29,7 @@ public class LoggerTest {
   public void tearDown() {
     Logger.setInstance(null);
   }
-  
+
   /**
    * Make sure get instance doesn't return null.
    */
@@ -36,7 +37,7 @@ public class LoggerTest {
   public void testGetInstanceNotNull() {
     assertTrue(Logger.getInstance() != null);
   }
-  
+
   /**
    * Make sure getInstance always returns same object if no setters used.
    */
@@ -45,21 +46,22 @@ public class LoggerTest {
     Logger l = Logger.getInstance();
     assertEquals(l, Logger.getInstance());
   }
-  
+
   /**
    * Make sure getInstance returns last set instance.
    */
   @Test
   public void testLastSetInstanceMock() {
     Logger l = mock(Logger.class);
-    
+
     Logger.setInstance(l);
     assertEquals(l, Logger.getInstance());
   }
-  
+
   /**
    * Make sure file being written to is handled correctly.
-   * @throws IOException 
+   * 
+   * @throws IOException
    */
   @Test
   public void testFileHandling() throws IOException {
@@ -67,10 +69,11 @@ public class LoggerTest {
     Logger.getInstance(f);
     assertEquals(f, Logger.getInstance().getFileWriter());
   }
-  
+
   /**
    * Test for writing to clean file.
-   * @throws IOException 
+   * 
+   * @throws IOException
    */
   @Test
   public void cleanWriteTest() throws IOException {
@@ -94,13 +97,8 @@ public class LoggerTest {
     }
     reader.close();
     if (content != null) {
-      assertEquals(
-          " : testevent : testspecifics", 
-          content.substring(
-              TIMESTAMP_CHARS, 
-              content.length()
-          )
-      );
+      assertEquals(" : testevent : testspecifics",
+          content.substring(TIMESTAMP_CHARS, content.length()));
     } else {
       assertEquals(null, content);
     }

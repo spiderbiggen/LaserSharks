@@ -5,29 +5,35 @@ import lasersharks.interfaces.Displayable;
 
 /**
  * represents the moving behaviour of a FishBot.
- * @author sytze
+ * 
+ * @author SEMGroup27
  *
  */
 public class DefaultMoveBehaviour implements MoveBehaviour {
-  
-  Displayable swimmer;
-  
+
+  private Displayable displayable;
+
   /**
    * the constructor.
-   * @param swimmer the fish this behaviour applies to.
+   * 
+   * @param displayable
+   *          the fish this behaviour applies to.
    */
   public DefaultMoveBehaviour(Displayable swimmer) {
-    this.swimmer = swimmer;
+    this.displayable = swimmer;
   }
-  
+
   /**
    * moves the FishBot in the right direction.
-   * @param frametime the frametime of the screen.
+   * 
+   * @param frametime
+   *          the frametime of the screen.
    * @return true of the fish was able to move.
    */
   @Override
   public boolean move(double frametime) {
-    return swimmer.getPosition().updatePosition(swimmer.getDirection(), (swimmer.getSpeed() / frametime), swimmer.getSize());
+    return displayable.getPosition().updatePosition(displayable.getDirection(),
+        (displayable.getSpeed() / frametime), displayable.getSize());
   }
 
 }

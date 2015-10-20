@@ -2,7 +2,7 @@ package lasersharks.behaviour.collision;
 
 import lasersharks.Logger;
 import lasersharks.behaviour.collision.interfaces.GetSizeIncrementBahaviour;
-import lasersharks.seaObjects.SeaObject;
+import lasersharks.seaobjects.SeaObject;
 import lasersharksgui.panes.StandardPane;
 
 /**

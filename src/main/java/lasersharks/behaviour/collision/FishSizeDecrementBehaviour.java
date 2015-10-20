@@ -1,7 +1,7 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.behaviour.collision.interfaces.SizeDecrementBahaviour;
-import lasersharks.seaObjects.SeaObject;
+import lasersharks.seaobjects.SeaObject;
 
 /**
  * sizeDecrement behaviour for fish.

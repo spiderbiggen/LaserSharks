@@ -11,15 +11,15 @@ import org.junit.Test;
 import lasersharks.Direction;
 import lasersharks.Position;
 import lasersharks.controllers.FishController;
-import lasersharks.enemies.FishFactory;
-import lasersharks.seaObjects.Fish;
-import lasersharks.seaObjects.FishBot;
-import lasersharks.seaObjects.LaserShark;
+import lasersharks.seaobjects.Fish;
+import lasersharks.seaobjects.FishBot;
+import lasersharks.seaobjects.LaserShark;
+import lasersharks.seaobjects.FishFactory;
 
 /**
  * the test class for the FishController class.
  * 
- * @author Sytze
+ * @author SEMGroup27
  */
 public class FishControllerTest {
 
@@ -56,7 +56,7 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
-    FishBot fishBot = new FishFactory().generateFish();
+    Fish fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addFish(fishBot);
     assertTrue(fishCon.getNextCycleInformation(3).contains(fishBot));
@@ -104,10 +104,10 @@ public class FishControllerTest {
     FishController fishCon = fishConFilled(SIZE + 1);
     assertTrue(fishCon.getShark().isAlive());
     double oldSize = fishCon.getShark().getSize();
-    fishCon.getNextCycleInformation(1);
+    fishCon.getNextCycleInformation(4);
     assertTrue(fishCon.getShark().getSize() > oldSize);
   }
-  
+
   /**
    * Test for shooting that fails.
    */
@@ -116,7 +116,7 @@ public class FishControllerTest {
     fishCon.getShark().decreaseAmmo(Integer.MAX_VALUE);
     assertFalse(fishCon.shootLaser());
   }
-  
+
   /**
    * Test for shooting that succeeds.
    */
@@ -124,7 +124,7 @@ public class FishControllerTest {
   public void testShootLaserTrue() {
     int oldAmmo = fishCon.getShark().getAmmo();
     assertTrue(fishCon.shootLaser());
-    int newAmmo = fishCon.getShark().getAmmo();    
+    int newAmmo = fishCon.getShark().getAmmo();
     assertTrue(oldAmmo - 1 == newAmmo);
   }
 }

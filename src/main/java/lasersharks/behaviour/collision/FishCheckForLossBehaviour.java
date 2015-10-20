@@ -1,7 +1,7 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.behaviour.collision.interfaces.CheckForLossBehaviour;
-import lasersharks.seaObjects.SeaObject;
+import lasersharks.seaobjects.SeaObject;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.LosingPane;
 

@@ -1,7 +1,7 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.behaviour.collision.interfaces.EeatenBehaviour;
-import lasersharks.seaObjects.SeaObject;
+import lasersharks.seaobjects.SeaObject;
 
 /**
  * Eaten behaviour for Fishes.

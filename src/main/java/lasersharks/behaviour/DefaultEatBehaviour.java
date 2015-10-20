@@ -10,7 +10,6 @@ import lasersharks.interfaces.Displayable;
  *
  */
 public class DefaultEatBehaviour implements EatBehaviour {
-
   /**
    * the constructor of the behaviour object.
    */
@@ -25,7 +24,6 @@ public class DefaultEatBehaviour implements EatBehaviour {
    */
   @Override
   public void eat(Displayable fish) {
-    // DO NOTHING
+   
   }
-
 }

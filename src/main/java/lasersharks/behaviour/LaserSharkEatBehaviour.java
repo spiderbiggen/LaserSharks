@@ -4,9 +4,9 @@ import lasersharks.Highscores;
 import lasersharks.Logger;
 import lasersharks.behaviour.interfaces.EatBehaviour;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaObjects.Ammo;
-import lasersharks.seaObjects.FishBot;
-import lasersharks.seaObjects.LaserShark;
+import lasersharks.seaobjects.Ammo;
+import lasersharks.seaobjects.FishBot;
+import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.panes.StandardPane;
 
 /**
