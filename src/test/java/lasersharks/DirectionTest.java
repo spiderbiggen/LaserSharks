@@ -13,7 +13,7 @@ import org.junit.runners.Parameterized.Parameters;
 /**
  * The test for the direction Enum.
  * 
- * @author Youri
+ * @author SEMGroup27
  *
  */
 @RunWith(Parameterized.class)
@@ -62,12 +62,10 @@ public class DirectionTest {
    */
   @Parameters
   public static Collection<Object[]> data() {
-    return Arrays
-        .asList(new Object[][] {
+    return Arrays.asList(new Object[][] {
 
         { Direction.South, 0, 1 }, { Direction.SouthEast, 1, 1 }, { Direction.East, 1, 0 },
-            { Direction.NorthEast, 1, -1 }, { Direction.North, 0, -1 },
-            { Direction.NorthWest, -1, -1 }, { Direction.West, -1, 0 },
-            { Direction.SouthWest, -1, 1 }, { Direction.None, 0, 0 } });
+        { Direction.NorthEast, 1, -1 }, { Direction.North, 0, -1 }, { Direction.NorthWest, -1, -1 },
+        { Direction.West, -1, 0 }, { Direction.SouthWest, -1, 1 }, { Direction.None, 0, 0 } });
   }
 }

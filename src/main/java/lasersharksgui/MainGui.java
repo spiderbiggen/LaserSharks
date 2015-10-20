@@ -62,11 +62,11 @@ public class MainGui extends Application {
     try {
       StandardPane paneToShow = (StandardPane) paneClass.newInstance();
       paneToShow.setOpacity(1.0);
-      
+
       currentPane.setOpacity(0.0);
       currentPane.stop();
       currentPane = paneToShow;
-      
+
       stackPane.getChildren().add(paneToShow);
     } catch (Exception e) {
       Logger.getInstance().write(e.getClass().getName() + "could not browse", e.getMessage());
@@ -114,7 +114,7 @@ public class MainGui extends Application {
   private static void setInstance(MainGui newInstance) {
     instance = newInstance;
   }
-  
+
   public static void clearInstance() {
     instance = null;
   }

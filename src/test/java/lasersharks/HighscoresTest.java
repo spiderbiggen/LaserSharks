@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * Tests for Highscores class.
  * 
- * @author Daan
+ * @author SEMGroup27
  *
  */
 public class HighscoresTest {

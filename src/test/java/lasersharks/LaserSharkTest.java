@@ -14,7 +14,7 @@ import lasersharks.enemies.Enemy;
 /**
  * Class for testing Lazershark object.
  * 
- * @author Michiel
+ * @author SEMGroup27
  *
  */
 public class LaserSharkTest extends SeaObjectTest {

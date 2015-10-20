@@ -21,14 +21,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lasersharks.Direction;
-import lasersharks.controllers.DirectionCallback;
-import lasersharks.controllers.DirectionInputController;
-import lasersharks.controllers.ScreenController;
 
 /**
- * Class for testion KeyboardController.
+ * Class for testinh {@link DirectionInputcontroller}.
  * 
- * @author Youri
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")

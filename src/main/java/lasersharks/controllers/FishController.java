@@ -6,21 +6,23 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.AmmoFactory;
 import lasersharks.AmmoSpawner;
 import lasersharks.Direction;
 import lasersharks.Displayable;
 import lasersharks.LaserBullet;
+import lasersharks.LaserFactory;
 import lasersharks.LaserShark;
 import lasersharks.LaserSpawner;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.SeaObject;
 import lasersharks.enemies.Enemy;
-import lasersharks.enemies.FishFactory;
-import lasersharks.enemies.FishSpawner;
+import lasersharks.enemies.EnemyFactory;
+import lasersharks.enemies.EnemySpawner;
 
 /**
- * Class for controlling fishdata.
+ * Class for controlling fish data.
  * 
  * @author SEMGroup27
  *
@@ -34,7 +36,7 @@ public class FishController {
   private List<Displayable> fishList;
   private LaserShark shark;
 
-  private FishSpawner fishSpawner;
+  private EnemySpawner enemySpawner;
   private AmmoSpawner ammoSpawner;
   private LaserSpawner laserSpawner;
 
@@ -73,9 +75,9 @@ public class FishController {
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);
-    fishSpawner = new FishFactory();
-    ammoSpawner = (AmmoSpawner) fishSpawner;
-    laserSpawner = (LaserSpawner) fishSpawner;
+    enemySpawner = new EnemyFactory();
+    ammoSpawner = new AmmoFactory();
+    laserSpawner = new LaserFactory();
   }
 
   /**
@@ -91,11 +93,11 @@ public class FishController {
   /**
    * Add a fish to the controller.
    * 
-   * @param fish
+   * @param displayable
    *          the Swimmer to add
    */
-  public void addFish(Displayable fish) {
-    this.fishList.add(fish);
+  public void addFish(Displayable displayable) {
+    this.fishList.add(displayable);
   }
 
   /**
@@ -139,8 +141,8 @@ public class FishController {
    * 
    * @return the fishSpawner
    */
-  public FishSpawner getFishSpawner() {
-    return fishSpawner;
+  public EnemySpawner getFishSpawner() {
+    return enemySpawner;
   }
 
   /**
@@ -178,7 +180,7 @@ public class FishController {
   public List<Displayable> getNextCycleInformation(double frametime) {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
-      SeaObject f = fishSpawner.generateFish();
+      SeaObject f = enemySpawner.generateFish();
       SeaObject g = ammoSpawner.generateAmmo();
       this.addFish(f);
 

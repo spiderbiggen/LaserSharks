@@ -4,7 +4,7 @@
 package lasersharks;
 
 /**
- * @author Stefan Breetveld
+ * @author SEMGroup27
  *
  */
 public interface LaserSpawner {

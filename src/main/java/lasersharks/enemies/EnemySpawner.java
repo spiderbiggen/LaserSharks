@@ -3,12 +3,12 @@ package lasersharks.enemies;
 import java.util.Random;
 
 /**
- * Interface for Fishfactory.
+ * Interface for EnemySpawner.
  * 
- * @author Sytze
+ * @author SEMGroup27
  *
  */
-public interface FishSpawner {
+public interface EnemySpawner {
 
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.

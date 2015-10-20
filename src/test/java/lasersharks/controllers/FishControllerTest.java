@@ -12,12 +12,12 @@ import lasersharks.Direction;
 import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.enemies.Enemy;
-import lasersharks.enemies.FishFactory;
+import lasersharks.enemies.EnemyFactory;
 
 /**
  * the test class for the FishController class.
  * 
- * @author Sytze
+ * @author SEMGroup27
  */
 public class FishControllerTest {
 
@@ -54,7 +54,7 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
-    Enemy fishBot = new FishFactory().generateFish();
+    Enemy fishBot = new EnemyFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addFish(fishBot);
     assertTrue(fishCon.getNextCycleInformation(1).contains(fishBot));

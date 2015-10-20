@@ -8,7 +8,7 @@ import lasersharks.behaviour.CantMoveBehaviour;
 import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
- * @author spide
+ * @author SEMGroup27
  *
  */
 public class Ammo extends SeaObject {
@@ -54,7 +54,7 @@ public class Ammo extends SeaObject {
   }
 
   /**
-   * @return The amount of ammo in this pack 
+   * @return The amount of ammo in this pack
    */
   public int getPickupAmount() {
     return pickupAmount;

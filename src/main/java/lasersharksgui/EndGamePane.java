@@ -13,7 +13,7 @@ import lasersharks.controllers.Options;
 import lasersharks.controllers.RestartGameController;
 
 /**
- * @author Stefan
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")

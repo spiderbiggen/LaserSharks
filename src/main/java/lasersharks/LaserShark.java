@@ -7,6 +7,8 @@ import lasersharks.controllers.DirectionCallback;
 
 /**
  * LaserShark class.
+ * 
+ * @author SEMGroup27
  *
  */
 public class LaserShark extends SeaObject implements DirectionCallback {
@@ -15,10 +17,10 @@ public class LaserShark extends SeaObject implements DirectionCallback {
   private final float widthScale = 1.5f;
   private static final int STARTING_AMMO = 10;
   private static final int MAX_AMMO = 10;
-  
+
   private int ammo;
   private Direction lastHorizontalDirection;
-  
+
   /**
    * Constructor class for LaserShark.
    * 
@@ -72,53 +74,61 @@ public class LaserShark extends SeaObject implements DirectionCallback {
   public void putDirection(Direction dir) {
     this.setDirection(dir);
   }
-  
+
   /**
    * decreases the ammo.
-   * @param amount the amount to decrease.
+   * 
+   * @param amount
+   *          the amount to decrease.
    * @return the current ammo of the shark.
    */
   public int decreaseAmmo(int amount) {
     ammo = ammo - amount;
     return ammo;
   }
-  
+
   /**
    * decreases the ammo by one.
+   * 
    * @return the current ammo of the shark.
    */
   public int decreaseAmmo() {
     return decreaseAmmo(1);
   }
-  
+
   /**
    * returns the current ammo.
+   * 
    * @return the ammo.
    */
   public int getAmmo() {
     return ammo;
   }
-  
+
   /**
    * returns the maximum ammo.
+   * 
    * @return maximum ammo.
    */
   public int getMaxAmmo() {
     return MAX_AMMO;
   }
-  
+
   /**
    * increases the ammo.
-   * @param amount the amount to increase.
+   * 
+   * @param amount
+   *          the amount to increase.
    * @return the current ammo of the shark.
    */
   public int increaseAmmo(int amount) {
     ammo = Math.min(ammo + amount, MAX_AMMO);
     return ammo;
   }
-  
+
   /**
    * gets the last horizontal direction the shark went to.
+   * 
    * @return the last horizontal direction the shark went to.
    */
   public Direction getLastHorizontalDirection() {

@@ -8,7 +8,7 @@ import lasersharks.behaviour.MoveBehaviour;
 /**
  * Abstract class for objects of the great blue.
  * 
- * @author Youri
+ * @author SEMGRoup27
  */
 @SuppressWarnings("restriction")
 public abstract class SeaObject implements Displayable {
@@ -16,7 +16,7 @@ public abstract class SeaObject implements Displayable {
   protected CollisionBehaviour collisionBehaviour;
   protected MoveBehaviour moveBehaviour;
   protected EatBehaviour eatBehaviour;
-  
+
   private Position position;
   private float size;
   private double speed;
@@ -80,7 +80,7 @@ public abstract class SeaObject implements Displayable {
   public void increaseSize(float size) {
     this.size += size;
   }
-  
+
   /**
    * Method used for shrinking seaObject.
    * 
@@ -142,8 +142,8 @@ public abstract class SeaObject implements Displayable {
   }
 
   /**
-   * We calculate the distance between the seaObjectes. The sum of the size of both seaObjectes is our hitbox.
-   * Hitbox is now a circle, with size the radius in pixels.
+   * We calculate the distance between the seaObjectes. The sum of the size of both seaObjectes is
+   * our hitbox. Hitbox is now a circle, with size the radius in pixels.
    * 
    * @param swimmer
    *          we want to check if the seaObjectbot collides with this seaObject,
@@ -155,6 +155,7 @@ public abstract class SeaObject implements Displayable {
 
   /**
    * gets the middle of the seaObject.
+   * 
    * @return the middlepoint of the seaObject.
    */
   public Position getMiddlePoint() {
@@ -195,8 +196,8 @@ public abstract class SeaObject implements Displayable {
 
   @Override
   public String toString() {
-    return "seaObjectBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
-        + ", direction=" + direction + ", Alive =" + alive + "]";
+    return "seaObjectBot [" + "position=" + position.toString() + ", size=" + size + ", speed="
+        + speed + ", direction=" + direction + ", Alive =" + alive + "]";
   }
 
   /**
@@ -221,7 +222,7 @@ public abstract class SeaObject implements Displayable {
   public Rectangle makeHitbox() {
     return collisionBehaviour.makeHitbox();
   }
-  
+
   /**
    * The SeaObject eats an other seaObject. This kills seaObject and increases size of the shark.
    * 

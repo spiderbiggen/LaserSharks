@@ -6,7 +6,8 @@ import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
  * This class represents a laser projectile.
- * @author sytze
+ * 
+ * @author SEMGroup27
  *
  */
 public class LaserBullet extends SeaObject {
@@ -15,15 +16,20 @@ public class LaserBullet extends SeaObject {
   private static final double LASER_DEFAULT_STRENGTH = 1.0;
   private static final double IMG_WIDTH = 290;
   private static final double IMG_HEIGHT = 74;
-  
+
   private double strength;
-  
+
   /**
    * The constructor of the laser.
-   * @param position the position of the laser.
-   * @param size the size of the laser.
-   * @param startSpeed the starting speed of the laser.
-   * @param direction the direction of the laser.
+   * 
+   * @param position
+   *          the position of the laser.
+   * @param size
+   *          the size of the laser.
+   * @param startSpeed
+   *          the starting speed of the laser.
+   * @param direction
+   *          the direction of the laser.
    */
   public LaserBullet(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
@@ -48,13 +54,14 @@ public class LaserBullet extends SeaObject {
   public double getWidthScale() {
     return IMG_WIDTH / IMG_HEIGHT;
   }
-  
+
   /**
    * returns the strength.
+   * 
    * @return the strength.
    */
   public double getStrength() {
     return strength;
   }
-  
+
 }

@@ -3,15 +3,18 @@ package lasersharks.behaviour;
 import lasersharks.Displayable;
 
 /**
- * the interface of objects that represent an eat behaviour
- * @author sytze
+ * the interface of objects that represent an eat behaviour.
+ * 
+ * @author SEMGroup27
  *
  */
 public interface EatBehaviour {
-  
+
   /**
    * eats an other fish.
-   * @param fish the fish that should be eaten.
+   * 
+   * @param fish
+   *          the fish that should be eaten.
    */
-  public void eat(Displayable fish);
+  void eat(Displayable fish);
 }

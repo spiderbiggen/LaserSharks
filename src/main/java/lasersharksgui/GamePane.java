@@ -203,9 +203,7 @@ public class GamePane extends StandardPane implements Stoppable {
   public void stop() {
     this.clearPaneOfImageView();
     this.stopGame();
-    MainGui.getInstance().getCurrentScene().removeEventHandler(
-        KeyEvent.ANY, 
-        directionInputController
-    );
+    MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY,
+        directionInputController);
   }
 }

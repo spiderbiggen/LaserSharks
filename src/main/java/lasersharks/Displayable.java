@@ -5,8 +5,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * Interface for swimmer class.
  * 
- * @author Youri
- *
+ * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
 public interface Displayable {
@@ -66,8 +65,8 @@ public interface Displayable {
   boolean move(double frametime);
 
   /**
-   * We calculate the distance between the Displayable. The sum of the size of both Displayable is our hitbox.
-   * Hitbox is now a circle, with size the radius in pixels.
+   * We calculate the distance between the Displayable. The sum of the size of both Displayable is
+   * our hitbox. Hitbox is now a circle, with size the radius in pixels.
    * 
    * @param Displayable
    *          we want to check if the Displayable collides with this Displayable,
@@ -114,7 +113,7 @@ public interface Displayable {
    * @return a rectangle hitbox.
    */
   Rectangle makeHitbox();
-  
+
   /**
    * Method used for growing Displayable.
    * 
@@ -122,7 +121,7 @@ public interface Displayable {
    *          the delta by which to increase.
    */
   public void increaseSize(float size);
-  
+
   /**
    * Method used for decreasing Displayable.
    * 
@@ -130,7 +129,7 @@ public interface Displayable {
    *          the delta by which to increase.
    */
   public void decreaseSize(float size);
-  
+
   public Position getMiddlePoint();
 
   void eat(Displayable swimmer);

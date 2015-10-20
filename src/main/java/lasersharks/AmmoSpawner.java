@@ -6,13 +6,13 @@ package lasersharks;
 import java.util.Random;
 
 /**
- * Interface for an ammo factory
+ * Interface for an ammo factory.
  * 
- * @author Stefan Breetveld
+ * @author SEMGroup27
  *
  */
 public interface AmmoSpawner {
-  
+
   /**
    * This function creates a new Ammo pack on the screen. This should be used to spawn ammo.
    * 

@@ -11,6 +11,8 @@ import java.util.Date;
 
 /**
  * Class for logging game events.
+ * 
+ * @author SEMGroup27
  */
 public class Logger {
   private static Logger instance;

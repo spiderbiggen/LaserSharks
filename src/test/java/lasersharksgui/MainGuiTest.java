@@ -21,7 +21,7 @@ import com.google.code.tempusfugit.temporal.WaitFor;
 import lasersharks.controllers.FishController;
 import lasersharks.controllers.Options;
 import lasersharks.controllers.ScreenController;
-import lasersharks.enemies.FishSpawner;
+import lasersharks.enemies.EnemySpawner;
 
 /**
  * @author SEMGroup27
@@ -32,15 +32,15 @@ public class MainGuiTest {
 
   private static final long WINNING_FACTORY_SEED = 165;
   private static final float LOSE_GAMESIZE = 20;
-  private static final float WIN_GAMESIZE = 319;  
-  private static final float POST_GROWTH_INCREASE_TRESHHOLD = 1;  
+  private static final float WIN_GAMESIZE = 319;
+  private static final float POST_GROWTH_INCREASE_TRESHHOLD = 1;
   private final int width = 800;
   private final int height = 150;
 
   private GamePane pane;
   private ScreenController screenCon;
   private FishController fishCon;
-  private FishSpawner fishSpawner;
+
   /**
    * Resets the environment for each test.
    * 
@@ -56,10 +56,10 @@ public class MainGuiTest {
 
     FXApp.startApp(new MainGui());
     FXer.getUserWith(FXApp.getScene().getRoot());
-    
+
     Options.getInstance().setSpawnRng(new Random(0));
     Options.getInstance().setFactoryRng(new Random(WINNING_FACTORY_SEED));
-    
+
     WaitFor.waitOrTimeout(new Condition() {
 
       @Override
@@ -71,7 +71,7 @@ public class MainGuiTest {
     pane = (GamePane) MainGui.getInstance().getCurrentPane();
     screenCon = pane.getScreenController();
     fishCon = screenCon.getFishController();
-    fishSpawner = fishCon.getFishSpawner();
+    fishCon.getFishSpawner();
 
   }
 
@@ -120,11 +120,14 @@ public class MainGuiTest {
     }, Timeout.timeout(Duration.seconds(20L)));
     assertTrue(MainGui.getInstance().getCurrentPane() instanceof WinPane);
   }
-  
+
   /**
    * Test to see if the size of the shark can increase.
-   * @throws InterruptedException interruptedException
-   * @throws TimeoutException timeoutException
+   * 
+   * @throws InterruptedException
+   *           interruptedException
+   * @throws TimeoutException
+   *           timeoutException
    */
   @Test
   public void increaseSizeTest() throws InterruptedException, TimeoutException {

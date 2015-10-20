@@ -11,7 +11,7 @@ import lasersharksgui.StandardPane;
 /**
  * The default eat behaviour.
  * 
- * @author sytze
+ * @author SEMGroup27
  *
  */
 public class DefaultEatBehaviour implements EatBehaviour {
