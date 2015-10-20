@@ -9,6 +9,12 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.interfaces.Displayable;
+import lasersharks.seaObjects.Ammo;
+import lasersharks.seaObjects.FishBot;
+import lasersharks.seaObjects.LaserShark;
+import lasersharks.seaObjects.SeaObject;
+
 /**
  * Class for testing Lazershark object.
  * 

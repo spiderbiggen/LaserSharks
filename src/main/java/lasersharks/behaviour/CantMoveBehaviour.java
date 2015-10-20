@@ -1,4 +1,6 @@
-package lasersharks;
+package lasersharks.behaviour;
+
+import lasersharks.behaviour.interfaces.MoveBehaviour;
 
 /**
  * Represents behaviour of a displayable that can't move.

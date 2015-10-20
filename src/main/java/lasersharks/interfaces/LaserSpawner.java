@@ -1,7 +1,10 @@
 /**
  * 
  */
-package lasersharks;
+package lasersharks.interfaces;
+
+import lasersharks.seaObjects.LaserBullet;
+import lasersharks.seaObjects.LaserShark;
 
 /**
  * @author Stefan Breetveld

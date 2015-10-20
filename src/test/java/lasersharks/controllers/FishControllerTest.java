@@ -9,12 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import lasersharks.Direction;
-import lasersharks.FishBot;
-import lasersharks.LaserShark;
 import lasersharks.Position;
 import lasersharks.controllers.FishController;
-import lasersharks.enemies.Enemy;
 import lasersharks.enemies.FishFactory;
+import lasersharks.seaObjects.Enemy;
+import lasersharks.seaObjects.FishBot;
+import lasersharks.seaObjects.LaserShark;
 
 /**
  * the test class for the FishController class.
@@ -59,7 +59,7 @@ public class FishControllerTest {
     FishBot fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addFish(fishBot);
-    assertTrue(fishCon.getNextCycleInformation(1).contains(fishBot));
+    assertTrue(fishCon.getNextCycleInformation(3).contains(fishBot));
   }
 
   /**

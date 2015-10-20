@@ -1,7 +1,5 @@
 package lasersharks;
 
-import lasersharks.controllers.Options;
-
 /**
  * Class Position.
  */

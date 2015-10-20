@@ -1,6 +1,8 @@
-package lasersharks;
+package lasersharks.behaviour.interfaces;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.Position;
+import lasersharks.interfaces.Displayable;
 
 /**
  * This interface is implemented by object that have different behaviours of collision functions.

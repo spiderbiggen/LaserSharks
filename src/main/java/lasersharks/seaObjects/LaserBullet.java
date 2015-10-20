@@ -1,4 +1,10 @@
-package lasersharks;
+package lasersharks.seaObjects;
+
+import lasersharks.Direction;
+import lasersharks.Position;
+import lasersharks.behaviour.BotMoveBehaviour;
+import lasersharks.behaviour.CantEatBehaviour;
+import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
  * This class represents a laser projectile.

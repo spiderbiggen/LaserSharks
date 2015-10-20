@@ -1,4 +1,4 @@
-package lasersharksgui;
+package lasersharksgui.interfaces;
 
 /**
  * Interface for pane that is stoppable.

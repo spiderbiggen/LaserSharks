@@ -1,7 +1,6 @@
-package lasersharks.enemies;
+package lasersharks.seaObjects;
 
 import lasersharks.Direction;
-import lasersharks.FishBot;
 import lasersharks.Position;
 
 /**

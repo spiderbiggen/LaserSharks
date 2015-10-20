@@ -1,7 +1,13 @@
 /**
  * 
  */
-package lasersharks;
+package lasersharks.seaObjects;
+
+import lasersharks.Direction;
+import lasersharks.Position;
+import lasersharks.behaviour.CantEatBehaviour;
+import lasersharks.behaviour.CantMoveBehaviour;
+import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
  * @author spide

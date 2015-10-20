@@ -1,4 +1,4 @@
-package lasersharks.controllers;
+package lasersharks;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

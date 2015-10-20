@@ -1,4 +1,6 @@
-package lasersharks;
+package lasersharks.behaviour.interfaces;
+
+import lasersharks.interfaces.Displayable;
 
 /**
  * the interface of objects that represent an eat behaviour

@@ -9,6 +9,8 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.seaObjects.Ammo;
+
 /**
  * @author Stefan Breetveld
  *
@@ -30,7 +32,7 @@ public class AmmoTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Ammo#getImageResource()}.
+   * Test method for {@link lasersharks.seaObjects.Ammo#getImageResource()}.
    */
   @Test
   public void testGetImageResource() {
@@ -38,7 +40,7 @@ public class AmmoTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Ammo#getWidthScale()}.
+   * Test method for {@link lasersharks.seaObjects.Ammo#getWidthScale()}.
    */
   @Test
   public void testGetWidthScale() {
@@ -49,7 +51,7 @@ public class AmmoTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Ammo#getPickupAmount()}.
+   * Test method for {@link lasersharks.seaObjects.Ammo#getPickupAmount()}.
    */
   @Test
   public void testGetAmount() {

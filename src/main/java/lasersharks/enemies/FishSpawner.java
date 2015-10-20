@@ -2,11 +2,11 @@ package lasersharks.enemies;
 
 import java.util.Random;
 
-import lasersharks.Ammo;
-import lasersharks.FishBot;
-import lasersharks.LaserBullet;
-import lasersharks.LaserShark;
-import lasersharks.Displayable;
+import lasersharks.interfaces.Displayable;
+import lasersharks.seaObjects.Ammo;
+import lasersharks.seaObjects.FishBot;
+import lasersharks.seaObjects.LaserBullet;
+import lasersharks.seaObjects.LaserShark;
 
 /**
  * Interface for Fishfactory.

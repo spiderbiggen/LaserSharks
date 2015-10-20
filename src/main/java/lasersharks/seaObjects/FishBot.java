@@ -1,5 +1,10 @@
-package lasersharks;
+package lasersharks.seaObjects;
 
+import lasersharks.Direction;
+import lasersharks.Position;
+import lasersharks.behaviour.BotMoveBehaviour;
+import lasersharks.behaviour.CantEatBehaviour;
+import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
  * This class represent the fishes on the screen that are not player controllable.

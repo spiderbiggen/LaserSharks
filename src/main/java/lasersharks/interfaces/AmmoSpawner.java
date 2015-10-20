@@ -1,9 +1,11 @@
 /**
  * 
  */
-package lasersharks;
+package lasersharks.interfaces;
 
 import java.util.Random;
+
+import lasersharks.seaObjects.Ammo;
 
 /**
  * Interface for an ammo factory
