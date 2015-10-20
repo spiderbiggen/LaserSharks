@@ -2,6 +2,11 @@ package lasersharks.seaObjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
+import lasersharks.behaviour.collision.FishCheckForLossBehaviour;
+import lasersharks.behaviour.collision.FishEatenBehaviour;
+import lasersharks.behaviour.collision.FishGetSizeIncrementBehaviour;
+import lasersharks.behaviour.collision.FishLaserCollisionBehaviour;
+import lasersharks.behaviour.collision.FishSizeDecrementBehaviour;
 
 /**
  * Class for the first enemy.
@@ -9,7 +14,7 @@ import lasersharks.Position;
  * @author SEMGroup27
  *
  */
-public class Enemy extends FishBot {
+public class Fish extends FishBot {
   private String image;
   private int imgHeight;
   private int imgWidth;
@@ -32,7 +37,7 @@ public class Enemy extends FishBot {
    * @param direction
    *          Starting direction.
    */
-  public Enemy(
+  public Fish(
       String image, 
       int imgHeight, 
       int imgWidth, 
@@ -45,6 +50,11 @@ public class Enemy extends FishBot {
     this.image = image;
     this.imgHeight = imgHeight;
     this.imgWidth = imgWidth;
+    checkForLossBehaviour = new FishCheckForLossBehaviour(this);
+    eatenBehaviour = new FishEatenBehaviour(this);
+    getSizeIncrementBahaviour = new FishGetSizeIncrementBehaviour(this);
+    laserCollisionBehaviour = new FishLaserCollisionBehaviour();
+    sizeDecrementBahaviour = new FishSizeDecrementBehaviour(this);
   }
 
   @Override

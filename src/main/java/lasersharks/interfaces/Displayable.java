@@ -136,4 +136,41 @@ public interface Displayable {
   public Position getMiddlePoint();
 
   void eat(Displayable swimmer);
+  
+
+  /**
+   * Increment ammunition by an int value when collided.
+   * @return increment value.
+   */
+  int onCollisionAmmunitionIncrement();
+  
+  /**
+   * Check to see if player has lost the game.
+   * @param size shark size.
+   */
+  void onCollisionPlayerLoses(int size);
+  
+  /**
+   * Notify object it is eaten.
+   */
+  void onCollisionEaten();
+  
+  /**
+   * get size increment gained by colliding with object.
+   * @return size increment.
+   */
+  float onCollisionSizeIncrement();
+  
+  /**
+   * See if laser needs to be destroyed after colliding with this object.
+   * @return boolean weater laser object needs to be destroyed.
+   */
+  boolean onCollisionDestroyLaser();
+  
+  /**
+   * Notify ~ has been hit by the laster.
+   * @param size size by which object needs to decrement.
+   */
+  void onCollisionSizeDecrement(int size);
+
 }

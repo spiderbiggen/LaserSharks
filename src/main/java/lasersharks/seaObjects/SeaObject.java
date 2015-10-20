@@ -3,6 +3,21 @@ package lasersharks.seaObjects;
 import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Position;
+import lasersharks.behaviour.DefaultCollisionBehaviour;
+import lasersharks.behaviour.DefaultEatBehaviour;
+import lasersharks.behaviour.DefaultMoveBehaviour;
+import lasersharks.behaviour.collision.DefaultAmmunitionIncrementBehaviour;
+import lasersharks.behaviour.collision.DefaultCheckForLossBehaviour;
+import lasersharks.behaviour.collision.DefaultEatenBehaviour;
+import lasersharks.behaviour.collision.DefaultGetSizeIncrementBehaviour;
+import lasersharks.behaviour.collision.DefaultLaserCollisionBehaviour;
+import lasersharks.behaviour.collision.DefaultSizeDecrementBehaviour;
+import lasersharks.behaviour.collision.interfaces.AmmunitionIncrementBehaviour;
+import lasersharks.behaviour.collision.interfaces.CheckForLossBehaviour;
+import lasersharks.behaviour.collision.interfaces.EeatenBehaviour;
+import lasersharks.behaviour.collision.interfaces.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.collision.interfaces.LaserCollisionBehaviour;
+import lasersharks.behaviour.collision.interfaces.SizeDecrementBahaviour;
 import lasersharks.behaviour.interfaces.CollisionBehaviour;
 import lasersharks.behaviour.interfaces.EatBehaviour;
 import lasersharks.behaviour.interfaces.MoveBehaviour;
@@ -11,14 +26,22 @@ import lasersharks.interfaces.Displayable;
 /**
  * Abstract class for objects of the great blue.
  * 
- * @author Youri
+ * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
 public abstract class SeaObject implements Displayable {
 
+  private static final float MIN_SIZE = 30.0f;
   protected CollisionBehaviour collisionBehaviour;
   protected MoveBehaviour moveBehaviour;
   protected EatBehaviour eatBehaviour;
+  
+  protected AmmunitionIncrementBehaviour ammunitionIncrementBehaviour;
+  protected CheckForLossBehaviour checkForLossBehaviour;
+  protected EeatenBehaviour eatenBehaviour;
+  protected GetSizeIncrementBahaviour getSizeIncrementBahaviour;
+  protected LaserCollisionBehaviour laserCollisionBehaviour;
+  protected SizeDecrementBahaviour sizeDecrementBahaviour;
   
   private Position position;
   private float size;
@@ -44,6 +67,17 @@ public abstract class SeaObject implements Displayable {
     this.speed = startSpeed;
     this.direction = direction;
     this.alive = true;
+    
+    this.collisionBehaviour = new DefaultCollisionBehaviour(this);
+    this.moveBehaviour = new DefaultMoveBehaviour(this);
+    this.eatBehaviour = new DefaultEatBehaviour();
+    
+    this.ammunitionIncrementBehaviour = new DefaultAmmunitionIncrementBehaviour();
+    this.checkForLossBehaviour = new DefaultCheckForLossBehaviour();
+    this.eatenBehaviour = new DefaultEatenBehaviour();
+    this.getSizeIncrementBahaviour = new DefaultGetSizeIncrementBehaviour();
+    this.laserCollisionBehaviour = new DefaultLaserCollisionBehaviour();
+    this.sizeDecrementBahaviour = new DefaultSizeDecrementBehaviour();
   }
 
   /**
@@ -87,16 +121,16 @@ public abstract class SeaObject implements Displayable {
   /**
    * Method used for shrinking seaObject.
    * 
-   * @param size
+   * @param size decrement size
    */
   public void decreaseSize(float size) {
-    this.size = this.size - size;
+    this.setSize(Math.max(MIN_SIZE, this.getSize() - size));
   }
 
   /**
    * Method to set the size of the seaObject.
    * 
-   * @param size
+   * @param size size
    */
   public void setSize(float size) {
     this.size = size;
@@ -145,7 +179,8 @@ public abstract class SeaObject implements Displayable {
   }
 
   /**
-   * We calculate the distance between the seaObjectes. The sum of the size of both seaObjectes is our hitbox.
+   * We calculate the distance between the seaObjectes. 
+   * The sum of the size of both seaObjectes is our hitbox.
    * Hitbox is now a circle, with size the radius in pixels.
    * 
    * @param swimmer
@@ -198,7 +233,7 @@ public abstract class SeaObject implements Displayable {
 
   @Override
   public String toString() {
-    return "seaObjectBot [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
+    return "seaObject [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
         + ", direction=" + direction + ", Alive =" + alive + "]";
   }
 
@@ -234,6 +269,60 @@ public abstract class SeaObject implements Displayable {
   @Override
   public void eat(Displayable swimmer) {
     eatBehaviour.eat(swimmer);
+  }
+  
+
+  /**
+   * Increment ammunition by an int value when collided.
+   * @return increment value.
+   */
+  @Override
+  public int onCollisionAmmunitionIncrement() {
+    return this.ammunitionIncrementBehaviour.onCollisionAmmunitionIncrement();
+  }
+  
+  /**
+   * Check to see if player has lost the game.
+   * @param size shark size.
+   */
+  @Override
+  public void onCollisionPlayerLoses(int size) {
+    this.checkForLossBehaviour.onCollisionPlayerLoses(size);
+  }
+  
+  /**
+   * Notify object it is eaten.
+   */
+  @Override
+  public void onCollisionEaten() {
+    this.eatenBehaviour.onCollisionEaten();
+  }
+  
+  /**
+   * get size increment gained by colliding with object.
+   * @return size increment.
+   */
+  @Override
+  public float onCollisionSizeIncrement() {
+    return this.getSizeIncrementBahaviour.onCollisionSizeIncrement();
+  }
+  
+  /**
+   * See if laser needs to be destroyed after colliding with this object.
+   * @return boolean weather laser object needs to be destroyed.
+   */
+  @Override
+  public boolean onCollisionDestroyLaser() {
+    return this.laserCollisionBehaviour.onCollisionDestroyLaser();
+  }
+  
+  /**
+   * Notify ~ has been hit by the laster.
+   * @param size size by which object needs to decrement.
+   */
+  @Override
+  public void onCollisionSizeDecrement(int size) {
+    this.sizeDecrementBahaviour.onCollisionSizeDecrement(size);
   }
 
 }

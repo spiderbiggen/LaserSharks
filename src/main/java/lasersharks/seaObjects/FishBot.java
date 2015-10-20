@@ -2,8 +2,8 @@ package lasersharks.seaObjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.BotMoveBehaviour;
-import lasersharks.behaviour.CantEatBehaviour;
+import lasersharks.behaviour.DefaultMoveBehaviour;
+import lasersharks.behaviour.DefaultEatBehaviour;
 import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
@@ -29,7 +29,7 @@ public abstract class FishBot extends SeaObject {
   public FishBot(Position position, float size, double speed, Direction direction) {
     super(position, size, speed, direction);
     collisionBehaviour = new DefaultCollisionBehaviour(this);
-    moveBehaviour = new BotMoveBehaviour(this);
-    eatBehaviour = new CantEatBehaviour();
+    moveBehaviour = new DefaultMoveBehaviour(this);
+    eatBehaviour = new DefaultEatBehaviour();
   }
 }

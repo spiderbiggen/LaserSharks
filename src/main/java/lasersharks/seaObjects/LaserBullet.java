@@ -2,8 +2,8 @@ package lasersharks.seaObjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.BotMoveBehaviour;
-import lasersharks.behaviour.CantEatBehaviour;
+import lasersharks.behaviour.DefaultMoveBehaviour;
+import lasersharks.behaviour.DefaultEatBehaviour;
 import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
@@ -31,8 +31,8 @@ public class LaserBullet extends SeaObject {
     super(position, size, startSpeed, direction);
     strength = LASER_DEFAULT_STRENGTH;
     collisionBehaviour = new DefaultCollisionBehaviour(this);
-    eatBehaviour = new CantEatBehaviour();
-    moveBehaviour = new BotMoveBehaviour(this);
+    eatBehaviour = new DefaultEatBehaviour();
+    moveBehaviour = new DefaultMoveBehaviour(this);
   }
 
   /**
