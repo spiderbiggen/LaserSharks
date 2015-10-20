@@ -59,7 +59,7 @@ public class FishControllerTest {
     FishBot fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addFish(fishBot);
-    assertTrue(fishCon.getNextCycleInformation(1).contains(fishBot));
+    assertTrue(fishCon.getNextCycleInformation(2).contains(fishBot));
   }
 
   /**
