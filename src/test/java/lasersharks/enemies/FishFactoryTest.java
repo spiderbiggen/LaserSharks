@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Random;
 
-import lasersharks.Ammo;
 import lasersharks.Direction;
-import lasersharks.LaserBullet;
-import lasersharks.LaserShark;
+import lasersharks.Options;
 import lasersharks.Position;
-import lasersharks.controllers.Options;
-import lasersharks.Displayable;
 import lasersharks.enemies.FishFactory;
+import lasersharks.interfaces.Displayable;
+import lasersharks.seaObjects.Ammo;
+import lasersharks.seaObjects.LaserBullet;
+import lasersharks.seaObjects.LaserShark;
 
 import org.junit.Test;
 import org.mockito.Mockito;

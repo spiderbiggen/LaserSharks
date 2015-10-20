@@ -1,4 +1,4 @@
-package lasersharks;
+package lasersharks.behaviour.interfaces;
 
 /**
  * the interface of move behaviour objects.

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package lasersharksgui;
+package lasersharksgui.panes;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,8 +9,9 @@ import java.io.IOException;
 import javafx.scene.input.KeyEvent;
 import lasersharks.Highscores;
 import lasersharks.Logger;
-import lasersharks.controllers.Options;
+import lasersharks.Options;
 import lasersharks.controllers.RestartGameController;
+import lasersharksgui.MainGui;
 
 /**
  * @author Stefan

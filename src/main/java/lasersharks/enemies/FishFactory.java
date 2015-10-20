@@ -2,16 +2,17 @@ package lasersharks.enemies;
 
 import java.util.Random;
 
-import lasersharks.Ammo;
-import lasersharks.AmmoSpawner;
 //import groovyjarjarcommonscli.Options;
 import lasersharks.Direction;
-import lasersharks.FishBot;
-import lasersharks.LaserBullet;
-import lasersharks.LaserShark;
-import lasersharks.LaserSpawner;
+import lasersharks.Options;
 import lasersharks.Position;
-import lasersharks.controllers.Options;
+import lasersharks.interfaces.AmmoSpawner;
+import lasersharks.interfaces.LaserSpawner;
+import lasersharks.seaObjects.Ammo;
+import lasersharks.seaObjects.Enemy;
+import lasersharks.seaObjects.FishBot;
+import lasersharks.seaObjects.LaserBullet;
+import lasersharks.seaObjects.LaserShark;
 
 /**
  * Default Fishfactory implementation.

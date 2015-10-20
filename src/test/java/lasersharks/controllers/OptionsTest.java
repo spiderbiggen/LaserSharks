@@ -7,11 +7,11 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import lasersharks.controllers.Options;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import lasersharks.Options;
 
 /**
  * A unit test object for the Options class.

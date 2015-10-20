@@ -1,6 +1,12 @@
-package lasersharks;
+package lasersharks.seaObjects;
 
-import lasersharks.controllers.DirectionCallback;
+import lasersharks.Direction;
+import lasersharks.Logger;
+import lasersharks.Position;
+import lasersharks.behaviour.DefaultCollisionBehaviour;
+import lasersharks.behaviour.DefaultEatBehaviour;
+import lasersharks.behaviour.SharkMoveBehaviour;
+import lasersharks.interfaces.DirectionCallback;
 
 /**
  * LaserShark class.

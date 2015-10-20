@@ -2,6 +2,8 @@ package lasersharks;
 
 import org.junit.Test;
 
+import lasersharks.seaObjects.LaserBullet;
+
 /**
  * Test class for the LaserBullet class.
  * @author sytze

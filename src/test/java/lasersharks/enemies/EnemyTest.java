@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import lasersharks.FishBotTest;
-import lasersharks.enemies.Enemy;
+import lasersharks.seaObjects.Enemy;
 
 /**
  * The test for the enemy1 class.

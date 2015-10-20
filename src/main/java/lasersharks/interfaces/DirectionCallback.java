@@ -1,4 +1,4 @@
-package lasersharks.controllers;
+package lasersharks.interfaces;
 
 import lasersharks.Direction;
 

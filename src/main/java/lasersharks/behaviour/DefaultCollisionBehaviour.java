@@ -1,6 +1,9 @@
-package lasersharks;
+package lasersharks.behaviour;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.Position;
+import lasersharks.behaviour.interfaces.CollisionBehaviour;
+import lasersharks.interfaces.Displayable;
 
 /**
  * the default collision behaviour.

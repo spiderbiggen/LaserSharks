@@ -10,6 +10,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import lasersharks.interfaces.Displayable;
+import lasersharks.seaObjects.SeaObject;
+
 /**
  * Class for testing SeaObjects.
  * 

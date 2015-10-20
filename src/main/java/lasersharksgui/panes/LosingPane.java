@@ -1,4 +1,4 @@
-package lasersharksgui;
+package lasersharksgui.panes;
 
 /**
  * This pane represents the screen that is shown when a player loses.

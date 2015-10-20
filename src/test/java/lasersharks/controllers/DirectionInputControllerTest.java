@@ -21,9 +21,9 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lasersharks.Direction;
-import lasersharks.controllers.DirectionCallback;
 import lasersharks.controllers.DirectionInputController;
 import lasersharks.controllers.ScreenController;
+import lasersharks.interfaces.DirectionCallback;
 
 /**
  * Class for testion KeyboardController.

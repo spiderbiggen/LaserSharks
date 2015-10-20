@@ -1,4 +1,4 @@
-package lasersharksgui;
+package lasersharksgui.panes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,14 +12,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lasersharks.Direction;
 import lasersharks.Highscores;
-import lasersharks.LaserShark;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.Displayable;
-import lasersharks.controllers.DirectionCallback;
 import lasersharks.controllers.DirectionInputController;
 import lasersharks.controllers.ScreenController;
 import lasersharks.controllers.ShootController;
+import lasersharks.interfaces.DirectionCallback;
+import lasersharks.interfaces.Displayable;
+import lasersharks.seaObjects.LaserShark;
+import lasersharksgui.MainGui;
+import lasersharksgui.interfaces.Stoppable;
 
 /**
  * This is the pane representing the gameplay.

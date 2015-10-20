@@ -18,10 +18,13 @@ import com.google.code.tempusfugit.temporal.Duration;
 import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.code.tempusfugit.temporal.WaitFor;
 
+import lasersharks.Options;
 import lasersharks.controllers.FishController;
-import lasersharks.controllers.Options;
 import lasersharks.controllers.ScreenController;
 import lasersharks.enemies.FishSpawner;
+import lasersharksgui.panes.GamePane;
+import lasersharksgui.panes.LosingPane;
+import lasersharksgui.panes.WinPane;
 
 /**
  * @author SEMGroup27

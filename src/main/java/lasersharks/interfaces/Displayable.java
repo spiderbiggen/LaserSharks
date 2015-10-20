@@ -1,6 +1,8 @@
-package lasersharks;
+package lasersharks.interfaces;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.Direction;
+import lasersharks.Position;
 
 /**
  * Interface for swimmer class.
