@@ -1,12 +1,13 @@
 package lasersharks.behaviour;
 
-import lasersharks.Ammo;
-import lasersharks.Displayable;
 import lasersharks.Highscores;
-import lasersharks.LaserShark;
 import lasersharks.Logger;
-import lasersharks.enemies.Enemy;
-import lasersharksgui.StandardPane;
+import lasersharks.behaviour.interfaces.EatBehaviour;
+import lasersharks.interfaces.Displayable;
+import lasersharks.seaobjects.Ammo;
+import lasersharks.seaobjects.Enemy;
+import lasersharks.seaobjects.LaserShark;
+import lasersharksgui.panes.StandardPane;
 
 /**
  * The default eat behaviour.

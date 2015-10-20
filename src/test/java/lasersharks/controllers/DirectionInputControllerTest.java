@@ -21,9 +21,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lasersharks.Direction;
+import lasersharks.interfaces.DirectionCallback;
 
 /**
- * Class for testinh {@link DirectionInputcontroller}.
+ * Class for testing {@link DirectionInputcontroller}.
  * 
  * @author SEMGroup27
  *

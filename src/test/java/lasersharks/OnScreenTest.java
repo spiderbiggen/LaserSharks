@@ -14,8 +14,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import lasersharks.controllers.Options;
-
 /**
  * Parameterized test for the {@link Position#onScreen(double)} method.
  * 
@@ -33,6 +31,7 @@ public class OnScreenTest {
   @After
   public void tearDown() {
     this.position = null;
+    Options.destroyInstance();
   }
 
   /**
@@ -57,14 +56,26 @@ public class OnScreenTest {
    */
   @Parameters
   public static Collection<Object[]> data() {
-    double width = Options.getGlobalWidth();
-    double height = Options.getGlobalHeight();
-    return Arrays.asList(new Object[][] { { 0, 0, true }, { -1, 0, false }, { 0, -1, false },
-        { -1, -1, false }, { width, 0, true }, { width + 1, 0, false }, { width, -1, false },
-        { width + 1, -1, false }, { 0, height, true }, { -1, height, false },
-        { 0, height + 1, false }, { -1, height + 1, false }, { width, height, true },
-        { width + 1, height, false }, { width, height + 1, false },
-        { width + 1, height + 1, false } });
+    Options.setGlobalHeight(100);
+    Options.setGlobalWidth(100);
+    
+    return Arrays.asList(new Object[][] { 
+        { 0, 0, true }, 
+        { -1, 0, false }, 
+        { 0, -1, false },
+        { -1, -1, false }, 
+        { Position.getWidthPanel(), 0, true },
+        { Position.getWidthPanel() + 1, 0, false }, 
+        { Position.getWidthPanel(), -1, false },
+        { Position.getWidthPanel() + 1, -1, false }, 
+        { 0, Position.getHeightPanel(), true },
+        { -1, Position.getHeightPanel(), false }, 
+        { 0, Position.getHeightPanel() + 1, false },
+        { -1, Position.getHeightPanel() + 1, false },
+        { Position.getWidthPanel(), Position.getHeightPanel(), true },
+        { Position.getWidthPanel() + 1, Position.getHeightPanel(), false },
+        { Position.getWidthPanel(), Position.getHeightPanel() + 1, false },
+        { Position.getWidthPanel() + 1, Position.getHeightPanel() + 1, false } });
   }
 
   /**
@@ -72,6 +83,8 @@ public class OnScreenTest {
    */
   @Test
   public void testOnScreen() {
+    Options.setGlobalHeight(100);
+    Options.setGlobalWidth(100);
     assertEquals(expectedBool, position.onScreen(0));
   }
 

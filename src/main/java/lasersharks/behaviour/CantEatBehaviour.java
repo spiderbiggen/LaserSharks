@@ -1,6 +1,7 @@
 package lasersharks.behaviour;
 
-import lasersharks.Displayable;
+import lasersharks.behaviour.interfaces.EatBehaviour;
+import lasersharks.interfaces.Displayable;
 
 /**
  * represents behaviour of a fish that cant eat an other fish.

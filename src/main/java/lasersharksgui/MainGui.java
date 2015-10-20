@@ -1,7 +1,5 @@
 package lasersharksgui;
 
-import java.util.Random;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -9,8 +7,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lasersharks.Logger;
-import lasersharks.controllers.Options;
-import lasersharks.controllers.RestartGameController;
+import lasersharks.Options;
+import lasersharksgui.panes.GamePane;
+import lasersharksgui.panes.StandardPane;
 
 /**
  * The MainGui class is used for running the game.

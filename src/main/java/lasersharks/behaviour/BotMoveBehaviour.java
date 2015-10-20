@@ -1,6 +1,7 @@
 package lasersharks.behaviour;
 
-import lasersharks.Displayable;
+import lasersharks.behaviour.interfaces.MoveBehaviour;
+import lasersharks.interfaces.Displayable;
 
 /**
  * represents the moving behaviour of a FishBot.

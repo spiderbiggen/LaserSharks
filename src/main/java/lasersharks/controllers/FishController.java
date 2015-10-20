@@ -6,20 +6,20 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
-import lasersharks.AmmoFactory;
-import lasersharks.AmmoSpawner;
 import lasersharks.Direction;
-import lasersharks.Displayable;
-import lasersharks.LaserBullet;
-import lasersharks.LaserFactory;
-import lasersharks.LaserShark;
-import lasersharks.LaserSpawner;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.SeaObject;
-import lasersharks.enemies.Enemy;
-import lasersharks.enemies.EnemyFactory;
-import lasersharks.enemies.EnemySpawner;
+import lasersharks.interfaces.AmmoSpawner;
+import lasersharks.interfaces.Displayable;
+import lasersharks.interfaces.EnemyFactory;
+import lasersharks.interfaces.LaserSpawner;
+import lasersharks.seaobjects.AmmoFactory;
+import lasersharks.seaobjects.Enemy;
+import lasersharks.seaobjects.EnemySpawner;
+import lasersharks.seaobjects.LaserBullet;
+import lasersharks.seaobjects.LaserFactory;
+import lasersharks.seaobjects.LaserShark;
+import lasersharks.seaobjects.SeaObject;
 
 /**
  * Class for controlling fish data.

@@ -1,13 +1,14 @@
 package lasersharks.behaviour;
 
 import javafx.scene.shape.Rectangle;
-import lasersharks.Displayable;
 import lasersharks.Position;
+import lasersharks.behaviour.interfaces.CollisionBehaviour;
+import lasersharks.interfaces.Displayable;
 
 /**
  * the default collision behaviour.
  * 
- * @author SEMGroup27
+ * @author sytze
  *
  */
 public class DefaultCollisionBehaviour implements CollisionBehaviour {
@@ -21,11 +22,11 @@ public class DefaultCollisionBehaviour implements CollisionBehaviour {
   /**
    * the constructor.
    * 
-   * @param swimmer
+   * @param displayable
    *          the swimmer it should apply to.
    */
-  public DefaultCollisionBehaviour(Displayable swimmer) {
-    this.displayable = swimmer;
+  public DefaultCollisionBehaviour(Displayable displayable) {
+    this.displayable = displayable;
   }
 
   /**

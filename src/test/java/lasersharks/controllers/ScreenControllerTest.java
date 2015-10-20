@@ -5,9 +5,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import javafx.scene.Scene;
-import lasersharks.LaserShark;
-import lasersharksgui.GamePane;
+import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
+import lasersharksgui.panes.GamePane;
 
 /**
  * Test for {@link ScreenController} class.
