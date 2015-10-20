@@ -46,7 +46,7 @@ public class FishController {
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 670;
   private static final Direction START_DIRECTION = Direction.None;
-  private static final float DEVIDE_DECREASE_SIZE = 10;
+  private static final float DECREASE_SIZE = 2;
 
   /**
    * Spawn-chance for new fishes.
@@ -277,7 +277,7 @@ public class FishController {
           if (fishList.get(k) instanceof Enemy) {
             Rectangle fishHitbox = fishList.get(k).makeHitbox();
             if (laserHitbox.intersects(fishHitbox.getLayoutBounds())) {
-              fishList.get(k).decreaseSize(fishList.get(k).getSize() / DEVIDE_DECREASE_SIZE);
+              fishList.get(k).decreaseSize(DECREASE_SIZE);
               fishList.get(j).kill();
             }
           }
