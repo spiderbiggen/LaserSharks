@@ -14,6 +14,7 @@ import lasersharks.Options;
  * @author SEMGroup27
  *
  */
+@SuppressWarnings("restriction")
 public class AudioController {
 
   private static AudioController instance;
@@ -87,6 +88,11 @@ public class AudioController {
     AudioController.instance = instance;
   }
 
+  /**
+   * Resumes the music play back.
+   * 
+   * @return false if music Player is not yet initialized.
+   */
   public boolean resumeMusic() {
     if (musicPlayer != null) {
       musicPlayer.play();
@@ -94,32 +100,50 @@ public class AudioController {
     }
     return false;
   }
-  
+
+  /**
+   * Mute music and sound effect playback.
+   */
   public void muteAll() {
     muteMusic();
     muteSfx();
   }
-  
-  public void unMuteAll() {
-    unMuteMusic();
-    unMuteSfx();
+
+  /**
+   * Unmute music and sound effect playback.
+   */
+  public void unmuteAll() {
+    unmuteMusic();
+    unmuteSfx();
   }
 
+  /**
+   * Mute music playback.
+   */
   public void muteMusic() {
-    musicPlayer.stop();
+    musicPlayer.pause();
     Options.getInstance().setMutedMusic(true);
   }
 
-  public void unMuteMusic() {
+  /**
+   * Mute sound effect playback.
+   */
+  public void unmuteMusic() {
     resumeMusic();
     Options.getInstance().setMutedMusic(false);
   }
 
+  /**
+   * Unmute music playback.
+   */
   public void muteSfx() {
     Options.getInstance().setMutedSfx(true);
   }
 
-  public void unMuteSfx() {
+  /**
+   * Unmute sound effect playback.
+   */
+  public void unmuteSfx() {
     Options.getInstance().setMutedSfx(false);
   }
 }
