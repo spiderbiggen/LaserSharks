@@ -57,7 +57,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
     super();
     addBackGround();
     addMuteButton();
-    if (Options.getInstance().isPlayingMusic()) {
+    if (!Options.getInstance().isPlayingMusic()) {
       AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName());
     }
   }

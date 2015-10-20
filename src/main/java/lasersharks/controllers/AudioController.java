@@ -39,7 +39,7 @@ public class AudioController {
     try {
       if (!Options.getInstance().isMutedMusic()) {
         musicPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-        musicPlayer.setAutoPlay(true);
+        //musicPlayer.setAutoPlay(true);
         resumeMusic();
       }
     } catch (Exception e) {

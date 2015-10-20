@@ -22,14 +22,16 @@ public class Options {
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static final String DEFAULT_HIT_SOUND_FILENAME = "src/main/resources/soundEffect1.wav";
   private static final String DEFAULT_LASER_SOUND_FILENAME = "src/main/resources/shoot.wav";
-  
+  private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/ammoPickup.wav";
+
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
   private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
 
   private String musicFileName;
   private String hitSoundFileName;
   private String laserSoundFileName;
-  private boolean playingMusic = true;
+  private String ammoPickupSoundFileName;
+  private boolean playingMusic = false;
   private boolean mutedMusic = false;
   private boolean mutedSfx = false;
   private double musicVolume = 1.0f;
@@ -50,11 +52,12 @@ public class Options {
     this.dimension = screenRes;
     factoryRng = new Random();
     spawnRng = factoryRng;
-    
+
     this.setBackGround(DEFAULT_BACKGROUND_IMAGE);
     this.setMusicFilename(DEFAULT_MUSIC_FILENAME);
     this.setHitSoundFileName(DEFAULT_HIT_SOUND_FILENAME);
     this.setLaserSoundFileName(DEFAULT_LASER_SOUND_FILENAME);
+    this.setAmmoPickupSoundFileName(DEFAULT_PICKUP_SOUND_FILENAME);
   }
 
   /**
@@ -206,24 +209,53 @@ public class Options {
     return musicFileName;
   }
 
+  /**
+   * @return the hitSoundFileName
+   */
   public String getHitSoundFileName() {
     return hitSoundFileName;
   }
 
+  /**
+   * @param hitSoundFileName
+   *          the hitSoundFileName to set
+   */
   public void setHitSoundFileName(String hitSoundFileName) {
     this.hitSoundFileName = hitSoundFileName;
   }
 
+  /**
+   * @return the laserSoundFileName
+   */
   public String getLaserSoundFileName() {
     return laserSoundFileName;
   }
 
+  /**
+   * @param laserSoundFileName
+   *          the laserSoundFileName to set
+   */
   public void setLaserSoundFileName(String laserSoundFileName) {
     this.laserSoundFileName = laserSoundFileName;
   }
 
   /**
-   * @return the playMusic
+   * @return the ammoPickupSoundFileName
+   */
+  public String getAmmoPickupSoundFileName() {
+    return ammoPickupSoundFileName;
+  }
+
+  /**
+   * @param ammoPickupSoundFileName
+   *          the ammoPickupSoundFileName to set
+   */
+  public void setAmmoPickupSoundFileName(String ammoPickupSoundFileName) {
+    this.ammoPickupSoundFileName = ammoPickupSoundFileName;
+  }
+
+  /**
+   * @return playMusic
    */
   public boolean isPlayingMusic() {
     return playingMusic;
