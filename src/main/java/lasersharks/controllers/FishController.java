@@ -221,20 +221,16 @@ public class FishController {
    * from the screen.
    *
    */
-  /*private void checkForCollisions() {
-    collisionSharkWithFish();
-    collisionFishWithLaser();
-  }*/
-  
   private void checkForCollisions() {
     displayableList.add(0, this.shark);
     displayableList
-      .parallelStream()
+      .stream()
       .filter(v -> v.collisionActor())
       .forEach(v -> 
             displayableList
               .stream()
               .filter(w -> v.checkForCollision(w))
+              .filter(w -> w != v)
               .forEach(w -> v.collideWith(w))
       );
     displayableList.remove(0);
@@ -253,51 +249,4 @@ public class FishController {
     }
     return false;
   }
-
-  /**
-   * Method to check if there is a collision between a shark and a fish, if so and the shark is
-   * bigger than the fish, it will grow. If not, it will kill the shark.
-   */
-  public void collisionSharkWithFish() {
-    LaserShark shark = this.shark;
-    if (shark == null) {
-      return;
-    }
-    Rectangle sharkHitbox = shark.makeHitbox();
-    for (int i = 0; i < displayableList.size(); i++) {
-      Rectangle fishHitbox = displayableList.get(i).makeHitbox();
-      if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
-        if (displayableList.get(i).getSize() < shark.getSize()) {
-          // shark eats fish
-          shark.collideWith(displayableList.get(i));
-        } else {
-          // fish eats shark
-          shark.kill();
-        }
-      }
-    }
-  }
-
-  /**
-   * Method to check if there is a collision between a fish and a laser, if so the fish will shrink
-   * and the laser will be removed from the screen.
-   */
-  public void collisionFishWithLaser() {
-    // TODO: remove these horrible instanceof statements.
-    for (int j = 0; j < displayableList.size(); j++) {
-      if (displayableList.get(j) instanceof LaserBullet) {
-        Rectangle laserHitbox = displayableList.get(j).makeHitbox();
-        for (int k = 0; k < displayableList.size(); k++) {
-          if (displayableList.get(k) instanceof Fish) {
-            Rectangle fishHitbox = displayableList.get(k).makeHitbox();
-            if (laserHitbox.intersects(fishHitbox.getLayoutBounds())) {
-              displayableList.get(k).decreaseSize(displayableList.get(k).getSize() / DEVIDE_DECREASE_SIZE);
-              displayableList.get(j).kill();
-            }
-          }
-        }
-      }
-    }
-  }
-
 }

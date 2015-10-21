@@ -290,7 +290,6 @@ public abstract class SeaObject implements Displayable {
    */
   @Override
   public void onCollisionEaten() {
-    System.out.println(this.eatBehaviour.getClass().getName() + " Used by " + this.getClass().getName());
     this.eatenBehaviour.onCollisionEaten();
   }
   
