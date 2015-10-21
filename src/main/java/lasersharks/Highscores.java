@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import lasersharks.interfaces.Displayable;
+
 /**
  * A class that handles anything to do with highscores.
  * 
- * @author Daan
+ * @author SEMGroup27
  *
  */
 public class Highscores {

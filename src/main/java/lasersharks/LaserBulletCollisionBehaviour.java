@@ -1,6 +1,8 @@
 package lasersharks;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.behaviour.interfaces.CollisionBehaviour;
+import lasersharks.interfaces.Displayable;
 
 public class LaserBulletCollisionBehaviour implements CollisionBehaviour {
   
@@ -9,7 +11,7 @@ public class LaserBulletCollisionBehaviour implements CollisionBehaviour {
   private static final double HALF_SCALE = 0.5f;
   private static final float DEVIDE_DECREASE_SIZE = 10;
   
-  Displayable swimmer;
+  private Displayable swimmer;
   
   /**
    * the constructor.
@@ -40,8 +42,8 @@ public class LaserBulletCollisionBehaviour implements CollisionBehaviour {
   }
 
   @Override
-  public boolean collide(Displayable swimmer) {
-    if (swimmer instanceof FishBot) {
+  public boolean collide(Displayable Enemy) {
+    if (swimmer instanceof Displayable) {
       swimmer.decreaseSize(swimmer.getSize() / DEVIDE_DECREASE_SIZE);
       this.swimmer.kill();
     }

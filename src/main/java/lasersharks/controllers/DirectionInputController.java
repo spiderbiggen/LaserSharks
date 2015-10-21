@@ -1,22 +1,20 @@
 package lasersharks.controllers;
 
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import lasersharks.Direction;
+import lasersharks.interfaces.DirectionCallback;
 
 /**
  * Controller for handling the inputs to move the shark.
  * 
- * @author SEM Group 27
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")
 public class DirectionInputController implements EventHandler<KeyEvent> {
 
   private DirectionCallback callback;
-  private Scene scene;
-
   private boolean pressedUp;
   private boolean pressedDown;
   private boolean pressedLeft;
@@ -85,7 +83,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
       case D:
         pressedRight = pressed;
         handled = true;
-        break; 
+        break;
       default:
         break;
     }

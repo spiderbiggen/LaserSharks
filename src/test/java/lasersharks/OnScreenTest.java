@@ -15,8 +15,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
- * @author Stefan
- *
+ * Parameterized test for the {@link Position#onScreen(double)} method.
+ * 
+ * @author SEMGroup27
  */
 @RunWith(Parameterized.class)
 public class OnScreenTest {
@@ -30,6 +31,7 @@ public class OnScreenTest {
   @After
   public void tearDown() {
     this.position = null;
+    Options.destroyInstance();
   }
 
   /**
@@ -54,6 +56,9 @@ public class OnScreenTest {
    */
   @Parameters
   public static Collection<Object[]> data() {
+    Options.setGlobalHeight(100);
+    Options.setGlobalWidth(100);
+    
     return Arrays.asList(new Object[][] { 
         { 0, 0, true }, 
         { -1, 0, false }, 
@@ -78,6 +83,8 @@ public class OnScreenTest {
    */
   @Test
   public void testOnScreen() {
+    Options.setGlobalHeight(100);
+    Options.setGlobalWidth(100);
     assertEquals(expectedBool, position.onScreen(0));
   }
 

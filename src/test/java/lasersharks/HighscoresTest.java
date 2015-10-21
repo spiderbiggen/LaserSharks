@@ -1,9 +1,9 @@
 package lasersharks;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * Tests for Highscores class.
  * 
- * @author Daan
+ * @author SEMGroup27
  *
  */
 public class HighscoresTest {

@@ -6,22 +6,23 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.scene.shape.Rectangle;
-import lasersharks.AmmoSpawner;
 import lasersharks.Direction;
-import lasersharks.FishBot;
-import lasersharks.LaserBullet;
-import lasersharks.SeaObject;
-import lasersharks.Displayable;
-import lasersharks.LaserShark;
-import lasersharks.LaserSpawner;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.SeaObject;
-import lasersharks.enemies.FishFactory;
-import lasersharks.enemies.FishSpawner;
+import lasersharks.interfaces.AmmoSpawner;
+import lasersharks.interfaces.Displayable;
+import lasersharks.interfaces.EnemyFactory;
+import lasersharks.interfaces.LaserSpawner;
+import lasersharks.seaobjects.AmmoFactory;
+import lasersharks.seaobjects.Enemy;
+import lasersharks.seaobjects.EnemySpawner;
+import lasersharks.seaobjects.LaserBullet;
+import lasersharks.seaobjects.LaserFactory;
+import lasersharks.seaobjects.LaserShark;
+import lasersharks.seaobjects.SeaObject;
 
 /**
- * Class for controlling fishdata.
+ * Class for controlling fish data.
  * 
  * @author SEMGroup27
  *
@@ -35,7 +36,7 @@ public class FishController {
   private List<Displayable> fishList;
   private LaserShark shark;
 
-  private FishSpawner fishSpawner;
+  private EnemySpawner enemySpawner;
   private AmmoSpawner ammoSpawner;
   private LaserSpawner laserSpawner;
 
@@ -74,9 +75,9 @@ public class FishController {
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);
-    fishSpawner = new FishFactory();
-    ammoSpawner = (AmmoSpawner) fishSpawner;
-    laserSpawner = (LaserSpawner) fishSpawner;
+    enemySpawner = new EnemyFactory();
+    ammoSpawner = new AmmoFactory();
+    laserSpawner = new LaserFactory();
   }
 
   /**
@@ -92,11 +93,11 @@ public class FishController {
   /**
    * Add a fish to the controller.
    * 
-   * @param fish
+   * @param displayable
    *          the Swimmer to add
    */
-  public void addFish(Displayable fish) {
-    this.fishList.add(fish);
+  public void addFish(Displayable displayable) {
+    this.fishList.add(displayable);
   }
 
   /**
@@ -140,8 +141,8 @@ public class FishController {
    * 
    * @return the fishSpawner
    */
-  public FishSpawner getFishSpawner() {
-    return fishSpawner;
+  public EnemySpawner getFishSpawner() {
+    return enemySpawner;
   }
 
   /**
@@ -179,7 +180,7 @@ public class FishController {
   public List<Displayable> getNextCycleInformation(double frametime) {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
-      SeaObject f = fishSpawner.generateFish();
+      SeaObject f = enemySpawner.generateFish();
       SeaObject g = ammoSpawner.generateAmmo();
       this.addFish(f);
 
@@ -215,19 +216,19 @@ public class FishController {
   /**
    * this function checks if there are any collisions between the shark and other fish. if so, this
    * function checks if the size of the fish is smaller or bigger than the shark. If smaller, the
-   * fish is eaten by the shark. If bigger, the game ends.
-   * It also checks if there is a collision between a fish and a laser, if so, the fish will decrease in size
-   * and the laser will be removed from the screen.
+   * fish is eaten by the shark. If bigger, the game ends. It also checks if there is a collision
+   * between a fish and a laser, if so, the fish will decrease in size and the laser will be removed
+   * from the screen.
    *
    */
   private void checkForCollisions() {
-    collisionSharkWithFish();    
+    collisionSharkWithFish();
     collisionFishWithLaser();
-  } 
+  }
 
-  
   /**
    * A laser appears on the screen from the position of the shark and is added to the fishList.
+   * 
    * @return true if the shark had enough ammo.
    */
   public boolean shootLaser() {
@@ -238,11 +239,10 @@ public class FishController {
     }
     return false;
   }
-  
+
   /**
-   * Method to check if there is a collision between a shark and a fish, if so
-   * and the shark is bigger than the fish, it will grow.
-   * If not, it will kill the shark.
+   * Method to check if there is a collision between a shark and a fish, if so and the shark is
+   * bigger than the fish, it will grow. If not, it will kill the shark.
    */
   public void collisionSharkWithFish() {
     LaserShark shark = this.shark;
@@ -265,19 +265,19 @@ public class FishController {
   }
 
   /**
-   * Method to check if there is a collision between a fish and a laser, if so
-   * the fish will shrink and the laser will be removed from the screen.
+   * Method to check if there is a collision between a fish and a laser, if so the fish will shrink
+   * and the laser will be removed from the screen.
    */
   public void collisionFishWithLaser() {
-    //TODO: remove these horrible instanceof statements.
+    // TODO: remove these horrible instanceof statements.
     for (int j = 0; j < fishList.size(); j++) {
-      if (fishList.get(j) instanceof LaserBullet) {        
+      if (fishList.get(j) instanceof LaserBullet) {
         Rectangle laserHitbox = fishList.get(j).makeHitbox();
         for (int k = 0; k < fishList.size(); k++) {
-          if (fishList.get(k) instanceof FishBot) {
+          if (fishList.get(k) instanceof Enemy) {
             Rectangle fishHitbox = fishList.get(k).makeHitbox();
             if (laserHitbox.intersects(fishHitbox.getLayoutBounds())) {
-              fishList.get(k).decreaseSize(fishList.get(k).getSize()/DEVIDE_DECREASE_SIZE);
+              fishList.get(k).decreaseSize(fishList.get(k).getSize() / DEVIDE_DECREASE_SIZE);
               fishList.get(j).kill();
             }
           }
@@ -285,5 +285,5 @@ public class FishController {
       }
     }
   }
- 
+
 }

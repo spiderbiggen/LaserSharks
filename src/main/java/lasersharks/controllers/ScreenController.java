@@ -3,12 +3,12 @@ package lasersharks.controllers;
 import java.util.List;
 
 import javafx.scene.Scene;
-import lasersharks.LaserShark;
-import lasersharks.Displayable;
-import lasersharksgui.GamePane;
-import lasersharksgui.LosingPane;
+import lasersharks.interfaces.Displayable;
+import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
-import lasersharksgui.WinPane;
+import lasersharksgui.panes.GamePane;
+import lasersharksgui.panes.LosingPane;
+import lasersharksgui.panes.WinPane;
 
 /**
  * This is the class that will manage the screen.

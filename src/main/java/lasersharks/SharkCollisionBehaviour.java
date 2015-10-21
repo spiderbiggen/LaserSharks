@@ -1,6 +1,8 @@
 package lasersharks;
 
 import javafx.scene.shape.Rectangle;
+import lasersharks.behaviour.interfaces.CollisionBehaviour;
+import lasersharks.interfaces.Displayable;
 
 public class SharkCollisionBehaviour implements CollisionBehaviour {
 
@@ -9,7 +11,7 @@ public class SharkCollisionBehaviour implements CollisionBehaviour {
   private static final double HALF_SCALE = 0.5f;
   private static final float DEVIDE_DECREASE_SIZE = 10;
   
-  Displayable swimmer;
+  private Displayable swimmer;
   
   /**
    * the constructor.
