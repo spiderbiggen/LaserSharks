@@ -1,6 +1,3 @@
-/**
- * 
- */
 package lasersharks.controllers;
 
 import java.io.File;
@@ -34,17 +31,20 @@ public class AudioController {
    * 
    * @param path
    *          the path of the musicfile that should be played.
+   * @return true iff music has started Playing
    */
-  public void playMusic(String path) {
+  public boolean playMusic(String path) {
+    if (musicPlayer != null) {
+      AudioController.instance.musicPlayer.stop();
+    }
     try {
-      if (!Options.getInstance().isMutedMusic()) {
-        musicPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-        //musicPlayer.setAutoPlay(true);
-        resumeMusic();
-      }
+      musicPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
+      return resumeMusic();
+
     } catch (Exception e) {
       Logger.getInstance().write("MusicPlay failed", e.getMessage());
     }
+    return false;
   }
 
   /**
@@ -52,40 +52,21 @@ public class AudioController {
    * 
    * @param path
    *          the path of the sound file that should be played.
+   * @return true iff a sound effect has started Playing
    */
-  public void playSoundEffect(String path) {
+  public boolean playSoundEffect(String path) {
+    if (Options.getInstance().isMutedSfx()) {
+      return false;
+    }
     try {
-      if (!Options.getInstance().isMutedSfx()) {
-        sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-        Options.getInstance().setPlayingMusic(true);
-        sfxPlayer.setVolume(Options.getInstance().getSfxVolume());
-        sfxPlayer.play();
-      }
+      sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
+      sfxPlayer.setVolume(Options.getInstance().getSfxVolume());
+      sfxPlayer.play();
+      return true;
     } catch (Exception e) {
-      Logger.getInstance().write("AudioPlay failed", e.getMessage());
+      Logger.getInstance().write("sfxPlay failed", e.getMessage());
     }
-  }
-
-  /**
-   * Singleton AudioController instance.
-   * 
-   * @return the audio controller instance
-   */
-  public static AudioController getInstance() {
-    if (instance == null) {
-      return new AudioController();
-    }
-    return instance;
-  }
-
-  /**
-   * Sets the Singleton instance for the audio controller.
-   * 
-   * @param instance
-   *          the new instance
-   */
-  public void setInstance(AudioController instance) {
-    AudioController.instance = instance;
+    return false;
   }
 
   /**
@@ -94,13 +75,16 @@ public class AudioController {
    * @return false if music Player is not yet initialized.
    */
   public boolean resumeMusic() {
-    if (musicPlayer != null) {
-      musicPlayer.setVolume(Options.getInstance().getMusicVolume());
-      musicPlayer.play();
-      Options.getInstance().setPlayingMusic(true);
-      return true;
+    if (musicPlayer == null) {
+      return false;
     }
-    return false;
+    if (Options.getInstance().isMutedMusic()) {
+      return false;
+    }
+    musicPlayer.setVolume(Options.getInstance().getMusicVolume());
+    musicPlayer.play();
+    Options.getInstance().setPlayingMusic(true);
+    return true;
   }
 
   /**
@@ -123,16 +107,18 @@ public class AudioController {
    * Mute music playback.
    */
   public void muteMusic() {
-    musicPlayer.pause();
     Options.getInstance().setMutedMusic(true);
+    if (musicPlayer != null) {
+      musicPlayer.pause();
+    }
   }
 
   /**
    * Mute sound effect playback.
    */
   public void unmuteMusic() {
-    resumeMusic();
     Options.getInstance().setMutedMusic(false);
+    resumeMusic();
   }
 
   /**
@@ -173,5 +159,40 @@ public class AudioController {
   public void adjustSfxVolume(double newVolume) {
     newVolume = Math.min(Math.max(newVolume, 0), 1.0);
     Options.getInstance().setSfxVolume(newVolume);
+  }
+
+  /**
+   * Singleton AudioController instance.
+   * 
+   * @return the audio controller instance
+   */
+  public static AudioController getInstance() {
+    if (instance == null) {
+      return new AudioController();
+    }
+    return instance;
+  }
+
+  /**
+   * Sets the Singleton instance for the audio controller.
+   * 
+   * @param instance
+   *          the new instance
+   */
+  public static void setInstance(AudioController instance) {
+    if (AudioController.instance != null) {
+      destroyInstance();
+    }
+    AudioController.instance = instance;
+  }
+
+  /**
+   * Sets the Singleton instance for the audio controller to null to reset all the settings.
+   */
+  public static void destroyInstance() {
+    if (AudioController.instance.musicPlayer != null) {
+      AudioController.instance.musicPlayer.stop();
+    }
+    AudioController.instance = null;
   }
 }

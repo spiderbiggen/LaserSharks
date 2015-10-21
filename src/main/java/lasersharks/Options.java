@@ -31,11 +31,11 @@ public class Options {
   private String hitSoundFileName;
   private String laserSoundFileName;
   private String ammoPickupSoundFileName;
-  private boolean playingMusic = false;
-  private boolean mutedMusic = false;
-  private boolean mutedSfx = false;
-  private double musicVolume = 1.0f;
-  private double sfxVolume = 1.0f;
+  private boolean playingMusic;
+  private boolean mutedMusic;
+  private boolean mutedSfx;
+  private double musicVolume;
+  private double sfxVolume;
 
   private String backGround;
   private Random factoryRng;
@@ -58,6 +58,12 @@ public class Options {
     this.setHitSoundFileName(DEFAULT_HIT_SOUND_FILENAME);
     this.setLaserSoundFileName(DEFAULT_LASER_SOUND_FILENAME);
     this.setAmmoPickupSoundFileName(DEFAULT_PICKUP_SOUND_FILENAME);
+
+    playingMusic = false;
+    mutedMusic = false;
+    mutedSfx = false;
+    musicVolume = 1.0f;
+    sfxVolume = 1.0f;
   }
 
   /**
@@ -67,10 +73,10 @@ public class Options {
    * @return the options object that is currently used.
    */
   public static synchronized Options getInstance() {
-    if (currentOptions != null) {
-      return currentOptions;
+    if (currentOptions == null) {
+      currentOptions = new Options(getScreenSize());
     }
-    return new Options(getScreenSize());
+    return currentOptions;
   }
 
   /**
@@ -80,22 +86,41 @@ public class Options {
     currentOptions = null;
   }
 
-  /**
-   * Checks if two options objects are equal.
+  /*
+   * (non-Javadoc)
    * 
-   * @param object
-   *          the object to compare to.
-   * @return true if they are equal.
+   * @see java.lang.Object#hashCode()
    */
   @Override
-  public boolean equals(Object object) {
-    if (object instanceof Options) {
-      Options other = (Options) object;
-      if (other.getDimension().equals(dimension)) {
-        return true;
-      }
+  public int hashCode() {
+    return dimension.hashCode();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-    return false;
+    if (obj == null) {
+      return false;
+    }
+    if (!(obj instanceof Options)) {
+      return false;
+    }
+    Options other = (Options) obj;
+    if (dimension == null) {
+      if (other.dimension != null) {
+        return false;
+      }
+    } else if (!dimension.equals(other.dimension)) {
+      return false;
+    }
+    return true;
   }
 
   /**

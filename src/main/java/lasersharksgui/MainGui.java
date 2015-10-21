@@ -114,6 +114,9 @@ public class MainGui extends Application {
     instance = newInstance;
   }
 
+  /**
+   * Set the stored instance of this singleton to null.
+   */
   public static void clearInstance() {
     instance = null;
   }
