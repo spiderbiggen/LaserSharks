@@ -1,5 +1,9 @@
 package lasersharks.behaviour.interfaces;
 
+import lasersharks.seaobjects.LaserBullet;
+
 public interface LaserCollisionBehaviour {
-  boolean onCollisionDestroyLaser();
+  
+  void onCollisionDestroyLaser();
+
 }

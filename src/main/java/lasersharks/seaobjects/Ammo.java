@@ -5,9 +5,9 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.NoMovementMoveBehaviour;
 import lasersharks.behaviour.ammunitionIncrement.AmmoAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.eaten.AmmoEatenBehaviour;
+import lasersharks.behaviour.move.NoMovementMoveBehaviour;
 
 /**
  * @author SEMGroup27

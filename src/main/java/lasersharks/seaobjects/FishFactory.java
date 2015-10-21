@@ -5,6 +5,7 @@ import java.util.Random;
 import lasersharks.Direction;
 import lasersharks.Options;
 import lasersharks.Position;
+import lasersharks.interfaces.FishSpawner;
 
 /**
  * Default Fishfactory implementation.

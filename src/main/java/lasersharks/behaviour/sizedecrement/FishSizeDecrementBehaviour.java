@@ -9,7 +9,6 @@ import lasersharks.seaobjects.SeaObject;
  *
  */
 public class FishSizeDecrementBehaviour implements SizeDecrementBahaviour {
-  private static final float SIZE_DECREMENT = 10.0f;
   private SeaObject element;
       
   /**
@@ -22,6 +21,6 @@ public class FishSizeDecrementBehaviour implements SizeDecrementBahaviour {
 
   @Override
   public void onCollisionSizeDecrement(int size) {
-    element.decreaseSize(SIZE_DECREMENT);
+    element.decreaseSize(size);
   }
 }

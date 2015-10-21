@@ -1,4 +1,4 @@
-package lasersharks.behaviour;
+package lasersharks.behaviour.collisionHitbox;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Position;

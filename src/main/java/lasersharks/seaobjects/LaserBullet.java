@@ -2,9 +2,10 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.DefaultMoveBehaviour;
+import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
+import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
+import lasersharks.behaviour.move.DefaultMoveBehaviour;
 import lasersharks.behaviour.DefaultEatBehaviour;
-import lasersharks.behaviour.DefaultCollisionHitboxBehaviour;
 
 /**
  * This class represents a laser projectile.
@@ -14,6 +15,7 @@ import lasersharks.behaviour.DefaultCollisionHitboxBehaviour;
  */
 public class LaserBullet extends SeaObject {
 
+  private static final int SIZE_DECREMENT_ON_HIT = 10;
   private static final String LASER_IMAGE = "greenLaserRay.png";
   private static final double LASER_DEFAULT_STRENGTH = 1.0;
   private static final double IMG_WIDTH = 290;
@@ -36,9 +38,10 @@ public class LaserBullet extends SeaObject {
   public LaserBullet(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
     strength = LASER_DEFAULT_STRENGTH;
-    collisionBehaviour = new DefaultCollisionHitboxBehaviour(this);
+    collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
     eatBehaviour = new DefaultEatBehaviour();
     moveBehaviour = new DefaultMoveBehaviour(this);
+    laserCollisionBehaviour = new LaserLaserCollisionBehaviour(this);
   }
 
   /**
@@ -59,11 +62,16 @@ public class LaserBullet extends SeaObject {
 
   /**
    * returns the strength.
-   * 
+   * Possiably depricated.
    * @return the strength.
    */
   public double getStrength() {
     return strength;
+  }
+  
+  @Override
+  public int getOnCollisionSizeDecrement() {
+    return SIZE_DECREMENT_ON_HIT;
   }
 
 }

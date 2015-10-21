@@ -1,4 +1,4 @@
-package lasersharks.behaviour;
+package lasersharks.behaviour.move;
 
 import lasersharks.behaviour.interfaces.MoveBehaviour;
 import lasersharks.interfaces.Displayable;

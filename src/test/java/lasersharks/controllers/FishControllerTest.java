@@ -58,7 +58,7 @@ public class FishControllerTest {
   public void testAddFish() {
     Fish fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
-    fishCon.addFish(fishBot);
+    fishCon.addDisplayable(fishBot);
     assertTrue(fishCon.getNextCycleInformation(3).contains(fishBot));
   }
 
@@ -75,7 +75,7 @@ public class FishControllerTest {
     fishCon.setShark(
         new LaserShark(new Position(POSITION_X, POSITION_Y), sizeOfShark, SPEED, Direction.East));
     for (int i = 0; i < FISHAMOUNT; i++) {
-      fishCon.addFish(new Fish("", 1, 1,
+      fishCon.addDisplayable(new Fish("", 1, 1,
           new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH)
           , Float.valueOf(SIZE),
           Double.valueOf(SPEED), 

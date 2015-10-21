@@ -3,8 +3,9 @@ package lasersharks.seaobjects;
 import lasersharks.Direction;
 import lasersharks.Position;
 import lasersharks.behaviour.checkforloss.FishCheckForLossBehaviour;
+import lasersharks.behaviour.collision.FishCollisionBehaviour;
 import lasersharks.behaviour.eaten.FishEatenBehaviour;
-import lasersharks.behaviour.lasercollision.FishLaserCollisionBehaviour;
+import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
 import lasersharks.behaviour.sizedecrement.FishSizeDecrementBehaviour;
 import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
 
@@ -47,8 +48,8 @@ public class Fish extends SeaObject {
     checkForLossBehaviour = new FishCheckForLossBehaviour(this);
     eatenBehaviour = new FishEatenBehaviour(this);
     getSizeIncrementBahaviour = new FishGetSizeIncrementBehaviour(this);
-    laserCollisionBehaviour = new FishLaserCollisionBehaviour();
     sizeDecrementBahaviour = new FishSizeDecrementBehaviour(this);
+    collisionBehaviour = new FishCollisionBehaviour(this);
   }
 
   @Override
@@ -61,4 +62,11 @@ public class Fish extends SeaObject {
     return ((double) imgHeight) / ((double) imgWidth);
   }
 
+  /**
+   * Fishes are collisionActors
+   */
+  public boolean collisionActor() {
+    return true;
+  }
+  
 }

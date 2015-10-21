@@ -100,7 +100,7 @@ public abstract class SeaObjectTest {
   }
 
   /**
-   * Test for {@link SeaObject#collision(SeaObject)}.
+   * Test for {@link SeaObject#checkForCollision(SeaObject)}.
    */
   @Test
   public void testCollisionTrue() {
@@ -113,7 +113,7 @@ public abstract class SeaObjectTest {
   }
 
   /**
-   * Test for {@link SeaObject#collision(SeaObject)}.
+   * Test for {@link SeaObject#checkForCollision(SeaObject)}.
    */
   @Test
   public void testCollisionFalse() {

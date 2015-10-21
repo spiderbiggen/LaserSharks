@@ -74,7 +74,7 @@ public interface Displayable {
    *          we want to check if the Displayable collides with this Displayable,
    * @return true if the Displayables collide and false if not.
    */
-  boolean collision(Displayable swimmer);
+  boolean checkForCollision(Displayable swimmer);
 
   /**
    * this function checks if the Displayable is on the screen or not.
@@ -139,13 +139,6 @@ public interface Displayable {
   Position getMiddlePoint();
 
   /**
-   * Handle collision with other object.
-   * @param swimmer other object with wich is collided.
-   */
-  void collideWith(Displayable swimmer);
-  
-
-  /**
    * Increment ammunition by an int value when collided.
    * @return increment value.
    */
@@ -153,9 +146,9 @@ public interface Displayable {
   
   /**
    * Check to see if player has lost the game.
-   * @param size shark size.
+   * @param f shark size.
    */
-  void onCollisionPlayerLoses(int size);
+  void onCollisionPlayerLoses(float f);
   
   /**
    * Notify object it is eaten.
@@ -172,12 +165,36 @@ public interface Displayable {
    * See if laser needs to be destroyed after colliding with this object.
    * @return boolean weater laser object needs to be destroyed.
    */
-  boolean onCollisionDestroyLaser();
+  void onCollisionDestroyLaser();
   
   /**
    * Notify ~ has been hit by the laster.
    * @param size size by which object needs to decrement.
    */
   void onCollisionSizeDecrement(int size);
+  
+  /**
+   * Get size by which to decrement on collision
+   * @return
+   */
+  int getOnCollisionSizeDecrement();
 
+  /**
+   * Increase ammunition of current object.
+   * @param onCollisionAmmunitionIncrement
+   */
+  void increaseAmmunition(int onCollisionAmmunitionIncrement);
+  
+  /**
+   * Notify that the object have collided.
+   * @param object
+   */
+  void collideWith(Displayable object);
+  
+  /**
+   * See if this is the actor or the actee in collisions.
+   * @return
+   */
+  boolean collisionActor();
+  
 }

@@ -21,6 +21,7 @@ public class FishEatenBehaviour implements EeatenBehaviour {
 
   @Override
   public void onCollisionEaten() {
+    System.out.println("FishEatenBehaviour used");
     element.kill();
   }
 }

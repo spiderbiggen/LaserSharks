@@ -129,7 +129,7 @@ public class LaserSharkTest extends SeaObjectTest {
 
     assertTrue(mockedFish.isAlive());
     laserShark.collideWith(mockedFish);
-    verify(mockedFish).kill();
+    verify(mockedFish).onCollisionEaten();
   }
 
 }

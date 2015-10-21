@@ -3,14 +3,15 @@ package lasersharks.seaobjects;
 import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.DefaultEatBehaviour;
-import lasersharks.behaviour.DefaultMoveBehaviour;
 import lasersharks.behaviour.ammunitionIncrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
+import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
+import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.eaten.DefaultEatenBehaviour;
 import lasersharks.behaviour.interfaces.AmmunitionIncrementBehaviour;
 import lasersharks.behaviour.interfaces.CheckForLossBehaviour;
+import lasersharks.behaviour.interfaces.CollisionBehaviour;
 import lasersharks.behaviour.interfaces.CollisionHitboxBehaviour;
 import lasersharks.behaviour.interfaces.EatBehaviour;
 import lasersharks.behaviour.interfaces.EeatenBehaviour;
@@ -19,6 +20,7 @@ import lasersharks.behaviour.interfaces.LaserCollisionBehaviour;
 import lasersharks.behaviour.interfaces.MoveBehaviour;
 import lasersharks.behaviour.interfaces.SizeDecrementBahaviour;
 import lasersharks.behaviour.lasercollision.DefaultLaserCollisionBehaviour;
+import lasersharks.behaviour.move.DefaultMoveBehaviour;
 import lasersharks.behaviour.sizedecrement.DefaultSizeDecrementBehaviour;
 import lasersharks.behaviour.sizeincrement.DefaultGetSizeIncrementBehaviour;
 import lasersharks.interfaces.Displayable;
@@ -26,18 +28,14 @@ import lasersharks.interfaces.Displayable;
 /**
  * Abstract class for objects of the great blue.
  * 
-<<<<<<< HEAD
  * @author SEMGroup27
-=======
- * @author SEMGRoup27
->>>>>>> master
  */
 @SuppressWarnings("restriction")
 
 public abstract class SeaObject implements Displayable {
 
   private static final float MIN_SIZE = 30.0f;
-  protected CollisionHitboxBehaviour collisionBehaviour;
+  protected CollisionHitboxBehaviour collisionHitBoxBehaviour;
   protected MoveBehaviour moveBehaviour;
   protected EatBehaviour eatBehaviour;
   
@@ -47,6 +45,7 @@ public abstract class SeaObject implements Displayable {
   protected GetSizeIncrementBahaviour getSizeIncrementBahaviour;
   protected LaserCollisionBehaviour laserCollisionBehaviour;
   protected SizeDecrementBahaviour sizeDecrementBahaviour;
+  protected CollisionBehaviour collisionBehaviour;
   
   private Position position;
   private float size;
@@ -73,7 +72,7 @@ public abstract class SeaObject implements Displayable {
     this.direction = direction;
     this.alive = true;
     
-    this.collisionBehaviour = new DefaultCollisionHitboxBehaviour(this);
+    this.collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
     this.moveBehaviour = new DefaultMoveBehaviour(this);
     this.eatBehaviour = new DefaultEatBehaviour();
     
@@ -83,6 +82,7 @@ public abstract class SeaObject implements Displayable {
     this.getSizeIncrementBahaviour = new DefaultGetSizeIncrementBehaviour();
     this.laserCollisionBehaviour = new DefaultLaserCollisionBehaviour();
     this.sizeDecrementBahaviour = new DefaultSizeDecrementBehaviour();
+    this.collisionBehaviour = new DefaultCollisionBehaviour();
   }
 
   /**
@@ -192,8 +192,8 @@ public abstract class SeaObject implements Displayable {
    *          we want to check if the seaObjectbot collides with this seaObject,
    * @return true if the seaObjectes collide and false if not.
    */
-  public boolean collision(Displayable swimmer) {
-    return collisionBehaviour.collide(swimmer);
+  public boolean checkForCollision(Displayable swimmer) {
+    return collisionHitBoxBehaviour.collide(swimmer);
   }
 
   /**
@@ -202,7 +202,7 @@ public abstract class SeaObject implements Displayable {
    * @return the middlepoint of the seaObject.
    */
   public Position getMiddlePoint() {
-    return collisionBehaviour.getMiddlePoint();
+    return collisionHitBoxBehaviour.getMiddlePoint();
   }
 
   /**
@@ -263,18 +263,7 @@ public abstract class SeaObject implements Displayable {
    * @return a rectangle hitbox.
    */
   public Rectangle makeHitbox() {
-    return collisionBehaviour.makeHitbox();
-  }
-
-  /**
-   * The SeaObject eats an other seaObject. This kills seaObject and increases size of the shark.
-   * 
-   * @param seaObject
-   *          the seaObject the shark eats
-   */
-  @Override
-  public void collideWith(Displayable swimmer) {
-    eatBehaviour.eat(swimmer);
+    return collisionHitBoxBehaviour.makeHitbox();
   }
   
 
@@ -292,7 +281,7 @@ public abstract class SeaObject implements Displayable {
    * @param size shark size.
    */
   @Override
-  public void onCollisionPlayerLoses(int size) {
+  public void onCollisionPlayerLoses(float size) {
     this.checkForLossBehaviour.onCollisionPlayerLoses(size);
   }
   
@@ -301,6 +290,7 @@ public abstract class SeaObject implements Displayable {
    */
   @Override
   public void onCollisionEaten() {
+    System.out.println(this.eatBehaviour.getClass().getName() + " Used by " + this.getClass().getName());
     this.eatenBehaviour.onCollisionEaten();
   }
   
@@ -318,8 +308,8 @@ public abstract class SeaObject implements Displayable {
    * @return boolean weather laser object needs to be destroyed.
    */
   @Override
-  public boolean onCollisionDestroyLaser() {
-    return this.laserCollisionBehaviour.onCollisionDestroyLaser();
+  public void onCollisionDestroyLaser() {
+    this.laserCollisionBehaviour.onCollisionDestroyLaser();
   }
   
   /**
@@ -330,5 +320,36 @@ public abstract class SeaObject implements Displayable {
   public void onCollisionSizeDecrement(int size) {
     this.sizeDecrementBahaviour.onCollisionSizeDecrement(size);
   }
-
+  
+  /**
+   * Get decrement on collision.
+   * @return decrementation size.
+   */
+  public int getOnCollisionSizeDecrement() {
+    return 0;
+  }
+  
+  
+  /**
+   * Increment ammunition.
+   * @param onCollisionAmmunitionIncrement increment ammunition by given value.
+   */
+  public void increaseAmmunition(int onCollisionAmmunitionIncrement) {
+  
+  }
+  
+  /**
+   * Handle collisions
+   */
+  public void collideWith(Displayable object) {
+    System.out.println("Using:" + this.collisionBehaviour.getClass().getName());
+    this.collisionBehaviour.colideWith(object);
+  }
+  
+  /**
+   * See if object is a collision actor.
+   */
+  public boolean collisionActor() {
+    return false;
+  }
 }

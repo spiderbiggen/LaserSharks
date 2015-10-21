@@ -10,8 +10,7 @@ import lasersharks.behaviour.interfaces.LaserCollisionBehaviour;
 public class DefaultLaserCollisionBehaviour implements LaserCollisionBehaviour {
 
   @Override
-  public boolean onCollisionDestroyLaser() {
-    return true;
+  public void onCollisionDestroyLaser() {
   }
 
 }
