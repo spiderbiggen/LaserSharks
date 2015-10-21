@@ -1,4 +1,4 @@
-package lasersharks.behaviour.collision.interfaces;
+package lasersharks.behaviour.interfaces;
 
 public interface GetSizeIncrementBahaviour {
   float onCollisionSizeIncrement();

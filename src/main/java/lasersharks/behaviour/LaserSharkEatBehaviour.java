@@ -5,6 +5,7 @@ import lasersharks.Logger;
 import lasersharks.behaviour.interfaces.EatBehaviour;
 import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.Ammo;
+import lasersharks.seaobjects.Fish;
 import lasersharks.seaobjects.FishBot;
 import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.panes.StandardPane;
@@ -40,8 +41,8 @@ public class LaserSharkEatBehaviour implements EatBehaviour {
    */
   @Override
   public void eat(Displayable fish) {
-    if (fish instanceof FishBot) {
-      eat((FishBot) fish);
+    if (fish instanceof Fish) {
+      eat((Fish) fish);
     }
     if (fish instanceof Ammo) {
       eat((Ammo) fish);
@@ -50,11 +51,11 @@ public class LaserSharkEatBehaviour implements EatBehaviour {
 
   /**
    * eats an other FishBot. The fish grows, the score increases and a sound effect is played.
-   * 
+   *          
    * @param fish
    *          the fish that should be eaten.
    */
-  public void eat(FishBot fish) {
+  public void eat(Fish fish) {
     if (fish.isAlive()) {
       Logger.getInstance().write("Fish eaten",
           "Old sharksize: " + swimmer.getSize() + "," + "Fish size: " + fish.getSize() + ", "

@@ -1,6 +1,6 @@
-package lasersharks.behaviour.collision;
+package lasersharks.behaviour.eaten;
 
-import lasersharks.behaviour.collision.interfaces.EeatenBehaviour;
+import lasersharks.behaviour.interfaces.EeatenBehaviour;
 import lasersharks.seaobjects.SeaObject;
 
 /**

@@ -1,6 +1,6 @@
-package lasersharks.behaviour.collision;
+package lasersharks.behaviour.ammunitionIncrement;
 
-import lasersharks.behaviour.collision.interfaces.AmmunitionIncrementBehaviour;
+import lasersharks.behaviour.interfaces.AmmunitionIncrementBehaviour;
 
 /**
  * Default increment behaviour for Ammunition.

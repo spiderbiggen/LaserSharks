@@ -1,6 +1,6 @@
-package lasersharks.behaviour.collision;
+package lasersharks.behaviour.sizeincrement;
 
-import lasersharks.behaviour.collision.interfaces.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.interfaces.GetSizeIncrementBahaviour;
 
 /**
  * getSizeIncrement behaviour for SeaObjects.

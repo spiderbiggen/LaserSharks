@@ -70,7 +70,7 @@ public interface Displayable {
    * We calculate the distance between the Displayable. The sum of the size of both Displayable is
    * our hitbox. Hitbox is now a circle, with size the radius in pixels.
    * 
-   * @param Displayable
+   * @param swimmer
    *          we want to check if the Displayable collides with this Displayable,
    * @return true if the Displayables collide and false if not.
    */
@@ -132,9 +132,17 @@ public interface Displayable {
    */
   void decreaseSize(float size);
 
+  /**
+   * Get the middle-point of the actor.
+   * @return middle point of ~
+   */
   Position getMiddlePoint();
 
-  void eat(Displayable swimmer);
+  /**
+   * Handle collision with other object.
+   * @param swimmer other object with wich is collided.
+   */
+  void collideWith(Displayable swimmer);
   
 
   /**

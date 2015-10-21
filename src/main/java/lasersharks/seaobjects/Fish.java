@@ -2,11 +2,11 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.collision.FishCheckForLossBehaviour;
-import lasersharks.behaviour.collision.FishEatenBehaviour;
-import lasersharks.behaviour.collision.FishGetSizeIncrementBehaviour;
-import lasersharks.behaviour.collision.FishLaserCollisionBehaviour;
-import lasersharks.behaviour.collision.FishSizeDecrementBehaviour;
+import lasersharks.behaviour.checkforloss.FishCheckForLossBehaviour;
+import lasersharks.behaviour.eaten.FishEatenBehaviour;
+import lasersharks.behaviour.lasercollision.FishLaserCollisionBehaviour;
+import lasersharks.behaviour.sizedecrement.FishSizeDecrementBehaviour;
+import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
 
 /**
  * Class for the first enemy.

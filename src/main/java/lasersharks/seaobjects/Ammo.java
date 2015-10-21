@@ -5,9 +5,9 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.collision.AmmoAmmunitionIncrementBehaviour;
-import lasersharks.behaviour.collision.AmmoEatenBehaviour;
-import lasersharks.behaviour.AmmunitionMoveBehaviour;
+import lasersharks.behaviour.NoMovementMoveBehaviour;
+import lasersharks.behaviour.ammunitionIncrement.AmmoAmmunitionIncrementBehaviour;
+import lasersharks.behaviour.eaten.AmmoEatenBehaviour;
 
 /**
  * @author SEMGroup27
@@ -30,7 +30,7 @@ public class Ammo extends SeaObject {
    */
   public Ammo(Position position, float size) {
     super(position, size, 0, Direction.None);
-    moveBehaviour = new AmmunitionMoveBehaviour();
+    moveBehaviour = new NoMovementMoveBehaviour();
     ammunitionIncrementBehaviour = new AmmoAmmunitionIncrementBehaviour();
     eatenBehaviour = new AmmoEatenBehaviour(this);
     

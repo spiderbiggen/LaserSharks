@@ -1,6 +1,6 @@
-package lasersharks.behaviour.collision;
+package lasersharks.behaviour.lasercollision;
 
-import lasersharks.behaviour.collision.interfaces.LaserCollisionBehaviour;
+import lasersharks.behaviour.interfaces.LaserCollisionBehaviour;
 
 /**
  * Eaten behaviour for Fishes.

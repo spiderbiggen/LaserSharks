@@ -49,7 +49,7 @@ public class LaserSharkTest extends SeaObjectTest {
     Displayable ammo = mock(Ammo.class);
 
     assertEquals(DEFAULT_SHARK_AMMO, laserShark.getAmmo());
-    laserShark.eat(ammo);
+    laserShark.collideWith(ammo);
     assertEquals(EXPECTED_AFTER_EATING_AMMO, laserShark.getAmmo());
   }
 
@@ -61,7 +61,7 @@ public class LaserSharkTest extends SeaObjectTest {
     Displayable ammo = new Ammo(new Position(0, 0), 1f);
 
     assertEquals(DEFAULT_SHARK_AMMO - 1, laserShark.decreaseAmmo());
-    laserShark.eat(ammo);
+    laserShark.collideWith(ammo);
     assertEquals(EXPECTED_AFTER_EATING_AMMO, laserShark.getAmmo());
   }
 
@@ -74,7 +74,7 @@ public class LaserSharkTest extends SeaObjectTest {
     when(ammo.isAlive()).thenReturn(false);
 
     assertEquals(DEFAULT_SHARK_AMMO, laserShark.getAmmo());
-    laserShark.eat(ammo);
+    laserShark.collideWith(ammo);
     assertEquals(DEFAULT_SHARK_AMMO, laserShark.getAmmo());
   }
 
@@ -87,7 +87,7 @@ public class LaserSharkTest extends SeaObjectTest {
     when(ammo.isAlive()).thenReturn(false);
 
     assertEquals(DEFAULT_SHARK_AMMO - 1, laserShark.decreaseAmmo());
-    laserShark.eat(ammo);
+    laserShark.collideWith(ammo);
     assertEquals(DEFAULT_SHARK_AMMO - 1, laserShark.getAmmo());
   }
 
@@ -101,7 +101,7 @@ public class LaserSharkTest extends SeaObjectTest {
     when(mockedFish.isAlive()).thenReturn(true);
 
     assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
-    laserShark.eat(mockedFish);
+    laserShark.collideWith(mockedFish);
     assertEquals(laserShark.getSize(), EXPECTED_AFTER_EATING_SHARK_SIZE, 0);
   }
 
@@ -115,7 +115,7 @@ public class LaserSharkTest extends SeaObjectTest {
     when(mockedFish.isAlive()).thenReturn(false);
 
     assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
-    laserShark.eat(mockedFish);
+    laserShark.collideWith(mockedFish);
     assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
   }
 
@@ -128,7 +128,7 @@ public class LaserSharkTest extends SeaObjectTest {
     when(mockedFish.isAlive()).thenReturn(true);
 
     assertTrue(mockedFish.isAlive());
-    laserShark.eat(mockedFish);
+    laserShark.collideWith(mockedFish);
     verify(mockedFish).kill();
   }
 

@@ -4,7 +4,7 @@ import lasersharks.Direction;
 import lasersharks.Position;
 import lasersharks.behaviour.DefaultMoveBehaviour;
 import lasersharks.behaviour.DefaultEatBehaviour;
-import lasersharks.behaviour.DefaultCollisionBehaviour;
+import lasersharks.behaviour.DefaultCollisionHitboxBehaviour;
 
 /**
  * This class represent the fishes on the screen that are not player controllable.
@@ -28,7 +28,7 @@ public abstract class FishBot extends SeaObject {
    */
   public FishBot(Position position, float size, double speed, Direction direction) {
     super(position, size, speed, direction);
-    collisionBehaviour = new DefaultCollisionBehaviour(this);
+    collisionBehaviour = new DefaultCollisionHitboxBehaviour(this);
     moveBehaviour = new DefaultMoveBehaviour(this);
     eatBehaviour = new DefaultEatBehaviour();
   }

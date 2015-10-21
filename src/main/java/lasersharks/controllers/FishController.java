@@ -255,7 +255,7 @@ public class FishController {
       if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
         if (fishList.get(i).getSize() < shark.getSize()) {
           // shark eats fish
-          shark.eat(fishList.get(i));
+          shark.collideWith(fishList.get(i));
         } else {
           // fish eats shark
           shark.kill();

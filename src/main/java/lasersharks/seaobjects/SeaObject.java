@@ -3,24 +3,24 @@ package lasersharks.seaobjects;
 import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.DefaultCollisionBehaviour;
+import lasersharks.behaviour.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.DefaultEatBehaviour;
 import lasersharks.behaviour.DefaultMoveBehaviour;
-import lasersharks.behaviour.collision.DefaultAmmunitionIncrementBehaviour;
-import lasersharks.behaviour.collision.DefaultCheckForLossBehaviour;
-import lasersharks.behaviour.collision.DefaultEatenBehaviour;
-import lasersharks.behaviour.collision.DefaultGetSizeIncrementBehaviour;
-import lasersharks.behaviour.collision.DefaultLaserCollisionBehaviour;
-import lasersharks.behaviour.collision.DefaultSizeDecrementBehaviour;
-import lasersharks.behaviour.collision.interfaces.AmmunitionIncrementBehaviour;
-import lasersharks.behaviour.collision.interfaces.CheckForLossBehaviour;
-import lasersharks.behaviour.collision.interfaces.EeatenBehaviour;
-import lasersharks.behaviour.collision.interfaces.GetSizeIncrementBahaviour;
-import lasersharks.behaviour.collision.interfaces.LaserCollisionBehaviour;
-import lasersharks.behaviour.collision.interfaces.SizeDecrementBahaviour;
-import lasersharks.behaviour.interfaces.CollisionBehaviour;
+import lasersharks.behaviour.ammunitionIncrement.DefaultAmmunitionIncrementBehaviour;
+import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
+import lasersharks.behaviour.eaten.DefaultEatenBehaviour;
+import lasersharks.behaviour.interfaces.AmmunitionIncrementBehaviour;
+import lasersharks.behaviour.interfaces.CheckForLossBehaviour;
+import lasersharks.behaviour.interfaces.CollisionHitboxBehaviour;
 import lasersharks.behaviour.interfaces.EatBehaviour;
+import lasersharks.behaviour.interfaces.EeatenBehaviour;
+import lasersharks.behaviour.interfaces.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.interfaces.LaserCollisionBehaviour;
 import lasersharks.behaviour.interfaces.MoveBehaviour;
+import lasersharks.behaviour.interfaces.SizeDecrementBahaviour;
+import lasersharks.behaviour.lasercollision.DefaultLaserCollisionBehaviour;
+import lasersharks.behaviour.sizedecrement.DefaultSizeDecrementBehaviour;
+import lasersharks.behaviour.sizeincrement.DefaultGetSizeIncrementBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
@@ -37,7 +37,7 @@ import lasersharks.interfaces.Displayable;
 public abstract class SeaObject implements Displayable {
 
   private static final float MIN_SIZE = 30.0f;
-  protected CollisionBehaviour collisionBehaviour;
+  protected CollisionHitboxBehaviour collisionBehaviour;
   protected MoveBehaviour moveBehaviour;
   protected EatBehaviour eatBehaviour;
   
@@ -73,7 +73,7 @@ public abstract class SeaObject implements Displayable {
     this.direction = direction;
     this.alive = true;
     
-    this.collisionBehaviour = new DefaultCollisionBehaviour(this);
+    this.collisionBehaviour = new DefaultCollisionHitboxBehaviour(this);
     this.moveBehaviour = new DefaultMoveBehaviour(this);
     this.eatBehaviour = new DefaultEatBehaviour();
     
@@ -273,7 +273,7 @@ public abstract class SeaObject implements Displayable {
    *          the seaObject the shark eats
    */
   @Override
-  public void eat(Displayable swimmer) {
+  public void collideWith(Displayable swimmer) {
     eatBehaviour.eat(swimmer);
   }
   

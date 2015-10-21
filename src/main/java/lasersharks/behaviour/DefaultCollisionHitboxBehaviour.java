@@ -2,7 +2,7 @@ package lasersharks.behaviour;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Position;
-import lasersharks.behaviour.interfaces.CollisionBehaviour;
+import lasersharks.behaviour.interfaces.CollisionHitboxBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
@@ -11,7 +11,8 @@ import lasersharks.interfaces.Displayable;
  * @author sytze
  *
  */
-public class DefaultCollisionBehaviour implements CollisionBehaviour {
+@SuppressWarnings("restriction")
+public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour {
 
   private static final double WIDTH_TO_COORD = 0.85;
   private static final double SIZE_TO_COORD = 0.075;
@@ -25,7 +26,7 @@ public class DefaultCollisionBehaviour implements CollisionBehaviour {
    * @param displayable
    *          the swimmer it should apply to.
    */
-  public DefaultCollisionBehaviour(Displayable displayable) {
+  public DefaultCollisionHitboxBehaviour(Displayable displayable) {
     this.displayable = displayable;
   }
 
