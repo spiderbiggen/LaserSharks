@@ -7,7 +7,7 @@ package lasersharks;
  */
 public class SharkMoveBehaviour implements MoveBehaviour {
   private static final float HALF_RATE = 0.5F;
-  Displayable swimmer;
+  private Displayable swimmer;
   
   /**
    * the constructor.
@@ -24,7 +24,7 @@ public class SharkMoveBehaviour implements MoveBehaviour {
    */
   public boolean move(double frametime) {
     swimmer.getPosition().updatePosition(swimmer.getDirection(), (swimmer.getSpeed() / frametime), swimmer.getSize());
-    // this will make sure the fish stay within both
+    // this will make sure the fish stay within the borders.
 
     swimmer.getPosition().clipPosition((swimmer.getSize() * swimmer.getWidthScale() * HALF_RATE),
         (swimmer.getSize() * HALF_RATE));
