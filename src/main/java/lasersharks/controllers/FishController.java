@@ -227,6 +227,7 @@ public class FishController {
   }*/
   
   private void checkForCollisions() {
+    displayableList.add(0, this.shark);
     displayableList
       .parallelStream()
       .filter(v -> v.collisionActor())
@@ -236,6 +237,7 @@ public class FishController {
               .filter(w -> v.checkForCollision(w))
               .forEach(w -> v.collideWith(w))
       );
+    displayableList.remove(0);
   }
 
   /**

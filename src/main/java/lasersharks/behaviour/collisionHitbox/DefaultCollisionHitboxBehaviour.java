@@ -39,8 +39,10 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
    */
   @Override
   public boolean collide(Displayable swimmer) {
-    float distance = this.displayable.getMiddlePoint().calculateDistance(swimmer.getMiddlePoint());
-    return distance < this.displayable.getSize() + swimmer.getSize();
+    return swimmer.makeHitbox().intersects(displayable.makeHitbox().getLayoutBounds());
+    
+    //float distance = this.displayable.getMiddlePoint().calculateDistance(swimmer.getMiddlePoint());
+    //return distance < this.displayable.getSize() + swimmer.getSize();
   }
 
   /**
