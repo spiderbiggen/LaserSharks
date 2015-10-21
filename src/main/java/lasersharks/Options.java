@@ -20,10 +20,23 @@ public class Options {
   private static final int DEFAULT_WIDTH = 1920;
   private static final int DEFAULT_HEIGHT = 1080;
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
+  private static final String DEFAULT_HIT_SOUND_FILENAME = "src/main/resources/soundEffect1.wav";
+  private static final String DEFAULT_LASER_SOUND_FILENAME = "src/main/resources/shoot.wav";
+  private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/ammoPickup.wav";
+
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
   private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
 
   private String musicFileName;
+  private String hitSoundFileName;
+  private String laserSoundFileName;
+  private String ammoPickupSoundFileName;
+  private boolean playingMusic;
+  private boolean mutedMusic;
+  private boolean mutedSfx;
+  private double musicVolume;
+  private double sfxVolume;
+
   private String backGround;
   private Random factoryRng;
   private Random spawnRng;
@@ -39,6 +52,18 @@ public class Options {
     this.dimension = screenRes;
     factoryRng = new Random();
     spawnRng = factoryRng;
+
+    this.setBackGround(DEFAULT_BACKGROUND_IMAGE);
+    this.setMusicFilename(DEFAULT_MUSIC_FILENAME);
+    this.setHitSoundFileName(DEFAULT_HIT_SOUND_FILENAME);
+    this.setLaserSoundFileName(DEFAULT_LASER_SOUND_FILENAME);
+    this.setAmmoPickupSoundFileName(DEFAULT_PICKUP_SOUND_FILENAME);
+
+    playingMusic = false;
+    mutedMusic = false;
+    mutedSfx = false;
+    musicVolume = 1.0f;
+    sfxVolume = 1.0f;
   }
 
   /**
@@ -48,12 +73,9 @@ public class Options {
    * @return the options object that is currently used.
    */
   public static synchronized Options getInstance() {
-    if (currentOptions != null) {
-      return currentOptions;
+    if (currentOptions == null) {
+      currentOptions = new Options(getScreenSize());
     }
-    currentOptions = new Options(getScreenSize());
-    currentOptions.setBackGround(DEFAULT_BACKGROUND_IMAGE);
-    currentOptions.setMusicFilename(DEFAULT_MUSIC_FILENAME);
     return currentOptions;
   }
 
@@ -64,22 +86,41 @@ public class Options {
     currentOptions = null;
   }
 
-  /**
-   * Checks if two options objects are equal.
+  /*
+   * (non-Javadoc)
    * 
-   * @param object
-   *          the object to compare to.
-   * @return true if they are equal.
+   * @see java.lang.Object#hashCode()
    */
   @Override
-  public boolean equals(Object object) {
-    if (object instanceof Options) {
-      Options other = (Options) object;
-      if (other.getDimension().equals(dimension)) {
-        return true;
-      }
+  public int hashCode() {
+    return dimension.hashCode();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-    return false;
+    if (obj == null) {
+      return false;
+    }
+    if (!(obj instanceof Options)) {
+      return false;
+    }
+    Options other = (Options) obj;
+    if (dimension == null) {
+      if (other.dimension != null) {
+        return false;
+      }
+    } else if (!dimension.equals(other.dimension)) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -194,6 +235,138 @@ public class Options {
   }
 
   /**
+   * @return the hitSoundFileName
+   */
+  public String getHitSoundFileName() {
+    return hitSoundFileName;
+  }
+
+  /**
+   * @param hitSoundFileName
+   *          the hitSoundFileName to set
+   */
+  public void setHitSoundFileName(String hitSoundFileName) {
+    this.hitSoundFileName = hitSoundFileName;
+  }
+
+  /**
+   * @return the laserSoundFileName
+   */
+  public String getLaserSoundFileName() {
+    return laserSoundFileName;
+  }
+
+  /**
+   * @param laserSoundFileName
+   *          the laserSoundFileName to set
+   */
+  public void setLaserSoundFileName(String laserSoundFileName) {
+    this.laserSoundFileName = laserSoundFileName;
+  }
+
+  /**
+   * @return the ammoPickupSoundFileName
+   */
+  public String getAmmoPickupSoundFileName() {
+    return ammoPickupSoundFileName;
+  }
+
+  /**
+   * @param ammoPickupSoundFileName
+   *          the ammoPickupSoundFileName to set
+   */
+  public void setAmmoPickupSoundFileName(String ammoPickupSoundFileName) {
+    this.ammoPickupSoundFileName = ammoPickupSoundFileName;
+  }
+
+  /**
+   * @return playMusic
+   */
+  public boolean isPlayingMusic() {
+    return playingMusic;
+  }
+
+  /**
+   * @param playMusic
+   *          the playMusic to set
+   */
+  public void setPlayingMusic(boolean playMusic) {
+    this.playingMusic = playMusic;
+  }
+
+  /**
+   * @return if the music should be muted.
+   */
+  public boolean isMutedMusic() {
+    return mutedMusic;
+  }
+
+  /**
+   * Set if the music should be muted.
+   * 
+   * @param muteMusic
+   *          true if music should be muted.
+   */
+  public void setMutedMusic(boolean muteMusic) {
+    this.mutedMusic = muteMusic;
+  }
+
+  /**
+   * @return if the sfx should be muted.
+   */
+  public boolean isMutedSfx() {
+    return mutedSfx;
+  }
+
+  /**
+   * Set if the sfx should be muted.
+   * 
+   * @param muteSfx
+   *          true if music should be muted.
+   */
+  public void setMutedSfx(boolean muteSfx) {
+    this.mutedSfx = muteSfx;
+  }
+
+  /**
+   * @return the musicVolume
+   */
+  public double getMusicVolume() {
+    return musicVolume;
+  }
+
+  /**
+   * @param newVolume
+   *          the musicVolume to set
+   */
+  public void setMusicVolume(double newVolume) {
+    this.musicVolume = newVolume;
+  }
+
+  /**
+   * @return the sfxVolume
+   */
+  public double getSfxVolume() {
+    return sfxVolume;
+  }
+
+  /**
+   * @param sfxVolume
+   *          the sfxVolume to set
+   */
+  public void setSfxVolume(double sfxVolume) {
+    this.sfxVolume = sfxVolume;
+  }
+
+  /**
+   * @param musicFileName
+   *          the musicFileName to set
+   */
+  public void setMusicFileName(String musicFileName) {
+    this.musicFileName = musicFileName;
+  }
+
+  /**
    * Get the backGroundImage.
    * 
    * @return the backGroundImage.
@@ -203,9 +376,9 @@ public class Options {
   }
 
   /**
-   * Get the backGroundColor
+   * Get the backGroundColor.
    * 
-   * @return
+   * @return the backgroundColour
    */
   public static Color getBackGroundColor() {
     return DEFAULT_BACKCOLOUR;

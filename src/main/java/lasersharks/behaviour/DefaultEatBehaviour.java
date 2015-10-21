@@ -2,7 +2,9 @@ package lasersharks.behaviour;
 
 import lasersharks.Highscores;
 import lasersharks.Logger;
+import lasersharks.Options;
 import lasersharks.behaviour.interfaces.EatBehaviour;
+import lasersharks.controllers.AudioController;
 import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.Ammo;
 import lasersharks.seaobjects.Enemy;
@@ -20,7 +22,6 @@ public class DefaultEatBehaviour implements EatBehaviour {
   private Displayable swimmer;
 
   private static final float ENERGY_DISSERPATION_RATE = 7.5f;
-  private static final String EAT_FISH_SOUND = "src/main/resources/soundEffect1.wav";
 
   /**
    * the constructor.
@@ -61,7 +62,7 @@ public class DefaultEatBehaviour implements EatBehaviour {
               + "New sharksize: "
               + (swimmer.getSize() + (fish.getSize() / ENERGY_DISSERPATION_RATE)));
       swimmer.increaseSize(fish.getSize() / ENERGY_DISSERPATION_RATE);
-      StandardPane.playSoundEffect(EAT_FISH_SOUND);
+      AudioController.getInstance().playSoundEffect(Options.getInstance().getHitSoundFileName());
     }
     Highscores.getInstance().increaseScore(fish);
     fish.kill();
@@ -76,6 +77,8 @@ public class DefaultEatBehaviour implements EatBehaviour {
   public void eat(Ammo ammo) {
     if (swimmer instanceof LaserShark && ammo.isAlive()) {
       LaserShark shark = (LaserShark) swimmer;
+      AudioController.getInstance()
+          .playSoundEffect(Options.getInstance().getAmmoPickupSoundFileName());
       if (shark.getAmmo() < shark.getMaxAmmo()) {
         shark.increaseAmmo(ammo.getPickupAmount());
         Logger.getInstance().write("Ammo", "Player has picked up some ammo");
