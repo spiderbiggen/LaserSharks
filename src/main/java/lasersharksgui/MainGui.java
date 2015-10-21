@@ -78,7 +78,7 @@ public class MainGui extends Application {
       currentPane.setOpacity(0.0);
       currentPane.stop();
       currentPane = paneToShow;
-      
+      stackPane.getChildren().remove(paneToShow);      
       stackPane.getChildren().add(paneToShow);
   }
 
