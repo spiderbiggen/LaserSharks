@@ -23,7 +23,7 @@ public class FishCheckForLossBehaviour implements CheckForLossBehaviour {
 
   @Override
   public void onCollisionPlayerLoses(float size) {
-    if (size < element.getSize()) {
+    if (size <= element.getSize()) {
       MainGui.browseToGlobal(LosingPane.class);
     }
   }
