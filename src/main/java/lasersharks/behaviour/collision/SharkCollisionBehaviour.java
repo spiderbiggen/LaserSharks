@@ -16,7 +16,7 @@ public class SharkCollisionBehaviour implements CollisionBehaviour{
   }
 
   @Override
-  public void colideWith(Displayable other) {
+  public synchronized void colideWith(Displayable other) {
     other.onCollisionPlayerLoses(object.getSize());
     object.increaseSize(other.onCollisionSizeIncrement());
     object.increaseAmmunition(other.onCollisionAmmunitionIncrement());
