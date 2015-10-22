@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import lasersharks.Position;
+import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
 import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.Ammo;
 import lasersharks.seaobjects.Fish;
@@ -30,7 +31,7 @@ public class LaserSharkTest extends SeaObjectTest {
   private static final int DEFAULT_SHARK_AMMO = 10;
   private static final int EXPECTED_AFTER_EATING_AMMO = 10;
   private static final int DEFAULT_SHARK_SIZE = 30;
-  private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 34;
+  private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 31;
 
   /**
    * Set up which is used before the tests.
@@ -99,7 +100,7 @@ public class LaserSharkTest extends SeaObjectTest {
     Displayable mockedFish = mock(Fish.class);
     //when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(true);
-    when(mockedFish.onCollisionSizeIncrement()).thenReturn(size);
+    when(mockedFish.onCollisionSizeIncrement()).thenReturn(size/FishGetSizeIncrementBehaviour.ENERGY_DISSERPATION_RATE);
 
     assertEquals(DEFAULT_SHARK_SIZE, laserShark.getSize(), 0);
     laserShark.collideWith(mockedFish);
