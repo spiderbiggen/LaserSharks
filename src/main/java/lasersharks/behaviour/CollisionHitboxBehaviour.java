@@ -1,4 +1,4 @@
-package lasersharks.behaviour.interfaces;
+package lasersharks.behaviour;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Position;

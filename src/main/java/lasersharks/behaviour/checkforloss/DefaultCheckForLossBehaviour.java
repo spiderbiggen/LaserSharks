@@ -1,6 +1,6 @@
 package lasersharks.behaviour.checkforloss;
 
-import lasersharks.behaviour.interfaces.CheckForLossBehaviour;
+import lasersharks.behaviour.CheckForLossBehaviour;
 
 /**
  * Check for loss behaviour for SeaObjects.

@@ -1,6 +1,7 @@
 package lasersharks.behaviour.collision;
 
-import lasersharks.behaviour.interfaces.CollisionBehaviour;
+import lasersharks.Highscores;
+import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 
 public class SharkCollisionBehaviour implements CollisionBehaviour{
@@ -20,6 +21,11 @@ public class SharkCollisionBehaviour implements CollisionBehaviour{
     other.onCollisionPlayerLoses(object.getSize());
     object.increaseSize(other.onCollisionSizeIncrement());
     object.increaseAmmunition(other.onCollisionAmmunitionIncrement());
+    Highscores.getInstance().increaseScore(
+        other.getOnCollisionHighScoreIncrement(
+            Highscores.getInstance().getTimePenalty()
+         )
+    );
     other.onCollisionEaten();
   }
   

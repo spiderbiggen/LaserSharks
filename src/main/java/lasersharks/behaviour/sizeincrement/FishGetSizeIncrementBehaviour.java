@@ -1,7 +1,7 @@
 package lasersharks.behaviour.sizeincrement;
 
 import lasersharks.Logger;
-import lasersharks.behaviour.interfaces.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.GetSizeIncrementBahaviour;
 import lasersharks.seaobjects.SeaObject;
 import lasersharksgui.panes.StandardPane;
 

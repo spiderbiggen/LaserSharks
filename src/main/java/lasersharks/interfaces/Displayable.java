@@ -197,4 +197,11 @@ public interface Displayable {
    */
   boolean collisionActor();
   
+  /**
+   * Let displaybe object increase the player highscore on collision.
+   * @param timepenalty pennalty from timelimit.
+   * @return HighscoreIncrement.
+   */
+  int getOnCollisionHighScoreIncrement(int timepenalty);
+  
 }

@@ -1,6 +1,6 @@
 package lasersharks.behaviour.eaten;
 
-import lasersharks.behaviour.interfaces.EeatenBehaviour;
+import lasersharks.behaviour.EeatenBehaviour;
 
 /**
  * Eaten behaviour for SeaObjects.

@@ -2,7 +2,7 @@ package lasersharks.behaviour.collisionHitbox;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Position;
-import lasersharks.behaviour.interfaces.CollisionHitboxBehaviour;
+import lasersharks.behaviour.CollisionHitboxBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**

@@ -189,13 +189,18 @@ public class Highscores {
    * @param fish
    *          the fish that is used to calculate the additional score
    */
-  public void increaseScore(Displayable fish) {
-    if (fish.isAlive()) {
-      score = score + (int) ((fish.getSize() * HALF_SCALE + FISH_BONUS) - amountOfFishesEaten * 2);
-      amountOfFishesEaten++;
-    }
+  public void increaseScore(int increment) {
+    score += Math.max(0, increment);
   }
 
+  /**
+   * Get most current timepenalty.
+   * @return current timepenalty.
+   */
+  public int getTimePenalty() {
+    return (amountOfFishesEaten++) * 2;
+  }
+  
   /**
    * @return Bonus per eaten fish.
    */
