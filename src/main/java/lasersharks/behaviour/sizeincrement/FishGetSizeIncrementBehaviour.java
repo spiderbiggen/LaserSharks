@@ -25,7 +25,7 @@ public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBahaviour 
   }
 
   @Override
-  public float onCollisionSizeIncrement() {
+  public synchronized float onCollisionSizeIncrement() {
     Logger.getInstance().write("Fish eaten", element.toString());
     StandardPane.playSoundEffect(EAT_FISH_SOUND);
     return (element.getSize() / ENERGY_DISSERPATION_RATE);
