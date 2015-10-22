@@ -12,6 +12,7 @@ import lasersharksgui.panes.StandardPane;
  */
 public class FishEatenBehaviour implements EeatenBehaviour {
   private SeaObject element;
+  private static final String EAT_FISH_SOUND = "src/main/resources/soundEffect1.wav";
   
   /**
    * Constructor.
@@ -25,5 +26,6 @@ public class FishEatenBehaviour implements EeatenBehaviour {
   public void onCollisionEaten() {
     element.kill();
     element.setSize(0);
+    StandardPane.playSoundEffect(EAT_FISH_SOUND);
   }
 }
