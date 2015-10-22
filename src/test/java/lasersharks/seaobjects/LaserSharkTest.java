@@ -97,12 +97,13 @@ public class LaserSharkTest extends SeaObjectTest {
   @Test
   public void testLaserSharkGrowsWhenEatingFish() {
     Displayable mockedFish = mock(Fish.class);
-    when(mockedFish.getSize()).thenReturn(size);
+    //when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(true);
+    when(mockedFish.onCollisionSizeIncrement()).thenReturn(size);
 
-    assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
+    assertEquals(DEFAULT_SHARK_SIZE, laserShark.getSize(), 0);
     laserShark.collideWith(mockedFish);
-    assertEquals(laserShark.getSize(), EXPECTED_AFTER_EATING_SHARK_SIZE, 0);
+    assertEquals(EXPECTED_AFTER_EATING_SHARK_SIZE, laserShark.getSize(), 0);
   }
 
   /**

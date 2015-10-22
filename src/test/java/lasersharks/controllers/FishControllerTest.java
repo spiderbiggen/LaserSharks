@@ -1,12 +1,16 @@
 package lasersharks.controllers;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
 
+import org.apache.log4j.chainsaw.Main;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import lasersharks.Direction;
 import lasersharks.Position;
@@ -14,6 +18,9 @@ import lasersharks.controllers.FishController;
 import lasersharks.seaobjects.Fish;
 import lasersharks.seaobjects.FishBot;
 import lasersharks.seaobjects.LaserShark;
+import lasersharksgui.MainGui;
+import lasersharksgui.panes.LosingPane;
+import lasersharksgui.panes.StandardPane;
 import lasersharks.seaobjects.FishFactory;
 
 /**
@@ -87,12 +94,21 @@ public class FishControllerTest {
   /**
    * A cycle is tested where the shark gets killed. After the cycle, the shark should not be alive.
    */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Test
   public void testGetNextCycleSharkKilled() {
+    MainGui guiMock = Mockito.mock(MainGui.class);
+    ArgumentCaptor<Class> argument = ArgumentCaptor.forClass(
+            Class.class
+    );
+    MainGui.setInstance(guiMock);
+    
     FishController fishCon = fishConFilled(SIZE);
     assertTrue(fishCon.getShark().isAlive());
     fishCon.getNextCycleInformation(1);
-    assertFalse(fishCon.getShark().isAlive());
+    
+    Mockito.verify(guiMock).browseTo((argument.capture()));
+    assertEquals(LosingPane.class, argument.getValue());
   }
 
   /**
@@ -104,7 +120,7 @@ public class FishControllerTest {
     FishController fishCon = fishConFilled(SIZE + 1);
     assertTrue(fishCon.getShark().isAlive());
     double oldSize = fishCon.getShark().getSize();
-    fishCon.getNextCycleInformation(4);
+    fishCon.getNextCycleInformation(1);
     assertTrue(fishCon.getShark().getSize() > oldSize);
   }
 
