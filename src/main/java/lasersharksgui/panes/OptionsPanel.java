@@ -1,7 +1,6 @@
-package lasersharksgui;
+package lasersharksgui.panes;
 
 import javafx.scene.input.KeyEvent;
-import lasersharksgui.panes.StandardPane;
 
 public class OptionsPanel extends StandardPane{
 

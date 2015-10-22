@@ -6,7 +6,6 @@ import lasersharks.behaviour.interfaces.EatBehaviour;
 import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.Ammo;
 import lasersharks.seaobjects.Fish;
-import lasersharks.seaobjects.FishBot;
 import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.panes.StandardPane;
 

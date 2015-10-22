@@ -204,8 +204,7 @@ public class Options {
 
   /**
    * Get the backGroundColor
-   * 
-   * @return
+   * @return the default backgroundcolor
    */
   public static Color getBackGroundColor() {
     return DEFAULT_BACKCOLOUR;

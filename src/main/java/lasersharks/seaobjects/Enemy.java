@@ -2,9 +2,8 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.BotMoveBehaviour;
-import lasersharks.behaviour.CantEatBehaviour;
-import lasersharks.behaviour.DefaultCollisionBehaviour;
+import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
+import lasersharks.behaviour.move.NoMovementMoveBehaviour;
 
 /**
  * Class for the first enemy.
@@ -41,9 +40,8 @@ public class Enemy extends SeaObject {
     this.image = image;
     this.imgHeight = imgHeight;
     this.imgWidth = imgWidth;
-    collisionBehaviour = new DefaultCollisionBehaviour(this);
-    moveBehaviour = new BotMoveBehaviour(this);
-    eatBehaviour = new CantEatBehaviour();
+    collisionBehaviour = new DefaultCollisionBehaviour();
+    moveBehaviour = new NoMovementMoveBehaviour();
   }
 
   @Override

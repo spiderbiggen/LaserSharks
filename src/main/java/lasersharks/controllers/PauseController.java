@@ -5,8 +5,8 @@ import javafx.event.EventType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lasersharksgui.MainGui;
-import lasersharksgui.OptionsPanel;
 import lasersharksgui.panes.GamePane;
+import lasersharksgui.panes.OptionsPanel;
 
 /**
  * The pauseController handles how the GamePane switches to and from the OptionsPane.
