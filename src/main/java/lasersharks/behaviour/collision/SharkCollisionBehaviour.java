@@ -21,9 +21,8 @@ public class SharkCollisionBehaviour implements CollisionBehaviour{
     other.onCollisionPlayerLoses(object.getSize());
     object.increaseSize(other.onCollisionSizeIncrement());
     object.increaseAmmunition(other.onCollisionAmmunitionIncrement());
+    Highscores.getInstance().increaseScore(other);
     other.onCollisionEaten();
-    
-    
   }
   
 }
