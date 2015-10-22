@@ -341,7 +341,6 @@ public abstract class SeaObject implements Displayable {
    * Handle collisions
    */
   public void collideWith(Displayable object) {
-    System.out.println("Using:" + this.collisionBehaviour.getClass().getName());
     this.collisionBehaviour.colideWith(object);
   }
   
