@@ -145,7 +145,7 @@ public class LaserShark extends SeaObject implements DirectionCallback {
    * @param onCollisionAmmunitionIncrement Ammunition increment.
    */
   public void increaseAmmunition(int onCollisionAmmunitionIncrement) {
-    this.ammo += onCollisionAmmunitionIncrement;
+    this.ammo = Math.min(this.ammo + onCollisionAmmunitionIncrement, MAX_AMMO);
   }
 
   /**
