@@ -3,7 +3,9 @@
  */
 package lasersharks.seaobjects;
 
+import lasersharks.Options;
 import lasersharks.Position;
+import lasersharks.controllers.AudioController;
 import lasersharks.interfaces.LaserSpawner;
 
 /**
@@ -34,6 +36,7 @@ public class LaserFactory implements LaserSpawner {
   public LaserBullet createLaser(LaserShark origin) {
     Position posShark = origin.getPosition();
     Position posLaser = new Position(posShark.getPosX(), posShark.getPosY());
+    AudioController.getInstance().playSoundEffect(Options.getInstance().getLaserSoundFileName());
     return new LaserBullet(posLaser, LASER_SIZE, LASER_SPEED, origin.getLastHorizontalDirection());
   }
 

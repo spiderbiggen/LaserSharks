@@ -1,7 +1,5 @@
 package lasersharksgui.panes;
 
-import java.io.File;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -13,12 +11,11 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.Position;
+import lasersharks.controllers.AudioController;
 import lasersharksgui.interfaces.Stoppable;
 
 /**
@@ -37,10 +34,6 @@ public abstract class StandardPane extends Pane implements Stoppable {
   protected static final int TEXT_SCALE_SIZE_SMALL = 4;
 
   // audio variables
-  protected static MediaPlayer mediaPlayer;
-  protected static MediaPlayer soundPlayer;
-  private static boolean musicIsPlaying = false;
-  private static boolean shouldEffectPlay = true;
   protected Button muteButton;
 
   // sprite and image variables
@@ -64,8 +57,8 @@ public abstract class StandardPane extends Pane implements Stoppable {
     super();
     addBackGround();
     addMuteButton();
-    if (!musicIsPlaying) {
-      playMusic(Options.getInstance().getMusicFileName());
+    if (!Options.getInstance().isPlayingMusic()) {
+      AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName());
     }
   }
 
@@ -102,40 +95,6 @@ public abstract class StandardPane extends Pane implements Stoppable {
         muteSound();
       }
     });
-  }
-
-  /**
-   * This function plays a music track on repeat.
-   * 
-   * @param path
-   *          the path of the musicfile that should be played.
-   */
-  public static void playMusic(String path) {
-    try {
-      mediaPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-      mediaPlayer.setAutoPlay(true);
-      mediaPlayer.play();
-      musicIsPlaying = true;
-    } catch (Exception e) {
-      Logger.getInstance().write("MusicPlay failed", e.getMessage());
-    }
-  }
-
-  /**
-   * This function plays a sound effect.
-   * 
-   * @param path
-   *          the path of the sound file that should be played.
-   */
-  public static void playSoundEffect(String path) {
-    try {
-      soundPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-      if (shouldEffectPlay) {
-        soundPlayer.play();
-      }
-    } catch (Exception e) {
-      Logger.getInstance().write("AudioPlay failed", e.getMessage());
-    }
   }
 
   /**
@@ -187,17 +146,13 @@ public abstract class StandardPane extends Pane implements Stoppable {
    * method for muting and unmuting the music of the game.
    */
   public void muteSound() {
-    if (musicIsPlaying) {
-      mediaPlayer.pause();
-      musicIsPlaying = false;
-      shouldEffectPlay = false;
+    if (Options.getInstance().isPlayingMusic()) {
+      AudioController.getInstance().muteAll();
       muteButton.setGraphic(unmuteButtonImage);
       Logger.getInstance().write("Sound muted", "Mute sound button pressed");
     } else {
-      mediaPlayer.play();
+      AudioController.getInstance().unmuteAll();
       muteButton.setGraphic(muteButtonImage);
-      musicIsPlaying = true;
-      shouldEffectPlay = true;
       Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
     }
 
