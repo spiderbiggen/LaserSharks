@@ -85,7 +85,7 @@ public class GamePane extends StandardPane implements Stoppable {
    * Adds all event handlers to the GamePane.
    */
   public void addEventHandlers() {
-    addNonPauseHandlers();
+    addNonPauseEventHandlers();
     pauseController = new PauseController(this);
     MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, pauseController);   
   }
@@ -95,7 +95,7 @@ public class GamePane extends StandardPane implements Stoppable {
    */
   public void stopGame() {
     animation.stop();
-    removeNonPauseHandlers();
+    removeNonPauseEventHandlers();
   }
 
   /**
@@ -103,7 +103,7 @@ public class GamePane extends StandardPane implements Stoppable {
    */
   public void resumeGame() {
     animation.start();
-    addNonPauseHandlers();
+    addNonPauseEventHandlers();
   }
 
   /**
@@ -215,14 +215,14 @@ public class GamePane extends StandardPane implements Stoppable {
   public void stop() {
     this.clearPaneOfImageView();
     this.stopGame();
-    removeNonPauseHandlers();
+    removeNonPauseEventHandlers();
   }
   
   /**
    * This method removes all event handlers.
    */
-  public void removeAllHandlers() {
-    removeNonPauseHandlers();
+  public void removeAllEventHandlers() {
+    removeNonPauseEventHandlers();
     MainGui.getInstance().getCurrentScene().removeEventHandler(
         KeyEvent.ANY, 
         pauseController
@@ -233,7 +233,7 @@ public class GamePane extends StandardPane implements Stoppable {
    * Removes all the event handlers, except for the pause handler.
    * This is used for pausing the game.
    */
-  public void removeNonPauseHandlers() {
+  public void removeNonPauseEventHandlers() {
     MainGui.getInstance().getCurrentScene().removeEventHandler(
         KeyEvent.ANY, 
         directionInputController
@@ -248,7 +248,7 @@ public class GamePane extends StandardPane implements Stoppable {
    * Add all the event handlers, except for the pause handler.
    * This is used for resuming the game.
    */
-  public void addNonPauseHandlers() {
+  public void addNonPauseEventHandlers() {
     directionInputController = new DirectionInputController(callback);
     shootController = new ShootController(screenController.getFishController());
     MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputController);

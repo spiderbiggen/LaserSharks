@@ -1,7 +1,6 @@
 package lasersharks.controllers;
 
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lasersharksgui.MainGui;
