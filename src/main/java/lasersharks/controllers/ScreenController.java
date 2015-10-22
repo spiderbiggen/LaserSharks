@@ -48,10 +48,10 @@ public class ScreenController {
       GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
       if (!this.fishCon.getShark().isAlive()) {
         MainGui.browseToGlobal(LosingPane.class);
-        gamePane.stopGame();
+        gamePane.removeAllEventHandlers();
       } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
         MainGui.browseToGlobal(WinPane.class);
-        gamePane.stopGame();
+        gamePane.removeAllEventHandlers();
       }
     }
 

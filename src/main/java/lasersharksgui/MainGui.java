@@ -58,15 +58,32 @@ public class MainGui extends Application {
    *          The class of the panel we should browse to.
    */
   public void browseTo(Class<? extends StandardPane> paneClass) {
+      StandardPane paneToShow;
+      try {
+        paneToShow = (StandardPane) paneClass.newInstance();
+        browseTo(paneToShow);
+      } catch (InstantiationException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+  }
+  
+  /**
+   * This function is used to browse to an other panel.
+   * 
+   * @param paneClass
+   *          The class of the panel we should browse to.
+   */
+  public void browseTo(StandardPane pane) {
     try {
-      StandardPane paneToShow = (StandardPane) paneClass.newInstance();
-      paneToShow.setOpacity(1.0);
+      pane.setOpacity(1.0);
 
       currentPane.setOpacity(0.0);
       currentPane.stop();
-      currentPane = paneToShow;
+      currentPane = pane;
 
-      stackPane.getChildren().add(paneToShow);
+      stackPane.getChildren().add(pane);
     } catch (Exception e) {
       Logger.getInstance().write(e.getClass().getName() + "could not browse", e.getMessage());
     }
