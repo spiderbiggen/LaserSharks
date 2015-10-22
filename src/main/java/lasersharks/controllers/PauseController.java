@@ -42,7 +42,7 @@ public class PauseController implements EventHandler<KeyEvent> {
    * Pauses the game.
    */
   private void pauseGame() {
-    MainGui.getInstance().browseToPaneClass(OptionsPanel.class);
+    MainGui.getInstance().browseTo(OptionsPanel.class);
   }
   
   /**
@@ -50,7 +50,7 @@ public class PauseController implements EventHandler<KeyEvent> {
    */
   private void resumeGame() {
     pane.resumeGame();
-    MainGui.getInstance().browseToPane(pane);
+    MainGui.getInstance().browseTo(pane);
   }
   
 }

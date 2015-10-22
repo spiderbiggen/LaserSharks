@@ -28,7 +28,7 @@ public abstract class FishBot extends SeaObject {
    */
   public FishBot(Position position, float size, double speed, Direction direction) {
     super(position, size, speed, direction);
-    collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
+    this.collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
     moveBehaviour = new DefaultMoveBehaviour(this);
     eatBehaviour = new DefaultEatBehaviour();
   }

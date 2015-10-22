@@ -82,7 +82,6 @@ public abstract class SeaObject implements Displayable {
     this.getSizeIncrementBahaviour = new DefaultGetSizeIncrementBehaviour();
     this.laserCollisionBehaviour = new DefaultLaserCollisionBehaviour();
     this.sizeDecrementBahaviour = new DefaultSizeDecrementBehaviour();
-    this.collisionBehaviour = new DefaultCollisionBehaviour();
   }
 
   /**

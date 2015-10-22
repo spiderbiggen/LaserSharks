@@ -2,12 +2,9 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.checkforloss.FishCheckForLossBehaviour;
-import lasersharks.behaviour.collision.FishCollisionBehaviour;
-import lasersharks.behaviour.eaten.FishEatenBehaviour;
-import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
-import lasersharks.behaviour.sizedecrement.FishSizeDecrementBehaviour;
-import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
+import lasersharks.behaviour.BotMoveBehaviour;
+import lasersharks.behaviour.CantEatBehaviour;
+import lasersharks.behaviour.DefaultCollisionBehaviour;
 
 /**
  * Class for the first enemy.
@@ -15,7 +12,7 @@ import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
  * @author SEMGroup27
  *
  */
-public class Fish extends SeaObject {
+public class Enemy extends SeaObject {
   private String image;
   private int imgHeight;
   private int imgWidth;
@@ -38,18 +35,15 @@ public class Fish extends SeaObject {
    * @param direction
    *          Starting direction.
    */
-  public Fish(String image, int imgHeight, int imgWidth, Position position, Float size,
+  public Enemy(String image, int imgHeight, int imgWidth, Position position, Float size,
       Double speed, Direction direction) {
-
     super(position, size, speed, direction);
     this.image = image;
     this.imgHeight = imgHeight;
     this.imgWidth = imgWidth;
-    this.checkForLossBehaviour = new FishCheckForLossBehaviour(this);
-    this.eatenBehaviour = new FishEatenBehaviour(this);
-    this.getSizeIncrementBahaviour = new FishGetSizeIncrementBehaviour(this);
-    this.sizeDecrementBahaviour = new FishSizeDecrementBehaviour(this);
-    this.collisionBehaviour = new FishCollisionBehaviour(this);
+    collisionBehaviour = new DefaultCollisionBehaviour(this);
+    moveBehaviour = new BotMoveBehaviour(this);
+    eatBehaviour = new CantEatBehaviour();
   }
 
   @Override
@@ -62,11 +56,4 @@ public class Fish extends SeaObject {
     return ((double) imgHeight) / ((double) imgWidth);
   }
 
-  /**
-   * Fishes are collisionActors
-   */
-  public boolean collisionActor() {
-    return true;
-  }
-  
 }
