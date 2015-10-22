@@ -11,7 +11,7 @@ public class AmmoAmmunitionIncrementBehaviour implements AmmunitionIncrementBeha
   private static final int AMMUNITION_SIZE = 10;
 
   @Override
-  public int onCollisionAmmunitionIncrement() {
+  public synchronized int onCollisionAmmunitionIncrement() {
     return AMMUNITION_SIZE;
   }
 }
