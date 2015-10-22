@@ -15,6 +15,7 @@ import lasersharks.Highscores;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.controllers.DirectionInputController;
+import lasersharks.controllers.PauseController;
 import lasersharks.controllers.ScreenController;
 import lasersharks.controllers.ShootController;
 import lasersharks.interfaces.DirectionCallback;
@@ -40,6 +41,7 @@ public class GamePane extends StandardPane implements Stoppable {
   private DirectionCallback callback;
   private DirectionInputController directionInputController;
   private ShootController shootController;
+  private PauseController pauseController;
 
   /**
    * The constructor creates a new keyboardcontroller and screencontroller. The GamePane connects
@@ -48,10 +50,6 @@ public class GamePane extends StandardPane implements Stoppable {
   public GamePane() {
     screenController = new ScreenController(this);
     callback = this.screenController.getShark();
-    directionInputController = new DirectionInputController(callback);
-    shootController = new ShootController(screenController.getFishController());
-    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputController);
-    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, shootController);
     startGame();
   }
 
@@ -59,6 +57,7 @@ public class GamePane extends StandardPane implements Stoppable {
    * Function for start of drawing fish on screen.
    */
   public void startGame() {
+    addEventHandlers();
     Highscores.getInstance().setScore(0);
     clearPaneOfImageView();
     animation = new AnimationTimer() {
@@ -81,12 +80,22 @@ public class GamePane extends StandardPane implements Stoppable {
     };
     animation.start();
   }
+  
+  /**
+   * Adds all event handlers to the GamePane.
+   */
+  public void addEventHandlers() {
+    addNonPauseHandlers();
+    pauseController = new PauseController(this);
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, pauseController);   
+  }
 
   /**
    * Stops the game. Can be resumed by calling resumeGame().
    */
   public void stopGame() {
     animation.stop();
+    removeNonPauseHandlers();
   }
 
   /**
@@ -94,6 +103,7 @@ public class GamePane extends StandardPane implements Stoppable {
    */
   public void resumeGame() {
     animation.start();
+    addNonPauseHandlers();
   }
 
   /**
@@ -205,7 +215,43 @@ public class GamePane extends StandardPane implements Stoppable {
   public void stop() {
     this.clearPaneOfImageView();
     this.stopGame();
-    MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY,
-        directionInputController);
+    removeNonPauseHandlers();
+  }
+  
+  /**
+   * This method removes all event handlers.
+   */
+  public void removeAllHandlers() {
+    removeNonPauseHandlers();
+    MainGui.getInstance().getCurrentScene().removeEventHandler(
+        KeyEvent.ANY, 
+        pauseController
+    );
+  }
+  
+  /**
+   * Removes all the event handlers, except for the pause handler.
+   * This is used for pausing the game.
+   */
+  public void removeNonPauseHandlers() {
+    MainGui.getInstance().getCurrentScene().removeEventHandler(
+        KeyEvent.ANY, 
+        directionInputController
+    );
+    MainGui.getInstance().getCurrentScene().removeEventHandler(
+        KeyEvent.ANY, 
+        shootController
+    );
+  }
+  
+  /**
+   * Add all the event handlers, except for the pause handler.
+   * This is used for resuming the game.
+   */
+  public void addNonPauseHandlers() {
+    directionInputController = new DirectionInputController(callback);
+    shootController = new ShootController(screenController.getFishController());
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputController);
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, shootController);
   }
 }
