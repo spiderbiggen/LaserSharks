@@ -9,6 +9,7 @@ import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.behaviour.CollisionHitboxBehaviour;
 import lasersharks.behaviour.EeatenBehaviour;
 import lasersharks.behaviour.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.HighScoreIncrementBehaviour;
 import lasersharks.behaviour.LaserCollisionBehaviour;
 import lasersharks.behaviour.MoveBehaviour;
 import lasersharks.behaviour.SizeDecrementBahaviour;
@@ -17,6 +18,7 @@ import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
 import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.eaten.DefaultEatenBehaviour;
+import lasersharks.behaviour.highscoreincrement.DefaultHighScoreIncrementBehaviour;
 import lasersharks.behaviour.lasercollision.DefaultLaserCollisionBehaviour;
 import lasersharks.behaviour.move.DefaultMoveBehaviour;
 import lasersharks.behaviour.sizedecrement.DefaultSizeDecrementBehaviour;
@@ -43,6 +45,7 @@ public abstract class SeaObject implements Displayable {
   protected LaserCollisionBehaviour laserCollisionBehaviour;
   protected SizeDecrementBahaviour sizeDecrementBahaviour;
   protected CollisionBehaviour collisionBehaviour;
+  protected HighScoreIncrementBehaviour highScoreIncrementBehaviour;
   
   private Position position;
   private float size;
@@ -79,6 +82,7 @@ public abstract class SeaObject implements Displayable {
     this.laserCollisionBehaviour = new DefaultLaserCollisionBehaviour();
     this.sizeDecrementBahaviour = new DefaultSizeDecrementBehaviour();
     this.collisionBehaviour = new DefaultCollisionBehaviour();
+    this.highScoreIncrementBehaviour = new DefaultHighScoreIncrementBehaviour();
   }
 
   /**
@@ -348,4 +352,17 @@ public abstract class SeaObject implements Displayable {
   public boolean collisionActor() {
     return false;
   }
+  
+
+  /**
+   * Let displaybe object increase the player highscore on collision.
+   * @param timepenalty pennalty from timelimit.
+   * @return HighscoreIncrement.
+   */
+  public int getOnCollisionHighScoreIncrement(int timepenalty) {
+    return this.highScoreIncrementBehaviour.onCollisionHighScoreIncrement(timepenalty);
+  }
+  
 }
+
+
