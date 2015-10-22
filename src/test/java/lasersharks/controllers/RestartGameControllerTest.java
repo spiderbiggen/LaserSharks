@@ -1,0 +1,75 @@
+package lasersharks.controllers;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import lasersharksgui.MainGui;
+import lasersharksgui.panes.GamePane;
+
+/**
+ * Class for testing {@link DirectionInputcontroller}.
+ * 
+ * @author SEMGroup27
+ *
+ */
+@SuppressWarnings("restriction")
+public class RestartGameControllerTest {
+  private MainGui gui;
+  private ArgumentCaptor<Class> argument;
+  private RestartGameController restartGameController;
+  
+  /**
+   * Setup so that all proper items are mocked.
+   */
+  @Before
+  public void setUp() {
+    gui = Mockito.mock(MainGui.class);
+    argument = ArgumentCaptor.forClass(
+            Class.class
+    );
+    MainGui.setInstance(gui);
+    restartGameController = new RestartGameController();
+  }
+  
+  /**
+   * Cleanup our mess.
+   */
+  @After
+  public void tearDown() {
+    MainGui.clearInstance();
+  }
+  
+  /**
+   * Test the restart game controller.
+   */
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testRestartGame() {
+    KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.R, false, false, false, false);
+    this.restartGameController.handle(k);
+
+    Mockito.verify(gui).browseTo((argument.capture()));
+    assertEquals(GamePane.class, argument.getValue());
+  }
+  
+
+  /**
+   * Test the restart game controller.
+   */
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testNoInteractions() {
+    KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.A, false, false, false, false);
+    this.restartGameController.handle(k);
+
+    Mockito.verifyZeroInteractions(gui);
+  }
+  
+}
