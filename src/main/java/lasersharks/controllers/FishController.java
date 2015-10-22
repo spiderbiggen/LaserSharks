@@ -11,11 +11,11 @@ import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.interfaces.AmmoSpawner;
 import lasersharks.interfaces.Displayable;
-import lasersharks.interfaces.EnemyFactory;
 import lasersharks.interfaces.LaserSpawner;
 import lasersharks.seaobjects.AmmoFactory;
-import lasersharks.seaobjects.Enemy;
-import lasersharks.seaobjects.EnemySpawner;
+import lasersharks.seaobjects.Fish;
+import lasersharks.seaobjects.FishFactory;
+import lasersharks.interfaces.FishSpawner;
 import lasersharks.seaobjects.LaserBullet;
 import lasersharks.seaobjects.LaserFactory;
 import lasersharks.seaobjects.LaserShark;
@@ -33,10 +33,10 @@ public class FishController {
   /**
    * Holder for fish data.
    */
-  private List<Displayable> fishList;
+  private List<Displayable> displayableList;
   private LaserShark shark;
 
-  private EnemySpawner enemySpawner;
+  private FishSpawner enemySpawner;
   private AmmoSpawner ammoSpawner;
   private LaserSpawner laserSpawner;
 
@@ -70,12 +70,12 @@ public class FishController {
    * Constructor.
    */
   public FishController() {
-    this.fishList = new LinkedList<Displayable>();
+    this.displayableList = new LinkedList<Displayable>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
         START_DIRECTION);
-    enemySpawner = new EnemyFactory();
+    enemySpawner = new FishFactory();
     ammoSpawner = new AmmoFactory();
     laserSpawner = new LaserFactory();
   }
@@ -96,8 +96,8 @@ public class FishController {
    * @param displayable
    *          the Swimmer to add
    */
-  public void addFish(Displayable displayable) {
-    this.fishList.add(displayable);
+  public void addDisplayable(Displayable displayable) {
+    this.displayableList.add(displayable);
   }
 
   /**
@@ -141,7 +141,7 @@ public class FishController {
    * 
    * @return the fishSpawner
    */
-  public EnemySpawner getFishSpawner() {
+  public FishSpawner getFishSpawner() {
     return enemySpawner;
   }
 
@@ -151,8 +151,8 @@ public class FishController {
    * @param frametime
    */
   private void updatePositions(double frametime) {
-    this.fishList.removeAll(
-        this.fishList.stream().filter(v -> !v.move(frametime)).collect(Collectors.toList()));
+    this.displayableList.removeAll(
+        this.displayableList.stream().filter(v -> !v.move(frametime)).collect(Collectors.toList()));
     if (this.shark != null) {
       this.shark.move(frametime);
     }
@@ -165,7 +165,7 @@ public class FishController {
    */
   private List<Displayable> getNewFishPositions(double frametime) {
     this.updatePositions(frametime);
-    return this.fishList;
+    return this.displayableList;
   }
 
   /**
@@ -182,10 +182,10 @@ public class FishController {
     if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
       SeaObject f = enemySpawner.generateFish();
       SeaObject g = ammoSpawner.generateAmmo();
-      this.addFish(f);
+      this.addDisplayable(f);
 
       if (this.rng.nextInt(ONE_HUNDRED - 0) > AMMO_SPAWN_LIMITER) {
-        this.addFish(g);
+        this.addDisplayable(g);
       }
 
       Logger.getInstance().write("Fish spawned",
@@ -200,7 +200,7 @@ public class FishController {
    * 
    */
   public void clearFish() {
-    this.fishList.clear();
+    this.displayableList.clear();
   }
 
   /**
@@ -222,8 +222,18 @@ public class FishController {
    *
    */
   private void checkForCollisions() {
-    collisionSharkWithFish();
-    collisionFishWithLaser();
+    displayableList.add(0, this.shark);
+    displayableList
+      .stream()
+      .filter(v -> v.collisionActor())
+      .forEach(v -> 
+            displayableList
+              .stream()
+              .filter(w -> v.checkForCollision(w))
+              .filter(w -> w != v)
+              .forEach(w -> v.collideWith(w))
+      );
+    displayableList.remove(0);
   }
 
   /**
@@ -234,56 +244,9 @@ public class FishController {
   public boolean shootLaser() {
     if (shark.getAmmo() > 0) {
       shark.decreaseAmmo();
-      addFish(laserSpawner.createLaser(this.shark));
+      addDisplayable(laserSpawner.createLaser(this.shark));
       return true;
     }
     return false;
   }
-
-  /**
-   * Method to check if there is a collision between a shark and a fish, if so and the shark is
-   * bigger than the fish, it will grow. If not, it will kill the shark.
-   */
-  public void collisionSharkWithFish() {
-    LaserShark shark = this.shark;
-    if (shark == null) {
-      return;
-    }
-    Rectangle sharkHitbox = shark.makeHitbox();
-    for (int i = 0; i < fishList.size(); i++) {
-      Rectangle fishHitbox = fishList.get(i).makeHitbox();
-      if (sharkHitbox.intersects(fishHitbox.getLayoutBounds())) {
-        if (fishList.get(i).getSize() < shark.getSize()) {
-          // shark eats fish
-          shark.eat(fishList.get(i));
-        } else {
-          // fish eats shark
-          shark.kill();
-        }
-      }
-    }
-  }
-
-  /**
-   * Method to check if there is a collision between a fish and a laser, if so the fish will shrink
-   * and the laser will be removed from the screen.
-   */
-  public void collisionFishWithLaser() {
-    // TODO: remove these horrible instanceof statements.
-    for (int j = 0; j < fishList.size(); j++) {
-      if (fishList.get(j) instanceof LaserBullet) {
-        Rectangle laserHitbox = fishList.get(j).makeHitbox();
-        for (int k = 0; k < fishList.size(); k++) {
-          if (fishList.get(k) instanceof Enemy) {
-            Rectangle fishHitbox = fishList.get(k).makeHitbox();
-            if (laserHitbox.intersects(fishHitbox.getLayoutBounds())) {
-              fishList.get(k).decreaseSize(fishList.get(k).getSize() / DEVIDE_DECREASE_SIZE);
-              fishList.get(j).kill();
-            }
-          }
-        }
-      }
-    }
-  }
-
 }

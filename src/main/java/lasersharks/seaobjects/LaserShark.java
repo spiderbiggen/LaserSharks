@@ -3,9 +3,10 @@ package lasersharks.seaobjects;
 import lasersharks.Direction;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.behaviour.DefaultCollisionBehaviour;
-import lasersharks.behaviour.DefaultEatBehaviour;
-import lasersharks.behaviour.SharkMoveBehaviour;
+import lasersharks.behaviour.LaserSharkEatBehaviour;
+import lasersharks.behaviour.collision.SharkCollisionBehaviour;
+import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
+import lasersharks.behaviour.move.LaserSharkMoveBehaviour;
 import lasersharks.interfaces.DirectionCallback;
 
 /**
@@ -38,10 +39,11 @@ public class LaserShark extends SeaObject implements DirectionCallback {
    */
   public LaserShark(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
-    collisionBehaviour = new DefaultCollisionBehaviour(this);
-    moveBehaviour = new SharkMoveBehaviour(this);
-    eatBehaviour = new DefaultEatBehaviour(this);
+    collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
+    moveBehaviour = new LaserSharkMoveBehaviour(this);
+    eatBehaviour = new LaserSharkEatBehaviour(this);
     lastHorizontalDirection = Direction.East;
+    collisionBehaviour = new SharkCollisionBehaviour(this);
     ammo = STARTING_AMMO;
   }
 
@@ -137,4 +139,20 @@ public class LaserShark extends SeaObject implements DirectionCallback {
   public Direction getLastHorizontalDirection() {
     return lastHorizontalDirection;
   }
+  
+  /**
+   * Increment ammunition.
+   * @param onCollisionAmmunitionIncrement Ammunition increment.
+   */
+  public void increaseAmmunition(int onCollisionAmmunitionIncrement) {
+    this.ammo = Math.min(this.ammo + onCollisionAmmunitionIncrement, MAX_AMMO);
+  }
+
+  /**
+   * Lasersharks are collisionActors
+   */
+  public boolean collisionActor() {
+    return true;
+  }
+  
 }

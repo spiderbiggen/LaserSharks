@@ -88,7 +88,7 @@ public class MainGui extends Application {
    *          The class of the panel we should browse to.
    */
   public static void browseToGlobal(Class<? extends StandardPane> paneClass) {
-    instance.browseTo(paneClass);
+    getInstance().browseTo(paneClass);
   }
 
   /**
@@ -110,7 +110,7 @@ public class MainGui extends Application {
     Platform.exit();
   }
 
-  private static void setInstance(MainGui newInstance) {
+  public static void setInstance(MainGui newInstance) {
     instance = newInstance;
   }
 

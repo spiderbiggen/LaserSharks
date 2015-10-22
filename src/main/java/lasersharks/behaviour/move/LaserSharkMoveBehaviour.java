@@ -1,14 +1,14 @@
-package lasersharks.behaviour;
+package lasersharks.behaviour.move;
 
 import lasersharks.behaviour.interfaces.MoveBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
  * represents the default move behaviour of a shark the player controls.
- * @author sytze
+ * @author SEMGroup27
  *
  */
-public class SharkMoveBehaviour implements MoveBehaviour {
+public class LaserSharkMoveBehaviour implements MoveBehaviour {
   private static final float HALF_RATE = 0.5F;
   Displayable swimmer;
   
@@ -16,7 +16,7 @@ public class SharkMoveBehaviour implements MoveBehaviour {
    * the constructor.
    * @param swimmer
    */
-  public SharkMoveBehaviour(Displayable swimmer) {
+  public LaserSharkMoveBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
   }
   

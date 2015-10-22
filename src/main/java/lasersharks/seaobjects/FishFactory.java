@@ -1,20 +1,19 @@
-package lasersharks.interfaces;
+package lasersharks.seaobjects;
 
 import java.util.Random;
 
 import lasersharks.Direction;
 import lasersharks.Options;
 import lasersharks.Position;
-import lasersharks.seaobjects.Enemy;
-import lasersharks.seaobjects.EnemySpawner;
+import lasersharks.interfaces.FishSpawner;
 
 /**
- * Default Enemyfactory implementation.
+ * Default Fishfactory implementation.
  * 
  * @author SEMGroup27
  *
  */
-public class EnemyFactory implements EnemySpawner {
+public class FishFactory implements FishSpawner {
 
   /**
    * This value is used to modify the speed of the fishes that are generated. The generated speed is
@@ -50,12 +49,12 @@ public class EnemyFactory implements EnemySpawner {
   /**
    * initialize the enemy spawner.
    */
-  public EnemyFactory() {
+  public FishFactory() {
     this.enemyRng = Options.getInstance().getFactoryRng();
   }
 
   @Override
-  public Enemy generateFish(Random rng) {
+  public Fish generateFish(Random rng) {
     double posX;
     Direction dir;
 
@@ -72,14 +71,14 @@ public class EnemyFactory implements EnemySpawner {
     }
 
     int enemyImageIndex = rng.nextInt(fishResources.length);
-    return new Enemy(fishResources[enemyImageIndex], fishSizes[enemyImageIndex][1],
+    return new Fish(fishResources[enemyImageIndex], fishSizes[enemyImageIndex][1],
         fishSizes[enemyImageIndex][0],
         new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), size,
         (double) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
   }
 
   @Override
-  public Enemy generateFish() {
+  public Fish generateFish() {
     return generateFish(this.enemyRng);
   }
 

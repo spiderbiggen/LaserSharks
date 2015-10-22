@@ -1,4 +1,4 @@
-package lasersharks.behaviour;
+package lasersharks.behaviour.interfaces;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Position;
@@ -7,10 +7,11 @@ import lasersharks.interfaces.Displayable;
 /**
  * This interface is implemented by object that have different behaviours of collision functions.
  * 
- * @author sytze
+ * @author SEMGroup27
  *
  */
-public interface CollisionBehaviour {
+@SuppressWarnings("restriction")
+public interface CollisionHitboxBehaviour {
 
   /**
    * Returns the middle point.

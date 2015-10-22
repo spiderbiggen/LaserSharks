@@ -1,14 +1,16 @@
-package lasersharks.seaobjects;
+package lasersharks.interfaces;
 
 import java.util.Random;
 
+import lasersharks.seaobjects.Fish;
+
 /**
- * Interface for EnemySpawner.
+ * Interface for FishSpawner.
  * 
  * @author SEMGroup27
  *
  */
-public interface EnemySpawner {
+public interface FishSpawner {
 
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
@@ -18,7 +20,7 @@ public interface EnemySpawner {
    * @param rng
    *          random number generator to use.
    */
-  Enemy generateFish(Random rng);
+  Fish generateFish(Random rng);
 
   /**
    * This function creates a new FishBot with random values. This should be used to spawn fishes.
@@ -26,7 +28,7 @@ public interface EnemySpawner {
    * 
    * @return a random fish with random speed, size and position.
    */
-  Enemy generateFish();
+  Fish generateFish();
 
   /**
    * Set the seed for this spawner.

@@ -1,18 +1,27 @@
 package lasersharks.controllers;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
 
+import org.apache.log4j.chainsaw.Main;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.interfaces.EnemyFactory;
-import lasersharks.seaobjects.Enemy;
+import lasersharks.controllers.FishController;
+import lasersharks.seaobjects.Fish;
+import lasersharks.seaobjects.FishBot;
 import lasersharks.seaobjects.LaserShark;
+import lasersharksgui.MainGui;
+import lasersharksgui.panes.LosingPane;
+import lasersharksgui.panes.StandardPane;
+import lasersharks.seaobjects.FishFactory;
 
 /**
  * the test class for the FishController class.
@@ -54,9 +63,9 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
-    Enemy fishBot = new EnemyFactory().generateFish();
+    Fish fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
-    fishCon.addFish(fishBot);
+    fishCon.addDisplayable(fishBot);
     assertTrue(fishCon.getNextCycleInformation(3).contains(fishBot));
   }
 
@@ -73,9 +82,11 @@ public class FishControllerTest {
     fishCon.setShark(
         new LaserShark(new Position(POSITION_X, POSITION_Y), sizeOfShark, SPEED, Direction.East));
     for (int i = 0; i < FISHAMOUNT; i++) {
-      fishCon.addFish(new Enemy("", 1, 1,
-          new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH),
-          Float.valueOf(SIZE), Double.valueOf(SPEED), Direction.East));
+      fishCon.addDisplayable(new Fish("", 1, 1,
+          new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH)
+          , Float.valueOf(SIZE),
+          Double.valueOf(SPEED), 
+          Direction.East));
     }
     return fishCon;
   }
@@ -83,12 +94,21 @@ public class FishControllerTest {
   /**
    * A cycle is tested where the shark gets killed. After the cycle, the shark should not be alive.
    */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Test
   public void testGetNextCycleSharkKilled() {
+    MainGui guiMock = Mockito.mock(MainGui.class);
+    ArgumentCaptor<Class> argument = ArgumentCaptor.forClass(
+            Class.class
+    );
+    MainGui.setInstance(guiMock);
+    
     FishController fishCon = fishConFilled(SIZE);
     assertTrue(fishCon.getShark().isAlive());
     fishCon.getNextCycleInformation(1);
-    assertFalse(fishCon.getShark().isAlive());
+    
+    Mockito.verify(guiMock).browseTo((argument.capture()));
+    assertEquals(LosingPane.class, argument.getValue());
   }
 
   /**

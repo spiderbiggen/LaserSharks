@@ -1,4 +1,4 @@
-package lasersharks.behaviour;
+package lasersharks.behaviour.move;
 
 import lasersharks.behaviour.interfaces.MoveBehaviour;
 import lasersharks.interfaces.Displayable;
@@ -9,7 +9,7 @@ import lasersharks.interfaces.Displayable;
  * @author SEMGroup27
  *
  */
-public class BotMoveBehaviour implements MoveBehaviour {
+public class DefaultMoveBehaviour implements MoveBehaviour {
 
   private Displayable displayable;
 
@@ -19,8 +19,8 @@ public class BotMoveBehaviour implements MoveBehaviour {
    * @param displayable
    *          the fish this behaviour applies to.
    */
-  public BotMoveBehaviour(Displayable displayable) {
-    this.displayable = displayable;
+  public DefaultMoveBehaviour(Displayable swimmer) {
+    this.displayable = swimmer;
   }
 
   /**

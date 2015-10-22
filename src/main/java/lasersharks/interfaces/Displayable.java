@@ -70,11 +70,11 @@ public interface Displayable {
    * We calculate the distance between the Displayable. The sum of the size of both Displayable is
    * our hitbox. Hitbox is now a circle, with size the radius in pixels.
    * 
-   * @param Displayable
+   * @param swimmer
    *          we want to check if the Displayable collides with this Displayable,
    * @return true if the Displayables collide and false if not.
    */
-  boolean collision(Displayable swimmer);
+  boolean checkForCollision(Displayable swimmer);
 
   /**
    * this function checks if the Displayable is on the screen or not.
@@ -122,7 +122,7 @@ public interface Displayable {
    * @param size
    *          the delta by which to increase.
    */
-  public void increaseSize(float size);
+  void increaseSize(float size);
 
   /**
    * Method used for decreasing Displayable.
@@ -130,9 +130,71 @@ public interface Displayable {
    * @param size
    *          the delta by which to increase.
    */
-  public void decreaseSize(float size);
+  void decreaseSize(float size);
 
-  public Position getMiddlePoint();
+  /**
+   * Get the middle-point of the actor.
+   * @return middle point of ~
+   */
+  Position getMiddlePoint();
 
-  void eat(Displayable swimmer);
+  /**
+   * Increment ammunition by an int value when collided.
+   * @return increment value.
+   */
+  int onCollisionAmmunitionIncrement();
+  
+  /**
+   * Check to see if player has lost the game.
+   * @param f shark size.
+   */
+  void onCollisionPlayerLoses(float f);
+  
+  /**
+   * Notify object it is eaten.
+   */
+  void onCollisionEaten();
+  
+  /**
+   * get size increment gained by colliding with object.
+   * @return size increment.
+   */
+  float onCollisionSizeIncrement();
+  
+  /**
+   * See if laser needs to be destroyed after colliding with this object.
+   * @return boolean weater laser object needs to be destroyed.
+   */
+  void onCollisionDestroyLaser();
+  
+  /**
+   * Notify ~ has been hit by the laster.
+   * @param size size by which object needs to decrement.
+   */
+  void onCollisionSizeDecrement(int size);
+  
+  /**
+   * Get size by which to decrement on collision
+   * @return
+   */
+  int getOnCollisionSizeDecrement();
+
+  /**
+   * Increase ammunition of current object.
+   * @param onCollisionAmmunitionIncrement
+   */
+  void increaseAmmunition(int onCollisionAmmunitionIncrement);
+  
+  /**
+   * Notify that the object have collided.
+   * @param object
+   */
+  void collideWith(Displayable object);
+  
+  /**
+   * See if this is the actor or the actee in collisions.
+   * @return
+   */
+  boolean collisionActor();
+  
 }

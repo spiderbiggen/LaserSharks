@@ -1,4 +1,4 @@
-package lasersharks.behaviour;
+package lasersharks.behaviour.move;
 
 import lasersharks.behaviour.interfaces.MoveBehaviour;
 
@@ -8,12 +8,12 @@ import lasersharks.behaviour.interfaces.MoveBehaviour;
  * @author SEMGroup27
  *
  */
-public class CantMoveBehaviour implements MoveBehaviour {
+public class NoMovementMoveBehaviour implements MoveBehaviour {
 
   /**
    * The constructor of the behaviour object.
    */
-  public CantMoveBehaviour() {
+  public NoMovementMoveBehaviour() {
   }
 
   /**
