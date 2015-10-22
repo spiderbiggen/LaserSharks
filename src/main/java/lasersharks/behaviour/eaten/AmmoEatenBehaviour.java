@@ -1,7 +1,7 @@
 package lasersharks.behaviour.eaten;
 
 import lasersharks.Logger;
-import lasersharks.behaviour.interfaces.EeatenBehaviour;
+import lasersharks.behaviour.EeatenBehaviour;
 import lasersharks.seaobjects.SeaObject;
 
 /**

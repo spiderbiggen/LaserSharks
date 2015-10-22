@@ -1,6 +1,6 @@
 package lasersharks.behaviour.sizedecrement;
 
-import lasersharks.behaviour.interfaces.SizeDecrementBahaviour;
+import lasersharks.behaviour.SizeDecrementBahaviour;
 
 /**
  * sizeDecrement behaviour for fish.

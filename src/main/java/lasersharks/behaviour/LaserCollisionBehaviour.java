@@ -1,4 +1,4 @@
-package lasersharks.behaviour.interfaces;
+package lasersharks.behaviour;
 
 import lasersharks.seaobjects.LaserBullet;
 

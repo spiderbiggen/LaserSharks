@@ -1,7 +1,9 @@
 package lasersharks.behaviour.eaten;
 
-import lasersharks.behaviour.interfaces.EeatenBehaviour;
+import lasersharks.Logger;
+import lasersharks.behaviour.EeatenBehaviour;
 import lasersharks.seaobjects.SeaObject;
+import lasersharksgui.panes.StandardPane;
 
 /**
  * Eaten behaviour for Fishes.

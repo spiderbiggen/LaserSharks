@@ -5,7 +5,6 @@ import lasersharks.Position;
 import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
 import lasersharks.behaviour.move.DefaultMoveBehaviour;
-import lasersharks.behaviour.DefaultEatBehaviour;
 
 /**
  * This class represents a laser projectile.
@@ -39,7 +38,6 @@ public class LaserBullet extends SeaObject {
     super(position, size, startSpeed, direction);
     strength = LASER_DEFAULT_STRENGTH;
     collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
-    eatBehaviour = new DefaultEatBehaviour();
     moveBehaviour = new DefaultMoveBehaviour(this);
     laserCollisionBehaviour = new LaserLaserCollisionBehaviour(this);
   }

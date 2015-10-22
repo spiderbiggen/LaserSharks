@@ -1,6 +1,6 @@
 package lasersharks.behaviour.sizeincrement;
 
-import lasersharks.behaviour.interfaces.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.GetSizeIncrementBahaviour;
 
 /**
  * getSizeIncrement behaviour for SeaObjects.
