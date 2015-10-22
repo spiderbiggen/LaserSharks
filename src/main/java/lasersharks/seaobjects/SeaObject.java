@@ -3,22 +3,22 @@ package lasersharks.seaobjects;
 import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.DefaultEatBehaviour;
+import lasersharks.behaviour.AmmunitionIncrementBehaviour;
+import lasersharks.behaviour.CheckForLossBehaviour;
+import lasersharks.behaviour.CollisionBehaviour;
+import lasersharks.behaviour.CollisionHitboxBehaviour;
+import lasersharks.behaviour.EeatenBehaviour;
+import lasersharks.behaviour.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.HighScoreIncrementBehaviour;
+import lasersharks.behaviour.LaserCollisionBehaviour;
+import lasersharks.behaviour.MoveBehaviour;
+import lasersharks.behaviour.SizeDecrementBahaviour;
 import lasersharks.behaviour.ammunitionIncrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
 import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.eaten.DefaultEatenBehaviour;
-import lasersharks.behaviour.interfaces.AmmunitionIncrementBehaviour;
-import lasersharks.behaviour.interfaces.CheckForLossBehaviour;
-import lasersharks.behaviour.interfaces.CollisionBehaviour;
-import lasersharks.behaviour.interfaces.CollisionHitboxBehaviour;
-import lasersharks.behaviour.interfaces.EatBehaviour;
-import lasersharks.behaviour.interfaces.EeatenBehaviour;
-import lasersharks.behaviour.interfaces.GetSizeIncrementBahaviour;
-import lasersharks.behaviour.interfaces.LaserCollisionBehaviour;
-import lasersharks.behaviour.interfaces.MoveBehaviour;
-import lasersharks.behaviour.interfaces.SizeDecrementBahaviour;
+import lasersharks.behaviour.highscoreincrement.DefaultHighScoreIncrementBehaviour;
 import lasersharks.behaviour.lasercollision.DefaultLaserCollisionBehaviour;
 import lasersharks.behaviour.move.DefaultMoveBehaviour;
 import lasersharks.behaviour.sizedecrement.DefaultSizeDecrementBehaviour;
@@ -37,7 +37,6 @@ public abstract class SeaObject implements Displayable {
   private static final float MIN_SIZE = 30.0f;
   protected CollisionHitboxBehaviour collisionHitBoxBehaviour;
   protected MoveBehaviour moveBehaviour;
-  protected EatBehaviour eatBehaviour;
   
   protected AmmunitionIncrementBehaviour ammunitionIncrementBehaviour;
   protected CheckForLossBehaviour checkForLossBehaviour;
@@ -46,6 +45,7 @@ public abstract class SeaObject implements Displayable {
   protected LaserCollisionBehaviour laserCollisionBehaviour;
   protected SizeDecrementBahaviour sizeDecrementBahaviour;
   protected CollisionBehaviour collisionBehaviour;
+  protected HighScoreIncrementBehaviour highScoreIncrementBehaviour;
   
   private Position position;
   private float size;
@@ -74,7 +74,6 @@ public abstract class SeaObject implements Displayable {
     
     this.collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
     this.moveBehaviour = new DefaultMoveBehaviour(this);
-    this.eatBehaviour = new DefaultEatBehaviour();
     
     this.ammunitionIncrementBehaviour = new DefaultAmmunitionIncrementBehaviour();
     this.checkForLossBehaviour = new DefaultCheckForLossBehaviour();
@@ -83,6 +82,7 @@ public abstract class SeaObject implements Displayable {
     this.laserCollisionBehaviour = new DefaultLaserCollisionBehaviour();
     this.sizeDecrementBahaviour = new DefaultSizeDecrementBehaviour();
     this.collisionBehaviour = new DefaultCollisionBehaviour();
+    this.highScoreIncrementBehaviour = new DefaultHighScoreIncrementBehaviour();
   }
 
   /**
@@ -338,7 +338,8 @@ public abstract class SeaObject implements Displayable {
   }
   
   /**
-   * Handle collisions
+   * Handle collisions.
+   * @param object, object with wist the actor has collided.
    */
   public void collideWith(Displayable object) {
     this.collisionBehaviour.colideWith(object);
@@ -346,8 +347,22 @@ public abstract class SeaObject implements Displayable {
   
   /**
    * See if object is a collision actor.
+   * @return boolean if the actor has a usefull collision function.
    */
   public boolean collisionActor() {
     return false;
   }
+  
+
+  /**
+   * Let displaybe object increase the player highscore on collision.
+   * @param timepenalty pennalty from timelimit.
+   * @return HighscoreIncrement.
+   */
+  public int getOnCollisionHighScoreIncrement(int timepenalty) {
+    return this.highScoreIncrementBehaviour.onCollisionHighScoreIncrement(timepenalty);
+  }
+  
 }
+
+

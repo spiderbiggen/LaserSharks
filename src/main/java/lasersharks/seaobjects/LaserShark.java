@@ -3,7 +3,6 @@ package lasersharks.seaobjects;
 import lasersharks.Direction;
 import lasersharks.Logger;
 import lasersharks.Position;
-import lasersharks.behaviour.LaserSharkEatBehaviour;
 import lasersharks.behaviour.collision.SharkCollisionBehaviour;
 import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.move.LaserSharkMoveBehaviour;
@@ -41,7 +40,6 @@ public class LaserShark extends SeaObject implements DirectionCallback {
     super(position, size, startSpeed, direction);
     collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
     moveBehaviour = new LaserSharkMoveBehaviour(this);
-    eatBehaviour = new LaserSharkEatBehaviour(this);
     lastHorizontalDirection = Direction.East;
     collisionBehaviour = new SharkCollisionBehaviour(this);
     ammo = STARTING_AMMO;

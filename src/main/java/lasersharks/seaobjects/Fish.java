@@ -5,6 +5,7 @@ import lasersharks.Position;
 import lasersharks.behaviour.checkforloss.FishCheckForLossBehaviour;
 import lasersharks.behaviour.collision.FishCollisionBehaviour;
 import lasersharks.behaviour.eaten.FishEatenBehaviour;
+import lasersharks.behaviour.highscoreincrement.FishHighScoreIncrementBehaviour;
 import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
 import lasersharks.behaviour.sizedecrement.FishSizeDecrementBehaviour;
 import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
@@ -50,6 +51,7 @@ public class Fish extends SeaObject {
     getSizeIncrementBahaviour = new FishGetSizeIncrementBehaviour(this);
     sizeDecrementBahaviour = new FishSizeDecrementBehaviour(this);
     collisionBehaviour = new FishCollisionBehaviour(this);
+    highScoreIncrementBehaviour = new FishHighScoreIncrementBehaviour(this);
   }
 
   @Override

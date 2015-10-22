@@ -1,6 +1,6 @@
 package lasersharks.behaviour.collision;
 
-import lasersharks.behaviour.interfaces.CollisionBehaviour;
+import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 
 public class FishCollisionBehaviour implements CollisionBehaviour{

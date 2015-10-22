@@ -1,6 +1,6 @@
 package lasersharks.behaviour.ammunitionIncrement;
 
-import lasersharks.behaviour.interfaces.AmmunitionIncrementBehaviour;
+import lasersharks.behaviour.AmmunitionIncrementBehaviour;
 
 /**
  * Ammunition increment behaviour for Ammunition.
