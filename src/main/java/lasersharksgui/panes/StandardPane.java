@@ -2,8 +2,6 @@ package lasersharksgui.panes;
 
 import java.io.File;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,18 +40,14 @@ public abstract class StandardPane extends Pane implements Stoppable {
   private static boolean musicIsPlaying = false;
   private static boolean shouldEffectPlay = true;
   protected Button muteButton;
+  protected ImageView muteButtonImage = new ImageView("mutesound.png");
+  protected ImageView unmuteButtonImage = new ImageView("unmutesound.png");
 
   // sprite and image variables
   protected ImageView sharkImage;
   protected static final int SCALING_FACTOR_TO_UNDERNEATH_MIDDLE = 3;
   protected static final int SCALING_FACTOR_TO_ABOVE_MIDDLE = -5;
   protected static final int SCALING_FACTOR_TO_LITTLE_BELOW_MIDDLE = 100;
-  protected ImageView muteButtonImage = new ImageView("mutesound.png");
-  protected ImageView unmuteButtonImage = new ImageView("unmutesound.png");
-
-  // variables for the mute button
-  protected static final int BUTTON_HEIGHT = 24;
-  protected static final int BUTTON_WIDTH = 36;
 
   /**
    * Constructor of the StandardPane.
@@ -76,28 +70,6 @@ public abstract class StandardPane extends Pane implements Stoppable {
         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
     setBackground(new Background(myBI));
-  }
-
-  /**
-   * Method for adding the mute button to the scene.
-   */
-  public Button muteButton(double xPos, double yPos, double size) {
-    muteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
-    muteButtonImage.setFitWidth(BUTTON_WIDTH * size);
-    unmuteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
-    unmuteButtonImage.setFitWidth(BUTTON_WIDTH * size);
-    muteButton = new Button();
-    muteButton.setGraphic(muteButtonImage);
-    muteButton.setTranslateX(xPos);
-    muteButton.setTranslateY(yPos);
-
-    muteButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-        muteSound();
-      }
-    });
-    return muteButton;
   }
 
   /**

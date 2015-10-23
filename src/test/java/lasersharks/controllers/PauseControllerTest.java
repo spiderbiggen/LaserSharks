@@ -4,7 +4,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
-import lasersharksgui.panes.OptionsPanel;
+import lasersharksgui.panes.OptionsPane;
 
 import org.junit.After;
 import org.junit.Before;
@@ -55,7 +55,7 @@ public class PauseControllerTest {
   @Test
   public void testPressedP() {
     pauseController.handle(pPressed);
-    Mockito.verify(gui).browseTo(OptionsPanel.class);  
+    Mockito.verify(gui).browseTo(OptionsPane.class);  
   }
   
   /**
@@ -84,7 +84,7 @@ public class PauseControllerTest {
   public void testPressedPTwice() {
     pauseController.handle(pPressed);
     pauseController.handle(pPressed);
-    Mockito.verify(gui).browseTo(OptionsPanel.class);
+    Mockito.verify(gui).browseTo(OptionsPane.class);
     Mockito.verify(gui).browseTo(gamePane);    
   }
 }
