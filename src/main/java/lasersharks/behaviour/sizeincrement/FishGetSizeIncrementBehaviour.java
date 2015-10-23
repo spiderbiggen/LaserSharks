@@ -13,7 +13,7 @@ import lasersharksgui.panes.StandardPane;
 public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBahaviour {
   private SeaObject element;
   
-  public static final float ENERGY_DISSERPATION_RATE = 30f;
+  public static final float ENERGY_DISSERPATION_RATE = 7.5f;
   private static final String EAT_FISH_SOUND = "src/main/resources/soundEffect1.wav";
   
   /**
