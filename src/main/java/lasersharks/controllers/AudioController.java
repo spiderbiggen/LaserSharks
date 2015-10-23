@@ -11,13 +11,8 @@ import lasersharks.Options;
  * @author SEMGroup27
  *
  */
-<<<<<<< HEAD
 @SuppressWarnings("restriction") 
 public class AudioController {
-=======
-@SuppressWarnings("restriction")
-public final class AudioController {
->>>>>>> bcab87a7606dcb46e2ce59c5448d57ea6699e158
 
   private static AudioController instance;
 
@@ -25,13 +20,9 @@ public final class AudioController {
   private MediaPlayer sfxPlayer;
 
   /**
-   * 
+   * The constructor to create a new instance of audiocontroller.
    */
-<<<<<<< HEAD
   protected AudioController() {
-=======
-  private AudioController() {
->>>>>>> bcab87a7606dcb46e2ce59c5448d57ea6699e158
     setInstance(this);
   }
 

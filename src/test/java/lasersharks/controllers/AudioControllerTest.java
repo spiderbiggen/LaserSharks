@@ -220,4 +220,25 @@ public class AudioControllerTest {
     assertEquals(newVolume, Options.getInstance().getSfxVolume(), floatDelta);
   }
 
+  /**
+   * Test method for {@link lasersharks.controllers.AudioController#getInstance()}.
+   */
+  @Test
+  public void testGetInstance() {
+    AudioController audioController = new AudioController();
+    assertEquals(audioController, AudioController.getInstance());
+  }
+
+  /**
+   * Test method for {@link lasersharks.controllers.AudioController#SetInstance(AudioController)} .
+   */
+  @Test
+  public void testSetInstance() {
+    AudioController audioController = new AudioController();
+    AudioController ac = new AudioController();
+    assertEquals(ac, AudioController.getInstance());
+    AudioController.setInstance(audioController);
+    assertEquals(audioController, AudioController.getInstance());
+  }
+
 }
