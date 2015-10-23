@@ -3,10 +3,10 @@ package lasersharks.behaviour.collision.component;
 import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
 
-public class OnCollisionEatenCompomnentLeaf implements CollisionComponent {
+public class OnCollisionEatenComponentLeaf implements CollisionComponent {
   private CollisionComponent next;
 
-  public OnCollisionEatenCompomnentLeaf(CollisionComponent next) {
+  public OnCollisionEatenComponentLeaf(CollisionComponent next) {
     this.next = next;
   }
   

@@ -2,8 +2,8 @@ package lasersharks.behaviour.collision;
 
 import lasersharks.Highscores;
 import lasersharks.behaviour.CollisionBehaviour;
-import lasersharks.behaviour.collision.component.DefaultCompomnentLeaf;
-import lasersharks.behaviour.collision.component.OnCollisionEatenCompomnentLeaf;
+import lasersharks.behaviour.collision.component.DefaultComponentLeaf;
+import lasersharks.behaviour.collision.component.OnCollisionEatenComponentLeaf;
 import lasersharks.behaviour.collision.component.OnCollisionHighScoreIncrementComponent;
 import lasersharks.behaviour.collision.component.OnCollisionIncreaseAmmunitionComponent;
 import lasersharks.behaviour.collision.component.OnCollisionIncreaseSizeComponent;
@@ -33,8 +33,8 @@ public class SharkCollisionBehaviour implements CollisionBehaviour {
         new OnCollisionIncreaseSizeComponent(me, 
         new OnCollisionIncreaseAmmunitionComponent(me,
         new OnCollisionHighScoreIncrementComponent(
-        new OnCollisionEatenCompomnentLeaf(
-        new DefaultCompomnentLeaf())))));
+        new OnCollisionEatenComponentLeaf(
+        new DefaultComponentLeaf())))));
   }
 
   @Override
