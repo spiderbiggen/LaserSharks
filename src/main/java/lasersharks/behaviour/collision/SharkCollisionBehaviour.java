@@ -1,15 +1,22 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.Highscores;
-import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 
-public class SharkCollisionBehaviour implements CollisionBehaviour{
-  Displayable object;
-  
+/**
+ * The class for the collisionBehavior of the LaserShark.
+ * 
+ * @author SEMgroup27
+ *
+ */
+public class SharkCollisionBehaviour extends AbstractCollisionBehaviour {
+  private Displayable object;
+
   /**
    * Constructor.
-   * @param me this.
+   * 
+   * @param me
+   *          this.
    */
   public SharkCollisionBehaviour(Displayable me) {
     super();
@@ -22,11 +29,8 @@ public class SharkCollisionBehaviour implements CollisionBehaviour{
     object.increaseSize(other.onCollisionSizeIncrement());
     object.increaseAmmunition(other.onCollisionAmmunitionIncrement());
     Highscores.getInstance().increaseScore(
-        other.getOnCollisionHighScoreIncrement(
-            Highscores.getInstance().getTimePenalty()
-         )
-    );
+        other.getOnCollisionHighScoreIncrement(Highscores.getInstance().getTimePenalty()));
     other.onCollisionEaten();
   }
-  
+
 }

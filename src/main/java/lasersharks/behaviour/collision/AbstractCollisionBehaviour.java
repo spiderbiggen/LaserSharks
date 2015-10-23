@@ -1,16 +1,18 @@
 package lasersharks.behaviour.collision;
 
+import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
+
 /**
- * The default class for the collision behavior.
+ * Superclass for the collisionBehavior classes.
+ * 
  * @author SEMgroup27
  *
  */
-public class DefaultCollisionBehaviour extends AbstractCollisionBehaviour {
+public abstract class AbstractCollisionBehaviour implements CollisionBehaviour {
 
   @Override
   public void colideWith(Displayable object) {
 
   }
-
 }
