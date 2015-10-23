@@ -6,7 +6,6 @@ import lasersharks.behaviour.checkforloss.FishCheckForLossBehaviour;
 import lasersharks.behaviour.collision.FishCollisionBehaviour;
 import lasersharks.behaviour.eaten.FishEatenBehaviour;
 import lasersharks.behaviour.highscoreincrement.FishHighScoreIncrementBehaviour;
-import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
 import lasersharks.behaviour.sizedecrement.FishSizeDecrementBehaviour;
 import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
 
