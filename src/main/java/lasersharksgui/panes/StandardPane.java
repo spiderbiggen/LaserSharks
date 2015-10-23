@@ -47,8 +47,6 @@ public abstract class StandardPane extends Pane implements Stoppable {
   // variables for the mute button
   protected static final int BUTTON_HEIGHT = 24;
   protected static final int BUTTON_WIDTH = 36;
-  protected static final int BUTTON_X_OFFSET = 1850;
-  protected static final int BUTTON_Y_OFFSET = 1035;
 
   /**
    * Constructor of the StandardPane.
@@ -56,7 +54,6 @@ public abstract class StandardPane extends Pane implements Stoppable {
   public StandardPane() {
     super();
     addBackGround();
-    addMuteButton();
     if (!Options.getInstance().isPlayingMusic()) {
       AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName());
     }
@@ -77,17 +74,15 @@ public abstract class StandardPane extends Pane implements Stoppable {
   /**
    * Method for adding the mute button to the scene.
    */
-  public void addMuteButton() {
-    muteButtonImage.setFitHeight(BUTTON_HEIGHT);
-    muteButtonImage.setFitWidth(BUTTON_WIDTH);
-    unmuteButtonImage.setFitHeight(BUTTON_HEIGHT);
-    unmuteButtonImage.setFitWidth(BUTTON_WIDTH);
+  public Button muteButton(double xPos, double yPos, double size) {
+    muteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
+    muteButtonImage.setFitWidth(BUTTON_WIDTH * size);
+    unmuteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
+    unmuteButtonImage.setFitWidth(BUTTON_WIDTH * size);
     muteButton = new Button();
     muteButton.setGraphic(muteButtonImage);
-    muteButton.setTranslateX(BUTTON_X_OFFSET);
-    muteButton.setTranslateY(BUTTON_Y_OFFSET);
-
-    getChildren().add(muteButton);
+    muteButton.setTranslateX(xPos);
+    muteButton.setTranslateY(yPos);
 
     muteButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
@@ -95,6 +90,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
         muteSound();
       }
     });
+    return muteButton;
   }
 
   /**
