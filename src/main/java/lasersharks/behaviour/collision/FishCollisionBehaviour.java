@@ -1,5 +1,6 @@
 package lasersharks.behaviour.collision;
 
+import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.behaviour.collision.component.DefaultCompomnentLeaf;
 import lasersharks.behaviour.collision.component.OnCollisionDestroyLaserCompomnentLeaf;
 import lasersharks.behaviour.collision.component.OnCollisionSizeDecrementComponent;
@@ -12,7 +13,7 @@ import lasersharks.interfaces.Displayable;
  * @author SEMgroup27
  *
  */
-public class FishCollisionBehaviour extends AbstractCollisionBehaviour {
+public class FishCollisionBehaviour implements CollisionBehaviour {
   private CollisionComponent handler;
 
   /**

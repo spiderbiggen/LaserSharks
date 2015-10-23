@@ -1,6 +1,7 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.Highscores;
+import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.behaviour.collision.component.DefaultCompomnentLeaf;
 import lasersharks.behaviour.collision.component.OnCollisionEatenCompomnentLeaf;
 import lasersharks.behaviour.collision.component.OnCollisionHighScoreIncrementComponent;
@@ -16,7 +17,7 @@ import lasersharks.interfaces.Displayable;
  * @author SEMgroup27
  *
  */
-public class SharkCollisionBehaviour extends AbstractCollisionBehaviour {
+public class SharkCollisionBehaviour implements CollisionBehaviour {
   private CollisionComponent handler;
 
   /**
