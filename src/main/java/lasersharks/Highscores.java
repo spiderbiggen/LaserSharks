@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import lasersharks.interfaces.Displayable;
-
 /**
  * A class that handles anything to do with highscores.
  * 
@@ -21,7 +19,6 @@ public class Highscores {
   private ArrayList<String> highscores;
   private String inputFile;
   private int amountOfFishesEaten = 0;
-  private static final float HALF_SCALE = 0.5f;
   private static final int DATA_OFFSET = 3;
   private static final int FISH_BONUS = 20;
   private int score;
