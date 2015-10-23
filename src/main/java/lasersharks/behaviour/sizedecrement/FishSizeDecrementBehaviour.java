@@ -11,7 +11,6 @@ import lasersharks.seaobjects.SeaObject;
  */
 public class FishSizeDecrementBehaviour implements SizeDecrementBahaviour {
   private SeaObject element;
-  private static final float DECREASE_SIZE = 5;
 
   /**
    * Constructor.

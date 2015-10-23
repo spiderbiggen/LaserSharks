@@ -4,7 +4,7 @@ package lasersharks.behaviour;
  * @author SEMgroup27
  *
  */
-public interface EeatenBehaviour {
+public interface EatenBehaviour {
   /**
    * Method for a seaObject getting eaten.
    */

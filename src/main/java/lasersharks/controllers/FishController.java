@@ -223,12 +223,15 @@ public class FishController {
    */
   private void checkForCollisions() {
     displayableList.add(0, this.shark);
-    displayableList
-        .stream()
+    displayableList.stream()
         .filter(v -> v.collisionActor())
-        .forEach(
-            v -> displayableList.stream().filter(w -> v.checkForCollision(w)).filter(w -> w != v)
-                .forEach(w -> v.collideWith(w)));
+        .forEach(v -> 
+        displayableList.stream()
+            .filter(w -> v.checkForCollision(w))
+            .filter(w -> w.isAlive())
+            .forEach(w -> v.collideWith(w)
+        )
+    );
     displayableList.remove(0);
   }
 
