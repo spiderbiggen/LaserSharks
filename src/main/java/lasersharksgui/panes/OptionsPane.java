@@ -3,7 +3,10 @@ package lasersharksgui.panes;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import lasersharks.Logger;
 import lasersharks.Options;
+import lasersharks.controllers.AudioController;
+import javafx.scene.text.Text;
 
 /**
  * 
@@ -32,6 +35,7 @@ public class OptionsPane extends StandardPane {
 
   public OptionsPane() {
     this.setBackground(null);
+    Text musicVolume = new Text("Music Volume");
     addMidText("game Paused", PAUSE_TEXT_SIZE_UP,
         Options.getGlobalHeight() / PAUSE_TEXT_POSITION_UP);
     addMidText("press P to resume", PAUSE_TEXT_SIZE_BELOW,
@@ -68,6 +72,22 @@ public class OptionsPane extends StandardPane {
       }
     });
     return muteButton;
+  }
+
+  /**
+   * method for muting and unmuting the music of the game.
+   */
+  public void muteSound() {
+    if (!Options.getInstance().isMutedMusic()) {
+      AudioController.getInstance().muteAll();
+      muteButton.setGraphic(unmuteButtonImage);
+      Logger.getInstance().write("Sound muted", "Mute sound button pressed");
+    } else {
+      AudioController.getInstance().unmuteAll();
+      muteButton.setGraphic(muteButtonImage);
+      Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
+    }
+
   }
 
   @Override

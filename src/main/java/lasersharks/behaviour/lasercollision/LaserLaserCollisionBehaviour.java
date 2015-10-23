@@ -2,16 +2,22 @@ package lasersharks.behaviour.lasercollision;
 
 import lasersharks.behaviour.LaserCollisionBehaviour;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaobjects.LaserBullet;
 
 /**
- * Eaten behaviour for Fishes.
+ * Eaten behavior for Fishes.
+ * 
  * @author SEMGroup27
  *
  */
 public class LaserLaserCollisionBehaviour implements LaserCollisionBehaviour {
-  Displayable element;
-  
+  private Displayable element;
+
+  /**
+   * Constructor.
+   * 
+   * @param element
+   *          this.
+   */
   public LaserLaserCollisionBehaviour(Displayable element) {
     super();
     this.element = element;

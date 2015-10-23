@@ -20,10 +20,24 @@ public class Options {
   private static final int DEFAULT_WIDTH = 1920;
   private static final int DEFAULT_HEIGHT = 1080;
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
+  private static final String DEFAULT_EAT_SOUND_FILENAME = "src/main/resources/soundEffect1.wav";
+  private static final String DEFAULT_LASER_SOUND_FILENAME = "src/main/resources/shoot.wav";
+  private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/pickup.wav";
+
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
   private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
 
   private String musicFileName;
+  private String eatSoundFileName;
+  private String laserSoundFileName;
+  private String pickupSoundFileName;
+  private boolean playingMusic;
+  private boolean mutedMusic;
+  private boolean mutedSfx;
+  private double masterVolume;
+  private double musicVolume;
+  private double sfxVolume;
+
   private String backGround;
   private Random factoryRng;
   private Random spawnRng;
@@ -36,9 +50,23 @@ public class Options {
    *          the resolution this Options object should use.
    */
   public Options(Dimension screenRes) {
+    setInstance(this);
     this.dimension = screenRes;
     factoryRng = new Random();
     spawnRng = factoryRng;
+
+    this.setBackGround(DEFAULT_BACKGROUND_IMAGE);
+    this.setMusicFileName(DEFAULT_MUSIC_FILENAME);
+    this.setEatSoundFileName(DEFAULT_EAT_SOUND_FILENAME);
+    this.setLaserSoundFileName(DEFAULT_LASER_SOUND_FILENAME);
+    this.setPickupSoundFileName(DEFAULT_PICKUP_SOUND_FILENAME);
+
+    playingMusic = false;
+    mutedMusic = false;
+    mutedSfx = false;
+    masterVolume = 1.0;
+    musicVolume = 1.0;
+    sfxVolume = 1.0;
   }
 
   /**
@@ -51,17 +79,24 @@ public class Options {
     if (currentOptions != null) {
       return currentOptions;
     }
-    currentOptions = new Options(getScreenSize());
-    currentOptions.setBackGround(DEFAULT_BACKGROUND_IMAGE);
-    currentOptions.setMusicFilename(DEFAULT_MUSIC_FILENAME);
-    return currentOptions;
+    return new Options(getScreenSize());
   }
 
   /**
    * Destroy current options.
    */
   public static void destroyInstance() {
-    currentOptions = null;
+    Options.currentOptions = null;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    return dimension.hashCode();
   }
 
   /**
@@ -97,7 +132,7 @@ public class Options {
    * 
    * @return the screen resolution of the systems screen.
    */
-  public static Dimension getScreenSize() {
+  protected static Dimension getScreenSize() {
     try {
       return Toolkit.getDefaultToolkit().getScreenSize();
     } catch (Exception e) {
@@ -180,7 +215,7 @@ public class Options {
    * @param musicFile
    *          the music to set.
    */
-  public void setMusicFilename(String musicFile) {
+  public void setMusicFileName(String musicFile) {
     this.musicFileName = musicFile;
   }
 
@@ -194,6 +229,144 @@ public class Options {
   }
 
   /**
+   * @return the hitSoundFileName
+   */
+  public String getEatSoundFileName() {
+    return eatSoundFileName;
+  }
+
+  /**
+   * @param eatSoundFileName
+   *          the eatSoundFileName to set
+   */
+  public void setEatSoundFileName(String eatSoundFileName) {
+    this.eatSoundFileName = eatSoundFileName;
+  }
+
+  /**
+   * @return the laserSoundFileName
+   */
+  public String getLaserSoundFileName() {
+    return laserSoundFileName;
+  }
+
+  /**
+   * @param laserSoundFileName
+   *          the laserSoundFileName to set
+   */
+  public void setLaserSoundFileName(String laserSoundFileName) {
+    this.laserSoundFileName = laserSoundFileName;
+  }
+
+  /**
+   * @return the ammoPickupSoundFileName
+   */
+  public String getPickupSoundFileName() {
+    return pickupSoundFileName;
+  }
+
+  /**
+   * @param pickupSoundFileName
+   *          the pickupSoundFileName to set
+   */
+  public void setPickupSoundFileName(String pickupSoundFileName) {
+    this.pickupSoundFileName = pickupSoundFileName;
+  }
+
+  /**
+   * @return playMusic
+   */
+  public boolean isPlayingMusic() {
+    return playingMusic;
+  }
+
+  /**
+   * @param playMusic
+   *          the playMusic to set
+   */
+  public void setPlayingMusic(boolean playMusic) {
+    this.playingMusic = playMusic;
+  }
+
+  /**
+   * @return if the music should be muted.
+   */
+  public boolean isMutedMusic() {
+    return mutedMusic;
+  }
+
+  /**
+   * Set if the music should be muted.
+   * 
+   * @param muteMusic
+   *          true if music should be muted.
+   */
+  public void setMutedMusic(boolean muteMusic) {
+    this.mutedMusic = muteMusic;
+  }
+
+  /**
+   * @return if the sfx should be muted.
+   */
+  public boolean isMutedSfx() {
+    return mutedSfx;
+  }
+
+  /**
+   * Set if the sfx should be muted.
+   * 
+   * @param muteSfx
+   *          true if music should be muted.
+   */
+  public void setMutedSfx(boolean muteSfx) {
+    this.mutedSfx = muteSfx;
+  }
+
+  /**
+   * @return the masterVolume
+   */
+  public double getMasterVolume() {
+    return masterVolume;
+  }
+
+  /**
+   * @param masterVolume the masterVolume to set
+   */
+  public void setMasterVolume(double masterVolume) {
+    this.masterVolume = masterVolume;
+  }
+
+  /**
+   * @return the musicVolume
+   */
+  public double getMusicVolume() {
+    return musicVolume;
+  }
+
+  /**
+   * @param newVolume
+   *          the musicVolume to set
+   */
+  public void setMusicVolume(double newVolume) {
+    this.musicVolume = newVolume;
+  }
+
+  /**
+   * @return the sfxVolume
+   */
+  public double getSfxVolume() {
+    return sfxVolume;
+  }
+
+  /**
+   * @param sfxVolume
+   *          the sfxVolume to set
+   */
+  public void setSfxVolume(double sfxVolume) {
+    this.sfxVolume = sfxVolume;
+  }
+
+  /**
    * Get the backGroundImage.
    * 
    * @return the backGroundImage.
@@ -203,7 +376,8 @@ public class Options {
   }
 
   /**
-   * Get the backGroundColor
+   * Get the backGroundColor.
+   * 
    * @return the default backgroundcolor
    */
   public static Color getBackGroundColor() {

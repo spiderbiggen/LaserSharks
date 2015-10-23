@@ -1,6 +1,8 @@
-package lasersharks.seaobjects;
+package lasersharks.interfaces;
 
 import java.util.Random;
+
+import lasersharks.seaobjects.Enemy;
 
 /**
  * Interface for EnemySpawner.
