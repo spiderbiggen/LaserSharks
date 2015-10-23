@@ -3,7 +3,6 @@
  */
 package lasersharks.seaobjects;
 
-import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.controllers.AudioController;
 import lasersharks.interfaces.LaserSpawner;
@@ -19,6 +18,8 @@ public class LaserFactory implements LaserSpawner {
    */
   private static final int LASER_SIZE = 13;
   private static final int LASER_SPEED = 800;
+  private static final double LASER_POSITION_Y_SCALE = 0.5;
+  private static final double LASER_POSITION_X_SCALE = 0.7;
 
   /**
    * Constructor.
@@ -35,9 +36,10 @@ public class LaserFactory implements LaserSpawner {
   @Override
   public LaserBullet createLaser(LaserShark origin) {
     Position posShark = origin.getPosition();
-    Position posLaser = new Position(posShark.getPosX(), posShark.getPosY());
-    AudioController.getInstance().playSoundEffect(Options.getInstance().getLaserSoundFileName());
+    AudioController.getInstance().playLaserSoundEffect();
+    Position posLaser = new Position(posShark.getPosX() + LASER_POSITION_X_SCALE * origin.getSize(),
+        posShark.getPosY() + LASER_POSITION_Y_SCALE * origin.getSize());
+
     return new LaserBullet(posLaser, LASER_SIZE, LASER_SPEED, origin.getLastHorizontalDirection());
   }
-
 }

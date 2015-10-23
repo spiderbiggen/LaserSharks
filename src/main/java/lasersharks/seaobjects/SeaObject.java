@@ -7,7 +7,7 @@ import lasersharks.behaviour.AmmunitionIncrementBehaviour;
 import lasersharks.behaviour.CheckForLossBehaviour;
 import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.behaviour.CollisionHitboxBehaviour;
-import lasersharks.behaviour.EeatenBehaviour;
+import lasersharks.behaviour.EatenBehaviour;
 import lasersharks.behaviour.GetSizeIncrementBahaviour;
 import lasersharks.behaviour.HighScoreIncrementBehaviour;
 import lasersharks.behaviour.LaserCollisionBehaviour;
@@ -40,7 +40,7 @@ public abstract class SeaObject implements Displayable {
   
   protected AmmunitionIncrementBehaviour ammunitionIncrementBehaviour;
   protected CheckForLossBehaviour checkForLossBehaviour;
-  protected EeatenBehaviour eatenBehaviour;
+  protected EatenBehaviour eatenBehaviour;
   protected GetSizeIncrementBahaviour getSizeIncrementBahaviour;
   protected LaserCollisionBehaviour laserCollisionBehaviour;
   protected SizeDecrementBahaviour sizeDecrementBahaviour;

@@ -37,11 +37,12 @@ public abstract class EndGamePane extends StandardPane {
         addMidText("NEW HIGHSCORE!", CUSTOM_TEXT_SIZE, ADJUST_DY_FOR_BOTTOM);
       }
     } catch (FileNotFoundException e1) {
-      addMidText("UNABLE TO FIND A HIGHSCORES FILE", TEXT_SCALE_SIZE_SMALL, ADJUST_DY_FOR_BOTTOM);
+      addMidText("NO HIGHSCORES FILE WAS FOUND, SO A NEW ONE WAS CREATED", TEXT_SCALE_SIZE_SMALL,
+          ADJUST_DY_FOR_BOTTOM);
       Logger.getInstance().write("No highscores file found", e1.getMessage());
     }
-    addMidText(message, TEXT_SCALE_SIZE_BIG,
-        Options.getGlobalHeight() / SCALING_FACTOR_TO_UNDERNEATH_MIDDLE);
+    addMidText(message, TEXT_SCALE_SIZE_BIG, Options.getGlobalHeight()
+        / SCALING_FACTOR_TO_UNDERNEATH_MIDDLE);
     String highscores;
     try {
       Highscores.getInstance().writeHighscore();
@@ -51,10 +52,10 @@ public abstract class EndGamePane extends StandardPane {
       Logger.getInstance().write("IOException ", e.getMessage());
       e.printStackTrace();
     }
-    addMidText(highscores, TEXT_SCALE_SIZE_SMALL,
-        Options.getGlobalHeight() / SCALING_FACTOR_TO_LITTLE_BELOW_MIDDLE);
-    addMidText("Press R to restart", TEXT_SCALE_SIZE_SMALL,
-        Options.getGlobalHeight() / SCALING_FACTOR_TO_ABOVE_MIDDLE);
+    addMidText(highscores, TEXT_SCALE_SIZE_SMALL, Options.getGlobalHeight()
+        / SCALING_FACTOR_TO_LITTLE_BELOW_MIDDLE);
+    addMidText("Press R to restart", TEXT_SCALE_SIZE_SMALL, Options.getGlobalHeight()
+        / SCALING_FACTOR_TO_ABOVE_MIDDLE);
 
     this.restartHandler = new RestartGameController();
     MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, this.restartHandler);

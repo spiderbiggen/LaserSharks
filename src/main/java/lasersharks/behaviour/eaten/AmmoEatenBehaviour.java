@@ -1,7 +1,7 @@
 package lasersharks.behaviour.eaten;
 
 import lasersharks.Logger;
-import lasersharks.behaviour.EeatenBehaviour;
+import lasersharks.behaviour.EatenBehaviour;
 import lasersharks.seaobjects.SeaObject;
 
 /**
@@ -9,7 +9,7 @@ import lasersharks.seaobjects.SeaObject;
  * @author SEMGroup27
  *
  */
-public class AmmoEatenBehaviour implements EeatenBehaviour {
+public class AmmoEatenBehaviour implements EatenBehaviour {
   private SeaObject element;
   
   /**

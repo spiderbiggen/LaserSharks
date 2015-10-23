@@ -46,7 +46,7 @@ public class FishController {
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 670;
   private static final Direction START_DIRECTION = Direction.None;
-  private static final float DEVIDE_DECREASE_SIZE = 10;
+  private static final float DECREASE_SIZE = 2;
 
   /**
    * Spawn-chance for new fishes.
@@ -73,8 +73,7 @@ public class FishController {
     this.displayableList = new LinkedList<Displayable>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
-    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
-        START_DIRECTION);
+    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION);
     enemySpawner = new FishFactory();
     ammoSpawner = new AmmoFactory();
     laserSpawner = new LaserFactory();
@@ -123,8 +122,8 @@ public class FishController {
    * Set the shark to his beginning state.
    */
   public void setBeginShark() {
-    this.setShark(
-        new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION));
+    this.setShark(new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
+        START_DIRECTION));
   }
 
   /**
@@ -151,8 +150,8 @@ public class FishController {
    * @param frametime
    */
   private void updatePositions(double frametime) {
-    this.displayableList.removeAll(
-        this.displayableList.stream().filter(v -> !v.move(frametime)).collect(Collectors.toList()));
+    this.displayableList.removeAll(this.displayableList.stream().filter(v -> !v.move(frametime))
+        .collect(Collectors.toList()));
     if (this.shark != null) {
       this.shark.move(frametime);
     }
@@ -188,7 +187,8 @@ public class FishController {
         this.addDisplayable(g);
       }
 
-      Logger.getInstance().write("Fish spawned",
+      Logger.getInstance().write(
+          "Fish spawned",
           "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
               + f.getDirection() + ", " + "Position: " + f.getPosition());
     }
@@ -223,16 +223,15 @@ public class FishController {
    */
   private void checkForCollisions() {
     displayableList.add(0, this.shark);
-    displayableList
-      .stream()
-      .filter(v -> v.collisionActor())
-      .forEach(v -> 
-            displayableList
-              .stream()
-              .filter(w -> v.checkForCollision(w))
-              .filter(w -> w != v)
-              .forEach(w -> v.collideWith(w))
-      );
+    displayableList.stream()
+        .filter(v -> v.collisionActor())
+        .forEach(v -> 
+        displayableList.stream()
+            .filter(w -> v.checkForCollision(w))
+            .filter(w -> w.isAlive())
+            .forEach(w -> v.collideWith(w)
+        )
+    );
     displayableList.remove(0);
   }
 

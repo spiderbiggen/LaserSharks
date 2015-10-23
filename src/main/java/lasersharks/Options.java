@@ -20,17 +20,17 @@ public class Options {
   private static final int DEFAULT_WIDTH = 1920;
   private static final int DEFAULT_HEIGHT = 1080;
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
-  private static final String DEFAULT_HIT_SOUND_FILENAME = "src/main/resources/soundEffect1.wav";
+  private static final String DEFAULT_EAT_SOUND_FILENAME = "src/main/resources/soundEffect1.wav";
   private static final String DEFAULT_LASER_SOUND_FILENAME = "src/main/resources/shoot.wav";
-  private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/ammoPickup.wav";
+  private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/pickup.wav";
 
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
   private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
 
   private String musicFileName;
-  private String hitSoundFileName;
+  private String eatSoundFileName;
   private String laserSoundFileName;
-  private String ammoPickupSoundFileName;
+  private String pickupSoundFileName;
   private boolean playingMusic;
   private boolean mutedMusic;
   private boolean mutedSfx;
@@ -56,9 +56,9 @@ public class Options {
 
     this.setBackGround(DEFAULT_BACKGROUND_IMAGE);
     this.setMusicFileName(DEFAULT_MUSIC_FILENAME);
-    this.setHitSoundFileName(DEFAULT_HIT_SOUND_FILENAME);
+    this.setEatSoundFileName(DEFAULT_EAT_SOUND_FILENAME);
     this.setLaserSoundFileName(DEFAULT_LASER_SOUND_FILENAME);
-    this.setAmmoPickupSoundFileName(DEFAULT_PICKUP_SOUND_FILENAME);
+    this.setPickupSoundFileName(DEFAULT_PICKUP_SOUND_FILENAME);
 
     playingMusic = false;
     mutedMusic = false;
@@ -229,16 +229,16 @@ public class Options {
   /**
    * @return the hitSoundFileName
    */
-  public String getHitSoundFileName() {
-    return hitSoundFileName;
+  public String getEatSoundFileName() {
+    return eatSoundFileName;
   }
 
   /**
-   * @param hitSoundFileName
-   *          the hitSoundFileName to set
+   * @param eatSoundFileName
+   *          the eatSoundFileName to set
    */
-  public void setHitSoundFileName(String hitSoundFileName) {
-    this.hitSoundFileName = hitSoundFileName;
+  public void setEatSoundFileName(String eatSoundFileName) {
+    this.eatSoundFileName = eatSoundFileName;
   }
 
   /**
@@ -259,16 +259,16 @@ public class Options {
   /**
    * @return the ammoPickupSoundFileName
    */
-  public String getAmmoPickupSoundFileName() {
-    return ammoPickupSoundFileName;
+  public String getPickupSoundFileName() {
+    return pickupSoundFileName;
   }
 
   /**
-   * @param ammoPickupSoundFileName
-   *          the ammoPickupSoundFileName to set
+   * @param pickupSoundFileName
+   *          the pickupSoundFileName to set
    */
-  public void setAmmoPickupSoundFileName(String ammoPickupSoundFileName) {
-    this.ammoPickupSoundFileName = ammoPickupSoundFileName;
+  public void setPickupSoundFileName(String pickupSoundFileName) {
+    this.pickupSoundFileName = pickupSoundFileName;
   }
 
   /**

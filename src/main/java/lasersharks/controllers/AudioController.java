@@ -12,10 +12,9 @@ import lasersharks.Options;
  *
  */
 @SuppressWarnings("restriction")
-public class AudioController {
+public final class AudioController {
 
   private static AudioController instance;
-  
 
   private MediaPlayer musicPlayer;
   private MediaPlayer sfxPlayer;
@@ -23,7 +22,7 @@ public class AudioController {
   /**
    * 
    */
-  public AudioController() {
+  private AudioController() {
     setInstance(this);
   }
 
@@ -56,7 +55,7 @@ public class AudioController {
    *          the path of the sound file that should be played.
    * @return true iff a sound effect has started Playing
    */
-  public boolean playSoundEffect(String path) {
+  private boolean playSoundEffect(String path) {
     if (Options.getInstance().isMutedSfx()) {
       return false;
     }
@@ -69,6 +68,30 @@ public class AudioController {
       Logger.getInstance().write("sfxPlay failed", e.getMessage());
     }
     return false;
+  }
+  
+  /**
+   * Plays the eat sound.
+   * @return true iff a sound effect has started Playing
+   */
+  public boolean playEatSoundEffect() {
+    return playSoundEffect(Options.getInstance().getEatSoundFileName());
+  }
+
+  /**
+   * Plays a laserSound.
+   * @return true iff a sound effect has started Playing
+   */
+  public boolean playLaserSoundEffect() {
+    return playSoundEffect(Options.getInstance().getLaserSoundFileName());
+  }
+
+  /**
+   * Plays the pickup sound.
+   * @return true iff a sound effect has started Playing
+   */
+  public boolean playPickupSoundEffect() {
+    return playSoundEffect(Options.getInstance().getPickupSoundFileName());
   }
 
   /**
@@ -197,4 +220,5 @@ public class AudioController {
     }
     AudioController.instance = null;
   }
+
 }

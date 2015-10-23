@@ -15,7 +15,7 @@ import lasersharksgui.panes.StandardPane;
 public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBahaviour {
   private SeaObject element;
   
-  public static final float ENERGY_DISSERPATION_RATE = 30f;
+  public static final float ENERGY_DISSERPATION_RATE = 7.5f;
   
   /**
    * Constructor.
@@ -26,9 +26,9 @@ public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBahaviour 
   }
 
   @Override
-  public synchronized float onCollisionSizeIncrement() {
+  public float onCollisionSizeIncrement() {
     Logger.getInstance().write("Fish eaten", element.toString());
-    AudioController.getInstance().playSoundEffect(Options.getInstance().getHitSoundFileName());
+    AudioController.getInstance().playEatSoundEffect();
     return (element.getSize() / ENERGY_DISSERPATION_RATE);
   }
 }

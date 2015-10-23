@@ -1,6 +1,5 @@
 package lasersharks.behaviour.ammunitionIncrement;
 
-import lasersharks.Options;
 import lasersharks.behaviour.AmmunitionIncrementBehaviour;
 import lasersharks.controllers.AudioController;
 
@@ -15,8 +14,7 @@ public class AmmoAmmunitionIncrementBehaviour implements AmmunitionIncrementBeha
 
   @Override
   public synchronized int onCollisionAmmunitionIncrement() {
-    AudioController.getInstance()
-        .playSoundEffect(Options.getInstance().getAmmoPickupSoundFileName());
+    AudioController.getInstance().playPickupSoundEffect();
     return AMMUNITION_SIZE;
   }
 }
