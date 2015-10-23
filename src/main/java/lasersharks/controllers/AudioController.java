@@ -11,8 +11,13 @@ import lasersharks.Options;
  * @author SEMGroup27
  *
  */
+<<<<<<< HEAD
 @SuppressWarnings("restriction") 
 public class AudioController {
+=======
+@SuppressWarnings("restriction")
+public final class AudioController {
+>>>>>>> bcab87a7606dcb46e2ce59c5448d57ea6699e158
 
   private static AudioController instance;
 
@@ -22,7 +27,11 @@ public class AudioController {
   /**
    * 
    */
+<<<<<<< HEAD
   protected AudioController() {
+=======
+  private AudioController() {
+>>>>>>> bcab87a7606dcb46e2ce59c5448d57ea6699e158
     setInstance(this);
   }
 
