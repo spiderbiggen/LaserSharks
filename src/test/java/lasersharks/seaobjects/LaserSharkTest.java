@@ -31,7 +31,7 @@ public class LaserSharkTest extends SeaObjectTest {
   private static final int DEFAULT_SHARK_AMMO = 10;
   private static final int EXPECTED_AFTER_EATING_AMMO = 10;
   private static final int DEFAULT_SHARK_SIZE = 30;
-  private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 31;
+  private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 34;
 
   /**
    * Set up which is used before the tests.
