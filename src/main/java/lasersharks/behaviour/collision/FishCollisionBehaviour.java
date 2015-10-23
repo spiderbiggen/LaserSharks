@@ -3,12 +3,14 @@ package lasersharks.behaviour.collision;
 import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 
-public class FishCollisionBehaviour implements CollisionBehaviour{
+public class FishCollisionBehaviour extends AbstractCollisionBehaviour {
   Displayable object;
-  
+
   /**
    * Constructor
-   * @param me this.
+   * 
+   * @param me
+   *          this.
    */
   public FishCollisionBehaviour(Displayable me) {
     super();
@@ -20,5 +22,5 @@ public class FishCollisionBehaviour implements CollisionBehaviour{
     object.onCollisionSizeDecrement(other.getOnCollisionSizeDecrement());
     other.onCollisionDestroyLaser();
   }
-  
+
 }

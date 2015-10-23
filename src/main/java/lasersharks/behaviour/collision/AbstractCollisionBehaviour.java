@@ -3,11 +3,9 @@ package lasersharks.behaviour.collision;
 import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 
-public class DefaultCollisionBehaviour implements CollisionBehaviour{
-
+public abstract class AbstractCollisionBehaviour implements CollisionBehaviour {
   @Override
   public void colideWith(Displayable object) {
-    
+
   }
-  
 }

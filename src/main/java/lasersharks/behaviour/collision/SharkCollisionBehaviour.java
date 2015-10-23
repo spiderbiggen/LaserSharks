@@ -4,7 +4,7 @@ import lasersharks.Highscores;
 import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 
-public class SharkCollisionBehaviour implements CollisionBehaviour{
+public class SharkCollisionBehaviour extends AbstractCollisionBehaviour{
   Displayable object;
   
   /**
