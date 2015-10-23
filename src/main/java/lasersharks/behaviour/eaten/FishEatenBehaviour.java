@@ -1,7 +1,7 @@
 package lasersharks.behaviour.eaten;
 
 import lasersharks.Logger;
-import lasersharks.behaviour.EeatenBehaviour;
+import lasersharks.behaviour.EatenBehaviour;
 import lasersharks.seaobjects.SeaObject;
 import lasersharksgui.panes.StandardPane;
 
@@ -10,7 +10,7 @@ import lasersharksgui.panes.StandardPane;
  * @author SEMGroup27
  *
  */
-public class FishEatenBehaviour implements EeatenBehaviour {
+public class FishEatenBehaviour implements EatenBehaviour {
   private SeaObject element;
   private static final String EAT_FISH_SOUND = "src/main/resources/soundEffect1.wav";
   
