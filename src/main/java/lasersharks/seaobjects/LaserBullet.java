@@ -14,7 +14,7 @@ import lasersharks.behaviour.move.DefaultMoveBehaviour;
  */
 public class LaserBullet extends SeaObject {
 
-  private static final int SIZE_DECREMENT_ON_HIT = 10;
+  private static final int SIZE_DECREMENT_ON_HIT = 30;
   private static final String LASER_IMAGE = "greenLaserRay.png";
   private static final double LASER_DEFAULT_STRENGTH = 1.0;
   private static final double IMG_WIDTH = 290;

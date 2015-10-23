@@ -80,7 +80,15 @@ public class Highscores {
    *           if the file doesn't exist or is in the wrong location.
    */
   public ArrayList<String> getList() {
-    if (highscores == null || highscores.size() == 0) {
+    boolean noFile = false;
+    try (Scanner sc1 = new Scanner(new File(inputFile))) {
+      sc1.hasNext();
+    } catch (FileNotFoundException e) {
+      noFile = true;
+    }
+
+    if (highscores == null || highscores.size() == 0 || noFile) {
+
       readHighscore();
     }
     return highscores;

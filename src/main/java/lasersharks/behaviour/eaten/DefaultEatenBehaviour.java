@@ -1,13 +1,13 @@
 package lasersharks.behaviour.eaten;
 
-import lasersharks.behaviour.EeatenBehaviour;
+import lasersharks.behaviour.EatenBehaviour;
 
 /**
  * Eaten behaviour for SeaObjects.
  * @author SEMGroup27
  *
  */
-public class DefaultEatenBehaviour implements EeatenBehaviour {
+public class DefaultEatenBehaviour implements EatenBehaviour {
   @Override
   public void onCollisionEaten() {
   }

@@ -1,7 +1,6 @@
 package lasersharks.behaviour.eaten;
 
-import lasersharks.Options;
-import lasersharks.behaviour.EeatenBehaviour;
+import lasersharks.behaviour.EatenBehaviour;
 import lasersharks.controllers.AudioController;
 import lasersharks.seaobjects.SeaObject;
 
@@ -11,7 +10,7 @@ import lasersharks.seaobjects.SeaObject;
  * @author SEMGroup27
  *
  */
-public class FishEatenBehaviour implements EeatenBehaviour {
+public class FishEatenBehaviour implements EatenBehaviour {
   private SeaObject element;
 
   /**
@@ -28,6 +27,6 @@ public class FishEatenBehaviour implements EeatenBehaviour {
   public void onCollisionEaten() {
     element.kill();
     element.setSize(0);
-    AudioController.getInstance().playSoundEffect(Options.getInstance().getHitSoundFileName());
+    AudioController.getInstance().playEatSoundEffect();
   }
 }
