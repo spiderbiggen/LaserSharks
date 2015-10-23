@@ -1,6 +1,13 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.Highscores;
+import lasersharks.behaviour.collision.component.DefaultCompomnentLeaf;
+import lasersharks.behaviour.collision.component.OnCollisionEatenCompomnentLeaf;
+import lasersharks.behaviour.collision.component.OnCollisionHighScoreIncrementComponent;
+import lasersharks.behaviour.collision.component.OnCollisionIncreaseAmmunitionComponent;
+import lasersharks.behaviour.collision.component.OnCollisionIncreaseSizeComponent;
+import lasersharks.behaviour.collision.component.OnCollisionPlayerLosesComponent;
+import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
 
 /**
@@ -10,7 +17,7 @@ import lasersharks.interfaces.Displayable;
  *
  */
 public class SharkCollisionBehaviour extends AbstractCollisionBehaviour {
-  private Displayable object;
+  private CollisionComponent handler;
 
   /**
    * Constructor.
@@ -20,17 +27,18 @@ public class SharkCollisionBehaviour extends AbstractCollisionBehaviour {
    */
   public SharkCollisionBehaviour(Displayable me) {
     super();
-    this.object = me;
+    this.handler = 
+        new OnCollisionPlayerLosesComponent(me, 
+        new OnCollisionIncreaseSizeComponent(me, 
+        new OnCollisionIncreaseAmmunitionComponent(me,
+        new OnCollisionHighScoreIncrementComponent(
+        new OnCollisionEatenCompomnentLeaf(
+        new DefaultCompomnentLeaf())))));
   }
 
   @Override
   public synchronized void colideWith(Displayable other) {
-    other.onCollisionPlayerLoses(object.getSize());
-    object.increaseSize(other.onCollisionSizeIncrement());
-    object.increaseAmmunition(other.onCollisionAmmunitionIncrement());
-    Highscores.getInstance().increaseScore(
-        other.getOnCollisionHighScoreIncrement(Highscores.getInstance().getTimePenalty()));
-    other.onCollisionEaten();
+    handler.handleCollision(other);
   }
 
 }
