@@ -1,6 +1,5 @@
 package lasersharks.behaviour.collision;
 
-import lasersharks.Highscores;
 import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.behaviour.collision.component.DefaultComponentLeaf;
 import lasersharks.behaviour.collision.component.OnCollisionEatenComponentLeaf;
@@ -38,7 +37,7 @@ public class SharkCollisionBehaviour implements CollisionBehaviour {
   }
 
   @Override
-  public synchronized void colideWith(Displayable other) {
+  public void colideWith(Displayable other) {
     handler.handleCollision(other);
   }
 
