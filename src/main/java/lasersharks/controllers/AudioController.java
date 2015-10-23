@@ -11,7 +11,7 @@ import lasersharks.Options;
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction") 
+@SuppressWarnings("restriction")
 public class AudioController {
 
   private static AudioController instance;
@@ -61,7 +61,8 @@ public class AudioController {
     }
     try {
       sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
-      sfxPlayer.setVolume(Options.getInstance().getSfxVolume());
+      sfxPlayer.setVolume(
+          Options.getInstance().getSfxVolume() * Options.getInstance().getMasterVolume());
       sfxPlayer.play();
       return true;
     } catch (Exception e) {
@@ -69,9 +70,10 @@ public class AudioController {
     }
     return false;
   }
-  
+
   /**
    * Plays the eat sound.
+   * 
    * @return true iff a sound effect has started Playing
    */
   public boolean playEatSoundEffect() {
@@ -80,6 +82,7 @@ public class AudioController {
 
   /**
    * Plays a laserSound.
+   * 
    * @return true iff a sound effect has started Playing
    */
   public boolean playLaserSoundEffect() {
@@ -88,6 +91,7 @@ public class AudioController {
 
   /**
    * Plays the pickup sound.
+   * 
    * @return true iff a sound effect has started Playing
    */
   public boolean playPickupSoundEffect() {
@@ -106,7 +110,8 @@ public class AudioController {
     if (Options.getInstance().isMutedMusic()) {
       return false;
     }
-    musicPlayer.setVolume(Options.getInstance().getMusicVolume());
+    musicPlayer.setVolume(
+        Options.getInstance().getMusicVolume() * Options.getInstance().getMasterVolume());
     musicPlayer.play();
     Options.getInstance().setPlayingMusic(true);
     return true;
@@ -161,6 +166,21 @@ public class AudioController {
   }
 
   /**
+   * Adjusts the master volume in the {@link Option} Class.
+   * 
+   * @param newVolume
+   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   */
+  public void adjustMasterVolume(double newVolume) {
+    newVolume = Math.min(Math.max(newVolume, 0), 1.0);
+    Options.getInstance().setMasterVolume(newVolume);
+
+    if (musicPlayer != null) {
+      musicPlayer.setVolume(Options.getInstance().getMusicVolume() * newVolume);
+    }
+  }
+
+  /**
    * Adjusts the music volume of the musicPlayer and in the {@link Option} Class.
    * 
    * @param newVolume
@@ -171,7 +191,7 @@ public class AudioController {
     Options.getInstance().setMusicVolume(newVolume);
 
     if (musicPlayer != null) {
-      musicPlayer.setVolume(newVolume);
+      musicPlayer.setVolume(newVolume * Options.getInstance().getMasterVolume());
     }
   }
 

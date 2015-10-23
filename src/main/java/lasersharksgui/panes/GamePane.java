@@ -12,7 +12,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lasersharks.Direction;
 import lasersharks.Highscores;
-import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.controllers.DirectionInputController;
 import lasersharks.controllers.PauseController;
@@ -33,11 +32,12 @@ import lasersharksgui.interfaces.Stoppable;
 @SuppressWarnings("restriction")
 public class GamePane extends StandardPane implements Stoppable {
 
-  private static final int ANIMATION_SLEEP_TIMER = 10;
+  // private static final int ANIMATION_SLEEP_TIMER = 10;
   private AnimationTimer animation;
   private final double timeToMilis = 1_000_000;
   private ScreenController screenController;
   private static long time = 0;
+  private static boolean paused = false;
   private DirectionCallback callback;
   private DirectionInputController directionInputController;
   private ShootController shootController;
@@ -63,6 +63,10 @@ public class GamePane extends StandardPane implements Stoppable {
     animation = new AnimationTimer() {
       @Override
       public void handle(long now) {
+        if (paused) {
+          time = now;
+          paused = false;
+        }
         double frametime = (now - time) / timeToMilis;
         final double milis = 1000;
 
@@ -70,40 +74,40 @@ public class GamePane extends StandardPane implements Stoppable {
         showShark(screenController.getShark());
         showScore();
 
-        try {
-          Thread.sleep(ANIMATION_SLEEP_TIMER);
-        } catch (InterruptedException e) {
-          Logger.getInstance().write("Animation timer Interrupted", e.getMessage());
-        }
+        /*
+         * try { Thread.sleep(ANIMATION_SLEEP_TIMER); } catch (InterruptedException e) {
+         * Logger.getInstance().write("Animation timer Interrupted", e.getMessage()); }
+         */
         time = now;
       }
     };
     animation.start();
   }
-  
+
   /**
    * Adds all event handlers to the GamePane.
    */
   public void addEventHandlers() {
     addNonPauseEventHandlers();
     pauseController = new PauseController(this);
-    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, pauseController);   
+    MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, pauseController);
   }
 
   /**
    * Stops the game. Can be resumed by calling resumeGame().
    */
   public void stopGame() {
-    animation.stop();
+    paused = true;
     removeNonPauseEventHandlers();
+    animation.stop();
   }
 
   /**
    * resumes the game. Game has first to be started before it can be resumed.
    */
   public void resumeGame() {
-    animation.start();
     addNonPauseEventHandlers();
+    animation.start();
   }
 
   /**
@@ -215,38 +219,29 @@ public class GamePane extends StandardPane implements Stoppable {
   public void stop() {
     this.clearPaneOfImageView();
     this.stopGame();
-    removeNonPauseEventHandlers();
+    removeAllEventHandlers();
   }
-  
+
   /**
    * This method removes all event handlers.
    */
   public void removeAllEventHandlers() {
     removeNonPauseEventHandlers();
-    MainGui.getInstance().getCurrentScene().removeEventHandler(
-        KeyEvent.ANY, 
-        pauseController
-    );
+    MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, pauseController);
   }
-  
+
   /**
-   * Removes all the event handlers, except for the pause handler.
-   * This is used for pausing the game.
+   * Removes all the event handlers, except for the pause handler. This is used for pausing the
+   * game.
    */
   public void removeNonPauseEventHandlers() {
-    MainGui.getInstance().getCurrentScene().removeEventHandler(
-        KeyEvent.ANY, 
-        directionInputController
-    );
-    MainGui.getInstance().getCurrentScene().removeEventHandler(
-        KeyEvent.ANY, 
-        shootController
-    );
+    MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY,
+        directionInputController);
+    MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, shootController);
   }
-  
+
   /**
-   * Add all the event handlers, except for the pause handler.
-   * This is used for resuming the game.
+   * Add all the event handlers, except for the pause handler. This is used for resuming the game.
    */
   public void addNonPauseEventHandlers() {
     directionInputController = new DirectionInputController(callback);

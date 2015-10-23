@@ -58,22 +58,22 @@ public class MainGui extends Application {
    *          The class of the panel we should browse to.
    */
   public void browseTo(Class<? extends StandardPane> paneClass) {
-      StandardPane paneToShow;
-      try {
-        paneToShow = (StandardPane) paneClass.newInstance();
-        browseTo(paneToShow);
-      } catch (InstantiationException e) {
-        e.printStackTrace();
-      } catch (IllegalAccessException e) {
-        e.printStackTrace();
-      }
+    StandardPane paneToShow;
+    try {
+      paneToShow = (StandardPane) paneClass.newInstance();
+      browseTo(paneToShow);
+    } catch (InstantiationException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    }
   }
-  
+
   /**
    * This function is used to browse to an other panel.
    * 
-   * @param paneClass
-   *          The class of the panel we should browse to.
+   * @param pane
+   *          The pane we should browse to.
    */
   public void browseTo(StandardPane pane) {
     try {
@@ -96,6 +96,28 @@ public class MainGui extends Application {
    */
   public static MainGui getInstance() {
     return instance;
+  }
+
+  /**
+   * Add an overlay to the current Pane.
+   * 
+   * @param pane
+   *          the pane that should act as an overlay.
+   */
+  public void addOverlay(Pane pane) {
+    stackPane.getChildren().add(pane);
+  }
+
+  /**
+   * Removes a pane from the stackpane Makes sure that it's not the root pane.
+   * 
+   * @param pane
+   *          the pane to be removed.
+   */
+  public void removeOverlay(Pane pane) {
+    if (!pane.equals(currentPane)) {
+      stackPane.getChildren().remove(pane);
+    }
   }
 
   /**
@@ -127,10 +149,19 @@ public class MainGui extends Application {
     Platform.exit();
   }
 
+  /**
+   * Sets the singleton instance of the maingui class.
+   * 
+   * @param newInstance
+   *          the new instance of the maingui class
+   */
   public static void setInstance(MainGui newInstance) {
     instance = newInstance;
   }
 
+  /**
+   * Clear the current singleton instance.
+   */
   public static void clearInstance() {
     instance = null;
   }

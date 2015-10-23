@@ -34,6 +34,7 @@ public class Options {
   private boolean playingMusic;
   private boolean mutedMusic;
   private boolean mutedSfx;
+  private double masterVolume;
   private double musicVolume;
   private double sfxVolume;
 
@@ -63,8 +64,9 @@ public class Options {
     playingMusic = false;
     mutedMusic = false;
     mutedSfx = false;
-    musicVolume = 1.0f;
-    sfxVolume = 1.0f;
+    masterVolume = 1.0;
+    musicVolume = 1.0;
+    sfxVolume = 1.0;
   }
 
   /**
@@ -318,6 +320,20 @@ public class Options {
    */
   public void setMutedSfx(boolean muteSfx) {
     this.mutedSfx = muteSfx;
+  }
+
+  /**
+   * @return the masterVolume
+   */
+  public double getMasterVolume() {
+    return masterVolume;
+  }
+
+  /**
+   * @param masterVolume the masterVolume to set
+   */
+  public void setMasterVolume(double masterVolume) {
+    this.masterVolume = masterVolume;
   }
 
   /**
