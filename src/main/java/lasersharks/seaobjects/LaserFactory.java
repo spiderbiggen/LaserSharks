@@ -17,6 +17,7 @@ public class LaserFactory implements LaserSpawner {
    */
   private static final int LASER_SIZE = 13;
   private static final int LASER_SPEED = 800;
+  private static final int LASER_POSITION_Y_OFFSET = 45;
 
   /**
    * Constructor.
@@ -33,7 +34,9 @@ public class LaserFactory implements LaserSpawner {
   @Override
   public LaserBullet createLaser(LaserShark origin) {
     Position posShark = origin.getPosition();
-    Position posLaser = new Position(posShark.getPosX(), posShark.getPosY());
+    Position posLaser = new Position(posShark.getPosX(), posShark.getPosY()
+        + LASER_POSITION_Y_OFFSET);
+
     return new LaserBullet(posLaser, LASER_SIZE, LASER_SPEED, origin.getLastHorizontalDirection());
   }
 
