@@ -1,13 +1,18 @@
 package lasersharks.behaviour.collision;
 
-import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 
+/**
+ * The class for the collisionBehavior of the FishBots.
+ * 
+ * @author SEMgroup27
+ *
+ */
 public class FishCollisionBehaviour extends AbstractCollisionBehaviour {
-  Displayable object;
+  private Displayable object;
 
   /**
-   * Constructor
+   * Constructor.
    * 
    * @param me
    *          this.
