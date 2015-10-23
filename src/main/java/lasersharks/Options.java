@@ -130,7 +130,7 @@ public class Options {
    * 
    * @return the screen resolution of the systems screen.
    */
-  public static Dimension getScreenSize() {
+  protected static Dimension getScreenSize() {
     try {
       return Toolkit.getDefaultToolkit().getScreenSize();
     } catch (Exception e) {
