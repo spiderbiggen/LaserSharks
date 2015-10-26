@@ -1,27 +1,20 @@
 package lasersharks.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Random;
-
-import org.apache.log4j.chainsaw.Main;
+import lasersharks.Direction;
+import lasersharks.Position;
+import lasersharks.seaobjects.Fish;
+import lasersharks.seaobjects.FishFactory;
+import lasersharks.seaobjects.LaserShark;
+import lasersharksgui.MainGui;
+import lasersharksgui.panes.LosingPane;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import lasersharks.Direction;
-import lasersharks.Position;
-import lasersharks.controllers.FishController;
-import lasersharks.seaobjects.Fish;
-import lasersharks.seaobjects.FishBot;
-import lasersharks.seaobjects.LaserShark;
-import lasersharksgui.MainGui;
-import lasersharksgui.panes.LosingPane;
-import lasersharksgui.panes.StandardPane;
-import lasersharks.seaobjects.FishFactory;
+import java.util.Random;
+
+import static org.junit.Assert.*;
 
 /**
  * the test class for the FishController class.
@@ -84,8 +77,8 @@ public class FishControllerTest {
     for (int i = 0; i < FISHAMOUNT; i++) {
       fishCon.addDisplayable(new Fish("", 1, 1,
           new Position(POSITION_X + i * DIST_BETW_FISH, POSITION_Y + i * DIST_BETW_FISH)
-          , Float.valueOf(SIZE),
-          Double.valueOf(SPEED), 
+          , (float) SIZE,
+              (double) SPEED,
           Direction.East));
     }
     return fishCon;

@@ -10,14 +10,14 @@ import lasersharks.interfaces.Displayable;
  */
 public class LaserSharkMoveBehaviour implements MoveBehaviour {
   private static final float HALF_RATE = 0.5F;
-  private Displayable swimmer;
+  private Displayable displayable;
   
   /**
    * the constructor.
-   * @param swimmer
+   * @param displayable the fish this behaviour applies to.
    */
-  public LaserSharkMoveBehaviour(Displayable swimmer) {
-    this.swimmer = swimmer;
+  public LaserSharkMoveBehaviour(Displayable displayable) {
+    this.displayable = displayable;
   }
   
   /**
@@ -26,11 +26,11 @@ public class LaserSharkMoveBehaviour implements MoveBehaviour {
    * @return true if the shark was able to move.
    */
   public boolean move(double frametime) {
-    swimmer.getPosition().updatePosition(swimmer.getDirection(), (swimmer.getSpeed() / frametime), swimmer.getSize());
+    displayable.getPosition().updatePosition(displayable.getDirection(), displayable.getSpeed() / frametime, displayable.getSize());
     // this will make sure the fish stay within the borders.
 
-    swimmer.getPosition().clipPosition((swimmer.getSize() * swimmer.getWidthScale() * HALF_RATE),
-        (swimmer.getSize() * HALF_RATE));
+    displayable.getPosition().clipPosition((displayable.getSize() * displayable.getWidthScale() * HALF_RATE),
+        (displayable.getSize() * HALF_RATE));
     return true;
   }
 }

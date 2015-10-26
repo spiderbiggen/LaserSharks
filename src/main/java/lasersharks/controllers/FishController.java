@@ -1,25 +1,18 @@
 package lasersharks.controllers;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
-import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.interfaces.AmmoSpawner;
 import lasersharks.interfaces.Displayable;
-import lasersharks.interfaces.LaserSpawner;
-import lasersharks.seaobjects.AmmoFactory;
-import lasersharks.seaobjects.Fish;
-import lasersharks.seaobjects.FishFactory;
 import lasersharks.interfaces.FishSpawner;
-import lasersharks.seaobjects.LaserBullet;
-import lasersharks.seaobjects.LaserFactory;
-import lasersharks.seaobjects.LaserShark;
-import lasersharks.seaobjects.SeaObject;
+import lasersharks.interfaces.LaserSpawner;
+import lasersharks.seaobjects.*;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Class for controlling fish data.
@@ -46,7 +39,6 @@ public class FishController {
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 670;
   private static final Direction START_DIRECTION = Direction.None;
-  private static final float DECREASE_SIZE = 2;
 
   /**
    * Spawn-chance for new fishes.
@@ -70,7 +62,7 @@ public class FishController {
    * Constructor.
    */
   public FishController() {
-    this.displayableList = new LinkedList<Displayable>();
+    this.displayableList = new LinkedList<>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
     this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION);
@@ -147,7 +139,7 @@ public class FishController {
   /**
    * Update all fish positions.
    * 
-   * @param frametime
+   * @param frametime scalar based time elapsed since the last update
    */
   private void updatePositions(double frametime) {
     this.displayableList.removeAll(this.displayableList.stream().filter(v -> !v.move(frametime))
@@ -159,7 +151,7 @@ public class FishController {
 
   /**
    * 
-   * @param frametime
+   * @param frametime scalar based time elapsed since the last update
    * @return List of fish and their positions.
    */
   private List<Displayable> getNewFishPositions(double frametime) {
@@ -172,7 +164,7 @@ public class FishController {
    * offscreen fish.
    * 
    * @param frametime
-   *          the time between frames in seconds
+   *           scalar based time elapsed since the last update
    * 
    * @return List<Swimmer> list of fishes at there current position.
    */
@@ -224,12 +216,12 @@ public class FishController {
   private void checkForCollisions() {
     displayableList.add(0, this.shark);
     displayableList.stream()
-        .filter(v -> v.collisionActor())
+        .filter(Displayable::collisionActor)
         .forEach(v -> 
         displayableList.stream()
-            .filter(w -> v.checkForCollision(w))
-            .filter(w -> w.isAlive())
-            .forEach(w -> v.collideWith(w)
+            .filter(v::checkForCollision)
+            .filter(Displayable::isAlive)
+            .forEach(v::collideWith
         )
     );
     displayableList.remove(0);

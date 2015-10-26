@@ -3,16 +3,7 @@ package lasersharks.seaobjects;
 import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.AmmunitionIncrementBehaviour;
-import lasersharks.behaviour.CheckForLossBehaviour;
-import lasersharks.behaviour.CollisionBehaviour;
-import lasersharks.behaviour.CollisionHitboxBehaviour;
-import lasersharks.behaviour.EatenBehaviour;
-import lasersharks.behaviour.GetSizeIncrementBahaviour;
-import lasersharks.behaviour.HighScoreIncrementBehaviour;
-import lasersharks.behaviour.LaserCollisionBehaviour;
-import lasersharks.behaviour.MoveBehaviour;
-import lasersharks.behaviour.SizeDecrementBahaviour;
+import lasersharks.behaviour.*;
 import lasersharks.behaviour.ammunitionIncrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
@@ -304,7 +295,6 @@ public abstract class SeaObject implements Displayable {
   
   /**
    * See if laser needs to be destroyed after colliding with this object.
-   * @return boolean weather laser object needs to be destroyed.
    */
   @Override
   public void onCollisionDestroyLaser() {
@@ -342,7 +332,7 @@ public abstract class SeaObject implements Displayable {
    * @param object, object with wist the actor has collided.
    */
   public void collideWith(Displayable object) {
-    this.collisionBehaviour.colideWith(object);
+    this.collisionBehaviour.collideWith(object);
   }
   
   /**

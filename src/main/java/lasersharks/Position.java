@@ -150,7 +150,7 @@ public class Position {
    */
   public float calculateDistance(Position other) {
     return (float) Math
-        .sqrt((Math.pow(other.getPosX() - posX, 2)) + Math.pow(other.getPosY() - posX, 2));
+        .sqrt(Math.pow(other.getPosX() - posX, 2) + Math.pow(other.getPosY() - posX, 2));
   }
 
   /**
@@ -162,8 +162,8 @@ public class Position {
    *          max offset margin
    */
   public final boolean onScreen(double xMargin) {
-    return (posX + xMargin >= 0 && posX - xMargin <= Position.getWidthPanel() && posY >= 0
-        && posY <= Position.getHeightPanel());
+    return posX + xMargin >= 0 && posX - xMargin <= Position.getWidthPanel() && posY >= 0
+        && posY <= Position.getHeightPanel();
   }
 
   /**
@@ -195,11 +195,8 @@ public class Position {
     }
 
     Position position = (Position) obj;
-    if (this.getPosX() != position.getPosX() || this.getPosY() != position.getPosY()) {
-      return false;
-    }
+    return !(this.getPosX() != position.getPosX() || this.getPosY() != position.getPosY());
 
-    return true;
   }
 
   @Override

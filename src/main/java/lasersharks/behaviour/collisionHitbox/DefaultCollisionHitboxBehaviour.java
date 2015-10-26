@@ -51,10 +51,9 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
   @Override
   public Position getMiddlePoint() {
     Position startPos = displayable.getPosition();
-    Position middlePointPosition = new Position(
+    return new Position(
         startPos.getPosX() + (HALF_SCALE * displayable.getWidthScale() * displayable.getSize()),
         startPos.getPosY() + (HALF_SCALE * displayable.getSize()));
-    return middlePointPosition;
   }
 
   /**
@@ -65,10 +64,9 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
   public Rectangle makeHitbox() {
     double xcoordinate = displayable.getPosition().getPosX();
     double ycoordinate = displayable.getPosition().getPosY();
-    Rectangle rekt = new Rectangle(xcoordinate + SIZE_TO_COORD * displayable.getSize(),
+    return new Rectangle(xcoordinate + SIZE_TO_COORD * displayable.getSize(),
         ycoordinate + SIZE_TO_COORD * displayable.getSize(),
         displayable.getWidthScale() * displayable.getSize() * WIDTH_TO_COORD,
         displayable.getSize() * WIDTH_TO_COORD);
-    return rekt;
   }
 }

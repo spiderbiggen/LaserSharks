@@ -1,8 +1,5 @@
 package lasersharksgui.panes;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javafx.animation.AnimationTimer;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -22,6 +19,9 @@ import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.interfaces.Stoppable;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This is the pane representing the gameplay.
@@ -163,10 +163,10 @@ public class GamePane extends StandardPane implements Stoppable {
    */
   public void showFishList(List<Displayable> list) {
     clearPaneOfImageView();
-    for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).isAlive()) {
-        getChildren().add(fishImage(list.get(i)));
-        Rectangle hitBox = list.get(i).makeHitbox();
+    for (Displayable aList : list) {
+      if (aList.isAlive()) {
+        getChildren().add(fishImage(aList));
+        Rectangle hitBox = aList.makeHitbox();
         hitBox.setOpacity(0); // comment this line if you want to see the hitboxes as black boxes
         getChildren().add(hitBox);
       }

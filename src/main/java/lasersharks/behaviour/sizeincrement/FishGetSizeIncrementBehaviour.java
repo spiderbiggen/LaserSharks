@@ -1,11 +1,9 @@
 package lasersharks.behaviour.sizeincrement;
 
 import lasersharks.Logger;
-import lasersharks.Options;
 import lasersharks.behaviour.GetSizeIncrementBahaviour;
 import lasersharks.controllers.AudioController;
 import lasersharks.seaobjects.SeaObject;
-import lasersharksgui.panes.StandardPane;
 
 /**
  * getSizeIncrement behaviour for fish.

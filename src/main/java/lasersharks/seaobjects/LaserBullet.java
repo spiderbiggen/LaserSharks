@@ -63,6 +63,7 @@ public class LaserBullet extends SeaObject {
    * Possiably depricated.
    * @return the strength.
    */
+  @Deprecated
   public double getStrength() {
     return strength;
   }

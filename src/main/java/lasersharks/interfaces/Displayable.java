@@ -163,7 +163,6 @@ public interface Displayable {
   
   /**
    * See if laser needs to be destroyed after colliding with this object.
-   * @return boolean weater laser object needs to be destroyed.
    */
   void onCollisionDestroyLaser();
   
@@ -175,7 +174,7 @@ public interface Displayable {
   
   /**
    * Get size by which to decrement on collision
-   * @return
+   * @return size by which object needs to decrement.
    */
   int getOnCollisionSizeDecrement();
 

@@ -1,11 +1,11 @@
 package lasersharks.controllers;
 
-import java.io.File;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import lasersharks.Logger;
 import lasersharks.Options;
+
+import java.io.File;
 
 /**
  * @author SEMGroup27
@@ -17,7 +17,6 @@ public class AudioController {
   private static AudioController instance;
 
   private MediaPlayer musicPlayer;
-  private MediaPlayer sfxPlayer;
 
   /**
    * The constructor to create a new instance of audiocontroller.
@@ -60,9 +59,9 @@ public class AudioController {
       return false;
     }
     try {
-      sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
+      MediaPlayer sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
       sfxPlayer.setVolume(
-          Options.getInstance().getSfxVolume() * Options.getInstance().getMasterVolume());
+              Options.getInstance().getSfxVolume() * Options.getInstance().getMasterVolume());
       sfxPlayer.play();
       return true;
     } catch (Exception e) {
@@ -166,7 +165,7 @@ public class AudioController {
   }
 
   /**
-   * Adjusts the master volume in the {@link Option} Class.
+   * Adjusts the master volume in the {@link Options} Class.
    * 
    * @param newVolume
    *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
@@ -181,7 +180,7 @@ public class AudioController {
   }
 
   /**
-   * Adjusts the music volume of the musicPlayer and in the {@link Option} Class.
+   * Adjusts the music volume of the musicPlayer and in the {@link Options} Class.
    * 
    * @param newVolume
    *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
@@ -196,7 +195,7 @@ public class AudioController {
   }
 
   /**
-   * Adjusts the sound effects volume in the {@link Option} Class.
+   * Adjusts the sound effects volume in the {@link Options} Class.
    * 
    * @param newVolume
    *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0

@@ -19,8 +19,8 @@ public class DefaultMoveBehaviour implements MoveBehaviour {
    * @param displayable
    *          the fish this behaviour applies to.
    */
-  public DefaultMoveBehaviour(Displayable swimmer) {
-    this.displayable = swimmer;
+  public DefaultMoveBehaviour(Displayable displayable) {
+    this.displayable = displayable;
   }
 
   /**
@@ -33,7 +33,7 @@ public class DefaultMoveBehaviour implements MoveBehaviour {
   @Override
   public boolean move(double frametime) {
     return displayable.getPosition().updatePosition(displayable.getDirection(),
-        (displayable.getSpeed() / frametime), displayable.getSize());
+        displayable.getSpeed() / frametime, displayable.getSize());
   }
 
 }

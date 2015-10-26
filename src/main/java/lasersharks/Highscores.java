@@ -47,7 +47,7 @@ public class Highscores {
    * 
    */
   public void readHighscore() {
-    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> list = new ArrayList<>();
     try (Scanner sc = new Scanner(new File(inputFile))) {
 
       while (sc.hasNextLine()) {
@@ -76,8 +76,6 @@ public class Highscores {
    * Will return the current list. If the list doesn't exist yet read the one from the file.
    * 
    * @return the list of highscores.
-   * @throws FileNotFoundException
-   *           if the file doesn't exist or is in the wrong location.
    */
   public ArrayList<String> getList() {
     boolean noFile = false;
@@ -166,8 +164,7 @@ public class Highscores {
   public int getHighScore() throws FileNotFoundException {
     try (Scanner sc = new Scanner(new File(inputFile))) {
       String firstLine = sc.nextLine();
-      int highestScore = Integer.parseInt(firstLine.substring(DATA_OFFSET));
-      return highestScore;
+      return Integer.parseInt(firstLine.substring(DATA_OFFSET));
     }
 
   }
@@ -181,8 +178,8 @@ public class Highscores {
     getList();
     String res = "";
     String li = System.lineSeparator();
-    for (int i = 0; i < highscores.size(); i++) {
-      res = res + "     " + highscores.get(i) + li;
+    for (String highscore : highscores) {
+      res = res + "     " + highscore + li;
     }
 
     return "Highscores:" + li + res + li + "Your score: " + score;
@@ -191,8 +188,8 @@ public class Highscores {
   /**
    * Increase the current score the player has according to the size of the fish eaten.
    * 
-   * @param fish
-   *          the fish that is used to calculate the additional score
+   * @param increment
+   *          the increment by which to increase the fish
    */
   public void increaseScore(int increment) {
     score += Math.max(0, increment);
