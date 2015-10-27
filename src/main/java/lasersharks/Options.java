@@ -40,7 +40,6 @@ public class Options {
 
   private String backGround;
   private Random factoryRng;
-  private Random spawnRng;
   private static Options currentOptions;
 
   /**
@@ -53,7 +52,6 @@ public class Options {
     setInstance(this);
     this.dimension = screenRes;
     factoryRng = new Random();
-    spawnRng = factoryRng;
 
     backGround = DEFAULT_BACKGROUND_IMAGE;
     musicFileName = DEFAULT_MUSIC_FILENAME;
@@ -356,15 +354,5 @@ public class Options {
    */
   public void setFactoryRng(Random rng) {
     this.factoryRng = rng;
-  }
-
-  /**
-   * set the random number generator for factory.
-   * 
-   * @param rng
-   *          random number generator.
-   */
-  public void setSpawnRng(Random rng) {
-    this.spawnRng = rng;
   }
 }

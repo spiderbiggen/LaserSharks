@@ -43,7 +43,6 @@ public class FishController {
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 450;
   private static final Direction START_DIRECTION = Direction.None;
-  private static final float DECREASE_SIZE = 2;
 
   /**
    * Spawn-chance for new fishes.
@@ -75,7 +74,7 @@ public class FishController {
         START_SIZE, 
         START_SPEED, 
         START_DIRECTION
-        );
+    );
     enemySpawner = new FishFactory();
     ammoSpawner = new AmmoFactory();
     laserSpawner = new LaserFactory();
@@ -118,14 +117,6 @@ public class FishController {
    */
   public LaserShark getShark() {
     return this.shark;
-  }
-
-  /**
-   * Set the shark to his beginning state.
-   */
-  public void setBeginShark() {
-    this.setShark(new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
-        START_DIRECTION));
   }
 
   /**
@@ -195,14 +186,6 @@ public class FishController {
               + f.getDirection() + ", " + "Position: " + f.getPosition());
     }
     return this.getNewFishPositions(frametime);
-  }
-
-  /**
-   * Clear the fishList when the game ends.
-   * 
-   */
-  public void clearFish() {
-    this.displayableList.clear();
   }
 
   /**
