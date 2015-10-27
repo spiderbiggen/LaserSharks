@@ -55,11 +55,11 @@ public class Options {
     factoryRng = new Random();
     spawnRng = factoryRng;
 
-    this.setBackGround(DEFAULT_BACKGROUND_IMAGE);
-    this.setMusicFileName(DEFAULT_MUSIC_FILENAME);
-    this.setEatSoundFileName(DEFAULT_EAT_SOUND_FILENAME);
-    this.setLaserSoundFileName(DEFAULT_LASER_SOUND_FILENAME);
-    this.setPickupSoundFileName(DEFAULT_PICKUP_SOUND_FILENAME);
+    backGround = DEFAULT_BACKGROUND_IMAGE;
+    musicFileName = DEFAULT_MUSIC_FILENAME;
+    eatSoundFileName = DEFAULT_EAT_SOUND_FILENAME;
+    laserSoundFileName = DEFAULT_LASER_SOUND_FILENAME;
+    pickupSoundFileName = DEFAULT_PICKUP_SOUND_FILENAME;
 
     playingMusic = false;
     mutedMusic = false;
@@ -150,16 +150,6 @@ public class Options {
   }
 
   /**
-   * sets the resolution of this options object.
-   * 
-   * @param dimension
-   *          the resolution to set to.
-   */
-  public void setDimension(Dimension dimension) {
-    this.dimension = dimension;
-  }
-
-  /**
    * Gets the height of the screen now used.
    * 
    * @return the height of the screen.
@@ -200,26 +190,6 @@ public class Options {
   }
 
   /**
-   * sets the background image.
-   * 
-   * @param backGround
-   *          the background to set.
-   */
-  public void setBackGround(String backGround) {
-    this.backGround = backGround;
-  }
-
-  /**
-   * sets the music in terms of a filename.
-   * 
-   * @param musicFile
-   *          the music to set.
-   */
-  public void setMusicFileName(String musicFile) {
-    this.musicFileName = musicFile;
-  }
-
-  /**
    * Get the musicFileName.
    * 
    * @return the musicFileName.
@@ -236,26 +206,10 @@ public class Options {
   }
 
   /**
-   * @param eatSoundFileName
-   *          the eatSoundFileName to set
-   */
-  public void setEatSoundFileName(String eatSoundFileName) {
-    this.eatSoundFileName = eatSoundFileName;
-  }
-
-  /**
    * @return the laserSoundFileName
    */
   public String getLaserSoundFileName() {
     return laserSoundFileName;
-  }
-
-  /**
-   * @param laserSoundFileName
-   *          the laserSoundFileName to set
-   */
-  public void setLaserSoundFileName(String laserSoundFileName) {
-    this.laserSoundFileName = laserSoundFileName;
   }
 
   /**
@@ -330,7 +284,8 @@ public class Options {
   }
 
   /**
-   * @param masterVolume the masterVolume to set
+   * @param masterVolume
+   *          the masterVolume to set
    */
   public void setMasterVolume(double masterVolume) {
     this.masterVolume = masterVolume;
@@ -401,15 +356,6 @@ public class Options {
    */
   public void setFactoryRng(Random rng) {
     this.factoryRng = rng;
-  }
-
-  /**
-   * Get random number generator for factory.
-   * 
-   * @return random number generator.
-   */
-  public Random getSpawnRng() {
-    return spawnRng;
   }
 
   /**
