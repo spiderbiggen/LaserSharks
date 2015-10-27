@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
 
-import org.apache.log4j.chainsaw.Main;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -14,13 +13,10 @@ import org.mockito.Mockito;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.controllers.FishController;
 import lasersharks.seaobjects.Fish;
-import lasersharks.seaobjects.FishBot;
 import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.LosingPane;
-import lasersharksgui.panes.StandardPane;
 import lasersharks.seaobjects.FishFactory;
 
 /**
@@ -63,10 +59,11 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
+    MainGui.setInstance(Mockito.mock(MainGui.class));
     Fish fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addDisplayable(fishBot);
-    assertTrue(fishCon.getNextCycleInformation(3).contains(fishBot));
+    assertTrue(fishCon.getNextCycleInformation(1).contains(fishBot));
   }
 
   /**
