@@ -21,7 +21,7 @@ public class HighScoresTest {
 
   private static final String INPUT_FILE = "src/test/resources/highScoresTestFile";
   private final ArrayList<String> list = new ArrayList<>();
-  private final int testSize = 5;
+  private static final int TEST_SIZE = 5;
   private HighScores highScores;
 
   /**
@@ -40,13 +40,13 @@ public class HighScoresTest {
    * @throws Exception file error
    */
   @After public void tearDown() throws Exception {
-    HighScores.setInstance(null);
+    HighScores.destroyInstance();
     try (FileWriter fw = new FileWriter(new File(INPUT_FILE))) {
-      for (int i = 0; i < testSize; i++) {
-        if (i < testSize - 1) {
-          fw.write((i + 1) + ". " + (testSize - i) + System.lineSeparator());
+      for (int i = 0; i < TEST_SIZE; i++) {
+        if (i < TEST_SIZE - 1) {
+          fw.write((i + 1) + ". " + (TEST_SIZE - i) + System.lineSeparator());
         } else {
-          fw.write((i + 1) + ". " + (testSize - i));
+          fw.write((i + 1) + ". " + (TEST_SIZE - i));
         }
 
       }
@@ -127,7 +127,7 @@ public class HighScoresTest {
    */
   @Test public void testGetHighScoreTrue() throws FileNotFoundException {
     final int highestScore = highScores.getHighScore();
-    assertTrue(highestScore == testSize);
+    assertSame(TEST_SIZE, highestScore);
   }
 
   /**
@@ -137,7 +137,7 @@ public class HighScoresTest {
    */
   @Test public void testGetHighScoreFalse() throws FileNotFoundException {
     final int highestScore = highScores.getHighScore();
-    assertFalse(highestScore == testSize - 1);
+    assertNotSame(TEST_SIZE - 1, highestScore);
   }
 
   /**
@@ -156,7 +156,7 @@ public class HighScoresTest {
     final String li = System.lineSeparator();
     highScores.setScore(0);
     assertEquals(
-        "HighScores:" + li + "     " + "1. 10" + li + "     " + "2. 8" + li + "     " + "3. 6" + li
+        "High Scores:" + li + "     " + "1. 10" + li + "     " + "2. 8" + li + "     " + "3. 6" + li
             + "     " + "4. 4" + li + "     " + "5. 2" + li + li + "Your score: " + highScores
             .getScore(), highScores.makeHighScoreString());
 
@@ -237,7 +237,7 @@ public class HighScoresTest {
    * Make sure get instance doesn't return null.
    */
   @Test public void testGetInstanceNotNull() {
-    assertTrue(HighScores.getInstance() != null);
+    assertNotSame(null, HighScores.getInstance());
   }
 
   /**
@@ -245,17 +245,8 @@ public class HighScoresTest {
    */
   @Test public void testAlwaysSameInstance() {
     final HighScores l = HighScores.getInstance();
+    highScores.destroyInstance();
     assertEquals(l, HighScores.getInstance());
-  }
-
-  /**
-   * Test method for setInstance().
-   */
-  @SuppressWarnings("static-access") @Test public void testSetInstance() {
-    final HighScores testH = new HighScores();
-    highScores.setInstance(testH);
-    assertEquals(testH, testH.getInstance());
-
   }
 
 }

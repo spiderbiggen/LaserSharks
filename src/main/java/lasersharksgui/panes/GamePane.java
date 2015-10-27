@@ -29,8 +29,8 @@ import java.util.stream.Collectors;
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction")
-public class GamePane extends StandardPane implements Stoppable {
+@SuppressWarnings("restriction") public class GamePane extends AbstractStandardPane
+    implements Stoppable {
 
   // private static final int ANIMATION_SLEEP_TIMER = 10;
   private AnimationTimer animation;

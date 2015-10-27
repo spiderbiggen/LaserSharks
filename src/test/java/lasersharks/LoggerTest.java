@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -31,7 +31,7 @@ public class LoggerTest {
    */
   @Test
   public void testGetInstanceNotNull() {
-    assertTrue(Logger.getInstance() != null);
+    assertNotSame(null, Logger.getInstance());
   }
 
   /**

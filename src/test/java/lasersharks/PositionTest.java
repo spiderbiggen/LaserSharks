@@ -125,8 +125,7 @@ public class PositionTest {
   @Test
   public void testEqualsObjectTrue1() {
     final Position testPosition = new Position(0, 0);
-    assertTrue(position.equals(testPosition));
-    assertTrue(position.equals(position));
+    assertEquals(position, testPosition);
   }
 
   /**
@@ -134,7 +133,7 @@ public class PositionTest {
    */
   @Test
   public void testEqualsObjectTrue2() {
-    assertTrue(position.equals(position));
+    assertEquals(position, position);
   }
 
   /**
@@ -166,7 +165,7 @@ public class PositionTest {
    */
   @Test
   public void testEqualsObjectFalse4() {
-    assertFalse(position.equals("string"));
+    assertNotEquals(position, "string");
   }
 
   /**
@@ -186,9 +185,9 @@ public class PositionTest {
   @Test
   public void testHashCode() {
     Position testPosition = new Position(0, 0);
-    assertTrue(position.hashCode() == testPosition.hashCode());
+    assertSame(testPosition.hashCode(), position.hashCode());
     testPosition = new Position(1, 1);
-    assertTrue(position.hashCode() != testPosition.hashCode());
+    assertNotSame(position.hashCode(), testPosition.hashCode());
   }
 
   /**

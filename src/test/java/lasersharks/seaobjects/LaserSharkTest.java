@@ -106,7 +106,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testLaserSharkDoesntGrowsWhenEatingDeadFish() {
-    final Displayable mockedFish = mock(SeaObject.class);
+    final Displayable mockedFish = mock(AbstractSeaObject.class);
     when(mockedFish.getSize()).thenReturn(SIZE);
     when(mockedFish.isAlive()).thenReturn(false);
 
@@ -120,7 +120,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testEatenFishIsKilled() {
-    final SeaObject mockedFish = mock(Fish.class);
+    final AbstractSeaObject mockedFish = mock(Fish.class);
     when(mockedFish.isAlive()).thenReturn(true);
 
     assertTrue(mockedFish.isAlive());

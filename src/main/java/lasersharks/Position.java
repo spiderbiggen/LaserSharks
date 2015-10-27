@@ -118,7 +118,7 @@ public class Position {
    * @param deltaY
    *          the amount to change posY with
    */
-  public void adjustPos(final double deltaX, final double deltaY) {
+  private void adjustPos(final double deltaX, final double deltaY) {
     this.adjustPosX(deltaX);
     this.adjustPosY(deltaY);
   }
@@ -128,15 +128,15 @@ public class Position {
    * 
    * @param dir
    *          the direction the position should shift to.
-   * @param sp
+   * @param speed
    *          the speed in witch the fish moves.
    * @param margin
    *          size of object to make sure it's entirely off screen.
    * @return false if fish moves off the screen.
    */
-  public boolean updatePosition(final Direction dir, final double sp, final double margin) {
+  public boolean updatePosition(final Direction dir, final double speed, final double margin) {
     if (dir != null && !dir.equals(Direction.None)) {
-      adjustPos(sp * dir.getDeltaX(), sp * dir.getDeltaY());
+      adjustPos(speed * dir.getDeltaX(), speed * dir.getDeltaY());
     }
     return onScreen(margin);
   }

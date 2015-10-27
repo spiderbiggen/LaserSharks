@@ -22,7 +22,7 @@ public class FishFactoryTest {
   private static final int WIDTH = 1920;
   private static final int HEIGHT = 1080;
 
-  protected Displayable generatedFish;
+  private Displayable generatedFish;
   private static final long SEED = 12345622L;
   private static final long SEED_WEST = 11L;
 

@@ -30,8 +30,6 @@ import static org.mockito.Mockito.*;
 public class DirectionInputControllerTest {
   private static final int SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE_RELEASE = 4;
   private static final int SET_DIRECTION_CALLED_PRESS_PRESS_RELEASE = 3;
-  private Scene scene;
-  private ScreenController screenCon;
   private DirectionInputController directionInputController;
 
   private final KeyCode keyCode1;
@@ -72,9 +70,9 @@ public class DirectionInputControllerTest {
   @Before
   public void setUp() {
     this.callback = mock(DirectionCallback.class);
-    this.scene = mock(Scene.class);
-    this.screenCon = mock(ScreenController.class);
-    when(this.screenCon.getGlobalScene()).thenReturn(this.scene);
+    Scene scene = mock(Scene.class);
+    ScreenController screenCon = mock(ScreenController.class);
+    when(screenCon.getGlobalScene()).thenReturn(scene);
     this.directionInputController = new DirectionInputController(this.callback);
   }
 

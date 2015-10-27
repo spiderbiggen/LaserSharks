@@ -4,7 +4,7 @@ import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Position;
 import lasersharks.behaviour.*;
-import lasersharks.behaviour.ammunitionIncrement.DefaultAmmunitionIncrementBehaviour;
+import lasersharks.behaviour.ammunitionincrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
 import lasersharks.behaviour.collisionhitbox.DefaultCollisionHitBoxBehaviour;
@@ -23,7 +23,7 @@ import lasersharks.interfaces.Displayable;
  */
 @SuppressWarnings("restriction")
 
-public abstract class SeaObject implements Displayable {
+public abstract class AbstractSeaObject implements Displayable {
 
   private static final float MIN_SIZE = 30.0f;
   protected CollisionHitBoxBehaviour collisionHitBoxBehaviour;
@@ -56,7 +56,7 @@ public abstract class SeaObject implements Displayable {
    * @param direction
    *          start direction.
    */
-  public SeaObject(final Position position, final float size, final double startSpeed,
+  public AbstractSeaObject(final Position position, final float size, final double startSpeed,
       final Direction direction) {
     this.position = position;
     this.size = size;

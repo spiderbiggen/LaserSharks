@@ -20,8 +20,7 @@ public class FishTest extends SeaObjectTest {
   @Before
   public void setUp() {
     this.fish1 = new Fish(
-        IMAGE,
-        1, this.posOnScreen, Float.valueOf(SIZE), Double.valueOf(SPEED), DIRECTION
+        IMAGE, 1, this.posOnScreen, SIZE, (double) SPEED, DIRECTION
     );
   }
 

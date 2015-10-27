@@ -5,7 +5,6 @@ package lasersharksgui;
 
 import com.athaydes.automaton.FXApp;
 import com.athaydes.automaton.FXer;
-import com.google.code.tempusfugit.temporal.Condition;
 import com.google.code.tempusfugit.temporal.Duration;
 import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.code.tempusfugit.temporal.WaitFor;
@@ -60,14 +59,8 @@ public class MainGuiTest {
     Options.getInstance().setSpawnRng(new Random(0));
     Options.getInstance().setFactoryRng(new Random(WINNING_FACTORY_SEED));
 
-    WaitFor.waitOrTimeout(new Condition() {
-
-      @Override
-      public boolean isSatisfied() {
-        return MainGui.getInstance().getCurrentPane() instanceof GamePane;
-      }
-
-    }, Timeout.timeout(Duration.seconds(1L)));
+    WaitFor.waitOrTimeout(() -> MainGui.getInstance().getCurrentPane() instanceof GamePane,
+        Timeout.timeout(Duration.seconds(1L)));
     pane = (GamePane) MainGui.getInstance().getCurrentPane();
     screenCon = pane.getScreenController();
     fishCon = screenCon.getFishController();
@@ -86,14 +79,8 @@ public class MainGuiTest {
   //@Test
   public void loseGame() throws InterruptedException, TimeoutException {
     fishCon.getShark().setSize(LOSE_GAMESIZE);
-    WaitFor.waitOrTimeout(new Condition() {
-
-      @Override
-      public boolean isSatisfied() {
-        return MainGui.getInstance().getCurrentPane() instanceof LosingPane;
-      }
-
-    }, Timeout.timeout(Duration.seconds(20L)));
+    WaitFor.waitOrTimeout(() -> MainGui.getInstance().getCurrentPane() instanceof LosingPane,
+        Timeout.timeout(Duration.seconds(20L)));
     assertTrue(MainGui.getInstance().getCurrentPane() instanceof LosingPane);
 
   }
@@ -110,14 +97,8 @@ public class MainGuiTest {
   public void winGame() throws InterruptedException, TimeoutException {
     fishCon.getShark().setSize(WIN_GAMESIZE);
 
-    WaitFor.waitOrTimeout(new Condition() {
-
-      @Override
-      public boolean isSatisfied() {
-        return MainGui.getInstance().getCurrentPane() instanceof WinPane;
-      }
-
-    }, Timeout.timeout(Duration.seconds(20L)));
+    WaitFor.waitOrTimeout(() -> MainGui.getInstance().getCurrentPane() instanceof WinPane,
+        Timeout.timeout(Duration.seconds(20L)));
     assertTrue(MainGui.getInstance().getCurrentPane() instanceof WinPane);
   }
 

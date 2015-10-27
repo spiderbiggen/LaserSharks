@@ -1,7 +1,7 @@
 package lasersharks.behaviour.checkforloss;
 
 import lasersharks.behaviour.CheckForLossBehaviour;
-import lasersharks.seaobjects.SeaObject;
+import lasersharks.seaobjects.AbstractSeaObject;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.LosingPane;
 
@@ -11,13 +11,13 @@ import lasersharksgui.panes.LosingPane;
  *
  */
 public class FishCheckForLossBehaviour implements CheckForLossBehaviour {
-  private final SeaObject element;
+  private final AbstractSeaObject element;
   
   /**
    * Constructor.
    * @param ele element to wich to propagate actions.
    */
-  public FishCheckForLossBehaviour(final SeaObject ele) {
+  public FishCheckForLossBehaviour(final AbstractSeaObject ele) {
     this.element = ele;
   }
 

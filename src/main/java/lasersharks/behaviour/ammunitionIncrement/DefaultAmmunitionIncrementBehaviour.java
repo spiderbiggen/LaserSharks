@@ -1,4 +1,4 @@
-package lasersharks.behaviour.ammunitionIncrement;
+package lasersharks.behaviour.ammunitionincrement;
 
 import lasersharks.behaviour.AmmunitionIncrementBehaviour;
 

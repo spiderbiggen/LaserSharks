@@ -35,7 +35,7 @@ public class ShootController implements EventHandler<KeyEvent> {
   /**
    * orders the fishController to create a laser at the shark.
    */
-  public void shoot() {
+  private void shoot() {
     fishController.shootLaser();
   }
 

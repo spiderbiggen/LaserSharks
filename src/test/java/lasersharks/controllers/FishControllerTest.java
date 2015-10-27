@@ -14,7 +14,10 @@ import org.mockito.Mockito;
 
 import java.util.Random;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * the test class for the FishController class.
@@ -56,10 +59,11 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
+    final int delay = 3;
     final Fish fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addDisplayable(fishBot);
-    assertTrue(fishCon.getNextCycleInformation(3).contains(fishBot));
+    assertTrue(fishCon.getNextCycleInformation(delay).contains(fishBot));
   }
 
   /**
@@ -70,7 +74,7 @@ public class FishControllerTest {
    *          the SIZE of the shark to set to.
    * @return a fish controller with 10 fish and 1 shark. one shark and 1 fish collide.
    */
-  public FishController fishConFilled(final int sizeOfShark) {
+  private FishController fishConFilled(final int sizeOfShark) {
     fishCon = new FishController();
     fishCon.setShark(
         new LaserShark(new Position(POSITION_X, POSITION_Y), sizeOfShark, SPEED, Direction.East));
@@ -133,6 +137,6 @@ public class FishControllerTest {
     final int oldAmmo = fishCon.getShark().getAmmo();
     assertTrue(fishCon.shootLaser());
     final int newAmmo = fishCon.getShark().getAmmo();
-    assertTrue(oldAmmo - 1 == newAmmo);
+    assertSame(newAmmo, oldAmmo - 1);
   }
 }

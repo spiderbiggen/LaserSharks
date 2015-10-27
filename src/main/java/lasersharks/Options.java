@@ -24,7 +24,7 @@ public class Options {
   private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/pickup.wav";
 
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
-  private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
+  private static final Color DEFAULT_BACKGROUND_COLOUR = Color.BLUE;
 
   private String musicFileName;
   private String eatSoundFileName;
@@ -37,7 +37,7 @@ public class Options {
   private double musicVolume;
   private double sfxVolume;
 
-  private String backGround;
+  private String background;
   private Random factoryRng;
   private Random spawnRng;
   private static Options currentOptions;
@@ -54,7 +54,7 @@ public class Options {
     factoryRng = new Random();
     spawnRng = factoryRng;
 
-    this.setBackGround(DEFAULT_BACKGROUND_IMAGE);
+    this.setBackground(DEFAULT_BACKGROUND_IMAGE);
     this.setMusicFileName(DEFAULT_MUSIC_FILENAME);
     this.setEatSoundFileName(DEFAULT_EAT_SOUND_FILENAME);
     this.setLaserSoundFileName(DEFAULT_LASER_SOUND_FILENAME);
@@ -130,7 +130,7 @@ public class Options {
    * 
    * @return the screen resolution of the systems screen.
    */
-  protected static Dimension getScreenSize() {
+  private static Dimension getScreenSize() {
     try {
       return Toolkit.getDefaultToolkit().getScreenSize();
     } catch (HeadlessException e) {
@@ -199,12 +199,12 @@ public class Options {
 
   /**
    * sets the background image.
-   * 
-   * @param backGround
+   *
+   * @param background
    *          the background to set.
    */
-  public void setBackGround(final String backGround) {
-    this.backGround = backGround;
+  private void setBackground(final String background) {
+    this.background = background;
   }
 
   /**
@@ -213,7 +213,7 @@ public class Options {
    * @param musicFile
    *          the music to set.
    */
-  public void setMusicFileName(final String musicFile) {
+  private void setMusicFileName(final String musicFile) {
     this.musicFileName = musicFile;
   }
 
@@ -237,7 +237,7 @@ public class Options {
    * @param eatSoundFileName
    *          the eatSoundFileName to set
    */
-  public void setEatSoundFileName(final String eatSoundFileName) {
+  private void setEatSoundFileName(final String eatSoundFileName) {
     this.eatSoundFileName = eatSoundFileName;
   }
 
@@ -252,7 +252,7 @@ public class Options {
    * @param laserSoundFileName
    *          the laserSoundFileName to set
    */
-  public void setLaserSoundFileName(final String laserSoundFileName) {
+  private void setLaserSoundFileName(final String laserSoundFileName) {
     this.laserSoundFileName = laserSoundFileName;
   }
 
@@ -267,7 +267,7 @@ public class Options {
    * @param pickupSoundFileName
    *          the pickupSoundFileName to set
    */
-  public void setPickupSoundFileName(final String pickupSoundFileName) {
+  private void setPickupSoundFileName(final String pickupSoundFileName) {
     this.pickupSoundFileName = pickupSoundFileName;
   }
 
@@ -369,17 +369,17 @@ public class Options {
    * 
    * @return the backGroundImage.
    */
-  public String getBackGroundImage() {
-    return backGround;
+  public String getBackground() {
+    return background;
   }
 
   /**
-   * Get the backGroundColor.
-   * 
-   * @return the default backgroundcolor
+   * Get the backgroundColor.
+   *
+   * @return the default background color
    */
-  public static Color getBackGroundColor() {
-    return DEFAULT_BACKCOLOUR;
+  public static Color getBackgroundColor() {
+    return DEFAULT_BACKGROUND_COLOUR;
   }
 
   /**

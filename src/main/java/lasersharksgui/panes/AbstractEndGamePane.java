@@ -16,8 +16,8 @@ import java.io.FileNotFoundException;
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction")
-public abstract class EndGamePane extends StandardPane {
+@SuppressWarnings("restriction") public abstract class AbstractEndGamePane
+    extends AbstractStandardPane {
 
   private static final double ADJUST_DY_FOR_BOTTOM = -400;
   private static final int CUSTOM_TEXT_SIZE = TEXT_SCALE_SIZE_SMALL + 10;
@@ -25,12 +25,12 @@ public abstract class EndGamePane extends StandardPane {
   private final RestartGameController restartHandler;
 
   /**
-   * Creates a new EndGamePane with the given message.
+   * Creates a new AbstractEndGamePane with the given message.
    * 
    * @param message
    *          message to be shown
    */
-  public EndGamePane(final String message) {
+  public AbstractEndGamePane(final String message) {
     super();
     try {
       if (HighScores.getInstance().getHighScore() < HighScores.getInstance().getScore()) {

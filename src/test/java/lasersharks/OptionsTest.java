@@ -75,7 +75,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsFalseNull() {
-    assertFalse(options.equals(null));
+    assertNotEquals(options, null);
   }
 
   /**
@@ -91,7 +91,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsTrueCorrectValues() {
-    assertTrue(options.equals(new Options(dim)));
+    assertEquals(options, new Options(dim));
   }
 
   /**
@@ -99,7 +99,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsTrueSame() {
-    assertTrue(options.equals(options));
+    assertEquals(options, options);
   }
 
 }

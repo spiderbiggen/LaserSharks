@@ -162,8 +162,8 @@ public class FishController {
   public List<Displayable> getNextCycleInformation(final double frameTime) {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frameTime) {
-      final SeaObject f = enemySpawner.generateFish();
-      final SeaObject g = ammoSpawner.generateAmmo();
+      final AbstractSeaObject f = enemySpawner.generateFish();
+      final AbstractSeaObject g = ammoSpawner.generateAmmo();
       this.addDisplayable(f);
 
       if (this.rng.nextInt(ONE_HUNDRED) > AMMO_SPAWN_LIMITER) {

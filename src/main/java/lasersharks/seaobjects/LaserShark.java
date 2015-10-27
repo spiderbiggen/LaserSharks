@@ -14,7 +14,7 @@ import lasersharks.interfaces.DirectionCallback;
  * @author SEMGroup27
  *
  */
-public class LaserShark extends SeaObject implements DirectionCallback {
+public class LaserShark extends AbstractSeaObject implements DirectionCallback {
 
   private static final String IMAGE_RESOURCE = "shark.png";
   private static final float WIDTH_SCALE = 1.628664f;

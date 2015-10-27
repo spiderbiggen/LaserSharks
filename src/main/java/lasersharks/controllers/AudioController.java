@@ -13,12 +13,12 @@ import java.io.File;
  */
 @SuppressWarnings("restriction") public final class AudioController {
 
-  private static AudioController instance;
+  private static final AudioController INSTANCE = new AudioController();
 
   private MediaPlayer musicPlayer;
 
   /**
-   * The constructor to create a new instance of audioController.
+   * The constructor to create a new INSTANCE of audioController.
    */
   private AudioController() {
 
@@ -33,7 +33,7 @@ import java.io.File;
    */
   public boolean playMusic(final String path) {
     if (musicPlayer != null) {
-      AudioController.instance.musicPlayer.stop();
+      AudioController.INSTANCE.musicPlayer.stop();
     }
     try {
       musicPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
@@ -205,26 +205,23 @@ import java.io.File;
   }
 
   /**
-   * Singleton AudioController instance.
-   * 
-   * @return the audio controller instance
+   * Singleton AudioController INSTANCE.
+   *
+   * @return the audio controller INSTANCE
    */
   public static AudioController getInstance() {
-    if (instance == null) {
-      instance = new AudioController();
-    }
-    return instance;
+    return INSTANCE;
   }
 
   /**
-   * Clean the current instance but keep this instance to stay with singleton pattern.
+   * Clean the current INSTANCE but keep this INSTANCE to stay with singleton pattern.
    */
   public static void destroyInstance() {
-    if (instance != null) {
-      if (instance.musicPlayer != null) {
-        instance.musicPlayer.dispose();
+    if (INSTANCE != null) {
+      if (INSTANCE.musicPlayer != null) {
+        INSTANCE.musicPlayer.dispose();
       }
-      instance.musicPlayer = null;
+      INSTANCE.musicPlayer = null;
     }
   }
 

@@ -15,7 +15,7 @@ import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
  * @author SEMGroup27
  *
  */
-public class Fish extends SeaObject {
+public class Fish extends AbstractSeaObject {
   private final String image;
   private final double widthScale;
 

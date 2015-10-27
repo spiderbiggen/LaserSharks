@@ -29,7 +29,7 @@ public class PauseControllerTest {
   /**
    * Set up our mess.
    */
-  @Before public void setUpTest() {
+  @Before public void setUp() {
     gui = Mockito.mock(MainGui.class);
     gamePane = Mockito.mock(GamePane.class);
     pauseController = new PauseController(gamePane);
@@ -46,7 +46,7 @@ public class PauseControllerTest {
   /**
    * Cleanup our mess.
    */
-  @After public void tearDownTest() {
+  @After public void tearDown() {
     MainGui.clearInstance();
   }
 
@@ -54,7 +54,7 @@ public class PauseControllerTest {
    * Test for pressedP keyevent.
    */
   // @Test
-  public void PressedPTest() {
+  public void pressedPTest() {
     pauseController.handle(pPressed);
     Mockito.verify(gui).browseTo(OptionsPane.class);
   }
@@ -62,7 +62,7 @@ public class PauseControllerTest {
   /**
    * Test for pressedR keyevent.
    */
-  @Test public void PressedRTest() {
+  @Test public void pressedRTest() {
     pauseController.handle(rPressed);
     Mockito.verifyZeroInteractions(gui);
   }
@@ -70,7 +70,7 @@ public class PauseControllerTest {
   /**
    * Test for releaseP keyevent.
    */
-  @Test public void ReleasedPTest() {
+  @Test public void releasedPTest() {
     pauseController.handle(pReleased);
     Mockito.verifyZeroInteractions(gui);
   }
@@ -79,7 +79,7 @@ public class PauseControllerTest {
    * Tests if the game could go back to the original gamePane.
    */
   // @Test
-  public void PressedPTwiceTest() {
+  public void pressedPTwiceTest() {
     pauseController.handle(pPressed);
     pauseController.handle(pPressed);
     // Mockito.verify(gui).addOverlay();

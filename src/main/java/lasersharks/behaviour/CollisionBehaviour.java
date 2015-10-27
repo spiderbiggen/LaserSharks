@@ -10,10 +10,10 @@ import lasersharks.interfaces.Displayable;
  */
 public interface CollisionBehaviour {
   /**
-   * Method that handles the possible collides for SeaObject with one another.
+   * Method that handles the possible collides for AbstractSeaObject with one another.
    * 
    * @param object
-   *          The SeaObject that is collided with.
+   *          The AbstractSeaObject that is collided with.
    */
   void collideWith(Displayable object);
 

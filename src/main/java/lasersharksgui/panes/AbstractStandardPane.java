@@ -17,18 +17,17 @@ import lasersharksgui.interfaces.Stoppable;
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction")
-public abstract class StandardPane extends Pane implements Stoppable {
+@SuppressWarnings("restriction") public abstract class AbstractStandardPane extends Pane
+    implements Stoppable {
 
   // text variables
   protected static final int TEXT_SCALE_SIZE_BIG = 17;
-  protected static final int TEXT_SCALE_SIZE_MED = 10;
   protected static final int TEXT_SCALE_SIZE_SMALL = 4;
 
   // audio variables
   protected Button muteButton;
-  protected ImageView muteButtonImage = new ImageView("mutesound.png");
-  protected ImageView unmuteButtonImage = new ImageView("unmutesound.png");
+  protected final ImageView muteButtonImage = new ImageView("mutesound.png");
+  protected final ImageView unMuteButtonImage = new ImageView("unmutesound.png");
 
   // sprite and image variables
   protected ImageView sharkImage;
@@ -37,9 +36,9 @@ public abstract class StandardPane extends Pane implements Stoppable {
   protected static final int SCALING_FACTOR_TO_LITTLE_BELOW_MIDDLE = 100;
 
   /**
-   * Constructor of the StandardPane.
+   * Constructor of the AbstractStandardPane.
    */
-  public StandardPane() {
+  public AbstractStandardPane() {
     super();
     addBackGround();
     if (!Options.getInstance().isPlayingMusic()) {
@@ -52,7 +51,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
    */
   protected void addBackGround() {
     final BackgroundImage myBI = new BackgroundImage(
-        new Image(Options.getInstance().getBackGroundImage(), Options.getGlobalWidth(),
+        new Image(Options.getInstance().getBackground(), Options.getGlobalWidth(),
             Options.getGlobalHeight(), true, false),
         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);

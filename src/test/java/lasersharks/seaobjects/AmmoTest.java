@@ -15,7 +15,6 @@ import static org.junit.Assert.assertEquals;
  */
 public class AmmoTest {
 
-  private Position pos;
   private Ammo ammo;
 
   private static final float SIZE = 40;
@@ -25,7 +24,7 @@ public class AmmoTest {
    */
   @Before
   public void setUp() {
-    pos = new Position(0, 0);
+    Position pos = new Position(0, 0);
     ammo = new Ammo(pos, SIZE);
   }
 

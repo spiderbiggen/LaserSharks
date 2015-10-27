@@ -11,8 +11,7 @@ import lasersharks.controllers.AudioController;
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction")
-public class OptionsPane extends StandardPane {
+@SuppressWarnings("restriction") public class OptionsPane extends AbstractStandardPane {
 
   private static final int PAUSE_TEXT_SIZE_UP = 6;
   private static final double PAUSE_TEXT_POSITION_UP = 2.5;
@@ -57,8 +56,8 @@ public class OptionsPane extends StandardPane {
   private Button muteButton(final double xPos, final double yPos, final double size) {
     muteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
     muteButtonImage.setFitWidth(BUTTON_WIDTH * size);
-    unmuteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
-    unmuteButtonImage.setFitWidth(BUTTON_WIDTH * size);
+    unMuteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
+    unMuteButtonImage.setFitWidth(BUTTON_WIDTH * size);
     muteButton = new Button();
     muteButton.setGraphic(muteButtonImage);
     muteButton.setTranslateX(xPos);
@@ -78,7 +77,7 @@ public class OptionsPane extends StandardPane {
       Logger.getInstance().write("Sound un-muted", "Mute sound button pressed");
     } else {
       AudioController.getInstance().muteAll();
-      muteButton.setGraphic(unmuteButtonImage);
+      muteButton.setGraphic(unMuteButtonImage);
       Logger.getInstance().write("Sound muted", "Mute sound button pressed");
     }
 

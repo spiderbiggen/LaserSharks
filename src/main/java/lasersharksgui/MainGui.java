@@ -8,8 +8,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lasersharks.Logger;
 import lasersharks.Options;
+import lasersharksgui.panes.AbstractStandardPane;
 import lasersharksgui.panes.GamePane;
-import lasersharksgui.panes.StandardPane;
 
 /**
  * The MainGui class is used for running the game.
@@ -21,7 +21,7 @@ import lasersharksgui.panes.StandardPane;
 public class MainGui extends Application {
 
   private Scene currentScene;
-  private StandardPane currentPane;
+  private AbstractStandardPane currentPane;
   private StackPane stackPane;
   private static MainGui instance;
 
@@ -41,7 +41,7 @@ public class MainGui extends Application {
     stage.setFullScreen(true);
     stackPane = new StackPane();
     currentScene = new Scene(stackPane, Options.getGlobalWidth(), Options.getGlobalHeight(),
-        Options.getBackGroundColor());
+        Options.getBackgroundColor());
     stage.setScene(currentScene);
 
     // we start the application by showing the gamePanel
@@ -56,8 +56,8 @@ public class MainGui extends Application {
    * @param paneClass
    *          The class of the panel we should browse to.
    */
-  public void browseTo(final Class<? extends StandardPane> paneClass) {
-    StandardPane paneToShow;
+  public void browseTo(final Class<? extends AbstractStandardPane> paneClass) {
+    AbstractStandardPane paneToShow;
     try {
       paneToShow = paneClass.newInstance();
       browseTo(paneToShow);
@@ -72,7 +72,7 @@ public class MainGui extends Application {
    * @param pane
    *          The pane we should browse to.
    */
-  public void browseTo(final StandardPane pane) {
+  public void browseTo(final AbstractStandardPane pane) {
     try {
       pane.setOpacity(1.0);
 
@@ -123,7 +123,7 @@ public class MainGui extends Application {
    * @param paneClass
    *          The class of the panel we should browse to.
    */
-  public static void browseToGlobal(final Class<? extends StandardPane> paneClass) {
+  public static void browseToGlobal(final Class<? extends AbstractStandardPane> paneClass) {
     getInstance().browseTo(paneClass);
   }
 

@@ -15,19 +15,21 @@ import java.util.Scanner;
  */
 public class HighScores {
 
-  private static HighScores instance;
-  private ArrayList<String> highScores;
-  private String inputFile;
-  private int amountOfFishesEaten;
+  private static final HighScores instance = new HighScores();
+  private static final String HIGH_SCORE_FILE_URI = "src/main/resources/highScoreList";
   private static final int DATA_OFFSET = 3;
   private static final int FISH_BONUS = 20;
+
+  private ArrayList<String> highScoreList;
+  private String inputFile;
+  private int amountOfFishesEaten;
   private int score;
 
   /**
    * create a new instance of high scores.
    */
   protected HighScores() {
-    this.inputFile = "src/main/resources/highScores";
+    this.inputFile = HIGH_SCORE_FILE_URI;
   }
 
   /**
@@ -36,9 +38,6 @@ public class HighScores {
    * @return high scores instance
    */
   public static HighScores getInstance() {
-    if (instance == null) {
-      instance = new HighScores();
-    }
     return instance;
   }
 
@@ -59,7 +58,7 @@ public class HighScores {
         list.add(i + 1 + ". 0");
       }
     }
-    highScores = list;
+    highScoreList = list;
   }
 
   /**
@@ -69,7 +68,7 @@ public class HighScores {
    *          the list of new high scores.
    */
   public void setList(final ArrayList<String> inputList) {
-    highScores = inputList;
+    highScoreList = inputList;
   }
 
   /**
@@ -85,11 +84,11 @@ public class HighScores {
       noFile = true;
     }
 
-    if (highScores == null || highScores.isEmpty() || noFile) {
+    if (highScoreList == null || highScoreList.isEmpty() || noFile) {
 
       readHighScore();
     }
-    return highScores;
+    return highScoreList;
   }
 
   /**
@@ -103,7 +102,7 @@ public class HighScores {
   }
 
   /**
-   * Method for writing the high scores. The high scores are saved in highScores.txt .
+   * Method for writing the high scores. The high scores are saved in highScoreList.txt .
    */
   public void writeHighScore() {
     final ArrayList<String> list = getList();
@@ -176,7 +175,7 @@ public class HighScores {
     final StringBuilder stringBuilder = new StringBuilder();
     final String li = System.lineSeparator();
     stringBuilder.append("High Scores:").append(li);
-    for (final String highScore : highScores) {
+    for (final String highScore : highScoreList) {
       stringBuilder.append("     ").append(highScore).append(li);
     }
     return stringBuilder.append(li).append("Your score: ").append(score).toString();
@@ -209,14 +208,14 @@ public class HighScores {
   }
 
   /**
-   * Method so we can mock highScores in tests of other classes.
+   * Method so we can mock highScoreList in tests of other classes.
    *
    * @param highScores
-   *          highScores to be used.
+   *          highScoreList to be used.
    */
-  public static void setInstance(final HighScores highScores) {
+ /* public static void setInstance(final HighScores highScores) {
     HighScores.instance = highScores;
-  }
+  }*/
 
   /**
    * @return the score
@@ -233,4 +232,10 @@ public class HighScores {
     this.score = score;
   }
 
+  public static void destroyInstance() {
+    instance.highScoreList = null;
+    instance.inputFile = HIGH_SCORE_FILE_URI;
+    instance.amountOfFishesEaten = 0;
+    instance.score = 0;
+  }
 }

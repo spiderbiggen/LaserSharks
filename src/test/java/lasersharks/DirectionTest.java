@@ -28,14 +28,14 @@ public class DirectionTest {
    * 
    * @param dir
    *          input DIRECTION for witch to run the test.
-   * @param expecDeltaX
+   * @param expectedDeltaX
    *          expected X
-   * @param expecDeltaY
+   * @param expectedDeltaY
    *          expected Y
    */
-  public DirectionTest(final Direction dir, final int expecDeltaX, final int expecDeltaY) {
-    this.expectedDeltaX = expecDeltaX;
-    this.expectedDeltaY = expecDeltaY;
+  public DirectionTest(final Direction dir, final int expectedDeltaX, final int expectedDeltaY) {
+    this.expectedDeltaX = expectedDeltaX;
+    this.expectedDeltaY = expectedDeltaY;
     this.direction = dir;
   }
 

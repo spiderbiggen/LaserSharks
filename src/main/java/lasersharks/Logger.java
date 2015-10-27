@@ -98,7 +98,7 @@ public class Logger {
 
   /**
    * Method so we can mock logger in tests of other classes.
-   * 
+   *
    * @param logger
    *          logger to be used.
    */
