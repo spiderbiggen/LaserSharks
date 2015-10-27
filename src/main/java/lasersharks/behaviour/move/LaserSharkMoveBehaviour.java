@@ -22,15 +22,18 @@ public class LaserSharkMoveBehaviour implements MoveBehaviour {
   
   /**
    * moves the shark in a direction.
-   * @param frametime the refresh rate of the screen.
+   * @param frameTime the refresh rate of the screen.
    * @return true if the shark was able to move.
    */
-  public boolean move(double frametime) {
-    displayable.getPosition().updatePosition(displayable.getDirection(), displayable.getSpeed() / frametime, displayable.getSize());
+  public boolean move(double frameTime) {
+    displayable.getPosition()
+        .updatePosition(displayable.getDirection(), displayable.getSpeed() / frameTime,
+            displayable.getSize());
     // this will make sure the fish stay within the borders.
 
-    displayable.getPosition().clipPosition((displayable.getSize() * displayable.getWidthScale() * HALF_RATE),
-        (displayable.getSize() * HALF_RATE));
+    displayable.getPosition()
+        .clipPosition(displayable.getSize() * displayable.getWidthScale() * HALF_RATE,
+            displayable.getSize() * HALF_RATE);
     return true;
   }
 }

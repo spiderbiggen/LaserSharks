@@ -3,13 +3,11 @@
  */
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-
+import lasersharks.Position;
 import org.junit.Before;
 import org.junit.Test;
 
-import lasersharks.Position;
-import lasersharks.seaobjects.Ammo;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author SEMGroup27
@@ -17,17 +15,15 @@ import lasersharks.seaobjects.Ammo;
  */
 public class AmmoTest {
 
-  private Position pos;
   private Ammo ammo;
-
-  private final float size = 40;
 
   /**
    * Sets up the instances required for the tests.
    */
   @Before
   public void setUp() {
-    pos = new Position(0, 0);
+    Position pos = new Position(0, 0);
+    float size = 40;
     ammo = new Ammo(pos, size);
   }
 

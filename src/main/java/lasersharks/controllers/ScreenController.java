@@ -1,7 +1,5 @@
 package lasersharks.controllers;
 
-import java.util.List;
-
 import javafx.scene.Scene;
 import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.LaserShark;
@@ -9,6 +7,8 @@ import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 import lasersharksgui.panes.LosingPane;
 import lasersharksgui.panes.WinPane;
+
+import java.util.List;
 
 /**
  * This is the class that will manage the screen.
@@ -26,7 +26,7 @@ public class ScreenController {
    * Constructor.
    * 
    * @param pane
-   *          the GamePane this screencontroller is set to
+   *          the GamePane this {@link ScreenController} is set to
    */
   public ScreenController(GamePane pane) {
     super();
@@ -37,13 +37,13 @@ public class ScreenController {
 
   /**
    * Get information for next frame and checks if the shark is bigger than the winning size.
-   * 
-   * @param frametime
+   *
+   * @param frameTime
    *          time between frames in seconds
    * 
    * @return FishInfo
    */
-  public List<Displayable> getNextFrameInfo(double frametime) {
+  public List<Displayable> getNextFrameInfo(double frameTime) {
     if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
       GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
       if (!this.fishCon.getShark().isAlive()) {
@@ -55,7 +55,7 @@ public class ScreenController {
       }
     }
 
-    return this.fishCon.getNextCycleInformation(frametime);
+    return this.fishCon.getNextCycleInformation(frameTime);
   }
 
   /**
@@ -75,15 +75,15 @@ public class ScreenController {
   }
 
   /**
-   * @return the scene used for this screencontroller.
+   * @return the scene used for this {@link ScreenController}.
    */
   public Scene getGlobalScene() {
     return MainGui.getInstance().getCurrentScene();
   }
 
   /**
-   * 
-   * @return the fishcontroller used for this screencontroller.
+   *
+   * @return the fishController used for this {@link ScreenController}.
    */
   public FishController getFishController() {
     return fishCon;

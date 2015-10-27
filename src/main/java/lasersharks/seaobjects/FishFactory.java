@@ -1,14 +1,14 @@
 package lasersharks.seaobjects;
 
-import java.util.Random;
-
 import lasersharks.Direction;
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.interfaces.FishSpawner;
 
+import java.util.Random;
+
 /**
- * Default Fishfactory implementation.
+ * Default FishFactory implementation.
  * 
  * @author SEMGroup27
  *

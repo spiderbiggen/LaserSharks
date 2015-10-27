@@ -1,6 +1,6 @@
 package lasersharks.behaviour.collision.component;
 
-import lasersharks.Highscores;
+import lasersharks.HighScores;
 import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
 
@@ -13,8 +13,8 @@ public class OnCollisionHighScoreIncrementComponent implements CollisionComponen
 
   @Override
   public void handleCollision(Displayable other) {
-    Highscores.getInstance().increaseScore(
-        other.getOnCollisionHighScoreIncrement(Highscores.getInstance().getTimePenalty()));
+    HighScores.getInstance().increaseScore(
+        other.getOnCollisionHighScoreIncrement(HighScores.getInstance().getTimePenalty()));
     next.handleCollision(other);
   }
 

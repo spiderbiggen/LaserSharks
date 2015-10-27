@@ -60,11 +60,9 @@ public class MainGui extends Application {
   public void browseTo(Class<? extends StandardPane> paneClass) {
     StandardPane paneToShow;
     try {
-      paneToShow = (StandardPane) paneClass.newInstance();
+      paneToShow = paneClass.newInstance();
       browseTo(paneToShow);
-    } catch (InstantiationException e) {
-      e.printStackTrace();
-    } catch (IllegalAccessException e) {
+    } catch (InstantiationException | IllegalAccessException e) {
       e.printStackTrace();
     }
   }
@@ -109,7 +107,7 @@ public class MainGui extends Application {
   }
 
   /**
-   * Removes a pane from the stackpane Makes sure that it's not the root pane.
+   * Removes a pane from the {@link javafx.scene.layout.StackPane} Makes sure that it's not the root pane.
    * 
    * @param pane
    *          the pane to be removed.
@@ -150,10 +148,10 @@ public class MainGui extends Application {
   }
 
   /**
-   * Sets the singleton instance of the maingui class.
+   * Sets the singleton instance of the main gui class.
    * 
    * @param newInstance
-   *          the new instance of the maingui class
+   *          the new instance of the main gui class
    */
   public static void setInstance(MainGui newInstance) {
     instance = newInstance;

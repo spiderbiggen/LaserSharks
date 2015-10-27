@@ -2,7 +2,7 @@ package lasersharks.behaviour.collisionHitbox;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Position;
-import lasersharks.behaviour.CollisionHitboxBehaviour;
+import lasersharks.behaviour.CollisionHitBoxBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
@@ -11,11 +11,11 @@ import lasersharks.interfaces.Displayable;
  * @author sytze
  *
  */
-@SuppressWarnings("restriction")
-public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour {
+@SuppressWarnings("restriction") public class DefaultCollisionHitBoxBehaviour
+    implements CollisionHitBoxBehaviour {
 
-  private static final double WIDTH_TO_COORD = 0.85;
-  private static final double SIZE_TO_COORD = 0.075;
+  private static final double WIDTH_TO_COORDINATES = 0.85;
+  private static final double SIZE_TO_COORDINATES = 0.075;
   private static final double HALF_SCALE = 0.5f;
 
   private Displayable displayable;
@@ -26,7 +26,7 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
    * @param displayable
    *          the swimmer it should apply to.
    */
-  public DefaultCollisionHitboxBehaviour(Displayable displayable) {
+  public DefaultCollisionHitBoxBehaviour(Displayable displayable) {
     this.displayable = displayable;
   }
 
@@ -39,14 +39,15 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
    */
   @Override
   public boolean collide(Displayable swimmer) {
-    return swimmer.makeHitbox().intersects(displayable.makeHitbox().getLayoutBounds());
-    
-    //float distance = this.displayable.getMiddlePoint().calculateDistance(swimmer.getMiddlePoint());
+    return swimmer.makeHitBox().intersects(displayable.makeHitBox().getLayoutBounds());
+
+    //float distance = this.displayable.getMiddlePoint()
+    //      .calculateDistance(swimmer.getMiddlePoint());
     //return distance < this.displayable.getSize() + swimmer.getSize();
   }
 
   /**
-   * Gets the middlepoint of the swimmer.
+   * Gets the middle point of the swimmer.
    */
   @Override
   public Position getMiddlePoint() {
@@ -57,16 +58,16 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
   }
 
   /**
-   * Draw a rectangle shaped hitbox around the fishbot.
-   * 
-   * @return a rectangle hitbox.
+   * Draw a rectangle shaped hit box around the fish.
+   *
+   * @return a rectangle hit box.
    */
-  public Rectangle makeHitbox() {
-    double xcoordinate = displayable.getPosition().getPosX();
-    double ycoordinate = displayable.getPosition().getPosY();
-    return new Rectangle(xcoordinate + SIZE_TO_COORD * displayable.getSize(),
-        ycoordinate + SIZE_TO_COORD * displayable.getSize(),
-        displayable.getWidthScale() * displayable.getSize() * WIDTH_TO_COORD,
-        displayable.getSize() * WIDTH_TO_COORD);
+  public Rectangle makeHitBox() {
+    double xCoordinate = displayable.getPosition().getPosX();
+    double yCoordinate = displayable.getPosition().getPosY();
+    return new Rectangle(xCoordinate + SIZE_TO_COORDINATES * displayable.getSize(),
+        yCoordinate + SIZE_TO_COORDINATES * displayable.getSize(),
+        displayable.getWidthScale() * displayable.getSize() * WIDTH_TO_COORDINATES,
+        displayable.getSize() * WIDTH_TO_COORDINATES);
   }
 }

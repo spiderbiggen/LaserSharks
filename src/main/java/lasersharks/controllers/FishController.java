@@ -65,7 +65,8 @@ public class FishController {
     this.displayableList = new LinkedList<>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
-    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION);
+    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
+        START_DIRECTION);
     enemySpawner = new FishFactory();
     ammoSpawner = new AmmoFactory();
     laserSpawner = new LaserFactory();
@@ -102,9 +103,9 @@ public class FishController {
   }
 
   /**
-   * Method to get the lasershark.
-   * 
-   * @return the lasershark
+   * Method to get the laser shark.
+   *
+   * @return the laser shark
    */
   public LaserShark getShark() {
     return this.shark;
@@ -138,44 +139,44 @@ public class FishController {
 
   /**
    * Update all fish positions.
-   * 
-   * @param frametime scalar based time elapsed since the last update
+   *
+   * @param frameTime scalar based time elapsed since the last update
    */
-  private void updatePositions(double frametime) {
-    this.displayableList.removeAll(this.displayableList.stream().filter(v -> !v.move(frametime))
+  private void updatePositions(double frameTime) {
+    this.displayableList.removeAll(this.displayableList.stream().filter(v -> !v.move(frameTime))
         .collect(Collectors.toList()));
     if (this.shark != null) {
-      this.shark.move(frametime);
+      this.shark.move(frameTime);
     }
   }
 
   /**
-   * 
-   * @param frametime scalar based time elapsed since the last update
+   *
+   * @param frameTime scalar based time elapsed since the last update
    * @return List of fish and their positions.
    */
-  private List<Displayable> getNewFishPositions(double frametime) {
-    this.updatePositions(frametime);
+  private List<Displayable> getNewFishPositions(double frameTime) {
+    this.updatePositions(frameTime);
     return this.displayableList;
   }
 
   /**
-   * Add new fish with chance of SELF::FISHSPAWNCHANCE, then update fish positions and delete
-   * offscreen fish.
-   * 
-   * @param frametime
+   * Add new fish with chance of SELF::fishSpawnChance, then update fish positions and delete
+   * off screen fish.
+   *
+   * @param frameTime
    *           scalar based time elapsed since the last update
    * 
    * @return List<Swimmer> list of fishes at there current position.
    */
-  public List<Displayable> getNextCycleInformation(double frametime) {
+  public List<Displayable> getNextCycleInformation(double frameTime) {
     checkForCollisions();
-    if (this.rng.nextFloat() <= fishSpawnChance / frametime) {
+    if (this.rng.nextFloat() <= fishSpawnChance / frameTime) {
       SeaObject f = enemySpawner.generateFish();
       SeaObject g = ammoSpawner.generateAmmo();
       this.addDisplayable(f);
 
-      if (this.rng.nextInt(ONE_HUNDRED - 0) > AMMO_SPAWN_LIMITER) {
+      if (this.rng.nextInt(ONE_HUNDRED) > AMMO_SPAWN_LIMITER) {
         this.addDisplayable(g);
       }
 
@@ -184,7 +185,7 @@ public class FishController {
           "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
               + f.getDirection() + ", " + "Position: " + f.getPosition());
     }
-    return this.getNewFishPositions(frametime);
+    return this.getNewFishPositions(frameTime);
   }
 
   /**

@@ -11,11 +11,14 @@ import lasersharksgui.panes.LosingPane;
  *
  */
 public class FishCheckForLossBehaviour implements CheckForLossBehaviour {
+  /**
+   *
+   */
   private SeaObject element;
   
   /**
    * Constructor.
-   * @param ele element to wich to propagate actions.
+   * @param ele element to which to propagate actions.
    */
   public FishCheckForLossBehaviour(SeaObject ele) {
     this.element = ele;

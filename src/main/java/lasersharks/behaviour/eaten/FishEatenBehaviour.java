@@ -17,7 +17,7 @@ public class FishEatenBehaviour implements EatenBehaviour {
    * Constructor.
    * 
    * @param ele
-   *          element to wich to propagate actions.
+   *          element to which to propagate actions.
    */
   public FishEatenBehaviour(SeaObject ele) {
     this.element = ele;

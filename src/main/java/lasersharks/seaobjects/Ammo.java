@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package lasersharks.seaobjects;
 
@@ -57,8 +57,8 @@ public class Ammo extends SeaObject {
    * @return The amount of ammo in this pack
    */
   public int getPickupAmount() {
-    final int pickupAmount = 10;
-    return pickupAmount;
+    final int amount = 10;
+    return amount;
   }
 
 }

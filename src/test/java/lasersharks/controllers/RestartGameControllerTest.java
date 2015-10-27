@@ -1,20 +1,19 @@
 package lasersharks.controllers;
 
-import static org.junit.Assert.assertEquals;
-
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import lasersharksgui.MainGui;
+import lasersharksgui.panes.GamePane;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import lasersharksgui.MainGui;
-import lasersharksgui.panes.GamePane;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Class for testing {@link DirectionInputcontroller}.
+ * Class for testing {@link DirectionInputController}.
  * 
  * @author SEMGroup27
  *
@@ -55,7 +54,7 @@ public class RestartGameControllerTest {
     KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.R, false, false, false, false);
     this.restartGameController.handle(k);
 
-    Mockito.verify(gui).browseTo((argument.capture()));
+    Mockito.verify(gui).browseTo(argument.capture());
     assertEquals(GamePane.class, argument.getValue());
   }
   

@@ -47,8 +47,8 @@ public class Fish extends SeaObject {
     this.imgWidth = imgWidth;
     checkForLossBehaviour = new FishCheckForLossBehaviour(this);
     eatenBehaviour = new FishEatenBehaviour(this);
-    getSizeIncrementBahaviour = new FishGetSizeIncrementBehaviour(this);
-    sizeDecrementBahaviour = new FishSizeDecrementBehaviour(this);
+    getSizeIncrementBehaviour = new FishGetSizeIncrementBehaviour(this);
+    sizeDecrementBehaviour = new FishSizeDecrementBehaviour(this);
     collisionBehaviour = new FishCollisionBehaviour(this);
     highScoreIncrementBehaviour = new FishHighScoreIncrementBehaviour(this);
   }
@@ -64,7 +64,8 @@ public class Fish extends SeaObject {
   }
 
   /**
-   * Fishes are collisionActors
+   * Fishes are collisionActors.
+   * @return true
    */
   public boolean collisionActor() {
     return true;

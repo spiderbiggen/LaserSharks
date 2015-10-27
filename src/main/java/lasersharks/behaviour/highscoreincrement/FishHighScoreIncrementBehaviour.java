@@ -4,7 +4,7 @@ import lasersharks.behaviour.HighScoreIncrementBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
- * Highscore Increment behaviour for SeaObjects.
+ * High score Increment behaviour for SeaObjects.
  * @author SEMGroup27
  *
  */
@@ -13,7 +13,7 @@ public class FishHighScoreIncrementBehaviour implements HighScoreIncrementBehavi
   
   /**
    * Constructor.
-   * @param element object for wich to act.
+   * @param element object for which to act.
    */
   public FishHighScoreIncrementBehaviour(Displayable element) {
     this.element = element;

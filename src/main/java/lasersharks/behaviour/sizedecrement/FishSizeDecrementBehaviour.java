@@ -1,6 +1,6 @@
 package lasersharks.behaviour.sizedecrement;
 
-import lasersharks.behaviour.SizeDecrementBahaviour;
+import lasersharks.behaviour.SizeDecrementBehaviour;
 import lasersharks.seaobjects.SeaObject;
 
 /**
@@ -9,14 +9,14 @@ import lasersharks.seaobjects.SeaObject;
  * @author SEMGroup27
  *
  */
-public class FishSizeDecrementBehaviour implements SizeDecrementBahaviour {
+public class FishSizeDecrementBehaviour implements SizeDecrementBehaviour {
   private SeaObject element;
 
   /**
    * Constructor.
    * 
    * @param ele
-   *          ELement the behaviours handles about.
+   *          Element the behaviours handles about.
    */
   public FishSizeDecrementBehaviour(SeaObject ele) {
     this.element = ele;

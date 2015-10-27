@@ -17,13 +17,12 @@ public class NoMovementMoveBehaviour implements MoveBehaviour {
   }
 
   /**
-   * does nothing, as this behavour specifies a displayable that cant move.
-   * 
-   * @param fish
-   *          the fish it should eat.
+   * does nothing, as this behaviour specifies a displayable that cant move.
+   *
+   * @param frameTime
+   *          scalar based on the time elapsed since the last move
    */
-  @Override
-  public boolean move(double frametime) {
+  @Override public boolean move(double frameTime) {
     return true;
   }
 

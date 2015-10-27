@@ -25,15 +25,14 @@ public class DefaultMoveBehaviour implements MoveBehaviour {
 
   /**
    * moves the FishBot in the right direction.
-   * 
-   * @param frametime
-   *          the frametime of the screen.
+   *
+   * @param frameTime
+   *          the frame time of the screen.
    * @return true of the fish was able to move.
    */
-  @Override
-  public boolean move(double frametime) {
+  @Override public boolean move(double frameTime) {
     return displayable.getPosition().updatePosition(displayable.getDirection(),
-        displayable.getSpeed() / frametime, displayable.getSize());
+        displayable.getSpeed() / frameTime, displayable.getSize());
   }
 
 }

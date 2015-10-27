@@ -1,12 +1,10 @@
 package lasersharksgui.panes;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.controllers.AudioController;
-import javafx.scene.text.Text;
 
 /**
  * 
@@ -58,34 +56,29 @@ public class OptionsPane extends StandardPane {
   public Button muteButton(double xPos, double yPos, double size) {
     muteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
     muteButtonImage.setFitWidth(BUTTON_WIDTH * size);
-    unmuteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
-    unmuteButtonImage.setFitWidth(BUTTON_WIDTH * size);
+    unMuteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
+    unMuteButtonImage.setFitWidth(BUTTON_WIDTH * size);
     muteButton = new Button();
     muteButton.setGraphic(muteButtonImage);
     muteButton.setTranslateX(xPos);
     muteButton.setTranslateY(yPos);
 
-    muteButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-        muteSound();
-      }
-    });
+    muteButton.setOnAction(event -> muteSound());
     return muteButton;
   }
 
   /**
-   * method for muting and unmuting the music of the game.
+   * method for muting and un-muting the music of the game.
    */
   public void muteSound() {
     if (!Options.getInstance().isMutedMusic()) {
       AudioController.getInstance().muteAll();
-      muteButton.setGraphic(unmuteButtonImage);
+      muteButton.setGraphic(unMuteButtonImage);
       Logger.getInstance().write("Sound muted", "Mute sound button pressed");
     } else {
-      AudioController.getInstance().unmuteAll();
+      AudioController.getInstance().unMuteAll();
       muteButton.setGraphic(muteButtonImage);
-      Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
+      Logger.getInstance().write("Sound un-muted", "Mute sound button pressed");
     }
 
   }

@@ -1,20 +1,16 @@
 package lasersharks;
 
+import org.junit.After;
+import org.junit.Test;
+
+import java.io.*;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import org.junit.After;
-import org.junit.Test;
-
 /**
- * Test for logger classe.
+ * Test for logger class.
  * 
  * @author SEMGroup27
  *
@@ -23,7 +19,7 @@ public class LoggerTest {
   private static final int TIMESTAMP_CHARS = 8;
 
   /**
-   * Clear current logger so that getInstance can actualy thourowly be tested.
+   * Clear current logger so that getInstance can actually thoroughly be tested.
    */
   @After
   public void tearDown() {
@@ -86,7 +82,7 @@ public class LoggerTest {
     f.deleteOnExit();
     FileWriter fw = new FileWriter(f);
     Logger l = Logger.getInstance(fw);
-    l.write("testevent", "testspecifics");
+    l.write("testEvent", "testSpecifics");
     fw.close();
     FileReader fr = new FileReader(f);
     BufferedReader reader = new BufferedReader(fr);
@@ -97,7 +93,7 @@ public class LoggerTest {
     }
     reader.close();
     if (content != null) {
-      assertEquals(" : testevent : testspecifics",
+      assertEquals(" : testEvent : testSpecifics",
           content.substring(TIMESTAMP_CHARS, content.length()));
     } else {
       assertEquals(null, content);

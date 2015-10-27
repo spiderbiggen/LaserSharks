@@ -10,8 +10,7 @@ import lasersharks.interfaces.Displayable;
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction")
-public interface CollisionHitboxBehaviour {
+@SuppressWarnings("restriction") public interface CollisionHitBoxBehaviour {
 
   /**
    * Returns the middle point.
@@ -25,7 +24,7 @@ public interface CollisionHitboxBehaviour {
    * 
    * @return returns a rectangle the shape of the fish.
    */
-  Rectangle makeHitbox();
+  Rectangle makeHitBox();
 
   /**
    * Checks if a fish collides with an other fish.

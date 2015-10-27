@@ -2,7 +2,7 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
+import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitBoxBehaviour;
 import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
 import lasersharks.behaviour.move.DefaultMoveBehaviour;
 
@@ -37,7 +37,7 @@ public class LaserBullet extends SeaObject {
   public LaserBullet(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
     strength = LASER_DEFAULT_STRENGTH;
-    collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
+    collisionHitBoxBehaviour = new DefaultCollisionHitBoxBehaviour(this);
     moveBehaviour = new DefaultMoveBehaviour(this);
     laserCollisionBehaviour = new LaserLaserCollisionBehaviour(this);
   }
@@ -51,7 +51,7 @@ public class LaserBullet extends SeaObject {
   }
 
   /**
-   * gets the widthscale of the image. (width/height)
+   * gets the width scale of the image. (width/height)
    */
   @Override
   public double getWidthScale() {
@@ -60,7 +60,7 @@ public class LaserBullet extends SeaObject {
 
   /**
    * returns the strength.
-   * Possiably depricated.
+   * Possibly deprecated.
    * @return the strength.
    */
   @Deprecated
