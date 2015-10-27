@@ -1,6 +1,3 @@
-/**
- *
- */
 package lasersharks.seaobjects;
 
 import lasersharks.Direction;
@@ -38,23 +35,19 @@ public class Ammo extends SeaObject {
 
   @Override
   public String getImageResource() {
-    return "battery.png";
+    return imageResource;
   }
 
   @Override
   public double getWidthScale() {
-    final double imgHeight = 228;
-    final double imgWidth = 300;
-    return imgWidth / imgHeight;
+    return (double) imgWidth / (double) imgHeight;
   }
 
   /**
-   * Method to get the pickup amount.
    * @return The amount of ammo in this pack
    */
   public int getPickupAmount() {
-    final int amount = 10;
-    return amount;
+    return pickupAmount;
   }
 
 }

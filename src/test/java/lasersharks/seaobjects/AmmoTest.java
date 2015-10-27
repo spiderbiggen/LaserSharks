@@ -1,6 +1,3 @@
-/**
- * 
- */
 package lasersharks.seaobjects;
 
 import static org.junit.Assert.assertEquals;
