@@ -2,6 +2,7 @@ target/
 .checkstyle
 .settings/
 .classpath
+.idea/
 /bin/
 highScores/
 logs/
