@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Logger;
 import lasersharks.Position;
@@ -13,10 +12,8 @@ import lasersharks.interfaces.AmmoSpawner;
 import lasersharks.interfaces.Displayable;
 import lasersharks.interfaces.LaserSpawner;
 import lasersharks.seaobjects.AmmoFactory;
-import lasersharks.seaobjects.Fish;
 import lasersharks.seaobjects.FishFactory;
 import lasersharks.interfaces.FishSpawner;
-import lasersharks.seaobjects.LaserBullet;
 import lasersharks.seaobjects.LaserFactory;
 import lasersharks.seaobjects.LaserShark;
 import lasersharks.seaobjects.SeaObject;
