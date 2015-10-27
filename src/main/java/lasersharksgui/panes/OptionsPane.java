@@ -7,7 +7,7 @@ import lasersharks.Options;
 import lasersharks.controllers.AudioController;
 
 /**
- * 
+ * The pane representing the optionPane.
  * @author SEMGroup27
  *
  */

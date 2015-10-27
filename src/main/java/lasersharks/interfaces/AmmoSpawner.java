@@ -4,11 +4,10 @@
 package lasersharks.interfaces;
 
 import java.util.Random;
-
 import lasersharks.seaobjects.Ammo;
 
 /**
- * Interface for an ammo factory.
+ * Interface for an ammo spawner.
  * 
  * @author SEMGroup27
  *

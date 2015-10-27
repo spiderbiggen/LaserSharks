@@ -7,8 +7,11 @@ import lasersharks.interfaces.AmmoSpawner;
 import lasersharks.interfaces.Displayable;
 import lasersharks.interfaces.FishSpawner;
 import lasersharks.interfaces.LaserSpawner;
-import lasersharks.seaobjects.*;
-
+import lasersharks.seaobjects.AmmoFactory;
+import lasersharks.seaobjects.FishFactory;
+import lasersharks.seaobjects.LaserFactory;
+import lasersharks.seaobjects.LaserShark;
+import lasersharks.seaobjects.SeaObject;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;

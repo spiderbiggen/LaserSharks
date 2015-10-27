@@ -8,6 +8,7 @@ import lasersharks.controllers.AudioController;
 import lasersharks.interfaces.LaserSpawner;
 
 /**
+ * Class for creating lasers.
  * @author SEMGroup27
  *
  */
@@ -28,11 +29,7 @@ public class LaserFactory implements LaserSpawner {
 
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharks.LaserSpawner#createLaser(lasersharks.LaserShark)
-   */
+
   @Override
   public LaserBullet createLaser(LaserShark origin) {
     Position posShark = origin.getPosition();

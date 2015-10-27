@@ -7,6 +7,7 @@ import lasersharks.seaobjects.LaserBullet;
 import lasersharks.seaobjects.LaserShark;
 
 /**
+ * Interface for LaserSpawner.
  * @author SEMGroup27
  *
  */

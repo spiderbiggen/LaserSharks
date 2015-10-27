@@ -107,7 +107,8 @@ public class MainGui extends Application {
   }
 
   /**
-   * Removes a pane from the {@link javafx.scene.layout.StackPane} Makes sure that it's not the root pane.
+   * Removes a pane from the {@link javafx.scene.layout.StackPane} 
+   * Makes sure that it's not the root pane.
    * 
    * @param pane
    *          the pane to be removed.

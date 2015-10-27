@@ -5,7 +5,7 @@ import lasersharks.Direction;
 import lasersharks.Position;
 
 /**
- * Interface for swimmer class.
+ * Interface for Displayable class.
  * 
  * @author SEMGroup27
  */

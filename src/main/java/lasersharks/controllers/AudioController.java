@@ -4,7 +4,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import lasersharks.Logger;
 import lasersharks.Options;
-
 import java.io.File;
 
 /**

@@ -31,21 +31,11 @@ public class Ammo extends SeaObject {
     
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharks.SeaObject#getImageResource()
-   */
   @Override
   public String getImageResource() {
     return "battery.png";
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharks.SeaObject#getWidthScale()
-   */
   @Override
   public double getWidthScale() {
     final double imgHeight = 228;
@@ -54,6 +44,7 @@ public class Ammo extends SeaObject {
   }
 
   /**
+   * Method to get the pickup amount.
    * @return The amount of ammo in this pack
    */
   public int getPickupAmount() {

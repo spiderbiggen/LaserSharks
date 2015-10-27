@@ -21,7 +21,7 @@ public class Fish extends SeaObject {
   private int imgWidth;
 
   /**
-   * propagation for construction.
+   * Propagation for construction.
    * 
    * @param image
    *          Image of the enemy.

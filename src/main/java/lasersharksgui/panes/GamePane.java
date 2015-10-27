@@ -19,7 +19,6 @@ import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.interfaces.Stoppable;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +31,6 @@ import java.util.stream.Collectors;
 @SuppressWarnings("restriction")
 public class GamePane extends StandardPane implements Stoppable {
 
-  // private static final int ANIMATION_SLEEP_TIMER = 10;
   private AnimationTimer animation;
   private final double timeToMilliseconds = 1_000_000;
   private ScreenController screenController;
@@ -74,10 +72,6 @@ public class GamePane extends StandardPane implements Stoppable {
         showShark(screenController.getShark());
         showScore();
 
-        /*
-         * try { Thread.sleep(ANIMATION_SLEEP_TIMER); } catch (InterruptedException e) {
-         * Logger.getInstance().write("Animation timer Interrupted", e.getMessage()); }
-         */
         time = now;
       }
     };
