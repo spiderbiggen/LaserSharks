@@ -10,30 +10,34 @@ import lasersharks.interfaces.Displayable;
  */
 public class LaserSharkMoveBehaviour implements MoveBehaviour {
   private static final float HALF_RATE = 0.5F;
-  private Displayable displayable;
+
+  private Displayable diplayable;
   
   /**
-   * The constructor.
-   * @param displayable the fish this behaviour applies to.
+   * the constructor.
+   * @param diplayable the shark
    */
-  public LaserSharkMoveBehaviour(Displayable displayable) {
-    this.displayable = displayable;
+  public LaserSharkMoveBehaviour(Displayable diplayable) {
+    this.diplayable = diplayable;
   }
   
   /**
    * Moves the shark in a direction.
-   * @param frameTime the refresh rate of the screen.
+   * @param frametime the refresh rate of the screen.
    * @return true if the shark was able to move.
    */
-  public boolean move(double frameTime) {
-    displayable.getPosition()
-        .updatePosition(displayable.getDirection(), displayable.getSpeed() / frameTime,
-            displayable.getSize());
+  public boolean move(double frametime) {
+    diplayable.getPosition().updatePosition(
+        diplayable.getDirection(), 
+        (diplayable.getSpeed() / frametime), 
+        diplayable.getSize()
+    );
     // this will make sure the fish stay within the borders.
 
-    displayable.getPosition()
-        .clipPosition(displayable.getSize() * displayable.getWidthScale() * HALF_RATE,
-            displayable.getSize() * HALF_RATE);
+    diplayable.getPosition().clipPosition(
+        (diplayable.getSize() * diplayable.getWidthScale() * HALF_RATE),
+        (diplayable.getSize() * HALF_RATE)
+    );
     return true;
   }
 }

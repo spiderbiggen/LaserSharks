@@ -215,6 +215,7 @@ public class HighScores {
    * @param increment
    *          the fish that is used to calculate the additional score
    */
+
   public void increaseScore(int increment) {
     score += Math.max(0, increment);
   }

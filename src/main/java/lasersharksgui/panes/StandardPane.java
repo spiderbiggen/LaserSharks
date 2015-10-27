@@ -22,7 +22,6 @@ public abstract class StandardPane extends Pane implements Stoppable {
 
   // text variables
   protected static final int TEXT_SCALE_SIZE_BIG = 17;
-  protected static final int TEXT_SCALE_SIZE_MED = 10;
   protected static final int TEXT_SCALE_SIZE_SMALL = 4;
 
   // audio variables

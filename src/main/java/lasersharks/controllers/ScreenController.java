@@ -43,17 +43,13 @@ public class ScreenController {
    * 
    * @return FishInfo
    */
-  public List<Displayable> getNextFrameInfo(double frameTime) {
-    if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
-      GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
-      if (!this.fishCon.getShark().isAlive()) {
-        MainGui.browseToGlobal(LosingPane.class);
-      } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
-        MainGui.browseToGlobal(WinPane.class);
-      }
+  public List<Displayable> getNextFrameInfo(double frametime) {
+    
+    if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
+      MainGui.browseToGlobal(WinPane.class);
     }
-
-    return this.fishCon.getNextCycleInformation(frameTime);
+    
+    return this.fishCon.getNextCycleInformation(frametime);
   }
 
   /**

@@ -100,14 +100,13 @@ public class Options {
    * The random number generator to be used by factories.
    */
   private Random factoryRng;
-  /**
-   * The random number generator to be used by the fish controller.
-   */
-  private Random spawnRng;
+
   /**
    * The current Singleton instance.
    */
   private static Options instance;
+
+
 
   /**
    * constructor of the options class. Creates an Options object.
@@ -119,7 +118,6 @@ public class Options {
     setInstance(this);
     this.dimension = screenRes;
     factoryRng = new Random();
-    spawnRng = factoryRng;
 
     backGround = DEFAULT_BACKGROUND_IMAGE;
     musicFileName = DEFAULT_MUSIC_FILENAME;
@@ -420,15 +418,5 @@ public class Options {
    */
   public void setFactoryRng(Random rng) {
     this.factoryRng = rng;
-  }
-
-  /**
-   * set the random number generator for factory.
-   * 
-   * @param rng
-   *          random number generator.
-   */
-  public void setSpawnRng(Random rng) {
-    this.spawnRng = rng;
   }
 }

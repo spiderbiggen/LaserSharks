@@ -67,6 +67,7 @@ public class Fish extends SeaObject {
    * Fishes are collisionActors.
    * @return true
    */
+  @Override
   public boolean collisionActor() {
     return true;
   }

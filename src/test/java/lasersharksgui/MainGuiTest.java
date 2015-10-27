@@ -54,7 +54,6 @@ public class MainGuiTest {
     FXApp.startApp(new MainGui());
     FXer.getUserWith(FXApp.getScene().getRoot());
 
-    Options.getInstance().setSpawnRng(new Random(0));
     Options.getInstance().setFactoryRng(new Random(WINNING_FACTORY_SEED));
 
     WaitFor.waitOrTimeout(() -> MainGui.getInstance().getCurrentPane() instanceof GamePane,
