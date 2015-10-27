@@ -1,20 +1,24 @@
 package lasersharks.controllers;
 
-import lasersharks.Direction;
-import lasersharks.Position;
-import lasersharks.seaobjects.Fish;
-import lasersharks.seaobjects.FishFactory;
-import lasersharks.seaobjects.LaserShark;
-import lasersharksgui.MainGui;
-import lasersharksgui.panes.LosingPane;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import java.util.Random;
-
-import static org.junit.Assert.*;
+import lasersharks.Direction;
+import lasersharks.Position;
+import lasersharks.seaobjects.Fish;
+import lasersharks.seaobjects.LaserShark;
+import lasersharksgui.MainGui;
+import lasersharksgui.panes.LosingPane;
+import lasersharks.seaobjects.FishFactory;
 
 /**
  * the test class for the FishController class.
@@ -56,10 +60,11 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
+    MainGui.setInstance(Mockito.mock(MainGui.class));
     Fish fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addDisplayable(fishBot);
-    assertTrue(fishCon.getNextCycleInformation(3).contains(fishBot));
+    assertTrue(fishCon.getNextCycleInformation(1).contains(fishBot));
   }
 
   /**

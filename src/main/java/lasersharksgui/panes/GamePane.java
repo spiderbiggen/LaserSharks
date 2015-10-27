@@ -218,7 +218,7 @@ public class GamePane extends StandardPane implements Stoppable {
   /**
    * This method removes all event handlers.
    */
-  public void removeAllEventHandlers() {
+  private void removeAllEventHandlers() {
     removeNonPauseEventHandlers();
     MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, pauseController);
   }
@@ -227,7 +227,7 @@ public class GamePane extends StandardPane implements Stoppable {
    * Removes all the event handlers, except for the pause handler. This is used for pausing the
    * game.
    */
-  public void removeNonPauseEventHandlers() {
+  private void removeNonPauseEventHandlers() {
     MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY,
         directionInputController);
     MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, shootController);
@@ -236,7 +236,7 @@ public class GamePane extends StandardPane implements Stoppable {
   /**
    * Add all the event handlers, except for the pause handler. This is used for resuming the game.
    */
-  public void addNonPauseEventHandlers() {
+  private void addNonPauseEventHandlers() {
     directionInputController = new DirectionInputController(callback);
     shootController = new ShootController(screenController.getFishController());
     MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, directionInputController);
