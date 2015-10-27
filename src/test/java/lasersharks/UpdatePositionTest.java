@@ -3,19 +3,16 @@
  */
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import lasersharks.Direction;
-import lasersharks.Position;
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author SEM Group 27
@@ -37,7 +34,7 @@ public class UpdatePositionTest {
   }
 
   /**
-   * Constructor for parameterized Test.
+   * Constructor for parametrized Test.
    * 
    * @param direction
    *          direction to update to
@@ -52,7 +49,7 @@ public class UpdatePositionTest {
   }
 
   /**
-   * Parameterized test for {@link laserSharks.Position#updatePosition(Direction) }.
+   * Parametrized test for {@link lasersharks.Position#updatePosition(Direction, double, double) }.
    * 
    * @return list of parameters
    */
@@ -65,7 +62,7 @@ public class UpdatePositionTest {
   }
 
   /**
-   * Test methods for {@link laserSharks.Position#updatePosition(Direction) }.
+   * Test methods for {@link lasersharks.Position#updatePosition(Direction, double, double) }.
    */
 
   @Test

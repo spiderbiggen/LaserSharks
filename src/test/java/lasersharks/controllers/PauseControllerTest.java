@@ -5,11 +5,9 @@ import javafx.scene.input.KeyEvent;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 import lasersharksgui.panes.OptionsPane;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 /**
@@ -55,7 +53,7 @@ public class PauseControllerTest {
   }
 
   /**
-   * Test for pressedP keyevent.
+   * Test for pressedP key event.
    */
   // @Test
   public void testPressedP() {
@@ -64,7 +62,7 @@ public class PauseControllerTest {
   }
 
   /**
-   * Test for pressedR keyevent.
+   * Test for pressedR key event.
    */
   @Test
   public void testPressedR() {
@@ -73,7 +71,7 @@ public class PauseControllerTest {
   }
 
   /**
-   * Test for releaseP keyevent.
+   * Test for releaseP key event.
    */
   @Test
   public void testReleasedP() {

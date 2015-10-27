@@ -1,16 +1,15 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Random;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import lasersharks.Direction;
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.interfaces.Displayable;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Random;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for FishFactory.

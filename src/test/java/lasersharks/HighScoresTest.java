@@ -21,12 +21,12 @@ import org.junit.Test;
  * @author SEMGroup27
  *
  */
-public class HighscoresTest {
+public class HighScoresTest {
 
   private static final String INPUT_FILE = "src/test/resources/highscoresTestFile";
   private ArrayList<String> list = new ArrayList<String>();
   private final int testSize = 5;
-  private Highscores highscores;;
+  private HighScores highscores;;
 
   /**
    * Set the input file to the test file.
@@ -36,7 +36,7 @@ public class HighscoresTest {
    */
   @Before
   public void setUp() throws Exception {
-    highscores = new Highscores();
+    highscores = new HighScores();
     highscores.setInputFile(INPUT_FILE);
   }
 
@@ -48,7 +48,7 @@ public class HighscoresTest {
    */
   @After
   public void tearDown() throws Exception {
-    Highscores.setInstance(null);
+    HighScores.setInstance(null);
     try (FileWriter fw = new FileWriter(new File(INPUT_FILE))) {
       for (int i = 0; i < testSize; i++) {
         if (i < testSize - 1) {
@@ -71,7 +71,7 @@ public class HighscoresTest {
    */
   @Test
   public void testReadHighscoresTrue() throws IOException {
-    highscores.readHighscore();
+    highscores.readHighScore();
     assertEquals("[1. 5, 2. 4, 3. 3, 4. 2, 5. 1]", highscores.getList().toString());
   }
 
@@ -83,7 +83,7 @@ public class HighscoresTest {
    */
   @Test
   public void testReadHighscoresFalse() throws IOException {
-    highscores.readHighscore();
+    highscores.readHighScore();
     assertNotEquals("[1. 1, 2. 2, 3. 3, 4. 4, 5. 5]", highscores.getList().toString());
   }
 
@@ -99,7 +99,7 @@ public class HighscoresTest {
     list.add("3. 300");
     list.add("4. 200");
     assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]",
-        highscores.fixHighscoreCount(list).toString());
+        highscores.fixHighScoreCount(list).toString());
 
   }
 
@@ -115,7 +115,7 @@ public class HighscoresTest {
     list.add("4. 300");
     list.add("5. 200");
     assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]",
-        highscores.fixHighscoreCount(list).toString());
+        highscores.fixHighScoreCount(list).toString());
 
   }
 
@@ -131,7 +131,7 @@ public class HighscoresTest {
     list.add("5. 300");
     list.add("2. 200");
     assertEquals("[1. 600, 2. 500, 3. 400, 4. 300, 5. 200]",
-        highscores.fixHighscoreCount(list).toString());
+        highscores.fixHighScoreCount(list).toString());
 
   }
 
@@ -178,7 +178,7 @@ public class HighscoresTest {
     highscores.setScore(0);
     assertEquals("Highscores:" + li + "     " + "1. 10" + li + "     " + "2. 8" + li + "     "
         + "3. 6" + li + "     " + "4. 4" + li + "     " + "5. 2" + li + li + "Your score: "
-        + highscores.getScore(), highscores.makeHighscoreString());
+        + highscores.getScore(), highscores.makeHighScoreString());
 
   }
 
@@ -237,7 +237,7 @@ public class HighscoresTest {
   public void testWriteHighscoreNewHighscoreEntry() throws IOException {
     final int score = 50;
     highscores.setScore(score); // the highest score is now 50
-    highscores.writeHighscore();
+    highscores.writeHighScore();
     assertEquals("[1. 50, 2. 5, 3. 4, 4. 3, 5. 2]", highscores.getList().toString());
   }
 
@@ -251,7 +251,7 @@ public class HighscoresTest {
   public void testWriteHighscoreMiddleEntry() throws IOException {
     final int score = 3;
     highscores.setScore(score); // the score should be entered in the middle of the list
-    highscores.writeHighscore();
+    highscores.writeHighScore();
     assertEquals("[1. 5, 2. 4, 3. 3, 4. 3, 5. 2]", highscores.getList().toString());
   }
 
@@ -270,7 +270,7 @@ public class HighscoresTest {
    */
   @Test
   public void testGetInstanceNotNull() {
-    assertTrue(Highscores.getInstance() != null);
+    assertTrue(HighScores.getInstance() != null);
   }
 
   /**
@@ -278,8 +278,8 @@ public class HighscoresTest {
    */
   @Test
   public void testAlwaysSameInstance() {
-    Highscores l = Highscores.getInstance();
-    assertEquals(l, Highscores.getInstance());
+    HighScores l = HighScores.getInstance();
+    assertEquals(l, HighScores.getInstance());
   }
 
   /**
@@ -288,7 +288,7 @@ public class HighscoresTest {
   @SuppressWarnings("static-access")
   @Test
   public void testSetInstance() {
-    Highscores testH = new Highscores();
+    HighScores testH = new HighScores();
     highscores.setInstance(testH);
     assertEquals(testH, testH.getInstance());
 

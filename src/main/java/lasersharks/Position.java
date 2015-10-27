@@ -6,11 +6,35 @@ package lasersharks;
  * @author SEMGroup27
  */
 public class Position {
+  
+  /**
+   * The multiplier for the upper right corner height wise.
+   */
   private static final double HEIGHT_MULTIPLIER = 0.035;
-  private static final double WIDTH_MULTIPLYER = 0.8;
-  private static final int SECOND_HASH_PRIME = 31;
+  
+  /**
+   * The multiplier for the upper right corner width wise.
+   */
+  private static final double WIDTH_MULTIPLIER = 0.;
+  
+  /**
+   * A prime number for the hash.
+   */
   private static final int HASH_PRIME = 17;
+  
+  /**
+   * another prime number for the hash.
+   */
+  private static final int SECOND_HASH_PRIME = 31;
+  
+  /**
+   * Current x position.
+   */
   private double posX;
+  
+  /**
+   * Current y position.
+   */
   private double posY;
 
   /**
@@ -131,7 +155,7 @@ public class Position {
    * @param sp
    *          the speed in witch the fish moves.
    * @param margin
-   *          size of object to make sure it's entirely offscreen.
+   *          size of object to make sure it's entirely off screen.
    * @return false if fish moves off the screen.
    */
   public boolean updatePosition(Direction dir, double sp, double margin) {
@@ -150,7 +174,7 @@ public class Position {
    */
   public float calculateDistance(Position other) {
     return (float) Math
-        .sqrt((Math.pow(other.getPosX() - posX, 2)) + Math.pow(other.getPosY() - posX, 2));
+        .sqrt(Math.pow(other.getPosX() - posX, 2) + Math.pow(other.getPosY() - posX, 2));
   }
 
   /**
@@ -162,8 +186,8 @@ public class Position {
    *          max offset margin
    */
   public final boolean onScreen(double xMargin) {
-    return (posX + xMargin >= 0 && posX - xMargin <= Position.getWidthPanel() && posY >= 0
-        && posY <= Position.getHeightPanel());
+    return posX + xMargin >= 0 && posX - xMargin <= Position.getWidthPanel() && posY >= 0
+        && posY <= Position.getHeightPanel();
   }
 
   /**
@@ -179,11 +203,22 @@ public class Position {
     this.posY = Math.min(Math.max(0 - yMargin, this.posY), Options.getGlobalHeight() - yMargin);
   }
 
+  /**
+   * Create a string representation of the x and y coordinates.
+   *
+   * @return string represeenting x and y.
+   */
   @Override
   public String toString() {
     return "Position [posX=" + posX + ", posY=" + posY + "]";
   }
 
+  /**
+   * Check if both objects have the same position.
+   *
+   * @param obj any {@link Object}
+   * @return true if both objects have the same position.
+   */
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
@@ -195,13 +230,13 @@ public class Position {
     }
 
     Position position = (Position) obj;
-    if (this.getPosX() != position.getPosX() || this.getPosY() != position.getPosY()) {
-      return false;
-    }
+    return !(this.getPosX() != position.getPosX() || this.getPosY() != position.getPosY());
 
-    return true;
   }
 
+  /**
+   * @return a hashcode of the x and y coordinates.
+   */
   @Override
   public int hashCode() {
     int hash = (int) (SECOND_HASH_PRIME * HASH_PRIME + getPosX());
@@ -220,12 +255,12 @@ public class Position {
   }
 
   /**
-   * This position represents the middle of the screen.
-   * 
-   * @return a position with coordinates on the middle of the screen
+   * This position represents the upper right corner of the screen.
+   *
+   * @return a position with coordinates in the upper right corner of the screen.
    */
-  public static Position upperCornerPosition() {
-    return new Position(Math.round(Options.getGlobalWidth() * WIDTH_MULTIPLYER),
+  public static Position upperMidPosition() {
+    return new Position(Math.round(Options.getGlobalWidth() * WIDTH_MULTIPLIER),
         Math.round(Options.getGlobalHeight() * HEIGHT_MULTIPLIER));
   }
 

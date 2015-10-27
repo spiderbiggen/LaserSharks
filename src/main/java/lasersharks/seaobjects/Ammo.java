@@ -1,6 +1,3 @@
-/**
- * 
- */
 package lasersharks.seaobjects;
 
 import lasersharks.Direction;
@@ -36,21 +33,11 @@ public class Ammo extends SeaObject {
     
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharks.SeaObject#getImageResource()
-   */
   @Override
   public String getImageResource() {
     return imageResource;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharks.SeaObject#getWidthScale()
-   */
   @Override
   public double getWidthScale() {
     return (double) imgWidth / (double) imgHeight;

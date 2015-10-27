@@ -3,14 +3,8 @@ package lasersharksgui.panes;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
-import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.controllers.AudioController;
@@ -33,7 +27,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
   // audio variables
   protected Button muteButton;
   protected ImageView muteButtonImage = new ImageView("mutesound.png");
-  protected ImageView unmuteButtonImage = new ImageView("unmutesound.png");
+  protected ImageView unMuteButtonImage = new ImageView("unmutesound.png");
 
   // sprite and image variables
   protected ImageView sharkImage;
@@ -71,11 +65,11 @@ public abstract class StandardPane extends Pane implements Stoppable {
    *          a string containing the score of the player.
    */
   public void showScore(String score) {
-    addText("Score: " + score, TEXT_SCALE_SIZE_SMALL, Position.upperCornerPosition());
+    addText("Score: " + score, TEXT_SCALE_SIZE_SMALL, Position.upperMidPosition());
   }
 
   /**
-   * This function adds a textbox directly on the screen.
+   * This function adds a text box directly on the screen.
    * 
    * @param message
    *          The message that should be shown.
@@ -94,7 +88,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
   }
 
   /**
-   * This function adds a textbox directly on the screen. The X position here is automatically set
+   * This function adds a text box directly on the screen. The X position here is automatically set
    * to the middle.
    * 
    * @param message

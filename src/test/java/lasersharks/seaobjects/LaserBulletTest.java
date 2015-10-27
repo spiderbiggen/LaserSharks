@@ -1,10 +1,8 @@
 package lasersharks.seaobjects;
 
-import org.junit.Test;
-
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.seaobjects.LaserBullet;
+import org.junit.Test;
 
 /**
  * Test class for the LaserBullet class.
@@ -24,7 +22,7 @@ public class LaserBulletTest {
   public void testSize() {
     LaserBullet laserBullet = new LaserBullet(Position.middlePosition(), TEST_SIZE, TEST_SPEED,
         Direction.East);
-    assert (TEST_SIZE == laserBullet.getSize());
+    assert TEST_SIZE == laserBullet.getSize();
   }
 
 }

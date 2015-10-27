@@ -3,7 +3,7 @@ package lasersharks.behaviour.move;
 import lasersharks.behaviour.MoveBehaviour;
 
 /**
- * Represents behaviour of a displayable that can't move.
+ * Represents behaviour of a Displayable that can't move.
  * 
  * @author SEMGroup27
  *
@@ -17,13 +17,12 @@ public class NoMovementMoveBehaviour implements MoveBehaviour {
   }
 
   /**
-   * does nothing, as this behavour specifies a displayable that cant move.
-   * 
-   * @param fish
-   *          the fish it should eat.
+   * Does nothing, as this behaviour specifies a Displayable that cannot move.
+   *
+   * @param frameTime
+   *          scalar based on the time elapsed since the last move
    */
-  @Override
-  public boolean move(double frametime) {
+  @Override public boolean move(double frameTime) {
     return true;
   }
 
