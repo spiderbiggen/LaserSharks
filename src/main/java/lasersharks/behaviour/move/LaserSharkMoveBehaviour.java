@@ -14,7 +14,7 @@ public class LaserSharkMoveBehaviour implements MoveBehaviour {
   
   /**
    * the constructor.
-   * @param swimmer
+   * @param swimmer the shark
    */
   public LaserSharkMoveBehaviour(Displayable swimmer) {
     this.swimmer = swimmer;
@@ -26,7 +26,11 @@ public class LaserSharkMoveBehaviour implements MoveBehaviour {
    * @return true if the shark was able to move.
    */
   public boolean move(double frametime) {
-    swimmer.getPosition().updatePosition(swimmer.getDirection(), (swimmer.getSpeed() / frametime), swimmer.getSize());
+    swimmer.getPosition().updatePosition(
+        swimmer.getDirection(), 
+        (swimmer.getSpeed() / frametime), 
+        swimmer.getSize()
+    );
     // this will make sure the fish stay within the borders.
 
     swimmer.getPosition().clipPosition((swimmer.getSize() * swimmer.getWidthScale() * HALF_RATE),
