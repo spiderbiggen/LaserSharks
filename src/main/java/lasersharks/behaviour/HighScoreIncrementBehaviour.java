@@ -1,7 +1,7 @@
 package lasersharks.behaviour;
 
 /**
- * Interface which let displayable object increase the player high score on collision.
+ * Interface which let a Displayable object increase the player high score on collision.
  * @author SEMGroup27
  *
  */

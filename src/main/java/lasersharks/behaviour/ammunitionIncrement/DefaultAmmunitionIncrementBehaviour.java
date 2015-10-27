@@ -12,7 +12,8 @@ public class DefaultAmmunitionIncrementBehaviour implements AmmunitionIncrementB
   /**
    * @return the amount by which to increment the ammunition.
    */
-  @Override public int onCollisionAmmunitionIncrement() {
+  @Override 
+  public int onCollisionAmmunitionIncrement() {
     return 0;
   }
 }

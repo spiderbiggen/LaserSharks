@@ -3,7 +3,7 @@ package lasersharks.behaviour.collision;
 import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 /**
- * The default class for the collision behavior.
+ * The default class for the collision behaviour.
  * @author SEMgroup27
  *
  */

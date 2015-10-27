@@ -2,6 +2,8 @@ package lasersharks.behaviour;
 
 /**
  * Defines interface to increment size.
+ * 
+ * @author SEMGroup27
  */
 public interface GetSizeIncrementBehaviour {
 

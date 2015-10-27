@@ -11,9 +11,7 @@ import lasersharksgui.panes.LosingPane;
  *
  */
 public class FishCheckForLossBehaviour implements CheckForLossBehaviour {
-  /**
-   *
-   */
+
   private SeaObject element;
   
   /**

@@ -6,26 +6,32 @@ package lasersharks;
  * @author SEMGroup27
  */
 public class Position {
+  
   /**
    * The multiplier for the upper right corner height wise.
    */
   private static final double HEIGHT_MULTIPLIER = 0.035;
+  
   /**
    * The multiplier for the upper right corner width wise.
    */
   private static final double WIDTH_MULTIPLIER = 0.9;
+  
   /**
    * A prime number for the hash.
    */
   private static final int HASH_PRIME = 17;
+  
   /**
    * another prime number for the hash.
    */
   private static final int SECOND_HASH_PRIME = 31;
+  
   /**
    * Current x position.
    */
   private double posX;
+  
   /**
    * Current y position.
    */

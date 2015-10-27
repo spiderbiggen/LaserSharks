@@ -1,7 +1,12 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.behaviour.CollisionBehaviour;
-import lasersharks.behaviour.collision.component.*;
+import lasersharks.behaviour.collision.component.OnCollisionPlayerLosesComponent;
+import lasersharks.behaviour.collision.component.OnCollisionIncreaseSizeComponent;
+import lasersharks.behaviour.collision.component.OnCollisionIncreaseAmmunitionComponent;
+import lasersharks.behaviour.collision.component.DefaultComponentLeaf;
+import lasersharks.behaviour.collision.component.OnCollisionHighScoreIncrementComponent;
+import lasersharks.behaviour.collision.component.OnCollisionEatenComponentLeaf;
 import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
 
