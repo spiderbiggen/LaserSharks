@@ -1,8 +1,8 @@
 package lasersharks;
 
 import javafx.scene.paint.Color;
-
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Random;
 
 /**
