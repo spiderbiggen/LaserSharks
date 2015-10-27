@@ -40,7 +40,7 @@ public class FishController {
    * Holder for shark data.
    */
   private static final float START_SIZE = 80.0f;
-  private static final double START_SPEED = 670;
+  private static final double START_SPEED = 450;
   private static final Direction START_DIRECTION = Direction.None;
 
   /**
@@ -54,7 +54,7 @@ public class FishController {
    */
 
   private static final int ONE_HUNDRED = 100;
-  private static final int AMMO_SPAWN_LIMITER = 88;
+  private static final int AMMO_SPAWN_LIMITER = 90;
 
   /**
    * Random Number Generator holder.
@@ -68,8 +68,12 @@ public class FishController {
     this.displayableList = new LinkedList<>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
-    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED,
-        START_DIRECTION);
+    this.shark = new LaserShark(
+        Position.middlePosition(), 
+        START_SIZE, 
+        START_SPEED, 
+        START_DIRECTION
+        );
     enemySpawner = new FishFactory();
     ammoSpawner = new AmmoFactory();
     laserSpawner = new LaserFactory();

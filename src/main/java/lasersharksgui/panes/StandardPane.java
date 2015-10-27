@@ -66,7 +66,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
    *          a string containing the score of the player.
    */
   public void showScore(String score) {
-    addText("Score: " + score, TEXT_SCALE_SIZE_SMALL, Position.upperCornerPosition());
+    addText("Score: " + score, TEXT_SCALE_SIZE_SMALL, Position.upperMidPosition());
   }
 
   /**

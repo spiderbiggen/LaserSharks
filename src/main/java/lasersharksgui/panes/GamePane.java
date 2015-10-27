@@ -70,7 +70,7 @@ public class GamePane extends StandardPane implements Stoppable {
 
         showFishList(screenController.getNextFrameInfo(milliseconds / frameTime));
         showShark(screenController.getShark());
-        showScore();
+        showScoreAndAmmo();
 
         time = now;
       }
@@ -107,9 +107,11 @@ public class GamePane extends StandardPane implements Stoppable {
   /**
    * Displays the score in the upper right corner of the screen.
    */
-  public void showScore() {
-    addText("Score: " + HighScores.getInstance().getScore(), TEXT_SCALE_SIZE_SMALL,
-        Position.upperCornerPosition());
+
+  private void showScoreAndAmmo() {
+    addText("Ammo: " + screenController.getShark().getAmmo() +" Score: "
+        + HighScores.getInstance().getScore(), TEXT_SCALE_SIZE_SMALL,
+        Position.upperMidPosition());
   }
 
   /**

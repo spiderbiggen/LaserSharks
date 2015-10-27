@@ -20,7 +20,7 @@ import java.util.List;
 public class ScreenController {
   private GamePane currentPane;
   private FishController fishCon;
-  private static final int GAME_WINNING_SIZE = 320;
+  private static final int GAME_WINNING_SIZE = 400;
 
   /**
    * Constructor.

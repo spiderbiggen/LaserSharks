@@ -15,6 +15,11 @@ import lasersharks.behaviour.move.NoMovementMoveBehaviour;
  */
 public class Ammo extends SeaObject {
 
+  private final int pickupAmount = 6;
+  private final String imageResource = "battery.png";
+  private final int imgHeight = 228;
+  private final int imgWidth = 300;
+
   /**
    * Constructor class for Ammo.
    * 

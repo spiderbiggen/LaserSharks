@@ -23,6 +23,17 @@ public class FishFactoryTest {
   private static final int HEIGHT = 1080;
 
   protected Displayable generatedFish;
+<<<<<<< HEAD
+=======
+  private final long seed = 12345622L;
+  private final long seedWest = 11L;
+
+  private final float expectedSize1 = 282;
+  private final int expectedSpeed1 = 148;
+
+  private final float expectedSize2 = 289;
+  private final int expectedSpeed2 = 448;
+>>>>>>> origin/master
 
   private FishFactory fishFactory;
 

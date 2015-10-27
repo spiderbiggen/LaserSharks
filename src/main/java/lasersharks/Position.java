@@ -15,7 +15,7 @@ public class Position {
   /**
    * The multiplier for the upper right corner width wise.
    */
-  private static final double WIDTH_MULTIPLIER = 0.9;
+  private static final double WIDTH_MULTIPLIER = 0.;
   
   /**
    * A prime number for the hash.
@@ -259,7 +259,7 @@ public class Position {
    *
    * @return a position with coordinates in the upper right corner of the screen.
    */
-  public static Position upperCornerPosition() {
+  public static Position upperMidPosition() {
     return new Position(Math.round(Options.getGlobalWidth() * WIDTH_MULTIPLIER),
         Math.round(Options.getGlobalHeight() * HEIGHT_MULTIPLIER));
   }
