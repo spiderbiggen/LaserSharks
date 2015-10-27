@@ -1,12 +1,15 @@
 package lasersharks.controllers;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import javafx.embed.swing.JFXPanel;
 import lasersharks.Options;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 
 /**
  * @author SEMGroup27

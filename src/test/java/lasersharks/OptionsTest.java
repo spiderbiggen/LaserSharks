@@ -1,12 +1,16 @@
 package lasersharks;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
-
-import static org.junit.Assert.*;
 
 /**
  * A unit test object for the Options class.

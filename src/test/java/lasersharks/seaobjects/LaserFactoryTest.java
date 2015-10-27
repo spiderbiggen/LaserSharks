@@ -8,9 +8,7 @@ import org.mockito.Mockito;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.seaobjects.LaserBullet;
-import lasersharks.seaobjects.LaserFactory;
-import lasersharks.seaobjects.LaserShark;
+
 
 /**
  * Test class for LaserFactory.

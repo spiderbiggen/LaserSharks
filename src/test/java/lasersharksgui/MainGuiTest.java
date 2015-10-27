@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package lasersharksgui;
 
 import com.athaydes.automaton.FXApp;
