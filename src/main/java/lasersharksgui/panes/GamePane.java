@@ -113,7 +113,7 @@ public class GamePane extends StandardPane implements Stoppable {
   /**
    * Displays the score in the upper right corner of the screen.
    */
-  public void showScoreAndAmmo() {
+  private void showScoreAndAmmo() {
     addText("Ammo: "+ screenController.getShark().getAmmo() +" Score: " + Highscores.getInstance().getScore(), TEXT_SCALE_SIZE_SMALL,
         Position.upperCornerPosition());
   }
