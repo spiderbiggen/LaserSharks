@@ -41,7 +41,7 @@ public class FishController {
    * Holder for shark data.
    */
   private static final float START_SIZE = 80.0f;
-  private static final double START_SPEED = 630;
+  private static final double START_SPEED = 450;
   private static final Direction START_DIRECTION = Direction.None;
   private static final float DECREASE_SIZE = 2;
 

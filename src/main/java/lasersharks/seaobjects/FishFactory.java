@@ -27,7 +27,7 @@ public class FishFactory implements FishSpawner {
    * equal to SizeModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
    */
   private static final int SIZE_MODIFIER = 300;
-  private static final int BASE_SIZE = 75;
+  private static final int BASE_SIZE = 70;
 
   /**
    * this value is used as the seed for the fish.
