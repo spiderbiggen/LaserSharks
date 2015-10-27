@@ -118,18 +118,6 @@ public class LaserShark extends SeaObject implements DirectionCallback {
   }
 
   /**
-   * increases the ammo.
-   * 
-   * @param amount
-   *          the amount to increase.
-   * @return the current ammo of the shark.
-   */
-  public int increaseAmmo(int amount) {
-    ammo = Math.min(ammo + amount, MAX_AMMO);
-    return ammo;
-  }
-
-  /**
    * gets the last horizontal direction the shark went to.
    * 
    * @return the last horizontal direction the shark went to.
