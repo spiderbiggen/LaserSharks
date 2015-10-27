@@ -185,14 +185,6 @@ public class FishController {
   }
 
   /**
-   * Clear the fishList when the game ends.
-   * 
-   */
-  public void clearFish() {
-    this.displayableList.clear();
-  }
-
-  /**
    * Method to set the value of the fish spawn chance.
    * 
    * @param chance
