@@ -70,7 +70,12 @@ public class FishController {
     this.displayableList = new LinkedList<Displayable>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
-    this.shark = new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION);
+    this.shark = new LaserShark(
+        Position.middlePosition(), 
+        START_SIZE, 
+        START_SPEED, 
+        START_DIRECTION
+    );
     enemySpawner = new FishFactory();
     ammoSpawner = new AmmoFactory();
     laserSpawner = new LaserFactory();
