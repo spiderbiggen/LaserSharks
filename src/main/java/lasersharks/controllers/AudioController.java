@@ -15,6 +15,7 @@ import lasersharks.Options;
 public class AudioController {
 
   private static AudioController instance;
+  private static final int NUMBER_OF_MEDIAPLAYERS = 2;
 
   private MediaPlayer musicPlayer;
   private MediaPlayer sfxPlayer;
