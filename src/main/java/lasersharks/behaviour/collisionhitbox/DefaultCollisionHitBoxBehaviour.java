@@ -1,7 +1,6 @@
 package lasersharks.behaviour.collisionhitbox;
 
 import javafx.scene.shape.Rectangle;
-import lasersharks.Position;
 import lasersharks.behaviour.CollisionHitBoxBehaviour;
 import lasersharks.interfaces.Displayable;
 
@@ -40,17 +39,6 @@ public class DefaultCollisionHitBoxBehaviour implements CollisionHitBoxBehaviour
   @Override
   public boolean collide(final Displayable swimmer) {
     return swimmer.makeHitBox().intersects(displayable.makeHitBox().getLayoutBounds());
-  }
-
-  /**
-   * Gets the middle point of the swimmer.
-   */
-  @Override
-  public Position getMiddlePoint() {
-    final Position startPos = displayable.getPosition();
-    return new Position(
-        startPos.getPosX() + (HALF_SCALE * displayable.getWidthScale() * displayable.getSize()),
-        startPos.getPosY() + (HALF_SCALE * displayable.getSize()));
   }
 
   /**
