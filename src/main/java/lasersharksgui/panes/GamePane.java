@@ -73,7 +73,7 @@ import java.util.stream.Collectors;
 
         showFishList(screenController.getNextFrameInfo(millis / frameTime));
         showShark(screenController.getShark());
-        showScore();
+        showScoreAndAmmo();
 
         /*
          * try { Thread.sleep(ANIMATION_SLEEP_TIMER); } catch (InterruptedException e) {
@@ -118,8 +118,9 @@ import java.util.stream.Collectors;
   /**
    * Displays the score in the upper right corner of the screen.
    */
-  private void showScore() {
-    addText("Score: " + HighScores.getInstance().getScore(), TEXT_SCALE_SIZE_SMALL,
+  private void showScoreAndAmmo() {
+    addText(String.format("Ammo: %d Score: %d", screenController.getShark().getAmmo(),
+            HighScores.getInstance().getScore()), TEXT_SCALE_SIZE_SMALL,
         Position.upperCornerPosition());
   }
 
@@ -229,7 +230,7 @@ import java.util.stream.Collectors;
   /**
    * This method removes all event handlers.
    */
-  public void removeAllEventHandlers() {
+  private void removeAllEventHandlers() {
     removeNonPauseEventHandlers();
     MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, pauseController);
   }

@@ -185,7 +185,7 @@ public class PositionTest {
   @Test
   public void testHashCode() {
     Position testPosition = new Position(0, 0);
-    assertSame(testPosition.hashCode(), position.hashCode());
+    assertEquals(testPosition.hashCode(), position.hashCode());
     testPosition = new Position(1, 1);
     assertNotSame(position.hashCode(), testPosition.hashCode());
   }

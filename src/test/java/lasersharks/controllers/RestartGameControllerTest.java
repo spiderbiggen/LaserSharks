@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction")
+@SuppressWarnings({"restriction", "rawtypes"})
 public class RestartGameControllerTest {
   private MainGui gui;
   private ArgumentCaptor<Class> argument;
@@ -63,7 +63,6 @@ public class RestartGameControllerTest {
   /**
    * Test the restart game controller.
    */
-  @SuppressWarnings("unchecked")
   @Test
   public void testNoInteractions() {
     final KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.A, false, false, false,

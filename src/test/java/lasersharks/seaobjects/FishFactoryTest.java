@@ -26,11 +26,12 @@ public class FishFactoryTest {
   private static final long SEED = 12345622L;
   private static final long SEED_WEST = 11L;
 
-  private static final float EXPECTED_SIZE_1 = 172;
-  private static final int EXPECTED_SPEED_1 = 134;
+  private static final float EXPECTED_SIZE_1 = 282;
+  private static final int EXPECTED_SPEED_1 = 148;
 
-  private static final float EXPECTED_SIZE_2 = 176;
-  private static final int EXPECTED_SPEED_2 = 344;
+  private static final float EXPECTED_SIZE_2 = 289;
+  private static final int EXPECTED_SPEED_2 = 448;
+
 
   private FishFactory fishFactory;
 

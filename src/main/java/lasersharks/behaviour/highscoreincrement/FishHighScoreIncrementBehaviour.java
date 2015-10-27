@@ -13,7 +13,7 @@ public class FishHighScoreIncrementBehaviour implements HighScoreIncrementBehavi
   
   /**
    * Constructor.
-   * @param element object for wich to act.
+   * @param element object for which to act.
    */
   public FishHighScoreIncrementBehaviour(final Displayable element) {
     this.element = element;

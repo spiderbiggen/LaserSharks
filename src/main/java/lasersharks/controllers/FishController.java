@@ -1,18 +1,24 @@
 package lasersharks.controllers;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
 import lasersharks.Direction;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.interfaces.AmmoSpawner;
 import lasersharks.interfaces.Displayable;
-import lasersharks.interfaces.FishSpawner;
-import lasersharks.interfaces.LaserSpawner;
-import lasersharks.seaobjects.*;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
+import lasersharks.interfaces.LaserSpawner;
+import lasersharks.seaobjects.AmmoFactory;
+import lasersharks.seaobjects.FishFactory;
+import lasersharks.interfaces.FishSpawner;
+import lasersharks.seaobjects.LaserFactory;
+import lasersharks.seaobjects.LaserShark;
+import lasersharks.seaobjects.AbstractSeaObject;
+
 
 /**
  * Class for controlling fish data.
@@ -37,7 +43,7 @@ public class FishController {
    * Holder for shark data.
    */
   private static final float START_SIZE = 80.0f;
-  private static final double START_SPEED = 670;
+  private static final double START_SPEED = 450;
   private static final Direction START_DIRECTION = Direction.None;
 
   /**
@@ -51,7 +57,7 @@ public class FishController {
    */
 
   private static final int ONE_HUNDRED = 100;
-  private static final int AMMO_SPAWN_LIMITER = 88;
+  private static final int AMMO_SPAWN_LIMITER = 90;
 
   /**
    * Random Number Generator holder.
@@ -75,8 +81,12 @@ public class FishController {
    * Set the shark to his beginning state.
    */
   private void setBeginShark() {
-    this.setShark(
-        new LaserShark(Position.middlePosition(), START_SIZE, START_SPEED, START_DIRECTION));
+    this.shark = new LaserShark(
+        Position.middlePosition(),
+        START_SIZE,
+        START_SPEED,
+        START_DIRECTION
+    );
   }
 
   /**

@@ -5,7 +5,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
- * The shootcontroller is responsible for handling the keyEvents that has to do with shooting.
+ * The shootcontroller is responsible for handling the keyEvents that have to do with shooting.
  * 
  * @author SEMGroup27
  *
@@ -26,8 +26,10 @@ public class ShootController implements EventHandler<KeyEvent> {
     this.fishController = fishController;
   }
 
-  @Override public void handle(final KeyEvent event) {
-    if (event.getCode() == KeyCode.L && event.getEventType() == KeyEvent.KEY_PRESSED) {
+
+  @Override
+  public void handle(KeyEvent event) {
+    if (event.getCode() == KeyCode.SPACE && event.getEventType() == KeyEvent.KEY_PRESSED) {
         shoot();
     }
   }

@@ -18,9 +18,10 @@ import java.util.List;
  */
 @SuppressWarnings("restriction")
 public class ScreenController {
+
   private final GamePane currentPane;
   private final FishController fishCon;
-  private static final int GAME_WINNING_SIZE = 320;
+  private static final int GAME_WINNING_SIZE = 400;
 
   /**
    * Constructor.
@@ -43,19 +44,12 @@ public class ScreenController {
    * 
    * @return FishInfo
    */
-  public List<Displayable> getNextFrameInfo(final double frametime) {
-    if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
-      final GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
-      if (this.fishCon.getShark().isAlive()) {
-        if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
-          MainGui.browseToGlobal(WinPane.class);
-          gamePane.removeAllEventHandlers();
-        }
-      } else {
+  public List<Displayable> getNextFrameInfo(double frametime) {
+      if (!this.fishCon.getShark().isAlive()) {
         MainGui.browseToGlobal(LosingPane.class);
-        gamePane.removeAllEventHandlers();
+      } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
+        MainGui.browseToGlobal(WinPane.class);
       }
-    }
 
     return this.fishCon.getNextCycleInformation(frametime);
   }
