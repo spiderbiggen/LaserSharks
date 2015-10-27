@@ -3,8 +3,10 @@ package lasersharksgui.panes;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import lasersharks.Logger;
 import lasersharks.Options;
+import lasersharks.Position;
 import lasersharks.controllers.AudioController;
 import javafx.scene.text.Text;
 
@@ -55,7 +57,7 @@ public class OptionsPane extends StandardPane {
    *          the size of the button(width and height).
    * @return a new mute button based on the parameters.
    */
-  public Button muteButton(double xPos, double yPos, double size) {
+  private Button muteButton(double xPos, double yPos, double size) {
     muteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
     muteButtonImage.setFitWidth(BUTTON_WIDTH * size);
     unmuteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
@@ -77,7 +79,7 @@ public class OptionsPane extends StandardPane {
   /**
    * method for muting and unmuting the music of the game.
    */
-  public void muteSound() {
+  private void muteSound() {
     if (!Options.getInstance().isMutedMusic()) {
       AudioController.getInstance().muteAll();
       muteButton.setGraphic(unmuteButtonImage);
@@ -87,11 +89,20 @@ public class OptionsPane extends StandardPane {
       muteButton.setGraphic(muteButtonImage);
       Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
     }
-
   }
 
   @Override
   public void stop() {
     // empty
+  }
+  
+  private Slider volumeSlider(Position pos, double xSize, double ySize) {
+    Slider volumeSlider = new Slider();
+    volumeSlider.setLayoutX(pos.getPosX());
+    volumeSlider.setLayoutY(pos.getPosY());
+    volumeSlider.setMaxWidth(xSize);
+    volumeSlider.setMaxHeight(ySize);
+    
+    return volumeSlider;
   }
 }
