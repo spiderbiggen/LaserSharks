@@ -16,11 +16,11 @@ public class DefaultMoveBehaviour implements MoveBehaviour {
   /**
    * the constructor.
    * 
-   * @param swimmer
+   * @param diplayable
    *          the fish this behaviour applies to.
    */
-  public DefaultMoveBehaviour(Displayable swimmer) {
-    this.displayable = swimmer;
+  public DefaultMoveBehaviour(Displayable diplayable) {
+    this.displayable = diplayable;
   }
 
   /**
