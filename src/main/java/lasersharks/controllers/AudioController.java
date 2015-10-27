@@ -1,29 +1,27 @@
 package lasersharks.controllers;
 
-import java.io.File;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import lasersharks.Logger;
 import lasersharks.Options;
 
+import java.io.File;
+
 /**
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction")
-public class AudioController {
+@SuppressWarnings("restriction") public final class AudioController {
 
   private static AudioController instance;
 
   private MediaPlayer musicPlayer;
-  private MediaPlayer sfxPlayer;
 
   /**
-   * The constructor to create a new instance of audiocontroller.
+   * The constructor to create a new instance of audioController.
    */
-  protected AudioController() {
-    setInstance(this);
+  private AudioController() {
+
   }
 
   /**
@@ -33,7 +31,7 @@ public class AudioController {
    *          the path of the music file that should be played.
    * @return true iff music has started Playing
    */
-  public boolean playMusic(String path) {
+  public boolean playMusic(final String path) {
     if (musicPlayer != null) {
       AudioController.instance.musicPlayer.stop();
     }
@@ -55,12 +53,12 @@ public class AudioController {
    *          the path of the sound file that should be played.
    * @return true iff a sound effect has started Playing
    */
-  private boolean playSoundEffect(String path) {
+  private boolean playSoundEffect(final String path) {
     if (Options.getInstance().isMutedSfx()) {
       return false;
     }
     try {
-      sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
+      final MediaPlayer sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
       sfxPlayer.setVolume(
           Options.getInstance().getSfxVolume() * Options.getInstance().getMasterVolume());
       sfxPlayer.play();
@@ -126,11 +124,11 @@ public class AudioController {
   }
 
   /**
-   * Unmute music and sound effect playback.
+   * Un-mute music and sound effect playback.
    */
-  public void unmuteAll() {
-    unmuteMusic();
-    unmuteSfx();
+  public void unMuteAll() {
+    unMuteMusic();
+    unMuteSfx();
   }
 
   /**
@@ -144,66 +142,66 @@ public class AudioController {
   }
 
   /**
-   * Mute sound effect playback.
+   * Un-mute music playback.
    */
-  public void unmuteMusic() {
+  public void unMuteMusic() {
     Options.getInstance().setMutedMusic(false);
     resumeMusic();
   }
 
   /**
-   * Unmute music playback.
+   * Mute sound effects playback.
    */
   public void muteSfx() {
     Options.getInstance().setMutedSfx(true);
   }
 
   /**
-   * Unmute sound effect playback.
+   * Un-mute sound effect playback.
    */
-  public void unmuteSfx() {
+  public void unMuteSfx() {
     Options.getInstance().setMutedSfx(false);
   }
 
   /**
-   * Adjusts the master volume in the {@link Option} Class.
+   * Adjusts the master volume in the {@link Options} Class.
    * 
    * @param newVolume
    *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
-  public void adjustMasterVolume(double newVolume) {
-    newVolume = Math.min(Math.max(newVolume, 0), 1.0);
-    Options.getInstance().setMasterVolume(newVolume);
+  public void adjustMasterVolume(final double newVolume) {
+    final double volume = Math.min(Math.max(newVolume, 0), 1.0);
+    Options.getInstance().setMasterVolume(volume);
 
     if (musicPlayer != null) {
-      musicPlayer.setVolume(Options.getInstance().getMusicVolume() * newVolume);
+      musicPlayer.setVolume(Options.getInstance().getMusicVolume() * volume);
     }
   }
 
   /**
-   * Adjusts the music volume of the musicPlayer and in the {@link Option} Class.
+   * Adjusts the music volume of the musicPlayer and in the {@link Options} Class.
    * 
    * @param newVolume
    *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
-  public void adjustMusicVolume(double newVolume) {
-    newVolume = Math.min(Math.max(newVolume, 0), 1.0);
-    Options.getInstance().setMusicVolume(newVolume);
+  public void adjustMusicVolume(final double newVolume) {
+    final double volume = Math.min(Math.max(newVolume, 0), 1.0);
+    Options.getInstance().setMusicVolume(volume);
 
     if (musicPlayer != null) {
-      musicPlayer.setVolume(newVolume * Options.getInstance().getMasterVolume());
+      musicPlayer.setVolume(volume * Options.getInstance().getMasterVolume());
     }
   }
 
   /**
-   * Adjusts the sound effects volume in the {@link Option} Class.
+   * Adjusts the sound effects volume in the {@link Options} Class.
    * 
    * @param newVolume
    *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
-  public void adjustSfxVolume(double newVolume) {
-    newVolume = Math.min(Math.max(newVolume, 0), 1.0);
-    Options.getInstance().setSfxVolume(newVolume);
+  public void adjustSfxVolume(final double newVolume) {
+    final double volume = Math.min(Math.max(newVolume, 0), 1.0);
+    Options.getInstance().setSfxVolume(volume);
   }
 
   /**
@@ -213,32 +211,21 @@ public class AudioController {
    */
   public static AudioController getInstance() {
     if (instance == null) {
-      return new AudioController();
+      instance = new AudioController();
     }
     return instance;
   }
 
   /**
-   * Sets the Singleton instance for the audio controller.
-   * 
-   * @param instance
-   *          the new instance
-   */
-  public static void setInstance(AudioController instance) {
-    if (AudioController.instance != null) {
-      destroyInstance();
-    }
-    AudioController.instance = instance;
-  }
-
-  /**
-   * Sets the Singleton instance for the audio controller to null to reset all the settings.
+   * Clean the current instance but keep this instance to stay with singleton pattern.
    */
   public static void destroyInstance() {
-    if (AudioController.instance.musicPlayer != null) {
-      AudioController.instance.musicPlayer.stop();
+    if (instance != null) {
+      if (instance.musicPlayer != null) {
+        instance.musicPlayer.dispose();
+      }
+      instance.musicPlayer = null;
     }
-    AudioController.instance = null;
   }
 
 }

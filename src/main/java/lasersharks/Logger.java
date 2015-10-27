@@ -1,10 +1,6 @@
 package lasersharks;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,9 +13,9 @@ import java.util.Date;
 public class Logger {
   private static Logger instance;
   private static final String LOG_DIRECTORY = "logs/";
-  private FileWriter fileWriter;
-  private PrintWriter printWriter;
-  private DateFormat dateFormat;
+  private final FileWriter fileWriter;
+  private final PrintWriter printWriter;
+  private final DateFormat dateFormat;
 
   /**
    * Create an instance of the logger class.
@@ -27,7 +23,7 @@ public class Logger {
    * @param fileWriter
    *          file to use.
    */
-  protected Logger(FileWriter fileWriter) {
+  protected Logger(final FileWriter fileWriter) {
     this.fileWriter = fileWriter;
     this.printWriter = new PrintWriter(new BufferedWriter(this.fileWriter));
     this.dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -52,7 +48,7 @@ public class Logger {
    * @param specifics
    *          the specifics about the event.
    */
-  public void write(String event, String specifics) {
+  public void write(final String event, final String specifics) {
     this.printWriter
         .println(dateFormat.format(new Date()) + " : " + event + " : " + specifics + "\n");
     this.printWriter.flush();
@@ -68,10 +64,10 @@ public class Logger {
       return Logger.instance;
     }
 
-    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+    final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     FileWriter fw;
     try {
-      File f = new File(LOG_DIRECTORY + dateFormat.format(new Date()) + ".txt");
+      final File f = new File(LOG_DIRECTORY + dateFormat.format(new Date()) + ".txt");
 
       f.getParentFile().mkdirs();
       if (!f.exists()) {
@@ -93,7 +89,7 @@ public class Logger {
    *          filename to use.
    * @return instance of Logger Class.
    */
-  public static Logger getInstance(FileWriter filename) {
+  public static Logger getInstance(final FileWriter filename) {
     if (Logger.instance == null) {
       new Logger(filename);
     }
@@ -106,7 +102,7 @@ public class Logger {
    * @param logger
    *          logger to be used.
    */
-  public static void setInstance(Logger logger) {
+  public static void setInstance(final Logger logger) {
     Logger.instance = logger;
   }
 }

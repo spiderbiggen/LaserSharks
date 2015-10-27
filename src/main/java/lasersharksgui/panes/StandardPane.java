@@ -3,14 +3,8 @@ package lasersharksgui.panes;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
-import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.controllers.AudioController;
@@ -56,8 +50,8 @@ public abstract class StandardPane extends Pane implements Stoppable {
   /**
    * This function adds a background to the panel.
    */
-  public void addBackGround() {
-    BackgroundImage myBI = new BackgroundImage(
+  protected void addBackGround() {
+    final BackgroundImage myBI = new BackgroundImage(
         new Image(Options.getInstance().getBackGroundImage(), Options.getGlobalWidth(),
             Options.getGlobalHeight(), true, false),
         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -71,7 +65,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
    * @param score
    *          a string containing the score of the player.
    */
-  public void showScore(String score) {
+  public void showScore(final String score) {
     addText("Score: " + score, TEXT_SCALE_SIZE_SMALL, Position.upperCornerPosition());
   }
 
@@ -85,8 +79,8 @@ public abstract class StandardPane extends Pane implements Stoppable {
    * @param position
    *          the position of the message on the screen.
    */
-  public void addText(String message, int textSize, Position position) {
-    Text gameText = new Text(message);
+  public void addText(final String message, final int textSize, final Position position) {
+    final Text gameText = new Text(message);
     gameText.setScaleX(textSize);
     gameText.setScaleY(textSize);
     gameText.setX(position.getPosX());
@@ -105,7 +99,7 @@ public abstract class StandardPane extends Pane implements Stoppable {
    * @param deltaY
    *          how far from the middle of the screen the message should be shown.
    */
-  public void addMidText(String message, int textSize, double deltaY) {
+  public void addMidText(final String message, final int textSize, final double deltaY) {
     addText(message, textSize, new Position(Position.middlePosition().getPosX(),
         Position.middlePosition().getPosY() - deltaY));
   }

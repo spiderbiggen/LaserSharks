@@ -30,11 +30,4 @@ public interface FishSpawner {
    */
   Fish generateFish();
 
-  /**
-   * Set the seed for this spawner.
-   * 
-   * @param rng
-   *          new seed
-   */
-  void setFishRng(Random rng);
 }

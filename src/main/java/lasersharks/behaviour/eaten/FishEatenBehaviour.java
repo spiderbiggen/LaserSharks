@@ -11,7 +11,7 @@ import lasersharks.seaobjects.SeaObject;
  *
  */
 public class FishEatenBehaviour implements EatenBehaviour {
-  private SeaObject element;
+  private final SeaObject element;
 
   /**
    * Constructor.
@@ -19,7 +19,7 @@ public class FishEatenBehaviour implements EatenBehaviour {
    * @param ele
    *          element to wich to propagate actions.
    */
-  public FishEatenBehaviour(SeaObject ele) {
+  public FishEatenBehaviour(final SeaObject ele) {
     this.element = ele;
   }
 

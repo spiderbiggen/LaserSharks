@@ -29,15 +29,14 @@ public class MainGui extends Application {
    * @param args
    *          parameters to influence the startup of this game.
    */
-  public static void main(String[] args) {
+  public static void main(final String... args) {
     launch(args);
   }
 
   /**
    * The start method is the first method run when we launch our application.
    */
-  @Override
-  public void start(Stage stage) throws Exception {
+  @Override public void start(final Stage stage) throws Exception {
     setInstance(this);
     stage.setFullScreen(true);
     stackPane = new StackPane();
@@ -57,14 +56,12 @@ public class MainGui extends Application {
    * @param paneClass
    *          The class of the panel we should browse to.
    */
-  public void browseTo(Class<? extends StandardPane> paneClass) {
+  public void browseTo(final Class<? extends StandardPane> paneClass) {
     StandardPane paneToShow;
     try {
-      paneToShow = (StandardPane) paneClass.newInstance();
+      paneToShow = paneClass.newInstance();
       browseTo(paneToShow);
-    } catch (InstantiationException e) {
-      e.printStackTrace();
-    } catch (IllegalAccessException e) {
+    } catch (InstantiationException | IllegalAccessException e) {
       e.printStackTrace();
     }
   }
@@ -75,7 +72,7 @@ public class MainGui extends Application {
    * @param pane
    *          The pane we should browse to.
    */
-  public void browseTo(StandardPane pane) {
+  public void browseTo(final StandardPane pane) {
     try {
       pane.setOpacity(1.0);
 
@@ -104,7 +101,7 @@ public class MainGui extends Application {
    * @param pane
    *          the pane that should act as an overlay.
    */
-  public void addOverlay(Pane pane) {
+  public void addOverlay(final Pane pane) {
     stackPane.getChildren().add(pane);
   }
 
@@ -114,7 +111,7 @@ public class MainGui extends Application {
    * @param pane
    *          the pane to be removed.
    */
-  public void removeOverlay(Pane pane) {
+  public void removeOverlay(final Pane pane) {
     if (!pane.equals(currentPane)) {
       stackPane.getChildren().remove(pane);
     }
@@ -126,7 +123,7 @@ public class MainGui extends Application {
    * @param paneClass
    *          The class of the panel we should browse to.
    */
-  public static void browseToGlobal(Class<? extends StandardPane> paneClass) {
+  public static void browseToGlobal(final Class<? extends StandardPane> paneClass) {
     getInstance().browseTo(paneClass);
   }
 
@@ -155,7 +152,7 @@ public class MainGui extends Application {
    * @param newInstance
    *          the new instance of the maingui class
    */
-  public static void setInstance(MainGui newInstance) {
+  public static void setInstance(final MainGui newInstance) {
     instance = newInstance;
   }
 

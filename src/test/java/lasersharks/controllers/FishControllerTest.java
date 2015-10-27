@@ -56,7 +56,7 @@ public class FishControllerTest {
    */
   @Test
   public void testAddFish() {
-    Fish fishBot = new FishFactory().generateFish();
+    final Fish fishBot = new FishFactory().generateFish();
     assertFalse(fishCon.getNextCycleInformation(1).contains(fishBot));
     fishCon.addDisplayable(fishBot);
     assertTrue(fishCon.getNextCycleInformation(3).contains(fishBot));
@@ -64,18 +64,18 @@ public class FishControllerTest {
 
   /**
    * A fish controller containing 10 fishes and 1 shark. one fish collides with the shark. The fishes
-   * are size 10. Useful for testing multiple methods.
+   * are SIZE 10. Useful for testing multiple methods.
    * 
    * @param sizeOfShark
-   *          the size of the shark to set to.
+   *          the SIZE of the shark to set to.
    * @return a fish controller with 10 fish and 1 shark. one shark and 1 fish collide.
    */
-  public FishController fishConFilled(int sizeOfShark) {
+  public FishController fishConFilled(final int sizeOfShark) {
     fishCon = new FishController();
     fishCon.setShark(
         new LaserShark(new Position(POSITION_X, POSITION_Y), sizeOfShark, SPEED, Direction.East));
     for (int i = 0; i < FISH_AMOUNT; i++) {
-      fishCon.addDisplayable(new Fish("", 1, 1,
+      fishCon.addDisplayable(new Fish("", 1,
           new Position(POSITION_X + i * DIST_BETWEEN_FISH, POSITION_Y + i * DIST_BETWEEN_FISH),
           (float) SIZE, (double) SPEED,
           Direction.East));
@@ -89,29 +89,29 @@ public class FishControllerTest {
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Test
   public void testGetNextCycleSharkKilled() {
-    MainGui guiMock = Mockito.mock(MainGui.class);
-    ArgumentCaptor<Class> argument = ArgumentCaptor.forClass(
+    final MainGui guiMock = Mockito.mock(MainGui.class);
+    final ArgumentCaptor<Class> argument = ArgumentCaptor.forClass(
             Class.class
     );
     MainGui.setInstance(guiMock);
-    
-    FishController fishCon = fishConFilled(SIZE);
+
+    final FishController fishCon = fishConFilled(SIZE);
     assertTrue(fishCon.getShark().isAlive());
     fishCon.getNextCycleInformation(1);
-    
-    Mockito.verify(guiMock).browseTo((argument.capture()));
+
+    Mockito.verify(guiMock).browseTo(argument.capture());
     assertEquals(LosingPane.class, argument.getValue());
   }
 
   /**
    * A cycle is tested where the shark eats an other fish. After the cycle the shark should have
-   * grown in size.
+   * grown in SIZE.
    */
   @Test
   public void testGetNextCycleFishKilled() {
-    FishController fishCon = fishConFilled(SIZE + 1);
+    final FishController fishCon = fishConFilled(SIZE + 1);
     assertTrue(fishCon.getShark().isAlive());
-    double oldSize = fishCon.getShark().getSize();
+    final double oldSize = fishCon.getShark().getSize();
     fishCon.getNextCycleInformation(1);
     assertTrue(fishCon.getShark().getSize() > oldSize);
   }
@@ -130,9 +130,9 @@ public class FishControllerTest {
    */
   @Test
   public void testShootLaserTrue() {
-    int oldAmmo = fishCon.getShark().getAmmo();
+    final int oldAmmo = fishCon.getShark().getAmmo();
     assertTrue(fishCon.shootLaser());
-    int newAmmo = fishCon.getShark().getAmmo();
+    final int newAmmo = fishCon.getShark().getAmmo();
     assertTrue(oldAmmo - 1 == newAmmo);
   }
 }

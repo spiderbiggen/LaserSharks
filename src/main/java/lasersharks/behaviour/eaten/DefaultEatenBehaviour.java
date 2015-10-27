@@ -10,5 +10,6 @@ import lasersharks.behaviour.EatenBehaviour;
 public class DefaultEatenBehaviour implements EatenBehaviour {
   @Override
   public void onCollisionEaten() {
+    //Empty
   }
 }

@@ -11,7 +11,7 @@ import lasersharks.interfaces.Displayable;
  */
 public class DefaultMoveBehaviour implements MoveBehaviour {
 
-  private Displayable displayable;
+  private final Displayable displayable;
 
   /**
    * the constructor.
@@ -19,7 +19,7 @@ public class DefaultMoveBehaviour implements MoveBehaviour {
    * @param displayable
    *          the fish this behaviour applies to.
    */
-  public DefaultMoveBehaviour(Displayable displayable) {
+  public DefaultMoveBehaviour(final Displayable displayable) {
     this.displayable = displayable;
   }
 
@@ -27,12 +27,12 @@ public class DefaultMoveBehaviour implements MoveBehaviour {
    * moves the Fish in the right direction.
    *
    * @param frameTime
-   *          the frametime of the screen.
+   *          the frame time of the screen.
    * @return true of the fish was able to move.
    */
-  @Override public boolean move(double frameTime) {
+  @Override public boolean move(final double frameTime) {
     return displayable.getPosition().updatePosition(displayable.getDirection(),
-        (displayable.getSpeed() / frameTime), displayable.getSize());
+        displayable.getSpeed() / frameTime, displayable.getSize());
   }
 
 }

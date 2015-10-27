@@ -8,6 +8,7 @@ import lasersharks.behaviour.SizeDecrementBahaviour;
  *
  */
 public class DefaultSizeDecrementBehaviour implements SizeDecrementBahaviour {
-  @Override
-  public void onCollisionSizeDecrement(int size) { }
+  @Override public void onCollisionSizeDecrement(final int size) {
+    //Empty
+  }
 }

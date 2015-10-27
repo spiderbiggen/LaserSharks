@@ -1,14 +1,11 @@
 package lasersharks.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.Collection;
-
+import javafx.event.EventType;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import lasersharks.Direction;
+import lasersharks.interfaces.DirectionCallback;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,15 +13,14 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.mockito.ArgumentCaptor;
 
-import javafx.event.EventType;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import lasersharks.Direction;
-import lasersharks.interfaces.DirectionCallback;
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 /**
- * Class for testing {@link DirectionInputcontroller}.
+ * Class for testing {@link DirectionInputController}.
  * 
  * @author SEMGroup27
  *
@@ -38,29 +34,30 @@ public class DirectionInputControllerTest {
   private ScreenController screenCon;
   private DirectionInputController directionInputController;
 
-  private KeyCode keyCode1;
-  private KeyCode keyCode2;
-  private Direction expectedDirectionAfterKeyPress1;
-  private Direction expectedDirectionAfterKeyPress2;
-  private ArgumentCaptor<Direction> directionCaptor;
+  private final KeyCode keyCode1;
+  private final KeyCode keyCode2;
+  private final Direction expectedDirectionAfterKeyPress1;
+  private final Direction expectedDirectionAfterKeyPress2;
+  private final ArgumentCaptor<Direction> directionCaptor;
 
   private final Direction defaultDirection = Direction.None;
   private DirectionCallback callback;
 
   /**
-   * Constructor for parameterized tests.
+   * Constructor for parametrized tests.
    * 
    * @param keyCode1
    *          Code of firstKey pressed
    * @param keyCode2
    *          Code of secondKey pressed
    * @param expectedDirectionAfterKeyPress1
-   *          direction after firstkeypress
+   *          DIRECTION after first key press
    * @param expectedDirectionAfterKeyPress2
-   *          direction after secondkeypress
+   *          DIRECTION after second key press
    */
-  public DirectionInputControllerTest(KeyCode keyCode1, KeyCode keyCode2,
-      Direction expectedDirectionAfterKeyPress1, Direction expectedDirectionAfterKeyPress2) {
+  public DirectionInputControllerTest(final KeyCode keyCode1, final KeyCode keyCode2,
+      final Direction expectedDirectionAfterKeyPress1,
+      final Direction expectedDirectionAfterKeyPress2) {
     super();
     this.keyCode1 = keyCode1;
     this.keyCode2 = keyCode2;
@@ -87,7 +84,7 @@ public class DirectionInputControllerTest {
    * @param keyCode
    *          key witch has been pressed.
    */
-  private void pressKey(KeyCode keyCode) {
+  private void pressKey(final KeyCode keyCode) {
     keyAction(keyCode, KeyEvent.KEY_PRESSED);
   }
 
@@ -97,7 +94,7 @@ public class DirectionInputControllerTest {
    * @param keyCode
    *          key witch has been pressed.
    */
-  private void releaseKey(KeyCode keyCode) {
+  private void releaseKey(final KeyCode keyCode) {
     keyAction(keyCode, KeyEvent.KEY_RELEASED);
   }
 
@@ -109,13 +106,13 @@ public class DirectionInputControllerTest {
    * @param keyEvent
    *          the KeyEvent that needs to be simulated.
    */
-  private void keyAction(KeyCode keyCode, EventType<KeyEvent> keyEvent) {
-    KeyEvent k = new KeyEvent(keyEvent, "", "", keyCode, false, false, false, false);
+  private void keyAction(final KeyCode keyCode, final EventType<KeyEvent> keyEvent) {
+    final KeyEvent k = new KeyEvent(keyEvent, "", "", keyCode, false, false, false, false);
     this.directionInputController.handle(k);
   }
 
   /**
-   * Check if the direction is proper after firstkeypress.
+   * Check if the DIRECTION is proper after first key press.
    */
   @Test
   public void testDirectionAfterFirstKeyPress() {
@@ -126,7 +123,7 @@ public class DirectionInputControllerTest {
   }
 
   /**
-   * Check if the direction is proper after secondkeypress.
+   * Check if the DIRECTION is proper after second key press.
    */
   @Test
   public void testDirectionAfterSecondKeyPress() {
@@ -138,7 +135,7 @@ public class DirectionInputControllerTest {
   }
 
   /**
-   * Check if the direction is proper after secondkeyreleased.
+   * Check if the DIRECTION is proper after second key released.
    */
   @Test
   public void testDirectionAfterSecondKeyRelease() {
@@ -154,10 +151,9 @@ public class DirectionInputControllerTest {
   }
 
   /**
-   * Check if the direction is proper after bothKeysreleased.
+   * Check if the DIRECTION is proper after both Keys released.
    */
-  @Test
-  public void testDirectionAfterBothKeysreleased() {
+  @Test public void testDirectionAfterBothKeysReleased() {
     pressKey(this.keyCode1);
     pressKey(this.keyCode2);
     releaseKey(this.keyCode2);
@@ -171,10 +167,9 @@ public class DirectionInputControllerTest {
   }
 
   /**
-   * Check if the direction is proper after bothKeysreleasedReversed.
+   * Check if the DIRECTION is proper after bothKeysReleasedReversed.
    */
-  @Test
-  public void testDirectionAfterBothKeysreleasedReversed() {
+  @Test public void testDirectionAfterBothKeysReleasedReversed() {
     pressKey(this.keyCode1);
     pressKey(this.keyCode2);
     releaseKey(this.keyCode1);
@@ -188,7 +183,7 @@ public class DirectionInputControllerTest {
   }
 
   /**
-   * Check if the direction is proper after firstKeyPressedAndReleased.
+   * Check if the DIRECTION is proper after firstKeyPressedAndReleased.
    */
   @Test
   public void testDirectionAfterFirstKeyPressedAndReleased() {
@@ -201,7 +196,7 @@ public class DirectionInputControllerTest {
   }
 
   /**
-   * Check if the direction is proper after secondKeyPressedAndReleased.
+   * Check if the DIRECTION is proper after secondKeyPressedAndReleased.
    */
   @Test
   public void testDirectionAfterSecondKeyPressedAndReleased() {

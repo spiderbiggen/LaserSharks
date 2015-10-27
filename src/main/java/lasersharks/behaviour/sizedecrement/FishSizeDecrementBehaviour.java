@@ -10,7 +10,7 @@ import lasersharks.seaobjects.SeaObject;
  *
  */
 public class FishSizeDecrementBehaviour implements SizeDecrementBahaviour {
-  private SeaObject element;
+  private final SeaObject element;
 
   /**
    * Constructor.
@@ -18,12 +18,11 @@ public class FishSizeDecrementBehaviour implements SizeDecrementBahaviour {
    * @param ele
    *          ELement the behaviours handles about.
    */
-  public FishSizeDecrementBehaviour(SeaObject ele) {
+  public FishSizeDecrementBehaviour(final SeaObject ele) {
     this.element = ele;
   }
 
-  @Override
-  public void onCollisionSizeDecrement(int size) {
+  @Override public void onCollisionSizeDecrement(final int size) {
     element.decreaseSize(size);
   }
 }

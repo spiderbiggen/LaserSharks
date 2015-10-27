@@ -5,11 +5,9 @@ import javafx.scene.input.KeyEvent;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 import lasersharksgui.panes.OptionsPane;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 /**
@@ -31,8 +29,7 @@ public class PauseControllerTest {
   /**
    * Set up our mess.
    */
-  @Before
-  public void setUp() {
+  @Before public void setUpTest() {
     gui = Mockito.mock(MainGui.class);
     gamePane = Mockito.mock(GamePane.class);
     pauseController = new PauseController(gamePane);
@@ -49,8 +46,7 @@ public class PauseControllerTest {
   /**
    * Cleanup our mess.
    */
-  @After
-  public void tearDown() {
+  @After public void tearDownTest() {
     MainGui.clearInstance();
   }
 
@@ -58,7 +54,7 @@ public class PauseControllerTest {
    * Test for pressedP keyevent.
    */
   // @Test
-  public void testPressedP() {
+  public void PressedPTest() {
     pauseController.handle(pPressed);
     Mockito.verify(gui).browseTo(OptionsPane.class);
   }
@@ -66,8 +62,7 @@ public class PauseControllerTest {
   /**
    * Test for pressedR keyevent.
    */
-  @Test
-  public void testPressedR() {
+  @Test public void PressedRTest() {
     pauseController.handle(rPressed);
     Mockito.verifyZeroInteractions(gui);
   }
@@ -75,8 +70,7 @@ public class PauseControllerTest {
   /**
    * Test for releaseP keyevent.
    */
-  @Test
-  public void testReleasedP() {
+  @Test public void ReleasedPTest() {
     pauseController.handle(pReleased);
     Mockito.verifyZeroInteractions(gui);
   }
@@ -85,7 +79,7 @@ public class PauseControllerTest {
    * Tests if the game could go back to the original gamePane.
    */
   // @Test
-  public void testPressedPTwice() {
+  public void PressedPTwiceTest() {
     pauseController.handle(pPressed);
     pauseController.handle(pPressed);
     // Mockito.verify(gui).addOverlay();

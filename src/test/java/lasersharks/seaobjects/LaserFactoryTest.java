@@ -1,16 +1,12 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-
+import lasersharks.Direction;
+import lasersharks.Position;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import lasersharks.Direction;
-import lasersharks.Position;
-import lasersharks.seaobjects.LaserBullet;
-import lasersharks.seaobjects.LaserFactory;
-import lasersharks.seaobjects.LaserShark;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for LaserFactory.
@@ -35,10 +31,10 @@ public class LaserFactoryTest {
    */
   @Test
   public void testLaserCreation() {
-    LaserShark shark = Mockito.mock(LaserShark.class);
+    final LaserShark shark = Mockito.mock(LaserShark.class);
     Mockito.when(shark.getLastHorizontalDirection()).thenReturn(Direction.East);
     Mockito.when(shark.getPosition()).thenReturn(Position.middlePosition());
-    LaserBullet laserBulletCreated = laserFactory.createLaser(shark);
+    final LaserBullet laserBulletCreated = laserFactory.createLaser(shark);
     assertEquals(laserBulletCreated.getPosition(), Position.middlePosition());
   }
 
@@ -47,10 +43,10 @@ public class LaserFactoryTest {
    */
   @Test
   public void testLaserCreation2() {
-    LaserShark shark = Mockito.mock(LaserShark.class);
+    final LaserShark shark = Mockito.mock(LaserShark.class);
     Mockito.when(shark.getLastHorizontalDirection()).thenReturn(Direction.West);
     Mockito.when(shark.getPosition()).thenReturn(Position.middlePosition());
-    LaserBullet laserBulletCreated = laserFactory.createLaser(shark);
+    final LaserBullet laserBulletCreated = laserFactory.createLaser(shark);
     assertEquals(laserBulletCreated.getPosition(), Position.middlePosition());
   }
 

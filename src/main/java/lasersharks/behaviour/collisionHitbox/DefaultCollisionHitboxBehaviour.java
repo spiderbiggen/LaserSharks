@@ -1,8 +1,8 @@
-package lasersharks.behaviour.collisionHitbox;
+package lasersharks.behaviour.collisionhitbox;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Position;
-import lasersharks.behaviour.CollisionHitboxBehaviour;
+import lasersharks.behaviour.CollisionHitBoxBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
@@ -12,13 +12,13 @@ import lasersharks.interfaces.Displayable;
  *
  */
 @SuppressWarnings("restriction")
-public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour {
+public class DefaultCollisionHitBoxBehaviour implements CollisionHitBoxBehaviour {
 
   private static final double WIDTH_TO_COORD = 0.85;
   private static final double SIZE_TO_COORD = 0.075;
   private static final double HALF_SCALE = 0.5f;
 
-  private Displayable displayable;
+  private final Displayable displayable;
 
   /**
    * the constructor.
@@ -26,7 +26,7 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
    * @param displayable
    *          the swimmer it should apply to.
    */
-  public DefaultCollisionHitboxBehaviour(Displayable displayable) {
+  public DefaultCollisionHitBoxBehaviour(final Displayable displayable) {
     this.displayable = displayable;
   }
 
@@ -38,23 +38,23 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
    * @return true if the fish collide
    */
   @Override
-  public boolean collide(Displayable swimmer) {
-    return swimmer.makeHitbox().intersects(displayable.makeHitbox().getLayoutBounds());
+  public boolean collide(final Displayable swimmer) {
+    return swimmer.makeHitBox().intersects(displayable.makeHitBox().getLayoutBounds());
     
-    //float distance = this.displayable.getMiddlePoint().calculateDistance(swimmer.getMiddlePoint());
+    //float distance = this.displayable.getMiddlePoint()
+    //    .calculateDistance(swimmer.getMiddlePoint());
     //return distance < this.displayable.getSize() + swimmer.getSize();
   }
 
   /**
-   * Gets the middlepoint of the swimmer.
+   * Gets the middle point of the swimmer.
    */
   @Override
   public Position getMiddlePoint() {
-    Position startPos = displayable.getPosition();
-    Position middlePointPosition = new Position(
+    final Position startPos = displayable.getPosition();
+    return new Position(
         startPos.getPosX() + (HALF_SCALE * displayable.getWidthScale() * displayable.getSize()),
         startPos.getPosY() + (HALF_SCALE * displayable.getSize()));
-    return middlePointPosition;
   }
 
   /**
@@ -62,13 +62,12 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
    * 
    * @return a rectangle hitbox.
    */
-  public Rectangle makeHitbox() {
-    double xcoordinate = displayable.getPosition().getPosX();
-    double ycoordinate = displayable.getPosition().getPosY();
-    Rectangle rekt = new Rectangle(xcoordinate + SIZE_TO_COORD * displayable.getSize(),
-        ycoordinate + SIZE_TO_COORD * displayable.getSize(),
+  public Rectangle makeHitBox() {
+    final double xCoordinate = displayable.getPosition().getPosX();
+    final double yCoordinate = displayable.getPosition().getPosY();
+    return new Rectangle(xCoordinate + SIZE_TO_COORD * displayable.getSize(),
+        yCoordinate + SIZE_TO_COORD * displayable.getSize(),
         displayable.getWidthScale() * displayable.getSize() * WIDTH_TO_COORD,
         displayable.getSize() * WIDTH_TO_COORD);
-    return rekt;
   }
 }

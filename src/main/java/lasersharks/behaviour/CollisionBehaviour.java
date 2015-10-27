@@ -15,6 +15,6 @@ public interface CollisionBehaviour {
    * @param object
    *          The SeaObject that is collided with.
    */
-  void colideWith(Displayable object);
+  void collideWith(Displayable object);
 
 }

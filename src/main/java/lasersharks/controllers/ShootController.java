@@ -13,7 +13,7 @@ import javafx.scene.input.KeyEvent;
 @SuppressWarnings("restriction")
 public class ShootController implements EventHandler<KeyEvent> {
 
-  private FishController fishController;
+  private final FishController fishController;
 
   /**
    * The constructor of the class.
@@ -21,13 +21,12 @@ public class ShootController implements EventHandler<KeyEvent> {
    * @param fishController
    *          the fishController that this eventHandler is linked to.
    */
-  public ShootController(FishController fishController) {
+  public ShootController(final FishController fishController) {
     super();
     this.fishController = fishController;
   }
 
-  @Override
-  public void handle(KeyEvent event) {
+  @Override public void handle(final KeyEvent event) {
     if (event.getCode() == KeyCode.L && event.getEventType() == KeyEvent.KEY_PRESSED) {
         shoot();
     }

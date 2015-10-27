@@ -9,18 +9,17 @@ import lasersharks.interfaces.Displayable;
  *
  */
 public class FishHighScoreIncrementBehaviour implements HighScoreIncrementBehaviour {
-  private Displayable element;
+  private final Displayable element;
   
   /**
    * Constructor.
    * @param element object for wich to act.
    */
-  public FishHighScoreIncrementBehaviour(Displayable element) {
+  public FishHighScoreIncrementBehaviour(final Displayable element) {
     this.element = element;
   }
-  
-  @Override
-  public int onCollisionHighScoreIncrement(int timePenalty) {
+
+  @Override public int onCollisionHighScoreIncrement(final int timePenalty) {
     return (int) Math.max(element.getSize() + element.getSpeed() - timePenalty, 0);
   }
 }

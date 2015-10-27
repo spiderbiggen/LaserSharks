@@ -10,13 +10,13 @@ import lasersharks.seaobjects.SeaObject;
  *
  */
 public class AmmoEatenBehaviour implements EatenBehaviour {
-  private SeaObject element;
+  private final SeaObject element;
   
   /**
    * Constructor.
    * @param ele element to which to propagate actions.
    */
-  public AmmoEatenBehaviour(SeaObject ele) {
+  public AmmoEatenBehaviour(final SeaObject ele) {
     this.element = ele;
   }
 

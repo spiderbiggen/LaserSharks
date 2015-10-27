@@ -3,11 +3,11 @@
  */
 package lasersharks.seaobjects;
 
-import java.util.Random;
-
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.interfaces.AmmoSpawner;
+
+import java.util.Random;
 
 /**
  * @author SEMGroup27
@@ -37,8 +37,7 @@ public class AmmoFactory implements AmmoSpawner {
    * 
    * @see lasersharks.AmmoSpawner#generateAmmo(java.util.Random)
    */
-  @Override
-  public void setAmmoRng(Random newRng) {
+  @Override public void setAmmoRng(final Random newRng) {
     this.ammoRng = newRng;
   }
 
@@ -47,12 +46,9 @@ public class AmmoFactory implements AmmoSpawner {
    * 
    * @see lasersharks.AmmoSpawner#generateAmmo(java.util.Random)
    */
-  @Override
-  public Ammo generateAmmo(Random rng) {
-    @SuppressWarnings("static-access")
-    double posX = rng.nextInt((int) (Options.getInstance().getGlobalWidth() - 0) + 1);
-    @SuppressWarnings("static-access")
-    double posY = rng.nextInt((int) (Options.getInstance().getGlobalHeight() - 0) + 1);
+  @Override public Ammo generateAmmo(final Random rng) {
+    final double posX = rng.nextInt((int) Options.getGlobalWidth() + 1);
+    final double posY = rng.nextInt((int) Options.getGlobalHeight() + 1);
 
     return new Ammo(new Position(posX, posY), AMMO_SIZE);
 

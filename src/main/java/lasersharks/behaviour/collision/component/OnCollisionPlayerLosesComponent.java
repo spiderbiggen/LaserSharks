@@ -4,16 +4,15 @@ import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
 
 public class OnCollisionPlayerLosesComponent implements CollisionComponent {
-  private Displayable me;
-  private CollisionComponent next;
+  private final Displayable me;
+  private final CollisionComponent next;
 
-  public OnCollisionPlayerLosesComponent(Displayable me, CollisionComponent next) {
+  public OnCollisionPlayerLosesComponent(final Displayable me, final CollisionComponent next) {
     this.me = me;
     this.next = next;
   }
 
-  @Override
-  public void handleCollision(Displayable other) {
+  @Override public void handleCollision(final Displayable other) {
     other.onCollisionPlayerLoses(me.getSize());
     next.handleCollision(other);
   }

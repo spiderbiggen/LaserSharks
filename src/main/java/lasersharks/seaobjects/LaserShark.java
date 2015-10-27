@@ -4,7 +4,7 @@ import lasersharks.Direction;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.behaviour.collision.SharkCollisionBehaviour;
-import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
+import lasersharks.behaviour.collisionhitbox.DefaultCollisionHitBoxBehaviour;
 import lasersharks.behaviour.move.LaserSharkMoveBehaviour;
 import lasersharks.interfaces.DirectionCallback;
 
@@ -16,8 +16,8 @@ import lasersharks.interfaces.DirectionCallback;
  */
 public class LaserShark extends SeaObject implements DirectionCallback {
 
-  private final String imageResource = "shark.png";
-  private final float widthScale = 1.5f;
+  private static final String IMAGE_RESOURCE = "shark.png";
+  private static final float WIDTH_SCALE = 1.628664f;
   private static final int STARTING_AMMO = 10;
   private static final int MAX_AMMO = 10;
 
@@ -36,9 +36,10 @@ public class LaserShark extends SeaObject implements DirectionCallback {
    * @param direction
    *          init direction
    */
-  public LaserShark(Position position, float size, double startSpeed, Direction direction) {
+  public LaserShark(final Position position, final float size, final double startSpeed,
+      final Direction direction) {
     super(position, size, startSpeed, direction);
-    collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
+    collisionHitBoxBehaviour = new DefaultCollisionHitBoxBehaviour(this);
     moveBehaviour = new LaserSharkMoveBehaviour(this);
     lastHorizontalDirection = Direction.East;
     collisionBehaviour = new SharkCollisionBehaviour(this);
@@ -47,16 +48,15 @@ public class LaserShark extends SeaObject implements DirectionCallback {
 
   @Override
   public String getImageResource() {
-    return imageResource;
+    return IMAGE_RESOURCE;
   }
 
   @Override
   public double getWidthScale() {
-    return widthScale;
+    return WIDTH_SCALE;
   }
 
-  @Override
-  public void setDirection(Direction dir) {
+  @Override public void setDirection(final Direction dir) {
     if (dir.equals(Direction.East) || dir.equals(Direction.West)) {
       lastHorizontalDirection = dir;
     }
@@ -69,12 +69,11 @@ public class LaserShark extends SeaObject implements DirectionCallback {
 
   @Override
   public void kill() {
-    Logger.getInstance().write("Loss", "Player has colided with a bigger fish");
+    Logger.getInstance().write("Loss", "Player has collided with a bigger fish");
     super.kill();
   }
 
-  @Override
-  public void putDirection(Direction dir) {
+  @Override public void putDirection(final Direction dir) {
     this.setDirection(dir);
   }
 
@@ -85,7 +84,7 @@ public class LaserShark extends SeaObject implements DirectionCallback {
    *          the amount to decrease.
    * @return the current ammo of the shark.
    */
-  public int decreaseAmmo(int amount) {
+  public int decreaseAmmo(final int amount) {
     ammo = ammo - amount;
     return ammo;
   }
@@ -109,27 +108,6 @@ public class LaserShark extends SeaObject implements DirectionCallback {
   }
 
   /**
-   * returns the maximum ammo.
-   * 
-   * @return maximum ammo.
-   */
-  public int getMaxAmmo() {
-    return MAX_AMMO;
-  }
-
-  /**
-   * increases the ammo.
-   * 
-   * @param amount
-   *          the amount to increase.
-   * @return the current ammo of the shark.
-   */
-  public int increaseAmmo(int amount) {
-    ammo = Math.min(ammo + amount, MAX_AMMO);
-    return ammo;
-  }
-
-  /**
    * gets the last horizontal direction the shark went to.
    * 
    * @return the last horizontal direction the shark went to.
@@ -142,12 +120,13 @@ public class LaserShark extends SeaObject implements DirectionCallback {
    * Increment ammunition.
    * @param onCollisionAmmunitionIncrement Ammunition increment.
    */
-  public void increaseAmmunition(int onCollisionAmmunitionIncrement) {
+  public void increaseAmmunition(final int onCollisionAmmunitionIncrement) {
     this.ammo = Math.min(this.ammo + onCollisionAmmunitionIncrement, MAX_AMMO);
   }
 
   /**
    * Lasersharks are collisionActors.
+   * @return true
    */
   public boolean collisionActor() {
     return true;

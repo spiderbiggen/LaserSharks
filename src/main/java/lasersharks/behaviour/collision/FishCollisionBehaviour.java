@@ -14,7 +14,7 @@ import lasersharks.interfaces.Displayable;
  *
  */
 public class FishCollisionBehaviour implements CollisionBehaviour {
-  private CollisionComponent handler;
+  private final CollisionComponent handler;
 
   /**
    * Constructor.
@@ -22,7 +22,7 @@ public class FishCollisionBehaviour implements CollisionBehaviour {
    * @param me
    *          this.
    */
-  public FishCollisionBehaviour(Displayable me) {
+  public FishCollisionBehaviour(final Displayable me) {
     super();
     this.handler = 
         new OnCollisionSizeDecrementComponent(me, 
@@ -30,8 +30,7 @@ public class FishCollisionBehaviour implements CollisionBehaviour {
         new DefaultComponentLeaf()));
   }
 
-  @Override
-  public void colideWith(Displayable other) {
+  @Override public void collideWith(final Displayable other) {
     this.handler.handleCollision(other);
   }
 

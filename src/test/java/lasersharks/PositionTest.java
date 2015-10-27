@@ -1,11 +1,9 @@
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Test for the {@link Position} class.
@@ -40,7 +38,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#setPosX(int)}.
+   * Test method for {@link lasersharks.Position#setPosX(double)}.
    */
   @Test
   public void testSetPosX() {
@@ -57,7 +55,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#setPosY(int)}.
+   * Test method for {@link lasersharks.Position#setPosY(double)}.
    */
   @Test
   public void testSetPosY() {
@@ -86,7 +84,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosX(int)}.
+   * Test method for {@link lasersharks.Position#adjustPosX(double)}.
    */
   @Test
   public void testAdjustPosX1() {
@@ -95,7 +93,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosX(int)}.
+   * Test method for {@link lasersharks.Position#adjustPosX(double)}.
    */
   @Test
   public void testAdjustPosX2() {
@@ -104,7 +102,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosY(int)}.
+   * Test method for {@link lasersharks.Position#adjustPosY(double)}.
    */
   @Test
   public void testAdjustPosY1() {
@@ -113,7 +111,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosY(int)}.
+   * Test method for {@link lasersharks.Position#adjustPosY(double)}.
    */
   @Test
   public void testAdjustPosY2() {
@@ -126,7 +124,7 @@ public class PositionTest {
    */
   @Test
   public void testEqualsObjectTrue1() {
-    Position testPosition = new Position(0, 0);
+    final Position testPosition = new Position(0, 0);
     assertTrue(position.equals(testPosition));
     assertTrue(position.equals(position));
   }
@@ -177,7 +175,7 @@ public class PositionTest {
   @Test
   public void testCalculateDistance() {
     final double doubleDelta = Math.pow(10, 6);
-    Position testPosition = new Position(1, 1);
+    final Position testPosition = new Position(1, 1);
     assertEquals(Math.sqrt(2), position.calculateDistance(testPosition),
         Math.sqrt(2) / doubleDelta);
   }
@@ -202,7 +200,7 @@ public class PositionTest {
     final int halfScale = 2;
     Position.setHeightPanel(size);
     Position.setWidthPanel(size);
-    Position testPosition = new Position(size / halfScale, size / halfScale);
+    final Position testPosition = new Position(size / halfScale, size / halfScale);
     assertEquals(testPosition, Position.middlePosition());
   }
 }

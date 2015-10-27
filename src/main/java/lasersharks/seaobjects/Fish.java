@@ -16,18 +16,16 @@ import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
  *
  */
 public class Fish extends SeaObject {
-  private String image;
-  private double widthScale;
+  private final String image;
+  private final double widthScale;
 
   /**
    * propagation for construction.
    * 
    * @param image
    *          Image of the enemy.
-   * @param imgHeight
-   *          Height of image.
-   * @param imgWidth
-   *          Width of image.
+   * @param widthScale
+   *          The aspect ratio between the width and the height.
    * @param position
    *          Starting position.
    * @param size
@@ -37,12 +35,12 @@ public class Fish extends SeaObject {
    * @param direction
    *          Starting direction.
    */
-  public Fish(String image, int imgHeight, int imgWidth, Position position, Float size,
-      Double speed, Direction direction) {
+  public Fish(final String image, final double widthScale, final Position position,
+      final Float size, final Double speed, final Direction direction) {
 
     super(position, size, speed, direction);
     this.image = image;
-    this.widthScale = (double) imgHeight / (double) imgWidth;
+    this.widthScale = widthScale;
     checkForLossBehaviour = new FishCheckForLossBehaviour(this);
     eatenBehaviour = new FishEatenBehaviour(this);
     getSizeIncrementBahaviour = new FishGetSizeIncrementBehaviour(this);

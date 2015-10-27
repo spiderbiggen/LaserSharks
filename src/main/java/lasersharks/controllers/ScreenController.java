@@ -1,7 +1,5 @@
 package lasersharks.controllers;
 
-import java.util.List;
-
 import javafx.scene.Scene;
 import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.LaserShark;
@@ -9,6 +7,8 @@ import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 import lasersharksgui.panes.LosingPane;
 import lasersharksgui.panes.WinPane;
+
+import java.util.List;
 
 /**
  * This is the class that will manage the screen.
@@ -18,8 +18,8 @@ import lasersharksgui.panes.WinPane;
  */
 @SuppressWarnings("restriction")
 public class ScreenController {
-  private GamePane currentPane;
-  private FishController fishCon;
+  private final GamePane currentPane;
+  private final FishController fishCon;
   private static final int GAME_WINNING_SIZE = 320;
 
   /**
@@ -28,7 +28,7 @@ public class ScreenController {
    * @param pane
    *          the GamePane this screencontroller is set to
    */
-  public ScreenController(GamePane pane) {
+  public ScreenController(final GamePane pane) {
     super();
     this.fishCon = new FishController();
     this.currentPane = pane;
@@ -43,14 +43,16 @@ public class ScreenController {
    * 
    * @return FishInfo
    */
-  public List<Displayable> getNextFrameInfo(double frametime) {
+  public List<Displayable> getNextFrameInfo(final double frametime) {
     if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
-      GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
-      if (!this.fishCon.getShark().isAlive()) {
+      final GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
+      if (this.fishCon.getShark().isAlive()) {
+        if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
+          MainGui.browseToGlobal(WinPane.class);
+          gamePane.removeAllEventHandlers();
+        }
+      } else {
         MainGui.browseToGlobal(LosingPane.class);
-        gamePane.removeAllEventHandlers();
-      } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
-        MainGui.browseToGlobal(WinPane.class);
         gamePane.removeAllEventHandlers();
       }
     }

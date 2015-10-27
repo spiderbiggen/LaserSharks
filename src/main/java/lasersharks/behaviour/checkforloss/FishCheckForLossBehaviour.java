@@ -11,18 +11,17 @@ import lasersharksgui.panes.LosingPane;
  *
  */
 public class FishCheckForLossBehaviour implements CheckForLossBehaviour {
-  private SeaObject element;
+  private final SeaObject element;
   
   /**
    * Constructor.
    * @param ele element to wich to propagate actions.
    */
-  public FishCheckForLossBehaviour(SeaObject ele) {
+  public FishCheckForLossBehaviour(final SeaObject ele) {
     this.element = ele;
   }
 
-  @Override
-  public void onCollisionPlayerLoses(float size) {
+  @Override public void onCollisionPlayerLoses(final float size) {
     if (size <= element.getSize()) {
       MainGui.browseToGlobal(LosingPane.class);
     }

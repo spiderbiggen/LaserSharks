@@ -3,26 +3,24 @@
  */
 package lasersharksgui;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.Random;
-import java.util.concurrent.TimeoutException;
-
-import org.junit.Before;
-
 import com.athaydes.automaton.FXApp;
 import com.athaydes.automaton.FXer;
 import com.google.code.tempusfugit.temporal.Condition;
 import com.google.code.tempusfugit.temporal.Duration;
 import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.code.tempusfugit.temporal.WaitFor;
-
 import lasersharks.Options;
 import lasersharks.controllers.FishController;
 import lasersharks.controllers.ScreenController;
 import lasersharksgui.panes.GamePane;
 import lasersharksgui.panes.LosingPane;
 import lasersharksgui.panes.WinPane;
+import org.junit.Before;
+
+import java.util.Random;
+import java.util.concurrent.TimeoutException;
+
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -124,7 +122,7 @@ public class MainGuiTest {
   }
 
   /**
-   * Test to see if the size of the shark can increase.
+   * Test to see if the SIZE of the shark can increase.
    * 
    * @throws InterruptedException
    *           interruptedException
@@ -133,15 +131,10 @@ public class MainGuiTest {
    */
   //@Test
   public void increaseSizeTest() throws InterruptedException, TimeoutException {
-    int treshHold = (int) ((int) fishCon.getShark().getSize() + POST_GROWTH_INCREASE_TRESHHOLD);
-    WaitFor.waitOrTimeout(new Condition() {
-
-      @Override
-      public boolean isSatisfied() {
-        return fishCon.getShark().getSize() > treshHold;
-      }
-
-    }, Timeout.timeout(Duration.seconds(20L)));
+    final int treshHold = (int) ((int) fishCon.getShark().getSize()
+        + POST_GROWTH_INCREASE_TRESHHOLD);
+    WaitFor.waitOrTimeout(() -> fishCon.getShark().getSize() > treshHold,
+        Timeout.timeout(Duration.seconds(20L)));
     assertTrue(fishCon.getShark().getSize() > treshHold);
   }
 

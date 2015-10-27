@@ -1,21 +1,14 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import lasersharks.Position;
 import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaobjects.Ammo;
-import lasersharks.seaobjects.Fish;
-import lasersharks.seaobjects.LaserShark;
-import lasersharks.seaobjects.SeaObject;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
 
 /**
  * Class for testing Lazershark object.
@@ -38,8 +31,8 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Before
   public void setUp() {
-    fish1 = new LaserShark(posOnScreen, size, speed, direction);
-    laserShark = new LaserShark(posOnScreen, size, speed, direction);
+    fish1 = new LaserShark(posOnScreen, SIZE, SPEED, DIRECTION);
+    laserShark = new LaserShark(posOnScreen, SIZE, SPEED, DIRECTION);
   }
 
   /**
@@ -47,7 +40,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testAmmoGrowsEatingAmmoAtFullAmmo() {
-    Displayable ammo = mock(Ammo.class);
+    final Displayable ammo = mock(Ammo.class);
 
     assertEquals(DEFAULT_SHARK_AMMO, laserShark.getAmmo());
     laserShark.collideWith(ammo);
@@ -59,7 +52,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testAmmoGrowsEatingAmmoAtNonFullAmmo() {
-    Displayable ammo = new Ammo(new Position(0, 0), 1f);
+    final Displayable ammo = new Ammo(new Position(0, 0), 1f);
 
     assertEquals(DEFAULT_SHARK_AMMO - 1, laserShark.decreaseAmmo());
     laserShark.collideWith(ammo);
@@ -71,7 +64,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testAmmoDoesntGrowsWhenEatingDeadAmmoAtFullAmmo() {
-    Displayable ammo = mock(Ammo.class);
+    final Displayable ammo = mock(Ammo.class);
     when(ammo.isAlive()).thenReturn(false);
 
     assertEquals(DEFAULT_SHARK_AMMO, laserShark.getAmmo());
@@ -84,7 +77,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testAmmoDoesntGrowsWhenEatingDeadAmmoAtNonFullAmmo() {
-    Displayable ammo = mock(Ammo.class);
+    final Displayable ammo = mock(Ammo.class);
     when(ammo.isAlive()).thenReturn(false);
 
     assertEquals(DEFAULT_SHARK_AMMO - 1, laserShark.decreaseAmmo());
@@ -97,10 +90,11 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testLaserSharkGrowsWhenEatingFish() {
-    Displayable mockedFish = mock(Fish.class);
-    //when(mockedFish.getSize()).thenReturn(size);
+    final Displayable mockedFish = mock(Fish.class);
+    //when(mockedFish.getSize()).thenReturn(SIZE);
     when(mockedFish.isAlive()).thenReturn(true);
-    when(mockedFish.onCollisionSizeIncrement()).thenReturn(size/FishGetSizeIncrementBehaviour.ENERGY_DISSERPATION_RATE);
+    when(mockedFish.onCollisionSizeIncrement())
+        .thenReturn(SIZE / FishGetSizeIncrementBehaviour.ENERGY_DISSERPATION_RATE);
 
     assertEquals(DEFAULT_SHARK_SIZE, laserShark.getSize(), 0);
     laserShark.collideWith(mockedFish);
@@ -112,8 +106,8 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testLaserSharkDoesntGrowsWhenEatingDeadFish() {
-    Displayable mockedFish = mock(SeaObject.class);
-    when(mockedFish.getSize()).thenReturn(size);
+    final Displayable mockedFish = mock(SeaObject.class);
+    when(mockedFish.getSize()).thenReturn(SIZE);
     when(mockedFish.isAlive()).thenReturn(false);
 
     assertEquals(laserShark.getSize(), DEFAULT_SHARK_SIZE, 0);
@@ -126,7 +120,7 @@ public class LaserSharkTest extends SeaObjectTest {
    */
   @Test
   public void testEatenFishIsKilled() {
-    SeaObject mockedFish = mock(Fish.class);
+    final SeaObject mockedFish = mock(Fish.class);
     when(mockedFish.isAlive()).thenReturn(true);
 
     assertTrue(mockedFish.isAlive());

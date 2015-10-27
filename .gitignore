@@ -3,6 +3,6 @@ target/
 .settings/
 .classpath
 /bin/
-highscores/
+highScores/
 logs/
-src/main/resources/highscores
+src/main/resources/highScores

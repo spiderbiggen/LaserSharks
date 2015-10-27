@@ -20,7 +20,7 @@ public class Position {
    * @param posY
    *          initial y position
    */
-  public Position(double posX, double posY) {
+  public Position(final double posX, final double posY) {
     this.posX = posX;
     this.posY = posY;
   }
@@ -45,7 +45,7 @@ public class Position {
    * @param newHeight
    *          the new height of the panel to set.
    */
-  public static void setHeightPanel(int newHeight) {
+  public static void setHeightPanel(final int newHeight) {
     Options.setGlobalHeight(newHeight);
   }
 
@@ -55,7 +55,7 @@ public class Position {
    * @param newWidth
    *          the new width of the panel to set.
    */
-  public static void setWidthPanel(int newWidth) {
+  public static void setWidthPanel(final int newWidth) {
     Options.setGlobalWidth(newWidth);
   }
 
@@ -72,7 +72,7 @@ public class Position {
    * @param posX
    *          the x value.
    */
-  public void setPosX(double posX) {
+  public void setPosX(final double posX) {
     this.posX = posX;
   }
 
@@ -81,7 +81,7 @@ public class Position {
    * @param deltaX
    *          the amount we want to increase the x value.
    */
-  public void adjustPosX(double deltaX) {
+  public void adjustPosX(final double deltaX) {
     this.posX += deltaX;
   }
 
@@ -98,7 +98,7 @@ public class Position {
    * @param posY
    *          the amount to change posX with
    */
-  public void setPosY(double posY) {
+  public void setPosY(final double posY) {
     this.posY = posY;
   }
 
@@ -107,7 +107,7 @@ public class Position {
    * @param deltaY
    *          the amount to change posY with
    */
-  public void adjustPosY(double deltaY) {
+  public void adjustPosY(final double deltaY) {
     this.posY += deltaY;
   }
 
@@ -118,7 +118,7 @@ public class Position {
    * @param deltaY
    *          the amount to change posY with
    */
-  public void adjustPos(double deltaX, double deltaY) {
+  public void adjustPos(final double deltaX, final double deltaY) {
     this.adjustPosX(deltaX);
     this.adjustPosY(deltaY);
   }
@@ -131,10 +131,10 @@ public class Position {
    * @param sp
    *          the speed in witch the fish moves.
    * @param margin
-   *          size of object to make sure it's entirely offscreen.
+   *          size of object to make sure it's entirely off screen.
    * @return false if fish moves off the screen.
    */
-  public boolean updatePosition(Direction dir, double sp, double margin) {
+  public boolean updatePosition(final Direction dir, final double sp, final double margin) {
     if (dir != null && !dir.equals(Direction.None)) {
       adjustPos(sp * dir.getDeltaX(), sp * dir.getDeltaY());
     }
@@ -148,9 +148,9 @@ public class Position {
    *          The other position that should be compared to this position.
    * @return the distance between this position and other.
    */
-  public float calculateDistance(Position other) {
+  public float calculateDistance(final Position other) {
     return (float) Math
-        .sqrt((Math.pow(other.getPosX() - posX, 2)) + Math.pow(other.getPosY() - posX, 2));
+        .sqrt(Math.pow(other.getPosX() - posX, 2) + Math.pow(other.getPosY() - posX, 2));
   }
 
   /**
@@ -161,9 +161,9 @@ public class Position {
    * @param xMargin
    *          max offset margin
    */
-  public final boolean onScreen(double xMargin) {
-    return (posX + xMargin >= 0 && posX - xMargin <= Position.getWidthPanel() && posY >= 0
-        && posY <= Position.getHeightPanel());
+  public final boolean onScreen(final double xMargin) {
+    return posX + xMargin >= 0 && posX - xMargin <= Position.getWidthPanel() && posY >= 0
+        && posY <= Position.getHeightPanel();
   }
 
   /**
@@ -174,7 +174,7 @@ public class Position {
    * @param yMargin
    *          how far something can go outside of the screen on the y axis
    */
-  public void clipPosition(double xMargin, double yMargin) {
+  public void clipPosition(final double xMargin, final double yMargin) {
     this.posX = Math.min(Math.max(0 - xMargin, this.posX), Options.getGlobalWidth() - xMargin);
     this.posY = Math.min(Math.max(0 - yMargin, this.posY), Options.getGlobalHeight() - yMargin);
   }
@@ -184,8 +184,7 @@ public class Position {
     return "Position [posX=" + posX + ", posY=" + posY + "]";
   }
 
-  @Override
-  public boolean equals(Object obj) {
+  @Override public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }
@@ -194,12 +193,9 @@ public class Position {
       return false;
     }
 
-    Position position = (Position) obj;
-    if (this.getPosX() != position.getPosX() || this.getPosY() != position.getPosY()) {
-      return false;
-    }
+    final Position position = (Position) obj;
+    return !(this.getPosX() != position.getPosX() || this.getPosY() != position.getPosY());
 
-    return true;
   }
 
   @Override

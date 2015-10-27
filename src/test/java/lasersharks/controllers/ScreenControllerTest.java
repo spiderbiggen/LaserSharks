@@ -1,13 +1,12 @@
 package lasersharks.controllers;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mockito;
-
 import javafx.scene.Scene;
 import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Test for {@link ScreenController} class.

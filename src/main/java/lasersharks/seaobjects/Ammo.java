@@ -15,10 +15,8 @@ import lasersharks.behaviour.move.NoMovementMoveBehaviour;
  */
 public class Ammo extends SeaObject {
 
-  private final int pickupAmount = 10;
-  private final String imageResource = "battery.png";
-  private final int imgHeight = 228;
-  private final int imgWidth = 300;
+  private static final String IMAGE_RESOURCE = "battery.png";
+  private static final double WIDTH_SCALE = 1.315789;
 
   /**
    * Constructor class for Ammo.
@@ -28,22 +26,21 @@ public class Ammo extends SeaObject {
    * @param size
    *          init size
    */
-  public Ammo(Position position, float size) {
+  public Ammo(final Position position, final float size) {
     super(position, size, 0, Direction.None);
     moveBehaviour = new NoMovementMoveBehaviour();
     ammunitionIncrementBehaviour = new AmmoAmmunitionIncrementBehaviour();
     eatenBehaviour = new AmmoEatenBehaviour(this);
-    
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see lasersharks.SeaObject#getImageResource()
    */
   @Override
   public String getImageResource() {
-    return imageResource;
+    return IMAGE_RESOURCE;
   }
 
   /*
@@ -53,14 +50,7 @@ public class Ammo extends SeaObject {
    */
   @Override
   public double getWidthScale() {
-    return (double) imgWidth / (double) imgHeight;
-  }
-
-  /**
-   * @return The amount of ammo in this pack
-   */
-  public int getPickupAmount() {
-    return pickupAmount;
+    return WIDTH_SCALE;
   }
 
 }
