@@ -20,14 +20,14 @@ public class FishFactory implements FishSpawner {
    * equal to SpeedModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
    */
   private static final int SPEED_MODIFIER = 420;
-  private static final int BASE_SPEED = 80;
+  private static final int BASE_SPEED = 90;
 
   /**
    * This value is used to modify the size of the fishes that are generated. The generated speed is
    * equal to SizeModifier*RandomNumber, where RandomNumber is a random int between 0 and 100.
    */
-  private static final int SIZE_MODIFIER = 200;
-  private static final int BASE_SIZE = 30;
+  private static final int SIZE_MODIFIER = 210;
+  private static final int BASE_SIZE = 85;
 
   /**
    * this value is used as the seed for the fish.
