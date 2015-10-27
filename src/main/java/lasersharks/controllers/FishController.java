@@ -43,7 +43,6 @@ public class FishController {
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 670;
   private static final Direction START_DIRECTION = Direction.None;
-  private static final float DECREASE_SIZE = 2;
 
   /**
    * Spawn-chance for new fishes.
