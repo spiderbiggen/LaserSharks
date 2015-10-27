@@ -3,7 +3,7 @@ package lasersharks.behaviour.lasercollision;
 import lasersharks.behaviour.LaserCollisionBehaviour;
 
 /**
- * Eaten behavior for Fishes.
+ * Eaten behaviour for Fishes.
  * @author SEMGroup27
  *
  */

@@ -3,7 +3,7 @@ package lasersharks.behaviour.sizeincrement;
 import lasersharks.behaviour.GetSizeIncrementBehaviour;
 
 /**
- * getSizeIncrement behaviour for SeaObjects.
+ * GetSizeIncrement behaviour for SeaObjects.
  * @author SEMGroup27
  *
  */

@@ -4,7 +4,7 @@ import lasersharks.behaviour.SizeDecrementBehaviour;
 import lasersharks.seaobjects.SeaObject;
 
 /**
- * sizeDecrement behaviour for fish.
+ * SizeDecrement behaviour for fish.
  * 
  * @author SEMGroup27
  *

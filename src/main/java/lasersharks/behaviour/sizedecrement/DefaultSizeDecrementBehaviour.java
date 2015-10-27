@@ -3,7 +3,7 @@ package lasersharks.behaviour.sizedecrement;
 import lasersharks.behaviour.SizeDecrementBehaviour;
 
 /**
- * sizeDecrement behaviour for fish.
+ * SizeDecrement behaviour for fish.
  * @author SEMGroup27
  *
  */

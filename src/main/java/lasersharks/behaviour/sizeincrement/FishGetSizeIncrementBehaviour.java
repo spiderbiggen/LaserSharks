@@ -6,7 +6,7 @@ import lasersharks.controllers.AudioController;
 import lasersharks.seaobjects.SeaObject;
 
 /**
- * getSizeIncrement behaviour for fish.
+ * GetSizeIncrement behaviour for fish.
  * @author SEMGroup27
  *
  */
