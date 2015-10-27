@@ -17,8 +17,7 @@ import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
  */
 public class Fish extends SeaObject {
   private String image;
-  private int imgHeight;
-  private int imgWidth;
+  private double widthScale;
 
   /**
    * propagation for construction.
@@ -43,8 +42,7 @@ public class Fish extends SeaObject {
 
     super(position, size, speed, direction);
     this.image = image;
-    this.imgHeight = imgHeight;
-    this.imgWidth = imgWidth;
+    this.widthScale = (double) imgHeight / (double) imgWidth;
     checkForLossBehaviour = new FishCheckForLossBehaviour(this);
     eatenBehaviour = new FishEatenBehaviour(this);
     getSizeIncrementBahaviour = new FishGetSizeIncrementBehaviour(this);
@@ -53,18 +51,29 @@ public class Fish extends SeaObject {
     highScoreIncrementBehaviour = new FishHighScoreIncrementBehaviour(this);
   }
 
+  /**
+   * Will return the string resource for this seaObject.
+   *
+   * @return The resource's name
+   */
   @Override
   public String getImageResource() {
     return image;
   }
 
+  /**
+   * return the aspect ratio between the width and the height. height/width
+   *
+   * @return the aspect ratio
+   */
   @Override
   public double getWidthScale() {
-    return ((double) imgHeight) / ((double) imgWidth);
+    return widthScale;
   }
 
   /**
-   * Fishes are collisionActors
+   * Fishes are collisionActors.
+   * @return true
    */
   public boolean collisionActor() {
     return true;
