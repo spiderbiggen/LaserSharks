@@ -6,9 +6,9 @@ import lasersharks.behaviour.CollisionHitBoxBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
- * the default collision behaviour.
+ * The default collision behaviour.
  * 
- * @author sytze
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction") public class DefaultCollisionHitBoxBehaviour
@@ -17,11 +17,10 @@ import lasersharks.interfaces.Displayable;
   private static final double WIDTH_TO_COORDINATES = 0.85;
   private static final double SIZE_TO_COORDINATES = 0.075;
   private static final double HALF_SCALE = 0.5f;
-
   private Displayable displayable;
 
   /**
-   * the constructor.
+   * The constructor.
    * 
    * @param displayable
    *          the swimmer it should apply to.
@@ -40,10 +39,6 @@ import lasersharks.interfaces.Displayable;
   @Override
   public boolean collide(Displayable swimmer) {
     return swimmer.makeHitBox().intersects(displayable.makeHitBox().getLayoutBounds());
-
-    //float distance = this.displayable.getMiddlePoint()
-    //      .calculateDistance(swimmer.getMiddlePoint());
-    //return distance < this.displayable.getSize() + swimmer.getSize();
   }
 
   /**
