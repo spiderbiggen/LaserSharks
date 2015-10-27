@@ -339,7 +339,7 @@ public abstract class SeaObject implements Displayable {
   
   /**
    * Handle collisions.
-   * @param object, object with wist the actor has collided.
+   * @param object object with wist the actor has collided.
    */
   public void collideWith(Displayable object) {
     this.collisionBehaviour.colideWith(object);
