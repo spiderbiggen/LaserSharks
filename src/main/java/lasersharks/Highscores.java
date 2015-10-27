@@ -191,7 +191,7 @@ public class Highscores {
   /**
    * Increase the current score the player has according to the size of the fish eaten.
    * 
-   * @param incement the size by wich to increment.
+   * @param increment the size by wich to increment.
    * */
   public void increaseScore(int increment) {
     score += Math.max(0, increment);
