@@ -18,8 +18,8 @@ public class LaserShark extends SeaObject implements DirectionCallback {
 
   private final String imageResource = "shark.png";
   private final float widthScale = 1.5f;
-  private static final int STARTING_AMMO = 10;
-  private static final int MAX_AMMO = 10;
+  private static final int STARTING_AMMO = 5;
+  private static final int MAX_AMMO = 5;
 
   private int ammo;
   private Direction lastHorizontalDirection;

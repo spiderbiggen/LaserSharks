@@ -41,7 +41,7 @@ public class FishController {
    * Holder for shark data.
    */
   private static final float START_SIZE = 80.0f;
-  private static final double START_SPEED = 670;
+  private static final double START_SPEED = 450;
   private static final Direction START_DIRECTION = Direction.None;
 
   /**
@@ -55,7 +55,7 @@ public class FishController {
    */
 
   private static final int ONE_HUNDRED = 100;
-  private static final int AMMO_SPAWN_LIMITER = 88;
+  private static final int AMMO_SPAWN_LIMITER = 90;
 
   /**
    * Random Number Generator holder.

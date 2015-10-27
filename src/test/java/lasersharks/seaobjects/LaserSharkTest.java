@@ -28,8 +28,8 @@ public class LaserSharkTest extends SeaObjectTest {
    * Container for test object.
    */
   private LaserShark laserShark;
-  private static final int DEFAULT_SHARK_AMMO = 10;
-  private static final int EXPECTED_AFTER_EATING_AMMO = 10;
+  private static final int DEFAULT_SHARK_AMMO = 5;
+  private static final int EXPECTED_AFTER_EATING_AMMO = 5;
   private static final int DEFAULT_SHARK_SIZE = 30;
   private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 34;
 
