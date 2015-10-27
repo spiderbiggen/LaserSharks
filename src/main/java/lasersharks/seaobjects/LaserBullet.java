@@ -2,7 +2,7 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
+import lasersharks.behaviour.collisionhitbox.DefaultCollisionHitBoxBehaviour;
 import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
 import lasersharks.behaviour.move.DefaultMoveBehaviour;
 
@@ -12,15 +12,11 @@ import lasersharks.behaviour.move.DefaultMoveBehaviour;
  * @author SEMGroup27
  *
  */
-public class LaserBullet extends SeaObject {
+public class LaserBullet extends AbstractSeaObject {
 
   private static final int SIZE_DECREMENT_ON_HIT = 30;
   private static final String LASER_IMAGE = "greenLaserRay.png";
-  private static final double LASER_DEFAULT_STRENGTH = 1.0;
-  private static final double IMG_WIDTH = 290;
-  private static final double IMG_HEIGHT = 74;
-
-  private double strength;
+  private static final double WIDTH_SCALE = 3.918918;
 
   /**
    * The constructor of the laser.
@@ -34,10 +30,10 @@ public class LaserBullet extends SeaObject {
    * @param direction
    *          the direction of the laser.
    */
-  public LaserBullet(Position position, float size, double startSpeed, Direction direction) {
+  public LaserBullet(final Position position, final float size, final double startSpeed,
+      final Direction direction) {
     super(position, size, startSpeed, direction);
-    strength = LASER_DEFAULT_STRENGTH;
-    collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
+    collisionHitBoxBehaviour = new DefaultCollisionHitBoxBehaviour(this);
     moveBehaviour = new DefaultMoveBehaviour(this);
     laserCollisionBehaviour = new LaserLaserCollisionBehaviour(this);
   }
@@ -51,20 +47,11 @@ public class LaserBullet extends SeaObject {
   }
 
   /**
-   * gets the widthscale of the image. (width/height)
+   * gets the widthScale of the image. (width/height)
    */
   @Override
   public double getWidthScale() {
-    return IMG_WIDTH / IMG_HEIGHT;
-  }
-
-  /**
-   * returns the strength.
-   * Possiably depricated.
-   * @return the strength.
-   */
-  public double getStrength() {
-    return strength;
+    return WIDTH_SCALE;
   }
   
   @Override

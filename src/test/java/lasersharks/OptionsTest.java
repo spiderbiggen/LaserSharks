@@ -1,17 +1,13 @@
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import lasersharks.Options;
+import java.awt.*;
+
+import static org.junit.Assert.*;
+
 
 /**
  * A unit test object for the Options class.
@@ -65,11 +61,11 @@ public class OptionsTest {
     Options.setInstance(null);
 
     try {
-      // in case of a non-maven test, it should equal the screen size of the monitor.
+      // in case of a non-maven test, it should equal the screen SIZE of the monitor.
       assertEquals(Options.getInstance().getDimension(),
           Toolkit.getDefaultToolkit().getScreenSize());
-      // in case of a maven test, the dimensionhas 1920x1080 values.
-    } catch (Exception e) {
+      // in case of a maven test, the dimension has 1920x1080 values.
+    } catch (HeadlessException e) {
       assertEquals(Options.getInstance().getDimension(), DEFAULTDIM);
     }
   }
@@ -79,7 +75,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsFalseNull() {
-    assertFalse(options.equals(null));
+    assertNotEquals(options, null);
   }
 
   /**
@@ -95,7 +91,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsTrueCorrectValues() {
-    assertTrue(options.equals(new Options(dim)));
+    assertEquals(options, new Options(dim));
   }
 
   /**
@@ -103,7 +99,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsTrueSame() {
-    assertTrue(options.equals(options));
+    assertEquals(options, options);
   }
 
 }

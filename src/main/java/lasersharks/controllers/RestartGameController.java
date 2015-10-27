@@ -25,8 +25,7 @@ public class RestartGameController implements EventHandler<KeyEvent> {
     Logger.getInstance().write("Game", "Restarted");
   }
 
-  @Override
-  public void handle(KeyEvent event) {
+  @Override public void handle(final KeyEvent event) {
     if (event.getCode() == KeyCode.R) {
       restartGame();
     }

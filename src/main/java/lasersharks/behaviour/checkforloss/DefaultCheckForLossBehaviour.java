@@ -8,8 +8,8 @@ import lasersharks.behaviour.CheckForLossBehaviour;
  *
  */
 public class DefaultCheckForLossBehaviour implements CheckForLossBehaviour {
-  @Override
-  public void onCollisionPlayerLoses(float size) {
+  @Override public void onCollisionPlayerLoses(final float size) {
+    //Empty
   }
 
 }

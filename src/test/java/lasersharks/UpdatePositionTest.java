@@ -3,19 +3,16 @@
  */
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import lasersharks.Direction;
-import lasersharks.Position;
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author SEM Group 27
@@ -25,8 +22,8 @@ import lasersharks.Position;
 public class UpdatePositionTest {
 
   private Position position;
-  private Direction direction;
-  private Position expectedPosition;
+  private final Direction direction;
+  private final Position expectedPosition;
 
   /**
    * Setup the test scenario.
@@ -40,19 +37,19 @@ public class UpdatePositionTest {
    * Constructor for parameterized Test.
    * 
    * @param direction
-   *          direction to update to
+   *          DIRECTION to update to
    * @param expectedX
    *          expected X result from running the method
    * @param expectedY
    *          expected Y from running the method
    */
-  public UpdatePositionTest(Direction direction, int expectedX, int expectedY) {
+  public UpdatePositionTest(final Direction direction, final int expectedX, final int expectedY) {
     this.direction = direction;
     this.expectedPosition = new Position(expectedX, expectedY);
   }
 
   /**
-   * Parameterized test for {@link laserSharks.Position#updatePosition(Direction) }.
+   * Parameterized test for {@link lasersharks.Position#updatePosition(Direction, double, double)}  }.
    * 
    * @return list of parameters
    */
@@ -65,7 +62,7 @@ public class UpdatePositionTest {
   }
 
   /**
-   * Test methods for {@link laserSharks.Position#updatePosition(Direction) }.
+   * Test methods for {@link lasersharks.Position#updatePosition(Direction, double, double) }.
    */
 
   @Test

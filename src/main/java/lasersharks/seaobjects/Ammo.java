@@ -5,7 +5,7 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.ammunitionIncrement.AmmoAmmunitionIncrementBehaviour;
+import lasersharks.behaviour.ammunitionincrement.AmmoAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.eaten.AmmoEatenBehaviour;
 import lasersharks.behaviour.move.NoMovementMoveBehaviour;
 
@@ -13,12 +13,10 @@ import lasersharks.behaviour.move.NoMovementMoveBehaviour;
  * @author SEMGroup27
  *
  */
-public class Ammo extends SeaObject {
+public class Ammo extends AbstractSeaObject {
 
-  private final int pickupAmount = 6;
-  private final String imageResource = "battery.png";
-  private final int imgHeight = 228;
-  private final int imgWidth = 300;
+  private static final String IMAGE_RESOURCE = "battery.png";
+  private static final double WIDTH_SCALE = 1.315789;
 
   /**
    * Constructor class for Ammo.
@@ -28,39 +26,31 @@ public class Ammo extends SeaObject {
    * @param size
    *          init size
    */
-  public Ammo(Position position, float size) {
+  public Ammo(final Position position, final float size) {
     super(position, size, 0, Direction.None);
     moveBehaviour = new NoMovementMoveBehaviour();
     ammunitionIncrementBehaviour = new AmmoAmmunitionIncrementBehaviour();
     eatenBehaviour = new AmmoEatenBehaviour(this);
-    
   }
 
   /*
    * (non-Javadoc)
-   * 
-   * @see lasersharks.SeaObject#getImageResource()
+   *
+   * @see lasersharks.AbstractSeaObject#getImageResource()
    */
   @Override
   public String getImageResource() {
-    return imageResource;
+    return IMAGE_RESOURCE;
   }
 
   /*
    * (non-Javadoc)
    * 
-   * @see lasersharks.SeaObject#getWidthScale()
+   * @see lasersharks.AbstractSeaObject#getWidthScale()
    */
   @Override
   public double getWidthScale() {
-    return (double) imgWidth / (double) imgHeight;
-  }
-
-  /**
-   * @return The amount of ammo in this pack
-   */
-  public int getPickupAmount() {
-    return pickupAmount;
+    return WIDTH_SCALE;
   }
 
 }

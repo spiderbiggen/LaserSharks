@@ -1,17 +1,13 @@
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import org.junit.After;
 import org.junit.Test;
+
+import java.io.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.mockito.Mockito.mock;
 
 /**
  * Test for logger classe.
@@ -35,7 +31,7 @@ public class LoggerTest {
    */
   @Test
   public void testGetInstanceNotNull() {
-    assertTrue(Logger.getInstance() != null);
+    assertNotSame(null, Logger.getInstance());
   }
 
   /**
@@ -43,7 +39,7 @@ public class LoggerTest {
    */
   @Test
   public void testAlwaysSameInstance() {
-    Logger l = Logger.getInstance();
+    final Logger l = Logger.getInstance();
     assertEquals(l, Logger.getInstance());
   }
 
@@ -52,7 +48,7 @@ public class LoggerTest {
    */
   @Test
   public void testLastSetInstanceMock() {
-    Logger l = mock(Logger.class);
+    final Logger l = mock(Logger.class);
 
     Logger.setInstance(l);
     assertEquals(l, Logger.getInstance());
@@ -65,7 +61,7 @@ public class LoggerTest {
    */
   @Test
   public void testFileHandling() throws IOException {
-    FileWriter f = mock(FileWriter.class);
+    final FileWriter f = mock(FileWriter.class);
     Logger.getInstance(f);
     assertEquals(f, Logger.getInstance().getFileWriter());
   }
@@ -77,30 +73,30 @@ public class LoggerTest {
    */
   @Test
   public void cleanWriteTest() throws IOException {
-    File f = new File("logs/test.txt");
+    final File f = new File("logs/test.txt");
     f.getParentFile().mkdirs();
     if (f.exists()) {
       f.delete();
     }
     f.createNewFile();
     f.deleteOnExit();
-    FileWriter fw = new FileWriter(f);
-    Logger l = Logger.getInstance(fw);
+    final FileWriter fw = new FileWriter(f);
+    final Logger l = Logger.getInstance(fw);
     l.write("testevent", "testspecifics");
     fw.close();
-    FileReader fr = new FileReader(f);
-    BufferedReader reader = new BufferedReader(fr);
+    final FileReader fr = new FileReader(f);
+    final BufferedReader reader = new BufferedReader(fr);
     String content = reader.readLine();
-    String c2content = reader.readLine();
+    final String c2content = reader.readLine();
     if (c2content != null) {
       content = c2content;
     }
     reader.close();
-    if (content != null) {
+    if (content == null) {
+      assertEquals(null, content);
+    } else {
       assertEquals(" : testevent : testspecifics",
           content.substring(TIMESTAMP_CHARS, content.length()));
-    } else {
-      assertEquals(null, content);
     }
   }
 }

@@ -1,10 +1,9 @@
 package lasersharks;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.util.Random;
-
 import javafx.scene.paint.Color;
+
+import java.awt.*;
+import java.util.Random;
 
 /**
  * An options object is responsible for handling everything that has to do with options. This
@@ -25,7 +24,7 @@ public class Options {
   private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/pickup.wav";
 
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
-  private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
+  private static final Color DEFAULT_BACKGROUND_COLOUR = Color.BLUE;
 
   private String musicFileName;
   private String eatSoundFileName;
@@ -38,7 +37,7 @@ public class Options {
   private double musicVolume;
   private double sfxVolume;
 
-  private String backGround;
+  private String background;
   private Random factoryRng;
   private Random spawnRng;
   private static Options currentOptions;
@@ -49,13 +48,13 @@ public class Options {
    * @param screenRes
    *          the resolution this Options object should use.
    */
-  public Options(Dimension screenRes) {
+  public Options(final Dimension screenRes) {
     setInstance(this);
     this.dimension = screenRes;
     factoryRng = new Random();
     spawnRng = factoryRng;
 
-    backGround = DEFAULT_BACKGROUND_IMAGE;
+    background = DEFAULT_BACKGROUND_IMAGE;
     musicFileName = DEFAULT_MUSIC_FILENAME;
     eatSoundFileName = DEFAULT_EAT_SOUND_FILENAME;
     laserSoundFileName = DEFAULT_LASER_SOUND_FILENAME;
@@ -106,10 +105,9 @@ public class Options {
    *          the object to compare to.
    * @return true if they are equal.
    */
-  @Override
-  public boolean equals(Object object) {
+  @Override public boolean equals(final Object object) {
     if (object instanceof Options) {
-      Options other = (Options) object;
+      final Options other = (Options) object;
       if (other.getDimension().equals(dimension)) {
         return true;
       }
@@ -123,7 +121,7 @@ public class Options {
    * @param options
    *          the options object to set.
    */
-  public static void setInstance(Options options) {
+  public static void setInstance(final Options options) {
     currentOptions = options;
   }
 
@@ -132,10 +130,10 @@ public class Options {
    * 
    * @return the screen resolution of the systems screen.
    */
-  protected static Dimension getScreenSize() {
+  private static Dimension getScreenSize() {
     try {
       return Toolkit.getDefaultToolkit().getScreenSize();
-    } catch (Exception e) {
+    } catch (HeadlessException e) {
       return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
   }
@@ -173,8 +171,8 @@ public class Options {
    * @param height
    *          the height to set.
    */
-  public static void setGlobalHeight(double height) {
-    double oldWidth = getInstance().getDimension().getWidth();
+  public static void setGlobalHeight(final double height) {
+    final double oldWidth = getInstance().getDimension().getWidth();
     getInstance().getDimension().setSize(oldWidth, height);
   }
 
@@ -184,8 +182,8 @@ public class Options {
    * @param width
    *          the height to set.
    */
-  public static void setGlobalWidth(double width) {
-    double oldHeight = getInstance().getDimension().getHeight();
+  public static void setGlobalWidth(final double width) {
+    final double oldHeight = getInstance().getDimension().getHeight();
     getInstance().getDimension().setSize(width, oldHeight);
   }
 
@@ -220,14 +218,6 @@ public class Options {
   }
 
   /**
-   * @param pickupSoundFileName
-   *          the pickupSoundFileName to set
-   */
-  public void setPickupSoundFileName(String pickupSoundFileName) {
-    this.pickupSoundFileName = pickupSoundFileName;
-  }
-
-  /**
    * @return playMusic
    */
   public boolean isPlayingMusic() {
@@ -238,7 +228,7 @@ public class Options {
    * @param playMusic
    *          the playMusic to set
    */
-  public void setPlayingMusic(boolean playMusic) {
+  public void setPlayingMusic(final boolean playMusic) {
     this.playingMusic = playMusic;
   }
 
@@ -255,7 +245,7 @@ public class Options {
    * @param muteMusic
    *          true if music should be muted.
    */
-  public void setMutedMusic(boolean muteMusic) {
+  public void setMutedMusic(final boolean muteMusic) {
     this.mutedMusic = muteMusic;
   }
 
@@ -272,7 +262,7 @@ public class Options {
    * @param muteSfx
    *          true if music should be muted.
    */
-  public void setMutedSfx(boolean muteSfx) {
+  public void setMutedSfx(final boolean muteSfx) {
     this.mutedSfx = muteSfx;
   }
 
@@ -287,7 +277,7 @@ public class Options {
    * @param masterVolume
    *          the masterVolume to set
    */
-  public void setMasterVolume(double masterVolume) {
+  public void setMasterVolume(final double masterVolume) {
     this.masterVolume = masterVolume;
   }
 
@@ -302,7 +292,7 @@ public class Options {
    * @param newVolume
    *          the musicVolume to set
    */
-  public void setMusicVolume(double newVolume) {
+  public void setMusicVolume(final double newVolume) {
     this.musicVolume = newVolume;
   }
 
@@ -317,7 +307,7 @@ public class Options {
    * @param sfxVolume
    *          the sfxVolume to set
    */
-  public void setSfxVolume(double sfxVolume) {
+  public void setSfxVolume(final double sfxVolume) {
     this.sfxVolume = sfxVolume;
   }
 
@@ -326,17 +316,17 @@ public class Options {
    * 
    * @return the backGroundImage.
    */
-  public String getBackGroundImage() {
-    return backGround;
+  public String getBackground() {
+    return background;
   }
 
   /**
-   * Get the backGroundColor.
-   * 
-   * @return the default backgroundcolor
+   * Get the backgroundColor.
+   *
+   * @return the default background color
    */
-  public static Color getBackGroundColor() {
-    return DEFAULT_BACKCOLOUR;
+  public static Color getBackgroundColor() {
+    return DEFAULT_BACKGROUND_COLOUR;
   }
 
   /**
@@ -354,7 +344,7 @@ public class Options {
    * @param rng
    *          random number generator.
    */
-  public void setFactoryRng(Random rng) {
+  public void setFactoryRng(final Random rng) {
     this.factoryRng = rng;
   }
 
@@ -364,7 +354,7 @@ public class Options {
    * @param rng
    *          random number generator.
    */
-  public void setSpawnRng(Random rng) {
+  public void setSpawnRng(final Random rng) {
     this.spawnRng = rng;
   }
 }

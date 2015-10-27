@@ -4,13 +4,12 @@ import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
 
 public class OnCollisionDestroyLaserComponentLeaf implements CollisionComponent {
-  private CollisionComponent next;
 
-  public OnCollisionDestroyLaserComponentLeaf(CollisionComponent next) {
-    this.next = next;
+  public OnCollisionDestroyLaserComponentLeaf(final CollisionComponent next) {
+    //Empty
   }
-  
-  public void handleCollision(Displayable other) {
+
+  public void handleCollision(final Displayable other) {
     other.onCollisionDestroyLaser();
   }
   

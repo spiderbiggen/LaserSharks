@@ -5,7 +5,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
- * The shootcontroller is responsible for handling the keyEvents that has to do with shooting.
+ * The shootcontroller is responsible for handling the keyEvents that have to do with shooting.
  * 
  * @author SEMGroup27
  *
@@ -13,7 +13,7 @@ import javafx.scene.input.KeyEvent;
 @SuppressWarnings("restriction")
 public class ShootController implements EventHandler<KeyEvent> {
 
-  private FishController fishController;
+  private final FishController fishController;
 
   /**
    * The constructor of the class.
@@ -21,10 +21,11 @@ public class ShootController implements EventHandler<KeyEvent> {
    * @param fishController
    *          the fishController that this eventHandler is linked to.
    */
-  public ShootController(FishController fishController) {
+  public ShootController(final FishController fishController) {
     super();
     this.fishController = fishController;
   }
+
 
   @Override
   public void handle(KeyEvent event) {
@@ -36,7 +37,7 @@ public class ShootController implements EventHandler<KeyEvent> {
   /**
    * orders the fishController to create a laser at the shark.
    */
-  public void shoot() {
+  private void shoot() {
     fishController.shootLaser();
   }
 

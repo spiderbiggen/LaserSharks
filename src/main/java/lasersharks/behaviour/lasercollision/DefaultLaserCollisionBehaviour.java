@@ -11,6 +11,7 @@ public class DefaultLaserCollisionBehaviour implements LaserCollisionBehaviour {
 
   @Override
   public void onCollisionDestroyLaser() {
+    //Empty
   }
 
 }

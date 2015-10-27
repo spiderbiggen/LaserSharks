@@ -3,9 +3,9 @@
  */
 package lasersharks.interfaces;
 
-import java.util.Random;
-
 import lasersharks.seaobjects.Ammo;
+
+import java.util.Random;
 
 /**
  * Interface for an ammo factory.

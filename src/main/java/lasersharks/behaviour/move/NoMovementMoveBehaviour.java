@@ -11,19 +11,12 @@ import lasersharks.behaviour.MoveBehaviour;
 public class NoMovementMoveBehaviour implements MoveBehaviour {
 
   /**
-   * The constructor of the behaviour object.
-   */
-  public NoMovementMoveBehaviour() {
-  }
-
-  /**
    * does nothing, as this behavour specifies a displayable that cant move.
-   * 
-   * @param fish
-   *          the fish it should eat.
+   *
+   * @param frametime
+   *          time in seceonds since lat update
    */
-  @Override
-  public boolean move(double frametime) {
+  @Override public boolean move(final double frametime) {
     return true;
   }
 

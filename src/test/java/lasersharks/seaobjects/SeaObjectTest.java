@@ -1,18 +1,14 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import org.junit.After;
-import org.junit.Test;
-
 import lasersharks.Direction;
 import lasersharks.Position;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaobjects.SeaObject;
+import org.junit.After;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Class for testing SeaObjects.
@@ -22,13 +18,14 @@ import lasersharks.seaobjects.SeaObject;
  */
 public abstract class SeaObjectTest {
 
-  protected SeaObject fish1;
+  protected AbstractSeaObject fish1;
   protected final Position posOnScreen = new Position(50, 50);
   protected final Position posOffScreen = new Position(-1, -1);
-  protected final float size = 30;
-  protected final int speed = 40;
-  protected final Direction direction = Direction.East;
+  protected static final float SIZE = 30;
+  protected static final float SPEED = 40;
+  protected static final Direction DIRECTION = Direction.East;
 
+  private static final double DELTA = 0.0001;
   /**
    * Tear down after the test.
    */
@@ -38,7 +35,7 @@ public abstract class SeaObjectTest {
   }
 
   /**
-   * Test for {@link SeaObject#getPosition()}.
+   * Test for {@link AbstractSeaObject#getPosition()}.
    */
   @Test
   public void testGetPosition() {
@@ -46,43 +43,43 @@ public abstract class SeaObjectTest {
   }
 
   /**
-   * Test for {@link SeaObject#getSize()}.
+   * Test for {@link AbstractSeaObject#getSize()}.
    */
   @Test
   public void testGetSize() {
-    assertTrue(fish1.getSize() == size);
+    assertEquals(SIZE, fish1.getSize(), DELTA);
   }
 
   /**
-   * Test for {@link SeaObject#increaseSize(Float)}.
+   * Test for {@link AbstractSeaObject#increaseSize(float)}.
    */
   @Test
   public void testIncreaseSize() {
-    int deltaSize = 2;
+    final int deltaSize = 2;
     fish1.increaseSize(deltaSize);
-    assertEquals(size + deltaSize, fish1.getSize(), 0);
+    assertEquals(SIZE + deltaSize, fish1.getSize(), 0);
   }
 
   /**
-   * Test for {@link SeaObject#getSpeed()}.
+   * Test for {@link AbstractSeaObject#getSpeed()}.
    */
   @Test
   public void testGetSpeed() {
-    assertTrue(fish1.getSpeed() == speed);
+    assertEquals(SPEED, fish1.getSpeed(), DELTA);
   }
 
   /**
-   * Test for {@link SeaObject#setSpeed(int)}.
+   * Test for {@link AbstractSeaObject#setSpeed(int)}.
    */
   @Test
   public void testSetSpeed() {
-    int newSpeed = 2;
+    final int newSpeed = 2;
     fish1.setSpeed(newSpeed);
     assertEquals(newSpeed, fish1.getSpeed(), 0);
   }
 
   /**
-   * Test for {@link SeaObject#getDirection()}.
+   * Test for {@link AbstractSeaObject#getDirection()}.
    */
   @Test
   public void testGetDirection() {
@@ -90,54 +87,54 @@ public abstract class SeaObjectTest {
   }
 
   /**
-   * Test for {@link SeaObject#setDirection(Direction)}.
+   * Test for {@link AbstractSeaObject#setDirection(Direction)}.
    */
   @Test
   public void testSetDirection() {
-    Direction newDirection = Direction.South;
+    final Direction newDirection = Direction.South;
     fish1.setDirection(newDirection);
     assertEquals(fish1.getDirection(), newDirection);
   }
 
   /**
-   * Test for {@link SeaObject#checkForCollision(SeaObject)}.
+   * Test for {@link AbstractSeaObject#checkForCollision(Displayable)}.
    */
   @Test
   public void testCollisionTrue() {
-    SeaObject mockedFish = mock(SeaObject.class);
+    final AbstractSeaObject mockedFish = mock(AbstractSeaObject.class);
     when(mockedFish.getPosition()).thenReturn(posOnScreen);
-    when(mockedFish.getSize()).thenReturn(size);
-    // TODO: change the way how this is tested so it doesn't give nullpointer exceptions.
+    when(mockedFish.getSize()).thenReturn(SIZE);
+    // TODO: change the way how this is tested so it doesn't give null pointer exceptions.
     // This has to do with storing mockito objects in a variable and functions missing.
     // assertTrue(fish1.collision(mockedFish));
   }
 
   /**
-   * Test for {@link SeaObject#checkForCollision(SeaObject)}.
+   * Test for {@link AbstractSeaObject#checkForCollision(Displayable)}.
    */
   @Test
   public void testCollisionFalse() {
-    SeaObject mockedFish = mock(SeaObject.class);
+    final AbstractSeaObject mockedFish = mock(AbstractSeaObject.class);
     when(mockedFish.getPosition()).thenReturn(posOffScreen);
-    when(mockedFish.getSize()).thenReturn(size);
-    // TODO: change the way how this is tested so it doesn't give nullpointer exceptions.
+    when(mockedFish.getSize()).thenReturn(SIZE);
+    // TODO: change the way how this is tested so it doesn't give null pointer exceptions.
     // This has to do with storing mockito objects in a variable and functions missing.
     // assertFalse(fish1.collision(mockedFish));
   }
 
   /**
-   * Test for {@link SeaObject#move()}.
+   * Test for {@link AbstractSeaObject#move(double)}.
    */
   @Test
   public void testMove() {
-    double oldX = fish1.getPosition().getPosX();
+    final double oldX = fish1.getPosition().getPosX();
     fish1.move(1);
-    double newX = fish1.getPosition().getPosX();
+    final double newX = fish1.getPosition().getPosX();
     assertEquals(oldX + fish1.getSpeed(), newX, 1);
   }
 
   /**
-   * test for {@link SeaObject#isOnScreen()}.
+   * test for {@link AbstractSeaObject#isOnScreen()}.
    */
   @Test
   public void testOnScreenTrue() {
@@ -145,27 +142,28 @@ public abstract class SeaObjectTest {
   }
 
   /**
-   * Tests for {@link SeaObject#isOnScreen()}.
+   * Tests for {@link AbstractSeaObject#isOnScreen()}.
    */
   @Test
   public void testIsOnScreenFalseDeadFish() {
-    Displayable fish1 = this.fish1;
+    final Displayable fish1 = this.fish1;
     fish1.kill();
     assertFalse(fish1.isOnScreen());
   }
 
   /**
-   * Tests for {@link SeaObject#isOnScreen()}.
+   * Tests for {@link AbstractSeaObject#isOnScreen()}.
    */
   @Test
   public void testIsOnScreenFalseOffScreen() {
-    Displayable fish1 = this.fish1;
-    fish1.setPosition(posOffScreen);
+    final Displayable fish1 = this.fish1;
+    fish1.getPosition().setPosX(posOffScreen.getPosX());
+    fish1.getPosition().setPosY(posOffScreen.getPosY());
     assertFalse(fish1.isOnScreen());
   }
 
   /**
-   * Test for {@link SeaObject#isAlive()}.
+   * Test for {@link AbstractSeaObject#isAlive()}.
    */
   @Test
   public void testSetAlive() {

@@ -10,7 +10,7 @@ import lasersharks.interfaces.Displayable;
  *
  */
 public class LaserLaserCollisionBehaviour implements LaserCollisionBehaviour {
-  private Displayable element;
+  private final Displayable element;
 
   /**
    * Constructor.
@@ -18,7 +18,7 @@ public class LaserLaserCollisionBehaviour implements LaserCollisionBehaviour {
    * @param element
    *          this.
    */
-  public LaserLaserCollisionBehaviour(Displayable element) {
+  public LaserLaserCollisionBehaviour(final Displayable element) {
     super();
     this.element = element;
   }

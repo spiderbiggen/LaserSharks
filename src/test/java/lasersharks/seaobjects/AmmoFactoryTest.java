@@ -1,17 +1,14 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Random;
-
+import lasersharks.Options;
+import lasersharks.Position;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import lasersharks.Options;
-import lasersharks.Position;
-import lasersharks.seaobjects.Ammo;
-import lasersharks.seaobjects.AmmoFactory;
+import java.util.Random;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for AmmoFactory.
@@ -21,13 +18,13 @@ import lasersharks.seaobjects.AmmoFactory;
  */
 public class AmmoFactoryTest {
 
-  private final int width = 1920;
-  private final int height = 1080;
-  
-  private final long seed = 12345622L;
+  private static final int WIDTH = 1920;
+  private static final int HEIGHT = 1080;
 
-  private final double testXPos = 787.0;
-  private final double testYPos = 214.0;
+  private static final long SEED = 12345622L;
+
+  private static final double TEST_X_POS = 787.0;
+  private static final double TEST_Y_POS = 214.0;
 
   private AmmoFactory ammoFactory;
 
@@ -36,8 +33,8 @@ public class AmmoFactoryTest {
    */
   @Before
   public void setUp() {
-    Options.setGlobalHeight(height);
-    Options.setGlobalWidth(width);
+    Options.setGlobalHeight(HEIGHT);
+    Options.setGlobalWidth(WIDTH);
     ammoFactory = new AmmoFactory();
   }
   
@@ -54,9 +51,9 @@ public class AmmoFactoryTest {
    */
   @Test
   public void testAmmoCreation() {
-    Position testPos = new Position(testXPos, testYPos);
-    Random random = new Random(seed);
-    Ammo ammoCreated = ammoFactory.generateAmmo(random);
+    final Position testPos = new Position(TEST_X_POS, TEST_Y_POS);
+    final Random random = new Random(SEED);
+    final Ammo ammoCreated = ammoFactory.generateAmmo(random);
     assertEquals(testPos, ammoCreated.getPosition());
   }
 

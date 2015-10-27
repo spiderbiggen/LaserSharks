@@ -3,16 +3,16 @@
  */
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Parameterized test for the {@link Position#onScreen(double)} method.
@@ -22,15 +22,14 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class OnScreenTest {
 
-  private Position position;
-  private boolean expectedBool;
+  private final Position position;
+  private final boolean expectedBool;
 
   /**
    * Setup the test scenario.
    */
   @After
   public void tearDown() {
-    this.position = null;
     Options.destroyInstance();
   }
 
@@ -44,13 +43,13 @@ public class OnScreenTest {
    * @param expectedBool
    *          expected return value from running the method
    */
-  public OnScreenTest(double posX, double posY, boolean expectedBool) {
+  public OnScreenTest(final double posX, final double posY, final boolean expectedBool) {
     this.position = new Position(posX, posY);
     this.expectedBool = expectedBool;
   }
 
   /**
-   * Parameterized test for {@link laserSharks.Position#updatePosition(Direction) }.
+   * Parameterized test for {@link lasersharks.Position#updatePosition(Direction, double, double)}.
    * 
    * @return list of parameters
    */
@@ -79,7 +78,7 @@ public class OnScreenTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#onScreen(int)}.
+   * Test method for {@link lasersharks.Position#onScreen(double)}.
    */
   @Test
   public void testOnScreen() {

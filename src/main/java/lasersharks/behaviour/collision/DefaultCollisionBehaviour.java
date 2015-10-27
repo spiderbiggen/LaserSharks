@@ -9,9 +9,8 @@ import lasersharks.interfaces.Displayable;
  */
 public class DefaultCollisionBehaviour implements CollisionBehaviour {
 
-  @Override
-  public void colideWith(Displayable object) {
-
+  @Override public void collideWith(final Displayable object) {
+    //Empty
   }
 
 }

@@ -1,8 +1,5 @@
 package lasersharksgui.panes;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javafx.animation.AnimationTimer;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -11,7 +8,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lasersharks.Direction;
-import lasersharks.Highscores;
+import lasersharks.HighScores;
 import lasersharks.Position;
 import lasersharks.controllers.DirectionInputController;
 import lasersharks.controllers.PauseController;
@@ -23,31 +20,36 @@ import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.interfaces.Stoppable;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
- * This is the pane representing the gameplay.
+ * This is the pane representing the game play.
  * 
  * @author SEMGroup27
  *
  */
-@SuppressWarnings("restriction")
-public class GamePane extends StandardPane implements Stoppable {
+@SuppressWarnings("restriction") public class GamePane extends AbstractStandardPane
+    implements Stoppable {
 
   // private static final int ANIMATION_SLEEP_TIMER = 10;
   private AnimationTimer animation;
-  private final double timeToMilis = 1_000_000;
-  private ScreenController screenController;
-  private static long time = 0;
-  private static boolean paused = false;
-  private DirectionCallback callback;
+  private static final double TIME_TO_MILLIS = 1_000_000;
+
+  private static long time;
+  private static boolean paused;
+  private final DirectionCallback callback;
   private DirectionInputController directionInputController;
+  private ScreenController screenController;
   private ShootController shootController;
   private PauseController pauseController;
 
   /**
-   * The constructor creates a new keyboardcontroller and screencontroller. The GamePane connects
+   * The constructor creates a new keyboardController and screenController. The GamePane connects
    * these to itself.
    */
   public GamePane() {
+    super();
     screenController = new ScreenController(this);
     callback = this.screenController.getShark();
     startGame();
@@ -58,19 +60,18 @@ public class GamePane extends StandardPane implements Stoppable {
    */
   public void startGame() {
     addEventHandlers();
-    Highscores.getInstance().setScore(0);
+    HighScores.getInstance().setScore(0);
     clearPaneOfImageView();
     animation = new AnimationTimer() {
-      @Override
-      public void handle(long now) {
+      @Override public void handle(final long now) {
         if (paused) {
           time = now;
           paused = false;
         }
-        double frametime = (now - time) / timeToMilis;
-        final double milis = 1000;
+        final double frameTime = (now - time) / TIME_TO_MILLIS;
+        final double millis = 1000;
 
-        showFishList(screenController.getNextFrameInfo(milis / frametime));
+        showFishList(screenController.getNextFrameInfo(millis / frameTime));
         showShark(screenController.getShark());
         showScoreAndAmmo();
 
@@ -87,7 +88,7 @@ public class GamePane extends StandardPane implements Stoppable {
   /**
    * Adds all event handlers to the GamePane.
    */
-  public void addEventHandlers() {
+  private void addEventHandlers() {
     addNonPauseEventHandlers();
     pauseController = new PauseController(this);
     MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, pauseController);
@@ -97,9 +98,13 @@ public class GamePane extends StandardPane implements Stoppable {
    * Stops the game. Can be resumed by calling resumeGame().
    */
   public void stopGame() {
-    paused = true;
+    GamePane.setPaused(true);
     removeNonPauseEventHandlers();
     animation.stop();
+  }
+
+  private static void setPaused(final boolean paused) {
+    GamePane.paused = paused;
   }
 
   /**
@@ -114,7 +119,8 @@ public class GamePane extends StandardPane implements Stoppable {
    * Displays the score in the upper right corner of the screen.
    */
   private void showScoreAndAmmo() {
-    addText("Ammo: "+ screenController.getShark().getAmmo() +" Score: " + Highscores.getInstance().getScore(), TEXT_SCALE_SIZE_SMALL,
+    addText(String.format("Ammo: %d Score: %d", screenController.getShark().getAmmo(),
+            HighScores.getInstance().getScore()), TEXT_SCALE_SIZE_SMALL,
         Position.upperCornerPosition());
   }
 
@@ -122,8 +128,8 @@ public class GamePane extends StandardPane implements Stoppable {
    * This function removes all the ImageView objects. This is used to remove all the fish images on
    * the screen.
    */
-  public void clearPaneOfImageView() {
-    ObservableList<Node> list = getChildren();
+  private void clearPaneOfImageView() {
+    final ObservableList<Node> list = getChildren();
     list.removeAll(list.stream()
         .filter(v -> v instanceof ImageView || v instanceof Rectangle || v instanceof Text)
         .collect(Collectors.toList()));
@@ -135,13 +141,13 @@ public class GamePane extends StandardPane implements Stoppable {
    * @param shark
    *          the shark to display
    */
-  public void showShark(LaserShark shark) {
+  private void showShark(final LaserShark shark) {
     if (sharkImage == null) {
       sharkImage = new ImageView(shark.getImageResource());
     }
-    Position position = shark.getPosition();
-    double size = shark.getSize();
-    Direction dir = shark.getDirection();
+    final Position position = shark.getPosition();
+    final double size = shark.getSize();
+    final Direction dir = shark.getDirection();
 
     // flip the image according to the direction.
     if (dir.getDeltaX() != 0) {
@@ -161,16 +167,15 @@ public class GamePane extends StandardPane implements Stoppable {
    * @param list
    *          the list of fish that needs to be displayed.
    */
-  public void showFishList(List<Displayable> list) {
+  private void showFishList(final List<Displayable> list) {
     clearPaneOfImageView();
-    for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).isAlive()) {
-        getChildren().add(fishImage(list.get(i)));
-        Rectangle hitBox = list.get(i).makeHitbox();
-        hitBox.setOpacity(0); // comment this line if you want to see the hitboxes as black boxes
-        getChildren().add(hitBox);
-      }
-    }
+    // comment this line if you want to see the hit boxes as black boxes
+    list.stream().filter(Displayable::isAlive).forEach(aList -> {
+      getChildren().add(fishImage(aList));
+      final Rectangle hitBox = aList.makeHitBox();
+      hitBox.setOpacity(0); // comment this line if you want to see the hit boxes as black boxes
+      getChildren().add(hitBox);
+    });
   }
 
   /**
@@ -178,12 +183,12 @@ public class GamePane extends StandardPane implements Stoppable {
    * 
    * @param swimmer
    *          the fish to display.
-   * @return an imageview of the fish.
+   * @return an imageView of the fish.
    */
-  public ImageView fishImage(Displayable swimmer) {
-    Position position = swimmer.getPosition();
-    double size = swimmer.getSize();
-    Direction dir = swimmer.getDirection();
+  private ImageView fishImage(final Displayable swimmer) {
+    final Position position = swimmer.getPosition();
+    final double size = swimmer.getSize();
+    final Direction dir = swimmer.getDirection();
 
     ImageView image;
     image = new ImageView(swimmer.getImageResource());
@@ -211,7 +216,7 @@ public class GamePane extends StandardPane implements Stoppable {
    * @param screenController
    *          the screenController to set
    */
-  public void setScreenController(ScreenController screenController) {
+  public void setScreenController(final ScreenController screenController) {
     this.screenController = screenController;
   }
 

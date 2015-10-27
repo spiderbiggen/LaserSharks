@@ -16,8 +16,8 @@ import lasersharksgui.panes.OptionsPane;
 @SuppressWarnings("restriction")
 public class PauseController implements EventHandler<KeyEvent> {
 
-  private GamePane pane;
-  private OptionsPane optionsPane;
+  private final GamePane pane;
+  private final OptionsPane optionsPane;
   private Boolean isPaused = false;
 
   /**
@@ -25,13 +25,12 @@ public class PauseController implements EventHandler<KeyEvent> {
    * 
    * @param pane the game pane so that we can browse back to it
    */
-  public PauseController(GamePane pane) {
+  public PauseController(final GamePane pane) {
     this.pane = pane;
     this.optionsPane = new OptionsPane();
   }
 
-  @Override
-  public void handle(KeyEvent event) {
+  @Override public void handle(final KeyEvent event) {
     if (event.getCode() == KeyCode.P && event.getEventType() == KeyEvent.KEY_PRESSED) {
       if (isPaused) {
         resumeGame();

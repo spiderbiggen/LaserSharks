@@ -1,12 +1,7 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.behaviour.CollisionBehaviour;
-import lasersharks.behaviour.collision.component.DefaultComponentLeaf;
-import lasersharks.behaviour.collision.component.OnCollisionEatenComponentLeaf;
-import lasersharks.behaviour.collision.component.OnCollisionHighScoreIncrementComponent;
-import lasersharks.behaviour.collision.component.OnCollisionIncreaseAmmunitionComponent;
-import lasersharks.behaviour.collision.component.OnCollisionIncreaseSizeComponent;
-import lasersharks.behaviour.collision.component.OnCollisionPlayerLosesComponent;
+import lasersharks.behaviour.collision.component.*;
 import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
 
@@ -17,7 +12,7 @@ import lasersharks.interfaces.Displayable;
  *
  */
 public class SharkCollisionBehaviour implements CollisionBehaviour {
-  private CollisionComponent handler;
+  private final CollisionComponent handler;
 
   /**
    * Constructor.
@@ -25,7 +20,7 @@ public class SharkCollisionBehaviour implements CollisionBehaviour {
    * @param me
    *          this.
    */
-  public SharkCollisionBehaviour(Displayable me) {
+  public SharkCollisionBehaviour(final Displayable me) {
     super();
     this.handler = 
         new OnCollisionPlayerLosesComponent(me, 
@@ -36,8 +31,7 @@ public class SharkCollisionBehaviour implements CollisionBehaviour {
         new DefaultComponentLeaf())))));
   }
 
-  @Override
-  public void colideWith(Displayable other) {
+  @Override public void collideWith(final Displayable other) {
     handler.handleCollision(other);
   }
 

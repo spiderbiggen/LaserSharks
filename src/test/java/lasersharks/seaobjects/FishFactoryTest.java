@@ -1,16 +1,15 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Random;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import lasersharks.Direction;
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.interfaces.Displayable;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Random;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for FishFactory.
@@ -23,15 +22,16 @@ public class FishFactoryTest {
   private static final int WIDTH = 1920;
   private static final int HEIGHT = 1080;
 
-  protected Displayable generatedFish;
-  private final long seed = 12345622L;
-  private final long seedWest = 11L;
+  private Displayable generatedFish;
+  private static final long SEED = 12345622L;
+  private static final long SEED_WEST = 11L;
 
-  private final float expectedSize1 = 282;
-  private final int expectedSpeed1 = 148;
+  private static final float EXPECTED_SIZE_1 = 282;
+  private static final int EXPECTED_SPEED_1 = 148;
 
-  private final float expectedSize2 = 289;
-  private final int expectedSpeed2 = 448;
+  private static final float EXPECTED_SIZE_2 = 289;
+  private static final int EXPECTED_SPEED_2 = 448;
+
 
   private FishFactory fishFactory;
 
@@ -50,13 +50,13 @@ public class FishFactoryTest {
   public void testRandomFish1() {
     Options.setGlobalHeight(HEIGHT);
     Options.setGlobalWidth(WIDTH);
-    Random random = new Random(seed);
+    final Random random = new Random(SEED);
     generatedFish = fishFactory.generateFish(random);
 
     assertEquals(Direction.East, generatedFish.getDirection());
-    assertEquals(-expectedSize1, generatedFish.getPosition().getPosX(), 1);
-    assertEquals(expectedSize1, generatedFish.getSize(), 1);
-    assertEquals(expectedSpeed1, generatedFish.getSpeed(), 1);
+    assertEquals(-EXPECTED_SIZE_1, generatedFish.getPosition().getPosX(), 1);
+    assertEquals(EXPECTED_SIZE_1, generatedFish.getSize(), 1);
+    assertEquals(EXPECTED_SPEED_1, generatedFish.getSpeed(), 1);
   }
 
   /**
@@ -64,13 +64,13 @@ public class FishFactoryTest {
    */
   @Test
   public void testRandomFish2() {
-    Random random = new Random(seedWest);
+    final Random random = new Random(SEED_WEST);
     generatedFish = fishFactory.generateFish(random);
 
     assertEquals(Direction.West, generatedFish.getDirection());
     assertEquals(Position.getWidthPanel(), generatedFish.getPosition().getPosX(), 1);
-    assertEquals(expectedSize2, generatedFish.getSize(), 1);
-    assertEquals(expectedSpeed2, generatedFish.getSpeed(), 1);
+    assertEquals(EXPECTED_SIZE_2, generatedFish.getSize(), 1);
+    assertEquals(EXPECTED_SPEED_2, generatedFish.getSpeed(), 1);
   }
 
 }

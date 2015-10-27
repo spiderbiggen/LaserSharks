@@ -1,11 +1,9 @@
 package lasersharks.behaviour.sizeincrement;
 
 import lasersharks.Logger;
-import lasersharks.Options;
 import lasersharks.behaviour.GetSizeIncrementBahaviour;
 import lasersharks.controllers.AudioController;
-import lasersharks.seaobjects.SeaObject;
-import lasersharksgui.panes.StandardPane;
+import lasersharks.seaobjects.AbstractSeaObject;
 
 /**
  * getSizeIncrement behaviour for fish.
@@ -13,7 +11,7 @@ import lasersharksgui.panes.StandardPane;
  *
  */
 public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBahaviour {
-  private SeaObject element;
+  private final AbstractSeaObject element;
   
   public static final float ENERGY_DISSERPATION_RATE = 7.5f;
   
@@ -21,7 +19,7 @@ public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBahaviour 
    * Constructor.
    * @param ele element to which to propagate actions.
    */
-  public FishGetSizeIncrementBehaviour(SeaObject ele) {
+  public FishGetSizeIncrementBehaviour(final AbstractSeaObject ele) {
     this.element = ele;
   }
 
@@ -29,6 +27,6 @@ public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBahaviour 
   public float onCollisionSizeIncrement() {
     Logger.getInstance().write("Fish eaten", element.toString());
     AudioController.getInstance().playEatSoundEffect();
-    return (element.getSize() / ENERGY_DISSERPATION_RATE);
+    return element.getSize() / ENERGY_DISSERPATION_RATE;
   }
 }
