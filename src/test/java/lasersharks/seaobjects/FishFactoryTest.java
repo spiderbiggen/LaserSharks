@@ -13,26 +13,20 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for FishFactory.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class FishFactoryTest {
 
   private static final int WIDTH = 1920;
   private static final int HEIGHT = 1080;
-
-  private Displayable generatedFish;
   private static final long SEED = 12345622L;
   private static final long SEED_WEST = 11L;
-
   private static final float EXPECTED_SIZE_1 = 282;
   private static final int EXPECTED_SPEED_1 = 148;
-
   private static final float EXPECTED_SIZE_2 = 289;
   private static final int EXPECTED_SPEED_2 = 448;
-
-
+  private Displayable generatedFish;
   private FishFactory fishFactory;
 
   /**

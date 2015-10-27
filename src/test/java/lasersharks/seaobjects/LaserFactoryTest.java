@@ -10,9 +10,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for LaserFactory.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class LaserFactoryTest {
 

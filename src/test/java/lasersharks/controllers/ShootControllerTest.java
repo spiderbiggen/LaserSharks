@@ -4,18 +4,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
 /**
  * This test checks if the shootcontroller works properly.
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class ShootControllerTest {
 
@@ -36,8 +33,8 @@ public class ShootControllerTest {
    */
   @Test
   public void correctKeyPressedHandlingTest() {
-    final KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.SPACE, false, false, false,
-        false);
+    final KeyEvent k =
+        new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.SPACE, false, false, false, false);
     this.shootController.handle(k);
     verify(fishController).shootLaser();
   }
@@ -47,8 +44,8 @@ public class ShootControllerTest {
    */
   @Test
   public void incorrectKeyPressedHandlingTest() {
-    final KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.R, false, false, false,
-        false);
+    final KeyEvent k =
+        new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.R, false, false, false, false);
     this.shootController.handle(k);
     verifyZeroInteractions(fishController);
   }
@@ -58,8 +55,8 @@ public class ShootControllerTest {
    */
   @Test
   public void correctKeyReleasedHandlingTest() {
-    final KeyEvent k = new KeyEvent(KeyEvent.KEY_RELEASED, "", "", KeyCode.SPACE, false, false, false,
-        false);
+    final KeyEvent k =
+        new KeyEvent(KeyEvent.KEY_RELEASED, "", "", KeyCode.SPACE, false, false, false, false);
     this.shootController.handle(k);
     verifyZeroInteractions(fishController);
   }
@@ -69,8 +66,8 @@ public class ShootControllerTest {
    */
   @Test
   public void incorrectKeyReleasedHandlingTest() {
-    final KeyEvent k = new KeyEvent(KeyEvent.KEY_RELEASED, "", "", KeyCode.R, false, false, false,
-        false);
+    final KeyEvent k =
+        new KeyEvent(KeyEvent.KEY_RELEASED, "", "", KeyCode.R, false, false, false, false);
     this.shootController.handle(k);
     verifyZeroInteractions(fishController);
   }

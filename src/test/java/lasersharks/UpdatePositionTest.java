@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package lasersharks;
 
@@ -16,32 +16,20 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * @author SEM Group 27
- *
  */
 @RunWith(Parameterized.class)
 public class UpdatePositionTest {
 
-  private Position position;
   private final Direction direction;
   private final Position expectedPosition;
-
-  /**
-   * Setup the test scenario.
-   */
-  @Before
-  public void setUp() {
-    position = new Position(0, 0);
-  }
+  private Position position;
 
   /**
    * Constructor for parameterized Test.
-   * 
-   * @param direction
-   *          DIRECTION to update to
-   * @param expectedX
-   *          expected X result from running the method
-   * @param expectedY
-   *          expected Y from running the method
+   *
+   * @param direction DIRECTION to update to
+   * @param expectedX expected X result from running the method
+   * @param expectedY expected Y from running the method
    */
   public UpdatePositionTest(final Direction direction, final int expectedX, final int expectedY) {
     this.direction = direction;
@@ -49,8 +37,9 @@ public class UpdatePositionTest {
   }
 
   /**
-   * Parameterized test for {@link lasersharks.Position#updatePosition(Direction, double, double)}  }.
-   * 
+   * Parameterized test for {@link lasersharks.Position#updatePosition(Direction, double, double)
+   * }  }.
+   *
    * @return list of parameters
    */
   @Parameters
@@ -59,6 +48,14 @@ public class UpdatePositionTest {
         { Direction.East, 1, 0 }, { Direction.NorthEast, 1, -1 }, { Direction.North, 0, -1 },
         { Direction.NorthWest, -1, -1 }, { Direction.West, -1, 0 }, { Direction.SouthWest, -1, 1 },
         { Direction.None, 0, 0 }, { null, 0, 0 } });
+  }
+
+  /**
+   * Setup the test scenario.
+   */
+  @Before
+  public void setUp() {
+    position = new Position(0, 0);
   }
 
   /**

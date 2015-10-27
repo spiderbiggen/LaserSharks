@@ -8,9 +8,8 @@ import lasersharks.behaviour.move.DefaultMoveBehaviour;
 
 /**
  * This class represents a laser projectile.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class LaserBullet extends AbstractSeaObject {
 
@@ -20,15 +19,11 @@ public class LaserBullet extends AbstractSeaObject {
 
   /**
    * The constructor of the laser.
-   * 
-   * @param position
-   *          the position of the laser.
-   * @param size
-   *          the size of the laser.
-   * @param startSpeed
-   *          the starting speed of the laser.
-   * @param direction
-   *          the direction of the laser.
+   *
+   * @param position   the position of the laser.
+   * @param size       the size of the laser.
+   * @param startSpeed the starting speed of the laser.
+   * @param direction  the direction of the laser.
    */
   public LaserBullet(final Position position, final float size, final double startSpeed,
       final Direction direction) {
@@ -53,7 +48,7 @@ public class LaserBullet extends AbstractSeaObject {
   public double getWidthScale() {
     return WIDTH_SCALE;
   }
-  
+
   @Override
   public int getOnCollisionSizeDecrement() {
     return SIZE_DECREMENT_ON_HIT;

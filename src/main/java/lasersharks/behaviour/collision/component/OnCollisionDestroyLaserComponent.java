@@ -3,18 +3,17 @@ package lasersharks.behaviour.collision.component;
 import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
 
-public class OnCollisionIncreaseSizeComponent implements CollisionComponent {
-  private final Displayable me;
+public class OnCollisionDestroyLaserComponent implements CollisionComponent {
+
   private final CollisionComponent next;
 
-  public OnCollisionIncreaseSizeComponent(final Displayable me, final CollisionComponent next) {
-    this.me = me;
+  public OnCollisionDestroyLaserComponent(final CollisionComponent next) {
     this.next = next;
   }
 
-  @Override
   public void handleCollision(final Displayable other) {
-    me.increaseSize(other.onCollisionSizeIncrement());
+    other.onCollisionDestroyLaser();
+    other.onCollisionDestroyLaser();
     next.handleCollision(other);
   }
 

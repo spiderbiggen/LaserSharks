@@ -2,7 +2,9 @@ package lasersharks;
 
 import javafx.scene.paint.Color;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.util.Random;
 
 /**
@@ -15,17 +17,17 @@ import java.util.Random;
 @SuppressWarnings("restriction")
 public class Options {
 
-  private Dimension dimension;
   private static final int DEFAULT_WIDTH = 1920;
   private static final int DEFAULT_HEIGHT = 1080;
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
   private static final String DEFAULT_EAT_SOUND_FILENAME = "src/main/resources/soundEffect1.wav";
   private static final String DEFAULT_LASER_SOUND_FILENAME = "src/main/resources/shoot.wav";
   private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/pickup.wav";
-
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
   private static final Color DEFAULT_BACKGROUND_COLOUR = Color.BLUE;
+  private static Options currentOptions;
 
+  private Dimension dimension;
   private String musicFileName;
   private String eatSoundFileName;
   private String laserSoundFileName;
@@ -36,11 +38,8 @@ public class Options {
   private double masterVolume;
   private double musicVolume;
   private double sfxVolume;
-
   private String background;
   private Random factoryRng;
-  private Random spawnRng;
-  private static Options currentOptions;
 
   /**
    * constructor of the options class. Creates an Options object.
@@ -52,7 +51,6 @@ public class Options {
     setInstance(this);
     this.dimension = screenRes;
     factoryRng = new Random();
-    spawnRng = factoryRng;
 
     background = DEFAULT_BACKGROUND_IMAGE;
     musicFileName = DEFAULT_MUSIC_FILENAME;
@@ -82,15 +80,93 @@ public class Options {
   }
 
   /**
+   * sets the current options instance to a certain options object.
+   *
+   * @param options the options object to set.
+   */
+  public static void setInstance(final Options options) {
+    currentOptions = options;
+  }
+
+  /**
    * Destroy current options.
    */
   public static void destroyInstance() {
     Options.currentOptions = null;
   }
 
+  /**
+   * gets the current screen size that is being used.
+   *
+   * @return the screen resolution of the systems screen.
+   */
+  private static Dimension getScreenSize() {
+    try {
+      return Toolkit.getDefaultToolkit()
+          .getScreenSize();
+    } catch (HeadlessException e) {
+      return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    }
+  }
+
+  /**
+   * Gets the height of the screen now used.
+   *
+   * @return the height of the screen.
+   */
+  public static double getGlobalHeight() {
+    return getInstance().getDimension()
+        .getHeight();
+  }
+
+  /**
+   * sets the height of the screen.
+   *
+   * @param height
+   *          the height to set.
+   */
+  public static void setGlobalHeight(final double height) {
+    final double oldWidth = getInstance().getDimension()
+        .getWidth();
+    getInstance().getDimension()
+        .setSize(oldWidth, height);
+  }
+
+  /**
+   * Gets the Width of the screen now used.
+   *
+   * @return the width of the screen.
+   */
+  public static double getGlobalWidth() {
+    return getInstance().getDimension()
+        .getWidth();
+  }
+
+  /**
+   * sets the width of the screen.
+   *
+   * @param width
+   *          the height to set.
+   */
+  public static void setGlobalWidth(final double width) {
+    final double oldHeight = getInstance().getDimension()
+        .getHeight();
+    getInstance().getDimension()
+        .setSize(width, oldHeight);
+  }
+
+  /**
+   * Get the backgroundColor.
+   *
+   * @return the default background color
+   */
+  public static Color getBackgroundColor() {
+    return DEFAULT_BACKGROUND_COLOUR;
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -100,15 +176,17 @@ public class Options {
 
   /**
    * Checks if two options objects are equal.
-   * 
+   *
    * @param object
    *          the object to compare to.
    * @return true if they are equal.
    */
-  @Override public boolean equals(final Object object) {
+  @Override
+  public boolean equals(final Object object) {
     if (object instanceof Options) {
       final Options other = (Options) object;
-      if (other.getDimension().equals(dimension)) {
+      if (other.getDimension()
+          .equals(dimension)) {
         return true;
       }
     }
@@ -116,31 +194,8 @@ public class Options {
   }
 
   /**
-   * sets the current options instance to a certain options object.
-   * 
-   * @param options
-   *          the options object to set.
-   */
-  public static void setInstance(final Options options) {
-    currentOptions = options;
-  }
-
-  /**
-   * gets the current screen size that is being used.
-   * 
-   * @return the screen resolution of the systems screen.
-   */
-  private static Dimension getScreenSize() {
-    try {
-      return Toolkit.getDefaultToolkit().getScreenSize();
-    } catch (HeadlessException e) {
-      return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-    }
-  }
-
-  /**
    * gets the resolution in the form of a Dimension object of this options object.
-   * 
+   *
    * @return the resolution of this options object.
    */
   public Dimension getDimension() {
@@ -148,48 +203,8 @@ public class Options {
   }
 
   /**
-   * Gets the height of the screen now used.
-   * 
-   * @return the height of the screen.
-   */
-  public static double getGlobalHeight() {
-    return getInstance().getDimension().getHeight();
-  }
-
-  /**
-   * Gets the Width of the screen now used.
-   * 
-   * @return the width of the screen.
-   */
-  public static double getGlobalWidth() {
-    return getInstance().getDimension().getWidth();
-  }
-
-  /**
-   * sets the height of the screen.
-   * 
-   * @param height
-   *          the height to set.
-   */
-  public static void setGlobalHeight(final double height) {
-    final double oldWidth = getInstance().getDimension().getWidth();
-    getInstance().getDimension().setSize(oldWidth, height);
-  }
-
-  /**
-   * sets the width of the screen.
-   * 
-   * @param width
-   *          the height to set.
-   */
-  public static void setGlobalWidth(final double width) {
-    final double oldHeight = getInstance().getDimension().getHeight();
-    getInstance().getDimension().setSize(width, oldHeight);
-  }
-
-  /**
    * Get the musicFileName.
-   * 
+   *
    * @return the musicFileName.
    */
   public String getMusicFileName() {
@@ -241,7 +256,7 @@ public class Options {
 
   /**
    * Set if the music should be muted.
-   * 
+   *
    * @param muteMusic
    *          true if music should be muted.
    */
@@ -258,7 +273,7 @@ public class Options {
 
   /**
    * Set if the sfx should be muted.
-   * 
+   *
    * @param muteSfx
    *          true if music should be muted.
    */
@@ -313,20 +328,11 @@ public class Options {
 
   /**
    * Get the backGroundImage.
-   * 
+   *
    * @return the backGroundImage.
    */
   public String getBackground() {
     return background;
-  }
-
-  /**
-   * Get the backgroundColor.
-   *
-   * @return the default background color
-   */
-  public static Color getBackgroundColor() {
-    return DEFAULT_BACKGROUND_COLOUR;
   }
 
   /**
@@ -338,23 +344,4 @@ public class Options {
     return factoryRng;
   }
 
-  /**
-   * set the random number generator for factory.
-   * 
-   * @param rng
-   *          random number generator.
-   */
-  public void setFactoryRng(final Random rng) {
-    this.factoryRng = rng;
-  }
-
-  /**
-   * set the random number generator for factory.
-   * 
-   * @param rng
-   *          random number generator.
-   */
-  public void setSpawnRng(final Random rng) {
-    this.spawnRng = rng;
-  }
 }

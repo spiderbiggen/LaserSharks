@@ -6,9 +6,8 @@ import org.junit.Test;
 
 /**
  * Test class for the LaserBullet class.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class LaserBulletTest {
 

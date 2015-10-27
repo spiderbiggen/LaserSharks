@@ -1,6 +1,10 @@
 package lasersharks;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,8 +15,9 @@ import java.util.Date;
  * @author SEMGroup27
  */
 public class Logger {
-  private static Logger instance;
+
   private static final String LOG_DIRECTORY = "logs/";
+  private static Logger instance;
   private final FileWriter fileWriter;
   private final PrintWriter printWriter;
   private final DateFormat dateFormat;
@@ -32,31 +37,8 @@ public class Logger {
   }
 
   /**
-   * getCurrentFileWriter.
-   * 
-   * @return current file writer.
-   */
-  public FileWriter getFileWriter() {
-    return fileWriter;
-  }
-
-  /**
-   * Write event to log.
-   * 
-   * @param event
-   *          the event that happend.
-   * @param specifics
-   *          the specifics about the event.
-   */
-  public void write(final String event, final String specifics) {
-    this.printWriter
-        .println(dateFormat.format(new Date()) + " : " + event + " : " + specifics + "\n");
-    this.printWriter.flush();
-  }
-
-  /**
    * Get correct instance of Logger class. If it currently doesn't exists one is created.
-   * 
+   *
    * @return Logger class.
    */
   public static Logger getInstance() {
@@ -83,8 +65,18 @@ public class Logger {
   }
 
   /**
+   * Method so we can mock logger in tests of other classes.
+   *
+   * @param logger
+   *          logger to be used.
+   */
+  public static void setInstance(final Logger logger) {
+    Logger.instance = logger;
+  }
+
+  /**
    * Get instance of Logger class, if none exists one is created using the given filename.
-   * 
+   *
    * @param filename
    *          filename to use.
    * @return instance of Logger Class.
@@ -97,12 +89,23 @@ public class Logger {
   }
 
   /**
-   * Method so we can mock logger in tests of other classes.
+   * getCurrentFileWriter.
    *
-   * @param logger
-   *          logger to be used.
+   * @return current file writer.
    */
-  public static void setInstance(final Logger logger) {
-    Logger.instance = logger;
+  public FileWriter getFileWriter() {
+    return fileWriter;
+  }
+
+  /**
+   * Write event to log.
+   *
+   * @param event     the event that happend.
+   * @param specifics the specifics about the event.
+   */
+  public void write(final String event, final String specifics) {
+    this.printWriter
+        .println(dateFormat.format(new Date()) + " : " + event + " : " + specifics + "\n");
+    this.printWriter.flush();
   }
 }

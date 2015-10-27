@@ -7,14 +7,15 @@ import lasersharks.seaobjects.AbstractSeaObject;
 
 /**
  * Eaten behaviour for Ammunition.
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class AmmoEatenBehaviour implements EatenBehaviour {
   private final AbstractSeaObject element;
-  
+
   /**
    * Constructor.
+   *
    * @param ele element to which to propagate actions.
    */
   public AmmoEatenBehaviour(final AbstractSeaObject ele) {

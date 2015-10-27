@@ -6,18 +6,17 @@ import lasersharks.seaobjects.AbstractSeaObject;
 
 /**
  * Eaten behaviour for Fishes.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class FishEatenBehaviour implements EatenBehaviour {
+
   private final AbstractSeaObject element;
 
   /**
    * Constructor.
-   * 
-   * @param ele
-   *          element to wich to propagate actions.
+   *
+   * @param ele element to wich to propagate actions.
    */
   public FishEatenBehaviour(final AbstractSeaObject ele) {
     this.element = ele;

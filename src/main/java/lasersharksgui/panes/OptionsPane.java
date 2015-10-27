@@ -7,11 +7,10 @@ import lasersharks.Options;
 import lasersharks.controllers.AudioController;
 
 /**
- * 
  * @author SEMGroup27
- *
  */
-@SuppressWarnings("restriction") public class OptionsPane extends AbstractStandardPane {
+@SuppressWarnings("restriction")
+public class OptionsPane extends AbstractStandardPane {
 
   private static final int PAUSE_TEXT_SIZE_UP = 6;
   private static final double PAUSE_TEXT_POSITION_UP = 2.5;
@@ -45,12 +44,9 @@ import lasersharks.controllers.AudioController;
   /**
    * Method for adding the mute button to the scene.
    *
-   * @param xPos
-   *          the x position of the top left corner.
-   * @param yPos
-   *          the y position of the top left corner.
-   * @param size
-   *          the size of the button(width and height).
+   * @param xPos the x position of the top left corner.
+   * @param yPos the y position of the top left corner.
+   * @param size the size of the button(width and height).
    * @return a new mute button based on the parameters.
    */
   private Button muteButton(final double xPos, final double yPos, final double size) {

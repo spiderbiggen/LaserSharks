@@ -9,7 +9,6 @@ import lasersharksgui.panes.GamePane;
 
 /**
  * @author SEMGroup27
- *
  */
 @SuppressWarnings("restriction")
 public class RestartGameController implements EventHandler<KeyEvent> {
@@ -25,7 +24,8 @@ public class RestartGameController implements EventHandler<KeyEvent> {
     Logger.getInstance().write("Game", "Restarted");
   }
 
-  @Override public void handle(final KeyEvent event) {
+  @Override
+  public void handle(final KeyEvent event) {
     if (event.getCode() == KeyCode.R) {
       restartGame();
     }

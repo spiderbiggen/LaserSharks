@@ -6,7 +6,9 @@ import lasersharks.interfaces.Displayable;
 import org.junit.After;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -106,6 +108,7 @@ public abstract class SeaObjectTest {
     when(mockedFish.getSize()).thenReturn(SIZE);
     // TODO: change the way how this is tested so it doesn't give null pointer exceptions.
     // This has to do with storing mockito objects in a variable and functions missing.
+    // TODO: Fix by changing collision reference in methods to getter calls.
     // assertTrue(fish1.collision(mockedFish));
   }
 
@@ -119,6 +122,7 @@ public abstract class SeaObjectTest {
     when(mockedFish.getSize()).thenReturn(SIZE);
     // TODO: change the way how this is tested so it doesn't give null pointer exceptions.
     // This has to do with storing mockito objects in a variable and functions missing.
+    // TODO: Fix by changing collision reference in methods to getter calls.
     // assertFalse(fish1.collision(mockedFish));
   }
 

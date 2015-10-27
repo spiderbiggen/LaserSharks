@@ -15,7 +15,7 @@ public class DefaultMoveBehaviour implements MoveBehaviour {
 
   /**
    * the constructor.
-   * 
+   *
    * @param displayable
    *          the fish this behaviour applies to.
    */

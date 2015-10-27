@@ -12,7 +12,8 @@ public class OnCollisionPlayerLosesComponent implements CollisionComponent {
     this.next = next;
   }
 
-  @Override public void handleCollision(final Displayable other) {
+  @Override
+  public void handleCollision(final Displayable other) {
     other.onCollisionPlayerLoses(me.getSize());
     next.handleCollision(other);
   }

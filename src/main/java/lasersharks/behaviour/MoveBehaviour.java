@@ -7,6 +7,7 @@ package lasersharks.behaviour;
  *
  */
 public interface MoveBehaviour {
+
   /**
    * Moves the fish.
    * 

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package lasersharks.seaobjects;
 
@@ -11,7 +11,6 @@ import lasersharks.behaviour.move.NoMovementMoveBehaviour;
 
 /**
  * @author SEMGroup27
- *
  */
 public class Ammo extends AbstractSeaObject {
 
@@ -20,11 +19,9 @@ public class Ammo extends AbstractSeaObject {
 
   /**
    * Constructor class for Ammo.
-   * 
-   * @param position
-   *          initial position
-   * @param size
-   *          init size
+   *
+   * @param position initial position
+   * @param size     init size
    */
   public Ammo(final Position position, final float size) {
     super(position, size, 0, Direction.None);

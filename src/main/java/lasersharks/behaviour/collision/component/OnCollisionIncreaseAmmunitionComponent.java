@@ -13,7 +13,8 @@ public class OnCollisionIncreaseAmmunitionComponent implements CollisionComponen
     this.next = next;
   }
 
-  @Override public void handleCollision(final Displayable other) {
+  @Override
+  public void handleCollision(final Displayable other) {
     me.increaseAmmunition(other.onCollisionAmmunitionIncrement());
     next.handleCollision(other);
   }

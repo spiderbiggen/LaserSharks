@@ -7,9 +7,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * The test for the enemy1 class.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class FishTest extends SeaObjectTest {
   private static final String IMAGE = "enemy-1.png";

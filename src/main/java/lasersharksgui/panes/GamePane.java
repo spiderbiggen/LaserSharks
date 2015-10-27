@@ -25,20 +25,18 @@ import java.util.stream.Collectors;
 
 /**
  * This is the pane representing the game play.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
-@SuppressWarnings("restriction") public class GamePane extends AbstractStandardPane
-    implements Stoppable {
+@SuppressWarnings("restriction")
+public class GamePane extends AbstractStandardPane implements Stoppable {
 
-  // private static final int ANIMATION_SLEEP_TIMER = 10;
-  private AnimationTimer animation;
   private static final double TIME_TO_MILLIS = 1_000_000;
-
   private static long time;
   private static boolean paused;
   private final DirectionCallback callback;
+  // private static final int ANIMATION_SLEEP_TIMER = 10;
+  private AnimationTimer animation;
   private DirectionInputController directionInputController;
   private ScreenController screenController;
   private ShootController shootController;
@@ -55,6 +53,10 @@ import java.util.stream.Collectors;
     startGame();
   }
 
+  private static void setPaused(final boolean paused) {
+    GamePane.paused = paused;
+  }
+
   /**
    * Function for start of drawing fish on screen.
    */
@@ -63,7 +65,8 @@ import java.util.stream.Collectors;
     HighScores.getInstance().setScore(0);
     clearPaneOfImageView();
     animation = new AnimationTimer() {
-      @Override public void handle(final long now) {
+      @Override
+      public void handle(final long now) {
         if (paused) {
           time = now;
           paused = false;
@@ -103,10 +106,6 @@ import java.util.stream.Collectors;
     animation.stop();
   }
 
-  private static void setPaused(final boolean paused) {
-    GamePane.paused = paused;
-  }
-
   /**
    * resumes the game. Game has first to be started before it can be resumed.
    */
@@ -137,9 +136,8 @@ import java.util.stream.Collectors;
 
   /**
    * This method will display the shark on the screen.
-   * 
-   * @param shark
-   *          the shark to display
+   *
+   * @param shark the shark to display
    */
   private void showShark(final LaserShark shark) {
     if (sharkImage == null) {
@@ -163,9 +161,8 @@ import java.util.stream.Collectors;
 
   /**
    * This method displays a list<Fish> on the scene of the gui.
-   * 
-   * @param list
-   *          the list of fish that needs to be displayed.
+   *
+   * @param list the list of fish that needs to be displayed.
    */
   private void showFishList(final List<Displayable> list) {
     clearPaneOfImageView();
@@ -180,9 +177,8 @@ import java.util.stream.Collectors;
 
   /**
    * an image object of a fish.
-   * 
-   * @param swimmer
-   *          the fish to display.
+   *
+   * @param swimmer the fish to display.
    * @return an imageView of the fish.
    */
   private ImageView fishImage(final Displayable swimmer) {
@@ -213,8 +209,7 @@ import java.util.stream.Collectors;
   }
 
   /**
-   * @param screenController
-   *          the screenController to set
+   * @param screenController the screenController to set
    */
   public void setScreenController(final ScreenController screenController) {
     this.screenController = screenController;

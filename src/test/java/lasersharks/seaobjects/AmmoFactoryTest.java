@@ -12,9 +12,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for AmmoFactory.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class AmmoFactoryTest {
 
@@ -37,7 +36,7 @@ public class AmmoFactoryTest {
     Options.setGlobalWidth(WIDTH);
     ammoFactory = new AmmoFactory();
   }
-  
+
   /**
    * Clean up after the tests have been done.
    */

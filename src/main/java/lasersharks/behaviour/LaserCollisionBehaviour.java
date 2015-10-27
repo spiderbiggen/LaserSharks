@@ -7,6 +7,7 @@ package lasersharks.behaviour;
  *
  */
 public interface LaserCollisionBehaviour {
+
   /**
    * Method for destroying the laser on hit.
    */

@@ -11,6 +11,7 @@ import lasersharks.seaobjects.AbstractSeaObject;
  *
  */
 public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBahaviour {
+
   private final AbstractSeaObject element;
   
   public static final float ENERGY_DISSERPATION_RATE = 7.5f;

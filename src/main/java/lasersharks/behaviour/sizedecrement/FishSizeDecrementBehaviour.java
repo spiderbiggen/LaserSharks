@@ -10,6 +10,7 @@ import lasersharks.seaobjects.AbstractSeaObject;
  *
  */
 public class FishSizeDecrementBehaviour implements SizeDecrementBahaviour {
+
   private final AbstractSeaObject element;
 
   /**

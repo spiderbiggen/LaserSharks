@@ -10,7 +10,7 @@ import org.mockito.Mockito;
 
 /**
  * Test for {@link ScreenController} class.
- * 
+ *
  * @author SEMGroup27
  */
 

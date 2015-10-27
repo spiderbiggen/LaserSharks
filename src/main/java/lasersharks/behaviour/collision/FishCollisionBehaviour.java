@@ -1,8 +1,8 @@
 package lasersharks.behaviour.collision;
 
 import lasersharks.behaviour.CollisionBehaviour;
-import lasersharks.behaviour.collision.component.DefaultComponentLeaf;
-import lasersharks.behaviour.collision.component.OnCollisionDestroyLaserComponentLeaf;
+import lasersharks.behaviour.collision.component.DefaultComponent;
+import lasersharks.behaviour.collision.component.OnCollisionDestroyLaserComponent;
 import lasersharks.behaviour.collision.component.OnCollisionSizeDecrementComponent;
 import lasersharks.interfaces.CollisionComponent;
 import lasersharks.interfaces.Displayable;
@@ -24,10 +24,10 @@ public class FishCollisionBehaviour implements CollisionBehaviour {
    */
   public FishCollisionBehaviour(final Displayable me) {
     super();
-    this.handler = 
-        new OnCollisionSizeDecrementComponent(me, 
-        new OnCollisionDestroyLaserComponentLeaf(
-        new DefaultComponentLeaf()));
+    this.handler =
+        new OnCollisionSizeDecrementComponent(me,
+            new OnCollisionDestroyLaserComponent(
+                new DefaultComponent()));
   }
 
   @Override public void collideWith(final Displayable other) {

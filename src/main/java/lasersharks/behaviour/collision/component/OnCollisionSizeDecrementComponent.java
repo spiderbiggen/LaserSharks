@@ -12,7 +12,8 @@ public class OnCollisionSizeDecrementComponent implements CollisionComponent {
     this.next = next;
   }
 
-  @Override public void handleCollision(final Displayable other) {
+  @Override
+  public void handleCollision(final Displayable other) {
     me.onCollisionSizeDecrement(other.getOnCollisionSizeDecrement());
     next.handleCollision(other);
   }

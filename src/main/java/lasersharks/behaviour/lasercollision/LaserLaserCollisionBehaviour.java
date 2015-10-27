@@ -5,18 +5,16 @@ import lasersharks.interfaces.Displayable;
 
 /**
  * Eaten behavior for Fishes.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class LaserLaserCollisionBehaviour implements LaserCollisionBehaviour {
   private final Displayable element;
 
   /**
    * Constructor.
-   * 
-   * @param element
-   *          this.
+   *
+   * @param element this.
    */
   public LaserLaserCollisionBehaviour(final Displayable element) {
     super();

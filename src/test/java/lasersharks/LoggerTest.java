@@ -3,7 +3,11 @@ package lasersharks;
 import org.junit.After;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
@@ -16,6 +20,7 @@ import static org.mockito.Mockito.mock;
  *
  */
 public class LoggerTest {
+
   private static final int TIMESTAMP_CHARS = 8;
 
   /**

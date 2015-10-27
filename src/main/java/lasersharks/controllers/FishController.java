@@ -1,23 +1,22 @@
 package lasersharks.controllers;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
 import lasersharks.Direction;
 import lasersharks.Logger;
 import lasersharks.Position;
 import lasersharks.interfaces.AmmoSpawner;
 import lasersharks.interfaces.Displayable;
-
+import lasersharks.interfaces.FishSpawner;
 import lasersharks.interfaces.LaserSpawner;
+import lasersharks.seaobjects.AbstractSeaObject;
 import lasersharks.seaobjects.AmmoFactory;
 import lasersharks.seaobjects.FishFactory;
-import lasersharks.interfaces.FishSpawner;
 import lasersharks.seaobjects.LaserFactory;
 import lasersharks.seaobjects.LaserShark;
-import lasersharks.seaobjects.AbstractSeaObject;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 
 /**
@@ -129,15 +128,6 @@ public class FishController {
   }
 
   /**
-   * Method to return the FishSpawner.
-   * 
-   * @return the fishSpawner
-   */
-  public FishSpawner getFishSpawner() {
-    return enemySpawner;
-  }
-
-  /**
    * Update all fish positions.
    *
    * @param frameTime the time between frames in seconds
@@ -166,8 +156,8 @@ public class FishController {
    *
    * @param frameTime
    *          the time between frames in seconds
-   * 
-   * @return List<Swimmer> list of fishes at there current position.
+   *
+   * @return List<Displayable> list of fishes at there current position.
    */
   public List<Displayable> getNextCycleInformation(final double frameTime) {
     checkForCollisions();
@@ -180,12 +170,12 @@ public class FishController {
         this.addDisplayable(g);
       }
 
-      Logger.getInstance().write(
-          "Fish spawned",
-          "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
-              + f.getDirection() + ", " + "Position: " + f.getPosition());
+      Logger.getInstance()
+          .write("Fish spawned", String.format("Speed: %s, Size: %s, Direction: %s, Position: %s",
+              f.getSpeed(), f.getSize(), f.getDirection(), f.getPosition()));
     }
     return this.getNewFishPositions(frameTime);
+
   }
 
   /**
@@ -199,9 +189,10 @@ public class FishController {
   private void checkForCollisions() {
     displayableList.add(0, this.shark);
     displayableList.stream().filter(Displayable::collisionActor).forEach(
-        v -> displayableList.stream().filter(v::checkForCollision).filter(Displayable::isAlive)
-            .forEach(v::collideWith)
-    );
+        v -> displayableList.stream()
+            .filter(v::checkForCollision)
+            .filter(Displayable::isAlive)
+            .forEach(v::collideWith));
     displayableList.remove(0);
   }
 

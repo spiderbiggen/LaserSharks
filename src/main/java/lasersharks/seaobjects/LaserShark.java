@@ -126,7 +126,7 @@ public class LaserShark extends AbstractSeaObject implements DirectionCallback {
 
   /**
    * Lasersharks are collisionActors.
-   * @return true
+   * @return true.
    */
   public boolean collisionActor() {
     return true;

@@ -5,7 +5,6 @@ import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.LaserShark;
 import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
-import lasersharksgui.panes.LosingPane;
 import lasersharksgui.panes.WinPane;
 
 import java.util.List;
@@ -45,12 +44,10 @@ public class ScreenController {
    * @return FishInfo
    */
   public List<Displayable> getNextFrameInfo(double frametime) {
-      if (!this.fishCon.getShark().isAlive()) {
-        MainGui.browseToGlobal(LosingPane.class);
-      } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
-        MainGui.browseToGlobal(WinPane.class);
-      }
-
+    if (this.fishCon.getShark()
+        .getSize() > GAME_WINNING_SIZE) {
+      MainGui.browseToGlobal(WinPane.class);
+    }
     return this.fishCon.getNextCycleInformation(frametime);
   }
 

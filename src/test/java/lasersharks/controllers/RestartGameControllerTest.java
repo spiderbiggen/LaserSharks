@@ -14,16 +14,15 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Class for testing {@link DirectionInputController}.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
-@SuppressWarnings({"restriction", "rawtypes"})
+@SuppressWarnings({ "restriction", "rawtypes" })
 public class RestartGameControllerTest {
   private MainGui gui;
   private ArgumentCaptor<Class> argument;
   private RestartGameController restartGameController;
-  
+
   /**
    * Setup so that all proper items are mocked.
    */
@@ -31,12 +30,12 @@ public class RestartGameControllerTest {
   public void setUp() {
     gui = Mockito.mock(MainGui.class);
     argument = ArgumentCaptor.forClass(
-            Class.class
+        Class.class
     );
     MainGui.setInstance(gui);
     restartGameController = new RestartGameController();
   }
-  
+
   /**
    * Cleanup our mess.
    */
@@ -44,7 +43,7 @@ public class RestartGameControllerTest {
   public void tearDown() {
     MainGui.clearInstance();
   }
-  
+
   /**
    * Test the restart game controller.
    */
@@ -58,7 +57,6 @@ public class RestartGameControllerTest {
     Mockito.verify(gui).browseTo(argument.capture());
     assertEquals(GamePane.class, argument.getValue());
   }
-  
 
   /**
    * Test the restart game controller.
@@ -71,5 +69,5 @@ public class RestartGameControllerTest {
 
     Mockito.verifyZeroInteractions(gui);
   }
-  
+
 }

@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 
 /**
  * Test class for {@link PauseController}.
- * 
+ *
  * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
@@ -29,7 +29,8 @@ public class PauseControllerTest {
   /**
    * Set up our mess.
    */
-  @Before public void setUp() {
+  @Before
+  public void setUp() {
     gui = Mockito.mock(MainGui.class);
     gamePane = Mockito.mock(GamePane.class);
     pauseController = new PauseController(gamePane);
@@ -46,7 +47,8 @@ public class PauseControllerTest {
   /**
    * Cleanup our mess.
    */
-  @After public void tearDown() {
+  @After
+  public void tearDown() {
     MainGui.clearInstance();
   }
 
@@ -62,7 +64,8 @@ public class PauseControllerTest {
   /**
    * Test for pressedR keyevent.
    */
-  @Test public void pressedRTest() {
+  @Test
+  public void pressedRTest() {
     pauseController.handle(rPressed);
     Mockito.verifyZeroInteractions(gui);
   }
@@ -70,7 +73,8 @@ public class PauseControllerTest {
   /**
    * Test for releaseP keyevent.
    */
-  @Test public void releasedPTest() {
+  @Test
+  public void releasedPTest() {
     pauseController.handle(pReleased);
     Mockito.verifyZeroInteractions(gui);
   }

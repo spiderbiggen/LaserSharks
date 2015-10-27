@@ -1,28 +1,27 @@
 package lasersharks.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Random;
-
+import lasersharks.Direction;
+import lasersharks.Position;
+import lasersharks.seaobjects.Fish;
+import lasersharks.seaobjects.FishFactory;
+import lasersharks.seaobjects.LaserShark;
+import lasersharksgui.MainGui;
+import lasersharksgui.panes.LosingPane;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import lasersharks.Direction;
-import lasersharks.Position;
-import lasersharks.seaobjects.Fish;
-import lasersharks.seaobjects.LaserShark;
-import lasersharksgui.MainGui;
-import lasersharksgui.panes.LosingPane;
-import lasersharks.seaobjects.FishFactory;
+import java.util.Random;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * the test class for the FishController class.
- * 
+ *
  * @author SEMGroup27
  */
 public class FishControllerTest {
@@ -32,15 +31,14 @@ public class FishControllerTest {
   private static final int POSITION_Y = 10;
   private static final int POSITION_X = 10;
   private static final int RANDOM_SEED = 10;
-  private FishController fishCon;
   private static final int FISH_AMOUNT = 10;
   private static final int DIST_BETWEEN_FISH = 30;
+  private FishController fishCon;
 
   /**
    * Sets up a fish controller object.
-   * 
-   * @throws Exception
-   *           if an error occurs.
+   *
+   * @throws Exception if an error occurs.
    */
   @Before
   public void setUp() throws Exception {
@@ -68,11 +66,11 @@ public class FishControllerTest {
   }
 
   /**
-   * A fish controller containing 10 fishes and 1 shark. one fish collides with the shark. The fishes
+   * A fish controller containing 10 fishes and 1 shark. one fish collides with the shark. The
+   * fishes
    * are SIZE 10. Useful for testing multiple methods.
-   * 
-   * @param sizeOfShark
-   *          the SIZE of the shark to set to.
+   *
+   * @param sizeOfShark the SIZE of the shark to set to.
    * @return a fish controller with 10 fish and 1 shark. one shark and 1 fish collide.
    */
   private FishController fishConFilled(final int sizeOfShark) {
@@ -96,7 +94,7 @@ public class FishControllerTest {
   public void testGetNextCycleSharkKilled() {
     final MainGui guiMock = Mockito.mock(MainGui.class);
     final ArgumentCaptor<Class> argument = ArgumentCaptor.forClass(
-            Class.class
+        Class.class
     );
     MainGui.setInstance(guiMock);
 

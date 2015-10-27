@@ -4,10 +4,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * A unit test object for the Options class.
@@ -17,22 +20,22 @@ import static org.junit.Assert.*;
  */
 public class OptionsTest {
 
+  private static final int X_RESOLUTION = 1100;
+  private static final int Y_RESOLUTION = 1000;
+  private static final int X_RESOLUTION_OTHER = 2200;
+  private static final int Y_RESOLUTION_OTHER = 2000;
+  private static final Dimension DEFAULT_DIMENSION = new Dimension(1920, 1080);
   private Options options;
-  private static final int XRES = 1100;
-  private static final int YRES = 1000;
-  private static final int XRES_OTHER = 2200;
-  private static final int YRES_OTHER = 2000;
   private Dimension dim;
   private Dimension dimOther;
-  private static final Dimension DEFAULTDIM = new Dimension(1920, 1080);
 
   /**
    * Sets up a few objects for testing.
    */
   @Before
   public void setUp() {
-    dim = new Dimension(XRES, YRES);
-    dimOther = new Dimension(XRES_OTHER, YRES_OTHER);
+    dim = new Dimension(X_RESOLUTION, Y_RESOLUTION);
+    dimOther = new Dimension(X_RESOLUTION_OTHER, Y_RESOLUTION_OTHER);
     options = new Options(dim);
   }
 
@@ -66,7 +69,8 @@ public class OptionsTest {
           Toolkit.getDefaultToolkit().getScreenSize());
       // in case of a maven test, the dimension has 1920x1080 values.
     } catch (HeadlessException e) {
-      assertEquals(Options.getInstance().getDimension(), DEFAULTDIM);
+      assertEquals(Options.getInstance()
+          .getDimension(), DEFAULT_DIMENSION);
     }
   }
 

@@ -6,8 +6,9 @@ package lasersharks;
  * @author SEMGroup27
  */
 public class Position {
+
   private static final double HEIGHT_MULTIPLIER = 0.035;
-  private static final double WIDTH_MULTIPLYER = 0.8;
+  private static final double WIDTH_MULTIPLIER = 0.8;
   private static final int SECOND_HASH_PRIME = 31;
   private static final int HASH_PRIME = 17;
   private double posX;
@@ -33,20 +34,20 @@ public class Position {
   }
 
   /**
-   * @return the width of the panel.
-   */
-  public static double getWidthPanel() {
-    return Options.getGlobalWidth();
-  }
-
-  /**
    * sets the height of the panel.
-   * 
+   *
    * @param newHeight
    *          the new height of the panel to set.
    */
   public static void setHeightPanel(final int newHeight) {
     Options.setGlobalHeight(newHeight);
+  }
+
+  /**
+   * @return the width of the panel.
+   */
+  public static double getWidthPanel() {
+    return Options.getGlobalWidth();
   }
 
   /**
@@ -60,7 +61,27 @@ public class Position {
   }
 
   /**
-   * 
+   * This position represents the middle of the screen.
+   *
+   * @return a position with coordinates on the middle of the screen
+   */
+  public static Position middlePosition() {
+    return new Position(Math.round(Options.getGlobalWidth() / 2.0),
+        Math.round(Options.getGlobalHeight() / 2.0));
+  }
+
+  /**
+   * This position represents the middle of the screen.
+   *
+   * @return a position with coordinates on the middle of the screen
+   */
+  public static Position upperCornerPosition() {
+    return new Position(Math.round(Options.getGlobalWidth() * WIDTH_MULTIPLIER),
+        Math.round(Options.getGlobalHeight() * HEIGHT_MULTIPLIER));
+  }
+
+  /**
+   *
    * @return the x value.
    */
   public double getPosX() {
@@ -68,7 +89,7 @@ public class Position {
   }
 
   /**
-   * 
+   *
    * @param posX
    *          the x value.
    */
@@ -77,7 +98,7 @@ public class Position {
   }
 
   /**
-   * 
+   *
    * @param deltaX
    *          the amount we want to increase the x value.
    */
@@ -86,7 +107,7 @@ public class Position {
   }
 
   /**
-   * 
+   *
    * @return the y value
    */
   public double getPosY() {
@@ -94,7 +115,7 @@ public class Position {
   }
 
   /**
-   * 
+   *
    * @param posY
    *          the amount to change posX with
    */
@@ -103,7 +124,7 @@ public class Position {
   }
 
   /**
-   * 
+   *
    * @param deltaY
    *          the amount to change posY with
    */
@@ -112,7 +133,7 @@ public class Position {
   }
 
   /**
-   * 
+   *
    * @param deltaX
    *          the amount to change posX with
    * @param deltaY
@@ -125,7 +146,7 @@ public class Position {
 
   /**
    * Updates the position with a speed parameter.
-   * 
+   *
    * @param dir
    *          the direction the position should shift to.
    * @param speed
@@ -143,7 +164,7 @@ public class Position {
 
   /**
    * Returns the distance between the two positions using pythagoras.
-   * 
+   *
    * @param other
    *          The other position that should be compared to this position.
    * @return the distance between this position and other.
@@ -154,9 +175,9 @@ public class Position {
   }
 
   /**
-   * 
+   *
    * This boolean checks if the position is on the screen.
-   * 
+   *
    * @return true if the position is on the screen.
    * @param xMargin
    *          max offset margin
@@ -168,7 +189,7 @@ public class Position {
 
   /**
    * Will make sure the position is within the the given boundaries.
-   * 
+   *
    * @param xMargin
    *          how far something can go outside of the screen on the x axis
    * @param yMargin
@@ -203,26 +224,6 @@ public class Position {
     int hash = (int) (SECOND_HASH_PRIME * HASH_PRIME + getPosX());
     hash = (int) (SECOND_HASH_PRIME * hash + getPosY());
     return hash;
-  }
-
-  /**
-   * This position represents the middle of the screen.
-   * 
-   * @return a position with coordinates on the middle of the screen
-   */
-  public static Position middlePosition() {
-    return new Position(Math.round(Options.getGlobalWidth() / 2.0),
-        Math.round(Options.getGlobalHeight() / 2.0));
-  }
-
-  /**
-   * This position represents the middle of the screen.
-   * 
-   * @return a position with coordinates on the middle of the screen
-   */
-  public static Position upperCornerPosition() {
-    return new Position(Math.round(Options.getGlobalWidth() * WIDTH_MULTIPLYER),
-        Math.round(Options.getGlobalHeight() * HEIGHT_MULTIPLIER));
   }
 
 }

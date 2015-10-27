@@ -9,9 +9,9 @@ import java.io.File;
 
 /**
  * @author SEMGroup27
- *
  */
-@SuppressWarnings("restriction") public final class AudioController {
+@SuppressWarnings("restriction")
+public final class AudioController {
 
   private static final AudioController INSTANCE = new AudioController();
 
@@ -25,10 +25,30 @@ import java.io.File;
   }
 
   /**
+   * Singleton AudioController INSTANCE.
+   *
+   * @return the audio controller INSTANCE
+   */
+  public static AudioController getInstance() {
+    return INSTANCE;
+  }
+
+  /**
+   * Clean the current INSTANCE but keep this INSTANCE to stay with singleton pattern.
+   */
+  public static void destroyInstance() {
+    if (INSTANCE != null) {
+      if (INSTANCE.musicPlayer != null) {
+        INSTANCE.musicPlayer.dispose();
+      }
+      INSTANCE.musicPlayer = null;
+    }
+  }
+
+  /**
    * This function plays a music track on repeat.
-   * 
-   * @param path
-   *          the path of the music file that should be played.
+   *
+   * @param path the path of the music file that should be played.
    * @return true iff music has started Playing
    */
   public boolean playMusic(final String path) {
@@ -48,9 +68,8 @@ import java.io.File;
 
   /**
    * This function plays a sound effect.
-   * 
-   * @param path
-   *          the path of the sound file that should be played.
+   *
+   * @param path the path of the sound file that should be played.
    * @return true iff a sound effect has started Playing
    */
   private boolean playSoundEffect(final String path) {
@@ -71,7 +90,7 @@ import java.io.File;
 
   /**
    * Plays the eat sound.
-   * 
+   *
    * @return true iff a sound effect has started Playing
    */
   public boolean playEatSoundEffect() {
@@ -80,7 +99,7 @@ import java.io.File;
 
   /**
    * Plays a laserSound.
-   * 
+   *
    * @return true iff a sound effect has started Playing
    */
   public boolean playLaserSoundEffect() {
@@ -89,7 +108,7 @@ import java.io.File;
 
   /**
    * Plays the pickup sound.
-   * 
+   *
    * @return true iff a sound effect has started Playing
    */
   public boolean playPickupSoundEffect() {
@@ -98,7 +117,7 @@ import java.io.File;
 
   /**
    * Resumes the music play back.
-   * 
+   *
    * @return false if music Player is not yet initialized.
    */
   public boolean resumeMusic() {
@@ -165,9 +184,9 @@ import java.io.File;
 
   /**
    * Adjusts the master volume in the {@link Options} Class.
-   * 
-   * @param newVolume
-   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   *
+   * @param newVolume the new volume, anything above 1 will be changed to 1 and everything below
+   *                  0 will be 0
    */
   public void adjustMasterVolume(final double newVolume) {
     final double volume = Math.min(Math.max(newVolume, 0), 1.0);
@@ -180,9 +199,9 @@ import java.io.File;
 
   /**
    * Adjusts the music volume of the musicPlayer and in the {@link Options} Class.
-   * 
-   * @param newVolume
-   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   *
+   * @param newVolume the new volume, anything above 1 will be changed to 1 and everything below
+   *                  0 will be 0
    */
   public void adjustMusicVolume(final double newVolume) {
     final double volume = Math.min(Math.max(newVolume, 0), 1.0);
@@ -195,34 +214,13 @@ import java.io.File;
 
   /**
    * Adjusts the sound effects volume in the {@link Options} Class.
-   * 
-   * @param newVolume
-   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   *
+   * @param newVolume the new volume, anything above 1 will be changed to 1 and everything below
+   *                  0 will be 0
    */
   public void adjustSfxVolume(final double newVolume) {
     final double volume = Math.min(Math.max(newVolume, 0), 1.0);
     Options.getInstance().setSfxVolume(volume);
-  }
-
-  /**
-   * Singleton AudioController INSTANCE.
-   *
-   * @return the audio controller INSTANCE
-   */
-  public static AudioController getInstance() {
-    return INSTANCE;
-  }
-
-  /**
-   * Clean the current INSTANCE but keep this INSTANCE to stay with singleton pattern.
-   */
-  public static void destroyInstance() {
-    if (INSTANCE != null) {
-      if (INSTANCE.musicPlayer != null) {
-        INSTANCE.musicPlayer.dispose();
-      }
-      INSTANCE.musicPlayer = null;
-    }
   }
 
 }

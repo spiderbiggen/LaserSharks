@@ -11,7 +11,8 @@ public class OnCollisionHighScoreIncrementComponent implements CollisionComponen
     this.next = next;
   }
 
-  @Override public void handleCollision(final Displayable other) {
+  @Override
+  public void handleCollision(final Displayable other) {
     HighScores.getInstance().increaseScore(
         other.getOnCollisionHighScoreIncrement(HighScores.getInstance().getTimePenalty()));
     next.handleCollision(other);

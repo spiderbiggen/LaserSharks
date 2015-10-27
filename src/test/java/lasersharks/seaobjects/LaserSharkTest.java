@@ -8,10 +8,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
- * Class for testing Lazershark object.
+ * Class for testing LaserShark object.
  * 
  * @author SEMGroup27
  *
@@ -60,10 +62,10 @@ public class LaserSharkTest extends SeaObjectTest {
   }
 
   /**
-   * When the laser sharks eats a dead fish, it doenst grow.
+   * When the laser sharks eats a dead fish, it doesn't grow.
    */
   @Test
-  public void testAmmoDoesntGrowsWhenEatingDeadAmmoAtFullAmmo() {
+  public void testAmmoDoesNotGrowsWhenEatingDeadAmmoAtFullAmmo() {
     final Displayable ammo = mock(Ammo.class);
     when(ammo.isAlive()).thenReturn(false);
 
@@ -73,10 +75,10 @@ public class LaserSharkTest extends SeaObjectTest {
   }
 
   /**
-   * When the laser sharks eats a dead fish, it doenst grow.
+   * When the laser sharks eats a dead fish, it doesn't grow.
    */
   @Test
-  public void testAmmoDoesntGrowsWhenEatingDeadAmmoAtNonFullAmmo() {
+  public void testAmmoDoesNotGrowsWhenEatingDeadAmmoAtNonFullAmmo() {
     final Displayable ammo = mock(Ammo.class);
     when(ammo.isAlive()).thenReturn(false);
 
@@ -102,10 +104,10 @@ public class LaserSharkTest extends SeaObjectTest {
   }
 
   /**
-   * When the laser sharks eats a dead fish, it doenst grows.
+   * When the laser sharks eats a dead fish, it doesn't grows.
    */
   @Test
-  public void testLaserSharkDoesntGrowsWhenEatingDeadFish() {
+  public void testLaserSharkDoesNotGrowsWhenEatingDeadFish() {
     final Displayable mockedFish = mock(AbstractSeaObject.class);
     when(mockedFish.getSize()).thenReturn(SIZE);
     when(mockedFish.isAlive()).thenReturn(false);
@@ -116,7 +118,7 @@ public class LaserSharkTest extends SeaObjectTest {
   }
 
   /**
-   * When the lasershark eats a fish, the fish schould be killed.
+   * When the laserShark eats a fish, the fish should be killed.
    */
   @Test
   public void testEatenFishIsKilled() {

@@ -10,7 +10,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
 /**
  * Tests for HighScores class.
@@ -228,9 +231,10 @@ public class HighScoresTest {
   /**
    * Test method for the getFishBonus() method.
    */
-  @SuppressWarnings("static-access") @Test public void testGetFishBonus() {
+  @Test
+  public void testGetFishBonus() {
     final int expectedFishBonus = 20;
-    assertEquals(expectedFishBonus, highScores.getFishBonus());
+    assertEquals(expectedFishBonus, HighScores.getFishBonus());
   }
 
   /**
@@ -244,9 +248,9 @@ public class HighScoresTest {
    * Make sure getInstance always returns same object if no setters used.
    */
   @Test public void testAlwaysSameInstance() {
-    final HighScores l = HighScores.getInstance();
-    highScores.destroyInstance();
-    assertEquals(l, HighScores.getInstance());
+    final HighScores tempHighScores = HighScores.getInstance();
+    HighScores.destroyInstance();
+    assertEquals(tempHighScores, HighScores.getInstance());
   }
 
 }

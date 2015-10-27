@@ -13,30 +13,63 @@ import lasersharksgui.panes.GamePane;
 
 /**
  * The MainGui class is used for running the game.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
 public class MainGui extends Application {
 
+  private static MainGui instance;
   private Scene currentScene;
   private AbstractStandardPane currentPane;
   private StackPane stackPane;
-  private static MainGui instance;
 
   /**
-   * @param args
-   *          parameters to influence the startup of this game.
+   * @param args parameters to influence the startup of this game.
    */
   public static void main(final String... args) {
     launch(args);
   }
 
   /**
+   * Returns the current MainGui instance.
+   *
+   * @return the current instance.
+   */
+  public static MainGui getInstance() {
+    return instance;
+  }
+
+  /**
+   * Sets the singleton instance of the maingui class.
+   *
+   * @param newInstance the new instance of the maingui class
+   */
+  public static void setInstance(final MainGui newInstance) {
+    instance = newInstance;
+  }
+
+  /**
+   * This is the static version of the browseTo method.
+   *
+   * @param paneClass The class of the panel we should browse to.
+   */
+  public static void browseToGlobal(final Class<? extends AbstractStandardPane> paneClass) {
+    getInstance().browseTo(paneClass);
+  }
+
+  /**
+   * Clear the current singleton instance.
+   */
+  public static void clearInstance() {
+    instance = null;
+  }
+
+  /**
    * The start method is the first method run when we launch our application.
    */
-  @Override public void start(final Stage stage) throws Exception {
+  @Override
+  public void start(final Stage stage) throws Exception {
     setInstance(this);
     stage.setFullScreen(true);
     stackPane = new StackPane();
@@ -52,9 +85,8 @@ public class MainGui extends Application {
 
   /**
    * This function is used to browse to an other panel.
-   * 
-   * @param paneClass
-   *          The class of the panel we should browse to.
+   *
+   * @param paneClass The class of the panel we should browse to.
    */
   public void browseTo(final Class<? extends AbstractStandardPane> paneClass) {
     AbstractStandardPane paneToShow;
@@ -68,9 +100,8 @@ public class MainGui extends Application {
 
   /**
    * This function is used to browse to an other panel.
-   * 
-   * @param pane
-   *          The pane we should browse to.
+   *
+   * @param pane The pane we should browse to.
    */
   public void browseTo(final AbstractStandardPane pane) {
     try {
@@ -87,19 +118,9 @@ public class MainGui extends Application {
   }
 
   /**
-   * Returns the current MainGui instance.
-   * 
-   * @return the current instance.
-   */
-  public static MainGui getInstance() {
-    return instance;
-  }
-
-  /**
    * Add an overlay to the current Pane.
-   * 
-   * @param pane
-   *          the pane that should act as an overlay.
+   *
+   * @param pane the pane that should act as an overlay.
    */
   public void addOverlay(final Pane pane) {
     stackPane.getChildren().add(pane);
@@ -107,24 +128,13 @@ public class MainGui extends Application {
 
   /**
    * Removes a pane from the stackpane Makes sure that it's not the root pane.
-   * 
-   * @param pane
-   *          the pane to be removed.
+   *
+   * @param pane the pane to be removed.
    */
   public void removeOverlay(final Pane pane) {
     if (!pane.equals(currentPane)) {
       stackPane.getChildren().remove(pane);
     }
-  }
-
-  /**
-   * This is the static version of the browseTo method.
-   * 
-   * @param paneClass
-   *          The class of the panel we should browse to.
-   */
-  public static void browseToGlobal(final Class<? extends AbstractStandardPane> paneClass) {
-    getInstance().browseTo(paneClass);
   }
 
   /**
@@ -144,23 +154,6 @@ public class MainGui extends Application {
   @Override
   public void stop() throws Exception {
     Platform.exit();
-  }
-
-  /**
-   * Sets the singleton instance of the maingui class.
-   * 
-   * @param newInstance
-   *          the new instance of the maingui class
-   */
-  public static void setInstance(final MainGui newInstance) {
-    instance = newInstance;
-  }
-
-  /**
-   * Clear the current singleton instance.
-   */
-  public static void clearInstance() {
-    instance = null;
   }
 
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package lasersharksgui.panes;
 
@@ -14,10 +14,9 @@ import java.io.FileNotFoundException;
 
 /**
  * @author SEMGroup27
- *
  */
-@SuppressWarnings("restriction") public abstract class AbstractEndGamePane
-    extends AbstractStandardPane {
+@SuppressWarnings("restriction")
+public abstract class AbstractEndGamePane extends AbstractStandardPane {
 
   private static final double ADJUST_DY_FOR_BOTTOM = -400;
   private static final int CUSTOM_TEXT_SIZE = TEXT_SCALE_SIZE_SMALL + 10;
@@ -26,9 +25,8 @@ import java.io.FileNotFoundException;
 
   /**
    * Creates a new AbstractEndGamePane with the given message.
-   * 
-   * @param message
-   *          message to be shown
+   *
+   * @param message message to be shown
    */
   public AbstractEndGamePane(final String message) {
     super();

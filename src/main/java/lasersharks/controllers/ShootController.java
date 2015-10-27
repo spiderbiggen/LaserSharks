@@ -6,9 +6,8 @@ import javafx.scene.input.KeyEvent;
 
 /**
  * The shootcontroller is responsible for handling the keyEvents that have to do with shooting.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
 public class ShootController implements EventHandler<KeyEvent> {
@@ -17,20 +16,18 @@ public class ShootController implements EventHandler<KeyEvent> {
 
   /**
    * The constructor of the class.
-   * 
-   * @param fishController
-   *          the fishController that this eventHandler is linked to.
+   *
+   * @param fishController the fishController that this eventHandler is linked to.
    */
   public ShootController(final FishController fishController) {
     super();
     this.fishController = fishController;
   }
 
-
   @Override
   public void handle(KeyEvent event) {
     if (event.getCode() == KeyCode.SPACE && event.getEventType() == KeyEvent.KEY_PRESSED) {
-        shoot();
+      shoot();
     }
   }
 

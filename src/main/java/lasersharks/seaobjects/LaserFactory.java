@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package lasersharks.seaobjects;
 
@@ -9,7 +9,6 @@ import lasersharks.interfaces.LaserSpawner;
 
 /**
  * @author SEMGroup27
- *
  */
 public class LaserFactory implements LaserSpawner {
 
@@ -26,7 +25,8 @@ public class LaserFactory implements LaserSpawner {
    * 
    * @see lasersharks.LaserSpawner#createLaser(lasersharks.LaserShark)
    */
-  @Override public LaserBullet createLaser(final LaserShark origin) {
+  @Override
+  public LaserBullet createLaser(final LaserShark origin) {
     final Position posShark = origin.getPosition();
     AudioController.getInstance().playLaserSoundEffect();
     final Position posLaser = new Position(

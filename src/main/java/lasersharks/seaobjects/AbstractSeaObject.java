@@ -3,7 +3,16 @@ package lasersharks.seaobjects;
 import javafx.scene.shape.Rectangle;
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.*;
+import lasersharks.behaviour.AmmunitionIncrementBehaviour;
+import lasersharks.behaviour.CheckForLossBehaviour;
+import lasersharks.behaviour.CollisionBehaviour;
+import lasersharks.behaviour.CollisionHitBoxBehaviour;
+import lasersharks.behaviour.EatenBehaviour;
+import lasersharks.behaviour.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.HighScoreIncrementBehaviour;
+import lasersharks.behaviour.LaserCollisionBehaviour;
+import lasersharks.behaviour.MoveBehaviour;
+import lasersharks.behaviour.SizeDecrementBahaviour;
 import lasersharks.behaviour.ammunitionincrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
@@ -26,9 +35,9 @@ import lasersharks.interfaces.Displayable;
 public abstract class AbstractSeaObject implements Displayable {
 
   private static final float MIN_SIZE = 30.0f;
+  private final Position position;
   protected CollisionHitBoxBehaviour collisionHitBoxBehaviour;
   protected MoveBehaviour moveBehaviour;
-  
   protected AmmunitionIncrementBehaviour ammunitionIncrementBehaviour;
   protected CheckForLossBehaviour checkForLossBehaviour;
   protected EatenBehaviour eatenBehaviour;
@@ -37,8 +46,6 @@ public abstract class AbstractSeaObject implements Displayable {
   protected SizeDecrementBahaviour sizeDecrementBahaviour;
   protected CollisionBehaviour collisionBehaviour;
   protected HighScoreIncrementBehaviour highScoreIncrementBehaviour;
-
-  private final Position position;
   private float size;
   private double speed;
   private Direction direction;
@@ -96,8 +103,17 @@ public abstract class AbstractSeaObject implements Displayable {
   }
 
   /**
+   * Method to set the size of the seaObject.
+   *
+   * @param size size
+   */
+  public void setSize(final float size) {
+    this.size = size;
+  }
+
+  /**
    * Method used for growing seaObject.
-   * 
+   *
    * @param size
    *          the delta by which to increase.
    */
@@ -107,20 +123,11 @@ public abstract class AbstractSeaObject implements Displayable {
 
   /**
    * Method used for shrinking seaObject.
-   * 
+   *
    * @param size decrement size
    */
   public void decreaseSize(final float size) {
     this.setSize(Math.max(MIN_SIZE, this.getSize() - size));
-  }
-
-  /**
-   * Method to set the size of the seaObject.
-   * 
-   * @param size size
-   */
-  public void setSize(final float size) {
-    this.size = size;
   }
 
   /**
@@ -176,15 +183,6 @@ public abstract class AbstractSeaObject implements Displayable {
    */
   public boolean checkForCollision(final Displayable swimmer) {
     return collisionHitBoxBehaviour.collide(swimmer);
-  }
-
-  /**
-   * gets the middle of the seaObject.
-   *
-   * @return the middle point of the seaObject.
-   */
-  public Position getMiddlePoint() {
-    return collisionHitBoxBehaviour.getMiddlePoint();
   }
 
   /**

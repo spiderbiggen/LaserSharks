@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package lasersharks.seaobjects;
 
@@ -11,13 +11,11 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * @author SEMGroup27
- *
  */
 public class AmmoTest {
 
-  private Ammo ammo;
-
   private static final float SIZE = 40;
+  private Ammo ammo;
 
   /**
    * Sets up the instances required for the tests.

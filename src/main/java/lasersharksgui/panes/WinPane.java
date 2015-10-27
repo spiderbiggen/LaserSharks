@@ -2,9 +2,8 @@ package lasersharksgui.panes;
 
 /**
  * This pane represents the screen that is shown when a player loses.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class WinPane extends AbstractEndGamePane {
 

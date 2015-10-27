@@ -4,8 +4,16 @@ package lasersharks;
  * Direction Enum.
  */
 public enum Direction {
-  North(0, -1), NorthEast(1, -1), East(1, 0), SouthEast(1, 1), South(0, 1), SouthWest(-1,
-      1), West(-1, 0), NorthWest(-1, -1), None(0, 0);
+
+  North(0, -1),
+  NorthEast(1, -1),
+  East(1, 0),
+  SouthEast(1, 1),
+  South(0, 1),
+  SouthWest(-1, 1),
+  West(-1, 0),
+  NorthWest(-1, -1),
+  None(0, 0);
 
   private final int deltaX;
   private final int deltaY;

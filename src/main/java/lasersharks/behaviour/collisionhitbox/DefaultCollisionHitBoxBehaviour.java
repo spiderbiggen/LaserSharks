@@ -8,7 +8,7 @@ import lasersharks.interfaces.Displayable;
 /**
  * the default collision behaviour.
  *
- * @author sytze
+ * @author SEMGroup27
  *
  */
 @SuppressWarnings("restriction")

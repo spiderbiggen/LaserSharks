@@ -16,6 +16,7 @@ import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
  *
  */
 public class Fish extends AbstractSeaObject {
+
   private final String image;
   private final double widthScale;
 
@@ -70,9 +71,10 @@ public class Fish extends AbstractSeaObject {
   }
 
   /**
-   * Fishes are collisionActors.
-   * @return true
+   * Fishes are collisionActors
+   * @return this actor is a collison actor.
    */
+  @Override
   public boolean collisionActor() {
     return true;
   }
