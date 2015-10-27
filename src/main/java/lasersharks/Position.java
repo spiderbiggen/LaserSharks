@@ -7,7 +7,7 @@ package lasersharks;
  */
 public class Position {
   private static final double HEIGHT_MULTIPLIER = 0.035;
-  private static final double WIDTH_MULTIPLYER = 0.9;
+  private static final double WIDTH_MULTIPLYER = 0.8;
   private static final int SECOND_HASH_PRIME = 31;
   private static final int HASH_PRIME = 17;
   private double posX;
