@@ -5,7 +5,7 @@ package lasersharksgui.panes;
  *
  * @author SEMGroup27
  */
-public class LosingPane extends AbstractEndGamePane {
+public class LosingPane extends EndGamePane {
 
   /**
    * The constructor makes a new panel with a few text objects shown.
