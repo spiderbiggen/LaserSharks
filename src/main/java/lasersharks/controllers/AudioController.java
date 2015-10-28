@@ -4,6 +4,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import lasersharks.Logger;
 import lasersharks.Options;
+
 import java.io.File;
 
 /**
@@ -54,7 +55,7 @@ public class AudioController {
    *          the path of the sound file that should be played.
    * @return true iff a sound effect has started Playing
    */
-  private boolean playSoundEffect(String path) {
+  public boolean playSoundEffect(String path) {
     if (Options.getInstance().isMutedSfx()) {
       return false;
     }
@@ -239,5 +240,4 @@ public class AudioController {
     }
     AudioController.instance = null;
   }
-
 }
