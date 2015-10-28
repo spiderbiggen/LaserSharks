@@ -31,7 +31,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
   }
 
   /**
-   * Will handle the actuation of keypresses.
+   * Will handle the actuation of key presses.
    * 
    * @param event
    *          the event in which a key is actuated
@@ -42,7 +42,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
   }
 
   /**
-   * Will handle the release of keypresses.
+   * Will handle the release of key presses.
    * 
    * @param event
    *          the event in which a key is released
@@ -58,7 +58,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
    * @param event
    *          the event in which a key is released
    * @param pressed
-   *          boolean for keypressed and keyreleased
+   *          boolean for key pressed and key released
    * @return handled
    */
   private boolean keySwitch(KeyEvent event, boolean pressed) {

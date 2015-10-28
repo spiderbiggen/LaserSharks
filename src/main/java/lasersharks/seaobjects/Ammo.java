@@ -1,6 +1,3 @@
-/**
- * 
- */
 package lasersharks.seaobjects;
 
 import lasersharks.Direction;
@@ -15,7 +12,7 @@ import lasersharks.behaviour.move.NoMovementMoveBehaviour;
  */
 public class Ammo extends SeaObject {
 
-  private final int pickupAmount = 10;
+  private final int pickupAmount = 6;
   private final String imageResource = "battery.png";
   private final int imgHeight = 228;
   private final int imgWidth = 300;
@@ -36,21 +33,11 @@ public class Ammo extends SeaObject {
     
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharks.SeaObject#getImageResource()
-   */
   @Override
   public String getImageResource() {
     return imageResource;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharks.SeaObject#getWidthScale()
-   */
   @Override
   public double getWidthScale() {
     return (double) imgWidth / (double) imgHeight;

@@ -51,7 +51,7 @@ public class LaserBullet extends SeaObject {
   }
 
   /**
-   * gets the widthscale of the image. (width/height)
+   * gets the width scale of the image. (width/height)
    */
   @Override
   public double getWidthScale() {
@@ -60,9 +60,10 @@ public class LaserBullet extends SeaObject {
 
   /**
    * returns the strength.
-   * Possiably depricated.
+   * Possibly deprecated.
    * @return the strength.
    */
+  @Deprecated
   public double getStrength() {
     return strength;
   }

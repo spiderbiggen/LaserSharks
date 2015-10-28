@@ -18,9 +18,8 @@ public class LaserShark extends SeaObject implements DirectionCallback {
 
   private final String imageResource = "shark.png";
   private final float widthScale = 1.5f;
-  private static final int STARTING_AMMO = 10;
-  private static final int MAX_AMMO = 10;
-
+  private static final int STARTING_AMMO = 5;
+  private static final int MAX_AMMO = 5;
   private int ammo;
   private Direction lastHorizontalDirection;
 
@@ -47,11 +46,13 @@ public class LaserShark extends SeaObject implements DirectionCallback {
 
   @Override
   public String getImageResource() {
+    String imageResource = "shark.png";
     return imageResource;
   }
 
   @Override
   public double getWidthScale() {
+    final float widthScale = 1.5f;
     return widthScale;
   }
 
@@ -69,7 +70,7 @@ public class LaserShark extends SeaObject implements DirectionCallback {
 
   @Override
   public void kill() {
-    Logger.getInstance().write("Loss", "Player has colided with a bigger fish");
+    Logger.getInstance().write("Loss", "Player has collided with a bigger fish");
     super.kill();
   }
 
@@ -118,18 +119,6 @@ public class LaserShark extends SeaObject implements DirectionCallback {
   }
 
   /**
-   * increases the ammo.
-   * 
-   * @param amount
-   *          the amount to increase.
-   * @return the current ammo of the shark.
-   */
-  public int increaseAmmo(int amount) {
-    ammo = Math.min(ammo + amount, MAX_AMMO);
-    return ammo;
-  }
-
-  /**
    * gets the last horizontal direction the shark went to.
    * 
    * @return the last horizontal direction the shark went to.
@@ -148,6 +137,7 @@ public class LaserShark extends SeaObject implements DirectionCallback {
 
   /**
    * Lasersharks are collisionActors.
+   * @return true
    */
   public boolean collisionActor() {
     return true;

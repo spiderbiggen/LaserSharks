@@ -23,7 +23,6 @@ public class AmmoEatenBehaviour implements EatenBehaviour {
   @Override
   public void onCollisionEaten() {
     Logger.getInstance().write("Ammo", "Player has picked up some ammo");
-    //TODO: play some sound.
     element.kill();
   }
 }

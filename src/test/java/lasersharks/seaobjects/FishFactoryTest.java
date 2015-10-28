@@ -1,16 +1,15 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Random;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import lasersharks.Direction;
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.interfaces.Displayable;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Random;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for FishFactory.
@@ -27,11 +26,11 @@ public class FishFactoryTest {
   private final long seed = 12345622L;
   private final long seedWest = 11L;
 
-  private final float expectedSize1 = 172;
-  private final int expectedSpeed1 = 134;
+  private final float expectedSize1 = 282;
+  private final int expectedSpeed1 = 148;
 
-  private final float expectedSize2 = 176;
-  private final int expectedSpeed2 = 344;
+  private final float expectedSize2 = 289;
+  private final int expectedSpeed2 = 448;
 
   private FishFactory fishFactory;
 

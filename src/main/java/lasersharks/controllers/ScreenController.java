@@ -1,7 +1,5 @@
 package lasersharks.controllers;
 
-import java.util.List;
-
 import javafx.scene.Scene;
 import lasersharks.interfaces.Displayable;
 import lasersharks.seaobjects.LaserShark;
@@ -9,6 +7,8 @@ import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 import lasersharksgui.panes.LosingPane;
 import lasersharksgui.panes.WinPane;
+
+import java.util.List;
 
 /**
  * This is the class that will manage the screen.
@@ -20,13 +20,13 @@ import lasersharksgui.panes.WinPane;
 public class ScreenController {
   private GamePane currentPane;
   private FishController fishCon;
-  private static final int GAME_WINNING_SIZE = 320;
+  private static final int GAME_WINNING_SIZE = 400;
 
   /**
    * Constructor.
    * 
    * @param pane
-   *          the GamePane this screencontroller is set to
+   *          the GamePane this {@link ScreenController} is set to
    */
   public ScreenController(GamePane pane) {
     super();
@@ -37,22 +37,18 @@ public class ScreenController {
 
   /**
    * Get information for next frame and checks if the shark is bigger than the winning size.
-   * 
-   * @param frametime
+   *
+   * @param frameTime
    *          time between frames in seconds
    * 
    * @return FishInfo
    */
   public List<Displayable> getNextFrameInfo(double frametime) {
-    if (MainGui.getInstance().getCurrentPane() instanceof GamePane) {
-      GamePane gamePane = (GamePane) MainGui.getInstance().getCurrentPane();
-      if (!this.fishCon.getShark().isAlive()) {
-        MainGui.browseToGlobal(LosingPane.class);
-      } else if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
-        MainGui.browseToGlobal(WinPane.class);
-      }
+    
+    if (this.fishCon.getShark().getSize() > GAME_WINNING_SIZE) {
+      MainGui.browseToGlobal(WinPane.class);
     }
-
+    
     return this.fishCon.getNextCycleInformation(frametime);
   }
 
@@ -73,15 +69,15 @@ public class ScreenController {
   }
 
   /**
-   * @return the scene used for this screencontroller.
+   * @return the scene used for this {@link ScreenController}.
    */
   public Scene getGlobalScene() {
     return MainGui.getInstance().getCurrentScene();
   }
 
   /**
-   * 
-   * @return the fishcontroller used for this screencontroller.
+   *
+   * @return the fishController used for this {@link ScreenController}.
    */
   public FishController getFishController() {
     return fishCon;

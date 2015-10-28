@@ -6,13 +6,13 @@ import lasersharks.Position;
 import lasersharks.behaviour.AmmunitionIncrementBehaviour;
 import lasersharks.behaviour.CheckForLossBehaviour;
 import lasersharks.behaviour.CollisionBehaviour;
-import lasersharks.behaviour.CollisionHitboxBehaviour;
+import lasersharks.behaviour.CollisionHitBoxBehaviour;
 import lasersharks.behaviour.EatenBehaviour;
-import lasersharks.behaviour.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.GetSizeIncrementBehaviour;
 import lasersharks.behaviour.HighScoreIncrementBehaviour;
 import lasersharks.behaviour.LaserCollisionBehaviour;
 import lasersharks.behaviour.MoveBehaviour;
-import lasersharks.behaviour.SizeDecrementBahaviour;
+import lasersharks.behaviour.SizeDecrementBehaviour;
 import lasersharks.behaviour.ammunitionIncrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
@@ -35,15 +35,15 @@ import lasersharks.interfaces.Displayable;
 public abstract class SeaObject implements Displayable {
 
   private static final float MIN_SIZE = 30.0f;
-  protected CollisionHitboxBehaviour collisionHitBoxBehaviour;
+  protected CollisionHitBoxBehaviour collisionHitBoxBehaviour;
   protected MoveBehaviour moveBehaviour;
   
   protected AmmunitionIncrementBehaviour ammunitionIncrementBehaviour;
   protected CheckForLossBehaviour checkForLossBehaviour;
   protected EatenBehaviour eatenBehaviour;
-  protected GetSizeIncrementBahaviour getSizeIncrementBahaviour;
+  protected GetSizeIncrementBehaviour getSizeIncrementBehaviour;
   protected LaserCollisionBehaviour laserCollisionBehaviour;
-  protected SizeDecrementBahaviour sizeDecrementBahaviour;
+  protected SizeDecrementBehaviour sizeDecrementBehaviour;
   protected CollisionBehaviour collisionBehaviour;
   protected HighScoreIncrementBehaviour highScoreIncrementBehaviour;
   
@@ -71,16 +71,16 @@ public abstract class SeaObject implements Displayable {
     this.speed = startSpeed;
     this.direction = direction;
     this.alive = true;
-    
+
     this.collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
     this.moveBehaviour = new DefaultMoveBehaviour(this);
     
     this.ammunitionIncrementBehaviour = new DefaultAmmunitionIncrementBehaviour();
     this.checkForLossBehaviour = new DefaultCheckForLossBehaviour();
     this.eatenBehaviour = new DefaultEatenBehaviour();
-    this.getSizeIncrementBahaviour = new DefaultGetSizeIncrementBehaviour();
+    this.getSizeIncrementBehaviour = new DefaultGetSizeIncrementBehaviour();
     this.laserCollisionBehaviour = new DefaultLaserCollisionBehaviour();
-    this.sizeDecrementBahaviour = new DefaultSizeDecrementBehaviour();
+    this.sizeDecrementBehaviour = new DefaultSizeDecrementBehaviour();
     this.collisionBehaviour = new DefaultCollisionBehaviour();
     this.highScoreIncrementBehaviour = new DefaultHighScoreIncrementBehaviour();
   }
@@ -173,24 +173,24 @@ public abstract class SeaObject implements Displayable {
 
   /**
    * The current seaObject will move, this will return false if it moves out of the view.
-   * 
-   * @param frametime
+   *
+   * @param frameTime
    *          the time between frames in seconds
    * 
    * @return true if seaObject is in view
    */
-  public boolean move(double frametime) {
-    return moveBehaviour.move(frametime);
+  public boolean move(double frameTime) {
+    return moveBehaviour.move(frameTime);
   }
 
   /**
-   * We calculate the distance between the seaObjectes. 
-   * The sum of the size of both seaObjectes is our hitbox.
-   * Hitbox is now a circle, with size the radius in pixels.
+   * We calculate the distance between the seaObjects.
+   * The sum of the size of both seaObjects is our hit box.
+   * Hit box is now a circle, with size the radius in pixels.
    * 
    * @param swimmer
-   *          we want to check if the seaObjectbot collides with this seaObject,
-   * @return true if the seaObjectes collide and false if not.
+   *          we want to check if the seaObjectBot collides with this seaObject,
+   * @return true if the seaObjects collide and false if not.
    */
   public boolean checkForCollision(Displayable swimmer) {
     return collisionHitBoxBehaviour.collide(swimmer);
@@ -198,8 +198,8 @@ public abstract class SeaObject implements Displayable {
 
   /**
    * gets the middle of the seaObject.
-   * 
-   * @return the middlepoint of the seaObject.
+   *
+   * @return the middle point of the seaObject.
    */
   public Position getMiddlePoint() {
     return collisionHitBoxBehaviour.getMiddlePoint();
@@ -258,12 +258,12 @@ public abstract class SeaObject implements Displayable {
   public abstract double getWidthScale();
 
   /**
-   * Draw a rectangle shaped hitbox around the seaObjectbot.
-   * 
-   * @return a rectangle hitbox.
+   * Draw a rectangle shaped hit box around the seaObjectBot.
+   *
+   * @return a rectangle hit box.
    */
-  public Rectangle makeHitbox() {
-    return collisionHitBoxBehaviour.makeHitbox();
+  public Rectangle makeHitBox() {
+    return collisionHitBoxBehaviour.makeHitBox();
   }
   
 
@@ -275,7 +275,7 @@ public abstract class SeaObject implements Displayable {
   public int onCollisionAmmunitionIncrement() {
     return this.ammunitionIncrementBehaviour.onCollisionAmmunitionIncrement();
   }
-  
+
   /**
    * Check to see if player has lost the game.
    * @param size shark size.
@@ -299,12 +299,11 @@ public abstract class SeaObject implements Displayable {
    */
   @Override
   public float onCollisionSizeIncrement() {
-    return this.getSizeIncrementBahaviour.onCollisionSizeIncrement();
+    return this.getSizeIncrementBehaviour.onCollisionSizeIncrement();
   }
   
   /**
    * See if laser needs to be destroyed after colliding with this object.
-   * @return boolean weather laser object needs to be destroyed.
    */
   @Override
   public void onCollisionDestroyLaser() {
@@ -312,17 +311,17 @@ public abstract class SeaObject implements Displayable {
   }
   
   /**
-   * Notify ~ has been hit by the laster.
+   * Notify ~ has been hit by the laser.
    * @param size size by which object needs to decrement.
    */
   @Override
   public void onCollisionSizeDecrement(int size) {
-    this.sizeDecrementBahaviour.onCollisionSizeDecrement(size);
+    this.sizeDecrementBehaviour.onCollisionSizeDecrement(size);
   }
   
   /**
    * Get decrement on collision.
-   * @return decrementation size.
+   * @return decrementing size.
    */
   public int getOnCollisionSizeDecrement() {
     return 0;
@@ -339,15 +338,15 @@ public abstract class SeaObject implements Displayable {
   
   /**
    * Handle collisions.
-   * @param object, object with wist the actor has collided.
+   * @param object object with which the actor has collided.
    */
   public void collideWith(Displayable object) {
-    this.collisionBehaviour.colideWith(object);
+    this.collisionBehaviour.collideWith(object);
   }
   
   /**
    * See if object is a collision actor.
-   * @return boolean if the actor has a usefull collision function.
+   * @return boolean if the actor has a useful collision function.
    */
   public boolean collisionActor() {
     return false;
@@ -355,12 +354,12 @@ public abstract class SeaObject implements Displayable {
   
 
   /**
-   * Let displaybe object increase the player highscore on collision.
-   * @param timepenalty pennalty from timelimit.
-   * @return HighscoreIncrement.
+   * Let displayable object increase the player high score on collision.
+   * @param timePenalty penalty from time limit.
+   * @return High score increment.
    */
-  public int getOnCollisionHighScoreIncrement(int timepenalty) {
-    return this.highScoreIncrementBehaviour.onCollisionHighScoreIncrement(timepenalty);
+  public int getOnCollisionHighScoreIncrement(int timePenalty) {
+    return this.highScoreIncrementBehaviour.onCollisionHighScoreIncrement(timePenalty);
   }
   
 }

@@ -2,7 +2,8 @@ target/
 .checkstyle
 .settings/
 .classpath
+.idea/
 /bin/
-highscores/
+highScores/
 logs/
-src/main/resources/highscores
+src/main/resources/highScores

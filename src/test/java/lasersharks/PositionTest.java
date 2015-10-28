@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+
 /**
  * Test for the {@link Position} class.
  * 
@@ -40,7 +41,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#setPosX(int)}.
+   * Test method for {@link lasersharks.Position#setPosX(double)}.
    */
   @Test
   public void testSetPosX() {
@@ -57,7 +58,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#setPosY(int)}.
+   * Test method for {@link lasersharks.Position#setPosY(double)}.
    */
   @Test
   public void testSetPosY() {
@@ -86,7 +87,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosX(int)}.
+   * Test method for {@link lasersharks.Position#adjustPosX(double)}.
    */
   @Test
   public void testAdjustPosX1() {
@@ -95,7 +96,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosX(int)}.
+   * Test method for {@link lasersharks.Position#adjustPosX(double)}.
    */
   @Test
   public void testAdjustPosX2() {
@@ -104,7 +105,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosY(int)}.
+   * Test method for {@link lasersharks.Position#adjustPosY(double)}.
    */
   @Test
   public void testAdjustPosY1() {
@@ -113,7 +114,7 @@ public class PositionTest {
   }
 
   /**
-   * Test method for {@link lasersharks.Position#adjustPosY(int)}.
+   * Test method for {@link lasersharks.Position#adjustPosY(double)}.
    */
   @Test
   public void testAdjustPosY2() {

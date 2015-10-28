@@ -4,33 +4,40 @@ import lasersharks.behaviour.MoveBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
- * represents the default move behaviour of a shark the player controls.
+ * Represents the default move behaviour of a shark the player controls.
  * @author SEMGroup27
  *
  */
 public class LaserSharkMoveBehaviour implements MoveBehaviour {
   private static final float HALF_RATE = 0.5F;
-  private Displayable swimmer;
+
+  private Displayable diplayable;
   
   /**
    * the constructor.
-   * @param swimmer
+   * @param diplayable the shark
    */
-  public LaserSharkMoveBehaviour(Displayable swimmer) {
-    this.swimmer = swimmer;
+  public LaserSharkMoveBehaviour(Displayable diplayable) {
+    this.diplayable = diplayable;
   }
   
   /**
-   * moves the shark in a direction.
+   * Moves the shark in a direction.
    * @param frametime the refresh rate of the screen.
    * @return true if the shark was able to move.
    */
   public boolean move(double frametime) {
-    swimmer.getPosition().updatePosition(swimmer.getDirection(), (swimmer.getSpeed() / frametime), swimmer.getSize());
+    diplayable.getPosition().updatePosition(
+        diplayable.getDirection(), 
+        (diplayable.getSpeed() / frametime), 
+        diplayable.getSize()
+    );
     // this will make sure the fish stay within the borders.
 
-    swimmer.getPosition().clipPosition((swimmer.getSize() * swimmer.getWidthScale() * HALF_RATE),
-        (swimmer.getSize() * HALF_RATE));
+    diplayable.getPosition().clipPosition(
+        (diplayable.getSize() * diplayable.getWidthScale() * HALF_RATE),
+        (diplayable.getSize() * HALF_RATE)
+    );
     return true;
   }
 }

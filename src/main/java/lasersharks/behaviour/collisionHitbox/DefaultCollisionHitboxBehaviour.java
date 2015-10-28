@@ -2,7 +2,7 @@ package lasersharks.behaviour.collisionHitbox;
 
 import javafx.scene.shape.Rectangle;
 import lasersharks.Position;
-import lasersharks.behaviour.CollisionHitboxBehaviour;
+import lasersharks.behaviour.CollisionHitBoxBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
@@ -12,7 +12,7 @@ import lasersharks.interfaces.Displayable;
  *
  */
 @SuppressWarnings("restriction")
-public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour {
+public class DefaultCollisionHitboxBehaviour implements CollisionHitBoxBehaviour {
 
   private static final double WIDTH_TO_COORD = 0.85;
   private static final double SIZE_TO_COORD = 0.075;
@@ -39,7 +39,7 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
    */
   @Override
   public boolean collide(Displayable swimmer) {
-    return swimmer.makeHitbox().intersects(displayable.makeHitbox().getLayoutBounds());
+    return swimmer.makeHitBox().intersects(displayable.makeHitBox().getLayoutBounds());
     
     //float distance = this.displayable.getMiddlePoint().calculateDistance(swimmer.getMiddlePoint());
     //return distance < this.displayable.getSize() + swimmer.getSize();
@@ -62,7 +62,7 @@ public class DefaultCollisionHitboxBehaviour implements CollisionHitboxBehaviour
    * 
    * @return a rectangle hitbox.
    */
-  public Rectangle makeHitbox() {
+  public Rectangle makeHitBox() {
     double xcoordinate = displayable.getPosition().getPosX();
     double ycoordinate = displayable.getPosition().getPosY();
     Rectangle rekt = new Rectangle(xcoordinate + SIZE_TO_COORD * displayable.getSize(),

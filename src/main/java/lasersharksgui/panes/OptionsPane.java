@@ -1,18 +1,17 @@
 package lasersharksgui.panes;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.text.Text;
 import lasersharks.Logger;
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.controllers.AudioController;
-import javafx.scene.text.Text;
 
 /**
- * 
+ * The pane representing the optionPane.
  * @author SEMGroup27
  *
  */
@@ -42,6 +41,11 @@ public class OptionsPane extends StandardPane {
   private static final double SLIDER_SIZE_X = 3.0;
   private static final double SLIDER_SIZE_Y = 3.0;
 
+  // audio variables
+  private Button muteButton;
+  private static final ImageView MUTE_IMAGE = new ImageView("mutesound.png");
+  private static final ImageView UNMUTE_IMAGE = new ImageView("unmutesound.png");
+  
   /**
    * Constructor to initialize the OptionsPane.
    */
@@ -84,36 +88,31 @@ public class OptionsPane extends StandardPane {
    * @return a new mute button based on the parameters.
    */
   private Button muteButton(double xPos, double yPos, double size) {
-    muteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
-    muteButtonImage.setFitWidth(BUTTON_WIDTH * size);
-    unmuteButtonImage.setFitHeight(BUTTON_HEIGHT * size);
-    unmuteButtonImage.setFitWidth(BUTTON_WIDTH * size);
+    MUTE_IMAGE.setFitHeight(BUTTON_HEIGHT * size);
+    MUTE_IMAGE.setFitWidth(BUTTON_WIDTH * size);
+    UNMUTE_IMAGE.setFitHeight(BUTTON_HEIGHT * size);
+    UNMUTE_IMAGE.setFitWidth(BUTTON_WIDTH * size);
     muteButton = new Button();
-    muteButton.setGraphic(unmuteButtonImage);
+    muteButton.setGraphic(UNMUTE_IMAGE);
     muteButton.setTranslateX(xPos);
     muteButton.setTranslateY(yPos);
 
-    muteButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-        muteSound();
-      }
-    });
+    muteButton.setOnAction(event -> muteSound());
     return muteButton;
   }
 
   /**
-   * method for muting and unmuting the music of the game.
+   * method for muting and un-muting the music of the game.
    */
   private void muteSound() {
     if (!Options.getInstance().isMutedMusic()) {
       AudioController.getInstance().muteAll();
-      muteButton.setGraphic(muteButtonImage);
+      muteButton.setGraphic(UNMUTE_IMAGE);
       Logger.getInstance().write("Sound muted", "Mute sound button pressed");
     } else {
-      AudioController.getInstance().unmuteAll();
-      muteButton.setGraphic(unmuteButtonImage);
-      Logger.getInstance().write("Sound unmuted", "Mute sound button pressed");
+      AudioController.getInstance().unMuteAll();
+      muteButton.setGraphic(MUTE_IMAGE);
+      Logger.getInstance().write("Sound un-muted", "Mute sound button pressed");
     }
   }
   

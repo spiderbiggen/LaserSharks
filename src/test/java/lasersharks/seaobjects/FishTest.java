@@ -1,11 +1,9 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import lasersharks.seaobjects.Fish;
+import static org.junit.Assert.assertEquals;
 
 /**
  * The test for the enemy1 class.
@@ -22,12 +20,7 @@ public class FishTest extends SeaObjectTest {
   @Before
   public void setUp() {
     this.fish1 = new Fish(
-        IMAGE,
-        1,
-        1,
-        this.posOnScreen,
-        Float.valueOf(this.size),
-        Double.valueOf(this.speed),
+        IMAGE, 1, 1, this.posOnScreen, this.size, (double) this.speed,
         this.direction
     );
   }

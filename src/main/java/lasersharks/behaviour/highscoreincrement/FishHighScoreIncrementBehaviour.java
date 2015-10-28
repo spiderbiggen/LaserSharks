@@ -4,7 +4,7 @@ import lasersharks.behaviour.HighScoreIncrementBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
- * Highscore Increment behaviour for SeaObjects.
+ * High score Increment behaviour for SeaObjects.
  * @author SEMGroup27
  *
  */
