@@ -1,6 +1,3 @@
-/**
- * 
- */
 package lasersharks.seaobjects;
 
 import static org.junit.Assert.assertEquals;
@@ -9,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import lasersharks.Position;
-import lasersharks.seaobjects.Ammo;
 
 /**
  * @author SEMGroup27

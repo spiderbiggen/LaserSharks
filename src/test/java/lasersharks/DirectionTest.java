@@ -1,14 +1,14 @@
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * The test for the direction Enum.
@@ -28,14 +28,14 @@ public class DirectionTest {
    * 
    * @param dir
    *          input direction for witch to run the test.
-   * @param expecDeltaX
+   * @param expectedDeltaX
    *          expected X
-   * @param expecDeltaY
+   * @param expectedDeltaY
    *          expected Y
    */
-  public DirectionTest(Direction dir, int expecDeltaX, int expecDeltaY) {
-    this.expectedDeltaX = expecDeltaX;
-    this.expectedDeltaY = expecDeltaY;
+  public DirectionTest(Direction dir, int expectedDeltaX, int expectedDeltaY) {
+    this.expectedDeltaX = expectedDeltaX;
+    this.expectedDeltaY = expectedDeltaY;
     this.direction = dir;
   }
 

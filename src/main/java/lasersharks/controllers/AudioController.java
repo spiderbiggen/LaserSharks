@@ -1,11 +1,10 @@
 package lasersharks.controllers;
 
-import java.io.File;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import lasersharks.Logger;
 import lasersharks.Options;
+import java.io.File;
 
 /**
  * @author SEMGroup27
@@ -17,10 +16,9 @@ public class AudioController {
   private static AudioController instance;
 
   private MediaPlayer musicPlayer;
-  private MediaPlayer sfxPlayer;
 
   /**
-   * The constructor to create a new instance of audiocontroller.
+   * The constructor to create a new instance of audio controller.
    */
   protected AudioController() {
     setInstance(this);
@@ -60,9 +58,9 @@ public class AudioController {
       return false;
     }
     try {
-      sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
+      MediaPlayer sfxPlayer = new MediaPlayer(new Media(new File(path).toURI().toString()));
       sfxPlayer.setVolume(
-          Options.getInstance().getSfxVolume() * Options.getInstance().getMasterVolume());
+              Options.getInstance().getSfxVolume() * Options.getInstance().getMasterVolume());
       sfxPlayer.play();
       return true;
     } catch (Exception e) {
@@ -126,11 +124,11 @@ public class AudioController {
   }
 
   /**
-   * Unmute music and sound effect playback.
+   * Un-mute music and sound effect playback.
    */
-  public void unmuteAll() {
-    unmuteMusic();
-    unmuteSfx();
+  public void unMuteAll() {
+    unMuteMusic();
+    unMuteSfx();
   }
 
   /**
@@ -144,32 +142,32 @@ public class AudioController {
   }
 
   /**
-   * Mute sound effect playback.
+   * Un-mute music playback.
    */
-  public void unmuteMusic() {
+  public void unMuteMusic() {
     Options.getInstance().setMutedMusic(false);
     resumeMusic();
   }
 
   /**
-   * Unmute music playback.
+   * Mute sound effect playback.
    */
   public void muteSfx() {
     Options.getInstance().setMutedSfx(true);
   }
 
   /**
-   * Unmute sound effect playback.
+   * Un-mute sound effect playback.
    */
-  public void unmuteSfx() {
+  public void unMuteSfx() {
     Options.getInstance().setMutedSfx(false);
   }
 
   /**
-   * Adjusts the master volume in the {@link Option} Class.
+   * Adjusts the master volume in the {@link Options} Class.
    * 
    * @param newVolume
-   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   *          new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
   public void adjustMasterVolume(double newVolume) {
     newVolume = Math.min(Math.max(newVolume, 0), 1.0);
@@ -181,10 +179,10 @@ public class AudioController {
   }
 
   /**
-   * Adjusts the music volume of the musicPlayer and in the {@link Option} Class.
+   * Adjusts the music volume of the musicPlayer and in the {@link Options} Class.
    * 
    * @param newVolume
-   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   *          new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
   public void adjustMusicVolume(double newVolume) {
     newVolume = Math.min(Math.max(newVolume, 0), 1.0);
@@ -196,10 +194,10 @@ public class AudioController {
   }
 
   /**
-   * Adjusts the sound effects volume in the {@link Option} Class.
+   * Adjusts the sound effects volume in the {@link Options} Class.
    * 
    * @param newVolume
-   *          the new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
+   *          new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
   public void adjustSfxVolume(double newVolume) {
     newVolume = Math.min(Math.max(newVolume, 0), 1.0);

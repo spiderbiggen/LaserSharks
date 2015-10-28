@@ -1,10 +1,9 @@
 package lasersharks;
 
+import javafx.scene.paint.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Random;
-
-import javafx.scene.paint.Color;
 
 /**
  * An options object is responsible for handling everything that has to do with options. This
@@ -16,31 +15,98 @@ import javafx.scene.paint.Color;
 @SuppressWarnings("restriction")
 public class Options {
 
+  /**
+   * The dimension of the screen.
+   */
   private Dimension dimension;
+  /**
+   * The default Width of the screen.
+   */
   private static final int DEFAULT_WIDTH = 1920;
+  /**
+   * The default height of the sceen.
+   */
   private static final int DEFAULT_HEIGHT = 1080;
+  /**
+   * The default music file URI.
+   */
   private static final String DEFAULT_MUSIC_FILENAME = "src/main/resources/music.mp3";
+  /**
+   * The default eat sound file URI.
+   */
   private static final String DEFAULT_EAT_SOUND_FILENAME = "src/main/resources/soundEffect1.wav";
+  /**
+   * The default laser sound file URI.
+   */
   private static final String DEFAULT_LASER_SOUND_FILENAME = "src/main/resources/shoot.wav";
+  /**
+   * The default pickup sound file URI.
+   */
   private static final String DEFAULT_PICKUP_SOUND_FILENAME = "src/main/resources/pickup.wav";
-
+  /**
+   * The default background image file URI.
+   */
   private static final String DEFAULT_BACKGROUND_IMAGE = "somber sea floor.jpg";
-  private static final Color DEFAULT_BACKCOLOUR = Color.BLUE;
+  /**
+   * The default background colour.
+   */
+  private static final Color DEFAULT_BACKGROUND_COLOUR = Color.BLUE;
 
+  /**
+   * The current music URI.
+   */
   private String musicFileName;
+  /**
+   * The current eat sound URI.
+   */
   private String eatSoundFileName;
+  /**
+   * The current laser sound URI.
+   */
   private String laserSoundFileName;
+  /**
+   * The current pickup sound URI.
+   */
   private String pickupSoundFileName;
+  /**
+   * If the music is currently playing.
+   */
   private boolean playingMusic;
+  /**
+   * If the music is currently muted.
+   */
   private boolean mutedMusic;
+  /**
+   * If the sound effects are currently muted.
+   */
   private boolean mutedSfx;
+  /**
+   * The current master volume.
+   */
   private double masterVolume;
+  /**
+   * The current music volume.
+   */
   private double musicVolume;
+  /**
+   * The current sound effects volume.
+   */
   private double sfxVolume;
-
+  /**
+   * The current Background image URI.
+   */
   private String backGround;
+  /**
+   * The random number generator to be used by factories.
+   */
   private Random factoryRng;
-  private static Options currentOptions;
+
+  /**
+   * The current Singleton instance.
+   */
+  private static Options instance;
+
+
 
   /**
    * constructor of the options class. Creates an Options object.
@@ -68,14 +134,14 @@ public class Options {
   }
 
   /**
-   * Gets the currentOptions object that is used. If there is none, a new one is created using
+   * Gets the instance object that is used. If there is none, a new one is created using
    * standard values.
    * 
    * @return the options object that is currently used.
    */
   public static synchronized Options getInstance() {
-    if (currentOptions != null) {
-      return currentOptions;
+    if (instance != null) {
+      return instance;
     }
     return new Options(getScreenSize());
   }
@@ -84,13 +150,11 @@ public class Options {
    * Destroy current options.
    */
   public static void destroyInstance() {
-    Options.currentOptions = null;
+    Options.instance = null;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see java.lang.Object#hashCode()
+  /**
+   * @return the hashcode of the dimension.
    */
   @Override
   public int hashCode() {
@@ -122,7 +186,7 @@ public class Options {
    *          the options object to set.
    */
   public static void setInstance(Options options) {
-    currentOptions = options;
+    instance = options;
   }
 
   /**
@@ -330,11 +394,11 @@ public class Options {
 
   /**
    * Get the backGroundColor.
-   * 
-   * @return the default backgroundcolor
+   *
+   * @return the default background color
    */
   public static Color getBackGroundColor() {
-    return DEFAULT_BACKCOLOUR;
+    return DEFAULT_BACKGROUND_COLOUR;
   }
 
   /**

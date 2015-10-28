@@ -3,13 +3,13 @@ package lasersharks.controllers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import javafx.embed.swing.JFXPanel;
+import lasersharks.Options;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.embed.swing.JFXPanel;
-import lasersharks.Options;
 
 /**
  * @author SEMGroup27
@@ -102,7 +102,7 @@ public class AudioControllerTest {
   public void testResumeMusic() {
     AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName());
     AudioController.getInstance().muteMusic(); // To effectively pause the music
-    Options.getInstance().setMutedMusic(false); // To unpause but not yet play the music
+    Options.getInstance().setMutedMusic(false); // To un-pause but not yet play the music
     assertTrue(AudioController.getInstance().resumeMusic());
     assertTrue(Options.getInstance().isPlayingMusic());
   }
@@ -117,12 +117,11 @@ public class AudioControllerTest {
   }
 
   /**
-   * Test method for {@link lasersharks.controllers.AudioController#unmuteAll()}.
+   * Test method for {@link lasersharks.controllers.AudioController#unMuteAll()}.
    */
-  @Test
-  public void testUnmuteAll() {
+  @Test public void testUnMuteAll() {
     AudioController.getInstance().muteAll();
-    AudioController.getInstance().unmuteAll();
+    AudioController.getInstance().unMuteAll();
     assertFalse(Options.getInstance().isMutedMusic() || Options.getInstance().isMutedSfx());
   }
 
@@ -136,12 +135,11 @@ public class AudioControllerTest {
   }
 
   /**
-   * Test method for {@link lasersharks.controllers.AudioController#unmuteMusic()}.
+   * Test method for {@link lasersharks.controllers.AudioController#unMuteMusic()}.
    */
-  @Test
-  public void testUnmuteMusic() {
+  @Test public void testUnMuteMusic() {
     AudioController.getInstance().muteMusic();
-    AudioController.getInstance().unmuteMusic();
+    AudioController.getInstance().unMuteMusic();
     assertFalse(Options.getInstance().isMutedMusic());
   }
 
@@ -155,12 +153,11 @@ public class AudioControllerTest {
   }
 
   /**
-   * Test method for {@link lasersharks.controllers.AudioController#unmuteSfx()}.
+   * Test method for {@link lasersharks.controllers.AudioController#unMuteSfx()}.
    */
-  @Test
-  public void testUnmuteSfx() {
+  @Test public void testUnMuteSfx() {
     AudioController.getInstance().muteSfx();
-    AudioController.getInstance().unmuteSfx();
+    AudioController.getInstance().unMuteSfx();
     assertFalse(Options.getInstance().isMutedSfx());
   }
 
@@ -230,7 +227,7 @@ public class AudioControllerTest {
   }
 
   /**
-   * Test method for {@link lasersharks.controllers.AudioController#SetInstance(AudioController)} .
+   * Test method for {@link lasersharks.controllers.AudioController#setInstance(AudioController)} .
    */
   @Test
   public void testSetInstance() {

@@ -3,7 +3,7 @@ package lasersharks.behaviour.highscoreincrement;
 import lasersharks.behaviour.HighScoreIncrementBehaviour;
 
 /**
- * Highscore Increment behaviour for SeaObjects.
+ * High score Increment behaviour for SeaObjects.
  * @author SEMGroup27
  *
  */

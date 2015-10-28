@@ -4,7 +4,7 @@ import lasersharks.behaviour.LaserCollisionBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
- * Eaten behavior for Fishes.
+ * Eaten behaviour for Fishes.
  * 
  * @author SEMGroup27
  *

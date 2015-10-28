@@ -1,24 +1,19 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import lasersharks.Position;
 import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
 import lasersharks.interfaces.Displayable;
-import lasersharks.seaobjects.Ammo;
-import lasersharks.seaobjects.Fish;
-import lasersharks.seaobjects.LaserShark;
-import lasersharks.seaobjects.SeaObject;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 /**
- * Class for testing Lazershark object.
+ * Class for testing Laser shark object.
  * 
  * @author SEMGroup27
  *
@@ -67,10 +62,9 @@ public class LaserSharkTest extends SeaObjectTest {
   }
 
   /**
-   * When the laser sharks eats a dead fish, it doenst grow.
+   * When the laser sharks eats a dead fish, it doesn't grow.
    */
-  @Test
-  public void testAmmoDoesntGrowsWhenEatingDeadAmmoAtFullAmmo() {
+  @Test public void testAmmoDoesNotGrowsWhenEatingDeadAmmoAtFullAmmo() {
     Displayable ammo = mock(Ammo.class);
     when(ammo.isAlive()).thenReturn(false);
 
@@ -80,10 +74,9 @@ public class LaserSharkTest extends SeaObjectTest {
   }
 
   /**
-   * When the laser sharks eats a dead fish, it doenst grow.
+   * When the laser sharks eats a dead fish, it doesn't grow.
    */
-  @Test
-  public void testAmmoDoesntGrowsWhenEatingDeadAmmoAtNonFullAmmo() {
+  @Test public void testAmmoDoesNotGrowsWhenEatingDeadAmmoAtNonFullAmmo() {
     Displayable ammo = mock(Ammo.class);
     when(ammo.isAlive()).thenReturn(false);
 
@@ -100,7 +93,8 @@ public class LaserSharkTest extends SeaObjectTest {
     Displayable mockedFish = mock(Fish.class);
     //when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(true);
-    when(mockedFish.onCollisionSizeIncrement()).thenReturn(size/FishGetSizeIncrementBehaviour.ENERGY_DISSERPATION_RATE);
+    when(mockedFish.onCollisionSizeIncrement())
+        .thenReturn(size / FishGetSizeIncrementBehaviour.ENERGY_DISSIPATION_RATE);
 
     assertEquals(DEFAULT_SHARK_SIZE, laserShark.getSize(), 0);
     laserShark.collideWith(mockedFish);
@@ -108,10 +102,9 @@ public class LaserSharkTest extends SeaObjectTest {
   }
 
   /**
-   * When the laser sharks eats a dead fish, it doenst grows.
+   * When the laser sharks eats a dead fish, it doesn't grows.
    */
-  @Test
-  public void testLaserSharkDoesntGrowsWhenEatingDeadFish() {
+  @Test public void testLaserSharkDoesNotGrowsWhenEatingDeadFish() {
     Displayable mockedFish = mock(SeaObject.class);
     when(mockedFish.getSize()).thenReturn(size);
     when(mockedFish.isAlive()).thenReturn(false);
@@ -122,7 +115,7 @@ public class LaserSharkTest extends SeaObjectTest {
   }
 
   /**
-   * When the lasershark eats a fish, the fish schould be killed.
+   * When the laser shark eats a fish, the fish should be killed.
    */
   @Test
   public void testEatenFishIsKilled() {

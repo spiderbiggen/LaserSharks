@@ -4,12 +4,13 @@ import lasersharks.behaviour.MoveBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
- * represents the default move behaviour of a shark the player controls.
+ * Represents the default move behaviour of a shark the player controls.
  * @author SEMGroup27
  *
  */
 public class LaserSharkMoveBehaviour implements MoveBehaviour {
   private static final float HALF_RATE = 0.5F;
+
   private Displayable diplayable;
   
   /**
@@ -21,7 +22,7 @@ public class LaserSharkMoveBehaviour implements MoveBehaviour {
   }
   
   /**
-   * moves the shark in a direction.
+   * Moves the shark in a direction.
    * @param frametime the refresh rate of the screen.
    * @return true if the shark was able to move.
    */
