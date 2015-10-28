@@ -2,7 +2,7 @@ package lasersharks.seaobjects;
 
 import lasersharks.Direction;
 import lasersharks.Position;
-import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitBoxBehaviour;
+import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.lasercollision.LaserLaserCollisionBehaviour;
 import lasersharks.behaviour.move.DefaultMoveBehaviour;
 
@@ -37,7 +37,7 @@ public class LaserBullet extends SeaObject {
   public LaserBullet(Position position, float size, double startSpeed, Direction direction) {
     super(position, size, startSpeed, direction);
     strength = LASER_DEFAULT_STRENGTH;
-    collisionHitBoxBehaviour = new DefaultCollisionHitBoxBehaviour(this);
+    collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
     moveBehaviour = new DefaultMoveBehaviour(this);
     laserCollisionBehaviour = new LaserLaserCollisionBehaviour(this);
   }

@@ -14,6 +14,7 @@ import java.io.File;
 public class AudioController {
 
   private static AudioController instance;
+  private static final int NUMBER_OF_MEDIAPLAYERS = 2;
 
   private MediaPlayer musicPlayer;
 

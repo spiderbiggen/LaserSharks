@@ -29,11 +29,6 @@ public abstract class StandardPane extends Pane implements Stoppable {
   protected static final int TEXT_SCALE_SIZE_BIG = 17;
   protected static final int TEXT_SCALE_SIZE_SMALL = 4;
 
-  // audio variables
-  protected Button muteButton;
-  protected ImageView muteButtonImage = new ImageView("mutesound.png");
-  protected ImageView unMuteButtonImage = new ImageView("unmutesound.png");
-
   // sprite and image variables
   protected ImageView sharkImage;
   protected static final int SCALING_FACTOR_TO_UNDERNEATH_MIDDLE = 3;

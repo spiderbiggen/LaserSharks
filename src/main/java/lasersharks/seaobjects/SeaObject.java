@@ -16,7 +16,7 @@ import lasersharks.behaviour.SizeDecrementBehaviour;
 import lasersharks.behaviour.ammunitionIncrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
-import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitBoxBehaviour;
+import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
 import lasersharks.behaviour.eaten.DefaultEatenBehaviour;
 import lasersharks.behaviour.highscoreincrement.DefaultHighScoreIncrementBehaviour;
 import lasersharks.behaviour.lasercollision.DefaultLaserCollisionBehaviour;
@@ -72,7 +72,7 @@ public abstract class SeaObject implements Displayable {
     this.direction = direction;
     this.alive = true;
 
-    this.collisionHitBoxBehaviour = new DefaultCollisionHitBoxBehaviour(this);
+    this.collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
     this.moveBehaviour = new DefaultMoveBehaviour(this);
     
     this.ammunitionIncrementBehaviour = new DefaultAmmunitionIncrementBehaviour();
