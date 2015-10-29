@@ -53,7 +53,7 @@ public class PauseControllerTest {
   }
 
   /**
-   * Test for pressedP keyevent.
+   * Test for pressedP key event.
    */
   // @Test
   public void pressedPTest() {
@@ -62,7 +62,7 @@ public class PauseControllerTest {
   }
 
   /**
-   * Test for pressedR keyevent.
+   * Test for pressedR key event.
    */
   @Test
   public void pressedRTest() {
@@ -71,7 +71,7 @@ public class PauseControllerTest {
   }
 
   /**
-   * Test for releaseP keyevent.
+   * Test for releaseP key event.
    */
   @Test
   public void releasedPTest() {

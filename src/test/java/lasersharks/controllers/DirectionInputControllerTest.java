@@ -44,10 +44,14 @@ public class DirectionInputControllerTest {
   /**
    * Constructor for parametrized tests.
    *
-   * @param keyCode1                        Code of firstKey pressed
-   * @param keyCode2                        Code of secondKey pressed
-   * @param expectedDirectionAfterKeyPress1 DIRECTION after first key press
-   * @param expectedDirectionAfterKeyPress2 DIRECTION after second key press
+   * @param keyCode1
+   *          Code of firstKey pressed
+   * @param keyCode2
+   *          Code of secondKey pressed
+   * @param expectedDirectionAfterKeyPress1
+   *          direction after first key press
+   * @param expectedDirectionAfterKeyPress2
+   *          direction after second key press
    */
   public DirectionInputControllerTest(final KeyCode keyCode1, final KeyCode keyCode2,
       final Direction expectedDirectionAfterKeyPress1,
@@ -118,7 +122,11 @@ public class DirectionInputControllerTest {
   }
 
   /**
+   <<<<<<< HEAD
    * Check if the DIRECTION is proper after first key press.
+   =======
+   * Check if the direction is proper after first key press.
+   >>>>>>> remotes/origin/master
    */
   @Test
   public void testDirectionAfterFirstKeyPress() {
@@ -129,7 +137,11 @@ public class DirectionInputControllerTest {
   }
 
   /**
+   <<<<<<< HEAD
    * Check if the DIRECTION is proper after second key press.
+   =======
+   * Check if the direction is proper after second key press.
+   >>>>>>> remotes/origin/master
    */
   @Test
   public void testDirectionAfterSecondKeyPress() {
@@ -141,7 +153,11 @@ public class DirectionInputControllerTest {
   }
 
   /**
+   <<<<<<< HEAD
    * Check if the DIRECTION is proper after second key released.
+   =======
+   * Check if the direction is proper after second key released.
+   >>>>>>> remotes/origin/master
    */
   @Test
   public void testDirectionAfterSecondKeyRelease() {
@@ -157,7 +173,7 @@ public class DirectionInputControllerTest {
   }
 
   /**
-   * Check if the DIRECTION is proper after both Keys released.
+   * Check if the direction is proper after both Keys released.
    */
   @Test
   public void testDirectionAfterBothKeysReleased() {
@@ -174,7 +190,7 @@ public class DirectionInputControllerTest {
   }
 
   /**
-   * Check if the DIRECTION is proper after bothKeysReleasedReversed.
+   * Check if the proper is proper after bothKeysReleasedReversed.
    */
   @Test
   public void testDirectionAfterBothKeysReleasedReversed() {

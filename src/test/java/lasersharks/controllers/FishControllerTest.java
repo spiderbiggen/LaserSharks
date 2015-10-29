@@ -38,7 +38,8 @@ public class FishControllerTest {
   /**
    * Sets up a fish controller object.
    *
-   * @throws Exception if an error occurs.
+   * @throws Exception
+   *           if an error occurs.
    */
   @Before
   public void setUp() throws Exception {
@@ -68,9 +69,10 @@ public class FishControllerTest {
   /**
    * A fish controller containing 10 fishes and 1 shark. one fish collides with the shark. The
    * fishes
-   * are SIZE 10. Useful for testing multiple methods.
+   * are size 10. Useful for testing multiple methods.
    *
-   * @param sizeOfShark the SIZE of the shark to set to.
+   * @param sizeOfShark
+   *          the size of the shark to set to.
    * @return a fish controller with 10 fish and 1 shark. one shark and 1 fish collide.
    */
   private FishController fishConFilled(final int sizeOfShark) {
@@ -80,8 +82,7 @@ public class FishControllerTest {
     for (int i = 0; i < FISH_AMOUNT; i++) {
       fishCon.addDisplayable(new Fish("", 1,
           new Position(POSITION_X + i * DIST_BETWEEN_FISH, POSITION_Y + i * DIST_BETWEEN_FISH),
-          (float) SIZE, (double) SPEED,
-          Direction.East));
+          (float) SIZE, (double) SPEED, Direction.East));
     }
     return fishCon;
   }

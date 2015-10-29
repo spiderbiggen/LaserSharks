@@ -22,7 +22,6 @@ import lasersharksgui.interfaces.Stoppable;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 /**
  * This is the pane representing the game play.
  *
@@ -35,7 +34,7 @@ public class GamePane extends AbstractStandardPane implements Stoppable {
   private static long time;
   private static boolean paused;
   private final DirectionCallback callback;
-  // private static final int ANIMATION_SLEEP_TIMER = 10;
+
   private AnimationTimer animation;
   private DirectionInputController directionInputController;
   private ScreenController screenController;
@@ -69,8 +68,9 @@ public class GamePane extends AbstractStandardPane implements Stoppable {
       public void handle(final long now) {
         if (paused) {
           time = now;
-          paused = false;
+          setPaused(false);
         }
+
         final double frameTime = (now - time) / TIME_TO_MILLIS;
         final double millis = 1000;
 
@@ -78,10 +78,6 @@ public class GamePane extends AbstractStandardPane implements Stoppable {
         showShark(screenController.getShark());
         showScoreAndAmmo();
 
-        /*
-         * try { Thread.sleep(ANIMATION_SLEEP_TIMER); } catch (InterruptedException e) {
-         * Logger.getInstance().write("Animation timer Interrupted", e.getMessage()); }
-         */
         time = now;
       }
     };
@@ -117,6 +113,7 @@ public class GamePane extends AbstractStandardPane implements Stoppable {
   /**
    * Displays the score in the upper right corner of the screen.
    */
+
   private void showScoreAndAmmo() {
     addText(String.format("Ammo: %d Score: %d", screenController.getShark().getAmmo(),
             HighScores.getInstance().getScore()), TEXT_SCALE_SIZE_SMALL,
@@ -204,6 +201,7 @@ public class GamePane extends AbstractStandardPane implements Stoppable {
   /**
    * @return the screenController
    */
+  @Deprecated
   public ScreenController getScreenController() {
     return screenController;
   }

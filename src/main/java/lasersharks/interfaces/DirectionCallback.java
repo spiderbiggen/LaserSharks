@@ -12,7 +12,8 @@ public interface DirectionCallback {
   /**
    * Method by which the direction is propagated.
    *
-   * @param dir current direction.
+   * @param dir
+   *          current direction.
    */
   void putDirection(Direction dir);
 }

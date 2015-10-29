@@ -14,6 +14,11 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Class for testing {@link DirectionInputController}.
+ <<<<<<< HEAD
+ =======
+ *
+ * @author SEMGroup27
+>>>>>>> remotes/origin/master
  *
  * @author SEMGroup27
  */

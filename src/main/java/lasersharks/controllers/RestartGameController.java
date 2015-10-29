@@ -8,6 +8,7 @@ import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 
 /**
+ * Controller for restarting the game.
  * @author SEMGroup27
  */
 @SuppressWarnings("restriction")

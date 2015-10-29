@@ -4,7 +4,7 @@ import lasersharks.behaviour.MoveBehaviour;
 import lasersharks.interfaces.Displayable;
 
 /**
- * represents the default move behaviour of a shark the player controls.
+ * Represents the default move behaviour of a shark the player controls.
  * @author SEMGroup27
  *
  */

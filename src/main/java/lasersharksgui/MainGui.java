@@ -127,9 +127,11 @@ public class MainGui extends Application {
   }
 
   /**
-   * Removes a pane from the stackpane Makes sure that it's not the root pane.
+   * Removes a pane from the {@link javafx.scene.layout.StackPane}
+   * Makes sure that it's not the root pane.
    *
-   * @param pane the pane to be removed.
+   * @param pane
+   *          the pane to be removed.
    */
   public void removeOverlay(final Pane pane) {
     if (!pane.equals(currentPane)) {
@@ -155,5 +157,4 @@ public class MainGui extends Application {
   public void stop() throws Exception {
     Platform.exit();
   }
-
 }

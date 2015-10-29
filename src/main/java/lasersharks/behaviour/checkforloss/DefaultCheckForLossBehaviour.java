@@ -8,6 +8,12 @@ import lasersharks.behaviour.CheckForLossBehaviour;
  * @author SEMGroup27
  */
 public class DefaultCheckForLossBehaviour implements CheckForLossBehaviour {
+
+  /**
+   * Default behaviour for when the shark loses.
+   *
+   * @param size shark size.
+   */
   @Override
   public void onCollisionPlayerLoses(final float size) {
     //Empty

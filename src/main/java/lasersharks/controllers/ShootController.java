@@ -5,7 +5,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
+ <<<<<<< HEAD
  * The shootcontroller is responsible for handling the keyEvents that have to do with shooting.
+ =======
+ * The shootController is responsible for handling the keyEvents that has to do with shooting.
+ *
+ * @author SEMGroup27
+>>>>>>> remotes/origin/master
  *
  * @author SEMGroup27
  */

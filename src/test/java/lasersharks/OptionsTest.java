@@ -26,6 +26,7 @@ public class OptionsTest {
   private static final int Y_RESOLUTION_OTHER = 2000;
   private static final Dimension DEFAULT_DIMENSION = new Dimension(1920, 1080);
   private Options options;
+
   private Dimension dim;
   private Dimension dimOther;
 
@@ -69,8 +70,7 @@ public class OptionsTest {
           Toolkit.getDefaultToolkit().getScreenSize());
       // in case of a maven test, the dimension has 1920x1080 values.
     } catch (HeadlessException e) {
-      assertEquals(Options.getInstance()
-          .getDimension(), DEFAULT_DIMENSION);
+      assertEquals(Options.getInstance().getDimension(), DEFAULT_DIMENSION);
     }
   }
 

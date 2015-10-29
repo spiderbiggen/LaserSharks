@@ -1,6 +1,3 @@
-/**
- *
- */
 package lasersharks.seaobjects;
 
 import lasersharks.Direction;
@@ -30,21 +27,11 @@ public class Ammo extends AbstractSeaObject {
     eatenBehaviour = new AmmoEatenBehaviour(this);
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see lasersharks.AbstractSeaObject#getImageResource()
-   */
   @Override
   public String getImageResource() {
     return IMAGE_RESOURCE;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharks.AbstractSeaObject#getWidthScale()
-   */
   @Override
   public double getWidthScale() {
     return WIDTH_SCALE;

@@ -30,7 +30,8 @@ public class FishCollisionBehaviour implements CollisionBehaviour {
                 new DefaultComponent()));
   }
 
-  @Override public void collideWith(final Displayable other) {
+  @Override
+  public void collideWith(final Displayable other) {
     this.handler.handleCollision(other);
   }
 

@@ -15,35 +15,73 @@ import java.util.Scanner;
  */
 public class HighScores {
 
-  private static final HighScores instance = new HighScores();
-  private static final String HIGH_SCORE_FILE_URI = "src/main/resources/highScoreList";
+  private static final String HIGH_SCORE_FILE_URI = "src/main/resources/highScores";
+  /**
+   * The singleton INSTANCE of this class.
+   */
+  private static final HighScores INSTANCE = new HighScores();
+  /**
+   * The amount of characters to offset the string values by to get a score.
+   */
   private static final int DATA_OFFSET = 3;
+  /**
+   * Bonus score per fish.
+   */
   private static final int FISH_BONUS = 20;
-
+  /**
+   * The list of high scores stored as strings.
+   */
   private ArrayList<String> highScoreList;
+  /**
+   * The URI to the resource file.
+   */
   private String inputFile;
-  private int amountOfFishesEaten;
+  /**
+   * The amount of fishes that has been eaten.
+   */
+  private int amountOfFishesEaten = 0;
+  /**
+   * Current score.
+   */
   private int score;
 
   /**
-   * create a new instance of high scores.
+   * create a new INSTANCE of high scores.
    */
   protected HighScores() {
     this.inputFile = HIGH_SCORE_FILE_URI;
   }
 
+
   /**
-   * return the instance.
+   * return the INSTANCE.
    *
-   * @return high scores instance
+   * @return high scores INSTANCE
    */
   public static HighScores getInstance() {
-    return instance;
+    return INSTANCE;
+  }
+
+  /**
+   * @return Bonus per eaten fish.
+   */
+  public static int getFishBonus() {
+    return FISH_BONUS;
+  }
+
+  /**
+   * Restores the initial state of the INSTANCE, while obeying the singleton pattern.
+   */
+  public static void destroyInstance() {
+    INSTANCE.highScoreList = null;
+    INSTANCE.inputFile = HIGH_SCORE_FILE_URI;
+    INSTANCE.amountOfFishesEaten = 0;
+    INSTANCE.score = 0;
   }
 
   /**
    * Reads the current high score list so it can be edited.
-   * 
+   *
    */
   public void readHighScore() {
     final ArrayList<String> list = new ArrayList<>();
@@ -59,16 +97,6 @@ public class HighScores {
       }
     }
     highScoreList = list;
-  }
-
-  /**
-   * Sets the list of high scores to inputList.
-   * 
-   * @param inputList
-   *          the list of new high scores.
-   */
-  public void setList(final ArrayList<String> inputList) {
-    highScoreList = inputList;
   }
 
   /**
@@ -92,8 +120,17 @@ public class HighScores {
   }
 
   /**
+   * Sets the list of high scores to inputList.
+   *
+   * @param inputList the list of new high scores.
+   */
+  public void setList(final ArrayList<String> inputList) {
+    highScoreList = inputList;
+  }
+
+  /**
    * Set the input file to the one specified with inputFile.
-   * 
+   *
    * @param inputFile
    *          the relative path to the new input file.
    */
@@ -133,7 +170,7 @@ public class HighScores {
   /**
    * Fixes the still erroneous list after the new score has been inserted in the writeHighScore()
    * method. An example would be 1. 500 2. 250 2. 250 3. 100 4. 50.
-   * 
+   *
    * @param list
    *          the list containing the high score elements.
    * @return the correct high score list.
@@ -152,7 +189,7 @@ public class HighScores {
 
   /**
    * Gets the highest score from the high score list.
-   * 
+   *
    * @return the highest score in the list.
    * @throws FileNotFoundException
    *           when the file is not found.
@@ -201,23 +238,6 @@ public class HighScores {
   }
 
   /**
-   * @return Bonus per eaten fish.
-   */
-  public static int getFishBonus() {
-    return FISH_BONUS;
-  }
-
-  /**
-   * Method so we can mock highScoreList in tests of other classes.
-   *
-   * @param highScores
-   *          highScoreList to be used.
-   */
- /* public static void setInstance(final HighScores highScores) {
-    HighScores.instance = highScores;
-  }*/
-
-  /**
    * @return the score
    */
   public int getScore() {
@@ -230,15 +250,5 @@ public class HighScores {
    */
   public void setScore(final int score) {
     this.score = score;
-  }
-
-  /**
-   * Restores the initial state of the instance, while obeying the singleton pattern.
-   */
-  public static void destroyInstance() {
-    instance.highScoreList = null;
-    instance.inputFile = HIGH_SCORE_FILE_URI;
-    instance.amountOfFishesEaten = 0;
-    instance.score = 0;
   }
 }

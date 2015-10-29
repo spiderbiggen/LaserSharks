@@ -7,6 +7,7 @@ import lasersharks.interfaces.FishSpawner;
 
 import java.util.Random;
 
+
 /**
  * Default FishFactory implementation.
  * 
@@ -34,7 +35,7 @@ public class FishFactory implements FishSpawner {
   private static final String[] FISH_RESOURCES = { "enemy-1.png", "enemy-2.png", "enemy-4.png",
       "enemy-5.png", "enemy-6.png", "enemy-7.png", "enemy-8.png", "enemy-10.png", "enemy-12.png" };
   /**
-   * store the image sizes as {width, height} pairs.
+   * Store the image sizes as {width, height} pairs.
    */
   private static final double[] FISH_SIZES = { 1.666667, 1.048951, 0.869565, 0.740740, 2.307692,
       1.369863, 1.102941, 1.388880, 1.764706 };
@@ -44,7 +45,7 @@ public class FishFactory implements FishSpawner {
   private final Random enemyRng;
 
   /**
-   * initialize the enemy spawner.
+   * Initialize the enemy spawner.
    */
   public FishFactory() {
     this.enemyRng = Options.getInstance().getFactoryRng();

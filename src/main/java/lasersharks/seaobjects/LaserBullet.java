@@ -42,7 +42,7 @@ public class LaserBullet extends AbstractSeaObject {
   }
 
   /**
-   * gets the widthScale of the image. (width/height)
+   * gets the width scale of the image. (width/height)
    */
   @Override
   public double getWidthScale() {

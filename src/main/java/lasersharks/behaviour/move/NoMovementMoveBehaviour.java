@@ -10,12 +10,12 @@ import lasersharks.behaviour.MoveBehaviour;
 public class NoMovementMoveBehaviour implements MoveBehaviour {
 
   /**
-   * does nothing, as this behavour specifies a displayable that cant move.
+   * does nothing, as this behaviour specifies a displayable that cant move.
    *
-   * @param frametime time in seceonds since lat update
+   * @param frameTime time in seconds since lat update
    */
   @Override
-  public boolean move(final double frametime) {
+  public boolean move(final double frameTime) {
     return true;
   }
 

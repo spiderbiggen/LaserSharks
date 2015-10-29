@@ -1,8 +1,6 @@
 package lasersharks.controllers;
 
-import javafx.scene.Scene;
 import lasersharks.seaobjects.LaserShark;
-import lasersharksgui.MainGui;
 import lasersharksgui.panes.GamePane;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,8 +25,8 @@ public class ScreenControllerTest {
   public void setUp() {
     currentPane = Mockito.mock(GamePane.class);
     screenCon = Mockito.mock(ScreenController.class);
-    Mockito.mock(MainGui.class);
-    Mockito.mock(Scene.class);
+    //Mockito.mock(MainGui.class);
+    //Mockito.mock(Scene.class);
     FishController fishCon = Mockito.mock(FishController.class);
     LaserShark shark = Mockito.mock(LaserShark.class);
     Mockito.when(screenCon.getShark()).thenReturn(shark);
@@ -38,7 +36,7 @@ public class ScreenControllerTest {
   }
 
   /**
-   * Test for the constructer.
+   * Test for the constructor.
    */
   @Test
   public void testConstructor() {

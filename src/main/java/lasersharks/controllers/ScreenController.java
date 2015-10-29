@@ -18,15 +18,15 @@ import java.util.List;
 @SuppressWarnings("restriction")
 public class ScreenController {
 
+  private static final int GAME_WINNING_SIZE = 400;
   private final GamePane currentPane;
   private final FishController fishCon;
-  private static final int GAME_WINNING_SIZE = 400;
 
   /**
    * Constructor.
    * 
    * @param pane
-   *          the GamePane this screencontroller is set to
+   *          the GamePane this {@link ScreenController} is set to
    */
   public ScreenController(final GamePane pane) {
     super();
@@ -37,18 +37,18 @@ public class ScreenController {
 
   /**
    * Get information for next frame and checks if the shark is bigger than the winning size.
-   * 
-   * @param frametime
+   *
+   * @param frameTime
    *          time between frames in seconds
    * 
    * @return FishInfo
    */
-  public List<Displayable> getNextFrameInfo(double frametime) {
+  public List<Displayable> getNextFrameInfo(double frameTime) {
     if (this.fishCon.getShark()
         .getSize() > GAME_WINNING_SIZE) {
       MainGui.browseToGlobal(WinPane.class);
     }
-    return this.fishCon.getNextCycleInformation(frametime);
+    return this.fishCon.getNextCycleInformation(frameTime);
   }
 
   /**
@@ -68,15 +68,15 @@ public class ScreenController {
   }
 
   /**
-   * @return the scene used for this screencontroller.
+   * @return the scene used for this {@link ScreenController}.
    */
   public Scene getGlobalScene() {
     return MainGui.getInstance().getCurrentScene();
   }
 
   /**
-   * 
-   * @return the fishcontroller used for this screencontroller.
+   *
+   * @return the fishController used for this {@link ScreenController}.
    */
   public FishController getFishController() {
     return fishCon;

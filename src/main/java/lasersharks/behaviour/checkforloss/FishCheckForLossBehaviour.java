@@ -16,8 +16,7 @@ public class FishCheckForLossBehaviour implements CheckForLossBehaviour {
 
   /**
    * Constructor.
-   *
-   * @param ele element to wich to propagate actions.
+   * @param ele element to which to propagate actions.
    */
   public FishCheckForLossBehaviour(final AbstractSeaObject ele) {
     this.element = ele;

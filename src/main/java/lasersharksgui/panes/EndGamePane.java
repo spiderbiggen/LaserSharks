@@ -13,6 +13,7 @@ import lasersharksgui.MainGui;
 import java.io.FileNotFoundException;
 
 /**
+ * Class for the endGame Pane.
  * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
@@ -53,11 +54,6 @@ public class EndGamePane extends AbstractStandardPane {
     MainGui.getInstance().getCurrentScene().addEventHandler(KeyEvent.ANY, this.restartHandler);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see lasersharksgui.Stoppable#stop()
-   */
   @Override
   public void stop() {
     MainGui.getInstance().getCurrentScene().removeEventHandler(KeyEvent.ANY, this.restartHandler);

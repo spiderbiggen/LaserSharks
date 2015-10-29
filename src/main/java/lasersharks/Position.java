@@ -7,11 +7,34 @@ package lasersharks;
  */
 public class Position {
 
+  /**
+   * The multiplier for the upper right corner height wise.
+   */
   private static final double HEIGHT_MULTIPLIER = 0.035;
-  private static final double WIDTH_MULTIPLIER = 0.8;
-  private static final int SECOND_HASH_PRIME = 31;
+
+  /**
+   * The multiplier for the upper right corner width wise.
+   */
+  private static final double WIDTH_MULTIPLIER = 0.;
+
+  /**
+   * A prime number for the hash.
+   */
   private static final int HASH_PRIME = 17;
+
+  /**
+   * another prime number for the hash.
+   */
+  private static final int SECOND_HASH_PRIME = 31;
+
+  /**
+   * Current x position.
+   */
   private double posX;
+
+  /**
+   * Current y position.
+   */
   private double posY;
 
   /**
@@ -200,12 +223,24 @@ public class Position {
     this.posY = Math.min(Math.max(0 - yMargin, this.posY), Options.getGlobalHeight() - yMargin);
   }
 
+  /**
+   * Create a string representation of the x and y coordinates.
+   *
+   * @return string represeenting x and y.
+   */
   @Override
   public String toString() {
     return "Position [posX=" + posX + ", posY=" + posY + "]";
   }
 
-  @Override public boolean equals(final Object obj) {
+  /**
+   * Check if both objects have the same position.
+   *
+   * @param obj any {@link Object}
+   * @return true if both objects have the same position.
+   */
+  @Override
+  public boolean equals(Object obj) {
     if (this == obj) {
       return true;
     }
@@ -219,11 +254,13 @@ public class Position {
 
   }
 
+  /**
+   * @return a hashcode of the x and y coordinates.
+   */
   @Override
   public int hashCode() {
     int hash = (int) (SECOND_HASH_PRIME * HASH_PRIME + getPosX());
     hash = (int) (SECOND_HASH_PRIME * hash + getPosY());
     return hash;
   }
-
 }

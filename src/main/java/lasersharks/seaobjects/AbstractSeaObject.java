@@ -8,11 +8,11 @@ import lasersharks.behaviour.CheckForLossBehaviour;
 import lasersharks.behaviour.CollisionBehaviour;
 import lasersharks.behaviour.CollisionHitBoxBehaviour;
 import lasersharks.behaviour.EatenBehaviour;
-import lasersharks.behaviour.GetSizeIncrementBahaviour;
+import lasersharks.behaviour.GetSizeIncrementBehaviour;
 import lasersharks.behaviour.HighScoreIncrementBehaviour;
 import lasersharks.behaviour.LaserCollisionBehaviour;
 import lasersharks.behaviour.MoveBehaviour;
-import lasersharks.behaviour.SizeDecrementBahaviour;
+import lasersharks.behaviour.SizeDecrementBehaviour;
 import lasersharks.behaviour.ammunitionincrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
@@ -31,19 +31,19 @@ import lasersharks.interfaces.Displayable;
  * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
-
 public abstract class AbstractSeaObject implements Displayable {
 
   private static final float MIN_SIZE = 30.0f;
   private final Position position;
+
   protected CollisionHitBoxBehaviour collisionHitBoxBehaviour;
   protected MoveBehaviour moveBehaviour;
   protected AmmunitionIncrementBehaviour ammunitionIncrementBehaviour;
   protected CheckForLossBehaviour checkForLossBehaviour;
   protected EatenBehaviour eatenBehaviour;
-  protected GetSizeIncrementBahaviour getSizeIncrementBahaviour;
+  protected GetSizeIncrementBehaviour getSizeIncrementBehaviour;
   protected LaserCollisionBehaviour laserCollisionBehaviour;
-  protected SizeDecrementBahaviour sizeDecrementBahaviour;
+  protected SizeDecrementBehaviour sizeDecrementBehaviour;
   protected CollisionBehaviour collisionBehaviour;
   protected HighScoreIncrementBehaviour highScoreIncrementBehaviour;
   private float size;
@@ -77,9 +77,9 @@ public abstract class AbstractSeaObject implements Displayable {
     this.ammunitionIncrementBehaviour = new DefaultAmmunitionIncrementBehaviour();
     this.checkForLossBehaviour = new DefaultCheckForLossBehaviour();
     this.eatenBehaviour = new DefaultEatenBehaviour();
-    this.getSizeIncrementBahaviour = new DefaultGetSizeIncrementBehaviour();
+    this.getSizeIncrementBehaviour = new DefaultGetSizeIncrementBehaviour();
     this.laserCollisionBehaviour = new DefaultLaserCollisionBehaviour();
-    this.sizeDecrementBahaviour = new DefaultSizeDecrementBehaviour();
+    this.sizeDecrementBehaviour = new DefaultSizeDecrementBehaviour();
     this.collisionBehaviour = new DefaultCollisionBehaviour();
     this.highScoreIncrementBehaviour = new DefaultHighScoreIncrementBehaviour();
   }
@@ -255,7 +255,7 @@ public abstract class AbstractSeaObject implements Displayable {
   public int onCollisionAmmunitionIncrement() {
     return this.ammunitionIncrementBehaviour.onCollisionAmmunitionIncrement();
   }
-  
+
   /**
    * Check to see if player has lost the game.
    * @param size shark size.
@@ -278,7 +278,7 @@ public abstract class AbstractSeaObject implements Displayable {
    */
   @Override
   public float onCollisionSizeIncrement() {
-    return this.getSizeIncrementBahaviour.onCollisionSizeIncrement();
+    return this.getSizeIncrementBehaviour.onCollisionSizeIncrement();
   }
   
   /**
@@ -294,7 +294,7 @@ public abstract class AbstractSeaObject implements Displayable {
    * @param size size by which object needs to decrement.
    */
   @Override public void onCollisionSizeDecrement(final int size) {
-    this.sizeDecrementBahaviour.onCollisionSizeDecrement(size);
+    this.sizeDecrementBehaviour.onCollisionSizeDecrement(size);
   }
   
   /**
@@ -316,7 +316,7 @@ public abstract class AbstractSeaObject implements Displayable {
   
   /**
    * Handle collisions.
-   * @param object object with wist the actor has collided.
+   * @param object object with which the actor has collided.
    */
   public void collideWith(final Displayable object) {
     this.collisionBehaviour.collideWith(object);

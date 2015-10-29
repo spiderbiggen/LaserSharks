@@ -19,14 +19,14 @@ import static org.mockito.Mockito.when;
  *
  */
 public class LaserSharkTest extends SeaObjectTest {
-  /**
-   * Container for test object.
-   */
-  private LaserShark laserShark;
   private static final int DEFAULT_SHARK_AMMO = 5;
   private static final int EXPECTED_AFTER_EATING_AMMO = 5;
   private static final int DEFAULT_SHARK_SIZE = 30;
   private static final int EXPECTED_AFTER_EATING_SHARK_SIZE = 34;
+  /**
+   * Container for test object.
+   */
+  private LaserShark laserShark;
 
   /**
    * Set up which is used before the tests.
@@ -96,7 +96,7 @@ public class LaserSharkTest extends SeaObjectTest {
     //when(mockedFish.getSize()).thenReturn(SIZE);
     when(mockedFish.isAlive()).thenReturn(true);
     when(mockedFish.onCollisionSizeIncrement())
-        .thenReturn(SIZE / FishGetSizeIncrementBehaviour.ENERGY_DISSERPATION_RATE);
+        .thenReturn(SIZE / FishGetSizeIncrementBehaviour.ENERGY_DISSIPATION_RATE);
 
     assertEquals(DEFAULT_SHARK_SIZE, laserShark.getSize(), 0);
     laserShark.collideWith(mockedFish);

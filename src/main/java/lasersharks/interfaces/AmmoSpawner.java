@@ -8,7 +8,9 @@ import lasersharks.seaobjects.Ammo;
 import java.util.Random;
 
 /**
- * Interface for an ammo factory.
+ * Interface for an ammo spawner.
+ *
+ * @author SEMGroup27
  *
  * @author SEMGroup27
  */
@@ -29,10 +31,4 @@ public interface AmmoSpawner {
    */
   Ammo generateAmmo();
 
-  /**
-   * Set the seed for this spawner.
-   *
-   * @param newRng new seed
-   */
-  void setAmmoRng(Random newRng);
 }

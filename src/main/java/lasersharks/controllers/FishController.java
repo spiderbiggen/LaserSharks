@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-
 /**
  * Class for controlling fish data.
  * 
@@ -29,35 +28,30 @@ import java.util.stream.Collectors;
 @SuppressWarnings("restriction")
 public class FishController {
   /**
-   * Holder for fish data.
-   */
-  private final List<Displayable> displayableList;
-  private LaserShark shark;
-
-  private final FishSpawner enemySpawner;
-  private final AmmoSpawner ammoSpawner;
-  private final LaserSpawner laserSpawner;
-
-  /**
    * Holder for shark data.
    */
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 450;
   private static final Direction START_DIRECTION = Direction.None;
-
   /**
    * Spawn-chance for new fishes.
    */
   private static final float FISH_SPAWN_CHANCE_BASE = 1.0f;
-  private final float fishSpawnChance;
-
   /**
    * Numbers for keeping the spawn rate of ammo in check.
    */
 
   private static final int ONE_HUNDRED = 100;
   private static final int AMMO_SPAWN_LIMITER = 90;
-
+  /**
+   * Holder for fish data.
+   */
+  private final List<Displayable> displayableList;
+  private final FishSpawner enemySpawner;
+  private final AmmoSpawner ammoSpawner;
+  private final LaserSpawner laserSpawner;
+  private final float fishSpawnChance;
+  private LaserShark shark;
   /**
    * Random Number Generator holder.
    */
@@ -109,22 +103,22 @@ public class FishController {
   }
 
   /**
-   * Sets the shark object.
-   * 
-   * @param shark
-   *          the new shark;
-   */
-  public void setShark(final LaserShark shark) {
-    this.shark = shark;
-  }
-
-  /**
    * Method to get the laserShark.
    *
    * @return the laserShark
    */
   public LaserShark getShark() {
     return this.shark;
+  }
+
+  /**
+   * Sets the shark object.
+   *
+   * @param shark
+   *          the new shark;
+   */
+  public void setShark(final LaserShark shark) {
+    this.shark = shark;
   }
 
   /**
@@ -175,7 +169,6 @@ public class FishController {
               f.getSpeed(), f.getSize(), f.getDirection(), f.getPosition()));
     }
     return this.getNewFishPositions(frameTime);
-
   }
 
   /**

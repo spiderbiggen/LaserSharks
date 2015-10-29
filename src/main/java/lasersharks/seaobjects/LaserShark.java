@@ -20,7 +20,6 @@ public class LaserShark extends AbstractSeaObject implements DirectionCallback {
   private static final float WIDTH_SCALE = 1.628664f;
   private static final int STARTING_AMMO = 5;
   private static final int MAX_AMMO = 5;
-
   private int ammo;
   private Direction lastHorizontalDirection;
 
@@ -126,7 +125,7 @@ public class LaserShark extends AbstractSeaObject implements DirectionCallback {
 
   /**
    * Lasersharks are collisionActors.
-   * @return true.
+   * @return true
    */
   public boolean collisionActor() {
     return true;

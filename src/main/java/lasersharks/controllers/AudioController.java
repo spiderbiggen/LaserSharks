@@ -18,7 +18,7 @@ public final class AudioController {
   private MediaPlayer musicPlayer;
 
   /**
-   * The constructor to create a new INSTANCE of audioController.
+   * The constructor to create a new instance of audio controller.
    */
   private AudioController() {
 
@@ -72,7 +72,7 @@ public final class AudioController {
    * @param path the path of the sound file that should be played.
    * @return true iff a sound effect has started Playing
    */
-  private boolean playSoundEffect(final String path) {
+  public boolean playSoundEffect(final String path) {
     if (Options.getInstance().isMutedSfx()) {
       return false;
     }
@@ -185,8 +185,8 @@ public final class AudioController {
   /**
    * Adjusts the master volume in the {@link Options} Class.
    *
-   * @param newVolume the new volume, anything above 1 will be changed to 1 and everything below
-   *                  0 will be 0
+   * @param newVolume
+   *          new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
   public void adjustMasterVolume(final double newVolume) {
     final double volume = Math.min(Math.max(newVolume, 0), 1.0);
@@ -200,8 +200,8 @@ public final class AudioController {
   /**
    * Adjusts the music volume of the musicPlayer and in the {@link Options} Class.
    *
-   * @param newVolume the new volume, anything above 1 will be changed to 1 and everything below
-   *                  0 will be 0
+   * @param newVolume
+   *          new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
   public void adjustMusicVolume(final double newVolume) {
     final double volume = Math.min(Math.max(newVolume, 0), 1.0);
@@ -215,12 +215,11 @@ public final class AudioController {
   /**
    * Adjusts the sound effects volume in the {@link Options} Class.
    *
-   * @param newVolume the new volume, anything above 1 will be changed to 1 and everything below
-   *                  0 will be 0
+   * @param newVolume
+   *          new volume, anything above 1 will be changed to 1 and everything below 0 will be 0
    */
   public void adjustSfxVolume(final double newVolume) {
     final double volume = Math.min(Math.max(newVolume, 0), 1.0);
     Options.getInstance().setSfxVolume(volume);
   }
-
 }

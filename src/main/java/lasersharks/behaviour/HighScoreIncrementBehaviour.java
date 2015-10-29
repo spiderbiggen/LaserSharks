@@ -1,16 +1,14 @@
 package lasersharks.behaviour;
 
 /**
- * Interface wich let displaybe object increase the playerhighscore on collision.
- *
- * @author Youri
+ * Interface which let a Displayable object increase the player high score on collision.
+ * @author SEMGroup27
  */
 public interface HighScoreIncrementBehaviour {
 
   /**
-   * Call method wich returns the increment value.
-   *
-   * @param timePenalty pennalty from timelimit.
+   * Call method which returns the increment value.
+   * @param timePenalty penalty from time limit.
    * @return timeIncrement.
    */
   int onCollisionHighScoreIncrement(int timePenalty);

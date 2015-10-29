@@ -1,7 +1,6 @@
 package lasersharks.behaviour;
 
 import javafx.scene.shape.Rectangle;
-import lasersharks.Position;
 import lasersharks.interfaces.Displayable;
 
 /**

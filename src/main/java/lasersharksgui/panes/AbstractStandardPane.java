@@ -66,16 +66,19 @@ public abstract class AbstractStandardPane extends Pane
    *
    * @param score a string containing the score of the player.
    */
-  public void showScore(final String score) {
+  public void showScore(String score) {
     addText("Score: " + score, TEXT_SCALE_SIZE_SMALL, Position.upperCornerPosition());
   }
 
   /**
-   * This function adds a textbox directly on the screen.
+   * This function adds a text box directly on the screen.
    *
-   * @param message  The message that should be shown.
-   * @param textSize The size of the message.
-   * @param position the position of the message on the screen.
+   * @param message
+   *          The message that should be shown.
+   * @param textSize
+   *          The size of the message.
+   * @param position
+   *          the position of the message on the screen.
    */
   public void addText(final String message, final int textSize, final Position position) {
     final Text gameText = new Text(message);
@@ -87,7 +90,7 @@ public abstract class AbstractStandardPane extends Pane
   }
 
   /**
-   * This function adds a textbox directly on the screen. The X position here is automatically set
+   * This function adds a text box directly on the screen. The X position here is automatically set
    * to the middle.
    *
    * @param message  The message that should be shown.

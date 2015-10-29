@@ -5,7 +5,7 @@ import lasersharks.Direction;
 import lasersharks.Position;
 
 /**
- * Interface for swimmer class.
+ * Interface for Displayable class.
  *
  * @author SEMGroup27
  */
@@ -39,7 +39,9 @@ public interface Displayable {
   /**
    * The current Displayable will move, this will return false if it moves out of the view.
    *
-   * @param frameTime the time between frames in seconds
+   * @param frameTime
+   *          the time between frames in seconds
+   *
    * @return true if Displayable is in view
    */
   boolean move(double frameTime);
@@ -48,7 +50,8 @@ public interface Displayable {
    * We calculate the distance between the Displayable. The sum of the size of both Displayable is
    * our hit box. Hit box is now a circle, with size the radius in pixels.
    *
-   * @param swimmer we want to check if the Displayable collides with this Displayable,
+   * @param swimmer
+   *          we want to check if the Displayable collides with this Displayable,
    * @return true if the Displayables collide and false if not.
    */
   boolean checkForCollision(Displayable swimmer);
@@ -140,45 +143,38 @@ public interface Displayable {
 
   /**
    * Notify ~ has been hit by the laser.
-   *
    * @param size size by which object needs to decrement.
    */
   void onCollisionSizeDecrement(int size);
 
   /**
    * Get size by which to decrement on collision.
-   *
-   * @return the amount by which to decrease.
+   * @return size by which object needs to decrement.
    */
   int getOnCollisionSizeDecrement();
 
   /**
    * Increase ammunition of current object.
-   *
-   * @param onCollisionAmmunitionIncrement the amount by which to increase the ammunition.
+   * @param amount the amount by which to increase the ammo
    */
-  void increaseAmmunition(int onCollisionAmmunitionIncrement);
+  void increaseAmmunition(int amount);
 
   /**
    * Notify that the object have collided.
-   *
-   * @param object the object this object collided with.
+   * @param object the object that this object collided with
    */
   void collideWith(Displayable object);
 
   /**
    * See if this is the actor or the receiver in collisions.
-   *
-   * @return true iff this object can initiate a collision
+   * @return true iff this object can start a collision
    */
   boolean collisionActor();
 
   /**
    * Let displayable object increase the player high score on collision.
-   *
    * @param timePenalty penalty from time limit.
    * @return High score increment.
    */
   int getOnCollisionHighScoreIncrement(int timePenalty);
-
 }

@@ -15,8 +15,14 @@ public enum Direction {
   NorthWest(-1, -1),
   None(0, 0);
 
-  private final int deltaX;
-  private final int deltaY;
+  /**
+   * The directional delta in the x-axis.
+   */
+  private int deltaX;
+  /**
+   * The directional delta in the y-axis.
+   */
+  private int deltaY;
 
   /**
    * Constructor for Direction.

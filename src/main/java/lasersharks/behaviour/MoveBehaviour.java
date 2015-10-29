@@ -10,10 +10,10 @@ public interface MoveBehaviour {
 
   /**
    * Moves the fish.
-   * 
-   * @param frametime
+   *
+   * @param frameTime
    *          the refresh rate of the screen.
    * @return true if the fish was able to move.
    */
-  boolean move(double frametime);
+  boolean move(double frameTime);
 }

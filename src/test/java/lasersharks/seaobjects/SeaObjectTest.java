@@ -20,14 +20,14 @@ import static org.mockito.Mockito.when;
  */
 public abstract class SeaObjectTest {
 
-  protected AbstractSeaObject fish1;
-  protected final Position posOnScreen = new Position(50, 50);
-  protected final Position posOffScreen = new Position(-1, -1);
   protected static final float SIZE = 30;
   protected static final float SPEED = 40;
   protected static final Direction DIRECTION = Direction.East;
-
   private static final double DELTA = 0.0001;
+  protected final Position posOnScreen = new Position(50, 50);
+  protected final Position posOffScreen = new Position(-1, -1);
+  protected AbstractSeaObject fish1;
+
   /**
    * Tear down after the test.
    */

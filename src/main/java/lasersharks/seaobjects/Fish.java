@@ -21,7 +21,7 @@ public class Fish extends AbstractSeaObject {
   private final double widthScale;
 
   /**
-   * propagation for construction.
+   * Propagation for construction.
    * 
    * @param image
    *          Image of the enemy.
@@ -44,8 +44,8 @@ public class Fish extends AbstractSeaObject {
     this.widthScale = widthScale;
     checkForLossBehaviour = new FishCheckForLossBehaviour(this);
     eatenBehaviour = new FishEatenBehaviour(this);
-    getSizeIncrementBahaviour = new FishGetSizeIncrementBehaviour(this);
-    sizeDecrementBahaviour = new FishSizeDecrementBehaviour(this);
+    getSizeIncrementBehaviour = new FishGetSizeIncrementBehaviour(this);
+    sizeDecrementBehaviour = new FishSizeDecrementBehaviour(this);
     collisionBehaviour = new FishCollisionBehaviour(this);
     highScoreIncrementBehaviour = new FishHighScoreIncrementBehaviour(this);
   }
@@ -71,8 +71,8 @@ public class Fish extends AbstractSeaObject {
   }
 
   /**
-   * Fishes are collisionActors
-   * @return this actor is a collison actor.
+   * Fishes are collisionActors.
+   * @return true
    */
   @Override
   public boolean collisionActor() {

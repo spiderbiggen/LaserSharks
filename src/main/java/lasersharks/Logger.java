@@ -16,10 +16,25 @@ import java.util.Date;
  */
 public class Logger {
 
+  /**
+   * The relative URI to the log directory.
+   */
   private static final String LOG_DIRECTORY = "logs/";
+  /**
+   * The singleton instance of this class.
+   */
   private static Logger instance;
+  /**
+   * The main fileWriter used to write to the log file.
+   */
   private final FileWriter fileWriter;
+  /**
+   * The printWriter used by this logger.
+   */
   private final PrintWriter printWriter;
+  /**
+   * DateFormat to get the time into the log.
+   */
   private final DateFormat dateFormat;
 
   /**
@@ -32,7 +47,7 @@ public class Logger {
     this.fileWriter = fileWriter;
     this.printWriter = new PrintWriter(new BufferedWriter(this.fileWriter));
     this.dateFormat = new SimpleDateFormat("HH:mm:ss");
-    Logger.instance = this;
+    Logger.setInstance(this);
     this.printWriter.println("__________________ LAUNCHED ________________");
   }
 
@@ -100,12 +115,14 @@ public class Logger {
   /**
    * Write event to log.
    *
-   * @param event     the event that happend.
-   * @param specifics the specifics about the event.
+   * @param event
+   *          the event that happened.
+   * @param specifics
+   *          the specifics about the event.
    */
-  public void write(final String event, final String specifics) {
+  public void write(String event, String specifics) {
     this.printWriter
-        .println(dateFormat.format(new Date()) + " : " + event + " : " + specifics + "\n");
+        .println(String.format("%s : %s : %s\n", dateFormat.format(new Date()), event, specifics));
     this.printWriter.flush();
   }
 }

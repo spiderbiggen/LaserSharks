@@ -25,11 +25,14 @@ public class UpdatePositionTest {
   private Position position;
 
   /**
-   * Constructor for parameterized Test.
+   * Constructor for parametrized Test.
    *
-   * @param direction DIRECTION to update to
-   * @param expectedX expected X result from running the method
-   * @param expectedY expected Y from running the method
+   * @param direction
+   *          direction to update to
+   * @param expectedX
+   *          expected X result from running the method
+   * @param expectedY
+   *          expected Y from running the method
    */
   public UpdatePositionTest(final Direction direction, final int expectedX, final int expectedY) {
     this.direction = direction;
@@ -37,8 +40,7 @@ public class UpdatePositionTest {
   }
 
   /**
-   * Parameterized test for {@link lasersharks.Position#updatePosition(Direction, double, double)
-   * }  }.
+   * Parametrized test for {@link lasersharks.Position#updatePosition(Direction, double, double)}.
    *
    * @return list of parameters
    */

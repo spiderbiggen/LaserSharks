@@ -15,22 +15,26 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Parameterized test for the {@link Position#onScreen(double)} method.
+ * Parametrized test for the {@link Position#onScreen(double)} method.
  *
  * @author SEMGroup27
  */
 @RunWith(Parameterized.class)
 public class OnScreenTest {
 
+  private static final int SIZE = 100;
   private final Position position;
   private final boolean expectedBool;
 
   /**
-   * Constructor for parameterized Test.
+   * Constructor for parametrized Test.
    *
-   * @param posX         position x coordinate
-   * @param posY         position y coordinate
-   * @param expectedBool expected return value from running the method
+   * @param posX
+   *          position x coordinate
+   * @param posY
+   *          position y coordinate
+   * @param expectedBool
+   *          expected return value from running the method
    */
   public OnScreenTest(final double posX, final double posY, final boolean expectedBool) {
     this.position = new Position(posX, posY);
@@ -38,14 +42,14 @@ public class OnScreenTest {
   }
 
   /**
-   * Parameterized test for {@link lasersharks.Position#updatePosition(Direction, double, double)}.
+   * Parametrized test for {@link lasersharks.Position#updatePosition(Direction, double, double)}.
    *
    * @return list of parameters
    */
   @Parameters
   public static Collection<Object[]> data() {
-    Options.setGlobalHeight(100);
-    Options.setGlobalWidth(100);
+    Options.setGlobalHeight(SIZE);
+    Options.setGlobalWidth(SIZE);
 
     return Arrays.asList(new Object[][] {
         { 0, 0, true },
@@ -79,8 +83,8 @@ public class OnScreenTest {
    */
   @Test
   public void testOnScreen() {
-    Options.setGlobalHeight(100);
-    Options.setGlobalWidth(100);
+    Options.setGlobalHeight(SIZE);
+    Options.setGlobalWidth(SIZE);
     assertEquals(expectedBool, position.onScreen(0));
   }
 

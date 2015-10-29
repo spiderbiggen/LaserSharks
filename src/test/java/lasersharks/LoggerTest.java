@@ -13,8 +13,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
 
+
 /**
- * Test for logger classe.
+ * Test for logger class.
  * 
  * @author SEMGroup27
  *
@@ -24,7 +25,7 @@ public class LoggerTest {
   private static final int TIMESTAMP_CHARS = 8;
 
   /**
-   * Clear current logger so that getInstance can actualy thourowly be tested.
+   * Clear current logger so that getInstance can actually thoroughly be tested.
    */
   @After
   public void tearDown() {
@@ -61,11 +62,9 @@ public class LoggerTest {
 
   /**
    * Make sure file being written to is handled correctly.
-   * 
-   * @throws IOException
    */
   @Test
-  public void testFileHandling() throws IOException {
+  public void testFileHandling() {
     final FileWriter f = mock(FileWriter.class);
     Logger.getInstance(f);
     assertEquals(f, Logger.getInstance().getFileWriter());
@@ -73,8 +72,8 @@ public class LoggerTest {
 
   /**
    * Test for writing to clean file.
-   * 
-   * @throws IOException
+   *
+   * @throws IOException IOException while interacting with the filesystem.
    */
   @Test
   public void cleanWriteTest() throws IOException {
