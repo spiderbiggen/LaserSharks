@@ -3,7 +3,7 @@ package lasersharks.behaviour.sizeincrement;
 import lasersharks.Logger;
 import lasersharks.behaviour.GetSizeIncrementBehaviour;
 import lasersharks.controllers.AudioController;
-import lasersharks.seaobjects.SeaObject;
+import lasersharks.seaobjects.AbstractSeaObject;
 
 /**
  * GetSizeIncrement behaviour for fish.
@@ -11,15 +11,14 @@ import lasersharks.seaobjects.SeaObject;
  *
  */
 public class FishGetSizeIncrementBehaviour implements GetSizeIncrementBehaviour {
-  private SeaObject element;
-
   public static final float ENERGY_DISSIPATION_RATE = 7.5f;
+  private final AbstractSeaObject element;
   
   /**
    * Constructor.
    * @param ele element to which to propagate actions.
    */
-  public FishGetSizeIncrementBehaviour(SeaObject ele) {
+  public FishGetSizeIncrementBehaviour(final AbstractSeaObject ele) {
     this.element = ele;
   }
 

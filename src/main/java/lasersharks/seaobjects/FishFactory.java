@@ -4,7 +4,9 @@ import lasersharks.Direction;
 import lasersharks.Options;
 import lasersharks.Position;
 import lasersharks.interfaces.FishSpawner;
+
 import java.util.Random;
+
 
 /**
  * Default FishFactory implementation.
@@ -27,23 +29,20 @@ public class FishFactory implements FishSpawner {
    */
   private static final int SIZE_MODIFIER = 300;
   private static final int BASE_SIZE = 70;
-
-  /**
-   * This value is used as the seed for the fish.
-   */
-  private Random enemyRng;
-
   /**
    * The string url to the image.
    */
-  private final String[] fishResources = { "enemy-1.png", "enemy-2.png", "enemy-4.png",
+  private static final String[] FISH_RESOURCES = { "enemy-1.png", "enemy-2.png", "enemy-4.png",
       "enemy-5.png", "enemy-6.png", "enemy-7.png", "enemy-8.png", "enemy-10.png", "enemy-12.png" };
-
   /**
    * Store the image sizes as {width, height} pairs.
    */
-  private final Integer[][] fishSizes = { { 180, 300 }, { 286, 300 }, { 345, 300 }, { 405, 300 },
-      { 130, 300 }, { 219, 300 }, { 272, 300 }, { 216, 300 }, { 170, 300 } };
+  private static final double[] FISH_SIZES = { 1.666667, 1.048951, 0.869565, 0.740740, 2.307692,
+      1.369863, 1.102941, 1.388880, 1.764706 };
+  /**
+   * this value is used as the seed for the fish.
+   */
+  private final Random enemyRng;
 
   /**
    * Initialize the enemy spawner.
@@ -52,12 +51,11 @@ public class FishFactory implements FishSpawner {
     this.enemyRng = Options.getInstance().getFactoryRng();
   }
 
-  @Override
-  public Fish generateFish(Random rng) {
+  @Override public Fish generateFish(final Random rng) {
     double posX;
     Direction dir;
 
-    float size = rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE;
+    final float size = rng.nextFloat() * SIZE_MODIFIER + BASE_SIZE;
 
     if (rng.nextBoolean()) {
       // starts on the right side
@@ -69,9 +67,8 @@ public class FishFactory implements FishSpawner {
       dir = Direction.East;
     }
 
-    int enemyImageIndex = rng.nextInt(fishResources.length);
-    return new Fish(fishResources[enemyImageIndex], fishSizes[enemyImageIndex][1],
-        fishSizes[enemyImageIndex][0],
+    final int enemyImageIndex = rng.nextInt(FISH_RESOURCES.length);
+    return new Fish(FISH_RESOURCES[enemyImageIndex], FISH_SIZES[enemyImageIndex],
         new Position(posX, (int) ((Position.getHeightPanel() - size) * rng.nextFloat())), size,
         (double) Math.round(rng.nextFloat() * SPEED_MODIFIER + BASE_SPEED), dir);
   }
@@ -79,10 +76,5 @@ public class FishFactory implements FishSpawner {
   @Override
   public Fish generateFish() {
     return generateFish(this.enemyRng);
-  }
-
-  @Override
-  public void setFishRng(Random newRng) {
-    this.enemyRng = newRng;
   }
 }

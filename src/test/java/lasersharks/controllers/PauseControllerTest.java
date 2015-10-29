@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 
 /**
  * Test class for {@link PauseController}.
- * 
+ *
  * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
@@ -56,7 +56,7 @@ public class PauseControllerTest {
    * Test for pressedP key event.
    */
   // @Test
-  public void testPressedP() {
+  public void pressedPTest() {
     pauseController.handle(pPressed);
     Mockito.verify(gui).browseTo(OptionsPane.class);
   }
@@ -65,7 +65,7 @@ public class PauseControllerTest {
    * Test for pressedR key event.
    */
   @Test
-  public void testPressedR() {
+  public void pressedRTest() {
     pauseController.handle(rPressed);
     Mockito.verifyZeroInteractions(gui);
   }
@@ -74,7 +74,7 @@ public class PauseControllerTest {
    * Test for releaseP key event.
    */
   @Test
-  public void testReleasedP() {
+  public void releasedPTest() {
     pauseController.handle(pReleased);
     Mockito.verifyZeroInteractions(gui);
   }
@@ -83,7 +83,7 @@ public class PauseControllerTest {
    * Tests if the game could go back to the original gamePane.
    */
   // @Test
-  public void testPressedPTwice() {
+  public void pressedPTwiceTest() {
     pauseController.handle(pPressed);
     pauseController.handle(pPressed);
     // Mockito.verify(gui).addOverlay();

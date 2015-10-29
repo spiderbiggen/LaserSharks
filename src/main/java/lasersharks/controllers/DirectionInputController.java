@@ -7,14 +7,13 @@ import lasersharks.interfaces.DirectionCallback;
 
 /**
  * Controller for handling the inputs to move the shark.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
 public class DirectionInputController implements EventHandler<KeyEvent> {
 
-  private DirectionCallback callback;
+  private final DirectionCallback callback;
   private boolean pressedUp;
   private boolean pressedDown;
   private boolean pressedLeft;
@@ -22,46 +21,45 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
 
   /**
    * Constructor.
-   * 
-   * @param fishCon
-   *          callback
+   *
+   * @param fishCon callback
    */
-  public DirectionInputController(DirectionCallback fishCon) {
+  public DirectionInputController(final DirectionCallback fishCon) {
     this.callback = fishCon;
   }
 
   /**
    * Will handle the actuation of key presses.
-   * 
+   *
    * @param event
    *          the event in which a key is actuated
    * @return true if and only if the key is properly handled
    */
-  private boolean keyPressed(KeyEvent event) {
+  private boolean keyPressed(final KeyEvent event) {
     return keySwitch(event, true);
   }
 
   /**
    * Will handle the release of key presses.
-   * 
+   *
    * @param event
    *          the event in which a key is released
    * @return true if and only if the key is properly handled
    */
-  private boolean keyReleased(KeyEvent event) {
+  private boolean keyReleased(final KeyEvent event) {
     return keySwitch(event, false);
   }
 
   /**
    * Will handle a key event.
-   * 
+   *
    * @param event
    *          the event in which a key is released
    * @param pressed
    *          boolean for key pressed and key released
    * @return handled
    */
-  private boolean keySwitch(KeyEvent event, boolean pressed) {
+  private boolean keySwitch(final KeyEvent event, final boolean pressed) {
     boolean handled = false;
     switch (event.getCode()) {
       case UP:
@@ -122,7 +120,7 @@ public class DirectionInputController implements EventHandler<KeyEvent> {
   }
 
   @Override
-  public void handle(KeyEvent event) {
+  public void handle(final KeyEvent event) {
     boolean handled = false;
     if (event.getEventType() == KeyEvent.KEY_PRESSED) {
       handled = keyPressed(event);

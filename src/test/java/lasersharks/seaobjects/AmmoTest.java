@@ -1,30 +1,26 @@
 package lasersharks.seaobjects;
 
-import static org.junit.Assert.assertEquals;
-
+import lasersharks.Position;
 import org.junit.Before;
 import org.junit.Test;
 
-import lasersharks.Position;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author SEMGroup27
- *
  */
 public class AmmoTest {
 
-  private Position pos;
+  private static final float SIZE = 40;
   private Ammo ammo;
-
-  private final float size = 40;
 
   /**
    * Sets up the instances required for the tests.
    */
   @Before
   public void setUp() {
-    pos = new Position(0, 0);
-    ammo = new Ammo(pos, size);
+    Position pos = new Position(0, 0);
+    ammo = new Ammo(pos, SIZE);
   }
 
   /**
@@ -44,15 +40,6 @@ public class AmmoTest {
     final int imgWidth = 300;
     final double e = 0.001;
     assertEquals((double) imgWidth / (double) imgHeight, ammo.getWidthScale(), e);
-  }
-
-  /**
-   * Test method for {@link lasersharks.seaobjects.Ammo#getPickupAmount()}.
-   */
-  @Test
-  public void testGetAmount() {
-    final int amount = 6;
-    assertEquals(amount, ammo.getPickupAmount());
   }
 
 }

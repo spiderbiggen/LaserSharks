@@ -1,7 +1,9 @@
 package lasersharks;
 
 import javafx.scene.paint.Color;
+
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.util.Random;
 
@@ -15,10 +17,6 @@ import java.util.Random;
 @SuppressWarnings("restriction")
 public class Options {
 
-  /**
-   * The dimension of the screen.
-   */
-  private Dimension dimension;
   /**
    * The default Width of the screen.
    */
@@ -51,7 +49,14 @@ public class Options {
    * The default background colour.
    */
   private static final Color DEFAULT_BACKGROUND_COLOUR = Color.BLUE;
-
+  /**
+   * The current Singleton instance.
+   */
+  private static Options instance;
+  /**
+   * The dimension of the screen.
+   */
+  private Dimension dimension;
   /**
    * The current music URI.
    */
@@ -95,18 +100,11 @@ public class Options {
   /**
    * The current Background image URI.
    */
-  private String backGround;
+  private String background;
   /**
    * The random number generator to be used by factories.
    */
   private Random factoryRng;
-
-  /**
-   * The current Singleton instance.
-   */
-  private static Options instance;
-
-
 
   /**
    * constructor of the options class. Creates an Options object.
@@ -114,12 +112,12 @@ public class Options {
    * @param screenRes
    *          the resolution this Options object should use.
    */
-  public Options(Dimension screenRes) {
+  public Options(final Dimension screenRes) {
     setInstance(this);
     this.dimension = screenRes;
     factoryRng = new Random();
 
-    backGround = DEFAULT_BACKGROUND_IMAGE;
+    background = DEFAULT_BACKGROUND_IMAGE;
     musicFileName = DEFAULT_MUSIC_FILENAME;
     eatSoundFileName = DEFAULT_EAT_SOUND_FILENAME;
     laserSoundFileName = DEFAULT_LASER_SOUND_FILENAME;
@@ -147,6 +145,15 @@ public class Options {
   }
 
   /**
+   * sets the current options instance to a certain options object.
+   *
+   * @param options the options object to set.
+   */
+  public static void setInstance(final Options options) {
+    instance = options;
+  }
+
+  /**
    * Destroy current options.
    */
   public static void destroyInstance() {
@@ -154,7 +161,87 @@ public class Options {
   }
 
   /**
-   * @return the hashcode of the dimension.
+   * gets the current screen size that is being used.
+   *
+   * @return the screen resolution of the systems screen.
+   */
+  private static Dimension getScreenSize() {
+    try {
+      return Toolkit.getDefaultToolkit()
+          .getScreenSize();
+    } catch (HeadlessException e) {
+      return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    }
+  }
+
+  /**
+   * Gets the height of the screen now used.
+   *
+   * @return the height of the screen.
+   */
+  public static double getGlobalHeight() {
+    return getInstance().getDimension()
+        .getHeight();
+  }
+
+  /**
+   * sets the height of the screen.
+   *
+   * @param height
+   *          the height to set.
+   */
+  public static void setGlobalHeight(final double height) {
+    final double oldWidth = getInstance().getDimension()
+        .getWidth();
+    getInstance().getDimension()
+        .setSize(oldWidth, height);
+  }
+
+  /**
+   * Gets the Width of the screen now used.
+   *
+   * @return the width of the screen.
+   */
+  public static double getGlobalWidth() {
+    return getInstance().getDimension()
+        .getWidth();
+  }
+
+  /**
+   * sets the width of the screen.
+   *
+   * @param width
+   *          the height to set.
+   */
+  public static void setGlobalWidth(final double width) {
+    final double oldHeight = getInstance().getDimension()
+        .getHeight();
+    getInstance().getDimension()
+        .setSize(width, oldHeight);
+  }
+
+  /**
+   * Get the backgroundColor.
+   *
+   * @return the default background color
+   */
+  public static Color getBackgroundColor() {
+    return DEFAULT_BACKGROUND_COLOUR;
+  }
+
+  /**
+   * Get the backGroundColor.
+   *
+   * @return the default background color
+   */
+  public static Color getBackGroundColor() {
+    return DEFAULT_BACKGROUND_COLOUR;
+  }
+
+  /*
+   * (non-Javadoc)
+   *
+   * @see java.lang.Object#hashCode()
    */
   @Override
   public int hashCode() {
@@ -163,16 +250,17 @@ public class Options {
 
   /**
    * Checks if two options objects are equal.
-   * 
+   *
    * @param object
    *          the object to compare to.
    * @return true if they are equal.
    */
   @Override
-  public boolean equals(Object object) {
+  public boolean equals(final Object object) {
     if (object instanceof Options) {
-      Options other = (Options) object;
-      if (other.getDimension().equals(dimension)) {
+      final Options other = (Options) object;
+      if (other.getDimension()
+          .equals(dimension)) {
         return true;
       }
     }
@@ -180,31 +268,8 @@ public class Options {
   }
 
   /**
-   * sets the current options instance to a certain options object.
-   * 
-   * @param options
-   *          the options object to set.
-   */
-  public static void setInstance(Options options) {
-    instance = options;
-  }
-
-  /**
-   * gets the current screen size that is being used.
-   * 
-   * @return the screen resolution of the systems screen.
-   */
-  protected static Dimension getScreenSize() {
-    try {
-      return Toolkit.getDefaultToolkit().getScreenSize();
-    } catch (Exception e) {
-      return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-    }
-  }
-
-  /**
    * gets the resolution in the form of a Dimension object of this options object.
-   * 
+   *
    * @return the resolution of this options object.
    */
   public Dimension getDimension() {
@@ -212,48 +277,8 @@ public class Options {
   }
 
   /**
-   * Gets the height of the screen now used.
-   * 
-   * @return the height of the screen.
-   */
-  public static double getGlobalHeight() {
-    return getInstance().getDimension().getHeight();
-  }
-
-  /**
-   * Gets the Width of the screen now used.
-   * 
-   * @return the width of the screen.
-   */
-  public static double getGlobalWidth() {
-    return getInstance().getDimension().getWidth();
-  }
-
-  /**
-   * sets the height of the screen.
-   * 
-   * @param height
-   *          the height to set.
-   */
-  public static void setGlobalHeight(double height) {
-    double oldWidth = getInstance().getDimension().getWidth();
-    getInstance().getDimension().setSize(oldWidth, height);
-  }
-
-  /**
-   * sets the width of the screen.
-   * 
-   * @param width
-   *          the height to set.
-   */
-  public static void setGlobalWidth(double width) {
-    double oldHeight = getInstance().getDimension().getHeight();
-    getInstance().getDimension().setSize(width, oldHeight);
-  }
-
-  /**
    * Get the musicFileName.
-   * 
+   *
    * @return the musicFileName.
    */
   public String getMusicFileName() {
@@ -282,14 +307,6 @@ public class Options {
   }
 
   /**
-   * @param pickupSoundFileName
-   *          the pickupSoundFileName to set
-   */
-  public void setPickupSoundFileName(String pickupSoundFileName) {
-    this.pickupSoundFileName = pickupSoundFileName;
-  }
-
-  /**
    * @return playMusic
    */
   public boolean isPlayingMusic() {
@@ -300,7 +317,7 @@ public class Options {
    * @param playMusic
    *          the playMusic to set
    */
-  public void setPlayingMusic(boolean playMusic) {
+  public void setPlayingMusic(final boolean playMusic) {
     this.playingMusic = playMusic;
   }
 
@@ -313,11 +330,11 @@ public class Options {
 
   /**
    * Set if the music should be muted.
-   * 
+   *
    * @param muteMusic
    *          true if music should be muted.
    */
-  public void setMutedMusic(boolean muteMusic) {
+  public void setMutedMusic(final boolean muteMusic) {
     this.mutedMusic = muteMusic;
   }
 
@@ -330,11 +347,11 @@ public class Options {
 
   /**
    * Set if the sfx should be muted.
-   * 
+   *
    * @param muteSfx
    *          true if music should be muted.
    */
-  public void setMutedSfx(boolean muteSfx) {
+  public void setMutedSfx(final boolean muteSfx) {
     this.mutedSfx = muteSfx;
   }
 
@@ -349,7 +366,7 @@ public class Options {
    * @param masterVolume
    *          the masterVolume to set
    */
-  public void setMasterVolume(double masterVolume) {
+  public void setMasterVolume(final double masterVolume) {
     this.masterVolume = masterVolume;
   }
 
@@ -364,7 +381,7 @@ public class Options {
    * @param newVolume
    *          the musicVolume to set
    */
-  public void setMusicVolume(double newVolume) {
+  public void setMusicVolume(final double newVolume) {
     this.musicVolume = newVolume;
   }
 
@@ -379,26 +396,17 @@ public class Options {
    * @param sfxVolume
    *          the sfxVolume to set
    */
-  public void setSfxVolume(double sfxVolume) {
+  public void setSfxVolume(final double sfxVolume) {
     this.sfxVolume = sfxVolume;
   }
 
   /**
    * Get the backGroundImage.
-   * 
+   *
    * @return the backGroundImage.
    */
-  public String getBackGroundImage() {
-    return backGround;
-  }
-
-  /**
-   * Get the backGroundColor.
-   *
-   * @return the default background color
-   */
-  public static Color getBackGroundColor() {
-    return DEFAULT_BACKGROUND_COLOUR;
+  public String getBackground() {
+    return background;
   }
 
   /**
@@ -410,13 +418,4 @@ public class Options {
     return factoryRng;
   }
 
-  /**
-   * set the random number generator for factory.
-   * 
-   * @param rng
-   *          random number generator.
-   */
-  public void setFactoryRng(Random rng) {
-    this.factoryRng = rng;
-  }
 }

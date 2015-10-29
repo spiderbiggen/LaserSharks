@@ -1,12 +1,12 @@
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Test for the {@link Position} class.
@@ -127,9 +127,8 @@ public class PositionTest {
    */
   @Test
   public void testEqualsObjectTrue1() {
-    Position testPosition = new Position(0, 0);
-    assertTrue(position.equals(testPosition));
-    assertTrue(position.equals(position));
+    final Position testPosition = new Position(0, 0);
+    assertEquals(position, testPosition);
   }
 
   /**
@@ -137,7 +136,7 @@ public class PositionTest {
    */
   @Test
   public void testEqualsObjectTrue2() {
-    assertTrue(position.equals(position));
+    assertEquals(position, position);
   }
 
   /**
@@ -169,7 +168,7 @@ public class PositionTest {
    */
   @Test
   public void testEqualsObjectFalse4() {
-    assertFalse(position.equals("string"));
+    assertNotEquals(position, "string");
   }
 
   /**
@@ -178,7 +177,7 @@ public class PositionTest {
   @Test
   public void testCalculateDistance() {
     final double doubleDelta = Math.pow(10, 6);
-    Position testPosition = new Position(1, 1);
+    final Position testPosition = new Position(1, 1);
     assertEquals(Math.sqrt(2), position.calculateDistance(testPosition),
         Math.sqrt(2) / doubleDelta);
   }
@@ -189,9 +188,9 @@ public class PositionTest {
   @Test
   public void testHashCode() {
     Position testPosition = new Position(0, 0);
-    assertTrue(position.hashCode() == testPosition.hashCode());
+    assertEquals(testPosition.hashCode(), position.hashCode());
     testPosition = new Position(1, 1);
-    assertTrue(position.hashCode() != testPosition.hashCode());
+    assertNotSame(position.hashCode(), testPosition.hashCode());
   }
 
   /**
@@ -203,7 +202,7 @@ public class PositionTest {
     final int halfScale = 2;
     Position.setHeightPanel(size);
     Position.setWidthPanel(size);
-    Position testPosition = new Position(size / halfScale, size / halfScale);
+    final Position testPosition = new Position(size / halfScale, size / halfScale);
     assertEquals(testPosition, Position.middlePosition());
   }
 }

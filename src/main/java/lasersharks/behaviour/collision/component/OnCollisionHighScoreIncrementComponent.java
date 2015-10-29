@@ -6,22 +6,23 @@ import lasersharks.interfaces.Displayable;
 
 /**
  * Class for highscore increment when colliding.
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class OnCollisionHighScoreIncrementComponent implements CollisionComponent {
-  private CollisionComponent next;
+  private final CollisionComponent next;
 
   /**
    * Constructor.
+   *
    * @param next CollisionComponent
    */
-  public OnCollisionHighScoreIncrementComponent(CollisionComponent next) {
+  public OnCollisionHighScoreIncrementComponent(final CollisionComponent next) {
     this.next = next;
   }
 
   @Override
-  public void handleCollision(Displayable other) {
+  public void handleCollision(final Displayable other) {
     HighScores.getInstance().increaseScore(
         other.getOnCollisionHighScoreIncrement(HighScores.getInstance().getTimePenalty()));
     next.handleCollision(other);

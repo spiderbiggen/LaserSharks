@@ -1,16 +1,16 @@
 package lasersharks;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * A unit test object for the Options class.
@@ -20,22 +20,23 @@ import org.junit.Test;
  */
 public class OptionsTest {
 
+  private static final int X_RESOLUTION = 1100;
+  private static final int Y_RESOLUTION = 1000;
+  private static final int X_RESOLUTION_OTHER = 2200;
+  private static final int Y_RESOLUTION_OTHER = 2000;
+  private static final Dimension DEFAULT_DIMENSION = new Dimension(1920, 1080);
   private Options options;
-  private static final int X_RES = 1100;
-  private static final int Y_RES = 1000;
-  private static final int X_RES_OTHER = 2200;
-  private static final int Y_RES_OTHER = 2000;
+
   private Dimension dim;
   private Dimension dimOther;
-  private static final Dimension DEFAULT_DIM = new Dimension(1920, 1080);
 
   /**
    * Sets up a few objects for testing.
    */
   @Before
   public void setUp() {
-    dim = new Dimension(X_RES, Y_RES);
-    dimOther = new Dimension(X_RES_OTHER, Y_RES_OTHER);
+    dim = new Dimension(X_RESOLUTION, Y_RESOLUTION);
+    dimOther = new Dimension(X_RESOLUTION_OTHER, Y_RESOLUTION_OTHER);
     options = new Options(dim);
   }
 
@@ -64,12 +65,12 @@ public class OptionsTest {
     Options.setInstance(null);
 
     try {
-      // in case of a non-maven test, it should equal the screen size of the monitor.
+      // in case of a non-maven test, it should equal the screen SIZE of the monitor.
       assertEquals(Options.getInstance().getDimension(),
           Toolkit.getDefaultToolkit().getScreenSize());
       // in case of a maven test, the dimension has 1920x1080 values.
-    } catch (Exception e) {
-      assertEquals(Options.getInstance().getDimension(), DEFAULT_DIM);
+    } catch (HeadlessException e) {
+      assertEquals(Options.getInstance().getDimension(), DEFAULT_DIMENSION);
     }
   }
 
@@ -78,7 +79,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsFalseNull() {
-    assertFalse(options.equals(null));
+    assertNotEquals(options, null);
   }
 
   /**
@@ -94,7 +95,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsTrueCorrectValues() {
-    assertTrue(options.equals(new Options(dim)));
+    assertEquals(options, new Options(dim));
   }
 
   /**
@@ -102,7 +103,7 @@ public class OptionsTest {
    */
   @Test
   public void testEqualsTrueSame() {
-    assertTrue(options.equals(options));
+    assertEquals(options, options);
   }
 
 }

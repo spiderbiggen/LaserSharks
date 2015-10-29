@@ -12,11 +12,18 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for AmmoFactory.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class AmmoFactoryTest {
+
+  private static final int WIDTH = 1920;
+  private static final int HEIGHT = 1080;
+
+  private static final long SEED = 12345622L;
+
+  private static final double TEST_X_POS = 787.0;
+  private static final double TEST_Y_POS = 214.0;
 
   private AmmoFactory ammoFactory;
 
@@ -25,13 +32,11 @@ public class AmmoFactoryTest {
    */
   @Before
   public void setUp() {
-    int height = 1080;
-    Options.setGlobalHeight(height);
-    int width = 1920;
-    Options.setGlobalWidth(width);
+    Options.setGlobalHeight(HEIGHT);
+    Options.setGlobalWidth(WIDTH);
     ammoFactory = new AmmoFactory();
   }
-  
+
   /**
    * Clean up after the tests have been done.
    */
@@ -45,12 +50,9 @@ public class AmmoFactoryTest {
    */
   @Test
   public void testAmmoCreation() {
-    double testXPos = 787.0;
-    double testYPos = 214.0;
-    Position testPos = new Position(testXPos, testYPos);
-    long seed = 12345622L;
-    Random random = new Random(seed);
-    Ammo ammoCreated = ammoFactory.generateAmmo(random);
+    final Position testPos = new Position(TEST_X_POS, TEST_Y_POS);
+    final Random random = new Random(SEED);
+    final Ammo ammoCreated = ammoFactory.generateAmmo(random);
     assertEquals(testPos, ammoCreated.getPosition());
   }
 

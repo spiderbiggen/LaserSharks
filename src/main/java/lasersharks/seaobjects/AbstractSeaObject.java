@@ -13,10 +13,10 @@ import lasersharks.behaviour.HighScoreIncrementBehaviour;
 import lasersharks.behaviour.LaserCollisionBehaviour;
 import lasersharks.behaviour.MoveBehaviour;
 import lasersharks.behaviour.SizeDecrementBehaviour;
-import lasersharks.behaviour.ammunitionIncrement.DefaultAmmunitionIncrementBehaviour;
+import lasersharks.behaviour.ammunitionincrement.DefaultAmmunitionIncrementBehaviour;
 import lasersharks.behaviour.checkforloss.DefaultCheckForLossBehaviour;
 import lasersharks.behaviour.collision.DefaultCollisionBehaviour;
-import lasersharks.behaviour.collisionHitbox.DefaultCollisionHitboxBehaviour;
+import lasersharks.behaviour.collisionhitbox.DefaultCollisionHitBoxBehaviour;
 import lasersharks.behaviour.eaten.DefaultEatenBehaviour;
 import lasersharks.behaviour.highscoreincrement.DefaultHighScoreIncrementBehaviour;
 import lasersharks.behaviour.lasercollision.DefaultLaserCollisionBehaviour;
@@ -31,13 +31,13 @@ import lasersharks.interfaces.Displayable;
  * @author SEMGroup27
  */
 @SuppressWarnings("restriction")
-
-public abstract class SeaObject implements Displayable {
+public abstract class AbstractSeaObject implements Displayable {
 
   private static final float MIN_SIZE = 30.0f;
+  private final Position position;
+
   protected CollisionHitBoxBehaviour collisionHitBoxBehaviour;
   protected MoveBehaviour moveBehaviour;
-  
   protected AmmunitionIncrementBehaviour ammunitionIncrementBehaviour;
   protected CheckForLossBehaviour checkForLossBehaviour;
   protected EatenBehaviour eatenBehaviour;
@@ -46,8 +46,6 @@ public abstract class SeaObject implements Displayable {
   protected SizeDecrementBehaviour sizeDecrementBehaviour;
   protected CollisionBehaviour collisionBehaviour;
   protected HighScoreIncrementBehaviour highScoreIncrementBehaviour;
-  
-  private Position position;
   private float size;
   private double speed;
   private Direction direction;
@@ -55,7 +53,7 @@ public abstract class SeaObject implements Displayable {
 
   /**
    * <abstract> Method for creating a seaObject.
-   * 
+   *
    * @param position
    *          start position.
    * @param size
@@ -65,14 +63,15 @@ public abstract class SeaObject implements Displayable {
    * @param direction
    *          start direction.
    */
-  public SeaObject(Position position, float size, double startSpeed, Direction direction) {
+  public AbstractSeaObject(final Position position, final float size, final double startSpeed,
+      final Direction direction) {
     this.position = position;
     this.size = size;
     this.speed = startSpeed;
     this.direction = direction;
     this.alive = true;
 
-    this.collisionHitBoxBehaviour = new DefaultCollisionHitboxBehaviour(this);
+    this.collisionHitBoxBehaviour = new DefaultCollisionHitBoxBehaviour(this);
     this.moveBehaviour = new DefaultMoveBehaviour(this);
     
     this.ammunitionIncrementBehaviour = new DefaultAmmunitionIncrementBehaviour();
@@ -95,16 +94,6 @@ public abstract class SeaObject implements Displayable {
   }
 
   /**
-   * Sets the position of the seaObject.
-   * 
-   * @param position
-   *          the position to set to.
-   */
-  public void setPosition(Position position) {
-    this.position = position;
-  }
-
-  /**
    * Returns the Size of this seaObject.
    * 
    * @return the current size
@@ -114,31 +103,31 @@ public abstract class SeaObject implements Displayable {
   }
 
   /**
+   * Method to set the size of the seaObject.
+   *
+   * @param size size
+   */
+  public void setSize(final float size) {
+    this.size = size;
+  }
+
+  /**
    * Method used for growing seaObject.
-   * 
+   *
    * @param size
    *          the delta by which to increase.
    */
-  public void increaseSize(float size) {
+  public void increaseSize(final float size) {
     this.size += size;
   }
 
   /**
    * Method used for shrinking seaObject.
-   * 
+   *
    * @param size decrement size
    */
-  public void decreaseSize(float size) {
+  public void decreaseSize(final float size) {
     this.setSize(Math.max(MIN_SIZE, this.getSize() - size));
-  }
-
-  /**
-   * Method to set the size of the seaObject.
-   * 
-   * @param size size
-   */
-  public void setSize(float size) {
-    this.size = size;
   }
 
   /**
@@ -152,7 +141,7 @@ public abstract class SeaObject implements Displayable {
    * @param speed
    *          the speed to set.
    */
-  public void setSpeed(int speed) {
+  public void setSpeed(final int speed) {
     this.speed = speed;
   }
 
@@ -167,7 +156,7 @@ public abstract class SeaObject implements Displayable {
    * @param direction
    *          the direction to set.
    */
-  public void setDirection(Direction direction) {
+  public void setDirection(final Direction direction) {
     this.direction = direction;
   }
 
@@ -179,7 +168,7 @@ public abstract class SeaObject implements Displayable {
    * 
    * @return true if seaObject is in view
    */
-  public boolean move(double frameTime) {
+  public boolean move(final double frameTime) {
     return moveBehaviour.move(frameTime);
   }
 
@@ -189,20 +178,11 @@ public abstract class SeaObject implements Displayable {
    * Hit box is now a circle, with size the radius in pixels.
    * 
    * @param swimmer
-   *          we want to check if the seaObjectBot collides with this seaObject,
+   *          we want to check if the seaObject collides with this seaObject,
    * @return true if the seaObjects collide and false if not.
    */
-  public boolean checkForCollision(Displayable swimmer) {
+  public boolean checkForCollision(final Displayable swimmer) {
     return collisionHitBoxBehaviour.collide(swimmer);
-  }
-
-  /**
-   * gets the middle of the seaObject.
-   *
-   * @return the middle point of the seaObject.
-   */
-  public Position getMiddlePoint() {
-    return collisionHitBoxBehaviour.getMiddlePoint();
   }
 
   /**
@@ -251,14 +231,14 @@ public abstract class SeaObject implements Displayable {
   public abstract String getImageResource();
 
   /**
-   * return the aspect ratio between the width and the height. height/width
+   * return the aspect ratio between the width and the height. width/height
    * 
    * @return the aspect ratio
    */
   public abstract double getWidthScale();
 
   /**
-   * Draw a rectangle shaped hit box around the seaObjectBot.
+   * Draw a rectangle shaped hit box around the seaObject.
    *
    * @return a rectangle hit box.
    */
@@ -280,8 +260,7 @@ public abstract class SeaObject implements Displayable {
    * Check to see if player has lost the game.
    * @param size shark size.
    */
-  @Override
-  public void onCollisionPlayerLoses(float size) {
+  @Override public void onCollisionPlayerLoses(final float size) {
     this.checkForLossBehaviour.onCollisionPlayerLoses(size);
   }
   
@@ -314,14 +293,13 @@ public abstract class SeaObject implements Displayable {
    * Notify ~ has been hit by the laser.
    * @param size size by which object needs to decrement.
    */
-  @Override
-  public void onCollisionSizeDecrement(int size) {
+  @Override public void onCollisionSizeDecrement(final int size) {
     this.sizeDecrementBehaviour.onCollisionSizeDecrement(size);
   }
   
   /**
    * Get decrement on collision.
-   * @return decrementing size.
+   * @return decremental size.
    */
   public int getOnCollisionSizeDecrement() {
     return 0;
@@ -332,15 +310,15 @@ public abstract class SeaObject implements Displayable {
    * Increment ammunition.
    * @param onCollisionAmmunitionIncrement increment ammunition by given value.
    */
-  public void increaseAmmunition(int onCollisionAmmunitionIncrement) {
-  
+  public void increaseAmmunition(final int onCollisionAmmunitionIncrement) {
+    //Empty
   }
   
   /**
    * Handle collisions.
    * @param object object with which the actor has collided.
    */
-  public void collideWith(Displayable object) {
+  public void collideWith(final Displayable object) {
     this.collisionBehaviour.collideWith(object);
   }
   
@@ -358,7 +336,7 @@ public abstract class SeaObject implements Displayable {
    * @param timePenalty penalty from time limit.
    * @return High score increment.
    */
-  public int getOnCollisionHighScoreIncrement(int timePenalty) {
+  public int getOnCollisionHighScoreIncrement(final int timePenalty) {
     return this.highScoreIncrementBehaviour.onCollisionHighScoreIncrement(timePenalty);
   }
   

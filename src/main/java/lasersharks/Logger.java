@@ -15,26 +15,27 @@ import java.util.Date;
  * @author SEMGroup27
  */
 public class Logger {
-  /**
-   * The singleton instance of this class.
-   */
-  private static Logger instance;
+
   /**
    * The relative URI to the log directory.
    */
   private static final String LOG_DIRECTORY = "logs/";
   /**
+   * The singleton instance of this class.
+   */
+  private static Logger instance;
+  /**
    * The main fileWriter used to write to the log file.
    */
-  private FileWriter fileWriter;
+  private final FileWriter fileWriter;
   /**
    * The printWriter used by this logger.
    */
-  private PrintWriter printWriter;
+  private final PrintWriter printWriter;
   /**
    * DateFormat to get the time into the log.
    */
-  private DateFormat dateFormat;
+  private final DateFormat dateFormat;
 
   /**
    * Create an instance of the logger class.
@@ -42,7 +43,7 @@ public class Logger {
    * @param fileWriter
    *          file to use.
    */
-  protected Logger(FileWriter fileWriter) {
+  protected Logger(final FileWriter fileWriter) {
     this.fileWriter = fileWriter;
     this.printWriter = new PrintWriter(new BufferedWriter(this.fileWriter));
     this.dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -51,31 +52,8 @@ public class Logger {
   }
 
   /**
-   * getCurrentFileWriter.
-   * 
-   * @return current file writer.
-   */
-  public FileWriter getFileWriter() {
-    return fileWriter;
-  }
-
-  /**
-   * Write event to log.
-   * 
-   * @param event
-   *          the event that happened.
-   * @param specifics
-   *          the specifics about the event.
-   */
-  public void write(String event, String specifics) {
-    this.printWriter
-        .println(dateFormat.format(new Date()) + " : " + event + " : " + specifics + "\n");
-    this.printWriter.flush();
-  }
-
-  /**
    * Get correct instance of Logger class. If it currently doesn't exists one is created.
-   * 
+   *
    * @return Logger class.
    */
   public static Logger getInstance() {
@@ -83,10 +61,10 @@ public class Logger {
       return Logger.instance;
     }
 
-    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+    final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     FileWriter fw;
     try {
-      File f = new File(LOG_DIRECTORY + dateFormat.format(new Date()) + ".txt");
+      final File f = new File(LOG_DIRECTORY + dateFormat.format(new Date()) + ".txt");
 
       f.getParentFile().mkdirs();
       if (!f.exists()) {
@@ -102,13 +80,23 @@ public class Logger {
   }
 
   /**
+   * Method so we can mock logger in tests of other classes.
+   *
+   * @param logger
+   *          logger to be used.
+   */
+  public static void setInstance(final Logger logger) {
+    Logger.instance = logger;
+  }
+
+  /**
    * Get instance of Logger class, if none exists one is created using the given filename.
-   * 
+   *
    * @param filename
    *          filename to use.
    * @return instance of Logger Class.
    */
-  public static Logger getInstance(FileWriter filename) {
+  public static Logger getInstance(final FileWriter filename) {
     if (Logger.instance == null) {
       new Logger(filename);
     }
@@ -116,12 +104,25 @@ public class Logger {
   }
 
   /**
-   * Method so we can mock logger in tests of other classes.
-   * 
-   * @param logger
-   *          logger to be used.
+   * getCurrentFileWriter.
+   *
+   * @return current file writer.
    */
-  public static void setInstance(Logger logger) {
-    Logger.instance = logger;
+  public FileWriter getFileWriter() {
+    return fileWriter;
+  }
+
+  /**
+   * Write event to log.
+   *
+   * @param event
+   *          the event that happened.
+   * @param specifics
+   *          the specifics about the event.
+   */
+  public void write(String event, String specifics) {
+    this.printWriter
+        .println(String.format("%s : %s : %s\n", dateFormat.format(new Date()), event, specifics));
+    this.printWriter.flush();
   }
 }

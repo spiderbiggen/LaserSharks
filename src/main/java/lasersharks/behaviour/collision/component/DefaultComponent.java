@@ -5,16 +5,17 @@ import lasersharks.interfaces.Displayable;
 
 /**
  * Default class for collision component.
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
-public class DefaultComponentLeaf implements CollisionComponent {
-  
+public class DefaultComponent implements CollisionComponent {
+
   /**
    * Method for handling collision.
-   * 
+   *
    * @param other Displayable object.
    */
-  public void handleCollision(Displayable other) {
+  public void handleCollision(final Displayable other) {
+    //Empty
   }
 }

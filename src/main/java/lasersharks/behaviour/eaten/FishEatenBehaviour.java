@@ -2,24 +2,24 @@ package lasersharks.behaviour.eaten;
 
 import lasersharks.behaviour.EatenBehaviour;
 import lasersharks.controllers.AudioController;
-import lasersharks.seaobjects.SeaObject;
+import lasersharks.seaobjects.AbstractSeaObject;
 
 /**
  * Eaten behaviour for Fishes.
- * 
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class FishEatenBehaviour implements EatenBehaviour {
-  private SeaObject element;
+
+  private final AbstractSeaObject element;
 
   /**
    * Constructor.
-   * 
+   *
    * @param ele
    *          element to which to propagate actions.
    */
-  public FishEatenBehaviour(SeaObject ele) {
+  public FishEatenBehaviour(final AbstractSeaObject ele) {
     this.element = ele;
   }
 

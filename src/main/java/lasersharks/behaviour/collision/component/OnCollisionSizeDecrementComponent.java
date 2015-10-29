@@ -5,26 +5,26 @@ import lasersharks.interfaces.Displayable;
 
 /**
  * Class for size decrement for collisions.
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class OnCollisionSizeDecrementComponent implements CollisionComponent {
-  private Displayable me;
-  private CollisionComponent next;
+  private final Displayable me;
+  private final CollisionComponent next;
 
   /**
    * Constructor.
-   * 
-   * @param me Displayable object
+   *
+   * @param me   Displayable object
    * @param next CollisionComponent
    */
-  public OnCollisionSizeDecrementComponent(Displayable me, CollisionComponent next) {
+  public OnCollisionSizeDecrementComponent(final Displayable me, final CollisionComponent next) {
     this.me = me;
     this.next = next;
   }
 
   @Override
-  public void handleCollision(Displayable other) {
+  public void handleCollision(final Displayable other) {
     me.onCollisionSizeDecrement(other.getOnCollisionSizeDecrement());
     next.handleCollision(other);
   }

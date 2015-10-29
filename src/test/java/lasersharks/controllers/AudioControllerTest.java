@@ -1,27 +1,25 @@
 package lasersharks.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import javafx.embed.swing.JFXPanel;
 import lasersharks.Options;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author SEMGroup27
- *
  */
 @SuppressWarnings("restriction")
 public class AudioControllerTest {
 
-  private final double floatDelta = 0.0001f;
+  private static final double FLOAT_DELTA = 0.0001f;
 
   /**
-   * 
+   *
    */
   @Before
   public void setUp() {
@@ -29,7 +27,7 @@ public class AudioControllerTest {
   }
 
   /**
-   * 
+   *
    */
   @After
   public void tearDown() {
@@ -41,7 +39,7 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#playMusic(java.lang.String)}.
    */
   @Test
-  public void testPlayMusicMuted() {
+  public void playMusicMutedTest() {
     Options.getInstance().setMutedMusic(true);
     assertFalse(AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName()));
     assertFalse(Options.getInstance().isPlayingMusic());
@@ -51,7 +49,7 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#playMusic(java.lang.String)}.
    */
   //@Test
-  public void testPlayMusic() {
+  public void playMusicTestTest() {
     assertTrue(AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName()));
     assertTrue(Options.getInstance().isPlayingMusic());
   }
@@ -61,7 +59,7 @@ public class AudioControllerTest {
    * {@link lasersharks.controllers.AudioController#playSoundEffect(java.lang.String)}.
    */
   @Test
-  public void testPlaySoundEffectMuted() {
+  public void playSoundEffectMutedTest() {
     Options.getInstance().setMutedSfx(true);
     assertFalse(AudioController.getInstance()
         .playEatSoundEffect());
@@ -72,7 +70,7 @@ public class AudioControllerTest {
    * {@link lasersharks.controllers.AudioController#playSoundEffect(java.lang.String)}.
    */
   //@Test
-  public void testPlaySoundEffect() {
+  public void playSoundEffectTest() {
     assertTrue(AudioController.getInstance()
         .playEatSoundEffect());
   }
@@ -81,7 +79,7 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#resumeMusic()}.
    */
   @Test
-  public void testResumeMusicNoPlayer() {
+  public void resumeMusicNoPlayerTest() {
     assertFalse(AudioController.getInstance().resumeMusic());
   }
 
@@ -89,7 +87,7 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#resumeMusic()}.
    */
   @Test
-  public void testResumeMusicMuted() {
+  public void resumeMusicMutedTest() {
     Options.getInstance().setMutedMusic(true);
     AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName());
     assertFalse(AudioController.getInstance().resumeMusic());
@@ -99,7 +97,7 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#resumeMusic()}.
    */
   //@Test
-  public void testResumeMusic() {
+  public void resumeMusicTest() {
     AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName());
     AudioController.getInstance().muteMusic(); // To effectively pause the music
     Options.getInstance().setMutedMusic(false); // To un-pause but not yet play the music
@@ -111,7 +109,7 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#muteAll()}.
    */
   @Test
-  public void testMuteAll() {
+  public void muteAllTest() {
     AudioController.getInstance().muteAll();
     assertTrue(Options.getInstance().isMutedMusic() && Options.getInstance().isMutedSfx());
   }
@@ -119,7 +117,8 @@ public class AudioControllerTest {
   /**
    * Test method for {@link lasersharks.controllers.AudioController#unMuteAll()}.
    */
-  @Test public void testUnMuteAll() {
+  @Test
+  public void unMuteAllTest() {
     AudioController.getInstance().muteAll();
     AudioController.getInstance().unMuteAll();
     assertFalse(Options.getInstance().isMutedMusic() || Options.getInstance().isMutedSfx());
@@ -129,7 +128,7 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#muteMusic()}.
    */
   @Test
-  public void testMuteMusic() {
+  public void muteMusicTest() {
     AudioController.getInstance().muteMusic();
     assertTrue(Options.getInstance().isMutedMusic());
   }
@@ -137,7 +136,8 @@ public class AudioControllerTest {
   /**
    * Test method for {@link lasersharks.controllers.AudioController#unMuteMusic()}.
    */
-  @Test public void testUnMuteMusic() {
+  @Test
+  public void unMuteMusicTest() {
     AudioController.getInstance().muteMusic();
     AudioController.getInstance().unMuteMusic();
     assertFalse(Options.getInstance().isMutedMusic());
@@ -147,7 +147,7 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#muteSfx()}.
    */
   @Test
-  public void testMuteSfx() {
+  public void muteSfxTest() {
     AudioController.getInstance().muteSfx();
     assertTrue(Options.getInstance().isMutedSfx());
   }
@@ -155,7 +155,8 @@ public class AudioControllerTest {
   /**
    * Test method for {@link lasersharks.controllers.AudioController#unMuteSfx()}.
    */
-  @Test public void testUnMuteSfx() {
+  @Test
+  public void unMuteSfxTest() {
     AudioController.getInstance().muteSfx();
     AudioController.getInstance().unMuteSfx();
     assertFalse(Options.getInstance().isMutedSfx());
@@ -165,77 +166,65 @@ public class AudioControllerTest {
    * Test method for {@link lasersharks.controllers.AudioController#adjustMusicVolume(double)}.
    */
   @Test
-  public void testAdjustMusicVolumeAboveOne() {
+  public void adjustMusicVolumeAboveOneTest() {
     AudioController.getInstance().adjustMusicVolume(2.0);
-    assertEquals(1.0f, Options.getInstance().getMusicVolume(), floatDelta);
+    assertEquals(1.0f, Options.getInstance().getMusicVolume(), FLOAT_DELTA);
   }
 
   /**
    * Test method for {@link lasersharks.controllers.AudioController#adjustMusicVolume(double)}.
    */
   @Test
-  public void testAdjustMusicVolumeBelowZero() {
+  public void adjustMusicVolumeBelowZeroTest() {
     AudioController.getInstance().adjustMusicVolume(-1.0);
-    assertEquals(0.0f, Options.getInstance().getMusicVolume(), floatDelta);
+    assertEquals(0.0f, Options.getInstance().getMusicVolume(), FLOAT_DELTA);
   }
 
   /**
    * Test method for {@link lasersharks.controllers.AudioController#adjustMusicVolume(double)}.
    */
   @Test
-  public void testAdjustMusicVolumeBetweenZeroAndOne() {
+  public void adjustMusicVolumeBetweenZeroAndOneTest() {
     final double newVolume = 0.5;
     AudioController.getInstance().adjustMusicVolume(newVolume);
-    assertEquals(newVolume, Options.getInstance().getMusicVolume(), floatDelta);
+    assertEquals(newVolume, Options.getInstance().getMusicVolume(), FLOAT_DELTA);
   }
 
   /**
    * Test method for {@link lasersharks.controllers.AudioController#adjustSfxVolume(double)}.
    */
   @Test
-  public void testAdjustSfxVolumeAboveOne() {
+  public void adjustSfxVolumeAboveOneTest() {
     AudioController.getInstance().adjustSfxVolume(2.0);
-    assertEquals(1.0f, Options.getInstance().getSfxVolume(), floatDelta);
+    assertEquals(1.0f, Options.getInstance().getSfxVolume(), FLOAT_DELTA);
   }
 
   /**
    * Test method for {@link lasersharks.controllers.AudioController#adjustSfxVolume(double)}.
    */
   @Test
-  public void testAdjustSfxVolumeBelowZero() {
+  public void adjustSfxVolumeBelowZeroTest() {
     AudioController.getInstance().adjustSfxVolume(-1.0);
-    assertEquals(0.0f, Options.getInstance().getSfxVolume(), floatDelta);
+    assertEquals(0.0f, Options.getInstance().getSfxVolume(), FLOAT_DELTA);
   }
 
   /**
    * Test method for {@link lasersharks.controllers.AudioController#adjustSfxVolume(double)}.
    */
   @Test
-  public void testAdjustSfxVolumeBetweenZeroAndOne() {
+  public void adjustSfxVolumeBetweenZeroAndOneTest() {
     final double newVolume = 0.5;
     AudioController.getInstance().adjustSfxVolume(newVolume);
-    assertEquals(newVolume, Options.getInstance().getSfxVolume(), floatDelta);
+    assertEquals(newVolume, Options.getInstance().getSfxVolume(), FLOAT_DELTA);
   }
 
   /**
    * Test method for {@link lasersharks.controllers.AudioController#getInstance()}.
    */
   @Test
-  public void testGetInstance() {
-    AudioController audioController = new AudioController();
-    assertEquals(audioController, AudioController.getInstance());
-  }
-
-  /**
-   * Test method for {@link lasersharks.controllers.AudioController#setInstance(AudioController)} .
-   */
-  @Test
-  public void testSetInstance() {
-    AudioController audioController = new AudioController();
-    AudioController ac = new AudioController();
+  public void getInstanceTest() {
+    final AudioController ac = AudioController.getInstance();
     assertEquals(ac, AudioController.getInstance());
-    AudioController.setInstance(audioController);
-    assertEquals(audioController, AudioController.getInstance());
   }
 
 }

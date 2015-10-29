@@ -7,11 +7,12 @@ import lasersharks.interfaces.AmmoSpawner;
 import lasersharks.interfaces.Displayable;
 import lasersharks.interfaces.FishSpawner;
 import lasersharks.interfaces.LaserSpawner;
+import lasersharks.seaobjects.AbstractSeaObject;
 import lasersharks.seaobjects.AmmoFactory;
 import lasersharks.seaobjects.FishFactory;
 import lasersharks.seaobjects.LaserFactory;
 import lasersharks.seaobjects.LaserShark;
-import lasersharks.seaobjects.SeaObject;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -27,35 +28,30 @@ import java.util.stream.Collectors;
 @SuppressWarnings("restriction")
 public class FishController {
   /**
-   * Holder for fish data.
-   */
-  private List<Displayable> displayableList;
-  private LaserShark shark;
-
-  private FishSpawner enemySpawner;
-  private AmmoSpawner ammoSpawner;
-  private LaserSpawner laserSpawner;
-
-  /**
    * Holder for shark data.
    */
   private static final float START_SIZE = 80.0f;
   private static final double START_SPEED = 450;
   private static final Direction START_DIRECTION = Direction.None;
-
   /**
    * Spawn-chance for new fishes.
    */
   private static final float FISH_SPAWN_CHANCE_BASE = 1.0f;
-  private float fishSpawnChance;
-
   /**
    * Numbers for keeping the spawn rate of ammo in check.
    */
 
   private static final int ONE_HUNDRED = 100;
   private static final int AMMO_SPAWN_LIMITER = 90;
-
+  /**
+   * Holder for fish data.
+   */
+  private final List<Displayable> displayableList;
+  private final FishSpawner enemySpawner;
+  private final AmmoSpawner ammoSpawner;
+  private final LaserSpawner laserSpawner;
+  private final float fishSpawnChance;
+  private LaserShark shark;
   /**
    * Random Number Generator holder.
    */
@@ -68,15 +64,22 @@ public class FishController {
     this.displayableList = new LinkedList<>();
     this.rng = new Random();
     fishSpawnChance = FISH_SPAWN_CHANCE_BASE;
-    this.shark = new LaserShark(
-        Position.middlePosition(), 
-        START_SIZE, 
-        START_SPEED, 
-        START_DIRECTION
-    );
+    setBeginShark();
     enemySpawner = new FishFactory();
     ammoSpawner = new AmmoFactory();
     laserSpawner = new LaserFactory();
+  }
+
+  /**
+   * Set the shark to his beginning state.
+   */
+  private void setBeginShark() {
+    this.shark = new LaserShark(
+        Position.middlePosition(),
+        START_SIZE,
+        START_SPEED,
+        START_DIRECTION
+    );
   }
 
   /**
@@ -85,7 +88,7 @@ public class FishController {
    * @param rng
    *          the random number generator to use.
    */
-  public void setRng(Random rng) {
+  public void setRng(final Random rng) {
     this.rng = rng;
   }
 
@@ -95,53 +98,35 @@ public class FishController {
    * @param displayable
    *          the Swimmer to add
    */
-  public void addDisplayable(Displayable displayable) {
+  public void addDisplayable(final Displayable displayable) {
     this.displayableList.add(displayable);
   }
 
   /**
-   * Sets the shark object.
-   * 
-   * @param shark
-   *          the new shark;
-   */
-  public void setShark(LaserShark shark) {
-    this.shark = shark;
-  }
-
-  /**
-   * Method to get the laser shark.
+   * Method to get the laserShark.
    *
-   * @return the laser shark
+   * @return the laserShark
    */
   public LaserShark getShark() {
     return this.shark;
   }
 
   /**
-   * method to return the start size.
-   * 
-   * @return the start size
+   * Sets the shark object.
+   *
+   * @param shark
+   *          the new shark;
    */
-  public float getStartSize() {
-    return FishController.START_SIZE;
-  }
-
-  /**
-   * Method to return the FishSpawner.
-   * 
-   * @return the fishSpawner
-   */
-  public FishSpawner getFishSpawner() {
-    return enemySpawner;
+  public void setShark(final LaserShark shark) {
+    this.shark = shark;
   }
 
   /**
    * Update all fish positions.
    *
-   * @param frameTime scalar based time elapsed since the last update
+   * @param frameTime the time between frames in seconds
    */
-  private void updatePositions(double frameTime) {
+  private void updatePositions(final double frameTime) {
     this.displayableList.removeAll(this.displayableList.stream().filter(v -> !v.move(frameTime))
         .collect(Collectors.toList()));
     if (this.shark != null) {
@@ -151,10 +136,10 @@ public class FishController {
 
   /**
    *
-   * @param frameTime scalar based time elapsed since the last update
+   * @param frameTime the time between frames in seconds
    * @return List of fish and their positions.
    */
-  private List<Displayable> getNewFishPositions(double frameTime) {
+  private List<Displayable> getNewFishPositions(final double frameTime) {
     this.updatePositions(frameTime);
     return this.displayableList;
   }
@@ -164,37 +149,26 @@ public class FishController {
    * off screen fish.
    *
    * @param frameTime
-   *           scalar based time elapsed since the last update
-   * 
-   * @return List<Swimmer> list of fishes at there current position.
+   *          the time between frames in seconds
+   *
+   * @return List<Displayable> list of fishes at there current position.
    */
-  public List<Displayable> getNextCycleInformation(double frameTime) {
+  public List<Displayable> getNextCycleInformation(final double frameTime) {
     checkForCollisions();
     if (this.rng.nextFloat() <= fishSpawnChance / frameTime) {
-      SeaObject f = enemySpawner.generateFish();
-      SeaObject g = ammoSpawner.generateAmmo();
+      final AbstractSeaObject f = enemySpawner.generateFish();
+      final AbstractSeaObject g = ammoSpawner.generateAmmo();
       this.addDisplayable(f);
 
       if (this.rng.nextInt(ONE_HUNDRED) > AMMO_SPAWN_LIMITER) {
         this.addDisplayable(g);
       }
 
-      Logger.getInstance().write(
-          "Fish spawned",
-          "Speed: " + f.getSpeed() + ", " + "Size: " + f.getSize() + ", " + "Direction: "
-              + f.getDirection() + ", " + "Position: " + f.getPosition());
+      Logger.getInstance()
+          .write("Fish spawned", String.format("Speed: %s, Size: %s, Direction: %s, Position: %s",
+              f.getSpeed(), f.getSize(), f.getDirection(), f.getPosition()));
     }
     return this.getNewFishPositions(frameTime);
-  }
-
-  /**
-   * Method to set the value of the fish spawn chance.
-   * 
-   * @param chance
-   *          The int which is used as the new fish spawn chance.
-   */
-  public void setFishSpawnChance(int chance) {
-    fishSpawnChance = chance;
   }
 
   /**
@@ -207,15 +181,11 @@ public class FishController {
    */
   private void checkForCollisions() {
     displayableList.add(0, this.shark);
-    displayableList.stream()
-        .filter(Displayable::collisionActor)
-        .forEach(v -> 
-        displayableList.stream()
+    displayableList.stream().filter(Displayable::collisionActor).forEach(
+        v -> displayableList.stream()
             .filter(v::checkForCollision)
             .filter(Displayable::isAlive)
-            .forEach(v::collideWith
-        )
-    );
+            .forEach(v::collideWith));
     displayableList.remove(0);
   }
 

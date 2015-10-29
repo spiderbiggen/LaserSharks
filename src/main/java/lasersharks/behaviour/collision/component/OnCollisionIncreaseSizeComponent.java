@@ -5,25 +5,26 @@ import lasersharks.interfaces.Displayable;
 
 /**
  * Class for increasing size when collidiong.
- * @author SEMGroup27
  *
+ * @author SEMGroup27
  */
 public class OnCollisionIncreaseSizeComponent implements CollisionComponent {
-  private Displayable me;
-  private CollisionComponent next;
+  private final Displayable me;
+  private final CollisionComponent next;
 
   /**
    * Constructor.
-   * @param me Displayable object
+   *
+   * @param me   Displayable object
    * @param next CollisionComponent
    */
-  public OnCollisionIncreaseSizeComponent(Displayable me, CollisionComponent next) {
+  public OnCollisionIncreaseSizeComponent(final Displayable me, final CollisionComponent next) {
     this.me = me;
     this.next = next;
   }
 
   @Override
-  public void handleCollision(Displayable other) {
+  public void handleCollision(final Displayable other) {
     me.increaseSize(other.onCollisionSizeIncrement());
     next.handleCollision(other);
   }

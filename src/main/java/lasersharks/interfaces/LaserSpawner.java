@@ -12,6 +12,7 @@ import lasersharks.seaobjects.LaserShark;
  *
  */
 public interface LaserSpawner {
+
   /**
    * This function creates a laser.
    * 

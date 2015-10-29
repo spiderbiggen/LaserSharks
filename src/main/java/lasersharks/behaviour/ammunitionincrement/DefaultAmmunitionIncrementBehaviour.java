@@ -1,4 +1,4 @@
-package lasersharks.behaviour.ammunitionIncrement;
+package lasersharks.behaviour.ammunitionincrement;
 
 import lasersharks.behaviour.AmmunitionIncrementBehaviour;
 
@@ -12,7 +12,7 @@ public class DefaultAmmunitionIncrementBehaviour implements AmmunitionIncrementB
   /**
    * @return the amount by which to increment the ammunition.
    */
-  @Override 
+  @Override
   public int onCollisionAmmunitionIncrement() {
     return 0;
   }

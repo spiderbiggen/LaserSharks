@@ -4,8 +4,16 @@ package lasersharks;
  * Direction Enum.
  */
 public enum Direction {
-  North(0, -1), NorthEast(1, -1), East(1, 0), SouthEast(1, 1), South(0, 1), SouthWest(-1,
-      1), West(-1, 0), NorthWest(-1, -1), None(0, 0);
+
+  North(0, -1),
+  NorthEast(1, -1),
+  East(1, 0),
+  SouthEast(1, 1),
+  South(0, 1),
+  SouthWest(-1, 1),
+  West(-1, 0),
+  NorthWest(-1, -1),
+  None(0, 0);
 
   /**
    * The directional delta in the x-axis.
@@ -24,7 +32,7 @@ public enum Direction {
    * @param deltaY
    *          deltaY op direction
    */
-  Direction(int deltaX, int deltaY) {
+  Direction(final int deltaX, final int deltaY) {
     this.deltaX = deltaX;
     this.deltaY = deltaY;
   }

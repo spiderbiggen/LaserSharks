@@ -14,16 +14,20 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Class for testing {@link DirectionInputController}.
- * 
- * @author SEMGroup27
+ <<<<<<< HEAD
+ =======
  *
+ * @author SEMGroup27
+>>>>>>> remotes/origin/master
+ *
+ * @author SEMGroup27
  */
-@SuppressWarnings({"restriction", "rawtypes"})
+@SuppressWarnings({ "restriction", "rawtypes" })
 public class RestartGameControllerTest {
   private MainGui gui;
   private ArgumentCaptor<Class> argument;
   private RestartGameController restartGameController;
-  
+
   /**
    * Setup so that all proper items are mocked.
    */
@@ -31,12 +35,12 @@ public class RestartGameControllerTest {
   public void setUp() {
     gui = Mockito.mock(MainGui.class);
     argument = ArgumentCaptor.forClass(
-            Class.class
+        Class.class
     );
     MainGui.setInstance(gui);
     restartGameController = new RestartGameController();
   }
-  
+
   /**
    * Cleanup our mess.
    */
@@ -44,30 +48,31 @@ public class RestartGameControllerTest {
   public void tearDown() {
     MainGui.clearInstance();
   }
-  
+
   /**
    * Test the restart game controller.
    */
   @SuppressWarnings("unchecked")
   @Test
   public void testRestartGame() {
-    KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.R, false, false, false, false);
+    final KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.R, false, false, false,
+        false);
     this.restartGameController.handle(k);
 
     Mockito.verify(gui).browseTo(argument.capture());
     assertEquals(GamePane.class, argument.getValue());
   }
-  
 
   /**
    * Test the restart game controller.
    */
   @Test
   public void testNoInteractions() {
-    KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.A, false, false, false, false);
+    final KeyEvent k = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.A, false, false, false,
+        false);
     this.restartGameController.handle(k);
 
     Mockito.verifyZeroInteractions(gui);
   }
-  
+
 }

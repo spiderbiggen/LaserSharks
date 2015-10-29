@@ -15,20 +15,18 @@ import lasersharks.behaviour.sizeincrement.FishGetSizeIncrementBehaviour;
  * @author SEMGroup27
  *
  */
-public class Fish extends SeaObject {
-  private String image;
-  private int imgHeight;
-  private int imgWidth;
+public class Fish extends AbstractSeaObject {
+
+  private final String image;
+  private final double widthScale;
 
   /**
    * Propagation for construction.
    * 
    * @param image
    *          Image of the enemy.
-   * @param imgHeight
-   *          Height of image.
-   * @param imgWidth
-   *          Width of image.
+   * @param widthScale
+   *          The aspect ratio between the width and the height.
    * @param position
    *          Starting position.
    * @param size
@@ -38,13 +36,12 @@ public class Fish extends SeaObject {
    * @param direction
    *          Starting direction.
    */
-  public Fish(String image, int imgHeight, int imgWidth, Position position, Float size,
-      Double speed, Direction direction) {
+  public Fish(final String image, final double widthScale, final Position position,
+      final Float size, final Double speed, final Direction direction) {
 
     super(position, size, speed, direction);
     this.image = image;
-    this.imgHeight = imgHeight;
-    this.imgWidth = imgWidth;
+    this.widthScale = widthScale;
     checkForLossBehaviour = new FishCheckForLossBehaviour(this);
     eatenBehaviour = new FishEatenBehaviour(this);
     getSizeIncrementBehaviour = new FishGetSizeIncrementBehaviour(this);
@@ -53,14 +50,24 @@ public class Fish extends SeaObject {
     highScoreIncrementBehaviour = new FishHighScoreIncrementBehaviour(this);
   }
 
+  /**
+   * Will return the string resource for this seaObject.
+   *
+   * @return The resource's name
+   */
   @Override
   public String getImageResource() {
     return image;
   }
 
+  /**
+   * return the aspect ratio between the width and the height. height/width
+   *
+   * @return the aspect ratio
+   */
   @Override
   public double getWidthScale() {
-    return ((double) imgHeight) / ((double) imgWidth);
+    return widthScale;
   }
 
   /**

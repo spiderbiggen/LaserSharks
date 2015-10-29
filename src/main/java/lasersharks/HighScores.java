@@ -15,22 +15,11 @@ import java.util.Scanner;
  */
 public class HighScores {
 
+  private static final String HIGH_SCORE_FILE_URI = "src/main/resources/highScores";
   /**
-   * The singleton instance of this class.
+   * The singleton INSTANCE of this class.
    */
-  private static HighScores instance;
-  /**
-   * The list of high scores stored as strings.
-   */
-  private ArrayList<String> highScores;
-  /**
-   * The URI to the resource file.
-   */
-  private String inputFile;
-  /**
-   * The amount of fishes that has been eaten.
-   */
-  private int amountOfFishesEaten = 0;
+  private static final HighScores INSTANCE = new HighScores();
   /**
    * The amount of characters to offset the string values by to get a score.
    */
@@ -40,35 +29,62 @@ public class HighScores {
    */
   private static final int FISH_BONUS = 20;
   /**
-   * The current score.
+   * The list of high scores stored as strings.
+   */
+  private ArrayList<String> highScoreList;
+  /**
+   * The URI to the resource file.
+   */
+  private String inputFile;
+  /**
+   * The amount of fishes that has been eaten.
+   */
+  private int amountOfFishesEaten = 0;
+  /**
+   * Current score.
    */
   private int score;
 
   /**
-   * create a new instance of highScores.
+   * create a new INSTANCE of high scores.
    */
   protected HighScores() {
-    this.inputFile = "src/main/resources/highScores";
+    this.inputFile = HIGH_SCORE_FILE_URI;
   }
 
+
   /**
-   * return the instance.
-   * 
-   * @return highscores instance
+   * return the INSTANCE.
+   *
+   * @return high scores INSTANCE
    */
   public static HighScores getInstance() {
-    if (instance == null) {
-      instance = new HighScores();
-    }
-    return instance;
+    return INSTANCE;
   }
 
   /**
-   * Reads the current highscore list so it can be edited.
-   * 
+   * @return Bonus per eaten fish.
+   */
+  public static int getFishBonus() {
+    return FISH_BONUS;
+  }
+
+  /**
+   * Restores the initial state of the INSTANCE, while obeying the singleton pattern.
+   */
+  public static void destroyInstance() {
+    INSTANCE.highScoreList = null;
+    INSTANCE.inputFile = HIGH_SCORE_FILE_URI;
+    INSTANCE.amountOfFishesEaten = 0;
+    INSTANCE.score = 0;
+  }
+
+  /**
+   * Reads the current high score list so it can be edited.
+   *
    */
   public void readHighScore() {
-    ArrayList<String> list = new ArrayList<String>();
+    final ArrayList<String> list = new ArrayList<>();
     try (Scanner sc = new Scanner(new File(inputFile))) {
 
       while (sc.hasNextLine()) {
@@ -80,25 +96,13 @@ public class HighScores {
         list.add(i + 1 + ". 0");
       }
     }
-    highScores = list;
-  }
-
-  /**
-   * Sets the list of highscores to inputList.
-   * 
-   * @param inputList
-   *          the list of new highscores.
-   */
-  public void setList(ArrayList<String> inputList) {
-    highScores = inputList;
+    highScoreList = list;
   }
 
   /**
    * Will return the current list. If the list doesn't exist yet read the one from the file.
-   * 
-   * @return the list of highscores.
-   * @throws FileNotFoundException
-   *           if the file doesn't exist or is in the wrong location.
+   *
+   * @return the list of high scores.
    */
   public ArrayList<String> getList() {
     boolean noFile = false;
@@ -108,31 +112,37 @@ public class HighScores {
       noFile = true;
     }
 
-    if (highScores == null || highScores.size() == 0 || noFile) {
+    if (highScoreList == null || highScoreList.isEmpty() || noFile) {
 
       readHighScore();
     }
-    return highScores;
+    return highScoreList;
   }
 
   /**
-   * Set the inputfile to the one specified with inputFile.
-   * 
-   * @param inputFile
-   *          the relative path to the new inputfile.
+   * Sets the list of high scores to inputList.
+   *
+   * @param inputList the list of new high scores.
    */
-  public void setInputFile(String inputFile) {
+  public void setList(final ArrayList<String> inputList) {
+    highScoreList = inputList;
+  }
+
+  /**
+   * Set the input file to the one specified with inputFile.
+   *
+   * @param inputFile
+   *          the relative path to the new input file.
+   */
+  public void setInputFile(final String inputFile) {
     this.inputFile = inputFile;
   }
 
   /**
-   * Method for writing the highscores. The highscores are saved in highscores.txt .
-   * 
-   * @throws IOException
-   *           when there is an erroneous input.
+   * Method for writing the high scores. The high scores are saved in highScoreList.txt .
    */
-  public void writeHighScore() throws IOException {
-    ArrayList<String> list = getList();
+  public void writeHighScore() {
+    final ArrayList<String> list = getList();
     for (int i = 0; i < list.size(); i++) {
       if (score >= Integer.parseInt(list.get(i).substring(DATA_OFFSET))) {
         list.remove(list.size() - 1);
@@ -158,14 +168,14 @@ public class HighScores {
   }
 
   /**
-   * Fixes the still erroneous list after the new score has been inserted in the writeHighscore()
+   * Fixes the still erroneous list after the new score has been inserted in the writeHighScore()
    * method. An example would be 1. 500 2. 250 2. 250 3. 100 4. 50.
-   * 
+   *
    * @param list
-   *          the list containing the highscore elements.
-   * @return the correct highscore list.
+   *          the list containing the high score elements.
+   * @return the correct high score list.
    */
-  public ArrayList<String> fixHighScoreCount(ArrayList<String> list) {
+  public ArrayList<String> fixHighScoreCount(final ArrayList<String> list) {
     for (int i = 0; i < list.size(); i++) {
       String newEntry = list.get(i);
       list.remove(i);
@@ -178,72 +188,53 @@ public class HighScores {
   }
 
   /**
-   * Gets the highest score from the highscore list.
-   * 
+   * Gets the highest score from the high score list.
+   *
    * @return the highest score in the list.
    * @throws FileNotFoundException
    *           when the file is not found.
    */
   public int getHighScore() throws FileNotFoundException {
     try (Scanner sc = new Scanner(new File(inputFile))) {
-      String firstLine = sc.nextLine();
-      int highestScore = Integer.parseInt(firstLine.substring(DATA_OFFSET));
-      return highestScore;
+      final String firstLine = sc.nextLine();
+      return Integer.parseInt(firstLine.substring(DATA_OFFSET));
     }
 
   }
 
   /**
    * Makes a nicely displayed string to output on the end screen.
-   * 
-   * @return a String containing the highscores.
+   *
+   * @return a String containing the high scores.
    */
   public String makeHighScoreString() {
     getList();
-    String res = "";
-    String li = System.lineSeparator();
-    for (int i = 0; i < highScores.size(); i++) {
-      res = res + "     " + highScores.get(i) + li;
+    final StringBuilder stringBuilder = new StringBuilder();
+    final String li = System.lineSeparator();
+    stringBuilder.append("High Scores:").append(li);
+    for (final String highScore : highScoreList) {
+      stringBuilder.append("     ").append(highScore).append(li);
     }
-
-    return "Highscores:" + li + res + li + "Your score: " + score;
+    return stringBuilder.append(li).append("Your score: ").append(score).toString();
   }
 
   /**
    * Increase the current score the player has according to the size of the fish eaten.
-   * 
+   *
    * @param increment
-   *          the fish that is used to calculate the additional score
+   *          the amount by which to increment the score.
    */
-
-  public void increaseScore(int increment) {
+  public void increaseScore(final int increment) {
     score += Math.max(0, increment);
   }
 
   /**
-   * Get most current timepenalty.
-   * 
-   * @return current timepenalty.
+   * Get most current time penalty.
+   *
+   * @return current time penalty.
    */
   public int getTimePenalty() {
     return (amountOfFishesEaten++) * 2;
-  }
-
-  /**
-   * @return Bonus per eaten fish.
-   */
-  public static int getFishBonus() {
-    return FISH_BONUS;
-  }
-
-  /**
-   * Method so we can mock highscores in tests of other classes.
-   * 
-   * @param highscores
-   *          highscores to be used.
-   */
-  public static void setInstance(HighScores highscores) {
-    HighScores.instance = highscores;
   }
 
   /**
@@ -257,8 +248,7 @@ public class HighScores {
    * @param score
    *          the score to set
    */
-  public void setScore(int score) {
+  public void setScore(final int score) {
     this.score = score;
   }
-
 }
