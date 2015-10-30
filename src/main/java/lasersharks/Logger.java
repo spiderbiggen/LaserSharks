@@ -122,7 +122,7 @@ public class Logger {
    */
   public void write(String event, String specifics) {
     this.printWriter
-        .println(String.format("%s : %s : %s\n", dateFormat.format(new Date()), event, specifics));
+        .println(String.format("%s : %s : %s%n", dateFormat.format(new Date()), event, specifics));
     this.printWriter.flush();
   }
 }
