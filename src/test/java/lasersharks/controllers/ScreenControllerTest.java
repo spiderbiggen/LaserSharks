@@ -12,7 +12,6 @@ import org.mockito.Mockito;
  * @author SEMGroup27
  */
 
-@SuppressWarnings("restriction")
 public class ScreenControllerTest {
 
   private GamePane currentPane;
