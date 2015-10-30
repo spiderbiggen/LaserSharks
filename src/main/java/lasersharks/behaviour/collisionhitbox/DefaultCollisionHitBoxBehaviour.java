@@ -15,7 +15,6 @@ public class DefaultCollisionHitBoxBehaviour implements CollisionHitBoxBehaviour
 
   private static final double WIDTH_TO_COORDINATES = 0.85;
   private static final double SIZE_TO_COORDINATES = 0.075;
-  private static final double HALF_SCALE = 0.5f;
 
   private final Displayable displayable;
 

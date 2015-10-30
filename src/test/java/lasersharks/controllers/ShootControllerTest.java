@@ -14,6 +14,7 @@ import static org.mockito.Mockito.verifyZeroInteractions;
  *
  * @author SEMGroup27
  */
+@SuppressWarnings("restriction")
 public class ShootControllerTest {
 
   private ShootController shootController;

@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
  *
  */
 
-@SuppressWarnings("restriction")
 public class FishController {
   /**
    * Holder for shark data.
