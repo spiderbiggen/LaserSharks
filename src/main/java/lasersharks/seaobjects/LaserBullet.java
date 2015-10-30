@@ -20,10 +20,14 @@ public class LaserBullet extends AbstractSeaObject {
   /**
    * The constructor of the laser.
    *
-   * @param position   the position of the laser.
-   * @param size       the size of the laser.
-   * @param startSpeed the starting speed of the laser.
-   * @param direction  the direction of the laser.
+   * @param position
+   *          the position of the laser.
+   * @param size
+   *          the size of the laser.
+   * @param startSpeed
+   *          the starting speed of the laser.
+   * @param direction
+   *          the direction of the laser.
    */
   public LaserBullet(final Position position, final float size, final double startSpeed,
       final Direction direction) {

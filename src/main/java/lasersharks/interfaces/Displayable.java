@@ -173,8 +173,7 @@ public interface Displayable {
 
   /**
    * Let displayable object increase the player high score on collision.
-   * @param timePenalty penalty from time limit.
    * @return High score increment.
    */
-  int getOnCollisionHighScoreIncrement(int timePenalty);
+  int getOnCollisionHighScoreIncrement();
 }
