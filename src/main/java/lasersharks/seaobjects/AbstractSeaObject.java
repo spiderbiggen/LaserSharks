@@ -73,7 +73,7 @@ public abstract class AbstractSeaObject implements Displayable {
 
     this.collisionHitBoxBehaviour = new DefaultCollisionHitBoxBehaviour(this);
     this.moveBehaviour = new DefaultMoveBehaviour(this);
-    
+
     this.ammunitionIncrementBehaviour = new DefaultAmmunitionIncrementBehaviour();
     this.checkForLossBehaviour = new DefaultCheckForLossBehaviour();
     this.eatenBehaviour = new DefaultEatenBehaviour();
@@ -105,7 +105,8 @@ public abstract class AbstractSeaObject implements Displayable {
   /**
    * Method to set the size of the seaObject.
    *
-   * @param size size
+   * @param size
+   *          size
    */
   public void setSize(final float size) {
     this.size = size;
@@ -124,7 +125,8 @@ public abstract class AbstractSeaObject implements Displayable {
   /**
    * Method used for shrinking seaObject.
    *
-   * @param size decrement size
+   * @param size
+   *          decrement size
    */
   public void decreaseSize(final float size) {
     this.setSize(Math.max(MIN_SIZE, this.getSize() - size));
@@ -173,9 +175,8 @@ public abstract class AbstractSeaObject implements Displayable {
   }
 
   /**
-   * We calculate the distance between the seaObjects.
-   * The sum of the size of both seaObjects is our hit box.
-   * Hit box is now a circle, with size the radius in pixels.
+   * We calculate the distance between the seaObjects. The sum of the size of both seaObjects is our
+   * hit box. Hit box is now a circle, with size the radius in pixels.
    * 
    * @param swimmer
    *          we want to check if the seaObject collides with this seaObject,
@@ -219,8 +220,8 @@ public abstract class AbstractSeaObject implements Displayable {
 
   @Override
   public String toString() {
-    return "seaObject [" + "position=" + position.toString() + ", size=" + size + ", speed=" + speed
-        + ", direction=" + direction + ", Alive =" + alive + "]";
+    return "seaObject [" + "position=" + position.toString() + ", size=" + size + ", speed="
+        + speed + ", direction=" + direction + ", Alive =" + alive + "]";
   }
 
   /**
@@ -245,10 +246,10 @@ public abstract class AbstractSeaObject implements Displayable {
   public Rectangle makeHitBox() {
     return collisionHitBoxBehaviour.makeHitBox();
   }
-  
 
   /**
    * Increment ammunition by an int value when collided.
+   * 
    * @return increment value.
    */
   @Override
@@ -258,12 +259,15 @@ public abstract class AbstractSeaObject implements Displayable {
 
   /**
    * Check to see if player has lost the game.
-   * @param size shark size.
+   * 
+   * @param size
+   *          shark size.
    */
-  @Override public void onCollisionPlayerLoses(final float size) {
+  @Override
+  public void onCollisionPlayerLoses(final float size) {
     this.checkForLossBehaviour.onCollisionPlayerLoses(size);
   }
-  
+
   /**
    * Notify object it is eaten.
    */
@@ -271,16 +275,17 @@ public abstract class AbstractSeaObject implements Displayable {
   public void onCollisionEaten() {
     this.eatenBehaviour.onCollisionEaten();
   }
-  
+
   /**
    * get size increment gained by colliding with object.
+   * 
    * @return size increment.
    */
   @Override
   public float onCollisionSizeIncrement() {
     return this.getSizeIncrementBehaviour.onCollisionSizeIncrement();
   }
-  
+
   /**
    * See if laser needs to be destroyed after colliding with this object.
    */
@@ -288,58 +293,63 @@ public abstract class AbstractSeaObject implements Displayable {
   public void onCollisionDestroyLaser() {
     this.laserCollisionBehaviour.onCollisionDestroyLaser();
   }
-  
+
   /**
    * Notify ~ has been hit by the laser.
-   * @param size size by which object needs to decrement.
+   * 
+   * @param size
+   *          size by which object needs to decrement.
    */
-  @Override public void onCollisionSizeDecrement(final int size) {
+  @Override
+  public void onCollisionSizeDecrement(final int size) {
     this.sizeDecrementBehaviour.onCollisionSizeDecrement(size);
   }
-  
+
   /**
    * Get decrement on collision.
+   * 
    * @return decremental size.
    */
   public int getOnCollisionSizeDecrement() {
     return 0;
   }
-  
-  
+
   /**
    * Increment ammunition.
-   * @param onCollisionAmmunitionIncrement increment ammunition by given value.
+   * 
+   * @param onCollisionAmmunitionIncrement
+   *          increment ammunition by given value.
    */
   public void increaseAmmunition(final int onCollisionAmmunitionIncrement) {
-    //Empty
+    // Empty
   }
-  
+
   /**
    * Handle collisions.
-   * @param object object with which the actor has collided.
+   * 
+   * @param object
+   *          object with which the actor has collided.
    */
   public void collideWith(final Displayable object) {
     this.collisionBehaviour.collideWith(object);
   }
-  
+
   /**
    * See if object is a collision actor.
+   * 
    * @return boolean if the actor has a useful collision function.
    */
   public boolean collisionActor() {
     return false;
   }
-  
 
   /**
    * Let displayable object increase the player high score on collision.
-   * @param timePenalty penalty from time limit.
+   * 
    * @return High score increment.
    */
   public int getOnCollisionHighScoreIncrement() {
     return this.highScoreIncrementBehaviour.onCollisionHighScoreIncrement();
   }
-  
+
 }
-
-

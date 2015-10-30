@@ -8,7 +8,7 @@ public interface HighScoreIncrementBehaviour {
 
   /**
    * Call method which returns the increment value.
-   * @return timeIncrement.
+   * @return highscoreIncrement.
    */
   int onCollisionHighScoreIncrement();
 }
