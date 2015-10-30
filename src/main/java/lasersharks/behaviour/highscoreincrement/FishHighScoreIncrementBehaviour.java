@@ -21,7 +21,7 @@ public class FishHighScoreIncrementBehaviour implements HighScoreIncrementBehavi
   }
 
   @Override
-  public int onCollisionHighScoreIncrement(final int timePenalty) {
-    return (int) Math.max(element.getSize() + element.getSpeed() - timePenalty, 0);
+  public int onCollisionHighScoreIncrement() {
+    return (int) Math.max(element.getSize() + element.getSpeed(), 0);
   }
 }

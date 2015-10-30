@@ -52,7 +52,6 @@ public class HighScores {
     this.inputFile = HIGH_SCORE_FILE_URI;
   }
 
-
   /**
    * return the INSTANCE.
    *
@@ -122,7 +121,8 @@ public class HighScores {
   /**
    * Sets the list of high scores to inputList.
    *
-   * @param inputList the list of new high scores.
+   * @param inputList
+   *          the list of new high scores.
    */
   public void setList(final ArrayList<String> inputList) {
     highScoreList = inputList;
@@ -226,15 +226,6 @@ public class HighScores {
    */
   public void increaseScore(final int increment) {
     score += Math.max(0, increment);
-  }
-
-  /**
-   * Get most current time penalty.
-   *
-   * @return current time penalty.
-   */
-  public int getTimePenalty() {
-    return (amountOfFishesEaten++) * 2;
   }
 
   /**

@@ -336,8 +336,8 @@ public abstract class AbstractSeaObject implements Displayable {
    * @param timePenalty penalty from time limit.
    * @return High score increment.
    */
-  public int getOnCollisionHighScoreIncrement(final int timePenalty) {
-    return this.highScoreIncrementBehaviour.onCollisionHighScoreIncrement(timePenalty);
+  public int getOnCollisionHighScoreIncrement() {
+    return this.highScoreIncrementBehaviour.onCollisionHighScoreIncrement();
   }
   
 }

@@ -8,8 +8,7 @@ public interface HighScoreIncrementBehaviour {
 
   /**
    * Call method which returns the increment value.
-   * @param timePenalty penalty from time limit.
    * @return timeIncrement.
    */
-  int onCollisionHighScoreIncrement(int timePenalty);
+  int onCollisionHighScoreIncrement();
 }
