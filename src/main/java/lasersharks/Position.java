@@ -15,7 +15,7 @@ public class Position {
   /**
    * The multiplier for the upper right corner width wise.
    */
-  private static final double WIDTH_MULTIPLIER = 0.;
+  private static final double WIDTH_MULTIPLIER = 0.8;
 
   /**
    * A prime number for the hash.
