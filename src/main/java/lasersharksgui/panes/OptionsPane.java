@@ -82,10 +82,10 @@ public class OptionsPane extends AbstractStandardPane {
    * @return a new mute button based on the parameters.
    */
   private Button muteButton(double xPos, double yPos, double size) {
-    MUTE_IMAGE.setFitHeight(BUTTON_HEIGHT * size);
-    MUTE_IMAGE.setFitWidth(BUTTON_WIDTH * size);
-    UNMUTE_IMAGE.setFitHeight(BUTTON_HEIGHT * size);
-    UNMUTE_IMAGE.setFitWidth(BUTTON_WIDTH * size);
+    MUTE_IMAGE.setFitHeight(BUTTON_HEIGHT * size * screenScale);
+    MUTE_IMAGE.setFitWidth(BUTTON_WIDTH * size * screenScale);
+    UNMUTE_IMAGE.setFitHeight(BUTTON_HEIGHT * size * screenScale);
+    UNMUTE_IMAGE.setFitWidth(BUTTON_WIDTH * size * screenScale);
     muteButton = new Button();
     muteButton.setGraphic(UNMUTE_IMAGE);
     muteButton.setTranslateX(xPos);
@@ -130,8 +130,8 @@ public class OptionsPane extends AbstractStandardPane {
         Options.getInstance().getMasterVolume() * SLIDER_MAX);
     volumeSlider.setLayoutX(pos.getPosX());
     volumeSlider.setLayoutY(pos.getPosY());
-    volumeSlider.setScaleX(xSize);
-    volumeSlider.setScaleY(ySize);
+    volumeSlider.setScaleX(xSize * screenScale);
+    volumeSlider.setScaleY(ySize * screenScale);
     volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
       AudioController.getInstance().adjustMasterVolume(newValue.doubleValue() / SLIDER_MAX);
       Logger.getInstance().write("Master volume changed", "newValue: " + newValue.intValue() + ")");

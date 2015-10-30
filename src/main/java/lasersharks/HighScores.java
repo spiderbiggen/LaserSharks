@@ -37,10 +37,6 @@ public class HighScores {
    */
   private String inputFile;
   /**
-   * The amount of fishes that has been eaten.
-   */
-  private int amountOfFishesEaten = 0;
-  /**
    * Current score.
    */
   private int score;
@@ -74,7 +70,6 @@ public class HighScores {
   public static void destroyInstance() {
     INSTANCE.highScoreList = null;
     INSTANCE.inputFile = HIGH_SCORE_FILE_URI;
-    INSTANCE.amountOfFishesEaten = 0;
     INSTANCE.score = 0;
   }
 

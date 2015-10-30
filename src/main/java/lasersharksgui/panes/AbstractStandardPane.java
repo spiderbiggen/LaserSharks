@@ -1,6 +1,5 @@
 package lasersharksgui.panes;
 
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -31,10 +30,8 @@ public abstract class AbstractStandardPane extends Pane
   protected static final int SCALING_FACTOR_TO_UNDERNEATH_MIDDLE = 3;
   protected static final int SCALING_FACTOR_TO_ABOVE_MIDDLE = -5;
   protected static final int SCALING_FACTOR_TO_LITTLE_BELOW_MIDDLE = 100;
-  protected final ImageView muteButtonImage = new ImageView("mutesound.png");
-  protected final ImageView unMuteButtonImage = new ImageView("unmutesound.png");
-  // audio variables
-  protected Button muteButton;
+  protected static final double DEFAULT_SCREEN_HEIGHT = 1080;
+  protected final double screenScale;
   // sprite and image variables
   protected ImageView sharkImage;
 
@@ -43,6 +40,7 @@ public abstract class AbstractStandardPane extends Pane
    */
   public AbstractStandardPane() {
     super();
+    screenScale = Options.getGlobalHeight() / DEFAULT_SCREEN_HEIGHT;
     addBackGround();
     if (!Options.getInstance().isPlayingMusic()) {
       AudioController.getInstance().playMusic(Options.getInstance().getMusicFileName());
@@ -82,8 +80,8 @@ public abstract class AbstractStandardPane extends Pane
    */
   public void addText(final String message, final int textSize, final Position position) {
     final Text gameText = new Text(message);
-    gameText.setScaleX(textSize);
-    gameText.setScaleY(textSize);
+    gameText.setScaleX(textSize * screenScale);
+    gameText.setScaleY(textSize * screenScale);
     gameText.setX(position.getPosX());
     gameText.setY(position.getPosY());
     getChildren().add(gameText);
